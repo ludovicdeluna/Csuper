@@ -11,7 +11,7 @@ On peut aussi sauvegarder ces fichiers dans des fichiers au format .csu (voir do
 
 Si vous avez des remarques ou des questions sur l'utilisation ou le code, n'hésiter pas à me le faire remarquer. De même si vous voulez contribuer au logiciel d'une facon ou d'une autre.
 
-Ce logiciel a été fait en guise d'exercice personnel pendant des études donc soyez indulgent au niveau des remarques dur le code, merci.
+Ce logiciel a été fait en guise d'exercice personnel pendant des études donc soyez indulgent au niveau des remarques sur le code, merci.
 
 Installation
 -----------
