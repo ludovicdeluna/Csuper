@@ -15,7 +15,7 @@ Ce logiciel a été fait en guise d'exercice personnel pendant des études donc 
 
 Installation
 -----------
-Les éxécutables seront bien disponibles sur [mon site](http://dalan.netne.net/).
+Les éxécutables sont disponibles sur [mon site](http://dalan.netne.net/wordpress).
 
 Si vous voulez compiler vous même le logiciel, un petit `gcc *.c -o csuper` devrait faire l'affaire.
 
