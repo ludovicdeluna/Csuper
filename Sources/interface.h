@@ -41,9 +41,9 @@
 #include "emplacement_fichier.h"
 
 #ifndef PORTABLE
-typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , nouvChem=6, lireChem=7 , quit=8} Menu;
+typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , nouvChem=6, lireChem=7 , quit=8 , easterEggs = 42} Menu;
 #else
-typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , quit=6} Menu;
+typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , quit=6, easterEggs = 42} Menu;
 #endif
 
 
