@@ -303,6 +303,9 @@ void menuPrincipal()
             case quit  :        printf("\nVous avez choisi de quitter le programme.\n\n");
                                 arret=VRAI;
                                 break;
+            case easterEggs :   printf("\nEffectivement c'est la bonne reponse mais ca ne m'aide pas a savoir ce que vous voulez faire.\n");
+                                systemPause();
+                                break;
             default :           mauvais_choix();
                                 systemPause();
         }
