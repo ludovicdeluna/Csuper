@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Comptage points console - Csuper" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../Compilation/bin/Debug/csuper" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../Compilation/obj/Debug" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="../Compilation/bin/Release/csuper" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../Compilation/obj/Release" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../Sources/affichage.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/affichage.h" />
+		<Unit filename="../Sources/emplacement_fichier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/emplacement_fichier.h" />
+		<Unit filename="../Sources/fichier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/fichier.h" />
+		<Unit filename="../Sources/fonction.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/fonction.h" />
+		<Unit filename="../Sources/interface.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/interface.h" />
+		<Unit filename="../Sources/main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/main.h" />
+		<Unit filename="../Sources/menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/menu.h" />
+		<Unit filename="../Sources/saisie_clavier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/saisie_clavier.h" />
+		<Unit filename="../Sources/structure.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/structure.h" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
