@@ -2,8 +2,8 @@
  * \file    interface.h
  * \brief   Prototypes des fonctions qui gerent l'interface graphique du logiciel
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    09/03/14
+ * \version 2.1.0
  */
 
  /*
@@ -52,9 +52,11 @@ void supprimerFichierNom();
 void listerFichier();
 void jouer(Fichier_Jeu *ptr_struct_fichier, char *nom_fichier);
 void nouvellePartie();
-void ChargerPartie();
+void chargerPartie();
 void menuPrincipal();
 void nouveauCheminFichier();
 void lireCheminFichier();
+void chargerPartieLocale(char *nom_fichier);
+void afficheFichierLocale(char *nom_fichier);
 
 #endif

@@ -2,8 +2,8 @@
  * \file    fichier.c
  * \brief   Fonction de gestion des fichiers
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    09/03/14
+ * \version 2.1.0
  */
 
  /*
@@ -37,7 +37,7 @@
 
 /*!
  * \fn FILE *ouvrirFichierExtension(char nom[], char mode[])
- *  Ouvre un fichier a partir de son nom (nom[]) et du mod voulu (mode[]) en y ajouter l'extension du fichier
+ *  Ouvre un fichier a partir de son nom et du mode voulu en y ajouter l'extension du fichier si necessaire
  * \param[in] nom[] le nom du fichier
  * \param[in] mode[] le mode voulu
  * \return un pointeur sur le fichier ouvert, NULL s'il y a eut un probleme
@@ -46,9 +46,19 @@ FILE *ouvrirFichierExtension(char nom[], char mode[])
 {
     /*Decalaration des variables*/
     char nom_2[TAILLE_MAX_NOM_FICHIER];
+    char jeu[4]=EXTENSION_FICHIER;
+    char ext[4]="abc";
+    int i;
 
-    /*Ajout de l'extension au nom de fichier*/
-    sprintf(nom_2,"%s.%s",nom,EXTENSION_FICHIER);
+    /*Lecture de l'extension du fichier*/
+    for (i=strlen(nom)-3 ; i<strlen(nom) ; i++)
+            ext[-strlen(nom)+i+3]=nom[i];
+
+    /*Ajout de l'extension au nom de fichier si elle n'y est pas*/
+    if (strcmp(jeu,ext)!=0)
+        sprintf(nom_2,"%s.%s",nom,EXTENSION_FICHIER);
+    else
+        strcpy(nom_2,nom);
 
     return ouvrirFichier(nom_2,mode);
 }
@@ -98,11 +108,21 @@ Fichier_Jeu *lireFichier(char *nom)
     {
         printf("\nProbleme allocation memoire\n");
         perror("");
+        fermerFichier(ptr_fichier);
         exit(0);
     }
 
-    /*Lecture des differentes variables du fichier dans la structure*/
+    /*Lecture et verification de l version du fichier*/
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->version),sizeof(float),1,ptr_fichier));
+    if (ptr_struct_fichier->version < VERSION)
+    {
+        printf("\nErreur la version du fichier est la %1.1f alors que le logiciel supporte uniquement les fichiers avec des"
+               " versions superieurs a la %1.1f.\n",ptr_struct_fichier->version,VERSION);
+        fermerFichier(ptr_fichier);
+        return NULL;
+    }
+
+    /*Lecture des differentes variables du fichier dans la structure*/
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->taille_max_nom),sizeof(float),1,ptr_fichier));
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->jour),sizeof(float),1,ptr_fichier));
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->mois),sizeof(float),1,ptr_fichier));
@@ -116,6 +136,7 @@ Fichier_Jeu *lireFichier(char *nom)
     {
         printf("\nProbleme allocation memoire\n");
         perror("");
+        fermerFichier(ptr_fichier);
         exit(0);
     }
 
@@ -126,6 +147,7 @@ Fichier_Jeu *lireFichier(char *nom)
         {
             printf("\nProbleme allocation memoire\n");
             perror("");
+            fermerFichier(ptr_fichier);
             exit(0);
         }
     }
@@ -135,6 +157,7 @@ Fichier_Jeu *lireFichier(char *nom)
     {
         printf("\nProbleme allocation memoire\n");
         perror("");
+        fermerFichier(ptr_fichier);
         exit(0);
     }
 
@@ -152,6 +175,7 @@ Fichier_Jeu *lireFichier(char *nom)
     {
         printf("\nProbleme allocation memoire\n");
         perror("");
+        fermerFichier(ptr_fichier);
         exit(0);
     }
 
@@ -162,6 +186,8 @@ Fichier_Jeu *lireFichier(char *nom)
     if ((ptr_struct_fichier->position=(float *)malloc(ptr_struct_fichier->nb_joueur*sizeof(float))) == NULL)
     {
         printf("Probleme allocation memoire");
+        perror("");
+        fermerFichier(ptr_fichier);
         exit(0);
     }
 
@@ -175,6 +201,7 @@ Fichier_Jeu *lireFichier(char *nom)
     {
         printf("\nProbleme allocation memoire\n");
         perror("");
+        fermerFichier(ptr_fichier);
         exit(0);
     }
 

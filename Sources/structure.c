@@ -2,8 +2,8 @@
  * \file    structure.c
  * \brief   Fonction de gestion des fichiers de la struction contenant les informations
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    09/03/14
+ * \version 2.1.0
  */
 
  /*

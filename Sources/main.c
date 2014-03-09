@@ -2,8 +2,8 @@
  * \file    main.c
  * \brief   Lancement du programme
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    09/03/14
+ * \version 2.1.0
  */
 
 /*
@@ -31,7 +31,8 @@
  *
  */
 
- #include "interface.h"
+#include "main.h"
+
 /*!
  * \fn int main(int argc, char *argv[])
  *  Lance le programme
@@ -43,7 +44,26 @@ int main(int argc, char *argv[])
     afficherLicense();
     systemPause();
     #endif
-    menuPrincipal();
+    if (argc == 2)
+        chargerPartieLocale(argv[1]);
+    else
+    {
+        if (argc >= 3)
+        {
+            if (strcmp(argv[1],LECTURE_FICHIER)==0)
+                afficheFichierLocale(argv[2]);
+            else if (strcmp(argv[2],LECTURE_FICHIER)==0)
+                afficheFichierLocale(argv[1]);
+            else if (strcmp(argv[1],OUVERTURE_FICHIER)==0)
+                chargerPartieLocale(argv[2]);
+            else if (strcmp(argv[2],OUVERTURE_FICHIER)==0)
+                chargerPartieLocale(argv[1]);
+            else
+                printf("Vous n'avez pas entre une bonne commande.\nLes options sont %s et %s avec le nom du fichier.\n",LECTURE_FICHIER,OUVERTURE_FICHIER);
+        }
+        else
+            menuPrincipal();
+    }
     return 0;
 }
 

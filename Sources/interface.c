@@ -2,8 +2,8 @@
  * \file    interface.c
  * \brief   Fonctions qui gerent l'interface graphique du logiciel
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    09/03/14
+ * \version 2.1.0
  */
 
  /*
@@ -221,10 +221,10 @@ void nouvellePartie()
 }
 
 /*!
- * \fn void ChargerPartie()
+ * \fn void chargerPartie()
  *  Charge une partie a partir d'un fichier et lance la fonction de comptage des points
  */
-void ChargerPartie()
+void chargerPartie()
 {
     Fichier_Jeu *ptr_struct_fichier;
     char nom_fichier[TAILLE_MAX_NOM_FICHIER];
@@ -286,7 +286,7 @@ void menuPrincipal()
         switch (choix) {
             case nouvPart  :    nouvellePartie();
                                 break;
-            case charPart  :    ChargerPartie();
+            case charPart  :    chargerPartie();
                                 break;
             case affFich  :     afficheFichier();
                                 break;
@@ -344,5 +344,67 @@ void lireCheminFichier()
     lectureCheminFichier(chemin);
 
     printf("Vos fichiers sont sauvegardes dans %s\n",chemin);
+    systemPause();
+}
+
+/*!
+ * \fn void chargerPartieLocale(char *nom_fichier)
+ *  Charge une partie a partir d'un fichier dont le nom a ete donne et lance la fonction de comptage des points
+ * \param[in] nom_fichier, le nom du fichier
+ */
+void chargerPartieLocale(char *nom_fichier)
+{
+    Fichier_Jeu *ptr_struct_fichier;
+
+    systemEfface();
+
+    ptr_struct_fichier=lireFichier(nom_fichier);
+
+    if (ptr_struct_fichier == NULL)
+    {
+        systemPause();
+        return;
+    }
+
+    afficherStruct(ptr_struct_fichier);
+
+    if(depScoreMax(ptr_struct_fichier))
+    {
+        afficherPartieFinie(ptr_struct_fichier);
+        systemPause();
+    }
+
+    else
+    {
+        systemPause();
+        jouer(ptr_struct_fichier,nom_fichier);
+    }
+}
+
+/*!
+ * \fn void afficheFichierLocale(char *nom_fichier)
+ *  Affiche le fichier dont le nom a ete donne en parametre
+ */
+void afficheFichierLocale(char *nom_fichier)
+{
+    Fichier_Jeu *ptr_struct_fichier;
+
+    systemEfface();
+
+    ptr_struct_fichier=lireFichier(nom_fichier);
+
+    /*Si le fichier a bien ete lu affiche et ferme la structure*/
+    if (ptr_struct_fichier != NULL)
+    {
+        afficherStruct(ptr_struct_fichier);
+
+        if(depScoreMax(ptr_struct_fichier))
+        {
+            afficherPartieFinie(ptr_struct_fichier);
+        }
+
+        fermeeFichierStruct(ptr_struct_fichier);
+    }
+
     systemPause();
 }

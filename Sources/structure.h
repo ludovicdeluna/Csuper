@@ -2,8 +2,8 @@
  * \file    structure.h
  * \brief   Prototypes des fonction de gestion des fichiers de la struction contenant les informations
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    09/03/14
+ * \version 2.1.0
  */
 
  /*
@@ -45,9 +45,9 @@
 
 /*!
  * \def VERSION
- * Definit la version a 1.3
+ * Definit la version a 1.4
  */
-#define VERSION 1.3
+#define VERSION 1.4
 
 /*!
  * \struct Fichier_Jeu
