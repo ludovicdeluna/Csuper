@@ -2,8 +2,8 @@
  * \file    menu.c
  * \brief   Fonctions qui gerent les menus demandant de rentrer des valeurs du logiciel
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    09/03/14
+ * \version 2.1.0
  */
 
  /*
@@ -41,7 +41,7 @@
  */
 char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER])
 {
-    printf("Donnez le nom du fichier sans l'extension avec au maximum %d caracteres.\nVotre choix : ",TAILLE_MAX_NOM_FICHIER-1);
+    printf("Donnez le nom du fichier avec ou sans l'extension avec au maximum %d caracteres.\nVotre choix : ",TAILLE_MAX_NOM_FICHIER-1);
     saisieClavierChaine(nom_fichier,TAILLE_MAX_NOM_FICHIER);
     printf("Vous avez choisi %s\n",nom_fichier);
 
