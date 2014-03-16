@@ -13,6 +13,12 @@ Si vous avez des remarques ou des questions sur l'utilisation ou le code, n'hés
 
 Ce logiciel a été fait en guise d'exercice personnel pendant des études donc soyez indulgent au niveau des remarques sur le code, merci.
 
+Documentation
+-------------
+La documentation se fait à l'aide de Doxygen.
+Une version PDF se trouve dans le dossier Documentation et une version html se trouve [ici](http://dalan.netne.net/Doc_csuper)
+Un fichier explique aussi comment sont ordonnées les données dans les fichiers .csu
+
 Installation
 -----------
 Les éxécutables sont disponibles sur [mon site](http://dalan.netne.net/wordpress).

@@ -38,15 +38,15 @@
 
 /*!
  * \def LECTURE_FICHIER
- * Definit l'appel a la lecture du fichier a "-read"
+ * Definit l'appel a la lecture du fichier a "--read"
  */
-#define LECTURE_FICHIER "-read"
+#define LECTURE_FICHIER "--read"
 
 /*!
  * \def OUVERTURE_FICHIER
- * Definit l'appel a l'ouverture du fichier a "-open"
+ * Definit l'appel a l'ouverture du fichier a "--open"
  */
-#define OUVERTURE_FICHIER "-open"
+#define OUVERTURE_FICHIER "--open"
 
 int main(int argc, char *argv[]);
 

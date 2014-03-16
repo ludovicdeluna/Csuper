@@ -10,3 +10,5 @@
 *.out
 *.app
 Compilation
+*.layout
+*.depend
