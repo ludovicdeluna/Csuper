@@ -36,10 +36,14 @@
 /*!
  * \fn int main(int argc, char *argv[])
  *  Lance le programme
+ * \param[in] argc le nombre d 'argument
+ * \param[in] argv le tableau des arguments
  * \return 0 si tout s'est bien passe
  */
 int main(int argc, char *argv[])
 {
+    int fonction;
+    int emplacement_fichier;
     #ifdef PORTABLE
     afficherLicense();
     systemPause();
@@ -48,18 +52,12 @@ int main(int argc, char *argv[])
         chargerPartieLocale(argv[1]);
     else
     {
-        if (argc >= 3)
+        if (argc >= 3 && searchArgument(argc,argv,&fonction,&emplacement_fichier))
         {
-            if (strcmp(argv[1],LECTURE_FICHIER)==0)
-                afficheFichierLocale(argv[2]);
-            else if (strcmp(argv[2],LECTURE_FICHIER)==0)
-                afficheFichierLocale(argv[1]);
-            else if (strcmp(argv[1],OUVERTURE_FICHIER)==0)
-                chargerPartieLocale(argv[2]);
-            else if (strcmp(argv[2],OUVERTURE_FICHIER)==0)
-                chargerPartieLocale(argv[1]);
-            else
-                printf("Vous n'avez pas entre une bonne commande.\nLes options sont %s et %s avec le nom du fichier.\n",LECTURE_FICHIER,OUVERTURE_FICHIER);
+            if (fonction == LECTURE_FICHIER)
+                afficheFichierLocale(argv[emplacement_fichier]);
+            else if (fonction == OUVERTURE_FICHIER)
+                chargerPartieLocale(argv[emplacement_fichier]);
         }
         else
             menuPrincipal();

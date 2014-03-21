@@ -1,13 +1,13 @@
 /*!
- * \file    main.h
+ * \file    argument_main.h
  * \brief   Lancement du programme
  * \author  Remi BERTHO
- * \date    09/03/14
+ * \date    21/03/14
  * \version 2.1.0
  */
 
 /*
- * main.h
+ * argument_main.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,23 +31,47 @@
  *
  */
 
-#ifndef MAIN_H_INCLUDED
-#define MAIN_H_INCLUDED
+#ifndef ARGUMENT_MAIN_H_INCLUDED
+#define ARGUMENT_MAIN_H_INCLUDED
 
-#include "interface.h"
+#include "fonction.h"
+
+/*!
+ * \def CHAINE_LECTURE_FICHIER
+ * Definit l'appel a la lecture du fichier a "--read"
+ */
+#define CHAINE_LECTURE_FICHIER "--read"
+
+/*!
+ * \def CHAINE_LECTURE_FICHIER_RED
+ * Definit l'appel a la lecture du fichier a "-r"
+ */
+#define CHAINE_LECTURE_FICHIER_RED "-r"
 
 /*!
  * \def LECTURE_FICHIER
- * Definit l'appel a la lecture du fichier a "--read"
+ * Definit l'appel a la lecture du fichier a 0
  */
-#define LECTURE_FICHIER "--read"
+#define LECTURE_FICHIER 0
+
+/*!
+ * \def CHAINE_OUVERTURE_FICHIER
+ * Definit l'appel a l'ouverture du fichier a "--open"
+ */
+#define CHAINE_OUVERTURE_FICHIER "--open"
+
+/*!
+ * \def CHAINE_OUVERTURE_FICHIER_RED
+ * Definit l'appel a l'ouverture du fichier a "-o"
+ */
+#define CHAINE_OUVERTURE_FICHIER_RED "-o"
 
 /*!
  * \def OUVERTURE_FICHIER
- * Definit l'appel a l'ouverture du fichier a "--open"
+ * Definit l'appel a l'ouverture du fichier a 1
  */
-#define OUVERTURE_FICHIER "--open"
+#define OUVERTURE_FICHIER 1
 
-int main(int argc, char *argv[]);
+int searchArgument(int argc, char *argv[], int *fonction, int *emplacement_fichier);
 
 #endif

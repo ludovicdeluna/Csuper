@@ -31,42 +31,46 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../Sources/affichage.c">
+		<Unit filename="../Sources/Console/affichage.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/affichage.h" />
-		<Unit filename="../Sources/emplacement_fichier.c">
+		<Unit filename="../Sources/Console/affichage.h" />
+		<Unit filename="../Sources/Console/interface.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/emplacement_fichier.h" />
-		<Unit filename="../Sources/fichier.c">
+		<Unit filename="../Sources/Console/interface.h" />
+		<Unit filename="../Sources/Console/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/fichier.h" />
-		<Unit filename="../Sources/fonction.c">
+		<Unit filename="../Sources/Console/main.h" />
+		<Unit filename="../Sources/Console/menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/fonction.h" />
-		<Unit filename="../Sources/interface.c">
+		<Unit filename="../Sources/Console/menu.h" />
+		<Unit filename="../Sources/System/argument_main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/interface.h" />
-		<Unit filename="../Sources/main.c">
+		<Unit filename="../Sources/System/argument_main.h" />
+		<Unit filename="../Sources/System/emplacement_fichier.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/main.h" />
-		<Unit filename="../Sources/menu.c">
+		<Unit filename="../Sources/System/emplacement_fichier.h" />
+		<Unit filename="../Sources/System/fichier.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/menu.h" />
-		<Unit filename="../Sources/saisie_clavier.c">
+		<Unit filename="../Sources/System/fichier.h" />
+		<Unit filename="../Sources/System/fonction.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/saisie_clavier.h" />
-		<Unit filename="../Sources/structure.c">
+		<Unit filename="../Sources/System/fonction.h" />
+		<Unit filename="../Sources/System/saisie_clavier.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/structure.h" />
+		<Unit filename="../Sources/System/saisie_clavier.h" />
+		<Unit filename="../Sources/System/structure.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/System/structure.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

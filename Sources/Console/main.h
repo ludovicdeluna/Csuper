@@ -1,13 +1,13 @@
 /*!
- * \file    menu.h
- * \brief   Prototypes des fonctions qui gerent les menus demandant de rentrer des valeurs du logiciel
+ * \file    main.h
+ * \brief   Lancement du programme
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    09/03/14
+ * \version 2.1.0
  */
 
- /*
- * menu.h
+/*
+ * main.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -24,27 +24,19 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
+ * aint with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
  *
  */
 
-#ifndef MENU_H_INCLUDED
-#define MENU_H_INCLUDED
+#ifndef MAIN_H_INCLUDED
+#define MAIN_H_INCLUDED
 
-#include "saisie_clavier.h"
-#include "fichier.h"
+#include "interface.h"
+#include "../System/argument_main.h"
 
-
-char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER]);
-void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier);
-void menuDistribue(char *nom_distribue);
-void menuNomJoueur(Fichier_Jeu *ptr_struct_fichier);
-void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier);
-int menuContinuer();
-int menuSupprimer();
-void menuNouveauChemin(char *nouveauChemin);
+int main(int argc, char *argv[]);
 
 #endif

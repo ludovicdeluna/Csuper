@@ -1,13 +1,13 @@
 /*!
- * \file    affichage.h
- * \brief   Prototypes des fonctions qui gerent l'affichage des scores du logiciel
+ * \file    menu.h
+ * \brief   Prototypes des fonctions qui gerent les menus demandant de rentrer des valeurs du logiciel
  * \author  Remi BERTHO
  * \date    13/02/14
  * \version 2.0
  */
 
  /*
- * affichage.h
+ * menu.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,23 +31,20 @@
  *
  */
 
-#ifndef AFFICHAGE_H_INCLUDED
-#define AFFICHAGE_H_INCLUDED
+#ifndef MENU_H_INCLUDED
+#define MENU_H_INCLUDED
 
-#include "structure.h"
-#include <string.h>
+#include "../System/saisie_clavier.h"
+#include "../System/fichier.h"
 
-void afficherNom(Fichier_Jeu *ptr_struct_fichier, int *ptr_taille_ligne);
-void afficherLigne(int taille_ligne);
-void afficherScoreTotal(Fichier_Jeu *ptr_struct_fichier);
-void afficherDistribue(Fichier_Jeu *ptr_struct_fichier);
-void afficherEnTete(Fichier_Jeu *ptr_struct_fichier);
-void afficherScoreEntier(Fichier_Jeu *ptr_struct_fichier);
-void afficherPosition(Fichier_Jeu *ptr_struct_fichier);
-void afficherScore(Fichier_Jeu *ptr_struct_fichier);
-void afficherStruct(Fichier_Jeu *ptr_struct_fichier);
-void afficherPartieFinie(Fichier_Jeu *ptr_struct_fichier);
-void afficherChaineTroisTab(char *chaine);
-void afficherLicense();
+
+char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER]);
+void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier);
+void menuDistribue(char *nom_distribue);
+void menuNomJoueur(Fichier_Jeu *ptr_struct_fichier);
+void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier);
+int menuContinuer();
+int menuSupprimer();
+void menuNouveauChemin(char *nouveauChemin);
 
 #endif

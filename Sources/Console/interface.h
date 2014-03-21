@@ -38,7 +38,7 @@
 
 #include "menu.h"
 #include "affichage.h"
-#include "emplacement_fichier.h"
+#include "../System/emplacement_fichier.h"
 
 #ifndef PORTABLE
 typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , nouvChem=6, lireChem=7 , quit=8 , easterEggs = 42} Menu;
