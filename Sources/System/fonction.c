@@ -197,3 +197,36 @@ int lireTailleFichier(FILE *ptr_fichier)
     return taille;
 }
 
+/*!
+ * \fn void *myAlloc(int taille_alloue)
+ *  Alloue un bloc memoire et verifie que ca s'est bien alloue
+ * \param[in] taille_alloue la taille à allouer
+ * \return un pointeur sur la structure alloué
+ */
+void *myAlloc(int taille_alloue)
+{
+    void *ptr;
+    if ((ptr=malloc(taille_alloue)) == NULL)
+    {
+        printf("\nProbleme allocation memoire\n");
+        perror("");
+        exit(0);
+    }
+    return ptr;
+}
+
+/*!
+ * \fn void myRealloc(void *ptr,int taille_alloue)
+ *  Realloue un bloc memoire et verifie que ca s'est bien alloue
+ * \param[in] taille_alloue la taille à allouer
+ * \param[in] ptr le pointeur sur quoi ca doit etre realloue
+ */
+void myRealloc(void **ptr,int taille_alloue)
+{
+    if ((*ptr=realloc(*ptr,taille_alloue)) == NULL)
+    {
+        printf("\nProbleme reallocation memoire\n");
+        perror("");
+        exit(0);
+    }
+}

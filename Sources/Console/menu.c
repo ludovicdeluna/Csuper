@@ -142,18 +142,18 @@ void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier)
     int validation;
     char valid;
 
-    debNouvTour(ptr_struct_fichier);
+    debNouvTour(ptr_struct_fichier,-1);
 
     do
     {
         validation=VRAI;
 
         /*Demande les points de tout les joueurs*/
-        for (i=(ptr_struct_fichier->nb_tour*ptr_struct_fichier->nb_joueur) ; i<(ptr_struct_fichier->nb_tour+1)*ptr_struct_fichier->nb_joueur ; i++)
+        for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
         {
-            printf("\nDonnez les points de %s : ",ptr_struct_fichier->nom_joueur[i%(int)ptr_struct_fichier->nb_joueur]);
-            saisieClavierFlottant(&(ptr_struct_fichier->point[i]));
-            printf("Vous avez choisi %.0f\n",ptr_struct_fichier->point[i]);
+            printf("\nDonnez les points de %s : ",ptr_struct_fichier->nom_joueur[i]);
+            saisieClavierFlottant(&(ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]));
+            printf("Vous avez choisi %.0f\n",ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]);
         }
 
         printf("\nValidez vous ces scores (O/n) : ");
@@ -164,7 +164,7 @@ void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier)
 
     } while (!validation);
 
-    finNouvTour(ptr_struct_fichier);
+    finNouvTour(ptr_struct_fichier,-1);
 }
 
 /*!

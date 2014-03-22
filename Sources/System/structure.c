@@ -49,12 +49,7 @@ Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premie
     struct tm *t;
 
     /*Allocation memoire de la structure*/
-    if ((ptr_struct_fichier=(Fichier_Jeu *)malloc(sizeof(Fichier_Jeu))) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        exit(0);
-    }
+    ptr_struct_fichier=(Fichier_Jeu *)myAlloc(sizeof(Fichier_Jeu));
 
     /*Copie de certaines variables dans la structure*/
     ptr_struct_fichier->taille_max_nom=TAILLE_MAX_NOM;
@@ -62,58 +57,32 @@ Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premie
     ptr_struct_fichier->nb_joueur=nb_joueur;
     ptr_struct_fichier->nb_max=nb_max;
     ptr_struct_fichier->distribue=0;
-    ptr_struct_fichier->nb_tour=0;
     ptr_struct_fichier->sens_premier=sens_premier;
 
-    /*Allocation memoire du tableau de chaine de caractere pour le nom des personnes*/
-    if ((ptr_struct_fichier->nom_joueur=(char **)malloc(nb_joueur*sizeof(char*))) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        exit(0);
-    }
+    /*Allocation memoire des nombre de tours*/
+    ptr_struct_fichier->nb_tour=(float *)myAlloc(nb_joueur*sizeof(float*));
 
-    /*Allocation memoire des noms des personnes*/
+    /*Allocation memoire du tableau des nom des personnes*/
+    ptr_struct_fichier->nom_joueur=(char **)myAlloc(nb_joueur*sizeof(char*));
     for (i=0 ; i<nb_joueur ; i++)
-    {
-        if ((ptr_struct_fichier->nom_joueur[i]=(char *)malloc(TAILLE_MAX_NOM*sizeof(char))) == NULL)
-        {
-            printf("\nProbleme allocation memoire\n");
-            perror("");
-            exit(0);
-        }
-    }
+        ptr_struct_fichier->nom_joueur[i]=(char *)myAlloc(TAILLE_MAX_NOM*sizeof(char));
 
-    /*Allocation memoire des points totaux*/
-    if ((ptr_struct_fichier->point_tot=(float *)malloc(nb_joueur*sizeof(float))) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        exit(0);
-    }
+    /*Allocation memoire des points totaux et des de positions*/
+    ptr_struct_fichier->point_tot=(float *)myAlloc(nb_joueur*sizeof(float));
+    ptr_struct_fichier->position=(float *)myAlloc(nb_joueur*sizeof(float));
 
-    /*Allocation memoire de positions*/
-    if ((ptr_struct_fichier->position=(float *)malloc(nb_joueur*sizeof(float))) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        exit(0);
-    }
-
-    /*Initialisation des points totaux et de la position a zero*/
+    /*Initialisation des points totaux,de la position a zero et du nombre de tour*/
     for (i=0 ; i<nb_joueur ; i++)
     {
         ptr_struct_fichier->point_tot[i]=0;
         ptr_struct_fichier->position[i]=1;
+        ptr_struct_fichier->nb_tour[i]=0;
     }
 
-    /*Allocation memoire des points*/
-    if ((ptr_struct_fichier->point=(float *)malloc(0)) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        exit(0);
-    }
+    /*Allocation memoire du tableau de points*/
+    ptr_struct_fichier->point=(float **)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(float*));
+    for (i=0 ; i<nb_joueur ; i++)
+        ptr_struct_fichier->point[i]=(float*)myAlloc(0*sizeof(float));
 
     /*Enregistrement de la date courante dans la structure*/
     timestamp = time(NULL);
@@ -134,8 +103,11 @@ void fermeeFichierStruct(Fichier_Jeu *ptr_struct_fichier)
 {
     int i;
 
+    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+        free(ptr_struct_fichier->point[i]);
     free(ptr_struct_fichier->point);
     free(ptr_struct_fichier->point_tot);
+    free(ptr_struct_fichier->nb_tour);
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
         free(ptr_struct_fichier->nom_joueur[i]);
     free(ptr_struct_fichier->nom_joueur);
@@ -145,35 +117,46 @@ void fermeeFichierStruct(Fichier_Jeu *ptr_struct_fichier)
 
 /*!
  * \fn void debNouvTour(Fichier_Jeu *ptr_struct_fichier)
- *  Realloue l'espace memoire dedie au points sur la structure Fichier_Jeu mis en parametre
+ *  Realloue l'espace memoire dedie au points sur la structure Fichier_Jeu mis en parametre pour un nouveau tour
  * \param[in,out] *ptr_struct_fichier un pointeur sur la structure Fichier_Jeu
+ * \param[in,out] num_joueur le numero du joueur qui va commencer un nouveau tour, vaut -1 si c'est tout le monde
  */
-void debNouvTour(Fichier_Jeu *ptr_struct_fichier)
+void debNouvTour(Fichier_Jeu *ptr_struct_fichier,int num_joueur)
 {
-    if ((ptr_struct_fichier->point=(float *)realloc(ptr_struct_fichier->point,ptr_struct_fichier->nb_joueur*((ptr_struct_fichier->nb_tour)+1)*sizeof(float))) == NULL)
+    int i;
+
+    if (num_joueur == -1)
     {
-        printf("\nProbleme reallocation memoire\n");
-        perror("");
-        exit(0);
+         for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+            myRealloc((void**)&(ptr_struct_fichier->point[i]),ptr_struct_fichier->nb_joueur*((ptr_struct_fichier->nb_tour[0])+1)*sizeof(float));
     }
+    else
+        myRealloc((void **)&(ptr_struct_fichier->point[num_joueur]),ptr_struct_fichier->nb_joueur*((ptr_struct_fichier->nb_tour[num_joueur])+1)*sizeof(float));
 }
 
 /*!
  * \fn void finNouvTour(Fichier_Jeu *ptr_struct_fichier)
- *  Met a jour les points totaux, le nombre de tour, la personne qui doit distribuer et les positions
+ *  Met a jour les points totaux, le nombre de tour, la personne qui doit distribuer et les positions pour un nouveau tour
  * \param[in,out] *ptr_struct_fichier un pointeur sur la structure Fichier_Jeu
+ * \param[in,out] num_joueur le numero du joueur qui va commencer un nouveau tour, vaut -1 si c'est tout le monde
  */
-void finNouvTour(Fichier_Jeu *ptr_struct_fichier)
+void finNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur)
 {
     int i;
 
     /*Mise a jour des points totaux*/
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
     {
-        ptr_struct_fichier->point_tot[i]+=ptr_struct_fichier->point[i+(int)((ptr_struct_fichier->nb_joueur)*(ptr_struct_fichier->nb_tour))];
+        ptr_struct_fichier->point_tot[i]+=ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]];
     }
 
-    (ptr_struct_fichier->nb_tour)++;
+    if (num_joueur == -1)
+    {
+        for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+            (ptr_struct_fichier->nb_tour[i])++;
+    }
+    else
+        (ptr_struct_fichier->nb_tour[num_joueur])++;
 
     /*Mise a jour de la personne qui doit distribue*/
     if (ptr_struct_fichier->distribue == ptr_struct_fichier->nb_joueur -1)
@@ -196,12 +179,7 @@ void calculPosition(Fichier_Jeu *ptr_struct_fichier)
     int j;
 
     /*Allocation memoire de points_trie*/
-    if ((points_trie=(float *)malloc(sizeof(float)*ptr_struct_fichier->nb_joueur)) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        exit(0);
-    }
+    points_trie=(float *)myAlloc(sizeof(float)*ptr_struct_fichier->nb_joueur);
 
     /*Copie les pints totaux dans points_trie*/
     for(i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
@@ -273,4 +251,23 @@ int depScoreMax(Fichier_Jeu *ptr_struct_fichier)
             return VRAI;
     }
     return FAUX;
+}
+
+/*!
+ * \fn int maxNbTour(Fichier_Jeu *ptr_struct_fichier)
+ *  Cherche le maximum de nombre de tour
+ * \param[in] *ptr_struct_fichier la structure du fichier
+ * \return le nombre maximum de nombre de tour
+ */
+int maxNbTour(Fichier_Jeu *ptr_struct_fichier)
+{
+    int max = ptr_struct_fichier->nb_tour[0];
+    int i;
+
+    for (i=1 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    {
+        if (ptr_struct_fichier->nb_tour[i] > max)
+            max = ptr_struct_fichier->nb_tour[i];
+    }
+    return max;
 }

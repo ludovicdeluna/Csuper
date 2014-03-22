@@ -42,7 +42,7 @@
  * \def PORTABLE
  * Definit PORTABLE
  */
-/*#define PORTABLE*/
+#define PORTABLE
 
 /*!
  * \def NOM_FICHIER

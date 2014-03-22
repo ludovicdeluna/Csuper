@@ -118,7 +118,6 @@ void afficherEnTete(Fichier_Jeu *ptr_struct_fichier)
     printf("\nFichier jeu\nCreer le %02.0f/%02.0f/%4.0f",ptr_struct_fichier->jour,ptr_struct_fichier->mois,ptr_struct_fichier->annee);
     printf("\nVersion du fichier : %1.1f\nTaille maximum des nom : %.0f",ptr_struct_fichier->version,ptr_struct_fichier->taille_max_nom);
     printf("\nNombre de joueur : %.0f\nNombre de points maximum : %.0f",ptr_struct_fichier->nb_joueur,ptr_struct_fichier->nb_max);
-    printf("\nNombre de tour : %.0f\nSens du premier : %d",ptr_struct_fichier->nb_tour,ptr_struct_fichier->sens_premier);
 }
 
 /*!
@@ -130,23 +129,27 @@ void afficherScoreEntier(Fichier_Jeu *ptr_struct_fichier)
 {
     int i;
     int j;
+    int k;
 
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur*ptr_struct_fichier->nb_tour ; i++)
+    int max_nb_tour = maxNbTour(ptr_struct_fichier);
+
+    for (i=0 ; i<max_nb_tour ; i++)
     {
         /*Affiche le numero du tour quand on passe a un nouveau tour*/
-        if (i%(int)ptr_struct_fichier->nb_joueur==0)
-            printf("\nTour %2.0f |",(float)i/ptr_struct_fichier->nb_joueur + 1);
+        printf("\nTour %2.0f |",(float)i + 1);
 
-        /*Affiche le score de la personne a un tour*/
-        printf("%4.0f",ptr_struct_fichier->point[i]);
-
-        /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
-        for (j=0 ; j<strlen(ptr_struct_fichier->nom_joueur[i%(int)ptr_struct_fichier->nb_joueur])-2 ; j++)
+        for (k=0 ; k<ptr_struct_fichier->nb_joueur ; k++)
         {
-            printf(" ");
-        }
+            /*Affiche le score de la personne a un tour*/
+            if (ptr_struct_fichier->nb_tour[k] >= i)
+                printf("%4.0f",ptr_struct_fichier->point[k][i]);
 
-        printf("|");
+            /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
+            for (j=0 ; j<strlen(ptr_struct_fichier->nom_joueur[k])-2 ; j++)
+            printf(" ");
+
+            printf("|");
+        }
     }
 }
 

@@ -104,17 +104,11 @@ Fichier_Jeu *lireFichier(char *nom)
     }
 
     /*Allocation memoire de la structure*/
-    if ((ptr_struct_fichier=(Fichier_Jeu *)malloc(sizeof(Fichier_Jeu))) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        fermerFichier(ptr_fichier);
-        exit(0);
-    }
+    ptr_struct_fichier=(Fichier_Jeu *)myAlloc(sizeof(Fichier_Jeu));
 
     /*Lecture et verification de l version du fichier*/
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->version),sizeof(float),1,ptr_fichier));
-    if (ptr_struct_fichier->version < VERSION)
+    if (ptr_struct_fichier->version + 0.01 < VERSION)
     {
         printf("\nErreur la version du fichier est la %1.1f alors que le logiciel supporte uniquement les fichiers avec des"
                " versions superieurs a la %1.1f.\n",ptr_struct_fichier->version,VERSION);
@@ -132,34 +126,14 @@ Fichier_Jeu *lireFichier(char *nom)
     verif_lecture_fichier+=fread(&(ptr_struct_fichier->sens_premier),sizeof(char),1,ptr_fichier);
 
     /*Allocation memoire du tableau de chaine de caractere pour le nom des personnes*/
-    if ((ptr_struct_fichier->nom_joueur=(char **)malloc(ptr_struct_fichier->nb_joueur*sizeof(char*))) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        fermerFichier(ptr_fichier);
-        exit(0);
-    }
+    ptr_struct_fichier->nom_joueur=(char **)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(char*));
 
     /*Allocation memoire des noms des personnes*/
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-    {
-        if ((ptr_struct_fichier->nom_joueur[i]=(char *)malloc(ptr_struct_fichier->taille_max_nom*sizeof(char))) == NULL)
-        {
-            printf("\nProbleme allocation memoire\n");
-            perror("");
-            fermerFichier(ptr_fichier);
-            exit(0);
-        }
-    }
+        ptr_struct_fichier->nom_joueur[i]=(char *)myAlloc(ptr_struct_fichier->taille_max_nom*sizeof(char));
 
     /*Allocation du tableau de caractere nom_pers ou vas etre stocke le nom des personnes en tant que tampon*/
-    if ((nom_pers=(char *)malloc(sizeof(char)*ptr_struct_fichier->taille_max_nom)) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        fermerFichier(ptr_fichier);
-        exit(0);
-    }
+    nom_pers=(char *)myAlloc(sizeof(char)*ptr_struct_fichier->taille_max_nom);
 
     /*Lecture du nom des personnes dans la structure*/
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
@@ -170,43 +144,28 @@ Fichier_Jeu *lireFichier(char *nom)
 
     free(nom_pers);
 
-    /*Allocation memoire des points totaux*/
-    if ((ptr_struct_fichier->point_tot=(float *)malloc(ptr_struct_fichier->nb_joueur*sizeof(float))) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        fermerFichier(ptr_fichier);
-        exit(0);
-    }
-
-    /*Lecture des points totaux*/
+    /*Allocation memoire et lecture des points totaux*/
+    ptr_struct_fichier->point_tot=(float *)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(float));
     verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->point_tot,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier));
 
-    /*Allocation memoire des positions*/
-    if ((ptr_struct_fichier->position=(float *)malloc(ptr_struct_fichier->nb_joueur*sizeof(float))) == NULL)
-    {
-        printf("Probleme allocation memoire");
-        perror("");
-        fermerFichier(ptr_fichier);
-        exit(0);
-    }
-
-    /*Lecture des positions, du nombre de tour et de distribue*/
+    /*Allocation memoire et lecture des positions*/
+    ptr_struct_fichier->position=(float *)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(float));
     verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->position,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier));
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->nb_tour),sizeof(float),1,ptr_fichier));
+
+    /*Allocation memoire et lecture du nombre de tours*/
+    ptr_struct_fichier->nb_tour=(float *)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(float));
+    verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->nb_tour,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier));
+
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->distribue),sizeof(float),1,ptr_fichier));
 
-    /*Allocation memoire des points*/
-    if ((ptr_struct_fichier->point=(float *)malloc(ptr_struct_fichier->nb_joueur*sizeof(float)*ptr_struct_fichier->nb_tour)) == NULL)
-    {
-        printf("\nProbleme allocation memoire\n");
-        perror("");
-        fermerFichier(ptr_fichier);
-        exit(0);
-    }
+    /*Allocation memoire du tableau de points points*/
+    ptr_struct_fichier->point=(float **)malloc(ptr_struct_fichier->nb_joueur*sizeof(float*));
+    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+        ptr_struct_fichier->point[i]=(float *)myAlloc(ptr_struct_fichier->nb_tour[i]*sizeof(float));
 
     /*Lecture des points*/
-    verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->point,sizeof(float),ptr_struct_fichier->nb_joueur*ptr_struct_fichier->nb_tour,ptr_fichier));
+    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+        verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->point[i],sizeof(float),ptr_struct_fichier->nb_tour[i],ptr_fichier));
 
     fermerFichier(ptr_fichier);
 
@@ -258,9 +217,11 @@ int ecrireFichier(char *nom, Fichier_Jeu *ptr_struct_fichier)
 
     fwrite(ptr_struct_fichier->point_tot,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier);
     fwrite(ptr_struct_fichier->position,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->nb_tour),sizeof(float),1,ptr_fichier);
+    fwrite(ptr_struct_fichier->nb_tour,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier);
     fwrite(&(ptr_struct_fichier->distribue),sizeof(float),1,ptr_fichier);
-    fwrite(ptr_struct_fichier->point,sizeof(float),ptr_struct_fichier->nb_joueur*ptr_struct_fichier->nb_tour,ptr_fichier);
+
+    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+        fwrite(ptr_struct_fichier->point[i],sizeof(float),ptr_struct_fichier->nb_tour[i],ptr_fichier);
 
     fermerFichier(ptr_fichier);
 

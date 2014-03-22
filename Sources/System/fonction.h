@@ -60,5 +60,7 @@ int compareFlottantCroissant(void const *a, void const *b);
 FILE *ouvrirFichier(char nome[], char mode[]);
 int fermerFichier(FILE *ptr_fichier);
 int lireTailleFichier(FILE *ptr_fichier);
+void *myAlloc(int taille_alloue);
+void myRealloc(void **ptr,int taille_alloue);
 
 #endif

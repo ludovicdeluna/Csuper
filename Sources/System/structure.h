@@ -66,17 +66,18 @@ typedef struct
     char **nom_joueur;     /*!< Tableau contenant tout les noms de joueurs. */
     float *point_tot;      /*!< Tableau contenant tout les points totaux des joueurs. */
     float *position;       /*!< Tableau contenant la position des joueurs. */
-    float nb_tour;         /*!< Nombre de tour dans le jeu. */
+    float *nb_tour;         /*!< Nombre de tour dans le jeu par joueur. */
     float distribue;       /*!< Numero de la personne qui doit distribuer. */
-    float *point;          /*!< Tableau contenat les points de chaque joueur a chaque tour. */
+    float **point;          /*!< Tableau contenat les points de chaque joueur a chaque tour. */
 } Fichier_Jeu;
 
 Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max , char sens_premier);
 void fermeeFichierStruct(Fichier_Jeu *ptr_struct_fichier);
-void debNouvTour(Fichier_Jeu *ptr_struct_fichier);
-void finNouvTour(Fichier_Jeu *ptr_struct_fichier);
+void debNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur);
+void finNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur);
 void calculPosition(Fichier_Jeu *ptr_struct_fichier);
 void ajoutDistribueStruct(Fichier_Jeu *ptr_struct_fichier, char *nom_distribue);
 int depScoreMax(Fichier_Jeu *ptr_struct_fichier);
+int maxNbTour(Fichier_Jeu *ptr_struct_fichier);
 
 #endif

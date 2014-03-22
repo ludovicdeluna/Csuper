@@ -79,7 +79,7 @@ char *saisieClavierChaine(char *chaine, int nb_caract_plus_un)
 
 /*!
  * \fn void *saisieClavierEntier(int *nb)
- *  Fait une saisie clavier d'un entier.
+ *  Fait une saisie clavier d'un entier, met 0 si l'entree n'est pas un chiffre.
  * \param[in,out] *nb le nombre que l'on veut saisir.
  */
 void saisieClavierEntier(int *nb)
@@ -89,13 +89,15 @@ void saisieClavierEntier(int *nb)
     /*On recupere la chaine de caractere contenant le nombre*/
     saisieClavierChaine(chaine,NB_CARACT_INT);
 
+    *nb=0;
+
     /*On convertit la chaine de caractere en entier*/
     sscanf(chaine,"%d",nb);
 }
 
 /*!
  * \fn void saisieClavierFlottant(float *nb)
- *  Fait une saisie clavier d'un flottant.
+ *  Fait une saisie clavier d'un flottant, met 0 si l'entree n'est pas un chiffre.
  * \param[in,out] *nb le nombre que l'on veut saisir.
  */
 void saisieClavierFlottant(float *nb)
@@ -105,13 +107,15 @@ void saisieClavierFlottant(float *nb)
     /*On recupere la chaine de caractere contenant le nombre*/
     saisieClavierChaine(chaine,NB_CARACT_FLOT);
 
+    *nb=0;
+
     /*On convertit la chaine de caractere en flottant*/
     sscanf(chaine,"%f",nb);
 }
 
 /*!
  * \fn void saisieClavierFlottantSansVirgule(float *nb)
- *  Fait une saisie clavier d'un flottant.
+ *  Fait une saisie clavier d'un flottant sans virgule, met 0 si l'entree n'est pas un chiffre.
  * \param[in,out] *nb le nombre que l'on veut saisir.
  */
 void saisieClavierFlottantSansVirgule(float *nb)
@@ -131,13 +135,15 @@ void saisieClavierFlottantSansVirgule(float *nb)
         *p = '\0';
     }
 
+    *nb=0;
+
     /*On convertit la chaine de caractere en flottant*/
     sscanf(chaine,"%f",nb);
 }
 
 /*!
  * \fn void saisieClavierDouble(double *nb)
- *  Fait une saisie clavier d'un double.
+ *  Fait une saisie clavier d'un double, met 0 si l'entree n'est pas un chiffre.
  * \param[in,out] *nb le nombre que l'on veut saisir.
  */
 void saisieClavierDouble(double *nb)
@@ -146,6 +152,8 @@ void saisieClavierDouble(double *nb)
 
     /*On recupere la chaine de caractere contenant le nombre*/
     saisieClavierChaine(chaine,NB_CARACT_DOUB);
+
+    *nb=0;
 
     /*On convertit la chaine de caractere en flottant*/
     sscanf(chaine,"%lf",nb);
