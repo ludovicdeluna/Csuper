@@ -143,6 +143,8 @@ void afficherScoreEntier(Fichier_Jeu *ptr_struct_fichier)
             /*Affiche le score de la personne a un tour*/
             if (ptr_struct_fichier->nb_tour[k] >= i)
                 printf("%4.0f",ptr_struct_fichier->point[k][i]);
+            else
+                printf("    ");
 
             /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
             for (j=0 ; j<strlen(ptr_struct_fichier->nom_joueur[k])-2 ; j++)
