@@ -49,17 +49,19 @@ char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER])
 }
 
 /*!
- * \fn void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier)
+ * \fn void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour)
  *  Demande et enregistre le nombre de joueur, le nombre maximum et le nom de la personne qui comme a distribuer
  * \param[in,out] *ptr_nb_joueur le nombre de joueur
  * \param[in,out] *ptr_nb_max le nombre maximum
  * \param[in,out] *ptr_sens_premier definit le sens du premier
  */
-void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_premier)
+void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_premier, char *ptr_tour_par_tour)
 {
     char nbmax;
     char premier_max;
+    char tour;
 
+    /*Nombre de joueur*/
     do
     {
         printf("\nDonnez le nombre de joueur dans votre jeu (>0).\nVotre choix : ");
@@ -67,9 +69,9 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
         printf("Vous avez choisi %.0f\n",*ptr_nb_joueur);
     } while (*ptr_nb_joueur <= 0);
 
+    /*Nombre maximum*/
     printf("\nVoulez-vous utiliser un nombre maximum (O/n) : ");
     saisieClavierCaractere(&nbmax);
-
     if (nbmax=='n' || nbmax=='N')
     {
         *ptr_nb_max =  INFINITY;
@@ -88,10 +90,19 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
     printf("\nLe premier est-il celui qui a le plus de points (O/n) : ");
     saisieClavierCaractere(&premier_max);
 
+    /*Sens du premier*/
     if (premier_max=='n' || premier_max == 'N')
         *ptr_sens_premier=-1;
     else
         *ptr_sens_premier=1;
+
+    /*Tour par tour ou pas*/
+    printf("\nLes points se feront en tour par tour (O/n) : ");
+    saisieClavierCaractere(&tour);
+    if (tour=='n' || tour == 'N')
+        *ptr_tour_par_tour=0;
+    else
+        *ptr_tour_par_tour=1;
 }
 
 /*!
@@ -141,19 +152,33 @@ void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier)
     int i;
     int validation;
     char valid;
+    int indice_joueur;
 
-    debNouvTour(ptr_struct_fichier,-1);
+    if (ptr_struct_fichier->tour_par_tour == 1)
+        indice_joueur = -1;
+    else
+        indice_joueur = menuNumJoueur(ptr_struct_fichier);
+
+    debNouvTour(ptr_struct_fichier,indice_joueur);
 
     do
     {
         validation=VRAI;
 
-        /*Demande les points de tout les joueurs*/
-        for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+        /*Demande les points de tout les joueurs si l'on est en tour par tour*/
+        if (ptr_struct_fichier->tour_par_tour == 1)
         {
-            printf("\nDonnez les points de %s : ",ptr_struct_fichier->nom_joueur[i]);
-            saisieClavierFlottant(&(ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]));
-            printf("Vous avez choisi %.0f\n",ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]);
+            for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+            {
+                printf("\nDonnez les points de %s : ",ptr_struct_fichier->nom_joueur[i]);
+                saisieClavierFlottant(&(ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]));
+                printf("Vous avez choisi %.0f\n",ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]);
+            }
+        } else
+        {
+            printf("\nDonnez ses points : ");
+            saisieClavierFlottant(&(ptr_struct_fichier->point[indice_joueur][(int)ptr_struct_fichier->nb_tour[indice_joueur]]));
+            printf("Vous avez choisi %.0f\n",ptr_struct_fichier->point[indice_joueur][(int)ptr_struct_fichier->nb_tour[indice_joueur]]);
         }
 
         printf("\nValidez vous ces scores (O/n) : ");
@@ -164,7 +189,27 @@ void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier)
 
     } while (!validation);
 
-    finNouvTour(ptr_struct_fichier,-1);
+    finNouvTour(ptr_struct_fichier,indice_joueur);
+}
+
+/*!
+ * \fn int menuNumJoueur(Fichier_Jeu *ptr_struct_fichier)
+ *  Demande et enregistre le numero du joueur
+ * \param[in,out] *ptr_struct_fichier la structure Fichier_Jeu
+ */
+int menuNumJoueur(Fichier_Jeu *ptr_struct_fichier)
+{
+    char nom[TAILLE_MAX_NOM];
+    int indice_joueur;
+
+    do
+    {
+        printf("\nDonner le nom de la personne qui va recevoir des points : ");
+        saisieClavierChaine(nom,TAILLE_MAX_NOM);
+        printf("Vous avez choisi %s\n",nom);
+    } while ((indice_joueur = rechercheNumJoueur(ptr_struct_fichier,nom)) == -1);
+
+    return indice_joueur;
 }
 
 /*!

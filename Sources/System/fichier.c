@@ -44,23 +44,9 @@
  */
 FILE *ouvrirFichierExtension(char nom[], char mode[])
 {
-    /*Decalaration des variables*/
-    char nom_2[TAILLE_MAX_NOM_FICHIER];
-    char jeu[4]=EXTENSION_FICHIER;
-    char ext[4]="abc";
-    int i;
+    ajoutExtension(nom);
 
-    /*Lecture de l'extension du fichier*/
-    for (i=strlen(nom)-3 ; i<strlen(nom) ; i++)
-            ext[-strlen(nom)+i+3]=nom[i];
-
-    /*Ajout de l'extension au nom de fichier si elle n'y est pas*/
-    if (strcmp(jeu,ext)!=0)
-        sprintf(nom_2,"%s.%s",nom,EXTENSION_FICHIER);
-    else
-        strcpy(nom_2,nom);
-
-    return ouvrirFichier(nom_2,mode);
+    return ouvrirFichier(nom,mode);
 }
 
 
@@ -124,6 +110,7 @@ Fichier_Jeu *lireFichier(char *nom)
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->nb_joueur),sizeof(float),1,ptr_fichier));
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->nb_max),sizeof(float),1,ptr_fichier));
     verif_lecture_fichier+=fread(&(ptr_struct_fichier->sens_premier),sizeof(char),1,ptr_fichier);
+    verif_lecture_fichier+=fread(&(ptr_struct_fichier->tour_par_tour),sizeof(char),1,ptr_fichier);
 
     /*Allocation memoire du tableau de chaine de caractere pour le nom des personnes*/
     ptr_struct_fichier->nom_joueur=(char **)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(char*));
@@ -210,6 +197,7 @@ int ecrireFichier(char *nom, Fichier_Jeu *ptr_struct_fichier)
     fwrite(&(ptr_struct_fichier->nb_joueur),sizeof(float),1,ptr_fichier);
     fwrite(&(ptr_struct_fichier->nb_max),sizeof(float),1,ptr_fichier);
     fwrite(&(ptr_struct_fichier->sens_premier),sizeof(char),1,ptr_fichier);
+    fwrite(&(ptr_struct_fichier->tour_par_tour),sizeof(char),1,ptr_fichier);
 
     /*Ecriture des noms des personnes*/
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
@@ -264,20 +252,18 @@ int nouveauScore(char *nom, Fichier_Jeu *ptr_struct_fichier)
  */
 int supprimerFichier(char *nom)
 {
-    char nom_2[TAILLE_MAX_NOM+4];
+    ajoutExtension(nom);
 
-    sprintf(nom_2,"%s.%s",nom,EXTENSION_FICHIER);
-
-    if(remove(nom_2))
+    if(remove(nom))
     {
-        printf("\nLe fichier %s n'a pas pu etre supprime.\n",nom_2);
+        printf("\nLe fichier %s n'a pas pu etre supprime.\n",nom);
         perror("");
         return FAUX;
     }
 
     else
     {
-        printf("\nLe fichier %s a bien ete supprime.\n",nom_2);
+        printf("\nLe fichier %s a bien ete supprime.\n",nom);
         return VRAI;
     }
 }
@@ -294,8 +280,10 @@ int renommerFichier(char *nom_ancien, char *nom_nouveau)
     char nom_ancien_2[TAILLE_MAX_NOM+8];
     char nom_nouveau_2[TAILLE_MAX_NOM+4];
 
-    sprintf(nom_ancien_2,"%s.%s",nom_ancien,EXTENSION_FICHIER);
-    sprintf(nom_nouveau_2,"%s.%s",nom_nouveau,EXTENSION_FICHIER);
+    sprintf(nom_ancien_2,"%s",nom_ancien);
+    ajoutExtension(nom_ancien_2);
+    sprintf(nom_nouveau_2,"%s",nom_nouveau);
+    ajoutExtension(nom_nouveau_2);
 
     if(rename(nom_ancien_2,nom_nouveau_2))
     {

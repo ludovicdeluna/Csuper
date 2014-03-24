@@ -39,6 +39,7 @@
 #include <errno.h>
 #include "saisie_clavier.h"
 
+
 /*!
  * \def VRAI
  * Definit VRAI a 1
@@ -62,5 +63,6 @@ int fermerFichier(FILE *ptr_fichier);
 int lireTailleFichier(FILE *ptr_fichier);
 void *myAlloc(int taille_alloue);
 void myRealloc(void **ptr,int taille_alloue);
+void ajoutExtension(char *nom_fichier);
 
 #endif

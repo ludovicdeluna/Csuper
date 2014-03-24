@@ -47,15 +47,19 @@ int creationPreferences()
     /*Lecture du chemin Document et creation du dossier au bonne endroit et de la chaine qui va contenir le fichier*/
     #ifdef __unix__
     strcpy(repertoire,getenv("HOME"));
-    sprintf(repertoire,"%s/%s",repertoire,NOM_DOSSIER);
-    mkdir(repertoire, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    sprintf(nom_fichier,"%s/%s",repertoire,NOM_FICHIER);
     #elif _WIN32
     strcpy(repertoire,getenv("USERPROFILE"));
-    sprintf(repertoire,"%s\\%s",repertoire,NOM_DOSSIER);
-    mkdir(repertoire);
-    sprintf(nom_fichier,"%s\\%s",repertoire,NOM_FICHIER);
     #endif
+
+    sprintf(repertoire,"%s/%s",repertoire,NOM_DOSSIER);
+
+    #ifdef __unix__
+    mkdir(repertoire, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    #elif _WIN32
+    mkdir(repertoire);
+    #endif
+
+    sprintf(nom_fichier,"%s/%s",repertoire,NOM_FICHIER);
 
     ptr_fichier=ouvrirFichier(nom_fichier,"w+");
 
@@ -86,11 +90,10 @@ int lecturePreferences(char *nom_fichier)
     /*Lecture du chemin Document et creation du nom de fichier du fichier preferences*/
     #ifdef __unix__
     strcpy(nom_fichier_preferences,getenv("HOME"));
-    sprintf(nom_fichier_preferences,"%s/%s/%s",nom_fichier_preferences,NOM_DOSSIER,NOM_FICHIER);
     #elif _WIN32
     strcpy(nom_fichier_preferences,getenv("USERPROFILE"));
-    sprintf(nom_fichier_preferences,"%s\\%s\\%s",nom_fichier_preferences,NOM_DOSSIER,NOM_FICHIER);
     #endif
+    sprintf(nom_fichier_preferences,"%s/%s/%s",nom_fichier_preferences,NOM_DOSSIER,NOM_FICHIER);
 
     ptr_fichier=ouvrirFichier(nom_fichier_preferences,"r");
 
@@ -161,11 +164,11 @@ int changerCheminFichier(char *nouveauChemin)
     /*Lecture du chemin Document et cree la chaine qui va contenir le nom du fichier*/
     #ifdef __unix__
     strcpy(nom_fichier,getenv("HOME"));
-    sprintf(nom_fichier,"%s/%s/%s",nom_fichier,NOM_DOSSIER,NOM_FICHIER);
     #elif _WIN32
     strcpy(nom_fichier,getenv("USERPROFILE"));
-    sprintf(nom_fichier,"%s\\%s\\%s",nom_fichier,NOM_DOSSIER,NOM_FICHIER);
     #endif
+
+    sprintf(nom_fichier,"%s/%s/%s",nom_fichier,NOM_DOSSIER,NOM_FICHIER);
 
     ptr_fichier=ouvrirFichier(nom_fichier,"w+");
 

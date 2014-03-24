@@ -34,14 +34,14 @@
  #include "structure.h"
 
 /*!
- * \fn Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier)
+ * \fn Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour)
  *  Cree une structure Fichier_jeu a partir des donnees de la fonction.
  * \param[in] nb_joueur le nombre de joueur
  * \param[in] nb_max le nombre maximum de points
  * \param[in] sens_premier permet de savoir dans quelle sens est calculer le premier
  * \return un pointeur sur le structure Fichier_Jeu cree
  */
-Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier)
+Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour)
 {
     Fichier_Jeu *ptr_struct_fichier;
     int i;
@@ -58,6 +58,7 @@ Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premie
     ptr_struct_fichier->nb_max=nb_max;
     ptr_struct_fichier->distribue=0;
     ptr_struct_fichier->sens_premier=sens_premier;
+    ptr_struct_fichier->tour_par_tour=tour_par_tour;
 
     /*Allocation memoire des nombre de tours*/
     ptr_struct_fichier->nb_tour=(float *)myAlloc(nb_joueur*sizeof(float*));
@@ -219,21 +220,14 @@ void calculPosition(Fichier_Jeu *ptr_struct_fichier)
  */
 void ajoutDistribueStruct(Fichier_Jeu *ptr_struct_fichier, char *nom_distribue)
 {
-    /*Declaration de la constante*/
-    int i;
-
-    /*Recherche du nom de la pesonne qui disribue dans le nom des joueurs*/
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    int num_joueur=rechercheNumJoueur(ptr_struct_fichier,nom_distribue);
+    if(num_joueur != -1)
     {
-        /*Si la personne est trouve, stocke le numero de la personne et arrete la fonction.*/
-        if (strcmp(ptr_struct_fichier->nom_joueur[i],nom_distribue)==0)
-        {
-            ptr_struct_fichier->distribue=i;
-            return;
-        }
+        ptr_struct_fichier->distribue = num_joueur;
+        return;
     }
-    /*Message d'erreur si le nom n'est pas trouve*/
-    printf("\nErreur le nom n'existe pas, la personne qui distribue a ete initialisee par defaut a %s\n",ptr_struct_fichier->nom_joueur[(int)ptr_struct_fichier->distribue]);
+    else
+        printf("La personne qui distribue a ete initialisee par defaut a %s\n",ptr_struct_fichier->nom_joueur[(int)ptr_struct_fichier->distribue]);
 }
 
 /*!
@@ -270,4 +264,27 @@ int maxNbTour(Fichier_Jeu *ptr_struct_fichier)
             max = ptr_struct_fichier->nb_tour[i];
     }
     return max;
+}
+
+/*!
+ * \fn int rechercheNumJoueur(Fichier_Jeu *ptr_struct_fichier, char *nom_personne)
+ *  Cherche l'indice du tableau dans lequel est stocke une personne.
+ * \param[in] *nom_distribue le nom de la personne
+ * \param[in] *ptr_struct_fichier la structure du fichier
+ * \return l'indice du tableau, -1 si non trouve
+ */
+int rechercheNumJoueur(Fichier_Jeu *ptr_struct_fichier, char *nom_personne)
+{
+    int i;
+
+    /*Recherche du nom de la personne dans le nom des joueurs*/
+    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    {
+        if (strncasecmp(ptr_struct_fichier->nom_joueur[i],nom_personne,strlen(nom_personne))==0)
+            return i;
+    }
+
+    /*Message d'erreur si le nom n'est pas trouve*/
+    printf("\nErreur le nom n'existe pas.\n");
+    return -1;
 }

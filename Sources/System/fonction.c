@@ -32,6 +32,7 @@
  */
 
  #include "fonction.h"
+ #include "fichier.h"
 
 
 /*!
@@ -229,4 +230,24 @@ void myRealloc(void **ptr,int taille_alloue)
         perror("");
         exit(0);
     }
+}
+
+/*!
+ * \fn void ajoutExtension(char *nom_fichier)
+ *  Ajoute l'extension du fichier si elle n'y est pas
+ * \param[in] nom_fichier le nom de fichier
+ */
+void ajoutExtension(char *nom_fichier)
+{
+    char jeu[4]=EXTENSION_FICHIER;
+    char ext[4]="abc";
+    int i;
+
+    /*Lecture de l'extension du fichier*/
+    for (i=strlen(nom_fichier)-3 ; i<strlen(nom_fichier) ; i++)
+            ext[-strlen(nom_fichier)+i+3]=nom_fichier[i];
+
+    /*Ajout de l'extension au nom de fichier si elle n'y est pas*/
+    if (strcmp(jeu,ext)!=0)
+        sprintf(nom_fichier,"%s.%s",nom_fichier,EXTENSION_FICHIER);
 }
