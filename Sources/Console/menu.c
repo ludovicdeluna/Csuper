@@ -112,7 +112,7 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
  */
 void menuDistribue(char *nom_distribue)
 {
-    printf("\nDonnez le nom de la personne qui commence a distribuer.\nVotre choix : ");
+    printf("\nDonnez le nom (ou les premieres lettres du nom) de la personne qui commence a distribuer.\nVotre choix : ");
     saisieClavierChaine(nom_distribue,TAILLE_MAX_NOM);
     printf("Vous avez choisi %s\n",nom_distribue);
 }
@@ -204,7 +204,7 @@ int menuNumJoueur(Fichier_Jeu *ptr_struct_fichier)
 
     do
     {
-        printf("\nDonner le nom de la personne qui va recevoir des points : ");
+        printf("\nDonner le nom (ou les premieres lettres du nom) de la personne qui va recevoir des points.\nVotre choix : ");
         saisieClavierChaine(nom,TAILLE_MAX_NOM);
         printf("Vous avez choisi %s\n",nom);
     } while ((indice_joueur = rechercheNumJoueur(ptr_struct_fichier,nom)) == -1);
