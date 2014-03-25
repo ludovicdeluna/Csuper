@@ -39,7 +39,7 @@
 
 
 char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER]);
-void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour);
+void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor);
 void menuDistribue(char *nom_distribue);
 void menuNomJoueur(Fichier_Jeu *ptr_struct_fichier);
 void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier);

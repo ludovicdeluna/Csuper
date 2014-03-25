@@ -100,12 +100,14 @@ void afficherScoreTotal(Fichier_Jeu *ptr_struct_fichier)
 
 /*!
  * \fn void afficherDistribue(Fichier_Jeu *ptr_struct_fichier)
- *  Affiche la personne devant distribuer
+ *  Affiche la personne devant distribuer si l'on utilise un distributeur
  * \param[in] *ptr_struct_fichier un pointeur sur la structure Fichier_Jeu
  */
 void afficherDistribue(Fichier_Jeu *ptr_struct_fichier)
 {
-    printf("\nC'est a %s de distribuer.\n",ptr_struct_fichier->nom_joueur[(int)ptr_struct_fichier->distribue]);
+    if (ptr_struct_fichier->use_distributor)
+        printf("\nC'est a %s de distribuer.",ptr_struct_fichier->nom_joueur[(int)ptr_struct_fichier->distribue]);
+    printf("\n");
 }
 
 /*!
@@ -182,8 +184,6 @@ void afficherPosition(Fichier_Jeu *ptr_struct_fichier)
 
         printf("|");
     }
-
-    printf("\n");
 }
 
 /*!
@@ -201,6 +201,8 @@ void afficherScore(Fichier_Jeu *ptr_struct_fichier)
     afficherScoreTotal(ptr_struct_fichier);
     afficherLigne(taille_ligne);
     afficherPosition(ptr_struct_fichier);
+    if (ptr_struct_fichier->use_distributor)
+        printf("\n");
     afficherDistribue(ptr_struct_fichier);
 }
 

@@ -49,17 +49,20 @@ char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER])
 }
 
 /*!
- * \fn void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour)
+ * \fn void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor)
  *  Demande et enregistre le nombre de joueur, le nombre maximum et le nom de la personne qui comme a distribuer
- * \param[in,out] *ptr_nb_joueur le nombre de joueur
- * \param[in,out] *ptr_nb_max le nombre maximum
- * \param[in,out] *ptr_sens_premier definit le sens du premier
+ * \param[in,out] ptr_nb_joueur le nombre de joueur
+ * \param[in,out] ptr_nb_max le nombre maximum
+ * \param[in,out] ptr_sens_premier definit le sens du premier
+ * \param[in,out] ptr_tour_par_tour definit si on joue en tour par tour ou pas
+ * \param[in,out] ptr_use_distributor definit si on utilise un distributeur ou pas
  */
-void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_premier, char *ptr_tour_par_tour)
+void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor)
 {
     char nbmax;
     char premier_max;
     char tour;
+    char distrib;
 
     /*Nombre de joueur*/
     do
@@ -87,10 +90,9 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
         } while (*ptr_nb_max <= 0);
     }
 
+    /*Sens du premier*/
     printf("\nLe premier est-il celui qui a le plus de points (O/n) : ");
     saisieClavierCaractere(&premier_max);
-
-    /*Sens du premier*/
     if (premier_max=='n' || premier_max == 'N')
         *ptr_sens_premier=-1;
     else
@@ -103,6 +105,14 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
         *ptr_tour_par_tour=0;
     else
         *ptr_tour_par_tour=1;
+
+    /*Distributeur ou pas*/
+    printf("\nOn utilise un distributeur (O/n) : ");
+    saisieClavierCaractere(&distrib);
+    if (distrib=='n' || distrib == 'N')
+        *ptr_use_distributor=0;
+    else
+        *ptr_use_distributor=1;
 }
 
 /*!

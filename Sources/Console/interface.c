@@ -190,6 +190,7 @@ void nouvellePartie()
     float nb_joueurs;
     char sens_premier;
     char tour_par_tour;
+    char use_distributor;
     int ecriture_fichier;
     char nom_distribue[TAILLE_MAX_NOM];
     char nom_fichier[TAILLE_MAX_NOM_FICHIER];
@@ -200,22 +201,23 @@ void nouvellePartie()
     if(lectureCheminFichier(nom_fichier)==FAUX)
         return;
 
-    menuDebutPartie(&nb_joueurs,&nb_max,&sens_premier,&tour_par_tour);
+    menuDebutPartie(&nb_joueurs,&nb_max,&sens_premier,&tour_par_tour,&use_distributor);
 
-    ptr_struct_fichier=creerFichierStruct(nb_joueurs,nb_max,sens_premier,tour_par_tour);
+    ptr_struct_fichier=creerFichierStruct(nb_joueurs,nb_max,sens_premier,tour_par_tour,use_distributor);
     menuNomJoueur(ptr_struct_fichier);
-    menuDistribue(nom_distribue);
-    ajoutDistribueStruct(ptr_struct_fichier,nom_distribue);
+
+    if (use_distributor)
+    {
+        menuDistribue(nom_distribue);
+        ajoutDistribueStruct(ptr_struct_fichier,nom_distribue);
+    }
 
     ecriture_fichier=ecrireFichier(nom_fichier,ptr_struct_fichier);
 
     systemPause();
 
     if (ecriture_fichier)
-    {
         jouer(ptr_struct_fichier,nom_fichier);
-    }
-
     else
         fermeeFichierStruct(ptr_struct_fichier);
 }

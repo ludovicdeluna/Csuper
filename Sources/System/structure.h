@@ -64,15 +64,16 @@ typedef struct
     float nb_max;          /*!< Nombre maximum que peut prendre un joueur. */
     char sens_premier;     /*!< Vaut 1 si le premier est celui qui a le plus de points, -1 sinon */
     char tour_par_tour;    /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
+    char use_distributor;  /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
     char **nom_joueur;     /*!< Tableau contenant tout les noms de joueurs. */
     float *point_tot;      /*!< Tableau contenant tout les points totaux des joueurs. */
     float *position;       /*!< Tableau contenant la position des joueurs. */
-    float *nb_tour;         /*!< Nombre de tour dans le jeu par joueur. */
+    float *nb_tour;        /*!< Nombre de tour dans le jeu par joueur. */
     float distribue;       /*!< Numero de la personne qui doit distribuer. */
-    float **point;          /*!< Tableau contenat les points de chaque joueur a chaque tour. */
+    float **point;         /*!< Tableau contenat les points de chaque joueur a chaque tour. */
 } Fichier_Jeu;
 
-Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max , char sens_premier, char tour_par_tour);
+Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max , char sens_premier, char tour_par_tour, char use_distributor);
 void fermeeFichierStruct(Fichier_Jeu *ptr_struct_fichier);
 void debNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur);
 void finNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur);
