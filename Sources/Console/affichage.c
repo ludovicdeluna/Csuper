@@ -42,13 +42,22 @@
 void afficherNom(Fichier_Jeu *ptr_struct_fichier, int *ptr_taille_ligne)
 {
     int i;
+    int j;
 
     /*Affichage du nom des joueurs*/
     printf("\n\t| ");
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
     {
         /*Affiche du nom du joueur*/
-        printf("%s | ",ptr_struct_fichier->nom_joueur[i]);
+        printf("%s",ptr_struct_fichier->nom_joueur[i]);
+        for (j=strlen(ptr_struct_fichier->nom_joueur[i]) ; j < 4 ; j++)
+        {
+            printf(" ");
+            *ptr_taille_ligne+=1;
+        }
+
+        printf(" | ");
+
         /*Calcule de la taille de la ligne*/
         *ptr_taille_ligne+=(strlen(ptr_struct_fichier->nom_joueur[i])+3);
     }
@@ -86,10 +95,24 @@ void afficherScoreTotal(Fichier_Jeu *ptr_struct_fichier)
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
     {
         /*Affiche le score de la personne*/
-        printf("%4.0f",ptr_struct_fichier->point_tot[i]);
+        switch (ptr_struct_fichier->number_after_comma)
+        {
+        case 0 :
+            printf("%6.0f",ptr_struct_fichier->point_tot[i]);
+            break;
+        case 1 :
+            printf("%6.1f",ptr_struct_fichier->point_tot[i]);
+            break;
+        case 2 :
+            printf("%6.2f",ptr_struct_fichier->point_tot[i]);
+            break;
+        case 3 :
+            printf("%6.3f",ptr_struct_fichier->point_tot[i]);
+            break;
+        }
 
         /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
-        for (j=0 ; j<strlen(ptr_struct_fichier->nom_joueur[i])-2 ; j++)
+        for (j=4 ; j<strlen(ptr_struct_fichier->nom_joueur[i]); j++)
         {
             printf(" ");
         }
@@ -121,7 +144,7 @@ void afficherEnTete(Fichier_Jeu *ptr_struct_fichier)
     printf("\nVersion du fichier : %1.1f\nTaille maximum des nom : %.0f",ptr_struct_fichier->version,ptr_struct_fichier->taille_max_nom);
     printf("\nNombre de joueur : %.0f\nNombre de points maximum : %.0f",ptr_struct_fichier->nb_joueur,ptr_struct_fichier->nb_max);
     printf("\nNombre de tours maximum : %d\nSens du premier : %d",maxNbTour(ptr_struct_fichier),ptr_struct_fichier->sens_premier);
-    printf("\nJeu en tour par tour : %d",ptr_struct_fichier->tour_par_tour);
+    printf("\nJeu en tour par tour : %d\nNombre de chiffres apres la virgule : %d",ptr_struct_fichier->tour_par_tour,ptr_struct_fichier->number_after_comma);
 }
 
 /*!
@@ -146,12 +169,28 @@ void afficherScoreEntier(Fichier_Jeu *ptr_struct_fichier)
         {
             /*Affiche le score de la personne a un tour*/
             if (ptr_struct_fichier->nb_tour[k] >= i+1)
-                printf("%4.0f",ptr_struct_fichier->point[k][i]);
+            {
+                switch (ptr_struct_fichier->number_after_comma)
+                {
+                case 0 :
+                    printf("%6.0f",ptr_struct_fichier->point[k][i]);
+                    break;
+                case 1 :
+                    printf("%6.1f",ptr_struct_fichier->point[k][i]);
+                    break;
+                case 2 :
+                    printf("%6.2f",ptr_struct_fichier->point[k][i]);
+                    break;
+                case 3 :
+                    printf("%6.3f",ptr_struct_fichier->point[k][i]);
+                    break;
+                }
+            }
             else
-                printf("    ");
+                printf("      ");
 
             /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
-            for (j=0 ; j<strlen(ptr_struct_fichier->nom_joueur[k])-2 ; j++)
+            for (j=4 ; j<(strlen(ptr_struct_fichier->nom_joueur[k])); j++)
             printf(" ");
 
             printf("|");
@@ -174,10 +213,11 @@ void afficherPosition(Fichier_Jeu *ptr_struct_fichier)
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
     {
         /*Affiche la position de la personne*/
-        printf("%4.0f",ptr_struct_fichier->position[i]);
+
+        printf("%6.0f",ptr_struct_fichier->position[i]);
 
         /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
-        for (j=0 ; j<strlen(ptr_struct_fichier->nom_joueur[i])-2 ; j++)
+        for (j=4 ; j<strlen(ptr_struct_fichier->nom_joueur[i]) ; j++)
         {
             printf(" ");
         }

@@ -48,6 +48,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/Console/menu.h" />
+		<Unit filename="../Sources/Console/saisie_clavier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/Console/saisie_clavier.h" />
 		<Unit filename="../Sources/System/argument_main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -64,10 +68,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/System/fonction.h" />
-		<Unit filename="../Sources/System/saisie_clavier.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/System/saisie_clavier.h" />
 		<Unit filename="../Sources/System/structure.c">
 			<Option compilerVar="CC" />
 		</Unit>

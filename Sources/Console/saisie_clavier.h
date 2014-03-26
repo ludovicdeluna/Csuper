@@ -34,7 +34,7 @@
 #ifndef SAISIE_CLAVIER_H_INCLUDED
 #define SAISIE_CLAVIER_H_INCLUDED
 
-#include "fonction.h"
+#include "../System/fonction.h"
 #include <locale.h>
 #include <string.h>
 #include <math.h>

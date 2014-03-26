@@ -191,6 +191,7 @@ void nouvellePartie()
     char sens_premier;
     char tour_par_tour;
     char use_distributor;
+    char number_after_comma;
     int ecriture_fichier;
     char nom_distribue[TAILLE_MAX_NOM];
     char nom_fichier[TAILLE_MAX_NOM_FICHIER];
@@ -201,9 +202,9 @@ void nouvellePartie()
     if(lectureCheminFichier(nom_fichier)==FAUX)
         return;
 
-    menuDebutPartie(&nb_joueurs,&nb_max,&sens_premier,&tour_par_tour,&use_distributor);
+    menuDebutPartie(&nb_joueurs,&nb_max,&sens_premier,&tour_par_tour,&use_distributor,&number_after_comma);
 
-    ptr_struct_fichier=creerFichierStruct(nb_joueurs,nb_max,sens_premier,tour_par_tour,use_distributor);
+    ptr_struct_fichier=creerFichierStruct(nb_joueurs,nb_max,sens_premier,tour_par_tour,use_distributor,number_after_comma);
     menuNomJoueur(ptr_struct_fichier);
 
     if (use_distributor)
@@ -275,7 +276,7 @@ void menuPrincipal()
 
         systemEfface();
 
-        printf("Csuper - Compteur de Score Universel Permettant l'Exemption de Reflexion v2.0\n\nQue voulez vous faire ?\n "
+        printf("Csuper - Compteur de Score Universel Permettant l'Exemption de Reflexion v2.1.6\n\nQue voulez vous faire ?\n "
         "(%d) Faire une nouvelle partie \n (%d) Charger une partie existente \n (%d) Afficher les resultats d'une partie existante "
         "\n (%d) Supprimer une partie \n (%d) Afficher toutes les parties existantes",nouvPart,charPart,affFich,supprFich,listFich);
         #ifndef PORTABLE

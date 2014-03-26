@@ -34,15 +34,16 @@
  #include "structure.h"
 
 /*!
- * \fn Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour, char use_distributor)
+ * \fn Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour, char use_distributor,char number_after_comma)
  *  Cree une structure Fichier_jeu a partir des donnees de la fonction.
  * \param[in] nb_joueur le nombre de joueur
  * \param[in] nb_max le nombre maximum de points
  * \param[in] sens_premier permet de savoir dans quelle sens est calculer le premier
  * \param[in] use_distributor permet de savoir si l'on utilise un distributeur ou pas
+ * \param[in] number_after_comma nombre de chiffres apres la virgule
  * \return un pointeur sur le structure Fichier_Jeu cree
  */
-Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour, char use_distributor)
+Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour, char use_distributor,char number_after_comma)
 {
     Fichier_Jeu *ptr_struct_fichier;
     int i;
@@ -61,6 +62,7 @@ Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premie
     ptr_struct_fichier->sens_premier=sens_premier;
     ptr_struct_fichier->tour_par_tour=tour_par_tour;
     ptr_struct_fichier->use_distributor=use_distributor;
+    ptr_struct_fichier->number_after_comma=number_after_comma;
 
     /*Allocation memoire des nombre de tours*/
     ptr_struct_fichier->nb_tour=(float *)myAlloc(nb_joueur*sizeof(float*));

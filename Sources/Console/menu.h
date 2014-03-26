@@ -34,12 +34,12 @@
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 
-#include "../System/saisie_clavier.h"
+#include "saisie_clavier.h"
 #include "../System/fichier.h"
 
 
 char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER]);
-void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor);
+void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor,char *ptr_number_after_comma);
 void menuDistribue(char *nom_distribue);
 void menuNomJoueur(Fichier_Jeu *ptr_struct_fichier);
 void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier);

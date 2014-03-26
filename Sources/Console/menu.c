@@ -49,20 +49,22 @@ char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER])
 }
 
 /*!
- * \fn void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor)
+ * \fn void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributorchar, *ptr_number_after_comma)
  *  Demande et enregistre le nombre de joueur, le nombre maximum et le nom de la personne qui comme a distribuer
  * \param[in,out] ptr_nb_joueur le nombre de joueur
  * \param[in,out] ptr_nb_max le nombre maximum
  * \param[in,out] ptr_sens_premier definit le sens du premier
  * \param[in,out] ptr_tour_par_tour definit si on joue en tour par tour ou pas
  * \param[in,out] ptr_use_distributor definit si on utilise un distributeur ou pas
+ * \param[in,out] ptr_number_after_comma le nombre de chiffres apres la virgule
  */
-void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor)
+void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor,char *ptr_number_after_comma)
 {
     char nbmax;
     char premier_max;
     char tour;
     char distrib;
+    int comma;
 
     /*Nombre de joueur*/
     do
@@ -113,6 +115,16 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
         *ptr_use_distributor=0;
     else
         *ptr_use_distributor=1;
+
+    /*Recuperation du nombre maximale.*/
+    do
+    {
+        printf("\nDonnez le nombre de chiffres que vous voulez afficher apres la virgule. Ce chiffre doit etre"
+        " compris entre 0 et 3\nVotre choix : ");
+        saisieClavierEntier(&comma);
+        printf("Vous avez choisi %.0d\n",comma);
+    } while (comma < 0 || comma > 3);
+    *ptr_number_after_comma=comma;
 }
 
 /*!
@@ -182,13 +194,13 @@ void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier)
             {
                 printf("\nDonnez les points de %s : ",ptr_struct_fichier->nom_joueur[i]);
                 saisieClavierFlottant(&(ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]));
-                printf("Vous avez choisi %.0f\n",ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]);
+                printf("Vous avez choisi %.3f\n",ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]]);
             }
         } else
         {
             printf("\nDonnez ses points : ");
             saisieClavierFlottant(&(ptr_struct_fichier->point[indice_joueur][(int)ptr_struct_fichier->nb_tour[indice_joueur]]));
-            printf("Vous avez choisi %.0f\n",ptr_struct_fichier->point[indice_joueur][(int)ptr_struct_fichier->nb_tour[indice_joueur]]);
+            printf("Vous avez choisi %.3f\n",ptr_struct_fichier->point[indice_joueur][(int)ptr_struct_fichier->nb_tour[indice_joueur]]);
         }
 
         printf("\nValidez vous ces scores (O/n) : ");
