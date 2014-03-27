@@ -33,9 +33,23 @@
 
 #include "fonction.h"
 #include "structure.h"
+#include "fichier.h"
+#include "emplacement_fichier.h"
 
 #ifndef CONFIG_H_INCLUDED
 #define CONFIG_H_INCLUDED
+
+/*!
+ * \def NOM_DOSSIER_CONFIG
+ * Definit NOM_DOSSIER_CONFIG a "config"
+ */
+#define NOM_DOSSIER_CONFIG "config"
+
+/*!
+ * \def NOM_FICHIER_CONFIG
+ * Definit NOM_FICHIER_CONFIG a "configuratio"
+ */
+#define NOM_FICHIER_CONFIG "configuration"
 
 typedef struct
 {
@@ -43,6 +57,11 @@ typedef struct
     char **name_game_config;
 }list_game_config;
 
-
+list_game_config *makeListGameConfig(int nb_config);
+void freeListGameConfig(list_game_config *ptr_config);
+int makeConfigListFile();
+list_game_config *readConfigListFile();
+int addConfigListFile(list_game_config *ptr_config, char *new_config_name);
+int removeConfigListFile(list_game_config *ptr_config, int num_suppr);
 
 #endif

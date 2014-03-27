@@ -45,16 +45,16 @@
 //#define PORTABLE
 
 /*!
- * \def NOM_FICHIER
- * Definit NOM_FICHIER a "preferences.txt"
+ * \def NOM_FICHIER_PREFERENCES
+ * Definit NOM_FICHIER_PREFERENCES a "preferences.txt"
  */
-#define NOM_FICHIER "preferences.txt"
+#define NOM_FICHIER_PREFERENCES "preferences.txt"
 
 /*!
- * \def NOM_DOSSIER
- * Definit NOM_DOSSIER a ".csuper"
+ * \def NOM_DOSSIER_CSUPER
+ * Definit NOM_DOSSIER_CSUPER a ".csuper"
  */
-#define NOM_DOSSIER ".csuper"
+#define NOM_DOSSIER_CSUPER ".csuper"
 
 int creationPreferences();
 int lecturePreferences(char *nom_fichier);

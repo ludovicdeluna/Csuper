@@ -50,16 +50,14 @@ int creationPreferences()
     #elif _WIN32
     strcpy(repertoire,getenv("USERPROFILE"));
     #endif
-
-    sprintf(repertoire,"%s/%s",repertoire,NOM_DOSSIER);
-
+    sprintf(repertoire,"%s/%s",repertoire,NOM_DOSSIER_CSUPER);
     #ifdef __unix__
     mkdir(repertoire, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     #elif _WIN32
     mkdir(repertoire);
     #endif
 
-    sprintf(nom_fichier,"%s/%s",repertoire,NOM_FICHIER);
+    sprintf(nom_fichier,"%s/%s",repertoire,NOM_FICHIER_PREFERENCES);
 
     ptr_fichier=ouvrirFichier(nom_fichier,"w+");
 
@@ -93,7 +91,7 @@ int lecturePreferences(char *nom_fichier)
     #elif _WIN32
     strcpy(nom_fichier_preferences,getenv("USERPROFILE"));
     #endif
-    sprintf(nom_fichier_preferences,"%s/%s/%s",nom_fichier_preferences,NOM_DOSSIER,NOM_FICHIER);
+    sprintf(nom_fichier_preferences,"%s/%s/%s",nom_fichier_preferences,NOM_DOSSIER_CSUPER,NOM_FICHIER_PREFERENCES);
 
     ptr_fichier=ouvrirFichier(nom_fichier_preferences,"r");
 
@@ -168,7 +166,7 @@ int changerCheminFichier(char *nouveauChemin)
     strcpy(nom_fichier,getenv("USERPROFILE"));
     #endif
 
-    sprintf(nom_fichier,"%s/%s/%s",nom_fichier,NOM_DOSSIER,NOM_FICHIER);
+    sprintf(nom_fichier,"%s/%s/%s",nom_fichier,NOM_DOSSIER_CSUPER,NOM_FICHIER_PREFERENCES);
 
     ptr_fichier=ouvrirFichier(nom_fichier,"w+");
 
