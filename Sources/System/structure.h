@@ -50,6 +50,20 @@
 #define VERSION 1.4
 
 /*!
+ * \struct game_config
+ * Type representant une configuration de jeu
+ */
+typedef struct
+{
+    float nb_max;          /*!< Nombre maximum que peut prendre un joueur. */
+    char sens_premier;     /*!< Vaut 1 si le premier est celui qui a le plus de points, -1 sinon */
+    char tour_par_tour;    /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
+    char use_distributor;  /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
+    char number_after_comma;/*!< Le nombre de chiffres apres la virgule dans l'affichage */
+}game_config;
+
+
+/*!
  * \struct Fichier_Jeu
  * Type representant un fichier .jeu
  */
@@ -61,11 +75,7 @@ typedef struct
     float mois;            /*!< Mois de creation de la structure. */
     float annee;           /*!< Annee de creation de la structure. */
     float nb_joueur;       /*!< Nombre de joueurs. */
-    float nb_max;          /*!< Nombre maximum que peut prendre un joueur. */
-    char sens_premier;     /*!< Vaut 1 si le premier est celui qui a le plus de points, -1 sinon */
-    char tour_par_tour;    /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
-    char use_distributor;  /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
-    char number_after_comma;/*!< Le nombre de chiffres apres la virgule dans l'affichage */
+    game_config config;    /*!< La configuration de la partie*/
     char **nom_joueur;     /*!< Tableau contenant tout les noms de joueurs. */
     float *point_tot;      /*!< Tableau contenant tout les points totaux des joueurs. */
     float *position;       /*!< Tableau contenant la position des joueurs. */
@@ -74,7 +84,7 @@ typedef struct
     float **point;         /*!< Tableau contenat les points de chaque joueur a chaque tour. */
 } Fichier_Jeu;
 
-Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max , char sens_premier, char tour_par_tour, char use_distributor,char number_after_comma);
+Fichier_Jeu *creerFichierStruct(float nb_joueur , game_config config);
 void fermeeFichierStruct(Fichier_Jeu *ptr_struct_fichier);
 void debNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur);
 void finNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur);

@@ -186,12 +186,8 @@ void jouer(Fichier_Jeu *ptr_struct_fichier, char *nom_fichier)
 void nouvellePartie()
 {
     Fichier_Jeu *ptr_struct_fichier;
-    float nb_max;
     float nb_joueurs;
-    char sens_premier;
-    char tour_par_tour;
-    char use_distributor;
-    char number_after_comma;
+    game_config config;
     int ecriture_fichier;
     char nom_distribue[TAILLE_MAX_NOM];
     char nom_fichier[TAILLE_MAX_NOM_FICHIER];
@@ -202,12 +198,12 @@ void nouvellePartie()
     if(lectureCheminFichier(nom_fichier)==FAUX)
         return;
 
-    menuDebutPartie(&nb_joueurs,&nb_max,&sens_premier,&tour_par_tour,&use_distributor,&number_after_comma);
+    menuDebutPartie(&nb_joueurs,&config);
 
-    ptr_struct_fichier=creerFichierStruct(nb_joueurs,nb_max,sens_premier,tour_par_tour,use_distributor,number_after_comma);
+    ptr_struct_fichier=creerFichierStruct(nb_joueurs,config);
     menuNomJoueur(ptr_struct_fichier);
 
-    if (use_distributor)
+    if (config.use_distributor)
     {
         menuDistribue(nom_distribue);
         ajoutDistribueStruct(ptr_struct_fichier,nom_distribue);
@@ -279,10 +275,7 @@ void menuPrincipal()
         printf("Csuper - Compteur de Score Universel Permettant l'Exemption de Reflexion v2.1.6\n\nQue voulez vous faire ?\n "
         "(%d) Faire une nouvelle partie \n (%d) Charger une partie existente \n (%d) Afficher les resultats d'une partie existante "
         "\n (%d) Supprimer une partie \n (%d) Afficher toutes les parties existantes",nouvPart,charPart,affFich,supprFich,listFich);
-        #ifndef PORTABLE
-        printf(" \n (%d) Choisir un nouveau dossier d'enregistrement des fichiers \n (%d) Affiche le dossier d'enregistrement des fichiers",nouvChem,lireChem);
-        #endif
-        printf("\n (%d) Quitter le programme\n\nVotre choix : ",quit);
+        printf("\n (%d) Afficher le menu des preferences \n (%d) Quitter le programme\n\nVotre choix : ",pref,quit);
 
         saisieClavierEntier(&choix);
 
@@ -297,16 +290,53 @@ void menuPrincipal()
                                 break;
             case listFich  :    listerFichier();
                                 break;
+            case pref :         menuPreferences();
+                                break;
+            case quit  :        printf("\nVous avez choisi de quitter le programme.\n\n");
+                                arret=VRAI;
+                                break;
+            case easterEggs :   printf("\nEffectivement c'est la bonne reponse mais ca ne m'aide pas a savoir ce que vous voulez faire.\n");
+                                systemPause();
+                                break;
+            default :           mauvais_choix();
+                                systemPause();
+        }
+
+        systemEfface();
+
+	} while (arret==FAUX);
+}
+
+void menuPreferences()
+{
+    int choix;
+    int arret = FAUX;
+
+    do
+    {
+        choix=-1;
+
+        systemEfface();
+
+        printf("\nQue voulez vous faire ?\n ");
+        #ifndef PORTABLE
+        printf(" \n (%d) Choisir un nouveau dossier d'enregistrement des fichiers \n (%d) Affiche le dossier d'enregistrement des fichiers",nouvChem,lireChem);
+        #endif
+        printf("\n (%d) Revenir au menu principal\n\nVotre choix : ",menuPrinc);
+
+        saisieClavierEntier(&choix);
+
+        switch (choix) {
             #ifndef PORTABLE
             case nouvChem   :   nouveauCheminFichier();
                                 break;
             case lireChem :     lireCheminFichier();
                                 break;
             #endif
-            case quit  :        printf("\nVous avez choisi de quitter le programme.\n\n");
+            case menuPrinc  :       printf("\nVous avez choisi de quitter le programme.\n\n");
                                 arret=VRAI;
                                 break;
-            case easterEggs :   printf("\nEffectivement c'est la bonne reponse mais ca ne m'aide pas a savoir ce que vous voulez faire.\n");
+            case easterEggs2 :  printf("\nEffectivement c'est la bonne reponse mais ca ne m'aide pas a savoir ce que vous voulez faire.\n");
                                 systemPause();
                                 break;
             default :           mauvais_choix();

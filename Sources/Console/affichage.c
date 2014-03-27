@@ -95,7 +95,7 @@ void afficherScoreTotal(Fichier_Jeu *ptr_struct_fichier)
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
     {
         /*Affiche le score de la personne*/
-        switch (ptr_struct_fichier->number_after_comma)
+        switch (ptr_struct_fichier->config.number_after_comma)
         {
         case 0 :
             printf("%6.0f",ptr_struct_fichier->point_tot[i]);
@@ -128,7 +128,7 @@ void afficherScoreTotal(Fichier_Jeu *ptr_struct_fichier)
  */
 void afficherDistribue(Fichier_Jeu *ptr_struct_fichier)
 {
-    if (ptr_struct_fichier->use_distributor)
+    if (ptr_struct_fichier->config.use_distributor)
         printf("\nC'est a %s de distribuer.",ptr_struct_fichier->nom_joueur[(int)ptr_struct_fichier->distribue]);
     printf("\n");
 }
@@ -142,9 +142,9 @@ void afficherEnTete(Fichier_Jeu *ptr_struct_fichier)
 {
     printf("\nFichier jeu\nCreer le %02.0f/%02.0f/%4.0f",ptr_struct_fichier->jour,ptr_struct_fichier->mois,ptr_struct_fichier->annee);
     printf("\nVersion du fichier : %1.1f\nTaille maximum des nom : %.0f",ptr_struct_fichier->version,ptr_struct_fichier->taille_max_nom);
-    printf("\nNombre de joueur : %.0f\nNombre de points maximum : %.0f",ptr_struct_fichier->nb_joueur,ptr_struct_fichier->nb_max);
-    printf("\nNombre de tours maximum : %d\nSens du premier : %d",maxNbTour(ptr_struct_fichier),ptr_struct_fichier->sens_premier);
-    printf("\nJeu en tour par tour : %d\nNombre de chiffres apres la virgule : %d",ptr_struct_fichier->tour_par_tour,ptr_struct_fichier->number_after_comma);
+    printf("\nNombre de joueur : %.0f\nNombre de points maximum : %.0f",ptr_struct_fichier->nb_joueur,ptr_struct_fichier->config.nb_max);
+    printf("\nNombre de tours maximum : %d\nSens du premier : %d",maxNbTour(ptr_struct_fichier),ptr_struct_fichier->config.sens_premier);
+    printf("\nJeu en tour par tour : %d\nNombre de chiffres apres la virgule : %d",ptr_struct_fichier->config.tour_par_tour,ptr_struct_fichier->config.number_after_comma);
 }
 
 /*!
@@ -170,7 +170,7 @@ void afficherScoreEntier(Fichier_Jeu *ptr_struct_fichier)
             /*Affiche le score de la personne a un tour*/
             if (ptr_struct_fichier->nb_tour[k] >= i+1)
             {
-                switch (ptr_struct_fichier->number_after_comma)
+                switch (ptr_struct_fichier->config.number_after_comma)
                 {
                 case 0 :
                     printf("%6.0f",ptr_struct_fichier->point[k][i]);
@@ -241,7 +241,7 @@ void afficherScore(Fichier_Jeu *ptr_struct_fichier)
     afficherScoreTotal(ptr_struct_fichier);
     afficherLigne(taille_ligne);
     afficherPosition(ptr_struct_fichier);
-    if (ptr_struct_fichier->use_distributor)
+    if (ptr_struct_fichier->config.use_distributor)
         printf("\n");
     afficherDistribue(ptr_struct_fichier);
 }

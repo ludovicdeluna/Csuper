@@ -56,6 +56,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/System/argument_main.h" />
+		<Unit filename="../Sources/System/config.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/System/config.h" />
 		<Unit filename="../Sources/System/emplacement_fichier.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -108,11 +108,11 @@ Fichier_Jeu *lireFichier(char *nom)
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->mois),sizeof(float),1,ptr_fichier));
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->annee),sizeof(float),1,ptr_fichier));
     verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->nb_joueur),sizeof(float),1,ptr_fichier));
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->nb_max),sizeof(float),1,ptr_fichier));
-    verif_lecture_fichier+=fread(&(ptr_struct_fichier->sens_premier),sizeof(char),1,ptr_fichier);
-    verif_lecture_fichier+=fread(&(ptr_struct_fichier->tour_par_tour),sizeof(char),1,ptr_fichier);
-    verif_lecture_fichier+=fread(&(ptr_struct_fichier->use_distributor),sizeof(char),1,ptr_fichier);
-    verif_lecture_fichier+=fread(&(ptr_struct_fichier->number_after_comma),sizeof(char),1,ptr_fichier);
+    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->config.nb_max),sizeof(float),1,ptr_fichier));
+    verif_lecture_fichier+=fread(&(ptr_struct_fichier->config.sens_premier),sizeof(char),1,ptr_fichier);
+    verif_lecture_fichier+=fread(&(ptr_struct_fichier->config.tour_par_tour),sizeof(char),1,ptr_fichier);
+    verif_lecture_fichier+=fread(&(ptr_struct_fichier->config.use_distributor),sizeof(char),1,ptr_fichier);
+    verif_lecture_fichier+=fread(&(ptr_struct_fichier->config.number_after_comma),sizeof(char),1,ptr_fichier);
 
     /*Allocation memoire du tableau de chaine de caractere pour le nom des personnes*/
     ptr_struct_fichier->nom_joueur=(char **)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(char*));
@@ -197,11 +197,11 @@ int ecrireFichier(char *nom, Fichier_Jeu *ptr_struct_fichier)
     fwrite(&(ptr_struct_fichier->mois),sizeof(float),1,ptr_fichier);
     fwrite(&(ptr_struct_fichier->annee),sizeof(float),1,ptr_fichier);
     fwrite(&(ptr_struct_fichier->nb_joueur),sizeof(float),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->nb_max),sizeof(float),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->sens_premier),sizeof(char),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->tour_par_tour),sizeof(char),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->use_distributor),sizeof(char),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->number_after_comma),sizeof(char),1,ptr_fichier);
+    fwrite(&(ptr_struct_fichier->config.nb_max),sizeof(float),1,ptr_fichier);
+    fwrite(&(ptr_struct_fichier->config.sens_premier),sizeof(char),1,ptr_fichier);
+    fwrite(&(ptr_struct_fichier->config.tour_par_tour),sizeof(char),1,ptr_fichier);
+    fwrite(&(ptr_struct_fichier->config.use_distributor),sizeof(char),1,ptr_fichier);
+    fwrite(&(ptr_struct_fichier->config.number_after_comma),sizeof(char),1,ptr_fichier);
 
     /*Ecriture des noms des personnes*/
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)

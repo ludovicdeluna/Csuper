@@ -1,13 +1,13 @@
 /*!
- * \file    emplacement_fichier.h
- * \brief   Prototypes des fonctions qui l'emplacement des fichiers sauvegardes
+ * \file    config.h
+ * \brief   Prototypes des fonction des fichiers lies a la config
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    27/03/14
+ * \version 2.2.0
  */
 
  /*
- * emplacement_fichier.h
+ * config.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,34 +31,18 @@
  *
  */
 
-#ifndef EMPLACEMENT_FICHIER_H_INCLUDED
-#define EMPLACEMENT_FICHIER_H_INCLUDED
+#include "fonction.h"
+#include "structure.h"
 
-#include <sys/stat.h>
-#include <sys/types.h>
-#include "fichier.h"
+#ifndef CONFIG_H_INCLUDED
+#define CONFIG_H_INCLUDED
 
-/*!
- * \def PORTABLE
- * Definit PORTABLE
- */
-//#define PORTABLE
+typedef struct
+{
+    int nb_config;
+    char **name_game_config;
+}list_game_config;
 
-/*!
- * \def NOM_FICHIER
- * Definit NOM_FICHIER a "preferences.txt"
- */
-#define NOM_FICHIER "preferences.txt"
 
-/*!
- * \def NOM_DOSSIER
- * Definit NOM_DOSSIER a ".csuper"
- */
-#define NOM_DOSSIER ".csuper"
-
-int creationPreferences();
-int lecturePreferences(char *nom_fichier);
-int lectureCheminFichier(char *nom_fichier);
-int changerCheminFichier(char *nouveauChemin);
 
 #endif

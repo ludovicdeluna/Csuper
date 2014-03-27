@@ -37,13 +37,9 @@
  * \fn Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour, char use_distributor,char number_after_comma)
  *  Cree une structure Fichier_jeu a partir des donnees de la fonction.
  * \param[in] nb_joueur le nombre de joueur
- * \param[in] nb_max le nombre maximum de points
- * \param[in] sens_premier permet de savoir dans quelle sens est calculer le premier
- * \param[in] use_distributor permet de savoir si l'on utilise un distributeur ou pas
- * \param[in] number_after_comma nombre de chiffres apres la virgule
- * \return un pointeur sur le structure Fichier_Jeu cree
+ * \param[in] config la configuration de la partie
  */
-Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour, char use_distributor,char number_after_comma)
+Fichier_Jeu *creerFichierStruct(float nb_joueur , game_config config)
 {
     Fichier_Jeu *ptr_struct_fichier;
     int i;
@@ -57,12 +53,8 @@ Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premie
     ptr_struct_fichier->taille_max_nom=TAILLE_MAX_NOM;
     ptr_struct_fichier->version=VERSION;
     ptr_struct_fichier->nb_joueur=nb_joueur;
-    ptr_struct_fichier->nb_max=nb_max;
     ptr_struct_fichier->distribue=0;
-    ptr_struct_fichier->sens_premier=sens_premier;
-    ptr_struct_fichier->tour_par_tour=tour_par_tour;
-    ptr_struct_fichier->use_distributor=use_distributor;
-    ptr_struct_fichier->number_after_comma=number_after_comma;
+    ptr_struct_fichier->config=config;
 
     /*Allocation memoire des nombre de tours*/
     ptr_struct_fichier->nb_tour=(float *)myAlloc(nb_joueur*sizeof(float*));
@@ -193,7 +185,7 @@ void calculPosition(Fichier_Jeu *ptr_struct_fichier)
     }
 
     /*Trie points_trie en fonction du sens du premier*/
-    if(ptr_struct_fichier->sens_premier == 1)
+    if(ptr_struct_fichier->config.sens_premier == 1)
         qsort(points_trie,ptr_struct_fichier->nb_joueur,sizeof(float),compareFlottantDecroissant);
     else
         qsort(points_trie,ptr_struct_fichier->nb_joueur,sizeof(float),compareFlottantCroissant);
@@ -245,7 +237,7 @@ int depScoreMax(Fichier_Jeu *ptr_struct_fichier)
     int i;
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
     {
-        if (ptr_struct_fichier->point_tot[i] >= ptr_struct_fichier->nb_max)
+        if (ptr_struct_fichier->point_tot[i] >= ptr_struct_fichier->config.nb_max)
             return VRAI;
     }
     return FAUX;

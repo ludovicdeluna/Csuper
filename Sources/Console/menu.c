@@ -49,16 +49,12 @@ char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER])
 }
 
 /*!
- * \fn void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max , char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributorchar, *ptr_number_after_comma)
+ * \fn void menuDebutPartie(float *ptr_nb_joueur, game_config *ptr_config)
  *  Demande et enregistre le nombre de joueur, le nombre maximum et le nom de la personne qui comme a distribuer
  * \param[in,out] ptr_nb_joueur le nombre de joueur
- * \param[in,out] ptr_nb_max le nombre maximum
- * \param[in,out] ptr_sens_premier definit le sens du premier
- * \param[in,out] ptr_tour_par_tour definit si on joue en tour par tour ou pas
- * \param[in,out] ptr_use_distributor definit si on utilise un distributeur ou pas
- * \param[in,out] ptr_number_after_comma le nombre de chiffres apres la virgule
+ * \param[in,out] ptr_config la configuration de la partie
  */
-void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_premier, char *ptr_tour_par_tour, char *ptr_use_distributor,char *ptr_number_after_comma)
+void menuDebutPartie(float *ptr_nb_joueur, game_config *ptr_config)
 {
     char nbmax;
     char premier_max;
@@ -79,7 +75,7 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
     saisieClavierCaractere(&nbmax);
     if (nbmax=='n' || nbmax=='N')
     {
-        *ptr_nb_max =  INFINITY;
+       ptr_config->nb_max  =  INFINITY;
     } else
     {
         /*Recuperation du nombre maximale.*/
@@ -87,36 +83,36 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
         {
             printf("\nDonnez le nombre maximal pouvant etre atteint par un joueur dans votre jeu (>0)."
             "\nVotre choix : ");
-            saisieClavierFlottant(ptr_nb_max);
-            printf("Vous avez choisi %.0f\n",*ptr_nb_max);
-        } while (*ptr_nb_max <= 0);
+            saisieClavierFlottant(&(ptr_config->nb_max));
+            printf("Vous avez choisi %.0f\n",ptr_config->nb_max);
+        } while (ptr_config->nb_max <= 0);
     }
 
     /*Sens du premier*/
     printf("\nLe premier est-il celui qui a le plus de points (O/n) : ");
     saisieClavierCaractere(&premier_max);
     if (premier_max=='n' || premier_max == 'N')
-        *ptr_sens_premier=-1;
+        ptr_config->sens_premier=-1;
     else
-        *ptr_sens_premier=1;
+        ptr_config->sens_premier=1;
 
     /*Tour par tour ou pas*/
     printf("\nLes points se feront en tour par tour (O/n) : ");
     saisieClavierCaractere(&tour);
     if (tour=='n' || tour == 'N')
-        *ptr_tour_par_tour=0;
+        ptr_config->tour_par_tour=0;
     else
-        *ptr_tour_par_tour=1;
+        ptr_config->tour_par_tour=1;
 
     /*Distributeur ou pas*/
     printf("\nOn utilise un distributeur (O/n) : ");
     saisieClavierCaractere(&distrib);
     if (distrib=='n' || distrib == 'N')
-        *ptr_use_distributor=0;
+        ptr_config->use_distributor=0;
     else
-        *ptr_use_distributor=1;
+        ptr_config->use_distributor=1;
 
-    /*Recuperation du nombre maximale.*/
+    /*Recuperation du nombre de chiffres apres la virgule.*/
     do
     {
         printf("\nDonnez le nombre de chiffres que vous voulez afficher apres la virgule. Ce chiffre doit etre"
@@ -124,7 +120,7 @@ void menuDebutPartie(float *ptr_nb_joueur, float *ptr_nb_max, char *ptr_sens_pre
         saisieClavierEntier(&comma);
         printf("Vous avez choisi %.0d\n",comma);
     } while (comma < 0 || comma > 3);
-    *ptr_number_after_comma=comma;
+    ptr_config->number_after_comma=comma;
 }
 
 /*!
@@ -176,7 +172,7 @@ void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier)
     char valid;
     int indice_joueur;
 
-    if (ptr_struct_fichier->tour_par_tour == 1)
+    if (ptr_struct_fichier->config.tour_par_tour == 1)
         indice_joueur = -1;
     else
         indice_joueur = menuNumJoueur(ptr_struct_fichier);
@@ -188,7 +184,7 @@ void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier)
         validation=VRAI;
 
         /*Demande les points de tout les joueurs si l'on est en tour par tour*/
-        if (ptr_struct_fichier->tour_par_tour == 1)
+        if (ptr_struct_fichier->config.tour_par_tour == 1)
         {
             for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
             {

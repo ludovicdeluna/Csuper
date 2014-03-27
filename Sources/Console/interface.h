@@ -40,10 +40,11 @@
 #include "affichage.h"
 #include "../System/emplacement_fichier.h"
 
+typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , pref=6, quit=7 , easterEggs = 42} MenuPrincipal;
 #ifndef PORTABLE
-typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , nouvChem=6, lireChem=7 , quit=8 , easterEggs = 42} Menu;
+typedef enum {nouvChem=1, lireChem=2 , menuPrinc=3 , easterEggs2 = 42} MenuPreferences;
 #else
-typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , quit=6, easterEggs = 42} Menu;
+typedef enum {menuPrinc=1, easterEggs2 = 42} MenuPreferences;
 #endif
 
 
@@ -54,6 +55,7 @@ void jouer(Fichier_Jeu *ptr_struct_fichier, char *nom_fichier);
 void nouvellePartie();
 void chargerPartie();
 void menuPrincipal();
+void menuPreferences();
 void nouveauCheminFichier();
 void lireCheminFichier();
 void chargerPartieLocale(char *nom_fichier);
