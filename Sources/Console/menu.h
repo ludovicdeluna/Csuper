@@ -36,6 +36,7 @@
 
 #include "saisie_clavier.h"
 #include "../System/fichier.h"
+#include "../System/config.h"
 
 
 char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER]);

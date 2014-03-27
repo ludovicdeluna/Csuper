@@ -58,10 +58,13 @@ typedef struct
 }list_game_config;
 
 list_game_config *makeListGameConfig(int nb_config);
-void freeListGameConfig(list_game_config *ptr_config);
+void freeListGameConfig(list_game_config *ptr_list_config);
 int makeConfigListFile();
 list_game_config *readConfigListFile();
-int addConfigListFile(list_game_config *ptr_config, char *new_config_name);
-int removeConfigListFile(list_game_config *ptr_config, int num_suppr);
+int addConfigListFile(char *new_config_name);
+int removeConfigListFile(int num_suppr, list_game_config *ptr_list_config);
+int makeConfigFile(game_config config, char *config_name);
+int removeConfigFile(char *config_name);
+int readConfigFile(int num_read, list_game_config *ptr_list_config, game_config *ptr_config);
 
 #endif
