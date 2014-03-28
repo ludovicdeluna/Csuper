@@ -41,7 +41,7 @@
  */
 char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER])
 {
-    printf("Donnez le nom du fichier avec ou sans l'extension avec au maximum %d caracteres.\nVotre choix : ",TAILLE_MAX_NOM_FICHIER-1);
+    printf("Donnez le nom du fichier avec au maximum %d caracteres.\nVotre choix : ",TAILLE_MAX_NOM_FICHIER-1);
     saisieClavierChaine(nom_fichier,TAILLE_MAX_NOM_FICHIER);
     printf("Vous avez choisi %s\n",nom_fichier);
 
@@ -56,11 +56,6 @@ char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER])
  */
 void menuDebutPartie(float *ptr_nb_joueur, game_config *ptr_config)
 {
-    char nbmax;
-    char premier_max;
-    char tour;
-    char distrib;
-    int comma;
     int i;
     int choix_config;
     list_game_config *ptr_list_config;
@@ -73,75 +68,91 @@ void menuDebutPartie(float *ptr_nb_joueur, game_config *ptr_config)
         printf("Vous avez choisi %.0f\n",*ptr_nb_joueur);
     } while (*ptr_nb_joueur <= 0);
 
-    /*Choix de la configuration de jeu*/
+    /*Affichage des diffrentes configurations*/
     ptr_list_config = readConfigListFile();
     printf("\nQuelle configuration voulez vous utilisez ?\n");
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
         printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
     printf("(%d) Autre\n",i+1);
+
+    /*Demande du choix*/
     do
     {
         printf("\nVotre choix : ");
         saisieClavierEntier(&choix_config);
         printf("Vous avez choisi %d\n",choix_config);
     } while (choix_config <1 || choix_config >i+1);
+
+    /*Soit on lit une config, soit on en cree une*/
     if (choix_config <= i)
         readConfigFile(choix_config-1,ptr_list_config,ptr_config);
     else
     {
         freeListGameConfig(ptr_list_config);
-        /*Nombre maximum*/
-        printf("\nVoulez-vous utiliser un nombre maximum (O/n) : ");
-        saisieClavierCaractere(&nbmax);
-        if (nbmax=='n' || nbmax=='N')
-        {
-           ptr_config->nb_max  =  INFINITY;
-        } else
-        {
-            /*Recuperation du nombre maximale.*/
-            do
-            {
-                printf("\nDonnez le nombre maximal pouvant etre atteint par un joueur dans votre jeu (>0)."
-                "\nVotre choix : ");
-                saisieClavierFlottant(&(ptr_config->nb_max));
-                printf("Vous avez choisi %.0f\n",ptr_config->nb_max);
-            } while (ptr_config->nb_max <= 0);
-        }
+        menuGameConfig(ptr_config);
+    }
+}
 
-        /*Sens du premier*/
-        printf("\nLe premier est-il celui qui a le plus de points (O/n) : ");
-        saisieClavierCaractere(&premier_max);
-        if (premier_max=='n' || premier_max == 'N')
-            ptr_config->sens_premier=-1;
-        else
-            ptr_config->sens_premier=1;
+/*!
+ * \fn void menuGameConfig(game_config *ptr_config)
+ *  Demande et enregistre la configuration de jeu
+ * \param[in,out] ptr_config la configuration de la partie
+ */
+void menuGameConfig(game_config *ptr_config)
+{
+    char nbmax;
+    char premier_max;
+    char tour;
+    char distrib;
+    int comma;
 
-        /*Tour par tour ou pas*/
-        printf("\nLes points se feront en tour par tour (O/n) : ");
-        saisieClavierCaractere(&tour);
-        if (tour=='n' || tour == 'N')
-            ptr_config->tour_par_tour=0;
-        else
-            ptr_config->tour_par_tour=1;
-
-        /*Distributeur ou pas*/
-        printf("\nOn utilise un distributeur (O/n) : ");
-        saisieClavierCaractere(&distrib);
-        if (distrib=='n' || distrib == 'N')
-            ptr_config->use_distributor=0;
-        else
-            ptr_config->use_distributor=1;
-
-        /*Recuperation du nombre de chiffres apres la virgule.*/
+    /*Nombre maximum*/
+    printf("\nVoulez-vous utiliser un nombre maximum (O/n) : ");
+    saisieClavierCaractere(&nbmax);
+    if (nbmax=='n' || nbmax=='N')
+    {
+        ptr_config->nb_max  =  INFINITY;
+    } else
+    {
+        /*Recuperation du nombre maximale.*/
         do
         {
-            printf("\nDonnez le nombre de chiffres que vous voulez afficher apres la virgule. Ce chiffre doit etre"
-            " compris entre 0 et 3\nVotre choix : ");
-            saisieClavierEntier(&comma);
-            printf("Vous avez choisi %.0d\n",comma);
-        } while (comma < 0 || comma > 3);
-        ptr_config->number_after_comma=comma;
+            printf("\nDonnez le nombre maximal pouvant etre atteint par un joueur dans votre jeu (>0)."
+            "\nVotre choix : ");
+            saisieClavierFlottant(&(ptr_config->nb_max));
+            printf("Vous avez choisi %.0f\n",ptr_config->nb_max);
+        } while (ptr_config->nb_max <= 0);
     }
+    /*Sens du premier*/
+    printf("\nLe premier est-il celui qui a le plus de points (O/n) : ");
+    saisieClavierCaractere(&premier_max);
+    if (premier_max=='n' || premier_max == 'N')
+        ptr_config->sens_premier=-1;
+    else
+        ptr_config->sens_premier=1;
+    /*Tour par tour ou pas*/
+    printf("\nLes points se feront en tour par tour (O/n) : ");
+    saisieClavierCaractere(&tour);
+    if (tour=='n' || tour == 'N')
+        ptr_config->tour_par_tour=0;
+    else
+        ptr_config->tour_par_tour=1;
+    /*Distributeur ou pas*/
+    printf("\nOn utilise un distributeur (O/n) : ");
+    saisieClavierCaractere(&distrib);
+    if (distrib=='n' || distrib == 'N')
+        ptr_config->use_distributor=0;
+    else
+        ptr_config->use_distributor=1;
+    /*Recuperation du nombre de chiffres apres la virgule.*/
+    do
+    {
+        printf("\nDonnez le nombre de chiffres que vous voulez afficher apres la virgule. Ce chiffre doit etre"
+        " compris entre 0 et 3\nVotre choix : ");
+        saisieClavierEntier(&comma);
+        printf("Vous avez choisi %.0d\n",comma);
+    } while (comma < 0 || comma > 3);
+    ptr_config->number_after_comma=comma;
 }
 
 /*!

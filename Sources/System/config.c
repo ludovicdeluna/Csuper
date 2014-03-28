@@ -228,7 +228,7 @@ int removeConfigListFile(int num_suppr, list_game_config *ptr_list_config)
     sprintf(nom_fichier_config,"%s%s/%s",nom_fichier_config,NOM_DOSSIER_CSUPER,NOM_FICHIER_CONFIG);
 
 
-    ptr_fichier=ouvrirFichier(nom_fichier_config,"w");
+    ptr_fichier=ouvrirFichier(nom_fichier_config,"w+");
 
     if(ptr_fichier == NULL)
         return FAUX;

@@ -52,9 +52,13 @@
 
 /*!
  * \def NOM_DOSSIER_CSUPER
- * Definit NOM_DOSSIER_CSUPER a ".csuper"
+ * Definit NOM_DOSSIER_CSUPER
  */
+#ifndef PORTABLE
 #define NOM_DOSSIER_CSUPER ".csuper"
+#else
+#define NOM_DOSSIER_CSUPER "csuper_config_files"
+#endif // PORTABLE
 
 int creationPreferences();
 int lecturePreferences(char *nom_fichier);
