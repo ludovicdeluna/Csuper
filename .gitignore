@@ -12,3 +12,7 @@
 Compilation
 *.layout
 *.depend
+csuper
+csuper.exe
+csuper-gui
+csuper-gui.exe
