@@ -60,6 +60,7 @@ typedef struct
     char tour_par_tour;    /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
     char use_distributor;  /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
     char number_after_comma;/*!< Le nombre de chiffres apres la virgule dans l'affichage */
+    char name[TAILLE_MAX_NOM];/*!< Le nom de la configuration de jeu */
 }game_config;
 
 

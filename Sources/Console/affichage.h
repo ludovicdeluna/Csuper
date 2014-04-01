@@ -49,5 +49,6 @@ void afficherStruct(Fichier_Jeu *ptr_struct_fichier);
 void afficherPartieFinie(Fichier_Jeu *ptr_struct_fichier);
 void afficherChaineTroisTab(char *chaine);
 void afficherLicense();
+void printGameConfig(game_config config);
 
 #endif

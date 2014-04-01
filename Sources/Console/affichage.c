@@ -142,9 +142,17 @@ void afficherEnTete(Fichier_Jeu *ptr_struct_fichier)
 {
     printf("\nFichier jeu\nCreer le %02.0f/%02.0f/%4.0f",ptr_struct_fichier->jour,ptr_struct_fichier->mois,ptr_struct_fichier->annee);
     printf("\nVersion du fichier : %1.1f\nTaille maximum des nom : %.0f",ptr_struct_fichier->version,ptr_struct_fichier->taille_max_nom);
-    printf("\nNombre de joueur : %.0f\nNombre de points maximum : %.0f",ptr_struct_fichier->nb_joueur,ptr_struct_fichier->config.nb_max);
+    printf("\nNombre de joueur : %.0f",ptr_struct_fichier->nb_joueur);
+    #ifdef __unix__
+    printf("\nNombre de points maximum/minimum : %.0f",ptr_struct_fichier->config.nb_max);
+    #elif _WIN32
+    if (ptr_struct_fichier->config.nb_max == INFINITY)
+        printf("\nNombre de points maximum/minimum : inf");
+    else
+        printf("\nNombre de points maximum/minimum : %.0f",ptr_struct_fichier->config.nb_max);
+    #endif
     printf("\nNombre de tours maximum : %d\nSens du premier : %d",maxNbTour(ptr_struct_fichier),ptr_struct_fichier->config.sens_premier);
-    printf("\nJeu en tour par tour : %d\nNombre de chiffres apres la virgule : %d",ptr_struct_fichier->config.tour_par_tour,ptr_struct_fichier->config.number_after_comma);
+    printf("\nJeu en tour par tour : %d\nNombre de chiffres apres la virgule utilise a l'affichage des points : %d",ptr_struct_fichier->config.tour_par_tour,ptr_struct_fichier->config.number_after_comma);
 }
 
 /*!
@@ -386,4 +394,26 @@ void afficherLicense()
     printf("\nCsuper Copyright (C) 2014 Remi BERTHO <remi.bertho@gmail.com>\n"
     "Ce programme vient SANS ABSOLUMENT AUCUNE GARANTIE. \nCeci est un logiciel libre et vous etes invite a le redistribuer"
     " suivant certaines conditions. \nPour plus de detail : http://www.gnu.org/licenses/gpl.html\n");
+}
+
+/*!
+ * \fn void printGameConfig(game_config config)
+ *  Print the game config
+ * \param[in] config a game config
+ */
+void printGameConfig(game_config config)
+{
+    printf("\nNom de la configuration de jeu : %s\n",config.name);
+    #ifdef __unix__
+    printf("\nNombre de points maximum/minimum : %.0f\n",config.nb_max);
+    #elif _WIN32
+    if (config.nb_max == INFINITY)
+        printf("\nNombre de points maximum/minimum : inf\n");
+    else
+        printf("\nNombre de points maximum/minimum : %.0f\n",config.nb_max);
+    #endif
+    printf("\nNombre de chiffres apres la virgule utilise a l'affichage des points : %d\n",config.number_after_comma);
+    printf("\nSens du premier : %d\n",config.sens_premier);
+    printf("\nJeu en tour par tour : %d\n",config.tour_par_tour);
+    printf("\nUtilise un distributeur tournant : %d\n",config.use_distributor);
 }

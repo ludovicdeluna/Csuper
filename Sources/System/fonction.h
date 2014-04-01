@@ -37,7 +37,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <errno.h>
-#include "../Console/saisie_clavier.h"
+#include <string.h>
 
 
 /*!
@@ -54,7 +54,6 @@
 
 
 void mauvais_choix();
-void systemPause();
 void systemEfface();
 int compareFlottantDecroissant(void const *a, void const *b);
 int compareFlottantCroissant(void const *a, void const *b);

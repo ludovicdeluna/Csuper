@@ -256,7 +256,7 @@ int removeConfigListFile(int num_suppr, list_game_config *ptr_list_config)
  * \param[in] config_name le nom de la config
  * \return VRAI si tout s'est bien passe, FAUX sinon
  */
-int makeConfigFile(game_config config, char *config_name)
+int makeConfigFile(game_config config)
 {
     char repertoire[TAILLE_MAX_NOM_FICHIER]="";
     char nom_fichier[TAILLE_MAX_NOM_FICHIER]="";
@@ -287,18 +287,26 @@ int makeConfigFile(game_config config, char *config_name)
     mkdir(repertoire);
     #endif
 
-    sprintf(nom_fichier,"%s/%s",repertoire,config_name);
+    sprintf(nom_fichier,"%s/%s",repertoire,config.name);
 
     ptr_fichier=ouvrirFichier(nom_fichier,"w+");
 
     if (ptr_fichier==NULL)
         return FAUX;
 
-    fprintf(ptr_fichier,"%f %d %d %d %d",config.nb_max,config.sens_premier,config.tour_par_tour,config.use_distributor,config.number_after_comma);
+    #ifdef __unix__
+    fprintf(ptr_fichier,"%f ",config.nb_max);
+    #elif _WIN32
+    if (config.nb_max == INFINITY)
+        fprintf(ptr_fichier,"inf ");
+    else
+        fprintf(ptr_fichier,"%f ",config.nb_max);
+    #endif
+    fprintf(ptr_fichier,"%d %d %d %d",config.sens_premier,config.tour_par_tour,config.use_distributor,config.number_after_comma);
 
     fermerFichier(ptr_fichier);
 
-    addConfigListFile(config_name);
+    addConfigListFile(config.name);
 
     return VRAI;
 }
@@ -358,7 +366,7 @@ int removeConfigFile(char *config_name)
 
 /*!
  * \fn int readConfigFile(int num_read, list_game_config *ptr_list_config, game_config *ptr_config)
- *  Lis un fichier de configuration de jeu
+ *  Lis un fichier de configuration de jeu et ferme la liste de configuration de jeu.
  * \param[in] num_read le numero de la liste de config a lire
  * \param[in] ptr_list_config un pointeur sur une liste de configuration  de jeu
  * \param[in] ptr_config un pointeur sur une configuration de jeu
@@ -368,6 +376,9 @@ int readConfigFile(int num_read, list_game_config *ptr_list_config, game_config 
 {
     char nom_fichier_config[TAILLE_MAX_NOM_FICHIER]="";
     FILE *ptr_fichier;
+    #ifdef _WIN32
+    char buffer[5];
+    #endif // _WIN32
 
     /*Lecture du chemin Document et creation du nom de fichier du fichier config*/
     #ifndef PORTABLE
@@ -385,8 +396,19 @@ int readConfigFile(int num_read, list_game_config *ptr_list_config, game_config 
     if(ptr_fichier == NULL)
         return FAUX;
 
-    /*Lis le nombre de config*/
-    fscanf(ptr_fichier,"%f%d%d%d%d",&(ptr_config->nb_max),(int *)&(ptr_config->sens_premier),(int *)&(ptr_config->tour_par_tour),(int *)&(ptr_config->use_distributor),(int *)&(ptr_config->number_after_comma));
+    /*Lis les differentes config*/
+    #ifdef __unix__
+    fscanf(ptr_fichier,"%f",&(ptr_config->nb_max));
+    #elif _WIN32
+    if (fscanf(ptr_fichier,"%f",&(ptr_config->nb_max))==0)
+    {
+        ptr_config->nb_max = INFINITY;
+        fscanf(ptr_fichier,"%s",buffer);
+    }
+    #endif
+    fscanf(ptr_fichier,"%d%d%d%d",(int *)&(ptr_config->sens_premier),(int *)&(ptr_config->tour_par_tour),(int *)&(ptr_config->use_distributor),(int *)&(ptr_config->number_after_comma));
+
+    strcpy(ptr_config->name,ptr_list_config->name_game_config[num_read]);
 
     fermerFichier(ptr_fichier);
 

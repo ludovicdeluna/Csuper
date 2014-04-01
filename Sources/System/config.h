@@ -63,7 +63,7 @@ int makeConfigListFile();
 list_game_config *readConfigListFile();
 int addConfigListFile(char *new_config_name);
 int removeConfigListFile(int num_suppr, list_game_config *ptr_list_config);
-int makeConfigFile(game_config config, char *config_name);
+int makeConfigFile(game_config config);
 int removeConfigFile(char *config_name);
 int readConfigFile(int num_read, list_game_config *ptr_list_config, game_config *ptr_config);
 

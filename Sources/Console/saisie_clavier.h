@@ -64,5 +64,6 @@ void saisieClavierFlottant(float *nb);
 void saisieClavierFlottantSansVirgule(float *nb);
 void saisieClavierDouble(double *nb);
 char *saisieClavierCaractere(char *c);
+void systemPause();
 
 #endif

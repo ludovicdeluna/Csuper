@@ -42,9 +42,9 @@
 
 typedef enum {nouvPart=1 , charPart=2 , affFich=3 , supprFich=4 , listFich=5 , pref=6, quit=7 , easterEggs = 42} MenuPrincipal;
 #ifndef PORTABLE
-typedef enum {nouvChem=1, lireChem=2 , newGameConf=3, removeGameConf=4 ,menuPrinc=5 , easterEggs2 = 42} MenuPreferences;
+typedef enum {nouvChem=1, lireChem=2 , newGameConf=3, removeGameConf=4, printListGameConf=5 , printGameConf=6 ,menuPrinc=7 , easterEggs2 = 42} MenuPreferences;
 #else
-typedef enum {newGameConf=1,removeGameConf=2 ,menuPrinc=3, easterEggs2 = 42} MenuPreferences;
+typedef enum {newGameConf=1,removeGameConf=2,printListGameConf=3 , printGameConf=4 ,menuPrinc=5, easterEggs2 = 42} MenuPreferences;
 #endif
 
 
@@ -62,5 +62,7 @@ void chargerPartieLocale(char *nom_fichier);
 void afficheFichierLocale(char *nom_fichier);
 void newGameConfig();
 void removeGameConfig();
+void printListGameConfig();
+void printGameConfigFile();
 
 #endif

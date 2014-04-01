@@ -272,7 +272,7 @@ void menuPrincipal()
 
         systemEfface();
 
-        printf("Csuper - Compteur de Score Universel Permettant l'Exemption de Reflexion v2.1.6\n\nQue voulez vous faire ?\n "
+        printf("Csuper - Compteur de Score Universel Permettant l'Exemption de Reflexion v2.1.7\n\nQue voulez vous faire ?\n "
         "(%d) Faire une nouvelle partie \n (%d) Charger une partie existente \n (%d) Afficher les resultats d'une partie existante "
         "\n (%d) Supprimer une partie \n (%d) Afficher toutes les parties existantes",nouvPart,charPart,affFich,supprFich,listFich);
         printf("\n (%d) Afficher le menu des preferences \n (%d) Quitter le programme\n\nVotre choix : ",pref,quit);
@@ -323,6 +323,7 @@ void menuPreferences()
         printf(" \n (%d) Choisir un nouveau dossier d'enregistrement des fichiers \n (%d) Affiche le dossier d'enregistrement des fichiers",nouvChem,lireChem);
         #endif
         printf("\n (%d) Faire une nouvelle configuration de jeu\n (%d) Supprimer une configuration de jeu",newGameConf,removeGameConf);
+        printf("\n (%d) Afficher la liste des configurations de jeu\n (%d) Afficher une configuration de jeu",printListGameConf,printGameConf);
         printf("\n (%d) Revenir au menu principal\n\nVotre choix : ",menuPrinc);
 
         saisieClavierEntier(&choix);
@@ -340,6 +341,10 @@ void menuPreferences()
             case newGameConf :  newGameConfig();
                                 break;
             case removeGameConf:removeGameConfig();
+                                break;
+            case printListGameConf:printListGameConfig();
+                                break;
+            case printGameConf: printGameConfigFile();
                                 break;
             case easterEggs2 :  printf("\nEffectivement c'est la bonne reponse mais ca ne m'aide pas a savoir ce que vous voulez faire.\n");
                                 systemPause();
@@ -454,23 +459,79 @@ void afficheFichierLocale(char *nom_fichier)
 void newGameConfig()
 {
     game_config config;
-    char config_name[TAILLE_MAX_NOM_FICHIER];
 
     systemEfface();
-    menuNomFichier(config_name);
+    menuNomFichier(config.name);
     menuGameConfig(&config);
-    makeConfigFile(config,config_name);
+    makeConfigFile(config);
 }
 
 /*!
  * \fn void removeGameConfig()
- *  Remove a game configuration
+ *  Ask and remove a game configuration
  */
 void removeGameConfig()
 {
     int i;
     int choix_config;
     list_game_config *ptr_list_config;
+
+    systemEfface();
+
+
+    ptr_list_config = readConfigListFile();
+    if (ptr_list_config->nb_config > 0)
+    {
+        /*Affichage des diffrentes configurations*/
+        printf("\nQuelle configuration voulez vous utilisez ?\n");
+        for (i=0 ; i<ptr_list_config->nb_config ; i++)
+            printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
+
+        /*Demande du choix*/
+        do
+        {
+            printf("\nVotre choix : ");
+            saisieClavierEntier(&choix_config);
+            printf("Vous avez choisi %d\n",choix_config);
+        } while (choix_config <1 || choix_config >i);
+
+        removeConfigListFile(choix_config-1,ptr_list_config);
+    }
+
+    else
+        printf("\nVous n'avez pas encore de fichiers de configurations de jeu.\n");
+
+    systemPause();
+}
+
+/*!
+ * \fn void printListGameConfig()
+ *  Print the list of game configuration
+ */
+void printListGameConfig()
+{
+    int i;
+    list_game_config *ptr_list_config;
+
+    systemEfface();
+
+    ptr_list_config = readConfigListFile();
+    printf("\nVoici la liste des configurations de jeu :\n");
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+        printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
+    systemPause();
+}
+
+/*!
+ * \fn void printGameConfig()
+ *  Ask and print a game configuration
+ */
+void printGameConfigFile()
+{
+    int i;
+    int choix_config;
+    list_game_config *ptr_list_config;
+    game_config config;
 
     systemEfface();
 
@@ -490,12 +551,12 @@ void removeGameConfig()
             printf("Vous avez choisi %d\n",choix_config);
         } while (choix_config <1 || choix_config >i);
 
-        removeConfigListFile(choix_config-1,ptr_list_config);
+        readConfigFile(choix_config-1,ptr_list_config,&config);
+        printGameConfig(config);
     }
 
     else
-    {
         printf("\nVous n'avez pas encore de fichiers de configurations de jeu.\n");
-        systemPause();
-    }
+
+    systemPause();
 }

@@ -46,18 +46,6 @@ void mauvais_choix()
 
 
 /*!
- * \fn void systemPause()
- *  Demande a l'utilisateur d'appuyer sur entrer pour continuer le programme.
- */
-void systemPause()
-{
-    char a;
-
-    printf("\nAppuyer sur entrer pour continuer");
-    saisieClavierCaractere(&a);
-}
-
-/*!
  * \fn void systemEfface()
  *  Efface la console de l'utilisateur.
  */
