@@ -31,7 +31,15 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add directory="../" />
 		</Compiler>
+		<ResourceCompiler>
+			<Add directory="../" />
+		</ResourceCompiler>
+		<Linker>
+			<Add library="libcsuper" />
+			<Add directory="../" />
+		</Linker>
 		<Unit filename="../Sources/Console/affichage.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -52,30 +60,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/Console/saisie_clavier.h" />
-		<Unit filename="../Sources/System/argument_main.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/System/argument_main.h" />
-		<Unit filename="../Sources/System/config.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/System/config.h" />
-		<Unit filename="../Sources/System/emplacement_fichier.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/System/emplacement_fichier.h" />
-		<Unit filename="../Sources/System/fichier.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/System/fichier.h" />
-		<Unit filename="../Sources/System/fonction.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/System/fonction.h" />
-		<Unit filename="../Sources/System/structure.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/System/structure.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

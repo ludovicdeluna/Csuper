@@ -30,7 +30,7 @@
  *
  *
  */
-
+#include <math.h>
 #include "fonction.h"
 #include "structure.h"
 #include "fichier.h"

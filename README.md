@@ -23,7 +23,9 @@ Installation
 -----------
 Les éxécutables sont disponibles sur [mon site](http://dalan.netne.net/wordpress).
 
-Si vous voulez compiler vous même le logiciel, un petit `gcc *.c -o csuper` devrait faire l'affaire. Sinon vous pouvez utilser le projet codeblocks.
+Si vous voulez compiler vous même le logiciel, vous pouvez utiliser la commande `make` ou les projets codeblocks.
+Puis si vous voulez l'utiliser en version portable faites `source ./add_library.sh` pour ajouter temporairement le dossier courant dans la liste de chemin de librairie.
+Et si vous voulez l'installer faites `sudo make install`. Il faudra alors faire `sudo make uninstall` pour le désinstaller.
 
 Penser à commenter ou décommenter la constante PORTABLE du fichier emplacement_fichier.h suivant la version que vous voulez.
 
@@ -31,6 +33,6 @@ Normalement la compilation devrait marcher sous Linux, Mac et Windows.
 
 Informations complémentaires
 ----------------------------
-Je suis actuellment en train de travailler sur la possibilité de mettre des points à chaque joueurs indépendamment des tours.
+Je suis actuellement en train de travailler sur l'amélioration des fichiers de configurations de jeu ainsi que sur la traduction anglaise.
 
-Une traduction en anglais ainsi qu'une interface graphique en GTK+ en prévu, mais les deux risquent de prendre du temps.
+Une interface graphique en GTK+ en prévu, mais cela risque de prendre du temps.

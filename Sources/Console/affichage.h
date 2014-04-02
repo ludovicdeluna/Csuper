@@ -35,6 +35,7 @@
 #define AFFICHAGE_H_INCLUDED
 
 #include "../System/structure.h"
+#include <math.h>
 #include <string.h>
 
 void afficherNom(Fichier_Jeu *ptr_struct_fichier, int *ptr_taille_ligne);
