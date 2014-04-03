@@ -90,6 +90,7 @@ void menuDebutPartie(float *ptr_nb_joueur, game_config *ptr_config)
     {
         freeListGameConfig(ptr_list_config);
         menuGameConfig(ptr_config);
+        strcpy(ptr_config->name,"Inconnu");
     }
 }
 
@@ -101,28 +102,42 @@ void menuDebutPartie(float *ptr_nb_joueur, game_config *ptr_config)
 void menuGameConfig(game_config *ptr_config)
 {
     char nbmax;
+    char max;
     char premier_max;
     char tour;
     char distrib;
     int comma;
 
     /*Nombre maximum*/
-    printf("\nVoulez-vous utiliser un nombre maximum (O/n) : ");
+    printf("\nVoulez-vous utiliser un nombre maximum ou minimum (O/n) : ");
     saisieClavierCaractere(&nbmax);
     if (nbmax=='n' || nbmax=='N')
     {
         ptr_config->nb_max  =  INFINITY;
+        ptr_config->max = 1;
     } else
     {
+        /*Maximum or minimum*/
+        printf("\nVoulez-vous utiliser un nombre maximum (O/n) : ");
+        saisieClavierCaractere(&max);
+        if (max=='n' || max == 'N')
+            ptr_config->max=0;
+        else
+            ptr_config->max=1;
+
         /*Recuperation du nombre maximale.*/
-        do
-        {
-            printf("\nDonnez le nombre maximal pouvant etre atteint par un joueur dans votre jeu (>0)."
-            "\nVotre choix : ");
-            saisieClavierFlottant(&(ptr_config->nb_max));
-            printf("Vous avez choisi %.0f\n",ptr_config->nb_max);
-        } while (ptr_config->nb_max <= 0);
+        printf("\nDonnez le nombre maximal ou minimum pouvant etre atteint par un joueur dans votre jeu."
+        "\nVotre choix : ");
+        saisieClavierFlottant(&(ptr_config->nb_max));
+        printf("Vous avez choisi %.3f\n",ptr_config->nb_max);
     }
+
+    /*Score au debut de la partie*/
+    printf("\nDonnez le score initial des joueurs."
+    "\nVotre choix : ");
+    saisieClavierFlottant(&(ptr_config->begin_score));
+    printf("Vous avez choisi %.3f\n",ptr_config->begin_score);
+
     /*Sens du premier*/
     printf("\nLe premier est-il celui qui a le plus de points (O/n) : ");
     saisieClavierCaractere(&premier_max);
@@ -130,6 +145,7 @@ void menuGameConfig(game_config *ptr_config)
         ptr_config->sens_premier=-1;
     else
         ptr_config->sens_premier=1;
+
     /*Tour par tour ou pas*/
     printf("\nLes points se feront en tour par tour (O/n) : ");
     saisieClavierCaractere(&tour);
@@ -137,6 +153,7 @@ void menuGameConfig(game_config *ptr_config)
         ptr_config->tour_par_tour=0;
     else
         ptr_config->tour_par_tour=1;
+
     /*Distributeur ou pas*/
     printf("\nOn utilise un distributeur (O/n) : ");
     saisieClavierCaractere(&distrib);
@@ -144,6 +161,7 @@ void menuGameConfig(game_config *ptr_config)
         ptr_config->use_distributor=0;
     else
         ptr_config->use_distributor=1;
+
     /*Recuperation du nombre de chiffres apres la virgule.*/
     do
     {

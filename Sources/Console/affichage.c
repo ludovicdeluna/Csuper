@@ -397,16 +397,19 @@ void afficherLicense()
 void printGameConfig(game_config config)
 {
     printf("\nNom de la configuration de jeu : %s\n",config.name);
+    printf("Utilise un nombre maximum : %d\n",config.max);
     #ifdef __unix__
-    printf("Nombre de points maximum/minimum : %.0f\n",config.nb_max);
+    printf("Nombre de points maximum/minimum : %.3f\n",config.nb_max);
     #elif _WIN32
     if (config.nb_max == INFINITY)
         printf("Nombre de points maximum/minimum : inf\n");
     else
-        printf("Nombre de points maximum/minimum : %.0f\n",config.nb_max);
+        printf("Nombre de points maximum/minimum : %.3f\n",config.nb_max);
     #endif
+    printf("Score initial : %.3f\n",config.begin_score);
     printf("Nombre de chiffres apres la virgule utilise a l'affichage des points : %d\n",config.number_after_comma);
     printf("Sens du premier : %d\n",config.sens_premier);
     printf("Jeu en tour par tour : %d\n",config.tour_par_tour);
     printf("Utilise un distributeur tournant : %d\n",config.use_distributor);
+
 }

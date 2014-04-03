@@ -36,6 +36,7 @@
 
 #include "fonction.h"
 #include <time.h>
+#include <float.h>
 
 /*!
  * \def TAILLE_MAX_NOM
@@ -60,7 +61,9 @@ typedef struct
     char tour_par_tour;    /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
     char use_distributor;  /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
     char number_after_comma;/*!< Le nombre de chiffres apres la virgule dans l'affichage */
+    char max;               /*!< Vaut 1 si on utilise un maximum, 0 si c'est un minimum */
     char name[TAILLE_MAX_NOM];/*!< Le nom de la configuration de jeu */
+    float begin_score;        /*!< L score de chacun des joueurs au debut de la partie */
 }game_config;
 
 

@@ -302,7 +302,7 @@ int makeConfigFile(game_config config)
     else
         fprintf(ptr_fichier,"%f ",config.nb_max);
     #endif
-    fprintf(ptr_fichier,"%d %d %d %d",config.sens_premier,config.tour_par_tour,config.use_distributor,config.number_after_comma);
+    fprintf(ptr_fichier,"%d %d %d %d %d %f",config.sens_premier,config.tour_par_tour,config.use_distributor,config.number_after_comma,config.max,config.begin_score);
 
     fermerFichier(ptr_fichier);
 
@@ -406,7 +406,7 @@ int readConfigFile(int num_read, list_game_config *ptr_list_config, game_config 
         fscanf(ptr_fichier,"%s",buffer);
     }
     #endif
-    fscanf(ptr_fichier,"%d%d%d%d",(int *)&(ptr_config->sens_premier),(int *)&(ptr_config->tour_par_tour),(int *)&(ptr_config->use_distributor),(int *)&(ptr_config->number_after_comma));
+    fscanf(ptr_fichier,"%d%d%d%d%d%f",(int *)&(ptr_config->sens_premier),(int *)&(ptr_config->tour_par_tour),(int *)&(ptr_config->use_distributor),(int *)&(ptr_config->number_after_comma),(int *)&(ptr_config->max),&(ptr_config->begin_score));
 
     strcpy(ptr_config->name,ptr_list_config->name_game_config[num_read]);
 

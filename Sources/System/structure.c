@@ -68,10 +68,10 @@ Fichier_Jeu *creerFichierStruct(float nb_joueur , game_config config)
     ptr_struct_fichier->point_tot=(float *)myAlloc(nb_joueur*sizeof(float));
     ptr_struct_fichier->position=(float *)myAlloc(nb_joueur*sizeof(float));
 
-    /*Initialisation des points totaux,de la position a zero et du nombre de tour*/
+    /*Initialisation des points totaux,de la position et du nombre de tour*/
     for (i=0 ; i<nb_joueur ; i++)
     {
-        ptr_struct_fichier->point_tot[i]=0;
+        ptr_struct_fichier->point_tot[i]=ptr_struct_fichier->config.begin_score;
         ptr_struct_fichier->position[i]=1;
         ptr_struct_fichier->nb_tour[i]=0;
     }
@@ -237,8 +237,17 @@ int depScoreMax(Fichier_Jeu *ptr_struct_fichier)
     int i;
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
     {
-        if (ptr_struct_fichier->point_tot[i] >= ptr_struct_fichier->config.nb_max)
-            return VRAI;
+        if (ptr_struct_fichier->config.max == 1)
+        {
+            if (ptr_struct_fichier->point_tot[i] + FLT_EPSILON >= ptr_struct_fichier->config.nb_max)
+                return VRAI;
+        }
+        else
+        {
+            if (ptr_struct_fichier->point_tot[i] - FLT_EPSILON <= ptr_struct_fichier->config.nb_max)
+                return VRAI;
+        }
+
     }
     return FAUX;
 }

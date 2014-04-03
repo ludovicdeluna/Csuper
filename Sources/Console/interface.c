@@ -272,7 +272,7 @@ void menuPrincipal()
 
         systemEfface();
 
-        printf("Csuper - Compteur de Score Universel Permettant l'Exemption de Reflexion v2.1.7\n\nQue voulez vous faire ?\n "
+        printf("Csuper - Compteur de Score Universel Permettant l'Exemption de Reflexion v2.1.8\n\nQue voulez vous faire ?\n "
         "(%d) Faire une nouvelle partie \n (%d) Charger une partie existente \n (%d) Afficher les resultats d'une partie existante "
         "\n (%d) Supprimer une partie \n (%d) Afficher toutes les parties existantes",nouvPart,charPart,affFich,supprFich,listFich);
         printf("\n (%d) Afficher le menu des preferences \n (%d) Quitter le programme\n\nVotre choix : ",pref,quit);
