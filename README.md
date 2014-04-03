@@ -16,7 +16,7 @@ Ce logiciel a été fait en guise d'exercice personnel pendant des études donc 
 Documentation
 -------------
 La documentation se fait à l'aide de Doxygen.
-Une version PDF se trouve dans le dossier Documentation et une version html se trouve [ici](http://dalan.netne.net/Doc_csuper)
+Une version PDF se trouve dans le dossier Documentation et une version html se trouve [ici pour csuper](http://dalan.netne.net/Doc_csuper) et [ici pour libcsuper](http://dalan.netne.net/Doc_libcsuper)
 Un fichier explique aussi comment sont ordonnées les données dans les fichiers .csu
 
 Installation

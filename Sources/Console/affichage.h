@@ -35,6 +35,7 @@
 #define AFFICHAGE_H_INCLUDED
 
 #include "../System/structure.h"
+#include "../System/fonction.h"
 #include <math.h>
 #include <string.h>
 
