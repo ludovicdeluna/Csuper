@@ -1,5 +1,5 @@
 /*!
- * \file    structure.c
+ * \file    csu_struct.c
  * \brief   Fonction de gestion des fichiers de la struction contenant les informations
  * \author  Remi BERTHO
  * \date    09/03/14
@@ -7,7 +7,7 @@
  */
 
  /*
- * structure.c
+ * csu_struct.c
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,7 +31,7 @@
  *
  */
 
- #include "structure.h"
+ #include "csu_struct.h"
 
 /*!
  * \fn Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour, char use_distributor,char number_after_comma)

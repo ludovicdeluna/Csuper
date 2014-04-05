@@ -1,5 +1,5 @@
 /*!
- * \file    fichier.c
+ * \file    csu_files.c
  * \brief   Fonction de gestion des fichiers
  * \author  Remi BERTHO
  * \date    09/03/14
@@ -7,7 +7,7 @@
  */
 
  /*
- * fichier.c
+ * csu_files.c
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,7 +31,7 @@
  *
  */
 
- #include "fichier.h"
+ #include "csu_files.h"
 
 
 

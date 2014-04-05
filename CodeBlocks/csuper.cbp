@@ -40,26 +40,26 @@
 			<Add library="libcsuper" />
 			<Add directory="../" />
 		</Linker>
-		<Unit filename="../Sources/Console/affichage.c">
+		<Unit filename="../Sources/csuper/display.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/Console/affichage.h" />
-		<Unit filename="../Sources/Console/interface.c">
+		<Unit filename="../Sources/csuper/display.h" />
+		<Unit filename="../Sources/csuper/interface.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/Console/interface.h" />
-		<Unit filename="../Sources/Console/main.c">
+		<Unit filename="../Sources/csuper/interface.h" />
+		<Unit filename="../Sources/csuper/keyboarding.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/Console/main.h" />
-		<Unit filename="../Sources/Console/menu.c">
+		<Unit filename="../Sources/csuper/keyboarding.h" />
+		<Unit filename="../Sources/csuper/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/Console/menu.h" />
-		<Unit filename="../Sources/Console/saisie_clavier.c">
+		<Unit filename="../Sources/csuper/main.h" />
+		<Unit filename="../Sources/csuper/menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/Console/saisie_clavier.h" />
+		<Unit filename="../Sources/csuper/menu.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

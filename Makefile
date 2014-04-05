@@ -2,18 +2,18 @@ CC = gcc
 CFLAGS = -Wall -O2
 CFLAGSLIB = -fpic
 LDFLAGS = libcsuper.so
-SRC_SYS = 	Sources/System/argument_main.c \
-		Sources/System/config.c \
-		Sources/System/emplacement_fichier.c \
-		Sources/System/fichier.c \
-		Sources/System/fonction.c \
-		Sources/System/structure.c
+SRC_SYS = 	Sources/libcsuper/main_argument.c \
+		Sources/libcsuper/game_config.c \
+		Sources/libcsuper/file_system_path.c \
+		Sources/libcsuper/csu_files.c \
+		Sources/libcsuper/share.c \
+		Sources/libcsuper/csu_struct.c
 OBJ_SYS= $(SRC_SYS:.c=.o)
-SRC_TER = 	Sources/Console/affichage.c \
-		Sources/Console/interface.c \
-		Sources/Console/main.c \
-		Sources/Console/menu.c \
-		Sources/Console/saisie_clavier.c
+SRC_TER = 	Sources/csuper/display.c \
+		Sources/csuper/interface.c \
+		Sources/csuper/main.c \
+		Sources/csuper/menu.c \
+		Sources/csuper/keyboarding.c
 OBJ_TER= $(SRC_TER:.c=.o)
 
 all: libcsuper.so csuper

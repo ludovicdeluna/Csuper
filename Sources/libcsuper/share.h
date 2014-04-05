@@ -1,13 +1,13 @@
 /*!
- * \file    saisie_clavier.h
- * \brief   Prototypes des fonctions de saisie clavier
+ * \file    share.h
+ * \brief   Prototypes des fonctions essentielles au fonctionnement du programme
  * \author  Remi BERTHO
  * \date    13/02/14
  * \version 2.0
  */
 
  /*
- * saisie_clavier.h
+ * share.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,39 +31,36 @@
  *
  */
 
-#ifndef SAISIE_CLAVIER_H_INCLUDED
-#define SAISIE_CLAVIER_H_INCLUDED
+#ifndef FONCTION_H_INCLUDED
+#define FONCTION_H_INCLUDED
 
-#include "../System/fonction.h"
-#include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
 #include <string.h>
-#include <math.h>
 
 /*!
- * \def NB_CARACT_INT
- * Definit NB_CARACT_INT a 12
+ * \def VRAI
+ * Definit VRAI a 1
  */
-#define NB_CARACT_INT 12
+#define VRAI 1
 
 /*!
- * \def NB_CARACT_FLOT
- * Definit NB_CARACT_FLOT a 39
+ * \def FAUX
+ * Definit FAUX a 0
  */
-#define NB_CARACT_FLOT 39
+#define FAUX 0
 
-/*!
- * \def NB_CARACT_DOUB
- * Definit NB_CARACT_DOUB a 309
- */
-#define NB_CARACT_DOUB 309
 
-void clean_stdin(void);
-char *saisieClavierChaine(char *chaine, int nb_caract_plus_un);
-void saisieClavierEntier(int *nb);
-void saisieClavierFlottant(float *nb);
-void saisieClavierFlottantSansVirgule(float *nb);
-void saisieClavierDouble(double *nb);
-char *saisieClavierCaractere(char *c);
-void systemPause();
+void mauvais_choix();
+void systemEfface();
+int compareFlottantDecroissant(void const *a, void const *b);
+int compareFlottantCroissant(void const *a, void const *b);
+FILE *ouvrirFichier(char nome[], char mode[]);
+int fermerFichier(FILE *ptr_fichier);
+int lireTailleFichier(FILE *ptr_fichier);
+void *myAlloc(int taille_alloue);
+void myRealloc(void **ptr,int taille_alloue);
+void ajoutExtension(char *nom_fichier);
 
 #endif

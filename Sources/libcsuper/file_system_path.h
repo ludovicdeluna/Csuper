@@ -1,5 +1,5 @@
 /*!
- * \file    emplacement_fichier.h
+ * \file    file_system_path.h
  * \brief   Prototypes des fonctions qui l'emplacement des fichiers sauvegardes
  * \author  Remi BERTHO
  * \date    13/02/14
@@ -7,7 +7,7 @@
  */
 
  /*
- * emplacement_fichier.h
+ * file_system_path.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -36,7 +36,8 @@
 
 #include <sys/stat.h>
 #include <sys/types.h>
-#include "fichier.h"
+#include "csu_struct.h"
+#include "csu_files.h"
 
 /*!
  * \def PORTABLE

@@ -1,13 +1,13 @@
 /*!
- * \file    config.c
- * \brief   Fonction des fichiers lies a la config
+ * \file    game_config.c
+ * \brief   Fonction des fichiers lies a la configiguration de jeu
  * \author  Remi BERTHO
  * \date    27/03/14
  * \version 2.2.0
  */
 
  /*
- * config.c
+ * game_config.c
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,7 +31,7 @@
  *
  */
 
- #include "config.h"
+ #include "game_config.h"
 
 /*!
  * \fn list_game_config *makeListGameConfig(int nb_config)

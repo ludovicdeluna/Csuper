@@ -1,13 +1,13 @@
 /*!
- * \file    menu.h
- * \brief   Prototypes des fonctions qui gerent les menus demandant de rentrer des valeurs du logiciel
+ * \file    libcsuper.h
+ * \brief   Inclusion of all header files of libcsuper
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    05/04/14
+ * \version 2.2.0
  */
 
  /*
- * menu.h
+ * libcsuper.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,23 +31,14 @@
  *
  */
 
-#ifndef MENU_H_INCLUDED
-#define MENU_H_INCLUDED
+#ifndef LIBCSUPER_H_INCLUDED
+#define LIBCSUPER_H_INCLUDED
 
-#include "saisie_clavier.h"
-#include "../System/fichier.h"
-#include "../System/config.h"
-
-
-char *menuNomFichier(char nom_fichier[TAILLE_MAX_NOM_FICHIER]);
-void menuDebutPartie(float *ptr_nb_joueur, game_config *ptr_config);
-void menuGameConfig(game_config *ptr_config);
-void menuDistribue(char *nom_distribue);
-void menuNomJoueur(Fichier_Jeu *ptr_struct_fichier);
-void menuPointsJoueur(Fichier_Jeu *ptr_struct_fichier);
-int menuNumJoueur(Fichier_Jeu *ptr_struct_fichier);
-int menuContinuer();
-int menuSupprimer();
-void menuNouveauChemin(char *nouveauChemin);
+#include "csu_struct.h"
+#include "share.h"
+#include "csu_files.h"
+#include "file_system_path.h"
+#include "main_argument.h"
+#include "game_config.h"
 
 #endif

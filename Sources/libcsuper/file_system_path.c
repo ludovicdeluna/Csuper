@@ -1,5 +1,5 @@
 /*!
- * \file    emplacement_fichier.c
+ * \file    file_system_path.c
  * \brief   Fonctions qui l'emplacement des fichiers sauvegardes
  * \author  Remi BERTHO
  * \date    13/02/14
@@ -7,7 +7,7 @@
  */
 
  /*
- * emplacement_fichier.c
+ * file_system_path.c
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,7 +31,7 @@
  *
  */
 
- #include "emplacement_fichier.h"
+ #include "file_system_path.h"
 
 /*!
  * \fn void creationPreferences()

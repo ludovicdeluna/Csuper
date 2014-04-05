@@ -1,5 +1,5 @@
 /*!
- * \file    structure.h
+ * \file    csu_struct.h
  * \brief   Prototypes des fonction de gestion des fichiers de la struction contenant les informations
  * \author  Remi BERTHO
  * \date    09/03/14
@@ -7,7 +7,7 @@
  */
 
  /*
- * structure.h
+ * csu_struct.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -34,9 +34,9 @@
 #ifndef STRUCTURE_H_INCLUDED
 #define STRUCTURE_H_INCLUDED
 
-#include "fonction.h"
 #include <time.h>
 #include <float.h>
+#include "share.h"
 
 /*!
  * \def TAILLE_MAX_NOM
@@ -56,14 +56,14 @@
  */
 typedef struct
 {
-    float nb_max;          /*!< Nombre maximum que peut prendre un joueur. */
-    char sens_premier;     /*!< Vaut 1 si le premier est celui qui a le plus de points, -1 sinon */
-    char tour_par_tour;    /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
-    char use_distributor;  /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
-    char number_after_comma;/*!< Le nombre de chiffres apres la virgule dans l'affichage */
-    char max;               /*!< Vaut 1 si on utilise un maximum, 0 si c'est un minimum */
-    char name[TAILLE_MAX_NOM];/*!< Le nom de la configuration de jeu */
-    float begin_score;        /*!< L score de chacun des joueurs au debut de la partie */
+    float nb_max;               /*!< Nombre maximum que peut prendre un joueur. */
+    char sens_premier;          /*!< Vaut 1 si le premier est celui qui a le plus de points, -1 sinon */
+    char tour_par_tour;         /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
+    char use_distributor;       /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
+    char number_after_comma;    /*!< Le nombre de chiffres apres la virgule dans l'affichage */
+    char max;                   /*!< Vaut 1 si on utilise un maximum, 0 si c'est un minimum */
+    char name[TAILLE_MAX_NOM];  /*!< Le nom de la configuration de jeu */
+    float begin_score;          /*!< L score de chacun des joueurs au debut de la partie */
 }game_config;
 
 

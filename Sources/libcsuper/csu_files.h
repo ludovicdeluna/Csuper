@@ -1,5 +1,5 @@
 /*!
- * \file    fichier.h
+ * \file    csu_files.h
  * \brief   Prototypes des fonction de gestion des fichiers
  * \author  Remi BERTHO
  * \date    13/02/14
@@ -7,7 +7,7 @@
  */
 
  /*
- * fichier.h
+ * csu_files.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -34,7 +34,7 @@
 #ifndef FICHIER_JEU_H_INCLUDED
 #define FICHIER_JEU_H_INCLUDED
 
-#include "structure.h"
+#include "csu_struct.h"
 #include <unistd.h>
 
 

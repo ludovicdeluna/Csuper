@@ -39,30 +39,33 @@
 		<Linker>
 			<Add option="-shared" />
 		</Linker>
-		<Unit filename="../Sources/System/argument_main.c">
+		<Unit filename="../Sources/libcsuper/csu_files.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/System/argument_main.h" />
-		<Unit filename="../Sources/System/config.c">
+		<Unit filename="../Sources/libcsuper/csu_files.h" />
+		<Unit filename="../Sources/libcsuper/csu_struct.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/System/config.h" />
-		<Unit filename="../Sources/System/emplacement_fichier.c">
+		<Unit filename="../Sources/libcsuper/csu_struct.h">
+			<Option weight="0" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/file_system_path.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/System/emplacement_fichier.h" />
-		<Unit filename="../Sources/System/fichier.c">
+		<Unit filename="../Sources/libcsuper/file_system_path.h" />
+		<Unit filename="../Sources/libcsuper/game_config.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/System/fichier.h" />
-		<Unit filename="../Sources/System/fonction.c">
+		<Unit filename="../Sources/libcsuper/game_config.h" />
+		<Unit filename="../Sources/libcsuper/libcsuper.h" />
+		<Unit filename="../Sources/libcsuper/main_argument.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/System/fonction.h" />
-		<Unit filename="../Sources/System/structure.c">
+		<Unit filename="../Sources/libcsuper/main_argument.h" />
+		<Unit filename="../Sources/libcsuper/share.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/System/structure.h" />
+		<Unit filename="../Sources/libcsuper/share.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />

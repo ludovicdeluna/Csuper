@@ -1,13 +1,13 @@
 /*!
- * \file    config.h
- * \brief   Prototypes des fonction des fichiers lies a la config
+ * \file    game_config.h
+ * \brief   Prototypes des fonction des fichiers lies a la configuration de jeu
  * \author  Remi BERTHO
  * \date    27/03/14
  * \version 2.2.0
  */
 
  /*
- * config.h
+ * game_config.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -30,14 +30,13 @@
  *
  *
  */
-#include <math.h>
-#include "fonction.h"
-#include "structure.h"
-#include "fichier.h"
-#include "emplacement_fichier.h"
 
 #ifndef CONFIG_H_INCLUDED
 #define CONFIG_H_INCLUDED
+
+#include <math.h>
+#include "csu_struct.h"
+#include "file_system_path.h"
 
 /*!
  * \def NOM_DOSSIER_CONFIG

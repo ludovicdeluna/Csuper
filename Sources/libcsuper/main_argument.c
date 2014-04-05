@@ -1,5 +1,5 @@
 /*!
- * \file    argument_main.c
+ * \file    main_argument.c
  * \brief   Lancement du programme
  * \author  Remi BERTHO
  * \date    21/03/14
@@ -7,7 +7,7 @@
  */
 
 /*
- * argument_main.c
+ * main_argument.c
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,7 +31,7 @@
  *
  */
 
-#include "argument_main.h"
+#include "main_argument.h"
 
 /*!
  * \fn int searchArgument(int argc, char *argv[], int *fonction, int *emplacement_fichier)

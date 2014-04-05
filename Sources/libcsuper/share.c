@@ -1,5 +1,5 @@
 /*!
- * \file    fonction.c
+ * \file    share.c
  * \brief   Fonctions essentielles au fonctionnement du programme
  * \author  Remi BERTHO
  * \date    13/02/14
@@ -7,7 +7,7 @@
  */
 
  /*
- * fonction.c
+ * share.c
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,8 +31,8 @@
  *
  */
 
- #include "fonction.h"
- #include "fichier.h"
+#include "share.h"
+#include "csu_files.h"
 
 
 /*!

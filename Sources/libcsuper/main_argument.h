@@ -1,5 +1,5 @@
 /*!
- * \file    argument_main.h
+ * \file    main_argument.h
  * \brief   Lancement du programme
  * \author  Remi BERTHO
  * \date    21/03/14
@@ -7,7 +7,7 @@
  */
 
 /*
- * argument_main.h
+ * main_argument.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -34,7 +34,7 @@
 #ifndef ARGUMENT_MAIN_H_INCLUDED
 #define ARGUMENT_MAIN_H_INCLUDED
 
-#include "fonction.h"
+#include "share.h"
 
 /*!
  * \def CHAINE_LECTURE_FICHIER
