@@ -48,20 +48,20 @@ int main(int argc, char *argv[])
     afficherLicense();
     systemPause();
     #endif
-    if (argc == 2)
-        chargerPartieLocale(argv[1]);
-    else
+    if (argc >= 2 && searchArgument(argc,argv,&fonction,&emplacement_fichier))
     {
-        if (argc >= 3 && searchArgument(argc,argv,&fonction,&emplacement_fichier))
+        switch (fonction)
         {
-            if (fonction == LECTURE_FICHIER)
-                afficheFichierLocale(argv[emplacement_fichier]);
-            else if (fonction == OUVERTURE_FICHIER)
-                chargerPartieLocale(argv[emplacement_fichier]);
+            case LECTURE_FICHIER    :   afficheFichierLocale(argv[emplacement_fichier]);
+                                        break;
+            case OUVERTURE_FICHIER  :   chargerPartieLocale(argv[emplacement_fichier]);
+                                        break;
+            case HELP               :   systemPause();
+                                        break;
         }
-        else
-            menuPrincipal();
     }
+    else
+        menuPrincipal();
     return 0;
 }
 

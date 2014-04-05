@@ -72,6 +72,25 @@
  */
 #define OUVERTURE_FICHIER 1
 
+/*!
+ * \def STRING_HELP
+ * Definit l'appel a l'aide a "--help"
+ */
+#define STRING_HELP "--help"
+
+/*!
+ * \def STRING_HELP_RED
+ * Definit l'appel a l'aide a "-h"
+ */
+#define STRING_HELP_RED "-h"
+
+/*!
+ * \def HELP
+ * Definit l'appel a l'aide a 2
+ */
+#define HELP 2
+
 int searchArgument(int argc, char *argv[], int *fonction, int *emplacement_fichier);
+void displayHelp();
 
 #endif

@@ -60,10 +60,25 @@ int searchArgument(int argc, char *argv[], int *fonction, int *emplacement_fichi
             *emplacement_fichier = 1+i;
             break;
         }
+        if (strcmp(argv[i],STRING_HELP)==0 || strcmp(argv[i],STRING_HELP_RED)==0)
+        {
+            displayHelp();
+            *fonction=HELP;
+            *emplacement_fichier = i;
+            break;
+        }
     }
 
     if (i == argc || *emplacement_fichier >= argc)
         return FAUX;
     else
         return VRAI;
+}
+
+void displayHelp()
+{
+    printf("\nCsuper - Compteur de Score Universel Permettant l'Exemption de Reflexion\nVoici la syntaxe pour l'utiliser.\n");
+    printf("\t- N'utiliser pas d'argument pour lancer le programme sur le menu.\n");
+    printf("\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour lancer le jeu directement sur ce fichier.\n",CHAINE_OUVERTURE_FICHIER,CHAINE_OUVERTURE_FICHIER_RED);
+    printf("\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour afficher directement le contenu du fichier.\n",CHAINE_LECTURE_FICHIER,CHAINE_LECTURE_FICHIER_RED);
 }

@@ -156,16 +156,14 @@ void jouer(Fichier_Jeu *ptr_struct_fichier, char *nom_fichier)
         afficherScore(ptr_struct_fichier);
 
         if (depScoreMax(ptr_struct_fichier))
-        {
             continuer=FAUX;
-            afficherPartieFinie(ptr_struct_fichier);
-        }
 
         else
             continuer=menuContinuer();
 
     } while (continuer==VRAI);
 
+    afficherPartieFinie(ptr_struct_fichier);
 
     if (menuSupprimer())
     {

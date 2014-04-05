@@ -13,10 +13,5 @@ Compilation
 *.layout
 *.depend
 csuper
-csuper.exe
 csuper-gui
-csuper-gui.exe
-libcsuper.so
-libcsuper.a
-libcsuper.dll
 libcsuper.def

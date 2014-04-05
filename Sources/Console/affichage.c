@@ -45,7 +45,7 @@ void afficherNom(Fichier_Jeu *ptr_struct_fichier, int *ptr_taille_ligne)
     int j;
 
     /*Affichage du nom des joueurs*/
-    printf("\n\t| ");
+    printf("\nNoms    | ");
     for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
     {
         /*Affiche du nom du joueur*/
@@ -53,13 +53,15 @@ void afficherNom(Fichier_Jeu *ptr_struct_fichier, int *ptr_taille_ligne)
         for (j=strlen(ptr_struct_fichier->nom_joueur[i]) ; j < 4 ; j++)
         {
             printf(" ");
-            *ptr_taille_ligne+=1;
+            if (ptr_taille_ligne != NULL)
+                *ptr_taille_ligne+=1;
         }
 
         printf(" | ");
 
         /*Calcule de la taille de la ligne*/
-        *ptr_taille_ligne+=(strlen(ptr_struct_fichier->nom_joueur[i])+3);
+        if (ptr_taille_ligne != NULL)
+            *ptr_taille_ligne+=(strlen(ptr_struct_fichier->nom_joueur[i])+3);
     }
 }
 
@@ -238,6 +240,10 @@ void afficherScore(Fichier_Jeu *ptr_struct_fichier)
     int taille_ligne=1;
 
     afficherNom(ptr_struct_fichier,&taille_ligne);
+    afficherLigne(taille_ligne);
+    afficherScoreEntier(ptr_struct_fichier);
+    afficherLigne(taille_ligne);
+    afficherNom(ptr_struct_fichier,NULL);
     afficherLigne(taille_ligne);
     afficherScoreTotal(ptr_struct_fichier);
     afficherLigne(taille_ligne);
