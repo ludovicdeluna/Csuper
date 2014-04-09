@@ -40,6 +40,7 @@
 			<Add library="libcsuper" />
 			<Add directory="../" />
 		</Linker>
+		<Unit filename="../Sources/csuper/csuper.h" />
 		<Unit filename="../Sources/csuper/display.c">
 			<Option compilerVar="CC" />
 		</Unit>

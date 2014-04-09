@@ -1,0 +1,30 @@
+# French translations for PACKAGE package
+# Traductions françaises du paquet PACKAGE.
+# Copyright (C) 2014 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# dalan <remi.bertho@gmail.com>, 2014.
+# Rémi BERTHO <remi.bertho@gmail.com>, 2014.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-04-09 16:37+0200\n"
+"PO-Revision-Date: 2014-04-09 16:38+0200\n"
+"Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
+"Language-Team: français <wesnoth@ml.free.fr>\n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Gtranslator 2.91.6\n"
+
+#: Sources/libcsuper/share.c:58
+#, c-format
+msgid ""
+"\n"
+"Error: you didn't enter a good value.\n"
+msgstr ""
+"\n"
+"Erreur : vous n'avez pas entre une bonne valeur.\n"

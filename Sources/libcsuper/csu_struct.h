@@ -39,10 +39,10 @@
 #include "share.h"
 
 /*!
- * \def TAILLE_MAX_NOM
- * Definit la taille max d'un nom a 30
+ * \def SIZE_MAX_NAME
+ * Definit la size max d'un nom a 30
  */
-#define TAILLE_MAX_NOM 30
+#define SIZE_MAX_NAME 30
 
 /*!
  * \def VERSION
@@ -57,45 +57,45 @@
 typedef struct
 {
     float nb_max;               /*!< Nombre maximum que peut prendre un joueur. */
-    char sens_premier;          /*!< Vaut 1 si le premier est celui qui a le plus de points, -1 sinon */
-    char tour_par_tour;         /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
+    char first_way;          /*!< Vaut 1 si le premier est celui qui a le plus de points, -1 sinon */
+    char turn_by_turn;         /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
     char use_distributor;       /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
     char number_after_comma;    /*!< Le nombre de chiffres apres la virgule dans l'affichage */
     char max;                   /*!< Vaut 1 si on utilise un maximum, 0 si c'est un minimum */
-    char name[TAILLE_MAX_NOM];  /*!< Le nom de la configuration de jeu */
+    char name[SIZE_MAX_NAME];  /*!< Le nom de la configuration de jeu */
     float begin_score;          /*!< L score de chacun des joueurs au debut de la partie */
 }game_config;
 
 
 /*!
- * \struct Fichier_Jeu
+ * \struct csuStruct
  * Type representant un fichier .jeu
  */
 typedef struct
 {
     float version;         /*!< Version de la structure. */
-    float taille_max_nom;  /*!< Taille maximum que peut prendre un nom de joueur. */
-    float jour;            /*!< Jour de creation de la structure. */
-    float mois;            /*!< Mois de creation de la structure. */
-    float annee;           /*!< Annee de creation de la structure. */
-    float nb_joueur;       /*!< Nombre de joueurs. */
+    float size_max_name;  /*!< Taille maximum que peut prendre un nom de joueur. */
+    float day;            /*!< Jour de creation de la structure. */
+    float month;            /*!< Mois de creation de la structure. */
+    float year;           /*!< Annee de creation de la structure. */
+    float nb_player;       /*!< Nombre de joueurs. */
     game_config config;    /*!< La configuration de la partie*/
-    char **nom_joueur;     /*!< Tableau contenant tout les noms de joueurs. */
-    float *point_tot;      /*!< Tableau contenant tout les points totaux des joueurs. */
-    float *position;       /*!< Tableau contenant la position des joueurs. */
-    float *nb_tour;        /*!< Nombre de tour dans le jeu par joueur. */
-    float distribue;       /*!< Numero de la personne qui doit distribuer. */
+    char **player_names;     /*!< Tableau contenant tout les noms de joueurs. */
+    float *total_points;      /*!< Tableau contenant tout les points totaux des joueurs. */
+    float *rank;       /*!< Tableau contenant la rank des joueurs. */
+    float *nb_turn;        /*!< Nombre de tour dans le jeu par joueur. */
+    float distributor;       /*!< Numero de la personne qui doit distributorr. */
     float **point;         /*!< Tableau contenat les points de chaque joueur a chaque tour. */
-} Fichier_Jeu;
+} csuStruct;
 
-Fichier_Jeu *creerFichierStruct(float nb_joueur , game_config config);
-void fermeeFichierStruct(Fichier_Jeu *ptr_struct_fichier);
-void debNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur);
-void finNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur);
-void calculPosition(Fichier_Jeu *ptr_struct_fichier);
-void ajoutDistribueStruct(Fichier_Jeu *ptr_struct_fichier, char *nom_distribue);
-int depScoreMax(Fichier_Jeu *ptr_struct_fichier);
-int maxNbTour(Fichier_Jeu *ptr_struct_fichier);
-int rechercheNumJoueur(Fichier_Jeu *ptr_struct_fichier, char *nom_personne);
+csuStruct *newCsuStruct(float nb_player , game_config config);
+void closeCsuStruct(csuStruct *ptr_csu_struct);
+void startNewTurn(csuStruct *ptr_csu_struct, int index_player);
+void endNewTurn(csuStruct *ptr_csu_struct, int index_player);
+void rankCalculation(csuStruct *ptr_csu_struct);
+void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name);
+int exceedMaxNumber(csuStruct *ptr_csu_struct);
+int maxNbTurn(csuStruct *ptr_csu_struct);
+int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name);
 
 #endif

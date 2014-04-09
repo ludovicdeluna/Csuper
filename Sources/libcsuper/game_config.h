@@ -31,24 +31,24 @@
  *
  */
 
-#ifndef CONFIG_H_INCLUDED
-#define CONFIG_H_INCLUDED
+#ifndef GAME_CONFIG_H_INCLUDED
+#define GAME_CONFIG_H_INCLUDED
 
 #include <math.h>
 #include "csu_struct.h"
 #include "file_system_path.h"
 
 /*!
- * \def NOM_DOSSIER_CONFIG
- * Definit NOM_DOSSIER_CONFIG a "config"
+ * \def CONFIGURATION_FOLDER_NAME
+ * Definit CONFIGURATION_FOLDER_NAME a "config"
  */
-#define NOM_DOSSIER_CONFIG "config"
+#define CONFIGURATION_FOLDER_NAME "config"
 
 /*!
- * \def NOM_FICHIER_CONFIG
- * Definit NOM_FICHIER_CONFIG a "configuratio"
+ * \def CONFIGURATION_FILE_NAME
+ * Definit CONFIGURATION_FILE_NAME a "configuratio"
  */
-#define NOM_FICHIER_CONFIG "configuration"
+#define CONFIGURATION_FILE_NAME "configuration"
 
 typedef struct
 {
@@ -56,14 +56,14 @@ typedef struct
     char **name_game_config;
 }list_game_config;
 
-list_game_config *makeListGameConfig(int nb_config);
-void freeListGameConfig(list_game_config *ptr_list_config);
+list_game_config *newListGameConfig(int nb_config);
+void closeListGameConfig(list_game_config *ptr_list_config);
 int makeConfigListFile();
 list_game_config *readConfigListFile();
 int addConfigListFile(char *new_config_name);
-int removeConfigListFile(int num_suppr, list_game_config *ptr_list_config);
-int makeConfigFile(game_config config);
+int removeConfigListFile(int index_delete, list_game_config *ptr_list_config);
+int newConfigFile(game_config config);
 int removeConfigFile(char *config_name);
-int readConfigFile(int num_read, list_game_config *ptr_list_config, game_config *ptr_config);
+int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config);
 
 #endif

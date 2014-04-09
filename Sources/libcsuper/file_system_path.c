@@ -1,6 +1,6 @@
 /*!
  * \file    file_system_path.c
- * \brief   Fonctions qui l'emplacement des fichiers sauvegardes
+ * \brief   Fonctions qui l'emrankment des fichiers sauvegardes
  * \author  Remi BERTHO
  * \date    13/02/14
  * \version 2.0
@@ -34,148 +34,150 @@
  #include "file_system_path.h"
 
 /*!
- * \fn void creationPreferences()
+ * \fn void createFileSystemPath()
  *  Cree le dossier et le fichier qui va contenir les preferences
- * \return VRAI si tout s'est bien passe, FAUX sinon
+ * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int creationPreferences()
+int createFileSystemPath()
 {
-    char repertoire[TAILLE_MAX_NOM_FICHIER];
-    char nom_fichier[TAILLE_MAX_NOM_FICHIER];
-    FILE *ptr_fichier;
+    char folder[SIZE_MAX_FILE_NAME];
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
 
     /*Lecture du chemin Document et creation du dossier au bonne endroit et de la chaine qui va contenir le fichier*/
     #ifdef __unix__
-    strcpy(repertoire,getenv("HOME"));
+    strcpy(folder,getenv("HOME"));
     #elif _WIN32
-    strcpy(repertoire,getenv("USERPROFILE"));
+    strcpy(folder,getenv("USERPROFILE"));
     #endif
-    sprintf(repertoire,"%s/%s",repertoire,NOM_DOSSIER_CSUPER);
+    sprintf(folder,"%s/%s",folder,MAIN_FOLDER_NAME);
     #ifdef __unix__
-    mkdir(repertoire, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+    mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
     #elif _WIN32
-    mkdir(repertoire);
+    mkdir(folder);
     #endif
 
-    sprintf(nom_fichier,"%s/%s",repertoire,NOM_FICHIER_PREFERENCES);
+    sprintf(file_name,"%s/%s",folder,FILE_NAME_SYSTEM_PATH);
 
-    ptr_fichier=ouvrirFichier(nom_fichier,"w+");
+    ptr_file=openFile(file_name,"w+");
 
-    if (ptr_fichier==NULL)
-        return FAUX;
+    if (ptr_file==NULL)
+        return FALSE;
 
-    /*Ecrit le repertoire courant comme repertoire par defaut*/
-    fprintf(ptr_fichier,"%s",repertoire);
+    /*Ecrit le folder courant comme folder par defaut*/
+    fprintf(ptr_file,"%s",folder);
 
-    fermerFichier(ptr_fichier);
+    closeFile(ptr_file);
 
-    return VRAI;
+    return TRUE;
 }
 
 /*!
- * \fn int lecturePreferences(char *nom_fichier)
+ * \fn int readFileSystemPath(char *file_name)
  *  lis les preferences du fichier et ajoute le chemin lu dans le nom de fichier passe en parametre
- * \param[in,out] *nom_fichier le nom du fichier a qui on va ajouter son chemin
- * \return VRAI si tout s'est bien passe, FAUX sinon
+ * \param[in,out] *file_name le nom du fichier a qui on va ajouter son chemin
+ * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int lecturePreferences(char *nom_fichier)
+int readFileSystemPath(char *file_name)
 {
-    char nom_fichier_preferences[TAILLE_MAX_NOM_FICHIER];
-    char repertoire[TAILLE_MAX_NOM_FICHIER];
-    int taille_fichier_preferences;
-    FILE *ptr_fichier;
+    char file_name_preferences[SIZE_MAX_FILE_NAME];
+    char folder[SIZE_MAX_FILE_NAME];
+    int file_size;
+    FILE *ptr_file;
 
     /*Lecture du chemin Document et creation du nom de fichier du fichier preferences*/
     #ifdef __unix__
-    strcpy(nom_fichier_preferences,getenv("HOME"));
+    strcpy(file_name_preferences,getenv("HOME"));
     #elif _WIN32
-    strcpy(nom_fichier_preferences,getenv("USERPROFILE"));
+    strcpy(file_name_preferences,getenv("USERPROFILE"));
     #endif
-    sprintf(nom_fichier_preferences,"%s/%s/%s",nom_fichier_preferences,NOM_DOSSIER_CSUPER,NOM_FICHIER_PREFERENCES);
+    sprintf(file_name_preferences,"%s/%s/%s",file_name_preferences,MAIN_FOLDER_NAME,FILE_NAME_SYSTEM_PATH);
 
-    ptr_fichier=ouvrirFichier(nom_fichier_preferences,"r");
+    ptr_file=openFile(file_name_preferences,"r");
 
-    if(ptr_fichier == NULL)
-        return FAUX;
+    if(ptr_file == NULL)
+        return FALSE;
 
-    /*Lis le repertoire contenue dans le fichier*/
-    taille_fichier_preferences=lireTailleFichier(ptr_fichier);
-    fgets(repertoire,taille_fichier_preferences+1,ptr_fichier);
+    /*Lis le folder contenue dans le fichier*/
+    file_size=readFileSize(ptr_file);
+    fgets(folder,file_size+1,ptr_file);
 
-    /*Ajoute le repertoire lu au nom de fichier*/
+    /*Ajoute le folder lu au nom de fichier*/
     #ifdef __unix__
-    sprintf(repertoire,"%s/%s",repertoire,nom_fichier);
+    sprintf(folder,"%s/%s",folder,file_name);
     #elif _WIN32
-    sprintf(repertoire,"%s\\%s",repertoire,nom_fichier);
+    sprintf(folder,"%s\\%s",folder,file_name);
     #endif
 
-    strcpy(nom_fichier,repertoire);
+    strcpy(file_name,folder);
 
-    fermerFichier(ptr_fichier);
+    closeFile(ptr_file);
 
-    return VRAI;
+    return TRUE;
 }
 
 /*!
- * \fn int lectureCheminFichier(char *nom_fichier)
+ * \fn int readSystemPath(char *file_name)
  *  Ajoute le chemin du fichier dans le nom du fichier a partir des preferences, si le fichier de preference n'existe
  *  pas il le cree
  *  Attention ne fait quelque chose uniquement si la constant PORTABLE n'est pas defini
- * \param[in,out] *nom_fichier le nom du fichier a qui on va ajouter son chemin
- * \return VRAI si tout s'est bien passe, FAUX sinon
+ * \param[in,out] *file_name le nom du fichier a qui on va ajouter son chemin
+ * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int lectureCheminFichier(char *nom_fichier)
+int readSystemPath(char *file_name)
 {
     #ifndef PORTABLE
-    if (lecturePreferences(nom_fichier)==FAUX)
+    libcsuper_initialize();
+
+    if (readFileSystemPath(file_name)==FALSE)
     {
-        if(creationPreferences()==FAUX)
+        if(createFileSystemPath()==FALSE)
         {
             printf("\nErreur lors de la lecture du fichier de preferences.\n");
-            return FAUX;
+            return FALSE;
         }
-        if (lecturePreferences(nom_fichier)==FAUX)
+        if (readFileSystemPath(file_name)==FALSE)
         {
             printf("\nErreur lors de la lecture du fichier de preferences.\n");
-            return FAUX;
+            return FALSE;
         }
     }
     #endif
-    return VRAI;
+    return TRUE;
 }
 
 /*!
- * \fn int changerCheminFichier(char *nouveauChemin)
- *  Changer le chemin de sauvegarde des fichier par nouveauChemin
- * \param[in,out] *nouveauChemin le nomveau chemin
- * \return VRAI si tout s'est bien passe, FAUX sinon
+ * \fn int changeSystemPath(char *new_path)
+ *  Changer le chemin de sauvegarde des fichier par new_path
+ * \param[in,out] *new_path le nomveau chemin
+ * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int changerCheminFichier(char *nouveauChemin)
+int changeSystemPath(char *new_path)
 {
-    char nom_fichier[TAILLE_MAX_NOM_FICHIER];
-    FILE *ptr_fichier;
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
 
-    if (creationPreferences()==FAUX)
-        return FAUX;
+    if (createFileSystemPath()==FALSE)
+        return FALSE;
 
 
     /*Lecture du chemin Document et cree la chaine qui va contenir le nom du fichier*/
     #ifdef __unix__
-    strcpy(nom_fichier,getenv("HOME"));
+    strcpy(file_name,getenv("HOME"));
     #elif _WIN32
-    strcpy(nom_fichier,getenv("USERPROFILE"));
+    strcpy(file_name,getenv("USERPROFILE"));
     #endif
 
-    sprintf(nom_fichier,"%s/%s/%s",nom_fichier,NOM_DOSSIER_CSUPER,NOM_FICHIER_PREFERENCES);
+    sprintf(file_name,"%s/%s/%s",file_name,MAIN_FOLDER_NAME,FILE_NAME_SYSTEM_PATH);
 
-    ptr_fichier=ouvrirFichier(nom_fichier,"w+");
+    ptr_file=openFile(file_name,"w+");
 
-    if (ptr_fichier==NULL)
-        return FAUX;
+    if (ptr_file==NULL)
+        return FALSE;
 
-    fprintf(ptr_fichier,"%s",nouveauChemin);
+    fprintf(ptr_file,"%s",new_path);
 
-    fermerFichier(ptr_fichier);
+    closeFile(ptr_file);
 
-    return VRAI;
+    return TRUE;
 }

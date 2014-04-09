@@ -10,7 +10,9 @@
 *.exe
 *.out
 *.app
+CMakeFiles
 Compilation
+Locales
 *.layout
 *.depend
 csuper

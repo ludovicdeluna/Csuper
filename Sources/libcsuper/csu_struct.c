@@ -34,258 +34,263 @@
  #include "csu_struct.h"
 
 /*!
- * \fn Fichier_Jeu *creerFichierStruct(float nb_joueur , float nb_max, char sens_premier, char tour_par_tour, char use_distributor,char number_after_comma)
+ * \fn csuStruct *newCsuStruct(float nb_player , game_config config)
  *  Cree une structure Fichier_jeu a partir des donnees de la fonction.
- * \param[in] nb_joueur le nombre de joueur
+ * \param[in] nb_player le nombre de joueur
  * \param[in] config la configuration de la partie
  */
-Fichier_Jeu *creerFichierStruct(float nb_joueur , game_config config)
+csuStruct *newCsuStruct(float nb_player , game_config config)
 {
-    Fichier_Jeu *ptr_struct_fichier;
+    csuStruct *ptr_csu_struct;
     int i;
     time_t timestamp;
     struct tm *t;
 
     /*Allocation memoire de la structure*/
-    ptr_struct_fichier=(Fichier_Jeu *)myAlloc(sizeof(Fichier_Jeu));
+    ptr_csu_struct=(csuStruct *)myAlloc(sizeof(csuStruct));
 
     /*Copie de certaines variables dans la structure*/
-    ptr_struct_fichier->taille_max_nom=TAILLE_MAX_NOM;
-    ptr_struct_fichier->version=VERSION;
-    ptr_struct_fichier->nb_joueur=nb_joueur;
-    ptr_struct_fichier->distribue=0;
-    ptr_struct_fichier->config=config;
+    ptr_csu_struct->size_max_name=SIZE_MAX_NAME;
+    ptr_csu_struct->version=VERSION;
+    ptr_csu_struct->nb_player=nb_player;
+    ptr_csu_struct->distributor=0;
+    ptr_csu_struct->config=config;
 
     /*Allocation memoire des nombre de tours*/
-    ptr_struct_fichier->nb_tour=(float *)myAlloc(nb_joueur*sizeof(float*));
+    ptr_csu_struct->nb_turn=(float *)myAlloc(nb_player*sizeof(float*));
 
     /*Allocation memoire du tableau des nom des personnes*/
-    ptr_struct_fichier->nom_joueur=(char **)myAlloc(nb_joueur*sizeof(char*));
-    for (i=0 ; i<nb_joueur ; i++)
-        ptr_struct_fichier->nom_joueur[i]=(char *)myAlloc(TAILLE_MAX_NOM*sizeof(char));
+    ptr_csu_struct->player_names=(char **)myAlloc(nb_player*sizeof(char*));
+    for (i=0 ; i<nb_player ; i++)
+        ptr_csu_struct->player_names[i]=(char *)myAlloc(SIZE_MAX_NAME*sizeof(char));
 
-    /*Allocation memoire des points totaux et des de positions*/
-    ptr_struct_fichier->point_tot=(float *)myAlloc(nb_joueur*sizeof(float));
-    ptr_struct_fichier->position=(float *)myAlloc(nb_joueur*sizeof(float));
+    /*Allocation memoire des points totaux et des de ranks*/
+    ptr_csu_struct->total_points=(float *)myAlloc(nb_player*sizeof(float));
+    ptr_csu_struct->rank=(float *)myAlloc(nb_player*sizeof(float));
 
-    /*Initialisation des points totaux,de la position et du nombre de tour*/
-    for (i=0 ; i<nb_joueur ; i++)
+    /*Initialisation des points totaux,de la rank et du nombre de tour*/
+    for (i=0 ; i<nb_player ; i++)
     {
-        ptr_struct_fichier->point_tot[i]=ptr_struct_fichier->config.begin_score;
-        ptr_struct_fichier->position[i]=1;
-        ptr_struct_fichier->nb_tour[i]=0;
+        ptr_csu_struct->total_points[i]=ptr_csu_struct->config.begin_score;
+        ptr_csu_struct->rank[i]=1;
+        ptr_csu_struct->nb_turn[i]=0;
     }
 
     /*Allocation memoire du tableau de points*/
-    ptr_struct_fichier->point=(float **)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(float*));
-    for (i=0 ; i<nb_joueur ; i++)
-        ptr_struct_fichier->point[i]=(float*)myAlloc(0*sizeof(float));
+    ptr_csu_struct->point=(float **)myAlloc(ptr_csu_struct->nb_player*sizeof(float*));
+    for (i=0 ; i<nb_player ; i++)
+        ptr_csu_struct->point[i]=(float*)myAlloc(0*sizeof(float));
 
     /*Enregistrement de la date courante dans la structure*/
     timestamp = time(NULL);
     t = localtime(&timestamp);
-    ptr_struct_fichier->annee=(t->tm_year+1900);
-    ptr_struct_fichier->mois=(t->tm_mon+1);
-    ptr_struct_fichier->jour=(t->tm_mday);
+    ptr_csu_struct->year=(t->tm_year+1900);
+    ptr_csu_struct->month=(t->tm_mon+1);
+    ptr_csu_struct->day=(t->tm_mday);
 
-    return ptr_struct_fichier;
+    return ptr_csu_struct;
 }
 
 /*!
- * \fn void fermeeFichierStruct(Fichier_Jeu *ptr_struct_fichier)
- *  Desalloue la memoire attribuee a la structure Fichier_Jeu mis en parametre
- * \param[in,out] *ptr_struct_fichier un pointeur sur la structure Fichier_Jeu a fermer
+ * \fn void closeCsuStruct(csuStruct *ptr_csu_struct)
+ *  Desalloue la memoire attribuee a la structure csuStruct mis en parametre
+ * \param[in,out] *ptr_csu_struct un pointeur sur la structure csuStruct a fermer
  */
-void fermeeFichierStruct(Fichier_Jeu *ptr_struct_fichier)
+void closeCsuStruct(csuStruct *ptr_csu_struct)
 {
     int i;
 
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-        free(ptr_struct_fichier->point[i]);
-    free(ptr_struct_fichier->point);
-    free(ptr_struct_fichier->point_tot);
-    free(ptr_struct_fichier->nb_tour);
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-        free(ptr_struct_fichier->nom_joueur[i]);
-    free(ptr_struct_fichier->nom_joueur);
-    free(ptr_struct_fichier->position);
-    free(ptr_struct_fichier);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        free(ptr_csu_struct->point[i]);
+    free(ptr_csu_struct->point);
+    free(ptr_csu_struct->total_points);
+    free(ptr_csu_struct->nb_turn);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        free(ptr_csu_struct->player_names[i]);
+    free(ptr_csu_struct->player_names);
+    free(ptr_csu_struct->rank);
+    free(ptr_csu_struct);
 }
 
 /*!
- * \fn void debNouvTour(Fichier_Jeu *ptr_struct_fichier)
- *  Realloue l'espace memoire dedie au points sur la structure Fichier_Jeu mis en parametre pour un nouveau tour
- * \param[in,out] *ptr_struct_fichier un pointeur sur la structure Fichier_Jeu
- * \param[in,out] num_joueur le numero du joueur qui va commencer un nouveau tour, vaut -1 si c'est tout le monde
+ * \fn void startNewTurn(csuStruct *ptr_csu_struct)
+ *  Realloue l'espace memoire dedie au points sur la structure csuStruct mis en parametre pour un nouveau tour
+ * \param[in,out] *ptr_csu_struct un pointeur sur la structure csuStruct
+ * \param[in,out] index_player le numero du joueur qui va commencer un nouveau tour, vaut -1 si c'est tout le monde
  */
-void debNouvTour(Fichier_Jeu *ptr_struct_fichier,int num_joueur)
+void startNewTurn(csuStruct *ptr_csu_struct,int index_player)
 {
     int i;
 
-    if (num_joueur == -1)
+    if (index_player == -1)
     {
-         for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-            myRealloc((void**)&(ptr_struct_fichier->point[i]),ptr_struct_fichier->nb_joueur*((ptr_struct_fichier->nb_tour[0])+1)*sizeof(float));
+         for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            myRealloc((void**)&(ptr_csu_struct->point[i]),ptr_csu_struct->nb_player*((ptr_csu_struct->nb_turn[0])+1)*sizeof(float));
     }
     else
-        myRealloc((void **)&(ptr_struct_fichier->point[num_joueur]),ptr_struct_fichier->nb_joueur*((ptr_struct_fichier->nb_tour[num_joueur])+1)*sizeof(float));
+        myRealloc((void **)&(ptr_csu_struct->point[index_player]),ptr_csu_struct->nb_player*((ptr_csu_struct->nb_turn[index_player])+1)*sizeof(float));
 }
 
 /*!
- * \fn void finNouvTour(Fichier_Jeu *ptr_struct_fichier)
- *  Met a jour les points totaux, le nombre de tour, la personne qui doit distribuer et les positions pour un nouveau tour
- * \param[in,out] *ptr_struct_fichier un pointeur sur la structure Fichier_Jeu
- * \param[in,out] num_joueur le numero du joueur qui va commencer un nouveau tour, vaut -1 si c'est tout le monde
+ * \fn void endNewTurn(csuStruct *ptr_csu_struct)
+ *  Met a day les points totaux, le nombre de tour, la personne qui doit distributorr et les ranks pour un nouveau tour
+ * \param[in,out] *ptr_csu_struct un pointeur sur la structure csuStruct
+ * \param[in,out] index_player le numero du joueur qui va commencer un nouveau tour, vaut -1 si c'est tout le monde
  */
-void finNouvTour(Fichier_Jeu *ptr_struct_fichier, int num_joueur)
+void endNewTurn(csuStruct *ptr_csu_struct, int index_player)
 {
     int i;
 
-    /*Mise a jour des points totaux*/
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    /*Mise a day des points totaux*/
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        ptr_struct_fichier->point_tot[i]+=ptr_struct_fichier->point[i][(int)ptr_struct_fichier->nb_tour[i]];
+        ptr_csu_struct->total_points[i]+=ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]];
     }
 
-    if (num_joueur == -1)
+    if (index_player == -1)
     {
-        for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-            (ptr_struct_fichier->nb_tour[i])++;
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            (ptr_csu_struct->nb_turn[i])++;
     }
     else
-        (ptr_struct_fichier->nb_tour[num_joueur])++;
+        (ptr_csu_struct->nb_turn[index_player])++;
 
-    /*Mise a jour de la personne qui doit distribue*/
-    if (ptr_struct_fichier->distribue == ptr_struct_fichier->nb_joueur -1)
-        ptr_struct_fichier->distribue=0;
+    /*Mise a day de la personne qui doit distributor*/
+    if (ptr_csu_struct->distributor == ptr_csu_struct->nb_player -1)
+        ptr_csu_struct->distributor=0;
     else
-        (ptr_struct_fichier->distribue)++;
+        (ptr_csu_struct->distributor)++;
 
-    calculPosition(ptr_struct_fichier);
+    rankCalculation(ptr_csu_struct);
 }
 
 /*!
- * \fn void calculPosition(Fichier_Jeu *ptr_struct_fichier)
- *  Calcule les positions des joueurs
- * \param[in,out] *ptr_struct_fichier un pointeur sur la structure Fichier_Jeu
+ * \fn void rankCalculation(csuStruct *ptr_csu_struct)
+ *  Calcule les ranks des joueurs
+ * \param[in,out] *ptr_csu_struct un pointeur sur la structure csuStruct
  */
-void calculPosition(Fichier_Jeu *ptr_struct_fichier)
+void rankCalculation(csuStruct *ptr_csu_struct)
 {
-    float *points_trie;
+    float *sort_points;
     int i;
     int j;
 
-    /*Allocation memoire de points_trie*/
-    points_trie=(float *)myAlloc(sizeof(float)*ptr_struct_fichier->nb_joueur);
+    /*Allocation memoire de sort_points*/
+    sort_points=(float *)myAlloc(sizeof(float)*ptr_csu_struct->nb_player);
 
-    /*Copie les pints totaux dans points_trie*/
-    for(i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    /*Copie les pints totaux dans sort_points*/
+    for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        points_trie[i]=ptr_struct_fichier->point_tot[i];
+        sort_points[i]=ptr_csu_struct->total_points[i];
     }
 
-    /*Trie points_trie en fonction du sens du premier*/
-    if(ptr_struct_fichier->config.sens_premier == 1)
-        qsort(points_trie,ptr_struct_fichier->nb_joueur,sizeof(float),compareFlottantDecroissant);
+    /*Trie sort_points en fonction du sens du premier*/
+    if(ptr_csu_struct->config.first_way == 1)
+        qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatDescending);
     else
-        qsort(points_trie,ptr_struct_fichier->nb_joueur,sizeof(float),compareFlottantCroissant);
+        qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatAscending);
 
 
     /*Boucle sur les points tries a partir du plus petit*/
-    for(i=ptr_struct_fichier->nb_joueur -1 ; i>=0 ; i--)
+    for(i=ptr_csu_struct->nb_player -1 ; i>=0 ; i--)
     {
         /*Boucle sur les points totaux des joueurs*/
-        for(j=0 ; j<ptr_struct_fichier->nb_joueur ; j++)
+        for(j=0 ; j<ptr_csu_struct->nb_player ; j++)
         {
-            /*Si les points totaux sont egaux aux points trie, on enregistre la position*/
-            if (points_trie[i]==ptr_struct_fichier->point_tot[j])
+            /*Si les points totaux sont egaux aux points trie, on enregistre la rank*/
+            if (sort_points[i]==ptr_csu_struct->total_points[j])
             {
-                ptr_struct_fichier->position[j]=i+1;
+                ptr_csu_struct->rank[j]=i+1;
             }
         }
     }
 
-    free(points_trie);
+    free(sort_points);
 }
 
 /*!
- * \fn void ajoutDistribueStruct(Fichier_Jeu *ptr_struct_fichier, char *nom_distribue)
- *  Ajoute la personne qui distribue dans la structure.
- * \param[in] *nom_distribue le nom de la personne qui distribue
- * \param[in] *ptr_struct_fichier la structure du fichier avec lequel on veut mettre la personne qui distribue
+ * \fn void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
+ *  Ajoute la personne qui distributor dans la structure.
+ * \param[in] *distributor_name le nom de la personne qui distributor
+ * \param[in] *ptr_csu_struct la structure du fichier avec lequel on veut mettre la personne qui distributor
  */
-void ajoutDistribueStruct(Fichier_Jeu *ptr_struct_fichier, char *nom_distribue)
+void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
 {
-    int num_joueur=rechercheNumJoueur(ptr_struct_fichier,nom_distribue);
-    if(num_joueur != -1)
+    int index_player=searchPlayerIndex(ptr_csu_struct,distributor_name);
+
+    libcsuper_initialize();
+
+    if(index_player != -1)
     {
-        ptr_struct_fichier->distribue = num_joueur;
+        ptr_csu_struct->distributor = index_player;
         return;
     }
     else
-        printf("La personne qui distribue a ete initialisee par defaut a %s\n",ptr_struct_fichier->nom_joueur[(int)ptr_struct_fichier->distribue]);
+        printf("La personne qui distributor a ete initialisee par defaut a %s\n",ptr_csu_struct->player_names[(int)ptr_csu_struct->distributor]);
 }
 
 /*!
- * \fn int depScoreMax(Fichier_Jeu *ptr_struct_fichier)
+ * \fn int exceedMaxNumber(csuStruct *ptr_csu_struct)
  *  Verifie si quelqu'un a depasse le score maximum
- * \param[in] *ptr_struct_fichier la structure du fichier
- * \return VRAI s'il y a un depassement, FAUX sinon
+ * \param[in] *ptr_csu_struct la structure du fichier
+ * \return TRUE s'il y a un depassement, FALSE sinon
  */
-int depScoreMax(Fichier_Jeu *ptr_struct_fichier)
+int exceedMaxNumber(csuStruct *ptr_csu_struct)
 {
     int i;
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        if (ptr_struct_fichier->config.max == 1)
+        if (ptr_csu_struct->config.max == 1)
         {
-            if (ptr_struct_fichier->point_tot[i] + FLT_EPSILON >= ptr_struct_fichier->config.nb_max)
-                return VRAI;
+            if (ptr_csu_struct->total_points[i] + FLT_EPSILON >= ptr_csu_struct->config.nb_max)
+                return TRUE;
         }
         else
         {
-            if (ptr_struct_fichier->point_tot[i] - FLT_EPSILON <= ptr_struct_fichier->config.nb_max)
-                return VRAI;
+            if (ptr_csu_struct->total_points[i] - FLT_EPSILON <= ptr_csu_struct->config.nb_max)
+                return TRUE;
         }
 
     }
-    return FAUX;
+    return FALSE;
 }
 
 /*!
- * \fn int maxNbTour(Fichier_Jeu *ptr_struct_fichier)
+ * \fn int maxNbTurn(csuStruct *ptr_csu_struct)
  *  Cherche le maximum de nombre de tour
- * \param[in] *ptr_struct_fichier la structure du fichier
+ * \param[in] *ptr_csu_struct la structure du fichier
  * \return le nombre maximum de nombre de tour
  */
-int maxNbTour(Fichier_Jeu *ptr_struct_fichier)
+int maxNbTurn(csuStruct *ptr_csu_struct)
 {
-    int max = ptr_struct_fichier->nb_tour[0];
+    int max = ptr_csu_struct->nb_turn[0];
     int i;
 
-    for (i=1 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    for (i=1 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        if (ptr_struct_fichier->nb_tour[i] > max)
-            max = ptr_struct_fichier->nb_tour[i];
+        if (ptr_csu_struct->nb_turn[i] > max)
+            max = ptr_csu_struct->nb_turn[i];
     }
     return max;
 }
 
 /*!
- * \fn int rechercheNumJoueur(Fichier_Jeu *ptr_struct_fichier, char *nom_personne)
+ * \fn int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
  *  Cherche l'indice du tableau dans lequel est stocke une personne.
- * \param[in] *nom_distribue le nom de la personne
- * \param[in] *ptr_struct_fichier la structure du fichier
+ * \param[in] *distributor_name le nom de la personne
+ * \param[in] *ptr_csu_struct la structure du fichier
  * \return l'indice du tableau, -1 si non trouve
  */
-int rechercheNumJoueur(Fichier_Jeu *ptr_struct_fichier, char *nom_personne)
+int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
 {
     int i;
 
+    libcsuper_initialize();
+
     /*Recherche du nom de la personne dans le nom des joueurs*/
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        if (strncasecmp(ptr_struct_fichier->nom_joueur[i],nom_personne,strlen(nom_personne))==0)
+        if (strncasecmp(ptr_csu_struct->player_names[i],player_name,strlen(player_name))==0)
             return i;
     }
 

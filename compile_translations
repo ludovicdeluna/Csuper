@@ -1,0 +1,3 @@
+#!/bin/bash
+msgfmt Translations/libcsuper/fr.po -o Locales/fr_FR/LC_MESSAGES/libcsuper.mo
+msgfmt Translations/csuper/fr.po -o Locales/fr_FR/LC_MESSAGES/csuper.mo

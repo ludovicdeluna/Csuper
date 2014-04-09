@@ -36,261 +36,269 @@
 
 
 /*!
- * \fn FILE *ouvrirFichierExtension(char nom[], char mode[])
+ * \fn FILE *openFileCsuExtension(char file_name[], char mode[])
  *  Ouvre un fichier a partir de son nom et du mode voulu en y ajouter l'extension du fichier si necessaire
- * \param[in] nom[] le nom du fichier
+ * \param[in] file_name[] le nom du fichier
  * \param[in] mode[] le mode voulu
  * \return un pointeur sur le fichier ouvert, NULL s'il y a eut un probleme
  */
-FILE *ouvrirFichierExtension(char nom[], char mode[])
+FILE *openFileCsuExtension(char file_name[], char mode[])
 {
-    ajoutExtension(nom);
+    addFileCsuExtension(file_name);
 
-    return ouvrirFichier(nom,mode);
+    return openFile(file_name,mode);
 }
 
 
 /*!
- * \fn Fichier_Jeu *lireFichier(char *nom)
+ * \fn csuStruct *readCsuFile(char *file_name)
  *  Lis ce qu'il y a dans le fichier avec le nom donne en parametre et le met dans une structure
- *  Fichier_Jeu rendu par la fonction
- * \param[in] nom[] le nom du fichier
- * \return un pointeur sur la structure Fichier_Jeu cree, NULL s'il y a un probleme d'ouverture du fichier
+ *  csuStruct rendu par la fonction
+ * \param[in] file_name[] le nom du fichier
+ * \return un pointeur sur la structure csuStruct cree, NULL s'il y a un probleme d'ouverture du fichier
  */
-Fichier_Jeu *lireFichier(char *nom)
+csuStruct *readCsuFile(char *file_name)
 {
-    Fichier_Jeu *ptr_struct_fichier=NULL;
+    csuStruct *ptr_csu_struct=NULL;
     int i;
-    char *nom_pers;
-    FILE *ptr_fichier;
-    char verif_fichier[sizeof(TYPE_FICHIER)];
-    int taille_fichier;
-    int verif_lecture_fichier=0;
+    char *player_name_temp;
+    FILE *ptr_file;
+    char check_file[sizeof(STRING_CHECK_CSU_FILE)];
+    int file_size;
+    int check_file_size=0;
 
-    ptr_fichier=ouvrirFichierExtension(nom,"rb");
+    libcsuper_initialize();
 
-    if (ptr_fichier == NULL)
+    ptr_file=openFileCsuExtension(file_name,"rb");
+
+    if (ptr_file == NULL)
     {
         printf("\nErreur : Le fichier n'a pas pu etre lu.\n");
-        return ptr_struct_fichier;
+        return ptr_csu_struct;
     }
 
-    fseek(ptr_fichier,0,SEEK_SET);
+    fseek(ptr_file,0,SEEK_SET);
 
-    taille_fichier=lireTailleFichier(ptr_fichier);
+    file_size=readFileSize(ptr_file);
 
-    verif_lecture_fichier+=fread(verif_fichier,sizeof(char),sizeof(TYPE_FICHIER),ptr_fichier);
+    check_file_size+=fread(check_file,sizeof(char),sizeof(STRING_CHECK_CSU_FILE),ptr_file);
 
     /*Si la chaine de verification ne correspond pas, on ferme le fichier et on retourne une structure vide*/
-    if (strcmp(TYPE_FICHIER,verif_fichier) != 0)
+    if (strcmp(STRING_CHECK_CSU_FILE,check_file) != 0)
     {
         printf("\nErreur : Fichier non compatible.\n");
-        fermerFichier(ptr_fichier);
-        return ptr_struct_fichier;
+        closeFile(ptr_file);
+        return ptr_csu_struct;
     }
 
     /*Allocation memoire de la structure*/
-    ptr_struct_fichier=(Fichier_Jeu *)myAlloc(sizeof(Fichier_Jeu));
+    ptr_csu_struct=(csuStruct *)myAlloc(sizeof(csuStruct));
 
     /*Lecture et verification de l version du fichier*/
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->version),sizeof(float),1,ptr_fichier));
-    if (ptr_struct_fichier->version + 0.01 < VERSION)
+    check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->version),sizeof(float),1,ptr_file));
+    if (ptr_csu_struct->version + 0.01 < VERSION)
     {
         printf("\nErreur la version du fichier est la %1.1f alors que le logiciel supporte uniquement les fichiers avec des"
-               " versions superieurs a la %1.1f.\n",ptr_struct_fichier->version,VERSION);
-        fermerFichier(ptr_fichier);
+               " versions superieurs a la %1.1f.\n",ptr_csu_struct->version,VERSION);
+        closeFile(ptr_file);
         return NULL;
     }
 
     /*Lecture des differentes variables du fichier dans la structure*/
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->taille_max_nom),sizeof(float),1,ptr_fichier));
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->jour),sizeof(float),1,ptr_fichier));
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->mois),sizeof(float),1,ptr_fichier));
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->annee),sizeof(float),1,ptr_fichier));
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->nb_joueur),sizeof(float),1,ptr_fichier));
-    verif_lecture_fichier+=(sizeof(game_config)*fread(&(ptr_struct_fichier->config),sizeof(game_config),1,ptr_fichier));
+    check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->size_max_name),sizeof(float),1,ptr_file));
+    check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->day),sizeof(float),1,ptr_file));
+    check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->month),sizeof(float),1,ptr_file));
+    check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->year),sizeof(float),1,ptr_file));
+    check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->nb_player),sizeof(float),1,ptr_file));
+    check_file_size+=(sizeof(game_config)*fread(&(ptr_csu_struct->config),sizeof(game_config),1,ptr_file));
 
     /*Allocation memoire du tableau de chaine de caractere pour le nom des personnes*/
-    ptr_struct_fichier->nom_joueur=(char **)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(char*));
+    ptr_csu_struct->player_names=(char **)myAlloc(ptr_csu_struct->nb_player*sizeof(char*));
 
     /*Allocation memoire des noms des personnes*/
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-        ptr_struct_fichier->nom_joueur[i]=(char *)myAlloc(ptr_struct_fichier->taille_max_nom*sizeof(char));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        ptr_csu_struct->player_names[i]=(char *)myAlloc(ptr_csu_struct->size_max_name*sizeof(char));
 
-    /*Allocation du tableau de caractere nom_pers ou vas etre stocke le nom des personnes en tant que tampon*/
-    nom_pers=(char *)myAlloc(sizeof(char)*ptr_struct_fichier->taille_max_nom);
+    /*Allocation du tableau de caractere player_name_temp ou vas etre stocke le nom des personnes en tant que tampon*/
+    player_name_temp=(char *)myAlloc(sizeof(char)*ptr_csu_struct->size_max_name);
 
     /*Lecture du nom des personnes dans la structure*/
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        verif_lecture_fichier+=fread(nom_pers,sizeof(char),ptr_struct_fichier->taille_max_nom,ptr_fichier);
-        strcpy(ptr_struct_fichier->nom_joueur[i],nom_pers);
+        check_file_size+=fread(player_name_temp,sizeof(char),ptr_csu_struct->size_max_name,ptr_file);
+        strcpy(ptr_csu_struct->player_names[i],player_name_temp);
     }
 
-    free(nom_pers);
+    free(player_name_temp);
 
     /*Allocation memoire et lecture des points totaux*/
-    ptr_struct_fichier->point_tot=(float *)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(float));
-    verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->point_tot,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier));
+    ptr_csu_struct->total_points=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
+    check_file_size+=(sizeof(float)*fread(ptr_csu_struct->total_points,sizeof(float),ptr_csu_struct->nb_player,ptr_file));
 
-    /*Allocation memoire et lecture des positions*/
-    ptr_struct_fichier->position=(float *)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(float));
-    verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->position,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier));
+    /*Allocation memoire et lecture des ranks*/
+    ptr_csu_struct->rank=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
+    check_file_size+=(sizeof(float)*fread(ptr_csu_struct->rank,sizeof(float),ptr_csu_struct->nb_player,ptr_file));
 
     /*Allocation memoire et lecture du nombre de tours*/
-    ptr_struct_fichier->nb_tour=(float *)myAlloc(ptr_struct_fichier->nb_joueur*sizeof(float));
-    verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->nb_tour,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier));
+    ptr_csu_struct->nb_turn=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
+    check_file_size+=(sizeof(float)*fread(ptr_csu_struct->nb_turn,sizeof(float),ptr_csu_struct->nb_player,ptr_file));
 
-    verif_lecture_fichier+=(sizeof(float)*fread(&(ptr_struct_fichier->distribue),sizeof(float),1,ptr_fichier));
+    check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->distributor),sizeof(float),1,ptr_file));
 
     /*Allocation memoire du tableau de points points*/
-    ptr_struct_fichier->point=(float **)malloc(ptr_struct_fichier->nb_joueur*sizeof(float*));
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-        ptr_struct_fichier->point[i]=(float *)myAlloc(ptr_struct_fichier->nb_tour[i]*sizeof(float));
+    ptr_csu_struct->point=(float **)malloc(ptr_csu_struct->nb_player*sizeof(float*));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        ptr_csu_struct->point[i]=(float *)myAlloc(ptr_csu_struct->nb_turn[i]*sizeof(float));
 
     /*Lecture des points*/
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-        verif_lecture_fichier+=(sizeof(float)*fread(ptr_struct_fichier->point[i],sizeof(float),ptr_struct_fichier->nb_tour[i],ptr_fichier));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        check_file_size+=(sizeof(float)*fread(ptr_csu_struct->point[i],sizeof(float),ptr_csu_struct->nb_turn[i],ptr_file));
 
-    fermerFichier(ptr_fichier);
+    closeFile(ptr_file);
 
     /*Verifie si la lecture s'est bien passee*/
-    if (taille_fichier != verif_lecture_fichier)
+    if (file_size != check_file_size)
     {
         printf("\nErreur lors de la lecture du fichier\n");
         return NULL;
     }
 
-    return ptr_struct_fichier;
+    return ptr_csu_struct;
 }
 
 /*!
- * \fn int ecrireFichier(char *nom, Fichier_Jeu *ptr_struct_fichier)
- *  Cree un fichier .jeu qui contient toutes les informations de la structure Fichier_Jeu mis en parametre
- * \param[in] *nom le nom du fichier
- * \param[in] *ptr_struct_fichier la structure du fichier avec lequel on veut cree le fichier
- * \return VRAI si tout s'est bien passe, FAUX sinon
+ * \fn int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
+ *  Cree un fichier .jeu qui contient toutes les informations de la structure csuStruct mis en parametre
+ * \param[in] *file_name le nom du fichier
+ * \param[in] *ptr_csu_struct la structure du fichier avec lequel on veut cree le fichier
+ * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int ecrireFichier(char *nom, Fichier_Jeu *ptr_struct_fichier)
+int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
 {
     int i;
-    FILE *ptr_fichier;
+    FILE *ptr_file;
 
-    ptr_fichier=ouvrirFichierExtension(nom,"w+");
+    libcsuper_initialize();
 
-    if (ptr_fichier == NULL)
+    ptr_file=openFileCsuExtension(file_name,"w+");
+
+    if (ptr_file == NULL)
     {
         printf("\nErreur lors de l'ecriture du fichier.\n");
-        return FAUX;
+        return FALSE;
     }
 
-    fseek(ptr_fichier,0,SEEK_SET);
+    fseek(ptr_file,0,SEEK_SET);
 
-    fwrite(TYPE_FICHIER,sizeof(char),sizeof(TYPE_FICHIER),ptr_fichier);
-    fwrite(&(ptr_struct_fichier->version),sizeof(float),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->taille_max_nom),sizeof(float),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->jour),sizeof(float),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->mois),sizeof(float),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->annee),sizeof(float),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->nb_joueur),sizeof(float),1,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->config),sizeof(game_config),1,ptr_fichier);
+    fwrite(STRING_CHECK_CSU_FILE,sizeof(char),sizeof(STRING_CHECK_CSU_FILE),ptr_file);
+    fwrite(&(ptr_csu_struct->version),sizeof(float),1,ptr_file);
+    fwrite(&(ptr_csu_struct->size_max_name),sizeof(float),1,ptr_file);
+    fwrite(&(ptr_csu_struct->day),sizeof(float),1,ptr_file);
+    fwrite(&(ptr_csu_struct->month),sizeof(float),1,ptr_file);
+    fwrite(&(ptr_csu_struct->year),sizeof(float),1,ptr_file);
+    fwrite(&(ptr_csu_struct->nb_player),sizeof(float),1,ptr_file);
+    fwrite(&(ptr_csu_struct->config),sizeof(game_config),1,ptr_file);
 
     /*Ecriture des noms des personnes*/
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-        fwrite(ptr_struct_fichier->nom_joueur[i],sizeof(char),ptr_struct_fichier->taille_max_nom,ptr_fichier);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fwrite(ptr_csu_struct->player_names[i],sizeof(char),ptr_csu_struct->size_max_name,ptr_file);
 
-    fwrite(ptr_struct_fichier->point_tot,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier);
-    fwrite(ptr_struct_fichier->position,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier);
-    fwrite(ptr_struct_fichier->nb_tour,sizeof(float),ptr_struct_fichier->nb_joueur,ptr_fichier);
-    fwrite(&(ptr_struct_fichier->distribue),sizeof(float),1,ptr_fichier);
+    fwrite(ptr_csu_struct->total_points,sizeof(float),ptr_csu_struct->nb_player,ptr_file);
+    fwrite(ptr_csu_struct->rank,sizeof(float),ptr_csu_struct->nb_player,ptr_file);
+    fwrite(ptr_csu_struct->nb_turn,sizeof(float),ptr_csu_struct->nb_player,ptr_file);
+    fwrite(&(ptr_csu_struct->distributor),sizeof(float),1,ptr_file);
 
-    for (i=0 ; i<ptr_struct_fichier->nb_joueur ; i++)
-        fwrite(ptr_struct_fichier->point[i],sizeof(float),ptr_struct_fichier->nb_tour[i],ptr_fichier);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fwrite(ptr_csu_struct->point[i],sizeof(float),ptr_csu_struct->nb_turn[i],ptr_file);
 
-    fermerFichier(ptr_fichier);
+    closeFile(ptr_file);
 
-    return VRAI;
+    return TRUE;
 }
 
 /*!
- * \fn void nouveauScore(char *nom, Fichier_Jeu *ptr_struct_fichier)
- *  Mets a jour le fichier avec les nouveaux scores
- * \param[in] *nom le nom du fichier
- * \param[in] *ptr_struct_fichier la structure du fichier avec lequel on veut mettre un nouveau score
- * \return VRAI si tout s'est bien passe, FAUX sinon
+ * \fn void writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
+ *  Mets a day le fichier avec les nouveaux scores
+ * \param[in] *file_name le nom du fichier
+ * \param[in] *ptr_csu_struct la structure du fichier avec lequel on veut mettre un nouveau score
+ * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int nouveauScore(char *nom, Fichier_Jeu *ptr_struct_fichier)
+int writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
 {
-    char nom_fichier_2[TAILLE_MAX_NOM_FICHIER+4];
-    int reussi;
+    char file_name_2[SIZE_MAX_FILE_NAME+4];
+    int successful;
 
-    sprintf(nom_fichier_2,"%s_tmp",nom);
+    sprintf(file_name_2,"%s_tmp",file_name);
 
-    reussi=ecrireFichier(nom_fichier_2,ptr_struct_fichier);
+    successful=writeCsuFile(file_name_2,ptr_csu_struct);
 
-    if (reussi)
+    if (successful)
     {
-        if(supprimerFichier(nom))
+        if(deleteCsuFile(file_name))
         {
-            if(renommerFichier(nom_fichier_2,nom))
-                return VRAI;
+            if(renameCsuFile(file_name_2,file_name))
+                return TRUE;
         }
     }
 
-    return FAUX;
+    return FALSE;
 }
 
 /*!
- * \fn int supprimerFichier(char *nom)
+ * \fn int deleteCsuFile(char *file_name)
  *  Supprime le fichier dont le nom est en parametre
- * \param[in] *nom le nom du fichier
- * \return VRAI si tout s'est bien passe, FAUX sinon
+ * \param[in] *file_name le nom du fichier
+ * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int supprimerFichier(char *nom)
+int deleteCsuFile(char *file_name)
 {
-    ajoutExtension(nom);
+    addFileCsuExtension(file_name);
 
-    if(remove(nom))
+    libcsuper_initialize();
+
+    if(remove(file_name))
     {
-        printf("\nLe fichier %s n'a pas pu etre supprime.\n",nom);
+        printf("\nLe fichier %s n'a pas pu etre supprime.\n",file_name);
         perror("");
-        return FAUX;
+        return FALSE;
     }
 
     else
     {
-        printf("\nLe fichier %s a bien ete supprime.\n",nom);
-        return VRAI;
+        printf("\nLe fichier %s a bien ete supprime.\n",file_name);
+        return TRUE;
     }
 }
 
 /*!
- * \fn int renommerFichier(char *nom_ancien, char *nom_nouveau)
+ * \fn int renameCsuFile(char *old_name, char *new_name)
  *  Renomme le fichier dont le nom est en parametre
- * \param[in] *nom_ancien l'ancien nom du fichier
- * \param[in] *nom_nouveau le nouveau nom du fichier
- * \return VRAI si tout s'est bien passe, FAUX sinon
+ * \param[in] *old_name l'ancien nom du fichier
+ * \param[in] *new_name le nouveau nom du fichier
+ * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int renommerFichier(char *nom_ancien, char *nom_nouveau)
+int renameCsuFile(char *old_name, char *new_name)
 {
-    char nom_ancien_2[TAILLE_MAX_NOM+8];
-    char nom_nouveau_2[TAILLE_MAX_NOM+4];
+    char old_name_2[SIZE_MAX_NAME+8];
+    char new_name_2[SIZE_MAX_NAME+4];
 
-    sprintf(nom_ancien_2,"%s",nom_ancien);
-    ajoutExtension(nom_ancien_2);
-    sprintf(nom_nouveau_2,"%s",nom_nouveau);
-    ajoutExtension(nom_nouveau_2);
+    libcsuper_initialize();
 
-    if(rename(nom_ancien_2,nom_nouveau_2))
+    sprintf(old_name_2,"%s",old_name);
+    addFileCsuExtension(old_name_2);
+    sprintf(new_name_2,"%s",new_name);
+    addFileCsuExtension(new_name_2);
+
+    if(rename(old_name_2,new_name_2))
     {
-        printf("\nLe fichier %s n'a pas pu etre renomme.\n",nom_ancien_2);
-        return FAUX;
+        printf("\nLe fichier %s n'a pas pu etre renomme.\n",old_name_2);
+        return FALSE;
     }
 
     else
     {
-        printf("\nLe fichier %s a bien ete renome en %s.\n",nom_ancien_2,nom_nouveau_2);
-        return VRAI;
+        printf("\nLe fichier %s a bien ete renome en %s.\n",old_name_2,new_name_2);
+        return TRUE;
     }
 }
 

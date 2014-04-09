@@ -39,28 +39,28 @@
 
 
 /*!
- * \def TAILLE_MAX_NOM_FICHIER
- * Definit la taille max d'un nom a 250
+ * \def SIZE_MAX_FILE_NAME
+ * Definit la size max d'un nom a 250
  */
-#define TAILLE_MAX_NOM_FICHIER 250
+#define SIZE_MAX_FILE_NAME 250
 
 /*!
- * \def EXTENSION_FICHIER
+ * \def FILE_EXTENSION
  * Definit l'extension du fichier a "csu"
  */
-#define EXTENSION_FICHIER "csu"
+#define FILE_EXTENSION "csu"
 
 /*!
- * \def TYPE_FICHIER
+ * \def STRING_CHECK_CSU_FILE
  * Definit la chaine de caractere permettant de verifier le type de fichier a "CompteurScoreUniversel"
  */
-#define TYPE_FICHIER "CompteurScoreUniversel"
+#define STRING_CHECK_CSU_FILE "CompteurScoreUniversel"
 
-FILE *ouvrirFichierExtension(char nome[], char mode[]);
-Fichier_Jeu *lireFichier(char *nom);
-int ecrireFichier(char *nom, Fichier_Jeu *ptr_struct_fichier);
-int nouveauScore(char *nom, Fichier_Jeu *ptr_struct_fichier);
-int supprimerFichier(char *nom);
-int renommerFichier(char *nom_ancien, char *nom_nouveau);
+FILE *openFileCsuExtension(char file_name[], char mode[]);
+csuStruct *readCsuFile(char *file_name);
+int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct);
+int writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct);
+int deleteCsuFile(char *file_name);
+int renameCsuFile(char *old_name, char *new_name);
 
 #endif

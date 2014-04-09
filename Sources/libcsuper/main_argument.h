@@ -37,40 +37,40 @@
 #include "share.h"
 
 /*!
- * \def CHAINE_LECTURE_FICHIER
+ * \def STRING_READ_FILE
  * Definit l'appel a la lecture du fichier a "--read"
  */
-#define CHAINE_LECTURE_FICHIER "--read"
+#define STRING_READ_FILE "--read"
 
 /*!
- * \def CHAINE_LECTURE_FICHIER_RED
+ * \def STRING_READ_FILE_RED
  * Definit l'appel a la lecture du fichier a "-r"
  */
-#define CHAINE_LECTURE_FICHIER_RED "-r"
+#define STRING_READ_FILE_RED "-r"
 
 /*!
- * \def LECTURE_FICHIER
+ * \def READ_FILE
  * Definit l'appel a la lecture du fichier a 0
  */
-#define LECTURE_FICHIER 0
+#define READ_FILE 0
 
 /*!
- * \def CHAINE_OUVERTURE_FICHIER
+ * \def STRING_OPEN_FILE
  * Definit l'appel a l'ouverture du fichier a "--open"
  */
-#define CHAINE_OUVERTURE_FICHIER "--open"
+#define STRING_OPEN_FILE "--open"
 
 /*!
- * \def CHAINE_OUVERTURE_FICHIER_RED
+ * \def STRING_OPEN_FILE_RED
  * Definit l'appel a l'ouverture du fichier a "-o"
  */
-#define CHAINE_OUVERTURE_FICHIER_RED "-o"
+#define STRING_OPEN_FILE_RED "-o"
 
 /*!
- * \def OUVERTURE_FICHIER
+ * \def OPEN_FILE
  * Definit l'appel a l'ouverture du fichier a 1
  */
-#define OUVERTURE_FICHIER 1
+#define OPEN_FILE 1
 
 /*!
  * \def STRING_HELP
@@ -90,7 +90,7 @@
  */
 #define HELP 2
 
-int searchArgument(int argc, char *argv[], int *fonction, int *emplacement_fichier);
+int searchArgument(int argc, char *argv[], int *fonction, int *file_place);
 void displayHelp();
 
 #endif

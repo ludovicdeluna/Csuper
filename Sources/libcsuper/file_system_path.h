@@ -1,6 +1,6 @@
 /*!
  * \file    file_system_path.h
- * \brief   Prototypes des fonctions qui l'emplacement des fichiers sauvegardes
+ * \brief   Prototypes des fonctions qui l'emrankment des fichiers sauvegardes
  * \author  Remi BERTHO
  * \date    13/02/14
  * \version 2.0
@@ -31,8 +31,8 @@
  *
  */
 
-#ifndef EMPLACEMENT_FICHIER_H_INCLUDED
-#define EMPLACEMENT_FICHIER_H_INCLUDED
+#ifndef FILE_SYSTEM_PATH_H_INCLUDED
+#define FILE_SYSTEM_PATH_H_INCLUDED
 
 #include <sys/stat.h>
 #include <sys/types.h>
@@ -46,24 +46,24 @@
 //#define PORTABLE
 
 /*!
- * \def NOM_FICHIER_PREFERENCES
- * Definit NOM_FICHIER_PREFERENCES a "preferences.txt"
+ * \def FILE_NAME_SYSTEM_PATH
+ * Definit FILE_NAME_SYSTEM_PATH a "preferences.txt"
  */
-#define NOM_FICHIER_PREFERENCES "preferences.txt"
+#define FILE_NAME_SYSTEM_PATH "system_path.txt"
 
 /*!
- * \def NOM_DOSSIER_CSUPER
- * Definit NOM_DOSSIER_CSUPER
+ * \def MAIN_FOLDER_NAME
+ * Definit MAIN_FOLDER_NAME
  */
 #ifndef PORTABLE
-#define NOM_DOSSIER_CSUPER ".csuper"
+#define MAIN_FOLDER_NAME ".csuper"
 #else
-#define NOM_DOSSIER_CSUPER "csuper_config_files"
+#define MAIN_FOLDER_NAME "csuper_config_files"
 #endif // PORTABLE
 
-int creationPreferences();
-int lecturePreferences(char *nom_fichier);
-int lectureCheminFichier(char *nom_fichier);
-int changerCheminFichier(char *nouveauChemin);
+int createFileSystemPath();
+int readFileSystemPath(char *file_name);
+int readSystemPath(char *file_name);
+int changeSystemPath(char *new_path);
 
 #endif

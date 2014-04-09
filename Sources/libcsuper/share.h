@@ -38,29 +38,38 @@
 #include <stdlib.h>
 #include <errno.h>
 #include <string.h>
+#include <libintl.h>
 
 /*!
- * \def VRAI
- * Definit VRAI a 1
+ * \def TRUE
+ * Definit TRUE a 1
  */
-#define VRAI 1
+#define TRUE 1
 
 /*!
- * \def FAUX
- * Definit FAUX a 0
+ * \def FALSE
+ * Definit FALSE a 0
  */
-#define FAUX 0
+#define FALSE 0
 
+/*!
+ * \def _(String)
+ * Define the _ for gettext.
+ */
+#ifndef CSUPER
+#define _(String) dgettext ("libcsuper", String)
+#endif // CSUPER
 
-void mauvais_choix();
-void systemEfface();
-int compareFlottantDecroissant(void const *a, void const *b);
-int compareFlottantCroissant(void const *a, void const *b);
-FILE *ouvrirFichier(char nome[], char mode[]);
-int fermerFichier(FILE *ptr_fichier);
-int lireTailleFichier(FILE *ptr_fichier);
-void *myAlloc(int taille_alloue);
-void myRealloc(void **ptr,int taille_alloue);
-void ajoutExtension(char *nom_fichier);
+void libcsuper_initialize();
+void wrongChoice();
+void clearScreen();
+int compareFloatDescending(void const *a, void const *b);
+int compareFloatAscending(void const *a, void const *b);
+FILE *openFile(char nome[], char mode[]);
+int closeFile(FILE *ptr_file);
+int readFileSize(FILE *ptr_file);
+void *myAlloc(int size_alloue);
+void myRealloc(void **ptr,int size_alloue);
+void addFileCsuExtension(char *file_name);
 
 #endif
