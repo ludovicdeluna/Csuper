@@ -78,7 +78,7 @@ void clearScreen()
 
     /*Verifie si l'ecran s'est bien effacer*/
     if (successful != 0)
-        printf("\nErreur lors de l'effacage de la console.\n");
+        printf(_("\nError while clearing the screen.\n"));
 }
 
 
@@ -160,7 +160,7 @@ FILE *openFile(char file_name[], char mode[])
 
     if ((ptr_file=fopen(file_name,mode)) == (FILE *) NULL )
     {
-        printf("\nErreur lors de l'ouverture du fichier %s\n",file_name);
+        printf(_("\nError while opening %s\n"),file_name);
         perror("");
     }
     return ptr_file;
@@ -181,7 +181,7 @@ int closeFile(FILE *ptr_file)
     i=fclose(ptr_file);
     if (i)
     {
-        printf("Erreur lors de la fermeture du fichier");
+        printf(_("Error while closing the file"));
         perror("");
     }
 
@@ -220,7 +220,7 @@ void *myAlloc(int size_alloue)
 
     if ((ptr=malloc(size_alloue)) == NULL)
     {
-        printf("\nProbleme allocation memoire\n");
+        printf(_("\nMemory allocation problem\n"));
         perror("");
         exit(0);
     }
@@ -239,7 +239,7 @@ void myRealloc(void **ptr,int size_alloue)
 
     if ((*ptr=realloc(*ptr,size_alloue)) == NULL)
     {
-        printf("\nProbleme reallocation memoire\n");
+        printf(_("\nMemory allocation problem\n"));
         perror("");
         exit(0);
     }

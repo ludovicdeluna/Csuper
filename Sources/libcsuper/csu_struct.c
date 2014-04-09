@@ -226,7 +226,7 @@ void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
         return;
     }
     else
-        printf("La personne qui distributor a ete initialisee par defaut a %s\n",ptr_csu_struct->player_names[(int)ptr_csu_struct->distributor]);
+        printf(_("The distributor was initialize by default to %s.\n"),ptr_csu_struct->player_names[(int)ptr_csu_struct->distributor]);
 }
 
 /*!
@@ -295,6 +295,6 @@ int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
     }
 
     /*Message d'erreur si le nom n'est pas trouve*/
-    printf("\nErreur le nom n'existe pas.\n");
+    printf(_("\nError this name doesn't exist.\n"));
     return -1;
 }

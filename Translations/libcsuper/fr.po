@@ -2,23 +2,163 @@
 # Traductions françaises du paquet PACKAGE.
 # Copyright (C) 2014 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# dalan <remi.bertho@gmail.com>, 2014.
 # Rémi BERTHO <remi.bertho@gmail.com>, 2014.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-09 16:37+0200\n"
-"PO-Revision-Date: 2014-04-09 16:38+0200\n"
+"POT-Creation-Date: 2014-04-09 18:37+0200\n"
+"PO-Revision-Date: 2014-04-09 18:39+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
-"Language-Team: français <wesnoth@ml.free.fr>\n"
+"Language-Team: français <>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.6\n"
+
+#: Sources/libcsuper/csu_files.c:76
+#, c-format
+msgid ""
+"\n"
+"Error: The file could not be read.\n"
+msgstr ""
+"\n"
+"Erreur : Le fichier n'a pas pu être lu.\n"
+
+#: Sources/libcsuper/csu_files.c:89
+#, c-format
+msgid ""
+"\n"
+"Error: File not compatible.\n"
+msgstr ""
+"\n"
+"Erreur : Fichier non compatible.\n"
+
+#: Sources/libcsuper/csu_files.c:101
+#, c-format
+msgid ""
+"\n"
+"Error the file's version is the %1.1f while the software only support files "
+"with versions higher than the %1.1f.\n"
+msgstr ""
+"\n"
+"Erreur la version du fichier est la %1.1f alors que le logiciel supporte "
+"uniquement les fichiers avec des versions supérieurs a la %1.1f.\n"
+
+#: Sources/libcsuper/csu_files.c:162
+#, c-format
+msgid ""
+"\n"
+"Error while reading file.\n"
+msgstr ""
+"\n"
+"Erreur lors de la lecture du fichier\n"
+
+#: Sources/libcsuper/csu_files.c:187
+#, c-format
+msgid ""
+"\n"
+"Error while writing file.\n"
+msgstr ""
+"\n"
+"Erreur lors de l’écriture du fichier.\n"
+
+#: Sources/libcsuper/csu_files.c:261 Sources/libcsuper/game_config.c:357
+#, c-format
+msgid ""
+"\n"
+"The file %s cannot be deleted.\n"
+msgstr ""
+"\n"
+"Le fichier %s n'a pas pu être supprime.\n"
+
+#: Sources/libcsuper/csu_files.c:268 Sources/libcsuper/game_config.c:363
+#, c-format
+msgid ""
+"\n"
+"The file %s was well deleted.\n"
+msgstr ""
+"\n"
+"Le fichier %s a bien été supprimé.\n"
+
+#: Sources/libcsuper/csu_files.c:294
+#, c-format
+msgid ""
+"\n"
+"The file %s cannot be renamed.\n"
+msgstr ""
+"\n"
+"Le fichier %s n'a pas pu être renommé.\n"
+
+#: Sources/libcsuper/csu_files.c:300
+#, c-format
+msgid ""
+"\n"
+"The file %s was well renamed in %s.\n"
+msgstr ""
+"\n"
+"Le fichier %s a bien été renommé en %s.\n"
+
+#: Sources/libcsuper/csu_struct.c:229
+#, c-format
+msgid "The distributor was initialize by default to %s.\n"
+msgstr "La personne qui distribue a été initialisée par défaut à %s.\n"
+
+#: Sources/libcsuper/csu_struct.c:298
+#, c-format
+msgid ""
+"\n"
+"Error this name doesn't exist.\n"
+msgstr ""
+"\n"
+"Erreur ce nom n'existe pas.\n"
+
+#: Sources/libcsuper/file_system_path.c:136
+#: Sources/libcsuper/file_system_path.c:141
+#, c-format
+msgid ""
+"\n"
+"Error while reading the file containing the system path.\n"
+msgstr ""
+"\n"
+"Erreur lors de la lecture du fichier contenant le répertoire des fichiers.\n"
+
+#: Sources/libcsuper/main_argument.c:82
+#, c-format
+msgid ""
+"\n"
+"Csuper - Universal points counter allowing reflexion exemption\n"
+"Here is the syntax to use it.\n"
+msgstr ""
+"\n"
+"Csuper - Compteur de Score Universel Permettant l'Exemption de Réflexion\n"
+"Voici la syntaxe pour l'utiliser.\n"
+
+#: Sources/libcsuper/main_argument.c:83
+#, c-format
+msgid "\t- Do not use argument to launch the main menu.\n"
+msgstr "\t- N'utiliser pas d'argument pour lancer le programme sur le menu.\n"
+
+#: Sources/libcsuper/main_argument.c:84
+#, c-format
+msgid ""
+"\t- Use the argument '%s' or '%s' followed by the file name to launch "
+"directly the program on this file.\n"
+msgstr ""
+"\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour lancer le "
+"jeu directement sur ce fichier.\n"
+
+#: Sources/libcsuper/main_argument.c:85
+#, c-format
+msgid ""
+"\t- Use the argument '%s' or '%s' followed by the file name to display "
+"directly the content of the file.\n"
+msgstr ""
+"\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour afficher "
+"directement le contenu du fichier.\n"
 
 #: Sources/libcsuper/share.c:58
 #, c-format
@@ -28,3 +168,42 @@ msgid ""
 msgstr ""
 "\n"
 "Erreur : vous n'avez pas entre une bonne valeur.\n"
+
+#: Sources/libcsuper/share.c:81
+#, c-format
+msgid ""
+"\n"
+"Error while clearing the screen.\n"
+msgstr ""
+"\n"
+"Erreur lors de l'effaçage de la console.\n"
+
+#: Sources/libcsuper/share.c:163
+#, c-format
+msgid ""
+"\n"
+"Error while opening %s\n"
+msgstr ""
+"\n"
+"Erreur lors de l'ouverture du fichier %s\n"
+
+#: Sources/libcsuper/share.c:184
+#, c-format
+msgid "Error while closing the file"
+msgstr "Erreur lors de la fermeture du fichier"
+
+#: Sources/libcsuper/share.c:223 Sources/libcsuper/share.c:242
+#, c-format
+msgid ""
+"\n"
+"Memory allocation problem\n"
+msgstr ""
+"\n"
+"Problème allocation mémoire\n"
+
+#~ msgid ""
+#~ "\n"
+#~ "Memory allocation problem.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Problème allocation mémoire\n"

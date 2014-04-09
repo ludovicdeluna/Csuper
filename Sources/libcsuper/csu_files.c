@@ -73,7 +73,7 @@ csuStruct *readCsuFile(char *file_name)
 
     if (ptr_file == NULL)
     {
-        printf("\nErreur : Le fichier n'a pas pu etre lu.\n");
+        printf(_("\nError: The file could not be read.\n"));
         return ptr_csu_struct;
     }
 
@@ -86,7 +86,7 @@ csuStruct *readCsuFile(char *file_name)
     /*Si la chaine de verification ne correspond pas, on ferme le fichier et on retourne une structure vide*/
     if (strcmp(STRING_CHECK_CSU_FILE,check_file) != 0)
     {
-        printf("\nErreur : Fichier non compatible.\n");
+        printf(_("\nError: File not compatible.\n"));
         closeFile(ptr_file);
         return ptr_csu_struct;
     }
@@ -98,8 +98,8 @@ csuStruct *readCsuFile(char *file_name)
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->version),sizeof(float),1,ptr_file));
     if (ptr_csu_struct->version + 0.01 < VERSION)
     {
-        printf("\nErreur la version du fichier est la %1.1f alors que le logiciel supporte uniquement les fichiers avec des"
-               " versions superieurs a la %1.1f.\n",ptr_csu_struct->version,VERSION);
+        printf(_("\nError the file's version is the %1.1f while the software only support files with versions"
+               " higher than the %1.1f.\n"),ptr_csu_struct->version,VERSION);
         closeFile(ptr_file);
         return NULL;
     }
@@ -159,7 +159,7 @@ csuStruct *readCsuFile(char *file_name)
     /*Verifie si la lecture s'est bien passee*/
     if (file_size != check_file_size)
     {
-        printf("\nErreur lors de la lecture du fichier\n");
+        printf(_("\nError while reading file.\n"));
         return NULL;
     }
 
@@ -184,7 +184,7 @@ int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
 
     if (ptr_file == NULL)
     {
-        printf("\nErreur lors de l'ecriture du fichier.\n");
+        printf(_("\nError while writing file.\n"));
         return FALSE;
     }
 
@@ -258,14 +258,14 @@ int deleteCsuFile(char *file_name)
 
     if(remove(file_name))
     {
-        printf("\nLe fichier %s n'a pas pu etre supprime.\n",file_name);
+        printf(_("\nThe file %s cannot be deleted.\n"),file_name);
         perror("");
         return FALSE;
     }
 
     else
     {
-        printf("\nLe fichier %s a bien ete supprime.\n",file_name);
+        printf(_("\nThe file %s was well deleted.\n"),file_name);
         return TRUE;
     }
 }
@@ -291,13 +291,13 @@ int renameCsuFile(char *old_name, char *new_name)
 
     if(rename(old_name_2,new_name_2))
     {
-        printf("\nLe fichier %s n'a pas pu etre renomme.\n",old_name_2);
+        printf(_("\nThe file %s cannot be renamed.\n"),old_name_2);
         return FALSE;
     }
 
     else
     {
-        printf("\nLe fichier %s a bien ete renome en %s.\n",old_name_2,new_name_2);
+        printf(_("\nThe file %s was well renamed in %s.\n"),old_name_2,new_name_2);
         return TRUE;
     }
 }

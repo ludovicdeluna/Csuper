@@ -133,12 +133,12 @@ int readSystemPath(char *file_name)
     {
         if(createFileSystemPath()==FALSE)
         {
-            printf("\nErreur lors de la lecture du fichier de preferences.\n");
+            printf(_("\nError while reading the file containing the system path.\n"));
             return FALSE;
         }
         if (readFileSystemPath(file_name)==FALSE)
         {
-            printf("\nErreur lors de la lecture du fichier de preferences.\n");
+            printf(_("\nError while reading the file containing the system path.\n"));
             return FALSE;
         }
     }

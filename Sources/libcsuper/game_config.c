@@ -354,13 +354,13 @@ int removeConfigFile(char *config_name)
 
     if(remove(file_name))
     {
-        printf("\nLe fichier %s n'a pas pu etre supprime.\n",file_name);
+        printf(_("\nThe file %s cannot be deleted.\n"),file_name);
         perror("");
         return FALSE;
     }
     else
     {
-        printf("\nLe fichier %s a bien ete supprime.\n",file_name);
+        printf(_("\nThe file %s was well deleted.\n"),file_name);
         return TRUE;
     }
 

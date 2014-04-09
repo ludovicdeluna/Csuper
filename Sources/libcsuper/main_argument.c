@@ -79,8 +79,8 @@ void displayHelp()
 {
     libcsuper_initialize();
 
-    printf("\nCsuper - Compteur de Score Universel Permettant l'Exemption de Reflexion\nVoici la syntaxe pour l'utiliser.\n");
-    printf("\t- N'utiliser pas d'argument pour lancer le programme sur le menu.\n");
-    printf("\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour lancer le jeu directement sur ce fichier.\n",STRING_OPEN_FILE,STRING_OPEN_FILE_RED);
-    printf("\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour afficher directement le contenu du fichier.\n",STRING_READ_FILE,STRING_READ_FILE_RED);
+    printf(_("\nCsuper - Universal points counter allowing reflexion exemption\nHere is the syntax to use it.\n"));
+    printf(_("\t- Do not use argument to launch the main menu.\n"));
+    printf(_("\t- Use the argument '%s' or '%s' followed by the file name to launch directly the program on this file.\n"),STRING_OPEN_FILE,STRING_OPEN_FILE_RED);
+    printf(_("\t- Use the argument '%s' or '%s' followed by the file name to display directly the content of the file.\n"),STRING_READ_FILE,STRING_READ_FILE_RED);
 }
