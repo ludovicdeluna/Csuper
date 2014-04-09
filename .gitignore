@@ -15,6 +15,6 @@ Compilation
 Locales
 *.layout
 *.depend
-csuper
-csuper-gui
+/csuper
+/csuper-gui
 libcsuper.def

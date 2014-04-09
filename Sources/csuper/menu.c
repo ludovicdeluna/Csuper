@@ -1,0 +1,355 @@
+/*!
+ * \file    menu.c
+ * \brief   Fonctions qui gerent les menus demandant de rentrer des valeurs du logiciel
+ * \author  Remi BERTHO
+ * \date    09/03/14
+ * \version 2.1.0
+ */
+
+ /*
+ * menu.c
+ *
+ * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ *
+ * This file is part of Csuper.
+ *
+ * Csuper is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * Csuper is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+ * MA 02110-1301, USA.
+ *
+ *
+ */
+
+ #include "menu.h"
+
+/*!
+ * \fn char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
+ *  Demande et enregistre le name du fichier
+ * \param[in,out] file_name la string de caractere contenant le name du fichier
+ * \return la string de caractere contenant le name du fichier
+ */
+char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
+{
+    printf("Donnez le name du fichier avec au maximum %d caracteres.\nVotre choix : ",SIZE_MAX_FILE_NAME-1);
+    stringKey(file_name,SIZE_MAX_FILE_NAME);
+    printf("Vous avez choisi %s\n",file_name);
+
+    return file_name;
+}
+
+/*!
+ * \fn void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
+ *  Demande et enregistre le namebre de joueur, le namebre maximum et le name de la personne qui comme a distributorr
+ * \param[in,out] ptr_nb_player le namebre de joueur
+ * \param[in,out] ptr_config la configuration de la partie
+ */
+void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
+{
+    int i;
+    int game_config_choice;
+    list_game_config *ptr_list_config;
+
+    /*Nombre de joueur*/
+    do
+    {
+        printf("\nDonnez le namebre de joueur dans votre jeu (>0).\nVotre choix : ");
+        floatKeyNoComma(ptr_nb_player);
+        printf("Vous avez choisi %.0f\n",*ptr_nb_player);
+    } while (*ptr_nb_player <= 0);
+
+    /*Affichage des diffrentes configurations*/
+    ptr_list_config = readConfigListFile();
+    printf("\nQuelle configuration voulez vous utilisez ?\n");
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+        printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
+    printf("(%d) Autre\n",i+1);
+
+    /*Demande du choix*/
+    do
+    {
+        printf("\nVotre choix : ");
+        intKey(&game_config_choice);
+        printf("Vous avez choisi %d\n",game_config_choice);
+    } while (game_config_choice <1 || game_config_choice >i+1);
+
+    /*Soit on lit une config, soit on en cree une*/
+    if (game_config_choice <= i)
+        readConfigFile(game_config_choice-1,ptr_list_config,ptr_config);
+    else
+    {
+        closeListGameConfig(ptr_list_config);
+        menuGameConfig(ptr_config);
+        strcpy(ptr_config->name,"Inconnu");
+    }
+}
+
+/*!
+ * \fn void menuGameConfig(game_config *ptr_config)
+ *  Demande et enregistre la configuration de jeu
+ * \param[in,out] ptr_config la configuration de la partie
+ */
+void menuGameConfig(game_config *ptr_config)
+{
+    char nbmax;
+    char max;
+    char first_max;
+    char turn;
+    char distrib;
+    int comma;
+
+    /*Nombre maximum*/
+    printf("\nVoulez-vous utiliser un namebre maximum ou minimum (O/n) : ");
+    charKey(&nbmax);
+    if (nbmax=='n' || nbmax=='N')
+    {
+        ptr_config->nb_max  =  INFINITY;
+        ptr_config->max = 1;
+    } else
+    {
+        /*Maximum or minimum*/
+        printf("\nVoulez-vous utiliser un namebre maximum (O/n) : ");
+        charKey(&max);
+        if (max=='n' || max == 'N')
+            ptr_config->max=0;
+        else
+            ptr_config->max=1;
+
+        /*Recuperation du namebre maximale.*/
+        printf("\nDonnez le namebre maximal ou minimum pouvant etre atteint par un joueur dans votre jeu."
+        "\nVotre choix : ");
+        floatKey(&(ptr_config->nb_max));
+        printf("Vous avez choisi %.3f\n",ptr_config->nb_max);
+    }
+
+    /*Score au debut de la partie*/
+    printf("\nDonnez le score initial des joueurs."
+    "\nVotre choix : ");
+    floatKey(&(ptr_config->begin_score));
+    printf("Vous avez choisi %.3f\n",ptr_config->begin_score);
+
+    /*Sens du premier*/
+    printf("\nLe premier est-il celui qui a le plus de points (O/n) : ");
+    charKey(&first_max);
+    if (first_max=='n' || first_max == 'N')
+        ptr_config->first_way=-1;
+    else
+        ptr_config->first_way=1;
+
+    /*Tour par turn ou pas*/
+    printf("\nLes points se feront en turn par turn (O/n) : ");
+    charKey(&turn);
+    if (turn=='n' || turn == 'N')
+        ptr_config->turn_by_turn=0;
+    else
+        ptr_config->turn_by_turn=1;
+
+    /*Distributeur ou pas*/
+    printf("\nOn utilise un distributeur (O/n) : ");
+    charKey(&distrib);
+    if (distrib=='n' || distrib == 'N')
+        ptr_config->use_distributor=0;
+    else
+        ptr_config->use_distributor=1;
+
+    /*Recuperation du namebre de chiffres apres la virgule.*/
+    do
+    {
+        printf("\nDonnez le namebre de chiffres que vous voulez afficher apres la virgule. Ce chiffre doit etre"
+        " compris entre 0 et 3\nVotre choix : ");
+        intKey(&comma);
+        printf("Vous avez choisi %.0d\n",comma);
+    } while (comma < 0 || comma > 3);
+    ptr_config->number_after_comma=comma;
+}
+
+/*!
+ * \fn void menuDistributor(char *distributor_name)
+ *  Demande et enregistre le name de la personne qui comme a distributorr
+ * \param[in,out] *distributor_name le name de la personne qui commence a distributorr
+ */
+void menuDistributor(char *distributor_name)
+{
+    printf("\nDonnez le name (ou les premieres lettres du name) de la personne qui commence a distributorr.\nVotre choix : ");
+    stringKey(distributor_name,SIZE_MAX_NAME);
+    printf("Vous avez choisi %s\n",distributor_name);
+}
+
+/*!
+ * \fn void menuPlayersName(csuStruct *ptr_csu_struct)
+ *  Demande et enregistre le name des joueurs
+ * \param[in,out] *ptr_csu_struct la structure csuStruct ou l'on veut enregistrer le name des joueurs
+ */
+void menuPlayersName(csuStruct *ptr_csu_struct)
+{
+    int i;
+    char name[SIZE_MAX_NAME];
+
+    printf("\nLes names des personnes doivent etre comprises entre 2 et %.0f caracteres sans accent.\n",ptr_csu_struct->size_max_name);
+
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        do
+        {
+            printf("\nDonnez le name de la %deme personne : ",i+1);
+            stringKey(name,SIZE_MAX_NAME);
+            printf("Vous avez choisi %s\n",name);
+        } while (strlen(name) <2 || strlen(name) > ptr_csu_struct->size_max_name);
+
+        strcpy(ptr_csu_struct->player_names[i],name);
+    }
+}
+
+/*!
+ * \fn void menuPlayersPoints(csuStruct *ptr_csu_struct)
+ *  Debute un nouveau turn, demande et enregistre les points et fini le turn
+ * \param[in,out] *ptr_csu_struct la structure csuStruct ou l'on veut faire un nouveau turn
+ */
+void menuPlayersPoints(csuStruct *ptr_csu_struct)
+{
+    int i;
+    int validation;
+    char valid;
+    int index_player;
+
+    if (ptr_csu_struct->config.turn_by_turn == 1)
+        index_player = -1;
+    else
+        index_player = menuPlayerIndex(ptr_csu_struct);
+
+    startNewTurn(ptr_csu_struct,index_player);
+
+    do
+    {
+        validation=TRUE;
+
+        /*Demande les points de tout les joueurs si l'on est en turn par turn*/
+        if (ptr_csu_struct->config.turn_by_turn == 1)
+        {
+            for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            {
+                printf("\nDonnez les points de %s : ",ptr_csu_struct->player_names[i]);
+                floatKey(&(ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]));
+                printf("Vous avez choisi %.3f\n",ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]);
+            }
+        } else
+        {
+            printf("\nDonnez ses points : ");
+            floatKey(&(ptr_csu_struct->point[index_player][(int)ptr_csu_struct->nb_turn[index_player]]));
+            printf("Vous avez choisi %.3f\n",ptr_csu_struct->point[index_player][(int)ptr_csu_struct->nb_turn[index_player]]);
+        }
+
+        printf("\nValidez vous ces scores (O/n) : ");
+        charKey(&valid);
+
+        if (valid=='n' || valid=='N')
+            validation = FALSE;
+
+    } while (!validation);
+
+    endNewTurn(ptr_csu_struct,index_player);
+}
+
+/*!
+ * \fn int menuPlayerIndex(csuStruct *ptr_csu_struct)
+ *  Demande et enregistre le numero du joueur
+ * \param[in,out] *ptr_csu_struct la structure csuStruct
+ */
+int menuPlayerIndex(csuStruct *ptr_csu_struct)
+{
+    char name[SIZE_MAX_NAME];
+    int index_player;
+
+    do
+    {
+        printf("\nDonner le name (ou les premieres lettres du name) de la personne qui va recevoir des points.\nVotre choix : ");
+        stringKey(name,SIZE_MAX_NAME);
+        printf("Vous avez choisi %s\n",name);
+    } while ((index_player = searchPlayerIndex(ptr_csu_struct,name)) == -1);
+
+    return index_player;
+}
+
+/*!
+ * \fn int menuContinue()
+ *  Demande si l'on veut continuer ou pas et l'enregistre dans la variable arret
+ * \return TRUE si l'on veut continuer, FALSE sinon
+ */
+int menuContinue()
+{
+    char continuer;
+
+    printf("\nVoulez-vous continuer la partie (O/n) : ");
+    charKey(&continuer);
+
+    if (continuer=='n' || continuer=='N')
+        return FALSE;
+
+    return TRUE;
+}
+
+/*!
+ * \fn int menuDelete()
+ *  Demande si l'on veut deleteimer le fichier ou pas et l'enregistre dans la variable delete
+ * \return TRUE si l'on veut deleteimer le fichier, FALSE sinon
+ */
+int menuDelete()
+{
+    char delete;
+
+    printf("\nVoulez-vous deleteimer le fichier (o/N) : ");
+    charKey(&delete);
+
+    if (delete=='o' || delete=='O')
+        return TRUE;
+
+    return FALSE;
+}
+
+/*!
+ * \fn void menuNewPath(char *new_path)
+ *  Demande et enregistre le nouveau chemin
+ * \param[in,out] *new_path le nouveau chemin
+ */
+void menuNewPath(char *new_path)
+{
+    int verif=FALSE;
+    FILE *ptr_file_test;
+    char check_path[SIZE_MAX_FILE_NAME];
+
+    do
+    {
+        /*Saisie clavier du nouveau chemin*/
+        printf("\nDonnez le nouveau dossier d'enregistrement des fichiers que vous voulez utiliser.\nVerifiez bien que le dossier existe"
+        " et que vous y avez les droits en lecture et ecriture.\n\nVotre choix : ");
+        stringKey(new_path,SIZE_MAX_FILE_NAME);
+
+        /*Creation d'un fichier test pour voir si le chemin est valide*/
+        sprintf(check_path,"%s/test-chemin_fichier_csuper",new_path);
+        ptr_file_test=openFile(check_path,"w+");
+
+        /*Si le chemin est valide on deleteime le fichier creer et on valide la saisie*/
+        if (ptr_file_test != NULL)
+        {
+            closeFile(ptr_file_test);
+            remove(check_path);
+            verif=TRUE;
+        }
+
+        else
+            printf("\nErreur le chemin de fichier donnee n'est pas valide.\n");
+
+    } while (verif == FALSE);
+
+    printf("Vous avez choisi %s\n",new_path);
+}
