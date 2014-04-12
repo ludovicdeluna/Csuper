@@ -191,6 +191,6 @@ void systemPause()
 {
     char a;
 
-    printf("\nAppuyer sur entrer pour continuer");
+    printf(_("\nPress enter to continue"));
     charKey(&a);
 }

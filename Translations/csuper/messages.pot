@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-09 18:37+0200\n"
+"POT-Creation-Date: 2014-04-12 16:54+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,4 +22,129 @@ msgstr ""
 msgid ""
 "\n"
 "What do you want to do ?\n"
+msgstr ""
+
+#: Sources/csuper/keyboarding.c:194
+#, c-format
+msgid ""
+"\n"
+"Press enter to continue"
+msgstr ""
+
+#: Sources/csuper/menu.c:44
+#, c-format
+msgid ""
+"Give the name of the file with at the most %d characters.\n"
+"Your choice : "
+msgstr ""
+
+#: Sources/csuper/menu.c:66
+#, c-format
+msgid ""
+"\n"
+"Give the number of player in the game (>0).\n"
+"Your choice : "
+msgstr ""
+
+#: Sources/csuper/menu.c:68
+#, c-format
+msgid "You chose %.0f\n"
+msgstr ""
+
+#: Sources/csuper/menu.c:73
+#, c-format
+msgid ""
+"\n"
+"Which game configuration would you want to use ?\n"
+msgstr ""
+
+#: Sources/csuper/menu.c:76
+#, c-format
+msgid "(%d) Other\n"
+msgstr ""
+
+#: Sources/csuper/menu.c:81
+#, c-format
+msgid ""
+"\n"
+"Your choice : "
+msgstr ""
+
+#: Sources/csuper/menu.c:83
+#, c-format
+msgid "You chose %d\n"
+msgstr ""
+
+#: Sources/csuper/menu.c:93
+msgid "Unknown"
+msgstr ""
+
+#: Sources/csuper/menu.c:112
+#, c-format
+msgid ""
+"\n"
+"Would you want to use a maximum or minimum score (Y/n) : "
+msgstr ""
+
+#: Sources/csuper/menu.c:121
+#, c-format
+msgid ""
+"\n"
+"Would you want to use a maximum score (Y/n) : "
+msgstr ""
+
+#: Sources/csuper/menu.c:129
+#, c-format
+msgid ""
+"\n"
+"Give the maximal or minimal score which a player can reach in the game.\n"
+"Your choice : "
+msgstr ""
+
+#: Sources/csuper/menu.c:132 Sources/csuper/menu.c:138
+#, c-format
+msgid "You chose %.3f\n"
+msgstr ""
+
+#: Sources/csuper/menu.c:136
+#, c-format
+msgid ""
+"\n"
+"Give the initial score of the players .\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper/menu.c:141
+#, c-format
+msgid ""
+"\n"
+"The first is the player who have the higher score (Y/n) : "
+msgstr ""
+
+#: Sources/csuper/menu.c:149
+#, c-format
+msgid ""
+"\n"
+"The points will be attribute in turn by turn (Y/n) : "
+msgstr ""
+
+#: Sources/csuper/menu.c:157
+#, c-format
+msgid ""
+"\n"
+"We use a distributor (Y/n) : "
+msgstr ""
+
+#: Sources/csuper/menu.c:167
+#, c-format
+msgid ""
+"\n"
+"Give the number of digit display after the comma. This number must be "
+"between 0 and 3\n"
+"Your choice : "
+msgstr ""
+
+#: Sources/csuper/menu.c:170
+#, c-format
+msgid "You chose %.0d\n"
 msgstr ""

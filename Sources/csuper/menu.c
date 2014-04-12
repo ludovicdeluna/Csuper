@@ -41,7 +41,7 @@
  */
 char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
 {
-    printf("Donnez le name du fichier avec au maximum %d caracteres.\nVotre choix : ",SIZE_MAX_FILE_NAME-1);
+    printf(_("Give the name of the file with at the most %d characters.\nYour choice : "),SIZE_MAX_FILE_NAME-1);
     stringKey(file_name,SIZE_MAX_FILE_NAME);
     printf("Vous avez choisi %s\n",file_name);
 
@@ -63,24 +63,24 @@ void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
     /*Nombre de joueur*/
     do
     {
-        printf("\nDonnez le namebre de joueur dans votre jeu (>0).\nVotre choix : ");
+        printf(_("\nGive the number of player in the game (>0).\nYour choice : "));
         floatKeyNoComma(ptr_nb_player);
-        printf("Vous avez choisi %.0f\n",*ptr_nb_player);
+        printf(_("You chose %.0f\n"),*ptr_nb_player);
     } while (*ptr_nb_player <= 0);
 
     /*Affichage des diffrentes configurations*/
     ptr_list_config = readConfigListFile();
-    printf("\nQuelle configuration voulez vous utilisez ?\n");
+    printf(_("\nWhich game configuration would you want to use ?\n"));
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
         printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
-    printf("(%d) Autre\n",i+1);
+    printf(_("(%d) Other\n"),i+1);
 
     /*Demande du choix*/
     do
     {
-        printf("\nVotre choix : ");
+        printf(_("\nYour choice : "));
         intKey(&game_config_choice);
-        printf("Vous avez choisi %d\n",game_config_choice);
+        printf(_("You chose %d\n"),game_config_choice);
     } while (game_config_choice <1 || game_config_choice >i+1);
 
     /*Soit on lit une config, soit on en cree une*/
@@ -90,7 +90,7 @@ void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
     {
         closeListGameConfig(ptr_list_config);
         menuGameConfig(ptr_config);
-        strcpy(ptr_config->name,"Inconnu");
+        strcpy(ptr_config->name,_("Unknown"));
     }
 }
 
@@ -109,7 +109,7 @@ void menuGameConfig(game_config *ptr_config)
     int comma;
 
     /*Nombre maximum*/
-    printf("\nVoulez-vous utiliser un namebre maximum ou minimum (O/n) : ");
+    printf(_("\nWould you want to use a maximum or minimum score (Y/n) : "));
     charKey(&nbmax);
     if (nbmax=='n' || nbmax=='N')
     {
@@ -118,7 +118,7 @@ void menuGameConfig(game_config *ptr_config)
     } else
     {
         /*Maximum or minimum*/
-        printf("\nVoulez-vous utiliser un namebre maximum (O/n) : ");
+        printf(_("\nWould you want to use a maximum score (Y/n) : "));
         charKey(&max);
         if (max=='n' || max == 'N')
             ptr_config->max=0;
@@ -126,20 +126,19 @@ void menuGameConfig(game_config *ptr_config)
             ptr_config->max=1;
 
         /*Recuperation du namebre maximale.*/
-        printf("\nDonnez le namebre maximal ou minimum pouvant etre atteint par un joueur dans votre jeu."
-        "\nVotre choix : ");
+        printf(_("\nGive the maximal or minimal score which a player can reach in the game."
+        "\nYour choice : "));
         floatKey(&(ptr_config->nb_max));
-        printf("Vous avez choisi %.3f\n",ptr_config->nb_max);
+        printf(_("You chose %.3f\n"),ptr_config->nb_max);
     }
 
     /*Score au debut de la partie*/
-    printf("\nDonnez le score initial des joueurs."
-    "\nVotre choix : ");
+    printf(_("\nGive the initial score of the players .\nYour choice: "));
     floatKey(&(ptr_config->begin_score));
-    printf("Vous avez choisi %.3f\n",ptr_config->begin_score);
+    printf(_("You chose %.3f\n"),ptr_config->begin_score);
 
     /*Sens du premier*/
-    printf("\nLe premier est-il celui qui a le plus de points (O/n) : ");
+    printf(_("\nThe first is the player who have the higher score (Y/n) : "));
     charKey(&first_max);
     if (first_max=='n' || first_max == 'N')
         ptr_config->first_way=-1;
@@ -147,7 +146,7 @@ void menuGameConfig(game_config *ptr_config)
         ptr_config->first_way=1;
 
     /*Tour par turn ou pas*/
-    printf("\nLes points se feront en turn par turn (O/n) : ");
+    printf(_("\nThe points will be attribute in turn by turn (Y/n) : "));
     charKey(&turn);
     if (turn=='n' || turn == 'N')
         ptr_config->turn_by_turn=0;
@@ -155,7 +154,7 @@ void menuGameConfig(game_config *ptr_config)
         ptr_config->turn_by_turn=1;
 
     /*Distributeur ou pas*/
-    printf("\nOn utilise un distributeur (O/n) : ");
+    printf(_("\nWe use a distributor (Y/n) : "));
     charKey(&distrib);
     if (distrib=='n' || distrib == 'N')
         ptr_config->use_distributor=0;
@@ -165,10 +164,10 @@ void menuGameConfig(game_config *ptr_config)
     /*Recuperation du namebre de chiffres apres la virgule.*/
     do
     {
-        printf("\nDonnez le namebre de chiffres que vous voulez afficher apres la virgule. Ce chiffre doit etre"
-        " compris entre 0 et 3\nVotre choix : ");
+        printf(_("\nGive the number of digit display after the comma. This number must be"
+        " between 0 and 3\nYour choice : "));
         intKey(&comma);
-        printf("Vous avez choisi %.0d\n",comma);
+        printf(_("You chose %.0d\n"),comma);
     } while (comma < 0 || comma > 3);
     ptr_config->number_after_comma=comma;
 }

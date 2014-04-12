@@ -9,10 +9,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-09 17:06+0200\n"
-"PO-Revision-Date: 2014-04-09 17:07+0200\n"
+"POT-Creation-Date: 2014-04-12 16:54+0200\n"
+"PO-Revision-Date: 2014-04-12 16:56+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
-"Language-Team: français <wesnoth@ml.free.fr>\n"
+"Language-Team: français <>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -28,3 +28,160 @@ msgid ""
 msgstr ""
 "\n"
 "Que voulez vous faire ?\n"
+
+#: Sources/csuper/keyboarding.c:194
+#, c-format
+msgid ""
+"\n"
+"Press enter to continue"
+msgstr ""
+"\n"
+"Appuyer sur entrer pour continuer"
+
+#: Sources/csuper/menu.c:44
+#, c-format
+msgid ""
+"Give the name of the file with at the most %d characters.\n"
+"Your choice : "
+msgstr ""
+"Donnez le nom du fichier avec au maximum %d caractères.\n"
+"Votre choix : "
+
+#: Sources/csuper/menu.c:66
+#, c-format
+msgid ""
+"\n"
+"Give the number of player in the game (>0).\n"
+"Your choice : "
+msgstr ""
+"\n"
+"Donnez le nombre de joueurs dans votre jeu (>0).\n"
+"Votre choix : "
+
+#: Sources/csuper/menu.c:68
+#, c-format
+msgid "You chose %.0f\n"
+msgstr "Vous avez choisi %.0f\n"
+
+#: Sources/csuper/menu.c:73
+#, c-format
+msgid ""
+"\n"
+"Which game configuration would you want to use ?\n"
+msgstr ""
+"\n"
+"Quelle configuration de jeu voulez vous utilisez ?\n"
+
+#: Sources/csuper/menu.c:76
+#, c-format
+msgid "(%d) Other\n"
+msgstr "(%d) Autre\n"
+
+#: Sources/csuper/menu.c:81
+#, c-format
+msgid ""
+"\n"
+"Your choice : "
+msgstr ""
+"\n"
+"Votre choix : "
+
+#: Sources/csuper/menu.c:83
+#, c-format
+msgid "You chose %d\n"
+msgstr "Vous avez choisi %d\n"
+
+#: Sources/csuper/menu.c:93
+msgid "Unknown"
+msgstr "Inconnu"
+
+#: Sources/csuper/menu.c:112
+#, c-format
+msgid ""
+"\n"
+"Would you want to use a maximum or minimum score (Y/n) : "
+msgstr ""
+"\n"
+"Voulez-vous utiliser un nombre maximum ou minimum (O/n) : "
+
+#: Sources/csuper/menu.c:121
+#, c-format
+msgid ""
+"\n"
+"Would you want to use a maximum score (Y/n) : "
+msgstr ""
+"\n"
+"Voulez-vous utiliser un nombre maximum (O/n) : "
+
+#: Sources/csuper/menu.c:129
+#, c-format
+msgid ""
+"\n"
+"Give the maximal or minimal score which a player can reach in the game.\n"
+"Your choice : "
+msgstr ""
+"\n"
+"Donnez le nombre maximal ou minimum pouvant être atteint par un joueur dans "
+"votre jeu.\n"
+"Votre choix : "
+
+#: Sources/csuper/menu.c:132 Sources/csuper/menu.c:138
+#, c-format
+msgid "You chose %.3f\n"
+msgstr "Vous avez choisi %.3f\n"
+
+#: Sources/csuper/menu.c:136
+#, c-format
+msgid ""
+"\n"
+"Give the initial score of the players .\n"
+"Your choice: "
+msgstr ""
+"\n"
+"Donnez le score initial des joueurs.\n"
+"Votre choix : "
+
+#: Sources/csuper/menu.c:141
+#, c-format
+msgid ""
+"\n"
+"The first is the player who have the higher score (Y/n) : "
+msgstr ""
+"\n"
+"Le premier est le joueur qui a le plus de points (O/n) : "
+
+#: Sources/csuper/menu.c:149
+#, c-format
+msgid ""
+"\n"
+"The points will be attribute in turn by turn (Y/n) : "
+msgstr ""
+"\n"
+"Les points seront attribués tour par tour (O/n) : "
+
+#: Sources/csuper/menu.c:157
+#, c-format
+msgid ""
+"\n"
+"We use a distributor (Y/n) : "
+msgstr ""
+"\n"
+"On utilise un distributeur (O/n) : "
+
+#: Sources/csuper/menu.c:167
+#, c-format
+msgid ""
+"\n"
+"Give the number of digit display after the comma. This number must be "
+"between 0 and 3\n"
+"Your choice : "
+msgstr ""
+"\n"
+"Donnez le nombre de chiffres que vous voulez afficher après la virgule. Ce "
+"chiffre doit être compris entre 0 et 3\n"
+"Votre choix : "
+
+#: Sources/csuper/menu.c:170
+#, c-format
+msgid "You chose %.0d\n"
+msgstr "Vous avez choisi %.0d\n"
