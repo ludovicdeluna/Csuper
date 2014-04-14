@@ -2,7 +2,6 @@
 # Traductions françaises du paquet PACKAGE.
 # Copyright (C) 2014 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# dalan <remi.bertho@gmail.com>, 2014.
 # Rémi BERTHO <remi.bertho@gmail.com>, 2014.
 #
 msgid ""
@@ -10,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-04-14 19:01+0200\n"
-"PO-Revision-Date: 2014-04-14 19:02+0200\n"
+"PO-Revision-Date: 2014-04-14 22:51+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -37,7 +36,7 @@ msgid ""
 "%s is the distributor."
 msgstr ""
 "\n"
-"C'est a %s de distribuer."
+"C'est à %s de distribuer."
 
 #: Sources/csuper/display.c:146
 #, c-format
@@ -52,7 +51,7 @@ msgid ""
 msgstr ""
 "\n"
 "Fichier csu\n"
-"Creer le %02.0f/%02.0f/%4.0f\n"
+"Créer le %02.0f/%02.0f/%4.0f\n"
 "Version du fichier : %1.1f\n"
 "Taille maximum du nom : %.0f\n"
 "Nombre de joueurs : %.0f\n"
@@ -100,7 +99,7 @@ msgstr ""
 "\n"
 "Csuper Copyright (C) 2014 Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Ce programme vient SANS ABSOLUMENT AUCUNE GARANTIE. \n"
-"Ceci est un logiciel libre et vous etes invite a le redistribuer suivant "
+"Ceci est un logiciel libre et vous etes invite à le redistribuer suivant "
 "certaines conditions. \n"
 "Pour plus de détails : http://www.gnu.org/licenses/gpl.html\n"
 
@@ -442,7 +441,7 @@ msgid ""
 msgstr ""
 "\n"
 "Donnez le nom (ou les premières lettres du nom) de la personne qui commence "
-"a distribuer.\n"
+"à distribuer.\n"
 "Votre choix : "
 
 #: Sources/csuper/menu.c:197
