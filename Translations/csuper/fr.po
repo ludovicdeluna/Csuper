@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-14 14:43+0200\n"
-"PO-Revision-Date: 2014-04-14 14:46+0200\n"
+"POT-Creation-Date: 2014-04-14 19:01+0200\n"
+"PO-Revision-Date: 2014-04-14 19:02+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -135,7 +135,62 @@ msgstr "Nombre de points maximum/minimum : %.3f\n"
 msgid "Number of points maximum/minimum : inf\n"
 msgstr "Nombre de points maximum/minimum : inf\n"
 
-#: Sources/csuper/interface.c:319
+#: Sources/csuper/interface.c:110
+#, c-format
+msgid "Here all your csu files :\n"
+msgstr "Voici tous vos fichiers csu :\n"
+
+#: Sources/csuper/interface.c:271
+#, c-format
+msgid ""
+"Csuper - Universal points counter allowing reflexion exemption v2.1.9\n"
+"\n"
+"What do you want to do ?\n"
+" (%d) Do a new game \n"
+" (%d) Load an existing game \n"
+" (%d) Display the results of an existing game \n"
+" (%d) Delete a game \n"
+" (%d) Display all existing games\n"
+" (%d) Display the preferences menu \n"
+" (%d) Quit the program\n"
+"\n"
+"Your choice : "
+msgstr ""
+"Csuper - Compteur de Score Universel Permettant l'Exemption de Réflexion "
+"v2.1.9\n"
+"\n"
+"Que voulez vous faire ? \n"
+" (%d) Faire une nouvelle partie \n"
+" (%d) Charger une partie existante \n"
+" (%d) Afficher les résultats d'une partie existante \n"
+" (%d) Supprimer une partie \n"
+" (%d) Afficher toutes les parties existantes\n"
+" (%d) Afficher le menu des préférences \n"
+" (%d) Quitter le programme\n"
+"\n"
+"Votre choix : "
+
+#: Sources/csuper/interface.c:291
+#, c-format
+msgid ""
+"\n"
+"See you.\n"
+msgstr ""
+"\n"
+"À bientôt.\n"
+
+#: Sources/csuper/interface.c:295 Sources/csuper/interface.c:345
+#, c-format
+msgid ""
+"\n"
+"Yes it's the good answer but that don't help me to know what do you want to "
+"do.\n"
+msgstr ""
+"\n"
+"Effectivement c'est la bonne réponse mais ça ne m'aide pas à savoir ce que "
+"vous voulez faire.\n"
+
+#: Sources/csuper/interface.c:318
 #, c-format
 msgid ""
 "\n"
@@ -143,6 +198,95 @@ msgid ""
 msgstr ""
 "\n"
 "Que voulez vous faire ?\n"
+
+#: Sources/csuper/interface.c:320
+#, c-format
+msgid ""
+"\n"
+" (%d) Change the folder for saving files\n"
+" (%d) Display the folder for saving files"
+msgstr ""
+"\n"
+" (%d) Changer le dossier d'enregistrement des fichiers\n"
+" (%d) Afficher le dossier d'enregistrement des fichiers"
+
+#: Sources/csuper/interface.c:322
+#, c-format
+msgid ""
+"\n"
+" (%d) Make a new game configuration\n"
+" (%d) Delete an existing game configuration\n"
+" (%d) Display the list of the game configurations\n"
+" (%d) Display a game configuration\n"
+" (%d) Back to main menu\n"
+"\n"
+"Your choice : "
+msgstr ""
+"\n"
+" (%d) Faire une nouvelle configuration de jeu\n"
+" (%d) Supprimer une configuration de jeu\n"
+" (%d) Afficher la liste des configurations de jeu\n"
+" (%d) Afficher une configuration de jeu\n"
+" (%d) Revenir au menu principal\n"
+"\n"
+"Votre choix : "
+
+#: Sources/csuper/interface.c:385
+#, c-format
+msgid "Your files are saved in %s\n"
+msgstr "Vos fichiers sont sauvegardes dans %s\n"
+
+#: Sources/csuper/interface.c:482
+#, c-format
+msgid ""
+"\n"
+"Which game configuration would you like to use ?\n"
+msgstr ""
+"\n"
+"Quelle configuration de jeu voulez vous utilisez ?\n"
+
+#: Sources/csuper/interface.c:489 Sources/csuper/interface.c:545
+#: Sources/csuper/menu.c:81
+#, c-format
+msgid ""
+"\n"
+"Your choice : "
+msgstr ""
+"\n"
+"Votre choix : "
+
+#: Sources/csuper/interface.c:491 Sources/csuper/interface.c:547
+#: Sources/csuper/menu.c:83
+#, c-format
+msgid "You chose %d\n"
+msgstr "Vous avez choisi %d\n"
+
+#: Sources/csuper/interface.c:498 Sources/csuper/interface.c:555
+#, c-format
+msgid ""
+"\n"
+"You do not have any game configuration files.\n"
+msgstr ""
+"\n"
+"Vous n'avez pas encore de fichiers de configurations de jeu.\n"
+
+#: Sources/csuper/interface.c:515
+#, c-format
+msgid ""
+"\n"
+"Here all your game configurations:\n"
+msgstr ""
+"\n"
+"Voici la liste de vos configurations de jeu :\n"
+
+#: Sources/csuper/interface.c:538
+#, c-format
+msgid ""
+"\n"
+"Which game configuration would you like to display ?\n"
+msgstr ""
+"\n"
+"Quelle configuration de jeu voulez vous afficher ?\n"
 
 #: Sources/csuper/keyboarding.c:194
 #, c-format
@@ -191,20 +335,6 @@ msgstr ""
 #, c-format
 msgid "(%d) Other\n"
 msgstr "(%d) Autre\n"
-
-#: Sources/csuper/menu.c:81
-#, c-format
-msgid ""
-"\n"
-"Your choice : "
-msgstr ""
-"\n"
-"Votre choix : "
-
-#: Sources/csuper/menu.c:83
-#, c-format
-msgid "You chose %d\n"
-msgstr "Vous avez choisi %d\n"
 
 #: Sources/csuper/menu.c:93
 msgid "Unknown"

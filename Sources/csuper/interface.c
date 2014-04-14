@@ -107,7 +107,7 @@ void listCsuFiles()
     /*Lecture du folder*/
     rep = opendir(folder);
 
-    printf("Voici tout vos fichiers de jeu :\n");
+    printf(_("Here all your csu files :\n"));
 
     /*Affichage du name de tout les fichiers du folder*/
     while ((lecture = readdir(rep))) {
@@ -268,10 +268,10 @@ void mainMenu()
 
         clearScreen();
 
-        printf("Csuper - Compteur de Score Universel Permettant l'Exemption de Reflexion v2.1.8\n\nQue voulez vous faire ?\n "
-        "(%d) Faire une nouvelle partie \n (%d) Charger une partie existente \n (%d) Afficher les resultats d'une partie existante "
-        "\n (%d) Supprimer une partie \n (%d) Afficher toutes les parties existantes",nouvPart,charPart,affFich,deleteFich,listFich);
-        printf("\n (%d) Afficher le menu des preferences \n (%d) Quitter le programme\n\nVotre choice : ",pref,quit);
+        printf(_("Csuper - Universal points counter allowing reflexion exemption v2.1.9\n\nWhat do you want to do ?\n "
+        "(%d) Do a new game \n (%d) Load an existing game \n (%d) Display the results of an existing game "
+        "\n (%d) Delete a game \n (%d) Display all existing games\n (%d) Display the preferences menu "
+        "\n (%d) Quit the program\n\nYour choice : "),nouvPart,charPart,affFich,deleteFich,listFich,pref,quit);
 
         intKey(&choice);
 
@@ -288,10 +288,11 @@ void mainMenu()
                                 break;
             case pref :         preferencesMenu();
                                 break;
-            case quit  :        printf("\nVous avez choisi de quitter le programme.\n\n");
+            case quit  :        printf(_("\nSee you.\n"));
+                                systemPause();
                                 stop=TRUE;
                                 break;
-            case easterEggs :   printf("\nEffectivement c'est la bonne reponse mais ca ne m'aide pas a savoir ce que vous voulez faire.\n");
+            case easterEggs :   printf(_("\nYes it's the good answer but that don't help me to know what do you want to do.\n"));
                                 systemPause();
                                 break;
             default :           wrongChoice();
@@ -316,11 +317,11 @@ void preferencesMenu()
 
         printf(_("\nWhat do you want to do ?\n"));
         #ifndef PORTABLE
-        printf(" \n (%d) Choisir un nouveau dossier d'enregistrement des fichiers \n (%d) Affiche le dossier d'enregistrement des fichiers",nouvChem,lireChem);
+        printf(_("\n (%d) Change the folder for saving files\n (%d) Display the folder for saving files"),nouvChem,lireChem);
         #endif
-        printf("\n (%d) Faire une nouvelle configuration de jeu\n (%d) Supprimer une configuration de jeu",newGameConf,removeGameConf);
-        printf("\n (%d) Afficher la liste des configurations de jeu\n (%d) Afficher une configuration de jeu",printListGameConf,printGameConf);
-        printf("\n (%d) Revenir au menu principal\n\nVotre choice : ",menuPrinc);
+        printf(_("\n (%d) Make a new game configuration\n (%d) Delete an existing game configuration"
+        "\n (%d) Display the list of the game configurations\n (%d) Display a game configuration"
+        "\n (%d) Back to main menu\n\nYour choice : "),newGameConf,removeGameConf,printListGameConf,printGameConf,menuPrinc);
 
         intKey(&choice);
 
@@ -331,8 +332,7 @@ void preferencesMenu()
             case lireChem :     readFilePath();
                                 break;
             #endif
-            case menuPrinc  :   printf("\nVous avez choisi de quitter le programme.\n\n");
-                                stop=TRUE;
+            case menuPrinc  :   stop=TRUE;
                                 break;
             case newGameConf :  newGameConfig();
                                 break;
@@ -342,7 +342,7 @@ void preferencesMenu()
                                 break;
             case printGameConf: printGameConfigFile();
                                 break;
-            case easterEggs2 :  printf("\nEffectivement c'est la bonne reponse mais ca ne m'aide pas a savoir ce que vous voulez faire.\n");
+            case easterEggs2 :  printf(_("\nYes it's the good answer but that don't help me to know what do you want to do.\n"));
                                 systemPause();
                                 break;
             default :           wrongChoice();
@@ -382,7 +382,7 @@ void readFilePath()
 
     readSystemPath(path);
 
-    printf("Vos fichiers sont sauvegardes dans %s\n",path);
+    printf(_("Your files are saved in %s\n"),path);
     systemPause();
 }
 
@@ -479,23 +479,23 @@ void removeGameConfig()
     if (ptr_list_config->nb_config > 0)
     {
         /*Affichage des diffrentes configurations*/
-        printf("\nQuelle configuration voulez vous utilisez ?\n");
+        printf(_("\nWhich game configuration would you like to use ?\n"));
         for (i=0 ; i<ptr_list_config->nb_config ; i++)
             printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
 
         /*Demande du choice*/
         do
         {
-            printf("\nVotre choice : ");
+            printf(_("\nYour choice : "));
             intKey(&game_config_choice);
-            printf("Vous avez choisi %d\n",game_config_choice);
+            printf(_("You chose %d\n"),game_config_choice);
         } while (game_config_choice <1 || game_config_choice >i);
 
         removeConfigListFile(game_config_choice-1,ptr_list_config);
     }
 
     else
-        printf("\nVous n'avez pas encore de fichiers de configurations de jeu.\n");
+        printf(_("\nYou do not have any game configuration files.\n"));
 
     systemPause();
 }
@@ -512,7 +512,7 @@ void printListGameConfig()
     clearScreen();
 
     ptr_list_config = readConfigListFile();
-    printf("\nVoici la liste des configurations de jeu :\n");
+    printf(_("\nHere all your game configurations:\n"));
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
         printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
     systemPause();
@@ -535,16 +535,16 @@ void printGameConfigFile()
     ptr_list_config = readConfigListFile();
     if (ptr_list_config->nb_config > 0)
     {
-        printf("\nQuelle configuration voulez vous utilisez ?\n");
+        printf(_("\nWhich game configuration would you like to display ?\n"));
         for (i=0 ; i<ptr_list_config->nb_config ; i++)
             printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
 
         /*Demande du choice*/
         do
         {
-            printf("\nVotre choice : ");
+            printf(_("\nYour choice : "));
             intKey(&game_config_choice);
-            printf("Vous avez choisi %d\n",game_config_choice);
+            printf(_("You chose %d\n"),game_config_choice);
         } while (game_config_choice <1 || game_config_choice >i);
 
         readConfigFile(game_config_choice-1,ptr_list_config,&config);
@@ -552,7 +552,7 @@ void printGameConfigFile()
     }
 
     else
-        printf("\nVous n'avez pas encore de fichiers de configurations de jeu.\n");
+        printf(_("\nYou do not have any game configuration files.\n"));
 
     systemPause();
 }
