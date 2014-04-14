@@ -92,7 +92,8 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
     int i;
     int j;
 
-    printf("\nTotal   |");
+    /*TRANSLATORS:The number of characters before the | must be eight*/
+    printf(_("\nTotal   |"));
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
@@ -131,7 +132,7 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
 void printDistributor(csuStruct *ptr_csu_struct)
 {
     if (ptr_csu_struct->config.use_distributor)
-        printf("\nC'est a %s de distributorr.",ptr_csu_struct->player_names[(int)ptr_csu_struct->distributor]);
+        printf(_("\n%s is the distributor."),ptr_csu_struct->player_names[(int)ptr_csu_struct->distributor]);
     printf("\n");
 }
 
@@ -142,12 +143,11 @@ void printDistributor(csuStruct *ptr_csu_struct)
  */
 void printHeader(csuStruct *ptr_csu_struct)
 {
-    printf("\nFichier jeu\nCreer le %02.0f/%02.0f/%4.0f",ptr_csu_struct->day,ptr_csu_struct->month,ptr_csu_struct->year);
-    printf("\nVersion du fichier : %1.1f",ptr_csu_struct->version);
-    printf("\nTaille maximum du nom : %.0f",ptr_csu_struct->size_max_name);
-    printf("\nNombre de joueur : %.0f",ptr_csu_struct->nb_player);
+    printf(_("\nCsu file\nCreated the %02.0f/%02.0f/%4.0f\nFile's version : %1.1f\nSize max of the names : %.0f"
+    "\nNumber of players : %.0f\nNumbers maximum of turns : %d")
+    ,ptr_csu_struct->day,ptr_csu_struct->month,ptr_csu_struct->year,ptr_csu_struct->version,ptr_csu_struct->size_max_name
+    ,ptr_csu_struct->nb_player,maxNbTurn(ptr_csu_struct));
     printGameConfig(ptr_csu_struct->config);
-    printf("Nombre de tours maximum : %d",maxNbTurn(ptr_csu_struct));
 }
 
 /*!
@@ -166,7 +166,8 @@ void printAllPoints(csuStruct *ptr_csu_struct)
     for (i=0 ; i<max_nb_turn ; i++)
     {
         /*Affiche le numero du tour quand on passe a un nouveau tour*/
-        printf("\nTour %2.0f |",(float)i + 1);
+        /*TRANSLATORS:The number of characters before the | and without the %2.0f must be six*/
+        printf(_("\nTurn %2.0f |"),(float)i + 1);
 
         for (k=0 ; k<ptr_csu_struct->nb_player ; k++)
         {
@@ -211,7 +212,8 @@ void printRanking(csuStruct *ptr_csu_struct)
     int i;
     int j;
 
-    printf("\nPosition|");
+    /*TRANSLATORS:The number of characters before the | must be eight*/
+    printf(_("\nRanking |"));
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
@@ -286,7 +288,7 @@ void printGameOver(csuStruct *ptr_csu_struct)
     int un_pris=FALSE;
     int deux_pris=FALSE;
 
-    printf("\nLa partie est terminee\n");
+    printf(_("\nThe game is over.\n"));
 
     /*Initialisation des ranks des personnes dans le tableau*/
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
@@ -390,9 +392,9 @@ void printStringThreeTabs(char *string)
  */
 void printLicense()
 {
-    printf("\nCsuper Copyright (C) 2014 Remi BERTHO <remi.bertho@gmail.com>\n"
-    "Ce programme vient SANS ABSOLUMENT AUCUNE GARANTIE. \nCeci est un logiciel libre et vous etes invite a le redistributorr"
-    " suivant certaines conditions. \nPour plus de detail : http://www.gnu.org/licenses/gpl.html\n");
+    printf(_("\nCsuper Copyright (C) 2014 Remi BERTHO <remi.bertho@gmail.com>\n"
+    "This program comes with ABSOLUTELY NO WARRANTY. \nThis is free software, and you are welcome to redistribute it"
+    " under certain conditions. \nFore more details : http://www.gnu.org/licenses/gpl.html\n"));
 }
 
 /*!
@@ -402,20 +404,16 @@ void printLicense()
  */
 void printGameConfig(game_config config)
 {
-    printf("\nNom de la configuration de jeu : %s\n",config.name);
-    printf("Utilise un nombre maximum : %d\n",config.max);
+    printf(_("\nName of the game configuration : %s\nUse a maximum score : %d\nInitial score : %.3f\n"
+    "Number of digit display after the comma : %d\nFirst way : %d\n"
+    "Game in turn by turn : %d\nUse a distributor : %d\n")
+    ,config.name,config.max,config.begin_score,config.number_after_comma,config.first_way,config.turn_by_turn,config.use_distributor);
     #ifdef __unix__
-    printf("Nombre de points maximum/minimum : %.3f\n",config.nb_max);
+    printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
     #elif _WIN32
     if (config.nb_max == INFINITY)
-        printf("Nombre de points maximum/minimum : inf\n");
+        printf(_("Number of points maximum/minimum : inf\n");
     else
-        printf("Nombre de points maximum/minimum : %.3f\n",config.nb_max);
+        printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
     #endif
-    printf("Score initial : %.3f\n",config.begin_score);
-    printf("Nombre de chiffres apres la virgule utilise a l'affichage des points : %d\n",config.number_after_comma);
-    printf("Sens du premier : %d\n",config.first_way);
-    printf("Jeu en tour par tour : %d\n",config.turn_by_turn);
-    printf("Utilise un distributeur tournant : %d\n",config.use_distributor);
-
 }

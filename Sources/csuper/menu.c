@@ -179,7 +179,7 @@ void menuGameConfig(game_config *ptr_config)
  */
 void menuDistributor(char *distributor_name)
 {
-    printf("\nDonnez le name (ou les premieres lettres du name) de la personne qui commence a distributorr.\nVotre choix : ");
+    printf(_("\nGive the name (or the firsts letters of the name) of the person who begin to distribute.\nYour choice : "));
     stringKey(distributor_name,SIZE_MAX_NAME);
     printf("Vous avez choisi %s\n",distributor_name);
 }
@@ -194,15 +194,15 @@ void menuPlayersName(csuStruct *ptr_csu_struct)
     int i;
     char name[SIZE_MAX_NAME];
 
-    printf("\nLes names des personnes doivent etre comprises entre 2 et %.0f caracteres sans accent.\n",ptr_csu_struct->size_max_name);
+    printf(_("\nThe players's names must have between 2 and %.0f characters with no special characters.\n"),ptr_csu_struct->size_max_name);
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         do
         {
-            printf("\nDonnez le name de la %deme personne : ",i+1);
+            printf(_("\nGive the name of the %dth person : "),i+1);
             stringKey(name,SIZE_MAX_NAME);
-            printf("Vous avez choisi %s\n",name);
+            printf(_("You chose %s\n"),name);
         } while (strlen(name) <2 || strlen(name) > ptr_csu_struct->size_max_name);
 
         strcpy(ptr_csu_struct->player_names[i],name);
@@ -237,18 +237,18 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
         {
             for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
             {
-                printf("\nDonnez les points de %s : ",ptr_csu_struct->player_names[i]);
+                printf(_("\nGive the points of %s : "),ptr_csu_struct->player_names[i]);
                 floatKey(&(ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]));
-                printf("Vous avez choisi %.3f\n",ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]);
+                printf(_("You chose %.3f\n"),ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]);
             }
         } else
         {
-            printf("\nDonnez ses points : ");
+            printf(_("\nGive their points : "));
             floatKey(&(ptr_csu_struct->point[index_player][(int)ptr_csu_struct->nb_turn[index_player]]));
-            printf("Vous avez choisi %.3f\n",ptr_csu_struct->point[index_player][(int)ptr_csu_struct->nb_turn[index_player]]);
+            printf(_("You chose %.3f\n"),ptr_csu_struct->point[index_player][(int)ptr_csu_struct->nb_turn[index_player]]);
         }
 
-        printf("\nValidez vous ces scores (O/n) : ");
+        printf(_("\nYou confirm these scores (Y/n) : "));
         charKey(&valid);
 
         if (valid=='n' || valid=='N')
@@ -271,9 +271,9 @@ int menuPlayerIndex(csuStruct *ptr_csu_struct)
 
     do
     {
-        printf("\nDonner le name (ou les premieres lettres du name) de la personne qui va recevoir des points.\nVotre choix : ");
+        printf(_("\nGive the name (or the firsts letters of the name) of the person who will earn points.\nYour choice: "));
         stringKey(name,SIZE_MAX_NAME);
-        printf("Vous avez choisi %s\n",name);
+        printf(_("You chose %s\n"),name);
     } while ((index_player = searchPlayerIndex(ptr_csu_struct,name)) == -1);
 
     return index_player;
@@ -288,7 +288,7 @@ int menuContinue()
 {
     char continuer;
 
-    printf("\nVoulez-vous continuer la partie (O/n) : ");
+    printf(_("\nWould you like to continue the game (Y/n) : "));
     charKey(&continuer);
 
     if (continuer=='n' || continuer=='N')
@@ -306,10 +306,10 @@ int menuDelete()
 {
     char delete;
 
-    printf("\nVoulez-vous deleteimer le fichier (o/N) : ");
+    printf(_("\nWould ou like to delete the file (y/N) : "));
     charKey(&delete);
 
-    if (delete=='o' || delete=='O')
+    if (delete=='o' || delete=='O' || delete == 'y' || delete == 'Y')
         return TRUE;
 
     return FALSE;
@@ -329,8 +329,8 @@ void menuNewPath(char *new_path)
     do
     {
         /*Saisie clavier du nouveau chemin*/
-        printf("\nDonnez le nouveau dossier d'enregistrement des fichiers que vous voulez utiliser.\nVerifiez bien que le dossier existe"
-        " et que vous y avez les droits en lecture et ecriture.\n\nVotre choix : ");
+        printf(_("\nGive the new folder which you would like to save your files.\nChech if the folder exist"
+        " and that you have the read and write rights.\n\nYour choice: "));
         stringKey(new_path,SIZE_MAX_FILE_NAME);
 
         /*Creation d'un fichier test pour voir si le chemin est valide*/
@@ -346,9 +346,9 @@ void menuNewPath(char *new_path)
         }
 
         else
-            printf("\nErreur le chemin de fichier donnee n'est pas valide.\n");
+            printf(_("\nError : this folder is not valid.\n"));
 
     } while (verif == FALSE);
 
-    printf("Vous avez choisi %s\n",new_path);
+    printf(_("You chose %s\n"),new_path);
 }

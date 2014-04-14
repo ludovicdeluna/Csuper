@@ -148,9 +148,7 @@ void play(csuStruct *ptr_csu_struct, char *file_name)
 
         /*Ecrit le nouveau score sur le fichier et verifie si l'ecriture du fichier s'est bien passe*/
         if (!writeFileNewTurn(file_name,ptr_csu_struct))
-        {
             systemPause();
-        }
 
         clearScreen();
         printPoints(ptr_csu_struct);
