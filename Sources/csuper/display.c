@@ -412,7 +412,7 @@ void printGameConfig(game_config config)
     printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
     #elif _WIN32
     if (config.nb_max == INFINITY)
-        printf(_("Number of points maximum/minimum : inf\n");
+        printf(_("Number of points maximum/minimum : inf\n"));
     else
         printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
     #endif

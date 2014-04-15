@@ -36,6 +36,12 @@
 
 #include "interface.h"
 
+/*!
+ * \def PORTABLE
+ * Definit PORTABLE
+ */
+//#define PORTABLE
+
 
 int main(int argc, char *argv[]);
 

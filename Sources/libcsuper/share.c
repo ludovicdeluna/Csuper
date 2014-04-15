@@ -1,9 +1,9 @@
 /*!
  * \file    share.c
- * \brief   Fonctions essentielles au fonctionnement du programme
+ * \brief   Essential function of libcsuper
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    15/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -11,14 +11,14 @@
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
- * This file is part of Csuper.
+ * This file is part of LibCsuper.
  *
- * Csuper is free software; you can redistribute it and/or modify
+ * LibCsuper is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * Csuper is distributed in the hope that it will be useful,
+ * LibCsuper is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -50,7 +50,7 @@ void libcsuper_initialize()
 
 /*!
  * \fn void wrongChoice()
- *  Affiche un message d'erreur.
+ *  Display an error message.
  */
 void wrongChoice()
 {
@@ -61,7 +61,7 @@ void wrongChoice()
 
 /*!
  * \fn void clearScreen()
- *  Efface la console de l'utilisateur.
+ *  Clear the terminal.
  */
 void clearScreen()
 {
@@ -85,9 +85,10 @@ void clearScreen()
 
 /*!
  * \fn int compareFloatAscending(void const *a, void const *b)
- *  Compare 2 Flottant, renvoie 1 si a>b, 0 si a=b et -1 si a<b
- * \param[in] *a un pointeur sur un flottant
- * \param[in] *b un pointeur sur un flottant
+ *  Compare 2 float
+ * \param[in] *a a pointer on a float
+ * \param[in] *b a pointer on a float
+ * \return 1 if a>b, 0 if a=b and -1 if a<b
  */
 int compareFloatAscending(void const *a, void const *b)
 {
@@ -116,9 +117,10 @@ int compareFloatAscending(void const *a, void const *b)
 
 /*!
  * \fn int int compareFloatDescending(void const *a, void const *b)
- *  Compare 2 Flottant, renvoie 1 si a<b, 0 si a=b et -1 si a>b
- * \param[in] *a un pointeur sur un flottant
- * \param[in] *b un pointeur sur un flottant
+ *  Compare 2 float
+ * \param[in] *a a pointer on a float
+ * \param[in] *b a pointer on a float
+ * \return 1 if a<b, 0 if a=b and -1 if a>b
  */
 int compareFloatDescending(void const *a, void const *b)
 {
@@ -147,10 +149,10 @@ int compareFloatDescending(void const *a, void const *b)
 
 /*!
  * \fn FILE *openFile(char file_name[], char mode[])
- *  Ouvre un fichier a partir de son nom (nom[]) et du mode voulu (mode[])
- * \param[in] file_name[] le nom du fichier
- * \param[in] mode[] le mode voulu
- * \return un pointeur sur le fichier ouvert, NULL s'il y a eut un probleme
+ *  Open a file with his name and with a specific mode.
+ * \param[in] file_name[] the filename
+ * \param[in] mode[] the mode
+ * \return a pointer to the open file, NULL if there was a problem
  */
 FILE *openFile(char file_name[], char mode[])
 {
@@ -168,9 +170,9 @@ FILE *openFile(char file_name[], char mode[])
 
 /*!
  * \fn int closeFile(FILE *ptr_file)
- *  Ferme le fichier
- * \param[in] *ptr_file le fichier
- * \return entier 0 si tout s'est bien passe, 1 sinon
+ *  Close the file
+ * \param[in] *ptr_file the file
+ * \return 0 if everything is OK, 1 otherwise
  */
 int closeFile(FILE *ptr_file)
 {
@@ -190,9 +192,9 @@ int closeFile(FILE *ptr_file)
 
 /*!
  * \fn int readFileSize(FILE *ptr_file)
- *  Lis la size du fichier
- * \param[in] *ptr_file le fichier
- * \return entier ayant la size du fichier
+ *  Read the size of the file
+ * \param[in] *ptr_file the file
+ * \return the size of the file
  */
 int readFileSize(FILE *ptr_file)
 {
@@ -208,9 +210,9 @@ int readFileSize(FILE *ptr_file)
 
 /*!
  * \fn void *myAlloc(int size_alloue)
- *  Alloue un bloc memoire et verifie que ca s'est bien alloue
- * \param[in] size_alloue la size à allouer
- * \return un pointeur sur la structure alloué
+ *  Allocate a memory block and check if everything is OK.
+ * \param[in] size_alloue the size
+ * \return a pointer on the allocate memory block
  */
 void *myAlloc(int size_alloue)
 {
@@ -229,9 +231,9 @@ void *myAlloc(int size_alloue)
 
 /*!
  * \fn void myRealloc(void *ptr,int size_alloue)
- *  Realloue un bloc memoire et verifie que ca s'est bien alloue
- * \param[in] size_alloue la size à allouer
- * \param[in] ptr le pointeur sur quoi ca doit etre realloue
+ *  Reallocate a memory block and check if everything is OK.
+ * \param[in] size_alloue the size
+ * \param[in] a pointer on the reallocate memory block
  */
 void myRealloc(void **ptr,int size_alloue)
 {
@@ -247,8 +249,8 @@ void myRealloc(void **ptr,int size_alloue)
 
 /*!
  * \fn void addFileCsuExtension(char *file_name)
- *  Ajoute l'extension du fichier si elle n'y est pas
- * \param[in] file_name le nom de fichier
+ *  Add the csu file extension
+ * \param[in] file_name the filename
  */
 void addFileCsuExtension(char *file_name)
 {
@@ -256,11 +258,11 @@ void addFileCsuExtension(char *file_name)
     char ext[4]="abc";
     int i;
 
-    /*Lecture de l'extension du fichier*/
+    /*Read the extension of the file*/
     for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)
             ext[-strlen(file_name)+i+3]=file_name[i];
 
-    /*Ajout de l'extension au nom de fichier si elle n'y est pas*/
+    /*Add the csu extension if it is not there*/
     if (strcmp(file_extension,ext)!=0)
         sprintf(file_name,"%s.%s",file_name,FILE_EXTENSION);
 }

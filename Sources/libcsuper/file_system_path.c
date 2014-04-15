@@ -11,14 +11,14 @@
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
- * This file is part of Csuper.
+ * This file is part of LibCsuper.
  *
- * Csuper is free software; you can redistribute it and/or modify
+ * LibCsuper is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * Csuper is distributed in the hope that it will be useful,
+ * LibCsuper is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -126,7 +126,6 @@ int readFileSystemPath(char *file_name)
  */
 int readSystemPath(char *file_name)
 {
-    #ifndef PORTABLE
     libcsuper_initialize();
 
     if (readFileSystemPath(file_name)==FALSE)
@@ -142,7 +141,6 @@ int readSystemPath(char *file_name)
             return FALSE;
         }
     }
-    #endif
     return TRUE;
 }
 

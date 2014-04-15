@@ -47,8 +47,10 @@ void displayFile()
 
     menuFileName(file_name);
 
+    #ifndef PORTABLE
     if(readSystemPath(file_name)==FALSE)
         return;
+    #endif // PORTABLE
 
     ptr_csu_struct=readCsuFile(file_name);
 
@@ -79,8 +81,10 @@ void deleteCsuFileNom()
     clearScreen();
     menuFileName(file_name);
 
+    #ifndef PORTABLE
     if(readSystemPath(file_name)==FALSE)
         return;
+    #endif // PORTABLE
 
     deleteCsuFile(file_name);
     systemPause();
@@ -101,8 +105,10 @@ void listCsuFiles()
 
     clearScreen();
 
+    #ifndef PORTABLE
     if(readSystemPath(folder)==FALSE)
         return;
+    #endif // PORTABLE
 
     /*Lecture du folder*/
     rep = opendir(folder);
@@ -191,8 +197,10 @@ void newGame()
     clearScreen();
     menuFileName(file_name);
 
+    #ifndef PORTABLE
     if(readSystemPath(file_name)==FALSE)
         return;
+    #endif // PORTABLE
 
     menuStartGame(&nb_players,&config);
 
@@ -227,8 +235,10 @@ void loadGame()
     clearScreen();
     menuFileName(file_name);
 
+    #ifndef PORTABLE
     if(readSystemPath(file_name)==FALSE)
         return;
+    #endif // PORTABLE
 
     ptr_csu_struct=readCsuFile(file_name);
 
@@ -380,7 +390,9 @@ void readFilePath()
 
     clearScreen();
 
+    #ifndef PORTABLE
     readSystemPath(path);
+    #endif // PORTABLE
 
     printf(_("Your files are saved in %s\n"),path);
     systemPause();
