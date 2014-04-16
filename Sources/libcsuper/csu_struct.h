@@ -1,9 +1,9 @@
 /*!
  * \file    csu_struct.h
- * \brief   Prototypes des fonction de gestion des fichiers de la struction contenant les informations
+ * \brief   Management of the csu files header
  * \author  Remi BERTHO
- * \date    09/03/14
- * \version 2.1.0
+ * \date    16/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -40,52 +40,52 @@
 
 /*!
  * \def SIZE_MAX_NAME
- * Definit la size max d'un nom a 30
+ * Define size max of name to 30
  */
 #define SIZE_MAX_NAME 30
 
 /*!
  * \def VERSION
- * Definit la version a 1.4
+ * Define the version to 1.4
  */
 #define VERSION 1.4
 
 /*!
  * \struct game_config
- * Type representant une configuration de jeu
+ * Represent a game configuration
  */
 typedef struct
 {
-    float nb_max;               /*!< Nombre maximum que peut prendre un joueur. */
-    char first_way;          /*!< Vaut 1 si le premier est celui qui a le plus de points, -1 sinon */
-    char turn_by_turn;         /*!< Vaut 1 si on joue en tour par tour, 0 sinon */
-    char use_distributor;       /*!< Vaut 1 si on utilise un distributeur, 0 sinon */
-    char number_after_comma;    /*!< Le nombre de chiffres apres la virgule dans l'affichage */
-    char max;                   /*!< Vaut 1 si on utilise un maximum, 0 si c'est un minimum */
-    char name[SIZE_MAX_NAME];  /*!< Le nom de la configuration de jeu */
-    float begin_score;          /*!< L score de chacun des joueurs au debut de la partie */
+    float nb_max;               /*!< Number maximum or minimum that can reach a player. */
+    char first_way;             /*!< Is 1 if the first those has the maximum of points, -1 otherwise */
+    char turn_by_turn;          /*!< Is 1 if the game is on turn by turn, 0 otherwise */
+    char use_distributor;       /*!< Is 1 if the game use a distributor, 0 otherwise */
+    char number_after_comma;    /*!< The number of digit which are display */
+    char max;                   /*!< Is 1 if the game use a maximum, 0 if it's a minimum */
+    char name[SIZE_MAX_NAME];   /*!< The name of the game configuration */
+    float begin_score;          /*!< The score of all players in the beginning of the game */
 }game_config;
 
 
 /*!
  * \struct csuStruct
- * Type representant un fichier .jeu
+ * Represent a csu file
  */
 typedef struct
 {
-    float version;         /*!< Version de la structure. */
-    float size_max_name;  /*!< Taille maximum que peut prendre un nom de joueur. */
-    float day;            /*!< Jour de creation de la structure. */
-    float month;            /*!< Mois de creation de la structure. */
-    float year;           /*!< Annee de creation de la structure. */
-    float nb_player;       /*!< Nombre de joueurs. */
-    game_config config;    /*!< La configuration de la partie*/
-    char **player_names;     /*!< Tableau contenant tout les noms de joueurs. */
-    float *total_points;      /*!< Tableau contenant tout les points totaux des joueurs. */
-    float *rank;       /*!< Tableau contenant la rank des joueurs. */
-    float *nb_turn;        /*!< Nombre de tour dans le jeu par joueur. */
-    float distributor;       /*!< Numero de la personne qui doit distributorr. */
-    float **point;         /*!< Tableau contenat les points de chaque joueur a chaque tour. */
+    float version;              /*!< Version of the structure. */
+    float size_max_name;        /*!< Maximum size that can reach a player name. */
+    float day;                  /*!< Day of the structure creation. */
+    float month;                /*!< Month of the structure creation. */
+    float year;                 /*!< Year of the structure creation. */
+    float nb_player;            /*!< Number of player. */
+    game_config config;         /*!< The game configuration.*/
+    char **player_names;        /*!< Array containing the name of all players. */
+    float *total_points;        /*!< Array containing the total score of all players. */
+    float *rank;                /*!< Array containing the rank of all players. */
+    float *nb_turn;             /*!< Array containing the number of turn of all players. */
+    float distributor;          /*!< Index of the distributor. */
+    float **point;              /*!< Array containing the points of all players in each turn. */
 } csuStruct;
 
 csuStruct *newCsuStruct(float nb_player , game_config config);

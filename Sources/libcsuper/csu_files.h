@@ -1,9 +1,9 @@
 /*!
  * \file    csu_files.h
- * \brief   Prototypes des fonction de gestion des fichiers
+ * \brief   Files management
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    16/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -40,19 +40,19 @@
 
 /*!
  * \def SIZE_MAX_FILE_NAME
- * Definit la size max d'un nom a 250
+ * Define the size maximum of a filename to 250
  */
 #define SIZE_MAX_FILE_NAME 250
 
 /*!
  * \def FILE_EXTENSION
- * Definit l'extension du fichier a "csu"
+ * Define the file extension to "csu"
  */
 #define FILE_EXTENSION "csu"
 
 /*!
  * \def STRING_CHECK_CSU_FILE
- * Definit la chaine de caractere permettant de verifier le type de fichier a "CompteurScoreUniversel"
+ * String for checking if the file is a csu file.
  */
 #define STRING_CHECK_CSU_FILE "CompteurScoreUniversel"
 

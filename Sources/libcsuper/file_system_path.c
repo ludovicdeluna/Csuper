@@ -35,8 +35,8 @@
 
 /*!
  * \fn void createFileSystemPath()
- *  Cree le dossier et le fichier qui va contenir les preferences
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ *  Create the folder and the file which contain the system path
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int createFileSystemPath()
 {
@@ -44,12 +44,8 @@ int createFileSystemPath()
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
 
-    /*Lecture du chemin Document et creation du dossier au bonne endroit et de la chaine qui va contenir le fichier*/
-    #ifdef __unix__
-    strcpy(folder,getenv("HOME"));
-    #elif _WIN32
-    strcpy(folder,getenv("USERPROFILE"));
-    #endif
+    /*Read the home directory and create the folder*/
+    readHomePath(folder);
     sprintf(folder,"%s/%s",folder,MAIN_FOLDER_NAME);
     #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -64,7 +60,6 @@ int createFileSystemPath()
     if (ptr_file==NULL)
         return FALSE;
 
-    /*Ecrit le folder courant comme folder par defaut*/
     fprintf(ptr_file,"%s",folder);
 
     closeFile(ptr_file);
@@ -74,9 +69,9 @@ int createFileSystemPath()
 
 /*!
  * \fn int readFileSystemPath(char *file_name)
- *  lis les preferences du fichier et ajoute le chemin lu dans le nom de fichier passe en parametre
- * \param[in,out] *file_name le nom du fichier a qui on va ajouter son chemin
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ *  Read the system path and the path read to the filename
+ * \param[in,out] *file_name the filename
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int readFileSystemPath(char *file_name)
 {
@@ -85,12 +80,7 @@ int readFileSystemPath(char *file_name)
     int file_size;
     FILE *ptr_file;
 
-    /*Lecture du chemin Document et creation du nom de fichier du fichier preferences*/
-    #ifdef __unix__
-    strcpy(file_name_preferences,getenv("HOME"));
-    #elif _WIN32
-    strcpy(file_name_preferences,getenv("USERPROFILE"));
-    #endif
+    readHomePath(file_name_preferences);
     sprintf(file_name_preferences,"%s/%s/%s",file_name_preferences,MAIN_FOLDER_NAME,FILE_NAME_SYSTEM_PATH);
 
     ptr_file=openFile(file_name_preferences,"r");
@@ -98,31 +88,21 @@ int readFileSystemPath(char *file_name)
     if(ptr_file == NULL)
         return FALSE;
 
-    /*Lis le folder contenue dans le fichier*/
     file_size=readFileSize(ptr_file);
     fgets(folder,file_size+1,ptr_file);
-
-    /*Ajoute le folder lu au nom de fichier*/
-    #ifdef __unix__
-    sprintf(folder,"%s/%s",folder,file_name);
-    #elif _WIN32
-    sprintf(folder,"%s\\%s",folder,file_name);
-    #endif
-
-    strcpy(file_name,folder);
-
     closeFile(ptr_file);
+
+    sprintf(folder,"%s/%s",folder,file_name);
+    strcpy(file_name,folder);
 
     return TRUE;
 }
 
 /*!
  * \fn int readSystemPath(char *file_name)
- *  Ajoute le chemin du fichier dans le nom du fichier a partir des preferences, si le fichier de preference n'existe
- *  pas il le cree
- *  Attention ne fait quelque chose uniquement si la constant PORTABLE n'est pas defini
- * \param[in,out] *file_name le nom du fichier a qui on va ajouter son chemin
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ *  Add the system path, if the file system path doesn't exist, it create it.
+ * \param[in,out] *file_name the filename
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int readSystemPath(char *file_name)
 {
@@ -146,9 +126,9 @@ int readSystemPath(char *file_name)
 
 /*!
  * \fn int changeSystemPath(char *new_path)
- *  Changer le chemin de sauvegarde des fichier par new_path
+ *  Change the system path
  * \param[in,out] *new_path le nomveau chemin
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int changeSystemPath(char *new_path)
 {
@@ -158,13 +138,7 @@ int changeSystemPath(char *new_path)
     if (createFileSystemPath()==FALSE)
         return FALSE;
 
-
-    /*Lecture du chemin Document et cree la chaine qui va contenir le nom du fichier*/
-    #ifdef __unix__
-    strcpy(file_name,getenv("HOME"));
-    #elif _WIN32
-    strcpy(file_name,getenv("USERPROFILE"));
-    #endif
+    readHomePath(file_name);
 
     sprintf(file_name,"%s/%s/%s",file_name,MAIN_FOLDER_NAME,FILE_NAME_SYSTEM_PATH);
 
@@ -178,4 +152,33 @@ int changeSystemPath(char *new_path)
     closeFile(ptr_file);
 
     return TRUE;
+}
+
+/*!
+ * \fn void readHomePath(char *path)
+ *  Read the home path
+ * \param[in,out] path the path
+ */
+void readHomePath(char *path)
+{
+    #ifdef __unix__
+    strcpy(path,getenv("HOME"));
+    #elif _WIN32
+    strcpy(path,getenv("USERPROFILE"));
+    #endif
+}
+
+/*!
+ * \fn void readHomePath(char *path)
+ *  Read the home path with a slash at the end
+ * \param[in,out] path the path
+ */
+void readHomePathSlash(char *path)
+{
+    #ifdef __unix__
+    strcpy(path,getenv("HOME"));
+    #elif _WIN32
+    strcpy(path,getenv("USERPROFILE"));
+    #endif
+    sprintf(path,"%s/",path);
 }

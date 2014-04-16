@@ -1,8 +1,8 @@
 /*!
  * \file    game_config.h
- * \brief   Prototypes des fonction des fichiers lies a la configuration de jeu
+ * \brief   Game configurations
  * \author  Remi BERTHO
- * \date    27/03/14
+ * \date    16/04/14
  * \version 2.2.0
  */
 
@@ -40,30 +40,35 @@
 
 /*!
  * \def CONFIGURATION_FOLDER_NAME
- * Definit CONFIGURATION_FOLDER_NAME a "config"
+ * Define the name of the folder which contain the game configurations
  */
 #define CONFIGURATION_FOLDER_NAME "config"
 
 /*!
  * \def CONFIGURATION_FILE_NAME
- * Definit CONFIGURATION_FILE_NAME a "configuratio"
+ * Define the name of the file which contain the list of the game configurations
  */
 #define CONFIGURATION_FILE_NAME "configuration"
 
+/*!
+ * \struct csuStruct
+ * Represent a list of game configuration
+ */
 typedef struct
 {
-    int nb_config;
-    char **name_game_config;
+    int nb_config;              /*!< Number of game configuration. */
+    char **name_game_config;    /*!< The list of the game configuration. */
 }list_game_config;
+
 
 list_game_config *newListGameConfig(int nb_config);
 void closeListGameConfig(list_game_config *ptr_list_config);
-int makeConfigListFile();
-list_game_config *readConfigListFile();
-int addConfigListFile(char *new_config_name);
-int removeConfigListFile(int index_delete, list_game_config *ptr_list_config);
-int newConfigFile(game_config config);
-int removeConfigFile(char *config_name);
-int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config);
+int makeConfigListFile(char * home_path);
+list_game_config *readConfigListFile(char * home_path);
+int addConfigListFile(char *new_config_name, char * home_path);
+int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,char * home_path);
+int newConfigFile(game_config config,char * home_path);
+int removeConfigFile(char *config_name,char * home_path);
+int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path);
 
 #endif

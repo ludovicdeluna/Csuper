@@ -1,8 +1,8 @@
 /*!
  * \file    game_config.c
- * \brief   Fonction des fichiers lies a la configiguration de jeu
+ * \brief   Game configuration
  * \author  Remi BERTHO
- * \date    27/03/14
+ * \date    16/04/14
  * \version 2.2.0
  */
 
@@ -35,8 +35,8 @@
 
 /*!
  * \fn list_game_config *newListGameConfig(int nb_config)
- *  Cree une structure list_game_config
- * \parma[in] nb_config le nombre de configuration disponible
+ *  Create a list of game configuration.
+ * \parma[in] nb_config the number of game configuration
  * \return une list_game_config
  */
 list_game_config *newListGameConfig(int nb_config)
@@ -52,8 +52,8 @@ list_game_config *newListGameConfig(int nb_config)
 
 /*!
  * \fn void closeListGameConfig(list_game_config *ptr_list_config)
- *  Desalloue une structure list_game_config
- * \parma[in] ptr_list_config un pointeur sur un list_game_config
+ *  Free a list of game configuration
+ * \parma[in] ptr_list_config a pointer on a list of game configuration
  */
 void closeListGameConfig(list_game_config *ptr_list_config)
  {
@@ -65,27 +65,18 @@ void closeListGameConfig(list_game_config *ptr_list_config)
  }
 
  /*!
- * \fn int makeConfigListFile()
- *  Cree les dossier et le fichier qui va contenir les configs
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ * \fn int makeConfigListFile(char * home_path)
+ *  Create the folder which contain the games configurations and the files which contain the list of games configurations
+ * \param[in] home_path the path to the home directory
+ * \return TRUE if everything is OK, FALSE otherwise
  */
-int makeConfigListFile()
+int makeConfigListFile(char * home_path)
 {
     char folder[SIZE_MAX_FILE_NAME]="";
     char file_name[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
 
-    /*Lecture du chemin Document et creation du dossier au bonne endroit et de la chaine qui va contenir le fichier*/
-    #ifndef PORTABLE
-    #ifdef __unix__
-    strcpy(folder,getenv("HOME"));
-    #elif _WIN32
-    strcpy(folder,getenv("USERPROFILE"));
-    #endif
-    sprintf(folder,"%s/",folder);
-    #endif // PORTABLE
-
-    sprintf(folder,"%s%s",folder,MAIN_FOLDER_NAME);
+    sprintf(folder,"%s%s",home_path,MAIN_FOLDER_NAME);
 
     #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -116,11 +107,12 @@ int makeConfigListFile()
 }
 
 /*!
- * \fn list_game_config *readConfigListFile()
- *  Cree une structure list_game_config a partir du fichier de configuration
- * \return une list_game_config
+ * \fn list_game_config *readConfigListFile(char * home_path)
+ *  Read the file which contain the list of game configuration.
+ * \param[in] home_path the path to the home directory
+ * \return a list_game_config
  */
-list_game_config *readConfigListFile()
+list_game_config *readConfigListFile(char * home_path)
 {
     char file_name_config[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
@@ -128,26 +120,16 @@ list_game_config *readConfigListFile()
     int nb_config;
     int i;
 
-    /*Lecture du chemin Document et creation du nom de fichier du fichier config*/
-    #ifndef PORTABLE
-    #ifdef __unix__
-    strcpy(file_name_config,getenv("HOME"));
-    #elif _WIN32
-    strcpy(file_name_config,getenv("USERPROFILE"));
-    #endif
-    sprintf(file_name_config,"%s/",file_name_config);
-    #endif // PORTABLE
-    sprintf(file_name_config,"%s%s/%s",file_name_config,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
+    sprintf(file_name_config,"%s%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
 
     ptr_file=openFile(file_name_config,"r");
 
     if(ptr_file == NULL)
     {
-        makeConfigListFile();
+        makeConfigListFile(home_path);
         ptr_file=openFile(file_name_config,"r");
     }
 
-    /*Lis le nombre de config*/
     fscanf(ptr_file,"%d",&nb_config);
 
     ptr_config=newListGameConfig(nb_config);
@@ -161,29 +143,20 @@ list_game_config *readConfigListFile()
 }
 
 /*!
- * \fn int addConfigListFile(list_game_config *ptr_list_config, char *new_config_name)
- *  Ajoute une nouvelle configuration dans le fichier qui les liste
- * \param[in] new_config_game le nom de la nouvelle configuration
+ * \fn int addConfigListFile(char *new_config_name,char *home_path)
+ *  Add a new game configuration into the file which contain the list of game configuration.
+ * \param[in] new_config_game the name of the new game configuration
+ * \param[in] home_path the path to the home directory
  * \return TRUE si tout s'est bien passe, FALSE sinon
  */
-int addConfigListFile(char *new_config_name)
+int addConfigListFile(char *new_config_name,char *home_path)
 {
     char file_name_config[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
     int i;
-    list_game_config *ptr_list_config =readConfigListFile();
+    list_game_config *ptr_list_config =readConfigListFile(home_path);
 
-    /*Lecture du chemin Document et creation du nom de fichier du fichier config*/
-    #ifndef PORTABLE
-    #ifdef __unix__
-    strcpy(file_name_config,getenv("HOME"));
-    #elif _WIN32
-    strcpy(file_name_config,getenv("USERPROFILE"));
-    #endif
-    sprintf(file_name_config,"%s/",file_name_config);
-    #endif // PORTABLE
-    sprintf(file_name_config,"%s%s/%s",file_name_config,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
-
+    sprintf(file_name_config,"%s%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
 
     ptr_file=openFile(file_name_config,"w");
 
@@ -204,30 +177,22 @@ int addConfigListFile(char *new_config_name)
 }
 
 /*!
- * \fn int removeConfigListFile(int index_delete, list_game_config *ptr_list_config)
- *  Enleve une configuration du fichier qui les liste
- * \param[in] num_sppr le numero de la config a supprimer
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ * \fn int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,char *home_path)
+ *  Remove a game configuration in the file which contain the list of game configuration and remove the game configuration.
+ * \param[in] index_delete the index pf the file which will be deleted
+ * \param[in] list_game_config the list of game configuration
+ * \param[in] home_path the path to the home directory
+ * \return TRUE if everything is OK, FALSE otherwise
  */
-int removeConfigListFile(int index_delete, list_game_config *ptr_list_config)
+int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,char *home_path)
 {
     char file_name_config[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
     int i;
 
-    ptr_list_config=readConfigListFile();
+    ptr_list_config=readConfigListFile(home_path);
 
-    /*Lecture du chemin Document et creation du nom de fichier du fichier config*/
-    #ifndef PORTABLE
-    #ifdef __unix__
-    strcpy(file_name_config,getenv("HOME"));
-    #elif _WIN32
-    strcpy(file_name_config,getenv("USERPROFILE"));
-    #endif
-    sprintf(file_name_config,"%s/",file_name_config);
-    #endif // PORTABLE
-    sprintf(file_name_config,"%s%s/%s",file_name_config,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
-
+    sprintf(file_name_config,"%s%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
 
     ptr_file=openFile(file_name_config,"w+");
 
@@ -241,7 +206,7 @@ int removeConfigListFile(int index_delete, list_game_config *ptr_list_config)
         if (i!=index_delete)
             fprintf(ptr_file,"%s\n",ptr_list_config->name_game_config[i]);
         else
-            removeConfigFile(ptr_list_config->name_game_config[i]);
+            removeConfigFile(ptr_list_config->name_game_config[i],home_path);
     }
 
     closeFile(ptr_file);
@@ -251,29 +216,19 @@ int removeConfigListFile(int index_delete, list_game_config *ptr_list_config)
 }
 
  /*!
- * \fn int newConfigFile(game_config config, char *config_name)
- *  Cree un fichier de configs de jeu
- * \param[in] config la config du jeu
- * \param[in] config_name le nom de la config
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ * \fn int newConfigFile(game_config config,char * home_path)
+ *  Create a game configuration file and put it into the game configuration file list.
+ * \param[in] config the gale configuration
+ * \param[in] home_path the path to the home directory
+ * \return TRUE if everything is OK, FALSE otherwise
  */
-int newConfigFile(game_config config)
+int newConfigFile(game_config config,char * home_path)
 {
     char folder[SIZE_MAX_FILE_NAME]="";
     char file_name[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
 
-    /*Lecture du chemin Document et creation du dossier au bonne endroit et de la chaine qui va contenir le fichier*/
-    #ifndef PORTABLE
-    #ifdef __unix__
-    strcpy(folder,getenv("HOME"));
-    #elif _WIN32
-    strcpy(folder,getenv("USERPROFILE"));
-    #endif
-    sprintf(folder,"%s/",folder);
-    #endif // PORTABLE
-
-    sprintf(folder,"%s%s",folder,MAIN_FOLDER_NAME);
+    sprintf(folder,"%s%s",home_path,MAIN_FOLDER_NAME);
 
     #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -307,35 +262,26 @@ int newConfigFile(game_config config)
 
     closeFile(ptr_file);
 
-    addConfigListFile(config.name);
+    addConfigListFile(config.name,home_path);
 
     return TRUE;
 }
 
  /*!
- * \fn int removeConfigFile(char *config_name)
- *  Supprime un fichier de configs de jeu
- * \param[in] config_name le nom de la configuration de jeu
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ * \fn int removeConfigFile(char *config_name,char * home_path)
+ *  Delete a game configuration.
+ * \param[in] config_name the name of the game configuration which will be deleted
+ * \param[in] home_path the path to the home directory
+ * \return TRUE if everything is OK, FALSE otherwise
  */
-int removeConfigFile(char *config_name)
+int removeConfigFile(char *config_name,char * home_path)
 {
     char folder[SIZE_MAX_FILE_NAME]="";
     char file_name[SIZE_MAX_FILE_NAME]="";
 
     libcsuper_initialize();
 
-    /*Lecture du chemin Document et creation du dossier au bonne endroit et de la chaine qui va contenir le fichier*/
-    #ifndef PORTABLE
-    #ifdef __unix__
-    strcpy(folder,getenv("HOME"));
-    #elif _WIN32
-    strcpy(folder,getenv("USERPROFILE"));
-    #endif
-    sprintf(folder,"%s/",folder);
-    #endif // PORTABLE
-
-    sprintf(folder,"%s%s",folder,MAIN_FOLDER_NAME);
+    sprintf(folder,"%s%s",home_path,MAIN_FOLDER_NAME);
 
     #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -368,14 +314,15 @@ int removeConfigFile(char *config_name)
 }
 
 /*!
- * \fn int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config)
- *  Lis un fichier de configuration de jeu et ferme la liste de configuration de jeu.
- * \param[in] index_read le numero de la liste de config a lire
- * \param[in] ptr_list_config un pointeur sur une liste de configuration  de jeu
- * \param[in] ptr_config un pointeur sur une configuration de jeu
- * \return une list_game_config
+ * \fn int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path)
+ *  Read a game configuration file and close the list of game configuration
+ * \param[in] index_read the index of the game configuration to be read
+ * \param[in] ptr_list_config a pointer on the game configration list
+ * \param[in] ptr_config a pointer on a game configuration
+ * \param[in] home_path the path to the home directory
+ * \return a list_game_config
  */
-int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config)
+int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path)
 {
     char file_name_config[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
@@ -383,16 +330,7 @@ int readConfigFile(int index_read, list_game_config *ptr_list_config, game_confi
     char buffer[5];
     #endif // _WIN32
 
-    /*Lecture du chemin Document et creation du nom de fichier du fichier config*/
-    #ifndef PORTABLE
-    #ifdef __unix__
-    strcpy(file_name_config,getenv("HOME"));
-    #elif _WIN32
-    strcpy(file_name_config,getenv("USERPROFILE"));
-    #endif
-    sprintf(file_name_config,"%s/",file_name_config);
-    #endif // PORTABLE
-    sprintf(file_name_config,"%s%s/%s/%s",file_name_config,MAIN_FOLDER_NAME,CONFIGURATION_FOLDER_NAME,ptr_list_config->name_game_config[index_read]);
+    sprintf(file_name_config,"%s%s/%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FOLDER_NAME,ptr_list_config->name_game_config[index_read]);
 
     ptr_file=openFile(file_name_config,"r");
 

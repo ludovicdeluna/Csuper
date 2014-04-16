@@ -35,9 +35,9 @@
 
 /*!
  * \fn csuStruct *newCsuStruct(float nb_player , game_config config)
- *  Cree une structure Fichier_jeu a partir des donnees de la fonction.
- * \param[in] nb_player le nombre de joueur
- * \param[in] config la configuration de la partie
+ *  Create a new csuStruct from a game configuration and the number of player.
+ * \param[in] nb_player the number of player
+ * \param[in] config the game configuration
  */
 csuStruct *newCsuStruct(float nb_player , game_config config)
 {
@@ -46,29 +46,29 @@ csuStruct *newCsuStruct(float nb_player , game_config config)
     time_t timestamp;
     struct tm *t;
 
-    /*Allocation memoire de la structure*/
+    /*Memory allocation of the structure*/
     ptr_csu_struct=(csuStruct *)myAlloc(sizeof(csuStruct));
 
-    /*Copie de certaines variables dans la structure*/
+    /*Copy the a few variable on the structure*/
     ptr_csu_struct->size_max_name=SIZE_MAX_NAME;
     ptr_csu_struct->version=VERSION;
     ptr_csu_struct->nb_player=nb_player;
     ptr_csu_struct->distributor=0;
     ptr_csu_struct->config=config;
 
-    /*Allocation memoire des nombre de tours*/
+    /*Memory allocation of the number of turn*/
     ptr_csu_struct->nb_turn=(float *)myAlloc(nb_player*sizeof(float*));
 
-    /*Allocation memoire du tableau des nom des personnes*/
+    /*Memory allocation of the player's names*/
     ptr_csu_struct->player_names=(char **)myAlloc(nb_player*sizeof(char*));
     for (i=0 ; i<nb_player ; i++)
         ptr_csu_struct->player_names[i]=(char *)myAlloc(SIZE_MAX_NAME*sizeof(char));
 
-    /*Allocation memoire des points totaux et des de ranks*/
+    /*Memory allocation of the total points and the ranking*/
     ptr_csu_struct->total_points=(float *)myAlloc(nb_player*sizeof(float));
     ptr_csu_struct->rank=(float *)myAlloc(nb_player*sizeof(float));
 
-    /*Initialisation des points totaux,de la rank et du nombre de tour*/
+    /*Initialization of the total points,the rank and the number of turns*/
     for (i=0 ; i<nb_player ; i++)
     {
         ptr_csu_struct->total_points[i]=ptr_csu_struct->config.begin_score;
@@ -76,12 +76,12 @@ csuStruct *newCsuStruct(float nb_player , game_config config)
         ptr_csu_struct->nb_turn[i]=0;
     }
 
-    /*Allocation memoire du tableau de points*/
+    /*Memory allocation of the points*/
     ptr_csu_struct->point=(float **)myAlloc(ptr_csu_struct->nb_player*sizeof(float*));
     for (i=0 ; i<nb_player ; i++)
         ptr_csu_struct->point[i]=(float*)myAlloc(0*sizeof(float));
 
-    /*Enregistrement de la date courante dans la structure*/
+    /*Save the current date*/
     timestamp = time(NULL);
     t = localtime(&timestamp);
     ptr_csu_struct->year=(t->tm_year+1900);
@@ -93,8 +93,8 @@ csuStruct *newCsuStruct(float nb_player , game_config config)
 
 /*!
  * \fn void closeCsuStruct(csuStruct *ptr_csu_struct)
- *  Desalloue la memoire attribuee a la structure csuStruct mis en parametre
- * \param[in,out] *ptr_csu_struct un pointeur sur la structure csuStruct a fermer
+ *  Free a csuStruct
+ * \param[in,out] *ptr_csu_struct a pointer to the csuStruct
  */
 void closeCsuStruct(csuStruct *ptr_csu_struct)
 {
@@ -113,10 +113,10 @@ void closeCsuStruct(csuStruct *ptr_csu_struct)
 }
 
 /*!
- * \fn void startNewTurn(csuStruct *ptr_csu_struct)
- *  Realloue l'espace memoire dedie au points sur la structure csuStruct mis en parametre pour un nouveau tour
- * \param[in,out] *ptr_csu_struct un pointeur sur la structure csuStruct
- * \param[in,out] index_player le numero du joueur qui va commencer un nouveau tour, vaut -1 si c'est tout le monde
+ * \fn void startNewTurn(csuStruct *ptr_csu_struct,int index_player)
+ *  Reallocate the memory for the point to begin a new turn.
+ * \param[in,out] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in,out] index_player the index of the player who begin a new turn, -1 if everybody begin a new turn
  */
 void startNewTurn(csuStruct *ptr_csu_struct,int index_player)
 {
@@ -132,21 +132,22 @@ void startNewTurn(csuStruct *ptr_csu_struct,int index_player)
 }
 
 /*!
- * \fn void endNewTurn(csuStruct *ptr_csu_struct)
- *  Met a day les points totaux, le nombre de tour, la personne qui doit distributorr et les ranks pour un nouveau tour
- * \param[in,out] *ptr_csu_struct un pointeur sur la structure csuStruct
- * \param[in,out] index_player le numero du joueur qui va commencer un nouveau tour, vaut -1 si c'est tout le monde
+ * \fn void endNewTurn(csuStruct *ptr_csu_struct, int index_player)
+ *  Update the total points, the number of turn, the distributor and the rank for a new turn
+ * \param[in,out] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in,out] index_player index_player the index of the player who begin a new turn, -1 if everybody begin a new turn
  */
 void endNewTurn(csuStruct *ptr_csu_struct, int index_player)
 {
     int i;
 
-    /*Mise a day des points totaux*/
+    /*Update the total points*/
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         ptr_csu_struct->total_points[i]+=ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]];
     }
 
+    /*Update the number of turn*/
     if (index_player == -1)
     {
         for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
@@ -155,7 +156,7 @@ void endNewTurn(csuStruct *ptr_csu_struct, int index_player)
     else
         (ptr_csu_struct->nb_turn[index_player])++;
 
-    /*Mise a day de la personne qui doit distributor*/
+    /*Update the distributor*/
     if (ptr_csu_struct->distributor == ptr_csu_struct->nb_player -1)
         ptr_csu_struct->distributor=0;
     else
@@ -166,8 +167,8 @@ void endNewTurn(csuStruct *ptr_csu_struct, int index_player)
 
 /*!
  * \fn void rankCalculation(csuStruct *ptr_csu_struct)
- *  Calcule les ranks des joueurs
- * \param[in,out] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Calculate the rank
+ * \param[in,out] *ptr_csu_struct a pointer on a csuStruct
  */
 void rankCalculation(csuStruct *ptr_csu_struct)
 {
@@ -175,29 +176,26 @@ void rankCalculation(csuStruct *ptr_csu_struct)
     int i;
     int j;
 
-    /*Allocation memoire de sort_points*/
     sort_points=(float *)myAlloc(sizeof(float)*ptr_csu_struct->nb_player);
 
-    /*Copie les pints totaux dans sort_points*/
     for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         sort_points[i]=ptr_csu_struct->total_points[i];
     }
 
-    /*Trie sort_points en fonction du sens du premier*/
+    /*Sort the points base on the first way*/
     if(ptr_csu_struct->config.first_way == 1)
         qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatDescending);
     else
         qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatAscending);
 
 
-    /*Boucle sur les points tries a partir du plus petit*/
+    /*Loop on the sort points from the smallest*/
     for(i=ptr_csu_struct->nb_player -1 ; i>=0 ; i--)
     {
-        /*Boucle sur les points totaux des joueurs*/
+        /*Loop on the total points*/
         for(j=0 ; j<ptr_csu_struct->nb_player ; j++)
         {
-            /*Si les points totaux sont egaux aux points trie, on enregistre la rank*/
             if (sort_points[i]==ptr_csu_struct->total_points[j])
             {
                 ptr_csu_struct->rank[j]=i+1;
@@ -210,9 +208,9 @@ void rankCalculation(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
- *  Ajoute la personne qui distributor dans la structure.
- * \param[in] *distributor_name le nom de la personne qui distributor
- * \param[in] *ptr_csu_struct la structure du fichier avec lequel on veut mettre la personne qui distributor
+ *  Add the distributor on the structure
+ * \param[in] *distributor_name the name of the distributor
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
  */
 void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
 {
@@ -231,9 +229,9 @@ void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
 
 /*!
  * \fn int exceedMaxNumber(csuStruct *ptr_csu_struct)
- *  Verifie si quelqu'un a depasse le score maximum
- * \param[in] *ptr_csu_struct la structure du fichier
- * \return TRUE s'il y a un depassement, FALSE sinon
+ *  Check if someone exceed the maximum number
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \return TRUE if someone exceed, FALSE otherwise
  */
 int exceedMaxNumber(csuStruct *ptr_csu_struct)
 {
@@ -257,9 +255,9 @@ int exceedMaxNumber(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn int maxNbTurn(csuStruct *ptr_csu_struct)
- *  Cherche le maximum de nombre de tour
- * \param[in] *ptr_csu_struct la structure du fichier
- * \return le nombre maximum de nombre de tour
+ *  Search the maximal number of turn
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \return the maximal number of turn
  */
 int maxNbTurn(csuStruct *ptr_csu_struct)
 {
@@ -276,10 +274,10 @@ int maxNbTurn(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
- *  Cherche l'indice du tableau dans lequel est stocke une personne.
- * \param[in] *distributor_name le nom de la personne
- * \param[in] *ptr_csu_struct la structure du fichier
- * \return l'indice du tableau, -1 si non trouve
+ *  Search the index of a person
+ * \param[in] *player_name the name of the player
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \return the index, -1 if there is not found
  */
 int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
 {
@@ -287,14 +285,12 @@ int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
 
     libcsuper_initialize();
 
-    /*Recherche du nom de la personne dans le nom des joueurs*/
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         if (strncasecmp(ptr_csu_struct->player_names[i],player_name,strlen(player_name))==0)
             return i;
     }
 
-    /*Message d'erreur si le nom n'est pas trouve*/
     printf(_("\nError this name doesn't exist.\n"));
     return -1;
 }

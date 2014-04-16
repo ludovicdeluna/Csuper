@@ -1,9 +1,9 @@
 /*!
  * \file    main_argument.c
- * \brief   Lancement du programme
+ * \brief   Begin csuper
  * \author  Remi BERTHO
- * \date    21/03/14
- * \version 2.1.0
+ * \date    16/04/14
+ * \version 2.2.0
  */
 
 /*
@@ -34,15 +34,15 @@
 #include "main_argument.h"
 
 /*!
- * \fn int searchArgument(int argc, char *argv[], int *fonction, int *file_place)
- *  Lance le programme
- * \param[in] argc le nombre d 'argument
- * \param[in] argv le tableau des arguments
- * \param[in] fonction entier determinant quelle fonction lancer
- * \param[in] file_place entier donnant l'emplacment du fichier a ouvrir
- * \return TRUE si la fonction a trouve un argument, FALSE sinon
+ * \fn int searchArgument(int argc, char *argv[], int *function, int *file_place)
+ *  Search the argument passed to the main function
+ * \param[in] argc the number of argument
+ * \param[in] argv the array of argument
+ * \param[in] function integer which determine which function run
+ * \param[in] file_place integer which determine the index of the filename
+ * \return TRUE if the function founded an argument, FALSE otherwise
  */
-int searchArgument(int argc, char *argv[], int *fonction, int *file_place)
+int searchArgument(int argc, char *argv[], int *function, int *file_place)
 {
     int i;
 
@@ -50,20 +50,20 @@ int searchArgument(int argc, char *argv[], int *fonction, int *file_place)
     {
         if (strcmp(argv[i],STRING_READ_FILE)==0 || strcmp(argv[i],STRING_READ_FILE_RED)==0)
         {
-            *fonction = READ_FILE;
+            *function = READ_FILE;
             *file_place = 1+i;
             break;
         }
         if (strcmp(argv[i],STRING_OPEN_FILE)==0 || strcmp(argv[i],STRING_OPEN_FILE_RED)==0)
         {
-            *fonction = OPEN_FILE;
+            *function = OPEN_FILE;
             *file_place = 1+i;
             break;
         }
         if (strcmp(argv[i],STRING_HELP)==0 || strcmp(argv[i],STRING_HELP_RED)==0)
         {
             displayHelp();
-            *fonction=HELP;
+            *function=HELP;
             *file_place = i;
             break;
         }
@@ -75,6 +75,11 @@ int searchArgument(int argc, char *argv[], int *fonction, int *file_place)
         return TRUE;
 }
 
+
+/*!
+ * \fn void displayHelp()
+ *  Display the help
+ */
 void displayHelp()
 {
     libcsuper_initialize();

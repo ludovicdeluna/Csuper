@@ -1,9 +1,9 @@
 /*!
  * \file    csu_files.c
- * \brief   Fonction de gestion des fichiers
+ * \brief   Files management
  * \author  Remi BERTHO
- * \date    09/03/14
- * \version 2.1.0
+ * \date    16/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -37,10 +37,10 @@
 
 /*!
  * \fn FILE *openFileCsuExtension(char file_name[], char mode[])
- *  Ouvre un fichier a partir de son nom et du mode voulu en y ajouter l'extension du fichier si necessaire
- * \param[in] file_name[] le nom du fichier
- * \param[in] mode[] le mode voulu
- * \return un pointeur sur le fichier ouvert, NULL s'il y a eut un probleme
+ *  Open a file with his name and with a specific mode and add the file extension if necessary.
+ * \param[in] file_name[] the filename
+ * \param[in] mode[] the mode
+ * \return a pointer on the open file, NULL if there is a problem
  */
 FILE *openFileCsuExtension(char file_name[], char mode[])
 {
@@ -52,10 +52,9 @@ FILE *openFileCsuExtension(char file_name[], char mode[])
 
 /*!
  * \fn csuStruct *readCsuFile(char *file_name)
- *  Lis ce qu'il y a dans le fichier avec le nom donne en parametre et le met dans une structure
- *  csuStruct rendu par la fonction
- * \param[in] file_name[] le nom du fichier
- * \return un pointeur sur la structure csuStruct cree, NULL s'il y a un probleme d'ouverture du fichier
+ *  Read the file with the name file_name and copy the result in a new csu structure.
+ * \param[in] file_name[] the filename
+ * \return a pointer on the new csu structure, NULL if there is a problem
  */
 csuStruct *readCsuFile(char *file_name)
 {
@@ -70,7 +69,6 @@ csuStruct *readCsuFile(char *file_name)
     libcsuper_initialize();
 
     ptr_file=openFileCsuExtension(file_name,"rb");
-
     if (ptr_file == NULL)
     {
         printf(_("\nError: The file could not be read.\n"));
@@ -78,12 +76,10 @@ csuStruct *readCsuFile(char *file_name)
     }
 
     fseek(ptr_file,0,SEEK_SET);
-
     file_size=readFileSize(ptr_file);
 
+    /*Check if it's a csu file*/
     check_file_size+=fread(check_file,sizeof(char),sizeof(STRING_CHECK_CSU_FILE),ptr_file);
-
-    /*Si la chaine de verification ne correspond pas, on ferme le fichier et on retourne une structure vide*/
     if (strcmp(STRING_CHECK_CSU_FILE,check_file) != 0)
     {
         printf(_("\nError: File not compatible.\n"));
@@ -91,10 +87,9 @@ csuStruct *readCsuFile(char *file_name)
         return ptr_csu_struct;
     }
 
-    /*Allocation memoire de la structure*/
     ptr_csu_struct=(csuStruct *)myAlloc(sizeof(csuStruct));
 
-    /*Lecture et verification de l version du fichier*/
+    /*Check the version of the file*/
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->version),sizeof(float),1,ptr_file));
     if (ptr_csu_struct->version + 0.01 < VERSION)
     {
@@ -104,7 +99,7 @@ csuStruct *readCsuFile(char *file_name)
         return NULL;
     }
 
-    /*Lecture des differentes variables du fichier dans la structure*/
+    /*Read different data*/
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->size_max_name),sizeof(float),1,ptr_file));
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->day),sizeof(float),1,ptr_file));
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->month),sizeof(float),1,ptr_file));
@@ -112,54 +107,46 @@ csuStruct *readCsuFile(char *file_name)
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->nb_player),sizeof(float),1,ptr_file));
     check_file_size+=(sizeof(game_config)*fread(&(ptr_csu_struct->config),sizeof(game_config),1,ptr_file));
 
-    /*Allocation memoire du tableau de chaine de caractere pour le nom des personnes*/
+    /*Read the players names*/
     ptr_csu_struct->player_names=(char **)myAlloc(ptr_csu_struct->nb_player*sizeof(char*));
-
-    /*Allocation memoire des noms des personnes*/
-    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-        ptr_csu_struct->player_names[i]=(char *)myAlloc(ptr_csu_struct->size_max_name*sizeof(char));
-
-    /*Allocation du tableau de caractere player_name_temp ou vas etre stocke le nom des personnes en tant que tampon*/
     player_name_temp=(char *)myAlloc(sizeof(char)*ptr_csu_struct->size_max_name);
-
-    /*Lecture du nom des personnes dans la structure*/
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
+        ptr_csu_struct->player_names[i]=(char *)myAlloc(ptr_csu_struct->size_max_name*sizeof(char));
         check_file_size+=fread(player_name_temp,sizeof(char),ptr_csu_struct->size_max_name,ptr_file);
         strcpy(ptr_csu_struct->player_names[i],player_name_temp);
     }
-
     free(player_name_temp);
 
-    /*Allocation memoire et lecture des points totaux*/
+    /*Read the total points*/
     ptr_csu_struct->total_points=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
     check_file_size+=(sizeof(float)*fread(ptr_csu_struct->total_points,sizeof(float),ptr_csu_struct->nb_player,ptr_file));
 
-    /*Allocation memoire et lecture des ranks*/
+    /*Read the rank*/
     ptr_csu_struct->rank=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
     check_file_size+=(sizeof(float)*fread(ptr_csu_struct->rank,sizeof(float),ptr_csu_struct->nb_player,ptr_file));
 
-    /*Allocation memoire et lecture du nombre de tours*/
+    /*Read the number of turn*/
     ptr_csu_struct->nb_turn=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
     check_file_size+=(sizeof(float)*fread(ptr_csu_struct->nb_turn,sizeof(float),ptr_csu_struct->nb_player,ptr_file));
 
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->distributor),sizeof(float),1,ptr_file));
 
-    /*Allocation memoire du tableau de points points*/
+    /*Read the points*/
     ptr_csu_struct->point=(float **)malloc(ptr_csu_struct->nb_player*sizeof(float*));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
         ptr_csu_struct->point[i]=(float *)myAlloc(ptr_csu_struct->nb_turn[i]*sizeof(float));
-
-    /*Lecture des points*/
-    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
         check_file_size+=(sizeof(float)*fread(ptr_csu_struct->point[i],sizeof(float),ptr_csu_struct->nb_turn[i],ptr_file));
+    }
+
 
     closeFile(ptr_file);
 
-    /*Verifie si la lecture s'est bien passee*/
+    /*Check the size of the file*/
     if (file_size != check_file_size)
     {
-        printf(_("\nError while reading file.\n"));
+        printf(_("\nError : corrupted file.\n"));
         return NULL;
     }
 
@@ -168,10 +155,10 @@ csuStruct *readCsuFile(char *file_name)
 
 /*!
  * \fn int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
- *  Cree un fichier .jeu qui contient toutes les informations de la structure csuStruct mis en parametre
- * \param[in] *file_name le nom du fichier
- * \param[in] *ptr_csu_struct la structure du fichier avec lequel on veut cree le fichier
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ *  Write a csu file
+ * \param[in] *file_name the filename
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
 {
@@ -199,7 +186,6 @@ int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
     fwrite(&(ptr_csu_struct->nb_player),sizeof(float),1,ptr_file);
     fwrite(&(ptr_csu_struct->config),sizeof(game_config),1,ptr_file);
 
-    /*Ecriture des noms des personnes*/
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
         fwrite(ptr_csu_struct->player_names[i],sizeof(char),ptr_csu_struct->size_max_name,ptr_file);
 
@@ -218,10 +204,10 @@ int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
- *  Mets a day le fichier avec les nouveaux scores
- * \param[in] *file_name le nom du fichier
- * \param[in] *ptr_csu_struct la structure du fichier avec lequel on veut mettre un nouveau score
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ *  Update the file with the new scores
+ * \param[in] *file_name the filename
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
 {
@@ -246,9 +232,9 @@ int writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
 
 /*!
  * \fn int deleteCsuFile(char *file_name)
- *  Supprime le fichier dont le nom est en parametre
- * \param[in] *file_name le nom du fichier
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ *  Delete a csu file
+ * \param[in] *file_name the filename
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int deleteCsuFile(char *file_name)
 {
@@ -272,10 +258,10 @@ int deleteCsuFile(char *file_name)
 
 /*!
  * \fn int renameCsuFile(char *old_name, char *new_name)
- *  Renomme le fichier dont le nom est en parametre
- * \param[in] *old_name l'ancien nom du fichier
- * \param[in] *new_name le nouveau nom du fichier
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ *  Rename a csu file.
+ * \param[in] *old_name the old name of the file
+ * \param[in] *new_name the new name of the file
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int renameCsuFile(char *old_name, char *new_name)
 {

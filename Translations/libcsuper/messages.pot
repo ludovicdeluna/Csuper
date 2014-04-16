@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-14 22:48+0200\n"
+"POT-Creation-Date: 2014-04-16 18:14+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Sources/libcsuper/csu_files.c:76
+#: Sources/libcsuper/csu_files.c:74
 #, c-format
 msgid ""
 "\n"
 "Error: The file could not be read.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:89
+#: Sources/libcsuper/csu_files.c:85
 #, c-format
 msgid ""
 "\n"
 "Error: File not compatible.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:101
+#: Sources/libcsuper/csu_files.c:96
 #, c-format
 msgid ""
 "\n"
@@ -39,62 +39,62 @@ msgid ""
 "with versions higher than the %1.1f.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:162
+#: Sources/libcsuper/csu_files.c:149
 #, c-format
 msgid ""
 "\n"
-"Error while reading file.\n"
+"Error : corrupted file.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:187
+#: Sources/libcsuper/csu_files.c:174
 #, c-format
 msgid ""
 "\n"
 "Error while writing file.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:261 Sources/libcsuper/game_config.c:357
+#: Sources/libcsuper/csu_files.c:248 Sources/libcsuper/game_config.c:357
 #, c-format
 msgid ""
 "\n"
 "The file %s cannot be deleted.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:268 Sources/libcsuper/game_config.c:363
+#: Sources/libcsuper/csu_files.c:255 Sources/libcsuper/game_config.c:363
 #, c-format
 msgid ""
 "\n"
 "The file %s was well deleted.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:294
+#: Sources/libcsuper/csu_files.c:281
 #, c-format
 msgid ""
 "\n"
 "The file %s cannot be renamed.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:300
+#: Sources/libcsuper/csu_files.c:287
 #, c-format
 msgid ""
 "\n"
 "The file %s was well renamed in %s.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_struct.c:229
+#: Sources/libcsuper/csu_struct.c:227
 #, c-format
 msgid "The distributor was initialize by default to %s.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_struct.c:298
+#: Sources/libcsuper/csu_struct.c:294
 #, c-format
 msgid ""
 "\n"
 "Error this name doesn't exist.\n"
 msgstr ""
 
-#: Sources/libcsuper/file_system_path.c:136
-#: Sources/libcsuper/file_system_path.c:141
+#: Sources/libcsuper/file_system_path.c:135
+#: Sources/libcsuper/file_system_path.c:140
 #, c-format
 msgid ""
 "\n"
@@ -142,19 +142,19 @@ msgid ""
 "Error while clearing the screen.\n"
 msgstr ""
 
-#: Sources/libcsuper/share.c:163
+#: Sources/libcsuper/share.c:165
 #, c-format
 msgid ""
 "\n"
 "Error while opening %s\n"
 msgstr ""
 
-#: Sources/libcsuper/share.c:184
+#: Sources/libcsuper/share.c:186
 #, c-format
 msgid "Error while closing the file"
 msgstr ""
 
-#: Sources/libcsuper/share.c:223 Sources/libcsuper/share.c:242
+#: Sources/libcsuper/share.c:225 Sources/libcsuper/share.c:244
 #, c-format
 msgid ""
 "\n"

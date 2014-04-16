@@ -59,6 +59,7 @@ void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
     int i;
     int game_config_choice;
     list_game_config *ptr_list_config;
+    char home_path[SIZE_MAX_FILE_NAME]="";
 
     /*Nombre de joueur*/
     do
@@ -69,7 +70,10 @@ void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
     } while (*ptr_nb_player <= 0);
 
     /*Affichage des diffrentes configurations*/
-    ptr_list_config = readConfigListFile();
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    ptr_list_config = readConfigListFile(home_path);
     printf(_("\nWhich game configuration would you want to use ?\n"));
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
         printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
@@ -85,7 +89,7 @@ void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
 
     /*Soit on lit une config, soit on en cree une*/
     if (game_config_choice <= i)
-        readConfigFile(game_config_choice-1,ptr_list_config,ptr_config);
+        readConfigFile(game_config_choice-1,ptr_list_config,ptr_config,home_path);
     else
     {
         closeListGameConfig(ptr_list_config);

@@ -2,8 +2,8 @@
  * \file    file_system_path.h
  * \brief   Prototypes des fonctions qui l'emrankment des fichiers sauvegardes
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    16/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -42,23 +42,21 @@
 
 /*!
  * \def FILE_NAME_SYSTEM_PATH
- * Definit FILE_NAME_SYSTEM_PATH a "preferences.txt"
+ * Define filename of the file which contain the system path to "system_path.txt"
  */
 #define FILE_NAME_SYSTEM_PATH "system_path.txt"
 
 /*!
  * \def MAIN_FOLDER_NAME
- * Definit MAIN_FOLDER_NAME
+ * Define the folder name of the csuper preferences
  */
-#ifndef PORTABLE
 #define MAIN_FOLDER_NAME ".csuper"
-#else
-#define MAIN_FOLDER_NAME "csuper_config_files"
-#endif // PORTABLE
 
 int createFileSystemPath();
 int readFileSystemPath(char *file_name);
 int readSystemPath(char *file_name);
 int changeSystemPath(char *new_path);
+void readHomePath(char *path);
+void readHomePathSlash(char *path);
 
 #endif

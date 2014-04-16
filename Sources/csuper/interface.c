@@ -467,11 +467,15 @@ void displayFileLocale(char *file_name)
 void newGameConfig()
 {
     game_config config;
+    char home_path[SIZE_MAX_FILE_NAME]="";
 
     clearScreen();
     menuFileName(config.name);
     menuGameConfig(&config);
-    newConfigFile(config);
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    newConfigFile(config,home_path);
 }
 
 /*!
@@ -483,11 +487,14 @@ void removeGameConfig()
     int i;
     int game_config_choice;
     list_game_config *ptr_list_config;
+    char home_path[SIZE_MAX_FILE_NAME]="";
 
     clearScreen();
 
-
-    ptr_list_config = readConfigListFile();
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    ptr_list_config = readConfigListFile(home_path);
     if (ptr_list_config->nb_config > 0)
     {
         /*Affichage des diffrentes configurations*/
@@ -503,7 +510,7 @@ void removeGameConfig()
             printf(_("You chose %d\n"),game_config_choice);
         } while (game_config_choice <1 || game_config_choice >i);
 
-        removeConfigListFile(game_config_choice-1,ptr_list_config);
+        removeConfigListFile(game_config_choice-1,ptr_list_config,home_path);
     }
 
     else
@@ -520,13 +527,18 @@ void printListGameConfig()
 {
     int i;
     list_game_config *ptr_list_config;
+    char home_path[SIZE_MAX_FILE_NAME]="";
 
     clearScreen();
 
-    ptr_list_config = readConfigListFile();
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    ptr_list_config = readConfigListFile(home_path);
     printf(_("\nHere all your game configurations:\n"));
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
         printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
+    closeListGameConfig(ptr_list_config);
     systemPause();
 }
 
@@ -540,11 +552,15 @@ void printGameConfigFile()
     int game_config_choice;
     list_game_config *ptr_list_config;
     game_config config;
+    char home_path[SIZE_MAX_FILE_NAME]="";
 
     clearScreen();
 
     /*Affichage des diffrentes configurations*/
-    ptr_list_config = readConfigListFile();
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    ptr_list_config = readConfigListFile(home_path);
     if (ptr_list_config->nb_config > 0)
     {
         printf(_("\nWhich game configuration would you like to display ?\n"));
@@ -559,7 +575,7 @@ void printGameConfigFile()
             printf(_("You chose %d\n"),game_config_choice);
         } while (game_config_choice <1 || game_config_choice >i);
 
-        readConfigFile(game_config_choice-1,ptr_list_config,&config);
+        readConfigFile(game_config_choice-1,ptr_list_config,&config,home_path);
         printGameConfig(config);
     }
 

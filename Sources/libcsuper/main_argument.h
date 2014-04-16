@@ -1,9 +1,9 @@
 /*!
  * \file    main_argument.h
- * \brief   Lancement du programme
+ * \brief   Begin csuper
  * \author  Remi BERTHO
- * \date    21/03/14
- * \version 2.1.0
+ * \date    16/04/14
+ * \version 2.2.0
  */
 
 /*
@@ -38,59 +38,59 @@
 
 /*!
  * \def STRING_READ_FILE
- * Definit l'appel a la lecture du fichier a "--read"
+ * Define the argument which call to read a file to "--read"
  */
 #define STRING_READ_FILE "--read"
 
 /*!
  * \def STRING_READ_FILE_RED
- * Definit l'appel a la lecture du fichier a "-r"
+ * Define the reduce argument which call to read a file to "-r"
  */
 #define STRING_READ_FILE_RED "-r"
 
 /*!
  * \def READ_FILE
- * Definit l'appel a la lecture du fichier a 0
+ * Define the call to read a file to 0
  */
 #define READ_FILE 0
 
 /*!
  * \def STRING_OPEN_FILE
- * Definit l'appel a l'ouverture du fichier a "--open"
+ * Define the argument which call to open a file to  "--open"
  */
 #define STRING_OPEN_FILE "--open"
 
 /*!
  * \def STRING_OPEN_FILE_RED
- * Definit l'appel a l'ouverture du fichier a "-o"
+ * Define the reduce argument which call to open a file to "-o"
  */
 #define STRING_OPEN_FILE_RED "-o"
 
 /*!
  * \def OPEN_FILE
- * Definit l'appel a l'ouverture du fichier a 1
+ * Define the call to read a file to 1
  */
 #define OPEN_FILE 1
 
 /*!
  * \def STRING_HELP
- * Definit l'appel a l'aide a "--help"
+ * Define the argument which call help to "--help"
  */
 #define STRING_HELP "--help"
 
 /*!
  * \def STRING_HELP_RED
- * Definit l'appel a l'aide a "-h"
+ * Define the reduce argument which call help to "-h"
  */
 #define STRING_HELP_RED "-h"
 
 /*!
  * \def HELP
- * Definit l'appel a l'aide a 2
+ * Define the call help to 2
  */
 #define HELP 2
 
-int searchArgument(int argc, char *argv[], int *fonction, int *file_place);
+int searchArgument(int argc, char *argv[], int *function, int *file_place);
 void displayHelp();
 
 #endif

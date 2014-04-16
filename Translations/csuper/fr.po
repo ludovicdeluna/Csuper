@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-14 19:01+0200\n"
+"POT-Creation-Date: 2014-04-16 18:14+0200\n"
 "PO-Revision-Date: 2014-04-14 22:51+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <>\n"
@@ -134,12 +134,12 @@ msgstr "Nombre de points maximum/minimum : %.3f\n"
 msgid "Number of points maximum/minimum : inf\n"
 msgstr "Nombre de points maximum/minimum : inf\n"
 
-#: Sources/csuper/interface.c:110
+#: Sources/csuper/interface.c:116
 #, c-format
 msgid "Here all your csu files :\n"
 msgstr "Voici tous vos fichiers csu :\n"
 
-#: Sources/csuper/interface.c:271
+#: Sources/csuper/interface.c:281
 #, c-format
 msgid ""
 "Csuper - Universal points counter allowing reflexion exemption v2.1.9\n"
@@ -169,7 +169,7 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper/interface.c:291
+#: Sources/csuper/interface.c:301
 #, c-format
 msgid ""
 "\n"
@@ -178,7 +178,7 @@ msgstr ""
 "\n"
 "À bientôt.\n"
 
-#: Sources/csuper/interface.c:295 Sources/csuper/interface.c:345
+#: Sources/csuper/interface.c:305 Sources/csuper/interface.c:355
 #, c-format
 msgid ""
 "\n"
@@ -189,7 +189,7 @@ msgstr ""
 "Effectivement c'est la bonne réponse mais ça ne m'aide pas à savoir ce que "
 "vous voulez faire.\n"
 
-#: Sources/csuper/interface.c:318
+#: Sources/csuper/interface.c:328
 #, c-format
 msgid ""
 "\n"
@@ -198,7 +198,7 @@ msgstr ""
 "\n"
 "Que voulez vous faire ?\n"
 
-#: Sources/csuper/interface.c:320
+#: Sources/csuper/interface.c:330
 #, c-format
 msgid ""
 "\n"
@@ -209,7 +209,7 @@ msgstr ""
 " (%d) Changer le dossier d'enregistrement des fichiers\n"
 " (%d) Afficher le dossier d'enregistrement des fichiers"
 
-#: Sources/csuper/interface.c:322
+#: Sources/csuper/interface.c:332
 #, c-format
 msgid ""
 "\n"
@@ -230,12 +230,12 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper/interface.c:385
+#: Sources/csuper/interface.c:397
 #, c-format
 msgid "Your files are saved in %s\n"
 msgstr "Vos fichiers sont sauvegardes dans %s\n"
 
-#: Sources/csuper/interface.c:482
+#: Sources/csuper/interface.c:494
 #, c-format
 msgid ""
 "\n"
@@ -244,7 +244,7 @@ msgstr ""
 "\n"
 "Quelle configuration de jeu voulez vous utilisez ?\n"
 
-#: Sources/csuper/interface.c:489 Sources/csuper/interface.c:545
+#: Sources/csuper/interface.c:501 Sources/csuper/interface.c:557
 #: Sources/csuper/menu.c:81
 #, c-format
 msgid ""
@@ -254,13 +254,13 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper/interface.c:491 Sources/csuper/interface.c:547
+#: Sources/csuper/interface.c:503 Sources/csuper/interface.c:559
 #: Sources/csuper/menu.c:83
 #, c-format
 msgid "You chose %d\n"
 msgstr "Vous avez choisi %d\n"
 
-#: Sources/csuper/interface.c:498 Sources/csuper/interface.c:555
+#: Sources/csuper/interface.c:510 Sources/csuper/interface.c:567
 #, c-format
 msgid ""
 "\n"
@@ -269,7 +269,7 @@ msgstr ""
 "\n"
 "Vous n'avez pas encore de fichiers de configurations de jeu.\n"
 
-#: Sources/csuper/interface.c:515
+#: Sources/csuper/interface.c:527
 #, c-format
 msgid ""
 "\n"
@@ -278,7 +278,7 @@ msgstr ""
 "\n"
 "Voici la liste de vos configurations de jeu :\n"
 
-#: Sources/csuper/interface.c:538
+#: Sources/csuper/interface.c:550
 #, c-format
 msgid ""
 "\n"
