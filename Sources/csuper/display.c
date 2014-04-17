@@ -1,9 +1,9 @@
 /*!
  * \file    display.c
- * \brief   Fonctions qui gerent l'affichage des scores du logiciel
+ * \brief   Display the games
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -35,20 +35,19 @@
 
 /*!
  * \fn void printNames(csuStruct *ptr_csu_struct, int *ptr_size_line)
- *  Affiche les noms des joueurs et calcule la taille de la ligne
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
- * \param[in,out] *ptr_size_line un pointeur sur la taille de la ligne a modifier
+ *  Print the payers names and calculate the size of a line.
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
+ * \param[in,out] *ptr_size_line a pointer to the size of the line, NULL if you doesn't need it
  */
 void printNames(csuStruct *ptr_csu_struct, int *ptr_size_line)
 {
     int i;
     int j;
 
-    /*Affichage du nom des joueurs*/
     printf("\nNoms    | ");
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        /*Affiche du nom du joueur*/
+        /*Display the player name*/
         printf("%s",ptr_csu_struct->player_names[i]);
         for (j=strlen(ptr_csu_struct->player_names[i]) ; j < 4 ; j++)
         {
@@ -59,7 +58,7 @@ void printNames(csuStruct *ptr_csu_struct, int *ptr_size_line)
 
         printf(" | ");
 
-        /*Calcule de la taille de la ligne*/
+        /*Calculate the size of the line*/
         if (ptr_size_line != NULL)
             *ptr_size_line+=(strlen(ptr_csu_struct->player_names[i])+3);
     }
@@ -67,8 +66,8 @@ void printNames(csuStruct *ptr_csu_struct, int *ptr_size_line)
 
  /*!
  * \fn void printLigne(int size_line)
- *  Affiche size_line - apres une tabulation
- * \param[in] size_line la taille de la ligne
+ *  Print a line of - after a tabulation.
+ * \param[in] size_line the size of the line
  */
 void printLigne(int size_line)
 {
@@ -84,8 +83,8 @@ void printLigne(int size_line)
 
 /*!
  * \fn void printTotalPoints(csuStruct *ptr_csu_struct)
- *  Affiche le score total des joueurs
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Print the total score of the players.
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
  */
 void printTotalPoints(csuStruct *ptr_csu_struct)
 {
@@ -97,7 +96,7 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        /*Affiche le score de la personne*/
+        /*Print the score of the player*/
         switch (ptr_csu_struct->config.number_after_comma)
         {
         case 0 :
@@ -114,7 +113,7 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
             break;
         }
 
-        /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
+        /*Add space at the end to keep the form*/
         for (j=4 ; j<strlen(ptr_csu_struct->player_names[i]); j++)
         {
             printf(" ");
@@ -126,8 +125,8 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void printDistributor(csuStruct *ptr_csu_struct)
- *  Affiche la personne devant distributorr si l'on utilise un distributeur
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Display the distributor.
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
  */
 void printDistributor(csuStruct *ptr_csu_struct)
 {
@@ -138,8 +137,8 @@ void printDistributor(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void printHeader(csuStruct *ptr_csu_struct)
- *  Affiche l'en tete de la structure
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Print the header of the structure
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
  */
 void printHeader(csuStruct *ptr_csu_struct)
 {
@@ -152,8 +151,8 @@ void printHeader(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void printAllPoints(csuStruct *ptr_csu_struct)
- *  Affiche tout les scores de touts les joueurs a chaque tour.
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Print the scores of all player in each turn.
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
  */
 void printAllPoints(csuStruct *ptr_csu_struct)
 {
@@ -165,13 +164,11 @@ void printAllPoints(csuStruct *ptr_csu_struct)
 
     for (i=0 ; i<max_nb_turn ; i++)
     {
-        /*Affiche le numero du tour quand on passe a un nouveau tour*/
         /*TRANSLATORS:The number of characters before the | and without the %2.0f must be six*/
         printf(_("\nTurn %2.0f |"),(float)i + 1);
 
         for (k=0 ; k<ptr_csu_struct->nb_player ; k++)
         {
-            /*Affiche le score de la personne a un tour*/
             if (ptr_csu_struct->nb_turn[k] >= i+1)
             {
                 switch (ptr_csu_struct->config.number_after_comma)
@@ -193,7 +190,7 @@ void printAllPoints(csuStruct *ptr_csu_struct)
             else
                 printf("      ");
 
-            /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
+            /*Add space at the end to keep the form*/
             for (j=4 ; j<(strlen(ptr_csu_struct->player_names[k])); j++)
             printf(" ");
 
@@ -204,8 +201,8 @@ void printAllPoints(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void printRanking(csuStruct *ptr_csu_struct)
- *  Affiche les ranks des joueurs
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Print the rank of each player
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
  */
 void printRanking(csuStruct *ptr_csu_struct)
 {
@@ -217,11 +214,9 @@ void printRanking(csuStruct *ptr_csu_struct)
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        /*Affiche la rank de la personne*/
-
         printf("%6.0f",ptr_csu_struct->rank[i]);
 
-        /*Ajoute des espaces a la fin du score pour garder la mise en forme*/
+        /*Add space at the end to keep the form*/
         for (j=4 ; j<strlen(ptr_csu_struct->player_names[i]) ; j++)
         {
             printf(" ");
@@ -233,9 +228,8 @@ void printRanking(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void printPoints(csuStruct *ptr_csu_struct)
- *  Affiche les noms des personnes aves leurs scores totaux ainsi que la personne devant distributorr
- *  a partir d'une structure csuStruct
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Print the names, the points, the total points and the rank of each player.
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
  */
 void printPoints(csuStruct *ptr_csu_struct)
 {
@@ -257,8 +251,8 @@ void printPoints(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void printCsuStruct(csuStruct *ptr_csu_struct)
- *  Affiche toutes les donnes d'une structure csuStruct
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Print all data of the csu structure.
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
  */
 void printCsuStruct(csuStruct *ptr_csu_struct)
 {
@@ -278,8 +272,8 @@ void printCsuStruct(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn void printGameOver(csuStruct *ptr_csu_struct)
- *  Affiche un podium des resultats
- * \param[in] *ptr_csu_struct un pointeur sur la structure csuStruct
+ *  Display that the game is over and a podium.
+ * \param[in] *ptr_csu_struct a pointer on a csu structure
  */
 void printGameOver(csuStruct *ptr_csu_struct)
 {
@@ -290,7 +284,7 @@ void printGameOver(csuStruct *ptr_csu_struct)
 
     printf(_("\nThe game is over.\n"));
 
-    /*Initialisation des ranks des personnes dans le tableau*/
+    /*Initialization of the position array*/
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         if (ptr_csu_struct->rank[i] == 3 || (un_pris && deux_pris && ptr_csu_struct->rank[i] == 1) || (deux_pris && ptr_csu_struct->rank[i] == 2))
@@ -308,65 +302,43 @@ void printGameOver(csuStruct *ptr_csu_struct)
         }
     }
 
+    /*Print the first line*/
     printf("\n\t\t\t");
-
-    /*Affiche le nom du premier*/
     printStringThreeTabs(ptr_csu_struct->player_names[pos[0]]);
-
     printf("\n");
 
+    /*Print the second line*/
     if(ptr_csu_struct->nb_player >=2)
-    {
         printStringThreeTabs(ptr_csu_struct->player_names[pos[1]]);
-    }
-
     else
-    {
         printf("\t\t\t");
-    }
-
-    /*On affiche le bas du podium pour le premier*/
     for (i=0 ; i<24 ; i++)
-    {
         printf("-");
-    }
-
     printf("\n");
 
-    /*S'il y a plus de deux joueurs, on affiche le bas du podium pou le deuxieme*/
+    /*Print the bottom of the second podium*/
     if(ptr_csu_struct->nb_player >=2)
     {
         for (i=0 ; i<24 ; i++)
-        {
             printf("-");
-        }
     }
 
-    /*S'il y a plus de trois joueurs, on insere le troisime sur le podium*/
+    /*Print the third podium*/
     if (ptr_csu_struct->nb_player >= 3)
     {
-        /*Laisse la rank sous le nom du premier*/
         printf("\t\t\t");
-
-        /*Affiche le nom du troisiemeejoueur*/
         printStringThreeTabs(ptr_csu_struct->player_names[pos[2]]);
-
-        /*Passe a la ligne et passe la rank des premiers et deuxieme*/
         printf("\n\t\t\t\t\t\t");
-
-        /*Affiche le bas du podium pour le troisieme*/
         for (i=0 ; i<24 ; i++)
-        {
             printf("-");
-        }
     }
 
 }
 
 /*!
  * \fn void printStringThreeTabs(char *string)
- *  Affiche la string de caractere passe en parametre centrer sur un espace de trois tabulations
- * \param[in] *string une string de caractere
+ *  Print a string center into a space of three tabulations.
+ * \param[in] *string a string
  */
 void printStringThreeTabs(char *string)
 {
@@ -388,7 +360,7 @@ void printStringThreeTabs(char *string)
 
 /*!
  * \fn void printLicense()
- *  Affiche la license
+ *  Print the license.
  */
 void printLicense()
 {

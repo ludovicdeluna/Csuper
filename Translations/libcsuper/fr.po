@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-16 18:14+0200\n"
+"POT-Creation-Date: 2014-04-17 13:39+0200\n"
 "PO-Revision-Date: 2014-04-16 18:14+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <>\n"
@@ -66,7 +66,7 @@ msgstr ""
 "\n"
 "Erreur lors de l’écriture du fichier.\n"
 
-#: Sources/libcsuper/csu_files.c:248 Sources/libcsuper/game_config.c:357
+#: Sources/libcsuper/csu_files.c:247 Sources/libcsuper/game_config.c:303
 #, c-format
 msgid ""
 "\n"
@@ -75,7 +75,7 @@ msgstr ""
 "\n"
 "Le fichier %s n'a pas pu être supprime.\n"
 
-#: Sources/libcsuper/csu_files.c:255 Sources/libcsuper/game_config.c:363
+#: Sources/libcsuper/csu_files.c:254 Sources/libcsuper/game_config.c:309
 #, c-format
 msgid ""
 "\n"
@@ -84,7 +84,7 @@ msgstr ""
 "\n"
 "Le fichier %s a bien été supprimé.\n"
 
-#: Sources/libcsuper/csu_files.c:281
+#: Sources/libcsuper/csu_files.c:280
 #, c-format
 msgid ""
 "\n"
@@ -93,7 +93,7 @@ msgstr ""
 "\n"
 "Le fichier %s n'a pas pu être renommé.\n"
 
-#: Sources/libcsuper/csu_files.c:287
+#: Sources/libcsuper/csu_files.c:286
 #, c-format
 msgid ""
 "\n"
@@ -116,8 +116,8 @@ msgstr ""
 "\n"
 "Erreur ce nom n'existe pas.\n"
 
-#: Sources/libcsuper/file_system_path.c:135
-#: Sources/libcsuper/file_system_path.c:140
+#: Sources/libcsuper/file_system_path.c:115
+#: Sources/libcsuper/file_system_path.c:120
 #, c-format
 msgid ""
 "\n"
@@ -126,7 +126,7 @@ msgstr ""
 "\n"
 "Erreur lors de la lecture du fichier contenant le répertoire des fichiers.\n"
 
-#: Sources/libcsuper/main_argument.c:82
+#: Sources/libcsuper/main_argument.c:87
 #, c-format
 msgid ""
 "\n"
@@ -137,12 +137,12 @@ msgstr ""
 "Csuper - Compteur de Score Universel Permettant l'Exemption de Réflexion\n"
 "Voici la syntaxe pour l'utiliser.\n"
 
-#: Sources/libcsuper/main_argument.c:83
+#: Sources/libcsuper/main_argument.c:88
 #, c-format
 msgid "\t- Do not use argument to launch the main menu.\n"
 msgstr "\t- N'utiliser pas d'argument pour lancer le programme sur le menu.\n"
 
-#: Sources/libcsuper/main_argument.c:84
+#: Sources/libcsuper/main_argument.c:89
 #, c-format
 msgid ""
 "\t- Use the argument '%s' or '%s' followed by the file name to launch "
@@ -151,7 +151,7 @@ msgstr ""
 "\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour lancer le "
 "jeu directement sur ce fichier.\n"
 
-#: Sources/libcsuper/main_argument.c:85
+#: Sources/libcsuper/main_argument.c:90
 #, c-format
 msgid ""
 "\t- Use the argument '%s' or '%s' followed by the file name to display "

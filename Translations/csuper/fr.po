@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-16 18:14+0200\n"
+"POT-Creation-Date: 2014-04-17 13:39+0200\n"
 "PO-Revision-Date: 2014-04-14 22:51+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.6\n"
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper/display.c:96
+#: Sources/csuper/display.c:95
 #, c-format
 msgid ""
 "\n"
@@ -29,7 +29,7 @@ msgstr ""
 "\n"
 "Total   |"
 
-#: Sources/csuper/display.c:135
+#: Sources/csuper/display.c:134
 #, c-format
 msgid ""
 "\n"
@@ -38,7 +38,7 @@ msgstr ""
 "\n"
 "C'est à %s de distribuer."
 
-#: Sources/csuper/display.c:146
+#: Sources/csuper/display.c:145
 #, c-format
 msgid ""
 "\n"
@@ -58,7 +58,7 @@ msgstr ""
 "Nombre de tours maximums : %d"
 
 #. TRANSLATORS:The number of characters before the | and without the %2.0f must be six
-#: Sources/csuper/display.c:170
+#: Sources/csuper/display.c:168
 #, c-format
 msgid ""
 "\n"
@@ -68,7 +68,7 @@ msgstr ""
 "Tour %2.0f |"
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper/display.c:216
+#: Sources/csuper/display.c:213
 #, c-format
 msgid ""
 "\n"
@@ -77,7 +77,7 @@ msgstr ""
 "\n"
 "Position|"
 
-#: Sources/csuper/display.c:291
+#: Sources/csuper/display.c:285
 #, c-format
 msgid ""
 "\n"
@@ -86,7 +86,7 @@ msgstr ""
 "\n"
 "La partie est terminée.\n"
 
-#: Sources/csuper/display.c:395
+#: Sources/csuper/display.c:367
 #, c-format
 msgid ""
 "\n"
@@ -103,7 +103,7 @@ msgstr ""
 "certaines conditions. \n"
 "Pour plus de détails : http://www.gnu.org/licenses/gpl.html\n"
 
-#: Sources/csuper/display.c:407
+#: Sources/csuper/display.c:379
 #, c-format
 msgid ""
 "\n"
@@ -124,12 +124,12 @@ msgstr ""
 "Jeu en tour par tour : %d\n"
 "Utilise un distributeur tournant : %d\n"
 
-#: Sources/csuper/display.c:412 Sources/csuper/display.c:417
+#: Sources/csuper/display.c:384 Sources/csuper/display.c:389
 #, c-format
 msgid "Number of points maximum/minimum : %.3f\n"
 msgstr "Nombre de points maximum/minimum : %.3f\n"
 
-#: Sources/csuper/display.c:415
+#: Sources/csuper/display.c:387
 #, c-format
 msgid "Number of points maximum/minimum : inf\n"
 msgstr "Nombre de points maximum/minimum : inf\n"
@@ -235,7 +235,7 @@ msgstr ""
 msgid "Your files are saved in %s\n"
 msgstr "Vos fichiers sont sauvegardes dans %s\n"
 
-#: Sources/csuper/interface.c:494
+#: Sources/csuper/interface.c:501
 #, c-format
 msgid ""
 "\n"
@@ -244,8 +244,8 @@ msgstr ""
 "\n"
 "Quelle configuration de jeu voulez vous utilisez ?\n"
 
-#: Sources/csuper/interface.c:501 Sources/csuper/interface.c:557
-#: Sources/csuper/menu.c:81
+#: Sources/csuper/interface.c:508 Sources/csuper/interface.c:573
+#: Sources/csuper/menu.c:85
 #, c-format
 msgid ""
 "\n"
@@ -254,13 +254,13 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper/interface.c:503 Sources/csuper/interface.c:559
-#: Sources/csuper/menu.c:83
+#: Sources/csuper/interface.c:510 Sources/csuper/interface.c:575
+#: Sources/csuper/menu.c:87
 #, c-format
 msgid "You chose %d\n"
 msgstr "Vous avez choisi %d\n"
 
-#: Sources/csuper/interface.c:510 Sources/csuper/interface.c:567
+#: Sources/csuper/interface.c:517 Sources/csuper/interface.c:583
 #, c-format
 msgid ""
 "\n"
@@ -269,7 +269,7 @@ msgstr ""
 "\n"
 "Vous n'avez pas encore de fichiers de configurations de jeu.\n"
 
-#: Sources/csuper/interface.c:527
+#: Sources/csuper/interface.c:538
 #, c-format
 msgid ""
 "\n"
@@ -278,7 +278,7 @@ msgstr ""
 "\n"
 "Voici la liste de vos configurations de jeu :\n"
 
-#: Sources/csuper/interface.c:550
+#: Sources/csuper/interface.c:566
 #, c-format
 msgid ""
 "\n"
@@ -287,7 +287,7 @@ msgstr ""
 "\n"
 "Quelle configuration de jeu voulez vous afficher ?\n"
 
-#: Sources/csuper/keyboarding.c:194
+#: Sources/csuper/keyboarding.c:171
 #, c-format
 msgid ""
 "\n"
@@ -305,7 +305,7 @@ msgstr ""
 "Donnez le nom du fichier avec au maximum %d caractères.\n"
 "Votre choix : "
 
-#: Sources/csuper/menu.c:66
+#: Sources/csuper/menu.c:67
 #, c-format
 msgid ""
 "\n"
@@ -316,12 +316,12 @@ msgstr ""
 "Donnez le nombre de joueurs dans votre jeu (>0).\n"
 "Votre choix : "
 
-#: Sources/csuper/menu.c:68
+#: Sources/csuper/menu.c:69
 #, c-format
 msgid "You chose %.0f\n"
 msgstr "Vous avez choisi %.0f\n"
 
-#: Sources/csuper/menu.c:73
+#: Sources/csuper/menu.c:77
 #, c-format
 msgid ""
 "\n"
@@ -330,16 +330,16 @@ msgstr ""
 "\n"
 "Quelle configuration de jeu voulez vous utilisez ?\n"
 
-#: Sources/csuper/menu.c:76
+#: Sources/csuper/menu.c:80
 #, c-format
 msgid "(%d) Other\n"
 msgstr "(%d) Autre\n"
 
-#: Sources/csuper/menu.c:93
+#: Sources/csuper/menu.c:97
 msgid "Unknown"
 msgstr "Inconnu"
 
-#: Sources/csuper/menu.c:112
+#: Sources/csuper/menu.c:116
 #, c-format
 msgid ""
 "\n"
@@ -348,7 +348,7 @@ msgstr ""
 "\n"
 "Voulez-vous utiliser un nombre maximum ou minimum (O/n) : "
 
-#: Sources/csuper/menu.c:121
+#: Sources/csuper/menu.c:125
 #, c-format
 msgid ""
 "\n"
@@ -357,7 +357,7 @@ msgstr ""
 "\n"
 "Voulez-vous utiliser un nombre maximum (O/n) : "
 
-#: Sources/csuper/menu.c:129
+#: Sources/csuper/menu.c:133
 #, c-format
 msgid ""
 "\n"
@@ -369,13 +369,13 @@ msgstr ""
 "votre jeu.\n"
 "Votre choix : "
 
-#: Sources/csuper/menu.c:132 Sources/csuper/menu.c:138
-#: Sources/csuper/menu.c:242 Sources/csuper/menu.c:248
+#: Sources/csuper/menu.c:136 Sources/csuper/menu.c:142
+#: Sources/csuper/menu.c:246 Sources/csuper/menu.c:252
 #, c-format
 msgid "You chose %.3f\n"
 msgstr "Vous avez choisi %.3f\n"
 
-#: Sources/csuper/menu.c:136
+#: Sources/csuper/menu.c:140
 #, c-format
 msgid ""
 "\n"
@@ -386,7 +386,7 @@ msgstr ""
 "Donnez le score initial des joueurs.\n"
 "Votre choix : "
 
-#: Sources/csuper/menu.c:141
+#: Sources/csuper/menu.c:145
 #, c-format
 msgid ""
 "\n"
@@ -395,7 +395,7 @@ msgstr ""
 "\n"
 "Le premier est le joueur qui a le plus de points (O/n) : "
 
-#: Sources/csuper/menu.c:149
+#: Sources/csuper/menu.c:153
 #, c-format
 msgid ""
 "\n"
@@ -404,7 +404,7 @@ msgstr ""
 "\n"
 "Les points seront attribués tour par tour (O/n) : "
 
-#: Sources/csuper/menu.c:157
+#: Sources/csuper/menu.c:161
 #, c-format
 msgid ""
 "\n"
@@ -413,7 +413,7 @@ msgstr ""
 "\n"
 "On utilise un distributeur (O/n) : "
 
-#: Sources/csuper/menu.c:167
+#: Sources/csuper/menu.c:171
 #, c-format
 msgid ""
 "\n"
@@ -426,12 +426,12 @@ msgstr ""
 "chiffre doit être compris entre 0 et 3\n"
 "Votre choix : "
 
-#: Sources/csuper/menu.c:170
+#: Sources/csuper/menu.c:174
 #, c-format
 msgid "You chose %.0d\n"
 msgstr "Vous avez choisi %.0d\n"
 
-#: Sources/csuper/menu.c:182
+#: Sources/csuper/menu.c:186
 #, c-format
 msgid ""
 "\n"
@@ -444,7 +444,13 @@ msgstr ""
 "à distribuer.\n"
 "Votre choix : "
 
-#: Sources/csuper/menu.c:197
+#: Sources/csuper/menu.c:188 Sources/csuper/menu.c:209
+#: Sources/csuper/menu.c:280 Sources/csuper/menu.c:357
+#, c-format
+msgid "You chose %s\n"
+msgstr "Vous avez choisi %s\n"
+
+#: Sources/csuper/menu.c:201
 #, c-format
 msgid ""
 "\n"
@@ -455,7 +461,7 @@ msgstr ""
 "Les noms des personnes doivent avoir entre 2 et %.0f caractères sans "
 "accent.\n"
 
-#: Sources/csuper/menu.c:203
+#: Sources/csuper/menu.c:207
 #, c-format
 msgid ""
 "\n"
@@ -464,13 +470,7 @@ msgstr ""
 "\n"
 "Donnez le nom de la %dème personne : "
 
-#: Sources/csuper/menu.c:205 Sources/csuper/menu.c:276
-#: Sources/csuper/menu.c:353
-#, c-format
-msgid "You chose %s\n"
-msgstr "Vous avez choisi %s\n"
-
-#: Sources/csuper/menu.c:240
+#: Sources/csuper/menu.c:244
 #, c-format
 msgid ""
 "\n"
@@ -479,7 +479,7 @@ msgstr ""
 "\n"
 "Donnez les points de %s : "
 
-#: Sources/csuper/menu.c:246
+#: Sources/csuper/menu.c:250
 #, c-format
 msgid ""
 "\n"
@@ -488,7 +488,7 @@ msgstr ""
 "\n"
 "Donnez ses points : "
 
-#: Sources/csuper/menu.c:251
+#: Sources/csuper/menu.c:255
 #, c-format
 msgid ""
 "\n"
@@ -497,7 +497,7 @@ msgstr ""
 "\n"
 "Validez vous ces scores (O/n) : "
 
-#: Sources/csuper/menu.c:274
+#: Sources/csuper/menu.c:278
 #, c-format
 msgid ""
 "\n"
@@ -510,7 +510,7 @@ msgstr ""
 "recevoir des points.\n"
 "Votre choix :"
 
-#: Sources/csuper/menu.c:291
+#: Sources/csuper/menu.c:295
 #, c-format
 msgid ""
 "\n"
@@ -519,7 +519,7 @@ msgstr ""
 "\n"
 "Voulez-vous continuer la partie (O/n) : "
 
-#: Sources/csuper/menu.c:309
+#: Sources/csuper/menu.c:313
 #, c-format
 msgid ""
 "\n"
@@ -528,7 +528,7 @@ msgstr ""
 "\n"
 "Voulez-vous supprimer le fichier (o/N) : "
 
-#: Sources/csuper/menu.c:332
+#: Sources/csuper/menu.c:336
 #, c-format
 msgid ""
 "\n"
@@ -545,7 +545,7 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper/menu.c:349
+#: Sources/csuper/menu.c:353
 #, c-format
 msgid ""
 "\n"

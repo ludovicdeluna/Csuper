@@ -1,9 +1,9 @@
 /*!
  * \file    main.c
- * \brief   Lancement du programme
+ * \brief   Begin csuper
  * \author  Remi BERTHO
- * \date    09/03/14
- * \version 2.1.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
 /*
@@ -35,10 +35,10 @@
 
 /*!
  * \fn int main(int argc, char *argv[])
- *  Lance le programme
- * \param[in] argc le namebre d 'argument
- * \param[in] argv le tableau des arguments
- * \return 0 si tout s'est bien passe
+ *  Begin csuper.
+ * \param[in] argc the number of argument.
+ * \param[in] argv the array of argument.
+ * \return EXIT_SUCCESS if everything is OK
  */
 int main(int argc, char *argv[])
 {
@@ -65,6 +65,6 @@ int main(int argc, char *argv[])
     }
     else
         mainMenu();
-    return 0;
+    return EXIT_SUCCESS;
 }
 

@@ -1,9 +1,9 @@
 /*!
  * \file    main.h
- * \brief   Lancement du programme
+ * \brief   Begin csuper
  * \author  Remi BERTHO
- * \date    09/03/14
- * \version 2.1.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
 /*
@@ -38,7 +38,7 @@
 
 /*!
  * \def PORTABLE
- * Definit PORTABLE
+ * Define if csuper is portable.
  */
 //#define PORTABLE
 

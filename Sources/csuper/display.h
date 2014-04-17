@@ -1,9 +1,9 @@
 /*!
  * \file    display.h
- * \brief   Prototypes des fonctions qui gerent l'affichage des scores du logiciel
+ * \brief   Display the games
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
  /*

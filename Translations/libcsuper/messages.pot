@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-16 18:14+0200\n"
+"POT-Creation-Date: 2014-04-17 13:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,28 +53,28 @@ msgid ""
 "Error while writing file.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:248 Sources/libcsuper/game_config.c:357
+#: Sources/libcsuper/csu_files.c:247 Sources/libcsuper/game_config.c:303
 #, c-format
 msgid ""
 "\n"
 "The file %s cannot be deleted.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:255 Sources/libcsuper/game_config.c:363
+#: Sources/libcsuper/csu_files.c:254 Sources/libcsuper/game_config.c:309
 #, c-format
 msgid ""
 "\n"
 "The file %s was well deleted.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:281
+#: Sources/libcsuper/csu_files.c:280
 #, c-format
 msgid ""
 "\n"
 "The file %s cannot be renamed.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:287
+#: Sources/libcsuper/csu_files.c:286
 #, c-format
 msgid ""
 "\n"
@@ -93,15 +93,15 @@ msgid ""
 "Error this name doesn't exist.\n"
 msgstr ""
 
-#: Sources/libcsuper/file_system_path.c:135
-#: Sources/libcsuper/file_system_path.c:140
+#: Sources/libcsuper/file_system_path.c:115
+#: Sources/libcsuper/file_system_path.c:120
 #, c-format
 msgid ""
 "\n"
 "Error while reading the file containing the system path.\n"
 msgstr ""
 
-#: Sources/libcsuper/main_argument.c:82
+#: Sources/libcsuper/main_argument.c:87
 #, c-format
 msgid ""
 "\n"
@@ -109,19 +109,19 @@ msgid ""
 "Here is the syntax to use it.\n"
 msgstr ""
 
-#: Sources/libcsuper/main_argument.c:83
+#: Sources/libcsuper/main_argument.c:88
 #, c-format
 msgid "\t- Do not use argument to launch the main menu.\n"
 msgstr ""
 
-#: Sources/libcsuper/main_argument.c:84
+#: Sources/libcsuper/main_argument.c:89
 #, c-format
 msgid ""
 "\t- Use the argument '%s' or '%s' followed by the file name to launch "
 "directly the program on this file.\n"
 msgstr ""
 
-#: Sources/libcsuper/main_argument.c:85
+#: Sources/libcsuper/main_argument.c:90
 #, c-format
 msgid ""
 "\t- Use the argument '%s' or '%s' followed by the file name to display "

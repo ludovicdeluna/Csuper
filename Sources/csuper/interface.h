@@ -1,9 +1,9 @@
 /*!
  * \file    interface.h
- * \brief   Prototypes des fonctions qui gerent l'interface graphique du logiciel
+ * \brief   Graphical interface
  * \author  Remi BERTHO
- * \date    09/03/14
- * \version 2.1.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -41,11 +41,11 @@
 #include "main.h"
 #include "csuper.h"
 
-typedef enum {nouvPart=1 , charPart=2 , affFich=3 , deleteFich=4 , listFich=5 , pref=6, quit=7 , easterEggs = 42} MainMenu;
+typedef enum {newMatch=1 , loadMatch=2 , printFile=3 , deleteFile=4 , listFile=5 , pref=6, quit=7 , easterEggs = 42} MainMenu;
 #ifndef PORTABLE
-typedef enum {nouvChem=1, lireChem=2 , newGameConf=3, removeGameConf=4, printListGameConf=5 , printGameConf=6 ,menuPrinc=7 , easterEggs2 = 42} PreferencesMenu;
+typedef enum {newPath=1, readPath=2 , newGameConf=3, removeGameConf=4, printListGameConf=5 , printGameConf=6 ,backMainMenu=7 , easterEggs2 = 42} PreferencesMenu;
 #else
-typedef enum {newGameConf=1,removeGameConf=2,printListGameConf=3 , printGameConf=4 ,menuPrinc=5, easterEggs2 = 42} PreferencesMenu;
+typedef enum {newGameConf=1,removeGameConf=2,printListGameConf=3 , printGameConf=4 ,backMainMenu=5, easterEggs2 = 42} PreferencesMenu;
 #endif
 
 

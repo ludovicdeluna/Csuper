@@ -1,9 +1,9 @@
 /*!
  * \file    interface.c
- * \brief   Fonctions qui gerent l'interface graphique du logiciel
+ * \brief   Graphical interface
  * \author  Remi BERTHO
- * \date    09/03/14
- * \version 2.1.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -36,7 +36,7 @@
 
 /*!
  * \fn void displayFile()
- *  Demande le name d'un fichier et l'affiche
+ *  Ask a filename and display it.
  */
 void displayFile()
 {
@@ -54,15 +54,12 @@ void displayFile()
 
     ptr_csu_struct=readCsuFile(file_name);
 
-    /*Si le fichier a bien ete lu affiche et ferme la structure*/
     if (ptr_csu_struct != NULL)
     {
         printCsuStruct(ptr_csu_struct);
 
         if(exceedMaxNumber(ptr_csu_struct))
-        {
             printGameOver(ptr_csu_struct);
-        }
 
         closeCsuStruct(ptr_csu_struct);
     }
@@ -72,7 +69,7 @@ void displayFile()
 
 /*!
  * \fn void deleteCsuFileNom()
- *  Demande le name d'un fichier et le deleteime
+ *  Ask a filename and deleted the file.
  */
 void deleteCsuFileNom()
 {
@@ -92,7 +89,7 @@ void deleteCsuFileNom()
 
 /*!
  * \fn void listCsuFiles()
- *  Liste tout les fichier du dossier courant contenant l'extension .jeu
+ *  List all the files with csu extension
  */
 void listCsuFiles()
 {
@@ -110,22 +107,17 @@ void listCsuFiles()
         return;
     #endif // PORTABLE
 
-    /*Lecture du folder*/
     rep = opendir(folder);
 
     printf(_("Here all your csu files :\n"));
 
-    /*Affichage du name de tout les fichiers du folder*/
     while ((lecture = readdir(rep))) {
-        /*Initialisation de ext*/
         for (i=0 ; i<3 ; i++)
             ext[i]='a';
 
-        /*Lecture de l'extension du fichier courant*/
         for (i=strlen(lecture->d_name)-3 ; i<strlen(lecture->d_name) ; i++)
             ext[-strlen(lecture->d_name)+i+3]=lecture->d_name[i];
 
-        /*Si l'extension est celle d'un fichier jeu, on l'affiche*/
         if (strcmp(jeu,ext)==0)
             printf("\t- %s\n", lecture->d_name);
     }
@@ -136,9 +128,9 @@ void listCsuFiles()
 
 /*!
  * \fn void play(csuStruct *ptr_csu_struct, char *file_name)
- *  Lance la partie de comptage jusqu'a la fin
- * \param[in,out] *ptr_csu_struct la structure csuStruct
- * \param[in] *file_name le name du fichier dans lequel on stocke les informations
+ *  Count the points
+ * \param[in,out] *ptr_csu_struct a pointer on a csu structure
+ * \param[in] *file_name the filename
  */
 void play(csuStruct *ptr_csu_struct, char *file_name)
 {
@@ -147,12 +139,10 @@ void play(csuStruct *ptr_csu_struct, char *file_name)
     clearScreen();
     printPoints(ptr_csu_struct);
 
-    /*Fait compter les points*/
     do
     {
         menuPlayersPoints(ptr_csu_struct);
 
-        /*Ecrit le nouveau score sur le fichier et verifie si l'ecriture du fichier s'est bien passe*/
         if (!writeFileNewTurn(file_name,ptr_csu_struct))
             systemPause();
 
@@ -183,7 +173,7 @@ void play(csuStruct *ptr_csu_struct, char *file_name)
 
 /*!
  * \fn void newGame()
- *  Initialise une nouvelle partie et lance la fonction de comptage des points
+ *  Initialize a new game and run the play function.
  */
 void newGame()
 {
@@ -225,7 +215,7 @@ void newGame()
 
 /*!
  * \fn void loadGame()
- *  Charge une partie a partir d'un fichier et lance la fonction de comptage des points
+ *  Load a game from a file and run the play function.
  */
 void loadGame()
 {
@@ -265,7 +255,7 @@ void loadGame()
 
 /*!
  * \fn void mainMenu()
- *  Lance un menu que redirige vers l'action que l'on veut effectuer
+ *  Main menu of csuper.
  */
 void mainMenu()
 {
@@ -281,20 +271,20 @@ void mainMenu()
         printf(_("Csuper - Universal points counter allowing reflexion exemption v2.1.9\n\nWhat do you want to do ?\n "
         "(%d) Do a new game \n (%d) Load an existing game \n (%d) Display the results of an existing game "
         "\n (%d) Delete a game \n (%d) Display all existing games\n (%d) Display the preferences menu "
-        "\n (%d) Quit the program\n\nYour choice : "),nouvPart,charPart,affFich,deleteFich,listFich,pref,quit);
+        "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFile,listFile,pref,quit);
 
         intKey(&choice);
 
         switch (choice) {
-            case nouvPart  :    newGame();
+            case newMatch  :    newGame();
                                 break;
-            case charPart  :    loadGame();
+            case loadMatch  :    loadGame();
                                 break;
-            case affFich  :     displayFile();
+            case printFile  :     displayFile();
                                 break;
-            case deleteFich  :   deleteCsuFileNom();
+            case deleteFile  :  deleteCsuFileNom();
                                 break;
-            case listFich  :    listCsuFiles();
+            case listFile  :    listCsuFiles();
                                 break;
             case pref :         preferencesMenu();
                                 break;
@@ -314,6 +304,10 @@ void mainMenu()
 	} while (stop==FALSE);
 }
 
+/*!
+ * \fn void preferencesMenu()
+ *  Preferences menu of csuper.
+ */
 void preferencesMenu()
 {
     int choice;
@@ -327,22 +321,22 @@ void preferencesMenu()
 
         printf(_("\nWhat do you want to do ?\n"));
         #ifndef PORTABLE
-        printf(_("\n (%d) Change the folder for saving files\n (%d) Display the folder for saving files"),nouvChem,lireChem);
+        printf(_("\n (%d) Change the folder for saving files\n (%d) Display the folder for saving files"),newPath,readPath);
         #endif
         printf(_("\n (%d) Make a new game configuration\n (%d) Delete an existing game configuration"
         "\n (%d) Display the list of the game configurations\n (%d) Display a game configuration"
-        "\n (%d) Back to main menu\n\nYour choice : "),newGameConf,removeGameConf,printListGameConf,printGameConf,menuPrinc);
+        "\n (%d) Back to main menu\n\nYour choice : "),newGameConf,removeGameConf,printListGameConf,printGameConf,backMainMenu);
 
         intKey(&choice);
 
         switch (choice) {
             #ifndef PORTABLE
-            case nouvChem   :   changeFilePath();
+            case newPath   :   changeFilePath();
                                 break;
-            case lireChem :     readFilePath();
+            case readPath :     readFilePath();
                                 break;
             #endif
-            case menuPrinc  :   stop=TRUE;
+            case backMainMenu  :   stop=TRUE;
                                 break;
             case newGameConf :  newGameConfig();
                                 break;
@@ -366,7 +360,7 @@ void preferencesMenu()
 
 /*!
  * \fn void changeFilePath()
- *  Charge un nouveau path que l'on demande a l'utilisateur
+ *  Change the path which the file are saved.
  */
 void changeFilePath()
 {
@@ -382,7 +376,7 @@ void changeFilePath()
 
 /*!
  * \fn void readFilePath()
- *  Lis le path de fichier et l'affiche
+ *  Read the file path and display it.
  */
 void readFilePath()
 {
@@ -400,8 +394,8 @@ void readFilePath()
 
 /*!
  * \fn void loadGameLocale(char *file_name)
- *  Charge une partie a partir d'un fichier dont le name a ete donne et lance la fonction de comptage des points
- * \param[in] file_name, le name du fichier
+ *  Load the file and run the play function
+ * \param[in] file_name, the filename
  */
 void loadGameLocale(char *file_name)
 {
@@ -434,7 +428,7 @@ void loadGameLocale(char *file_name)
 
 /*!
  * \fn void displayFileLocale(char *file_name)
- *  Affiche le fichier dont le name a ete donne en parametre
+ *  Display the file.
  */
 void displayFileLocale(char *file_name)
 {
@@ -444,15 +438,12 @@ void displayFileLocale(char *file_name)
 
     ptr_csu_struct=readCsuFile(file_name);
 
-    /*Si le fichier a bien ete lu affiche et ferme la structure*/
     if (ptr_csu_struct != NULL)
     {
         printCsuStruct(ptr_csu_struct);
 
         if(exceedMaxNumber(ptr_csu_struct))
-        {
             printGameOver(ptr_csu_struct);
-        }
 
         closeCsuStruct(ptr_csu_struct);
     }

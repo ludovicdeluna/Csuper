@@ -1,9 +1,9 @@
 /*!
  * \file    menu.h
- * \brief   Prototypes des fonctions qui gerent les menus demandant de rentrer des valeurs du logiciel
+ * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
  /*
