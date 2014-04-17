@@ -11,6 +11,8 @@
 				<Option object_output="../Compilation/obj/Debug/Sources" />
 				<Option type="3" />
 				<Option compiler="gcc" />
+				<Option host_application="../csuper" />
+				<Option run_host_application_in_terminal="1" />
 				<Option createDefFile="1" />
 				<Option createStaticLib="1" />
 				<Compiler>

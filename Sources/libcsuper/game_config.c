@@ -36,7 +36,7 @@
 /*!
  * \fn list_game_config *newListGameConfig(int nb_config)
  *  Create a list of game configuration.
- * \parma[in] nb_config the number of game configuration
+ * \param[in] nb_config the number of game configuration
  * \return une list_game_config
  */
 list_game_config *newListGameConfig(int nb_config)
@@ -53,7 +53,7 @@ list_game_config *newListGameConfig(int nb_config)
 /*!
  * \fn void closeListGameConfig(list_game_config *ptr_list_config)
  *  Free a list of game configuration
- * \parma[in] ptr_list_config a pointer on a list of game configuration
+ * \param[in] *ptr_list_config a pointer on a list of game configuration
  */
 void closeListGameConfig(list_game_config *ptr_list_config)
  {
@@ -67,7 +67,7 @@ void closeListGameConfig(list_game_config *ptr_list_config)
  /*!
  * \fn int makeConfigListFile(char * home_path)
  *  Create the folder which contain the games configurations and the files which contain the list of games configurations
- * \param[in] home_path the path to the home directory
+ * \param[in] *home_path the path to the home directory
  * \return TRUE if everything is OK, FALSE otherwise
  */
 int makeConfigListFile(char * home_path)
@@ -109,7 +109,7 @@ int makeConfigListFile(char * home_path)
 /*!
  * \fn list_game_config *readConfigListFile(char * home_path)
  *  Read the file which contain the list of game configuration.
- * \param[in] home_path the path to the home directory
+ * \param[in] *home_path the path to the home directory
  * \return a list_game_config
  */
 list_game_config *readConfigListFile(char * home_path)
@@ -145,9 +145,9 @@ list_game_config *readConfigListFile(char * home_path)
 /*!
  * \fn int addConfigListFile(char *new_config_name,char *home_path)
  *  Add a new game configuration into the file which contain the list of game configuration.
- * \param[in] new_config_game the name of the new game configuration
+ * \param[in] new_config_name the name of the new game configuration
  * \param[in] home_path the path to the home directory
- * \return TRUE si tout s'est bien passe, FALSE sinon
+ * \return TRUE if everything is OK, FALSE otherwise
  */
 int addConfigListFile(char *new_config_name,char *home_path)
 {
@@ -177,7 +177,7 @@ int addConfigListFile(char *new_config_name,char *home_path)
 }
 
 /*!
- * \fn int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,char *home_path)
+ * \fn int removeConfigListFile(int index_delete, list_game_config, *ptr_list_config,char *home_path)
  *  Remove a game configuration in the file which contain the list of game configuration and remove the game configuration.
  * \param[in] index_delete the index pf the file which will be deleted
  * \param[in] list_game_config the list of game configuration

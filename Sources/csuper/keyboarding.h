@@ -1,9 +1,9 @@
 /*!
  * \file    keyboarding.h
- * \brief   Prototypes des fonctions de saisie clavier
+ * \brief   Function of keyboarding
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
  /*
@@ -41,19 +41,19 @@
 #include "main.h"
 /*!
  * \def NB_CARACT_INT
- * Definit NB_CARACT_INT a 12
+ * Define the number of characters that need an int.
  */
 #define NB_CARACT_INT 12
 
 /*!
  * \def NB_CARACT_FLOAT
- * Definit NB_CARACT_FLOAT a 39
+ *  Define the number of characters that need a float.
  */
 #define NB_CARACT_FLOAT 39
 
 /*!
  * \def NB_CARACT_DOUB
- * Definit NB_CARACT_DOUB a 309
+ * Define the number of characters that need a double
  */
 #define NB_CARACT_DOUB 309
 

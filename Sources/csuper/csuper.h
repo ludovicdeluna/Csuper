@@ -2,8 +2,8 @@
  * \file    csuper.h
  * \brief   Include of csuper
  * \author  Remi BERTHO
- * \date    13/02/14
- * \version 2.0
+ * \date    17/04/14
+ * \version 2.2.0
  */
 
  /*
