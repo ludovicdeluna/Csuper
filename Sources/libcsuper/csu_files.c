@@ -91,7 +91,7 @@ csuStruct *readCsuFile(char *file_name)
 
     /*Check the version of the file*/
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->version),sizeof(float),1,ptr_file));
-    if (ptr_csu_struct->version + 0.01 < VERSION)
+    if (ptr_csu_struct->version + 0.01 < VERSION && ptr_csu_struct->version - 0.01 > VERSION)
     {
         printf(_("\nError the file's version is the %1.1f while the software only support files with versions"
                " higher than the %1.1f.\n"),ptr_csu_struct->version,VERSION);
