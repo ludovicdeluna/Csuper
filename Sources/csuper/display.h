@@ -2,7 +2,7 @@
  * \file    display.h
  * \brief   Display the games
  * \author  Remi BERTHO
- * \date    17/04/14
+ * \date    22/04/14
  * \version 2.2.0
  */
 
@@ -37,8 +37,15 @@
 
 #include <math.h>
 #include <string.h>
+#include <stdarg.h>
 #include "main.h"
 #include "csuper.h"
+
+typedef enum {foregroundBlack=30 , foregroundRed=31 , foregroundGreen=32 , foregroundBrown=33 , foregroundBlue=34 , foregroundMagenta=35, foregroundCyan=36 , foregroundWhite=37}foregroundColor;
+
+typedef enum {backgroundBlack=40 , backgroundRed=41 , backgroundGreen=42 , backgroundBrown=43 , backgroundBlue=44 , backgroundMagenta=45, backgroundCyan=46 , backgroundWhite=47 , backgroundDefault=49}backgroundColor;
+
+typedef enum { writingReset=0 , writingBold=1 , writingUnderline=4 } Writing;
 
 
 void printNames(csuStruct *ptr_csu_struct, int *ptr_size_ligne);
@@ -54,5 +61,7 @@ void printGameOver(csuStruct *ptr_csu_struct);
 void printStringThreeTabs(char *string);
 void printLicense();
 void printGameConfig(game_config config);
+void printSpecial(char *string, int nb_arg, ...);
+void color(int color);
 
 #endif

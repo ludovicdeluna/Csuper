@@ -2,7 +2,7 @@
  * \file    display.c
  * \brief   Display the games
  * \author  Remi BERTHO
- * \date    17/04/14
+ * \date    22/04/14
  * \version 2.2.0
  */
 
@@ -48,7 +48,26 @@ void printNames(csuStruct *ptr_csu_struct, int *ptr_size_line)
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         /*Display the player name*/
-        printf("%s",ptr_csu_struct->player_names[i]);
+        if (i == ptr_csu_struct->distributor)
+            color(writingUnderline);
+
+        switch ((int)ptr_csu_struct->rank[i])
+        {
+        case 1:
+            printSpecial(ptr_csu_struct->player_names[i],1,foregroundGreen);
+            break;
+        case 2:
+            printSpecial(ptr_csu_struct->player_names[i],1,foregroundCyan);
+            break;
+        case 3:
+            printSpecial(ptr_csu_struct->player_names[i],1,foregroundRed);
+            break;
+        default:
+            printSpecial(ptr_csu_struct->player_names[i],1,foregroundBrown);
+        }
+
+        color(writingReset);
+
         for (j=strlen(ptr_csu_struct->player_names[i]) ; j < 4 ; j++)
         {
             printf(" ");
@@ -96,6 +115,22 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
+        /*Chose the color*/
+        switch ((int)ptr_csu_struct->rank[i])
+        {
+        case 1:
+            color(foregroundGreen);
+            break;
+        case 2:
+            color(foregroundCyan);
+            break;
+        case 3:
+            color(foregroundRed);
+            break;
+        default:
+            color(foregroundBrown);
+        }
+
         /*Print the score of the player*/
         switch (ptr_csu_struct->config.number_after_comma)
         {
@@ -112,6 +147,8 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
             printf("%6.3f",ptr_csu_struct->total_points[i]);
             break;
         }
+
+        color(writingReset);
 
         /*Add space at the end to keep the form*/
         for (j=4 ; j<strlen(ptr_csu_struct->player_names[i]); j++)
@@ -169,6 +206,22 @@ void printAllPoints(csuStruct *ptr_csu_struct)
 
         for (k=0 ; k<ptr_csu_struct->nb_player ; k++)
         {
+            /*Chose the color*/
+            switch ((int)ptr_csu_struct->rank[k])
+            {
+            case 1:
+                color(foregroundGreen);
+                break;
+            case 2:
+                color(foregroundCyan);
+                break;
+            case 3:
+                color(foregroundRed);
+                break;
+            default:
+                color(foregroundBrown);
+            }
+
             if (ptr_csu_struct->nb_turn[k] >= i+1)
             {
                 switch (ptr_csu_struct->config.number_after_comma)
@@ -190,6 +243,8 @@ void printAllPoints(csuStruct *ptr_csu_struct)
             else
                 printf("      ");
 
+            color(writingReset);
+
             /*Add space at the end to keep the form*/
             for (j=4 ; j<(strlen(ptr_csu_struct->player_names[k])); j++)
             printf(" ");
@@ -208,19 +263,33 @@ void printRanking(csuStruct *ptr_csu_struct)
 {
     int i;
     int j;
+    char rank[7];
 
     /*TRANSLATORS:The number of characters before the | must be eight*/
     printf(_("\nRanking |"));
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
-        printf("%6.0f",ptr_csu_struct->rank[i]);
+        sprintf(rank,"%6.0f",ptr_csu_struct->rank[i]);
+        switch ((int)ptr_csu_struct->rank[i])
+        {
+        case 1:
+            printSpecial(rank,1,foregroundGreen);
+            break;
+        case 2:
+            printSpecial(rank,1,foregroundCyan);
+            break;
+        case 3:
+            printSpecial(rank,1,foregroundRed);
+            break;
+        default:
+            printSpecial(rank,1,foregroundBrown);
+        }
+
 
         /*Add space at the end to keep the form*/
         for (j=4 ; j<strlen(ptr_csu_struct->player_names[i]) ; j++)
-        {
             printf(" ");
-        }
 
         printf("|");
     }
@@ -304,33 +373,39 @@ void printGameOver(csuStruct *ptr_csu_struct)
 
     /*Print the first line*/
     printf("\n\t\t\t");
+    color(foregroundGreen);
     printStringThreeTabs(ptr_csu_struct->player_names[pos[0]]);
+    color(writingReset);
     printf("\n");
 
     /*Print the second line*/
     if(ptr_csu_struct->nb_player >=2)
+    {
+        color(foregroundCyan);
         printStringThreeTabs(ptr_csu_struct->player_names[pos[1]]);
+    }
     else
         printf("\t\t\t");
     for (i=0 ; i<24 ; i++)
-        printf("-");
+        printSpecial("-",1,foregroundGreen);
     printf("\n");
 
     /*Print the bottom of the second podium*/
     if(ptr_csu_struct->nb_player >=2)
     {
         for (i=0 ; i<24 ; i++)
-            printf("-");
+            printSpecial("-",1,foregroundCyan);
     }
 
     /*Print the third podium*/
     if (ptr_csu_struct->nb_player >= 3)
     {
         printf("\t\t\t");
+        color(foregroundRed);
         printStringThreeTabs(ptr_csu_struct->player_names[pos[2]]);
         printf("\n\t\t\t\t\t\t");
         for (i=0 ; i<24 ; i++)
-            printf("-");
+            printSpecial("-",1,foregroundRed);
     }
 
 }
@@ -388,4 +463,41 @@ void printGameConfig(game_config config)
     else
         printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
     #endif
+}
+
+/*!
+ * \fn void printSpecial(char *string, int nb_arg, ...)
+ *  Print the string in stdin with special effect.
+ * \param[in] string a string to display
+ * \param[in] nb_arg the number of argument
+ * \param[in] ... the argument
+ */
+void printSpecial(char *string, int nb_arg, ...)
+{
+    int i;
+    va_list l;
+    va_start(l,nb_arg);
+
+    for (i=0 ; i<nb_arg ; i++)
+        color(va_arg(l,int));
+
+    printf("%s",string);
+
+    va_end(l);
+    color(writingReset);
+}
+
+/*!
+ * \fn void color(int color)
+ *  Chose a color for printing.
+ *  Work only under Unix, under Windows do nothing.
+ * \param[in] color the code of the color (see foregroundColor, backgroundColor, Writing)
+ */
+void color(int color)
+{
+    #ifdef __unix__
+    char buf[3];
+    sprintf(buf,"%d",color);
+    printf("\033[%sm",buf);
+    #endif // __unix__
 }

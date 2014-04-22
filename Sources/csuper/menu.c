@@ -224,6 +224,7 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
     int validation;
     char valid;
     int index_player;
+    float total=0;
 
     if (ptr_csu_struct->config.turn_by_turn == 1)
         index_player = -1;
@@ -243,6 +244,8 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
                 printf(_("\nGive the points of %s : "),ptr_csu_struct->player_names[i]);
                 floatKey(&(ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]));
                 printf(_("You chose %.3f\n"),ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]);
+                total += ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]];
+                printf(_("\nTotal points at that turn : %.3f\n"),total);
             }
         } else
         {
