@@ -1,0 +1,8 @@
+#!/bin/bash
+sudo mkdir -p /opt/csuper
+sudo cp csuper /opt/csuper
+sudo cp libcsuper.so /usr/local/lib
+sudo echo "cd /opt/csuper && /opt/csuper/csuper" > csuper_install
+sudo chmod +x csuper_install
+sudo mv csuper_install /usr/local/bin/csuper
+sudo cp -R Locales /opt/csuper

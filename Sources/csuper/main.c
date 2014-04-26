@@ -45,7 +45,7 @@ int main(int argc, char *argv[])
     int function;
     int file_place;
     setlocale(LC_ALL,"");
-    bindtextdomain("csuper","./Locales");
+    bindtextdomain("csuper","Locales");
     textdomain("csuper");
     #ifdef PORTABLE
     printLicense();

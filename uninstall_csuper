@@ -1,0 +1,4 @@
+#!/bin/bash
+sudo rm -R /opt/csuper
+sudo rm /usr/local/bin/csuper
+sudo rm /usr/local/lib/libcsuper.so
