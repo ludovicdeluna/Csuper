@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-18 19:10+0200\n"
+"POT-Creation-Date: 2014-04-26 11:37+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,21 +18,29 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper/display.c:98
+#: Sources/csuper/display.c:48
+#, c-format
+msgid ""
+"\n"
+"Names   | "
+msgstr ""
+
+#. TRANSLATORS:The number of characters before the | must be eight
+#: Sources/csuper/display.c:115
 #, c-format
 msgid ""
 "\n"
 "Total   |"
 msgstr ""
 
-#: Sources/csuper/display.c:137
+#: Sources/csuper/display.c:172
 #, c-format
 msgid ""
 "\n"
 "%s is the distributor."
 msgstr ""
 
-#: Sources/csuper/display.c:148
+#: Sources/csuper/display.c:183
 #, c-format
 msgid ""
 "\n"
@@ -45,7 +53,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | and without the %2.0f must be six
-#: Sources/csuper/display.c:171
+#: Sources/csuper/display.c:206
 #, c-format
 msgid ""
 "\n"
@@ -53,21 +61,21 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper/display.c:217
+#: Sources/csuper/display.c:270
 #, c-format
 msgid ""
 "\n"
 "Ranking |"
 msgstr ""
 
-#: Sources/csuper/display.c:302
+#: Sources/csuper/display.c:355
 #, c-format
 msgid ""
 "\n"
 "The game is over.\n"
 msgstr ""
 
-#: Sources/csuper/display.c:384
+#: Sources/csuper/display.c:443
 #, c-format
 msgid ""
 "\n"
@@ -78,25 +86,25 @@ msgid ""
 "Fore more details : http://www.gnu.org/licenses/gpl.html\n"
 msgstr ""
 
-#: Sources/csuper/display.c:396
+#: Sources/csuper/display.c:455
 #, c-format
 msgid ""
 "\n"
 "Name of the game configuration : %s\n"
 "Use a maximum score : %d\n"
 "Initial score : %.3f\n"
-"Number of digit display after the comma : %d\n"
+"Number of decimal place : %d\n"
 "First way : %d\n"
 "Game in turn by turn : %d\n"
 "Use a distributor : %d\n"
 msgstr ""
 
-#: Sources/csuper/display.c:401 Sources/csuper/display.c:406
+#: Sources/csuper/display.c:460 Sources/csuper/display.c:465
 #, c-format
 msgid "Number of points maximum/minimum : %.3f\n"
 msgstr ""
 
-#: Sources/csuper/display.c:404
+#: Sources/csuper/display.c:463
 #, c-format
 msgid "Number of points maximum/minimum : inf\n"
 msgstr ""
@@ -317,8 +325,7 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Give the number of digit display after the comma. This number must be "
-"between 0 and 3\n"
+"Give the number of decimal place. This number must be between 0 and 3\n"
 "Your choice : "
 msgstr ""
 

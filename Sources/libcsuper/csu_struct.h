@@ -60,7 +60,7 @@ typedef struct
     char first_way;             /*!< Is 1 if the first those has the maximum of points, -1 otherwise */
     char turn_by_turn;          /*!< Is 1 if the game is on turn by turn, 0 otherwise */
     char use_distributor;       /*!< Is 1 if the game use a distributor, 0 otherwise */
-    char number_after_comma;    /*!< The number of digit which are display */
+    char decimal_place;         /*!< The number of decimal place which are display */
     char max;                   /*!< Is 1 if the game use a maximum, 0 if it's a minimum */
     char name[SIZE_MAX_NAME];   /*!< The name of the game configuration */
     float begin_score;          /*!< The score of all players in the beginning of the game */

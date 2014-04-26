@@ -44,7 +44,8 @@ void printNames(csuStruct *ptr_csu_struct, int *ptr_size_line)
     int i;
     int j;
 
-    printf("\nNoms    | ");
+    /*TRANSLATORS:The number of characters before the | must be eight*/
+    printf(_("\nNames   | "));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         /*Display the player name*/
@@ -132,7 +133,7 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
         }
 
         /*Print the score of the player*/
-        switch (ptr_csu_struct->config.number_after_comma)
+        switch (ptr_csu_struct->config.decimal_place)
         {
         case 0 :
             printf("%6.0f",ptr_csu_struct->total_points[i]);
@@ -224,7 +225,7 @@ void printAllPoints(csuStruct *ptr_csu_struct)
 
             if (ptr_csu_struct->nb_turn[k] >= i+1)
             {
-                switch (ptr_csu_struct->config.number_after_comma)
+                switch (ptr_csu_struct->config.decimal_place)
                 {
                 case 0 :
                     printf("%6.0f",ptr_csu_struct->point[k][i]);
@@ -452,9 +453,9 @@ void printLicense()
 void printGameConfig(game_config config)
 {
     printf(_("\nName of the game configuration : %s\nUse a maximum score : %d\nInitial score : %.3f\n"
-    "Number of digit display after the comma : %d\nFirst way : %d\n"
+    "Number of decimal place : %d\nFirst way : %d\n"
     "Game in turn by turn : %d\nUse a distributor : %d\n")
-    ,config.name,config.max,config.begin_score,config.number_after_comma,config.first_way,config.turn_by_turn,config.use_distributor);
+    ,config.name,config.max,config.begin_score,config.decimal_place,config.first_way,config.turn_by_turn,config.use_distributor);
     #ifdef __unix__
     printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
     #elif _WIN32

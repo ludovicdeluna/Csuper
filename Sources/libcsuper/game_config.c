@@ -258,7 +258,7 @@ int newConfigFile(game_config config,char * home_path)
     else
         fprintf(ptr_file,"%f ",config.nb_max);
     #endif
-    fprintf(ptr_file,"%d %d %d %d %d %f",config.first_way,config.turn_by_turn,config.use_distributor,config.number_after_comma,config.max,config.begin_score);
+    fprintf(ptr_file,"%d %d %d %d %d %f",config.first_way,config.turn_by_turn,config.use_distributor,config.decimal_place,config.max,config.begin_score);
 
     closeFile(ptr_file);
 
@@ -347,7 +347,7 @@ int readConfigFile(int index_read, list_game_config *ptr_list_config, game_confi
         fscanf(ptr_file,"%s",buffer);
     }
     #endif
-    fscanf(ptr_file,"%d%d%d%d%d%f",(int *)&(ptr_config->first_way),(int *)&(ptr_config->turn_by_turn),(int *)&(ptr_config->use_distributor),(int *)&(ptr_config->number_after_comma),(int *)&(ptr_config->max),&(ptr_config->begin_score));
+    fscanf(ptr_file,"%d%d%d%d%d%f",(int *)&(ptr_config->first_way),(int *)&(ptr_config->turn_by_turn),(int *)&(ptr_config->use_distributor),(int *)&(ptr_config->decimal_place),(int *)&(ptr_config->max),&(ptr_config->begin_score));
 
     strcpy(ptr_config->name,ptr_list_config->name_game_config[index_read]);
 

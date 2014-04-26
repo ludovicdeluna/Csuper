@@ -165,15 +165,15 @@ void menuGameConfig(game_config *ptr_config)
     else
         ptr_config->use_distributor=1;
 
-    /*Number of digit after the comma.*/
+    /*Number of decimal place.*/
     do
     {
-        printf(_("\nGive the number of digit display after the comma. This number must be"
+        printf(_("\nGive the number of decimal place. This number must be"
         " between 0 and 3\nYour choice : "));
         intKey(&comma);
         printf(_("You chose %.0d\n"),comma);
     } while (comma < 0 || comma > 3);
-    ptr_config->number_after_comma=comma;
+    ptr_config->decimal_place=comma;
 }
 
 /*!
