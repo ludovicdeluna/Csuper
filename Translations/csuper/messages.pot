@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-26 11:37+0200\n"
+"POT-Creation-Date: 2014-04-26 21:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -117,7 +117,7 @@ msgstr ""
 #: Sources/csuper/interface.c:271
 #, c-format
 msgid ""
-"Csuper - Universal points counter allowing reflexion exemption v2.1.9\n"
+"Csuper - Universal points counter allowing reflexion exemption v2.2.0\n"
 "\n"
 "What do you want to do ?\n"
 " (%d) Do a new game \n"
@@ -221,7 +221,7 @@ msgid ""
 "Which game configuration would you like to display ?\n"
 msgstr ""
 
-#: Sources/csuper/keyboarding.c:171
+#: Sources/csuper/keyboarding.c:163
 #, c-format
 msgid ""
 "\n"

@@ -2,7 +2,7 @@
  * \file    menu.c
  * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    17/04/14
+ * \date    26/04/14
  * \version 2.2.0
  */
 

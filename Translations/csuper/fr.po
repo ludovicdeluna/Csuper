@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-26 11:37+0200\n"
-"PO-Revision-Date: 2014-04-26 11:37+0200\n"
+"POT-Creation-Date: 2014-04-26 21:45+0200\n"
+"PO-Revision-Date: 2014-04-26 21:46+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -27,7 +27,7 @@ msgid ""
 "Names   | "
 msgstr ""
 "\n"
-"Nom     |"
+"Nom     | "
 
 #. TRANSLATORS:The number of characters before the | must be eight
 #: Sources/csuper/display.c:115
@@ -152,7 +152,7 @@ msgstr "Voici tous vos fichiers csu :\n"
 #: Sources/csuper/interface.c:271
 #, c-format
 msgid ""
-"Csuper - Universal points counter allowing reflexion exemption v2.1.9\n"
+"Csuper - Universal points counter allowing reflexion exemption v2.2.0\n"
 "\n"
 "What do you want to do ?\n"
 " (%d) Do a new game \n"
@@ -166,7 +166,7 @@ msgid ""
 "Your choice : "
 msgstr ""
 "Csuper - Compteur de Score Universel Permettant l'Exemption de Réflexion "
-"v2.1.9\n"
+"v2.2.0\n"
 "\n"
 "Que voulez vous faire ? \n"
 " (%d) Faire une nouvelle partie \n"
@@ -297,7 +297,7 @@ msgstr ""
 "\n"
 "Quelle configuration de jeu voulez vous afficher ?\n"
 
-#: Sources/csuper/keyboarding.c:171
+#: Sources/csuper/keyboarding.c:163
 #, c-format
 msgid ""
 "\n"

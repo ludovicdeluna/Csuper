@@ -2,7 +2,7 @@
  * \file    keyboarding.h
  * \brief   Function of keyboarding
  * \author  Remi BERTHO
- * \date    17/04/14
+ * \date    26/04/14
  * \version 2.2.0
  */
 
@@ -62,7 +62,6 @@ char *stringKey(char *string, int nb_char_plus_one);
 void intKey(int *nb);
 void floatKey(float *nb);
 void floatKeyNoComma(float *nb);
-void doubleKey(double *nb);
 char *charKey(char *c);
 void systemPause();
 

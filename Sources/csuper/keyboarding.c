@@ -2,7 +2,7 @@
  * \file    keyboarding.c
  * \brief   Function of keyboarding
  * \author  Remi BERTHO
- * \date    17/04/14
+ * \date    26/04/14
  * \version 2.2.0
  */
 
@@ -97,9 +97,15 @@ void intKey(int *nb)
 void floatKey(float *nb)
 {
     char string[NB_CARACT_FLOAT];
+    char *decimal;
 
     stringKey(string,NB_CARACT_FLOAT);
-    *nb=0;
+
+    /*Change the decimal to a comma*/
+    decimal = strchr(string, '.');
+    if (decimal)
+        *decimal = ',';
+
     sscanf(string,"%f",nb);
 }
 
@@ -116,7 +122,7 @@ void floatKeyNoComma(float *nb)
     stringKey(string,NB_CARACT_FLOAT);
 
     /*Remove the comma*/
-    p = strchr(string, '.');
+    p = strchr(string, ',');
     if (p)
     {
         *p = '\0';
@@ -124,20 +130,6 @@ void floatKeyNoComma(float *nb)
 
     *nb=0;
     sscanf(string,"%f",nb);
-}
-
-/*!
- * \fn void doubleKey(double *nb)
- *  Do a keyboarding of a double, put 0 if the keyboarding is not an double.
- * \param[in,out] *nb the number
- */
-void doubleKey(double *nb)
-{
-    char string[NB_CARACT_DOUB];
-
-    stringKey(string,NB_CARACT_DOUB);
-    *nb=0;
-    sscanf(string,"%lf",nb);
 }
 
 /*!
