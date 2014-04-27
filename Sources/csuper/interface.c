@@ -395,7 +395,7 @@ void readFilePath()
 /*!
  * \fn void loadGameLocale(char *file_name)
  *  Load the file and run the play function
- * \param[in] file_name, the filename
+ * \param[in] file_name the filename
  */
 void loadGameLocale(char *file_name)
 {
