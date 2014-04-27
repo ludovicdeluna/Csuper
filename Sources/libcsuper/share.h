@@ -71,5 +71,7 @@ int readFileSize(FILE *ptr_file);
 void *myAlloc(int size_alloue);
 void myRealloc(void **ptr,int size_alloue);
 void addFileCsuExtension(char *file_name);
+int deleteFile(char *file_name);
+int renameFile(char *old_name, char *new_name);
 
 #endif

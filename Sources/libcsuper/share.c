@@ -266,3 +266,51 @@ void addFileCsuExtension(char *file_name)
     if (strcmp(file_extension,ext)!=0)
         sprintf(file_name,"%s.%s",file_name,FILE_EXTENSION);
 }
+
+/*!
+ * \fn int deleteFile(char *file_name)
+ *  Delete a file
+ * \param[in] *file_name the filename
+ * \return TRUE if everything is OK, FALSE otherwise
+ */
+int deleteFile(char *file_name)
+{
+    libcsuper_initialize();
+
+    if(remove(file_name))
+    {
+        printf(_("\nThe file %s cannot be deleted.\n"),file_name);
+        perror("");
+        return FALSE;
+    }
+
+    else
+    {
+        printf(_("\nThe file %s was well deleted.\n"),file_name);
+        return TRUE;
+    }
+}
+
+/*!
+ * \fn int renameFile(char *old_name, char *new_name)
+ *  Rename a file.
+ * \param[in] *old_name the old name of the file
+ * \param[in] *new_name the new name of the file
+ * \return TRUE if everything is OK, FALSE otherwise
+ */
+int renameFile(char *old_name, char *new_name)
+{
+    libcsuper_initialize();
+
+    if(rename(old_name,new_name))
+    {
+        printf(_("\nThe file %s cannot be renamed.\n"),old_name);
+        return FALSE;
+    }
+
+    else
+    {
+        printf(_("\nThe file %s was well renamed in %s.\n"),old_name,new_name);
+        return TRUE;
+    }
+}

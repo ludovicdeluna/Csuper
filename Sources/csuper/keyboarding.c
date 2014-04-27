@@ -106,6 +106,7 @@ void floatKey(float *nb)
     if (decimal)
         *decimal = ',';
 
+    *nb=0;
     sscanf(string,"%f",nb);
 }
 

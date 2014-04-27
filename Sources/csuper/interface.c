@@ -77,13 +77,14 @@ void deleteCsuFileNom()
 
     clearScreen();
     menuFileName(file_name);
+    addFileCsuExtension(file_name);
 
     #ifndef PORTABLE
     if(readSystemPath(file_name)==FALSE)
         return;
     #endif // PORTABLE
 
-    deleteCsuFile(file_name);
+    deleteFile(file_name);
     systemPause();
 }
 
@@ -161,7 +162,7 @@ void play(csuStruct *ptr_csu_struct, char *file_name)
 
     if (menuDelete())
     {
-        deleteCsuFile(file_name);
+        deleteFile(file_name);
         systemPause();
     }
 
@@ -271,18 +272,18 @@ void mainMenu()
         printf(_("Csuper - Universal points counter allowing reflexion exemption v2.2.0\n\nWhat do you want to do ?\n "
         "(%d) Do a new game \n (%d) Load an existing game \n (%d) Display the results of an existing game "
         "\n (%d) Delete a game \n (%d) Display all existing games\n (%d) Display the preferences menu "
-        "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFile,listFile,pref,quit);
+        "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFiles,listFile,pref,quit);
 
         intKey(&choice);
 
         switch (choice) {
             case newMatch  :    newGame();
                                 break;
-            case loadMatch  :    loadGame();
+            case loadMatch  :   loadGame();
                                 break;
-            case printFile  :     displayFile();
+            case printFile  :   displayFile();
                                 break;
-            case deleteFile  :  deleteCsuFileNom();
+            case deleteFiles  : deleteCsuFileNom();
                                 break;
             case listFile  :    listCsuFiles();
                                 break;

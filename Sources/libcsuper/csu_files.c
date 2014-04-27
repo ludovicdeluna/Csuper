@@ -2,7 +2,7 @@
  * \file    csu_files.c
  * \brief   Files management
  * \author  Remi BERTHO
- * \date    16/04/14
+ * \date    27/04/14
  * \version 2.2.0
  */
 
@@ -220,71 +220,12 @@ int writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
 
     if (successful)
     {
-        if(deleteCsuFile(file_name))
+        if(deleteFile(file_name))
         {
-            if(renameCsuFile(file_name_2,file_name))
+            if(renameFile(file_name_2,file_name))
                 return TRUE;
         }
     }
 
     return FALSE;
 }
-
-/*!
- * \fn int deleteCsuFile(char *file_name)
- *  Delete a csu file
- * \param[in] *file_name the filename
- * \return TRUE if everything is OK, FALSE otherwise
- */
-int deleteCsuFile(char *file_name)
-{
-    addFileCsuExtension(file_name);
-
-    libcsuper_initialize();
-
-    if(remove(file_name))
-    {
-        printf(_("\nThe file %s cannot be deleted.\n"),file_name);
-        perror("");
-        return FALSE;
-    }
-
-    else
-    {
-        printf(_("\nThe file %s was well deleted.\n"),file_name);
-        return TRUE;
-    }
-}
-
-/*!
- * \fn int renameCsuFile(char *old_name, char *new_name)
- *  Rename a csu file.
- * \param[in] *old_name the old name of the file
- * \param[in] *new_name the new name of the file
- * \return TRUE if everything is OK, FALSE otherwise
- */
-int renameCsuFile(char *old_name, char *new_name)
-{
-    char old_name_2[SIZE_MAX_NAME+8];
-    char new_name_2[SIZE_MAX_NAME+4];
-
-    libcsuper_initialize();
-
-    sprintf(old_name_2,"%s",old_name);
-    addFileCsuExtension(old_name_2);
-    sprintf(new_name_2,"%s",new_name);
-    addFileCsuExtension(new_name_2);
-
-    if(rename(old_name_2,new_name_2))
-    {
-        printf(_("\nThe file %s cannot be renamed.\n"),old_name_2);
-        return FALSE;
-    }
-
-    else
-    {
-        printf(_("\nThe file %s was well renamed in %s.\n"),old_name_2,new_name_2);
-        return TRUE;
-    }
-}
-
