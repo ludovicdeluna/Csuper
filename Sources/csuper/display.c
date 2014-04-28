@@ -183,7 +183,7 @@ void printHeader(csuStruct *ptr_csu_struct)
     printf(_("\nCsu file\nCreated the %02.0f/%02.0f/%4.0f\nFile's version : %1.1f\nSize max of the names : %.0f"
     "\nNumber of players : %.0f\nNumbers maximum of turns : %d")
     ,ptr_csu_struct->day,ptr_csu_struct->month,ptr_csu_struct->year,ptr_csu_struct->version,ptr_csu_struct->size_max_name
-    ,ptr_csu_struct->nb_player,maxNbTurn(ptr_csu_struct));
+    ,ptr_csu_struct->nb_player,maxNbTurn(ptr_csu_struct)-1);
     printGameConfig(ptr_csu_struct->config);
 }
 
@@ -203,7 +203,7 @@ void printAllPoints(csuStruct *ptr_csu_struct)
     for (i=0 ; i<max_nb_turn ; i++)
     {
         /*TRANSLATORS:The number of characters before the | and without the %2.0f must be six*/
-        printf(_("\nTurn %2.0f |"),(float)i + 1);
+        printf(_("\nTurn %2.0f |"),(float)i);
 
         for (k=0 ; k<ptr_csu_struct->nb_player ; k++)
         {

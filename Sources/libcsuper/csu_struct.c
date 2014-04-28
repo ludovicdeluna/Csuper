@@ -68,18 +68,19 @@ csuStruct *newCsuStruct(float nb_player , game_config config)
     ptr_csu_struct->total_points=(float *)myAlloc(nb_player*sizeof(float));
     ptr_csu_struct->rank=(float *)myAlloc(nb_player*sizeof(float));
 
+    /*Memory allocation of the points*/
+    ptr_csu_struct->point=(float **)myAlloc(ptr_csu_struct->nb_player*sizeof(float*));
+    for (i=0 ; i<nb_player ; i++)
+        ptr_csu_struct->point[i]=(float*)myAlloc(1*sizeof(float));
+
     /*Initialization of the total points,the rank and the number of turns*/
     for (i=0 ; i<nb_player ; i++)
     {
         ptr_csu_struct->total_points[i]=ptr_csu_struct->config.begin_score;
         ptr_csu_struct->rank[i]=1;
-        ptr_csu_struct->nb_turn[i]=0;
+        ptr_csu_struct->nb_turn[i]=1;
+        ptr_csu_struct->point[i][0]=ptr_csu_struct->config.begin_score;
     }
-
-    /*Memory allocation of the points*/
-    ptr_csu_struct->point=(float **)myAlloc(ptr_csu_struct->nb_player*sizeof(float*));
-    for (i=0 ; i<nb_player ; i++)
-        ptr_csu_struct->point[i]=(float*)myAlloc(0*sizeof(float));
 
     /*Save the current date*/
     timestamp = time(NULL);
