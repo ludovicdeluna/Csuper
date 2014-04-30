@@ -2,8 +2,8 @@
  * \file    game_config.c
  * \brief   Game configuration
  * \author  Remi BERTHO
- * \date    16/04/14
- * \version 2.2.0
+ * \date    29/04/14
+ * \version 2.2.1
  */
 
  /*
@@ -156,6 +156,16 @@ int addConfigListFile(char *new_config_name,char *home_path)
     int i;
     list_game_config *ptr_list_config =readConfigListFile(home_path);
 
+    for (i=0 ; i< ptr_list_config->nb_config ; i++)
+    {
+        if (strcmp(ptr_list_config->name_game_config[i],new_config_name) == 0)
+        {
+            printf(_("\nThe game configuration %s already exist.\n"),new_config_name);
+            return FALSE;
+        }
+    }
+
+
     sprintf(file_name_config,"%s%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
 
     ptr_file=openFile(file_name_config,"w");
@@ -168,11 +178,11 @@ int addConfigListFile(char *new_config_name,char *home_path)
     for (i=0 ; i< ptr_list_config->nb_config ; i++)
         fprintf(ptr_file,"%s\n",ptr_list_config->name_game_config[i]);
 
-    fprintf(ptr_file,"%s",new_config_name);
-
-    closeFile(ptr_file);
     closeListGameConfig(ptr_list_config);
 
+
+    fprintf(ptr_file,"%s",new_config_name);
+    closeFile(ptr_file);
     return TRUE;
 }
 
@@ -228,6 +238,9 @@ int newConfigFile(game_config config,char * home_path)
     char file_name[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
 
+    if(addConfigListFile(config.name,home_path) == FALSE)
+        return FALSE;
+
     sprintf(folder,"%s%s",home_path,MAIN_FOLDER_NAME);
 
     #ifdef __unix__
@@ -258,11 +271,10 @@ int newConfigFile(game_config config,char * home_path)
     else
         fprintf(ptr_file,"%f ",config.nb_max);
     #endif
-    fprintf(ptr_file,"%d %d %d %d %d %f",config.first_way,config.turn_by_turn,config.use_distributor,config.decimal_place,config.max,config.begin_score);
+
+    fprintf(ptr_file,"%f %d %d %d %d %d",config.begin_score,config.decimal_place,config.first_way,config.max,config.turn_by_turn,config.use_distributor);
 
     closeFile(ptr_file);
-
-    addConfigListFile(config.name,home_path);
 
     return TRUE;
 }
@@ -315,7 +327,7 @@ int removeConfigFile(char *config_name,char * home_path)
 
 /*!
  * \fn int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path)
- *  Read a game configuration file and close the list of game configuration
+ *  Read a game configuration file.
  * \param[in] index_read the index of the game configuration to be read
  * \param[in] ptr_list_config a pointer on the game configration list
  * \param[in] ptr_config a pointer on a game configuration
@@ -326,6 +338,7 @@ int readConfigFile(int index_read, list_game_config *ptr_list_config, game_confi
 {
     char file_name_config[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
+    int tmp;
     #ifdef _WIN32
     char buffer[5];
     #endif // _WIN32
@@ -347,13 +360,126 @@ int readConfigFile(int index_read, list_game_config *ptr_list_config, game_confi
         fscanf(ptr_file,"%s",buffer);
     }
     #endif
-    fscanf(ptr_file,"%d%d%d%d%d%f",(int *)&(ptr_config->first_way),(int *)&(ptr_config->turn_by_turn),(int *)&(ptr_config->use_distributor),(int *)&(ptr_config->decimal_place),(int *)&(ptr_config->max),&(ptr_config->begin_score));
+    fscanf(ptr_file,"%f",&(ptr_config->begin_score));
+    fscanf(ptr_file,"%d",&tmp);
+    ptr_config->decimal_place=tmp;
+    fscanf(ptr_file,"%d",&tmp);
+    ptr_config->first_way=tmp;
+    fscanf(ptr_file,"%d",&tmp);
+    ptr_config->max=tmp;
+    fscanf(ptr_file,"%d",&tmp);
+    ptr_config->turn_by_turn=tmp;
+    fscanf(ptr_file,"%d",&tmp);
+    ptr_config->use_distributor=tmp;
 
     strcpy(ptr_config->name,ptr_list_config->name_game_config[index_read]);
 
     closeFile(ptr_file);
 
+    return TRUE;
+}
+
+/*!
+ * \fn int exportConfigFile(char *home_path,char *file_name)
+ *  Export all config file into a file.
+ * \param[in] file_name the filename of the exported file.
+ * \param[in] home_path the path to the home directory
+ * \return a list_game_config
+ */
+int exportConfigFile(char *home_path,char *file_name)
+{
+    int i;
+    list_game_config *ptr_list_config;
+    game_config config;
+    FILE *ptr_file_export;
+
+    ptr_list_config = readConfigListFile(home_path);
+
+    ptr_file_export=openFile(file_name,"w");
+
+    if(ptr_file_export == NULL)
+    {
+        printf(_("\nError while exporting game configurations.\n"));
+        return FALSE;
+    }
+
+    fprintf(ptr_file_export,"%d\n",ptr_list_config->nb_config);
+
+    for(i=0 ; i<ptr_list_config->nb_config ; i++)
+    {
+        readConfigFile(i,ptr_list_config,&config,home_path);
+        #ifdef __unix__
+        fprintf(ptr_file_export,"%f ",config.nb_max);
+        #elif _WIN32
+        if (config.nb_max == INFINITY)
+            fprintf(ptr_file_export,"inf ");
+        else
+            fprintf(ptr_file_export,"%f ",config.nb_max);
+        #endif
+        fprintf(ptr_file_export,"%f %s %d %d %d %d %d\n",config.begin_score,config.name,config.decimal_place,config.first_way,config.max,config.turn_by_turn,config.use_distributor);
+    }
+
+    closeFile(ptr_file_export);
     closeListGameConfig(ptr_list_config);
+
+    return TRUE;
+}
+
+/*!
+ * \fn int importConfigFile(char *home_path,char *file_name)
+ *  Import all config file from a file.
+ * \param[in] file_name the filename of the exported file.
+ * \param[in] home_path the path to the home directory
+ * \return a list_game_config
+ */
+int importConfigFile(char *home_path,char *file_name)
+{
+    int i;
+    int tmp;
+    int nb_config;
+    game_config config;
+    FILE *ptr_file_import;
+    #ifdef _WIN32
+    char buffer[5];
+    #endif // _WIN32
+
+    ptr_file_import=openFile(file_name,"r");
+
+    if(ptr_file_import == NULL)
+    {
+        printf(_("\nError while importing game configurations.\n"));
+        return FALSE;
+    }
+
+    fscanf(ptr_file_import,"%d",&nb_config);
+
+    for(i=0 ; i<nb_config ; i++)
+    {
+        #ifdef __unix__
+        fscanf(ptr_file_import,"%f",&(config.nb_max));
+        #elif _WIN32
+        if (fscanf(ptr_file_import,"%f",&(config.nb_max))==0)
+        {
+            config.nb_max = INFINITY;
+            fscanf(ptr_file_import,"%s",buffer);
+        }
+        #endif
+        fscanf(ptr_file_import,"%f%s",&(config.begin_score),config.name);
+        fscanf(ptr_file_import,"%d",&tmp);
+        config.decimal_place=tmp;
+        fscanf(ptr_file_import,"%d",&tmp);
+        config.first_way=tmp;
+        fscanf(ptr_file_import,"%d",&tmp);
+        config.max=tmp;
+        fscanf(ptr_file_import,"%d",&tmp);
+        config.turn_by_turn=tmp;
+        fscanf(ptr_file_import,"%d",&tmp);
+        config.use_distributor=tmp;
+
+        newConfigFile(config,home_path);
+    }
+
+    closeFile(ptr_file_import);
 
     return TRUE;
 }

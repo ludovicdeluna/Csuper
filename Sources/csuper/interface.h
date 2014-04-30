@@ -43,9 +43,9 @@
 
 typedef enum {newMatch=1 , loadMatch=2 , printFile=3 , deleteFiles=4 , listFile=5 , pref=6, quit=7 , easterEggs = 42} MainMenu;
 #ifndef PORTABLE
-typedef enum {newPath=1, readPath=2 , newGameConf=3, removeGameConf=4, printListGameConf=5 , printGameConf=6 ,backMainMenu=7 , easterEggs2 = 42} PreferencesMenu;
+typedef enum {newPath=1, readPath=2 , newGameConf=3, removeGameConf=4, printListGameConf=5 , printGameConf=6, exportGameConf=7, importGameConf=8 ,backMainMenu=9 , easterEggs2 = 42} PreferencesMenu;
 #else
-typedef enum {newGameConf=1,removeGameConf=2,printListGameConf=3 , printGameConf=4 ,backMainMenu=5, easterEggs2 = 42} PreferencesMenu;
+typedef enum {newGameConf=1,removeGameConf=2,printListGameConf=3 , printGameConf=4,exportGameConf=5, importGameConf=6  ,backMainMenu=7, easterEggs2 = 42} PreferencesMenu;
 #endif
 
 
@@ -65,5 +65,7 @@ void newGameConfig();
 void removeGameConfig();
 void printListGameConfig();
 void printGameConfigFile();
+void exportListGameConfig();
+void importListGameConfig();
 
 #endif

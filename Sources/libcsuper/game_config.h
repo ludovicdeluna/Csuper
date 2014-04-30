@@ -2,8 +2,8 @@
  * \file    game_config.h
  * \brief   Game configurations
  * \author  Remi BERTHO
- * \date    16/04/14
- * \version 2.2.0
+ * \date    29/04/14
+ * \version 2.2.1
  */
 
  /*
@@ -70,5 +70,7 @@ int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,cha
 int newConfigFile(game_config config,char * home_path);
 int removeConfigFile(char *config_name,char * home_path);
 int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path);
+int exportConfigFile(char *home_path,char *file_name);
+int importConfigFile(char *home_path,char *file_name);
 
 #endif

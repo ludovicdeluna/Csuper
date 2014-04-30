@@ -2,8 +2,8 @@
  * \file    interface.c
  * \brief   Graphical interface
  * \author  Remi BERTHO
- * \date    17/04/14
- * \version 2.2.0
+ * \date    29/04/14
+ * \version 2.2.1
  */
 
  /*
@@ -269,9 +269,9 @@ void mainMenu()
 
         clearScreen();
 
-        printf(_("Csuper - Universal points counter allowing reflexion exemption v2.2.0\n\nWhat do you want to do ?\n "
+        printf(_("Csuper - Universal points counter allowing reflexion exemption v2.2.1\n\nWhat do you want to do ?\n "
         "(%d) Do a new game \n (%d) Load an existing game \n (%d) Display the results of an existing game "
-        "\n (%d) Delete a game \n (%d) Display all existing games\n (%d) Display the preferences menu "
+        "\n (%d) Delete a game \n (%d) Display all existing games\n (%d) Display the preferences menu"
         "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFiles,listFile,pref,quit);
 
         intKey(&choice);
@@ -326,7 +326,8 @@ void preferencesMenu()
         #endif
         printf(_("\n (%d) Make a new game configuration\n (%d) Delete an existing game configuration"
         "\n (%d) Display the list of the game configurations\n (%d) Display a game configuration"
-        "\n (%d) Back to main menu\n\nYour choice : "),newGameConf,removeGameConf,printListGameConf,printGameConf,backMainMenu);
+        "\n (%d) Export game configurations\n (%d) Import game configurations\n (%d) Back to main menu\n\nYour choice : ")
+               ,newGameConf,removeGameConf,printListGameConf,printGameConf,exportGameConf,importGameConf,backMainMenu);
 
         intKey(&choice);
 
@@ -349,6 +350,10 @@ void preferencesMenu()
                                 break;
             case easterEggs2 :  printf(_("\nYes it's the good answer but that don't help me to know what do you want to do.\n"));
                                 systemPause();
+                                break;
+            case exportGameConf:exportListGameConfig();
+                                break;
+            case importGameConf:importListGameConfig();
                                 break;
             default :           wrongChoice();
                                 systemPause();
@@ -467,7 +472,8 @@ void newGameConfig()
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE
-    newConfigFile(config,home_path);
+    if (newConfigFile(config,home_path) == FALSE);
+        systemPause();
 }
 
 /*!
@@ -569,10 +575,59 @@ void printGameConfigFile()
 
         readConfigFile(game_config_choice-1,ptr_list_config,&config,home_path);
         printGameConfig(config);
+        closeListGameConfig(ptr_list_config);
     }
 
     else
         printf(_("\nYou do not have any game configuration files.\n"));
 
+    systemPause();
+}
+
+/*!
+ * \fn void exportListGameConfig()
+ *  Export all game configuration in one file.
+ */
+void exportListGameConfig()
+{
+    char home_path[SIZE_MAX_FILE_NAME]="";
+    char file_name[SIZE_MAX_FILE_NAME]="";
+
+    clearScreen();
+
+    menuFileName(file_name);
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    if(readSystemPath(file_name)==FALSE)
+        return;
+    #endif // PORTABLE
+
+    if(exportConfigFile(home_path,file_name) == TRUE);
+        printf(_("\nGame configurations are well export in %s\n"),file_name);
+    systemPause();
+}
+
+/*!
+ * \fn void importListGameConfig()
+ *  Import all game configuration in one file.
+ */
+void importListGameConfig()
+{
+    char home_path[SIZE_MAX_FILE_NAME]="";
+    char file_name[SIZE_MAX_FILE_NAME]="";
+
+    clearScreen();
+
+    menuFileName(file_name);
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    if(readSystemPath(file_name)==FALSE)
+        return;
+    #endif // PORTABLE
+
+    if(importConfigFile(home_path,file_name) == TRUE);
+        printf(_("\nGame configurations are well import from %s\n"),file_name);
     systemPause();
 }

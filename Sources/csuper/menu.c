@@ -2,8 +2,8 @@
  * \file    menu.c
  * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    26/04/14
- * \version 2.2.0
+ * \date    29/04/14
+ * \version 2.2.1
  */
 
  /*
@@ -92,10 +92,11 @@ void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
         readConfigFile(game_config_choice-1,ptr_list_config,ptr_config,home_path);
     else
     {
-        closeListGameConfig(ptr_list_config);
         menuGameConfig(ptr_config);
         strcpy(ptr_config->name,_("Unknown"));
     }
+
+    closeListGameConfig(ptr_list_config);
 }
 
 /*!

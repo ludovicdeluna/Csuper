@@ -8,10 +8,10 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-17 13:39+0200\n"
-"PO-Revision-Date: 2014-04-16 18:14+0200\n"
+"POT-Creation-Date: 2014-04-30 18:34+0200\n"
+"PO-Revision-Date: 2014-04-30 18:45+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
-"Language-Team: français <>\n"
+"Language-Team: français <wesnoth@ml.free.fr>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -66,48 +66,12 @@ msgstr ""
 "\n"
 "Erreur lors de l’écriture du fichier.\n"
 
-#: Sources/libcsuper/csu_files.c:247 Sources/libcsuper/game_config.c:303
-#, c-format
-msgid ""
-"\n"
-"The file %s cannot be deleted.\n"
-msgstr ""
-"\n"
-"Le fichier %s n'a pas pu être supprime.\n"
-
-#: Sources/libcsuper/csu_files.c:254 Sources/libcsuper/game_config.c:309
-#, c-format
-msgid ""
-"\n"
-"The file %s was well deleted.\n"
-msgstr ""
-"\n"
-"Le fichier %s a bien été supprimé.\n"
-
-#: Sources/libcsuper/csu_files.c:280
-#, c-format
-msgid ""
-"\n"
-"The file %s cannot be renamed.\n"
-msgstr ""
-"\n"
-"Le fichier %s n'a pas pu être renommé.\n"
-
-#: Sources/libcsuper/csu_files.c:286
-#, c-format
-msgid ""
-"\n"
-"The file %s was well renamed in %s.\n"
-msgstr ""
-"\n"
-"Le fichier %s a bien été renommé en %s.\n"
-
-#: Sources/libcsuper/csu_struct.c:227
+#: Sources/libcsuper/csu_struct.c:228
 #, c-format
 msgid "The distributor was initialize by default to %s.\n"
 msgstr "La personne qui distribue a été initialisée par défaut à %s.\n"
 
-#: Sources/libcsuper/csu_struct.c:294
+#: Sources/libcsuper/csu_struct.c:295
 #, c-format
 msgid ""
 "\n"
@@ -125,6 +89,51 @@ msgid ""
 msgstr ""
 "\n"
 "Erreur lors de la lecture du fichier contenant le répertoire des fichiers.\n"
+
+#: Sources/libcsuper/game_config.c:163
+#, c-format
+msgid ""
+"\n"
+"The game configuration %s already exist.\n"
+msgstr ""
+"\n"
+"La configuration de jeu %s existe déjà.\n"
+
+#: Sources/libcsuper/game_config.c:315 Sources/libcsuper/share.c:282
+#, c-format
+msgid ""
+"\n"
+"The file %s cannot be deleted.\n"
+msgstr ""
+"\n"
+"Le fichier %s n'a pas pu être supprime.\n"
+
+#: Sources/libcsuper/game_config.c:321 Sources/libcsuper/share.c:289
+#, c-format
+msgid ""
+"\n"
+"The file %s was well deleted.\n"
+msgstr ""
+"\n"
+"Le fichier %s a bien été supprimé.\n"
+
+#: Sources/libcsuper/game_config.c:402
+#, c-format
+msgid ""
+"\n"
+"Error while exporting game configurations.\n"
+msgstr ""
+"\n"
+"Erreur lors de l'exportation des configurations de jeu.\n"
+
+#: Sources/libcsuper/game_config.c:450
+#, c-format
+msgid ""
+"\n"
+"Error while importing game configurations.\n"
+msgstr ""
+"\n"
+"Erreur lors de l’importation des configurations de jeu.\n"
 
 #: Sources/libcsuper/main_argument.c:87
 #, c-format
@@ -200,6 +209,24 @@ msgid ""
 msgstr ""
 "\n"
 "Problème d'allocation mémoire\n"
+
+#: Sources/libcsuper/share.c:307
+#, c-format
+msgid ""
+"\n"
+"The file %s cannot be renamed.\n"
+msgstr ""
+"\n"
+"Le fichier %s n'a pas pu être renommé.\n"
+
+#: Sources/libcsuper/share.c:313
+#, c-format
+msgid ""
+"\n"
+"The file %s was well renamed in %s.\n"
+msgstr ""
+"\n"
+"Le fichier %s a bien été renommé en %s.\n"
 
 #~ msgid ""
 #~ "\n"
