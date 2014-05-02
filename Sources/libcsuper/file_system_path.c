@@ -36,7 +36,7 @@
 /*!
  * \fn void createFileSystemPath()
  *  Create the folder and the file which contain the system path
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int createFileSystemPath()
 {
@@ -58,20 +58,20 @@ int createFileSystemPath()
     ptr_file=openFile(file_name,"w+");
 
     if (ptr_file==NULL)
-        return FALSE;
+        return MY_FALSE;
 
     fprintf(ptr_file,"%s",folder);
 
     closeFile(ptr_file);
 
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
  * \fn int readFileSystemPath(char *file_name)
  *  Read the system path and the path read to the filename
  * \param[in,out] *file_name the filename
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int readFileSystemPath(char *file_name)
 {
@@ -86,7 +86,7 @@ int readFileSystemPath(char *file_name)
     ptr_file=openFile(file_name_preferences,"r");
 
     if(ptr_file == NULL)
-        return FALSE;
+        return MY_FALSE;
 
     file_size=readFileSize(ptr_file);
     fgets(folder,file_size+1,ptr_file);
@@ -95,48 +95,48 @@ int readFileSystemPath(char *file_name)
     sprintf(folder,"%s/%s",folder,file_name);
     strcpy(file_name,folder);
 
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
  * \fn int readSystemPath(char *file_name)
  *  Add the system path, if the file system path doesn't exist, it create it.
  * \param[in,out] *file_name the filename
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int readSystemPath(char *file_name)
 {
     libcsuper_initialize();
 
-    if (readFileSystemPath(file_name)==FALSE)
+    if (readFileSystemPath(file_name)==MY_FALSE)
     {
-        if(createFileSystemPath()==FALSE)
+        if(createFileSystemPath()==MY_FALSE)
         {
             printf(_("\nError while reading the file containing the system path.\n"));
-            return FALSE;
+            return MY_FALSE;
         }
-        if (readFileSystemPath(file_name)==FALSE)
+        if (readFileSystemPath(file_name)==MY_FALSE)
         {
             printf(_("\nError while reading the file containing the system path.\n"));
-            return FALSE;
+            return MY_FALSE;
         }
     }
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
  * \fn int changeSystemPath(char *new_path)
  *  Change the system path
  * \param[in,out] *new_path le nomveau chemin
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int changeSystemPath(char *new_path)
 {
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
 
-    if (createFileSystemPath()==FALSE)
-        return FALSE;
+    if (createFileSystemPath()==MY_FALSE)
+        return MY_FALSE;
 
     readHomePath(file_name);
 
@@ -145,13 +145,13 @@ int changeSystemPath(char *new_path)
     ptr_file=openFile(file_name,"w+");
 
     if (ptr_file==NULL)
-        return FALSE;
+        return MY_FALSE;
 
     fprintf(ptr_file,"%s",new_path);
 
     closeFile(ptr_file);
 
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!

@@ -40,11 +40,11 @@
  */
 void libcsuper_initialize()
 {
-    static char initialized=FALSE;
-    if (initialized == FALSE)
+    static char initialized=MY_FALSE;
+    if (initialized == MY_FALSE)
     {
         bindtextdomain("libcsuper","./Locales");
-        initialized = TRUE;
+        initialized = MY_TRUE;
     }
 }
 
@@ -271,7 +271,7 @@ void addFileCsuExtension(char *file_name)
  * \fn int deleteFile(char *file_name)
  *  Delete a file
  * \param[in] *file_name the filename
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int deleteFile(char *file_name)
 {
@@ -281,13 +281,13 @@ int deleteFile(char *file_name)
     {
         printf(_("\nThe file %s cannot be deleted.\n"),file_name);
         perror("");
-        return FALSE;
+        return MY_FALSE;
     }
 
     else
     {
         printf(_("\nThe file %s was well deleted.\n"),file_name);
-        return TRUE;
+        return MY_TRUE;
     }
 }
 
@@ -296,7 +296,7 @@ int deleteFile(char *file_name)
  *  Rename a file.
  * \param[in] *old_name the old name of the file
  * \param[in] *new_name the new name of the file
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int renameFile(char *old_name, char *new_name)
 {
@@ -305,12 +305,12 @@ int renameFile(char *old_name, char *new_name)
     if(rename(old_name,new_name))
     {
         printf(_("\nThe file %s cannot be renamed.\n"),old_name);
-        return FALSE;
+        return MY_FALSE;
     }
 
     else
     {
         printf(_("\nThe file %s was well renamed in %s.\n"),old_name,new_name);
-        return TRUE;
+        return MY_TRUE;
     }
 }

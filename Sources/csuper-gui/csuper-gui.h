@@ -1,13 +1,13 @@
 /*!
- * \file    main.c
- * \brief   Main
+ * \file    csuper-gui.h
+ * \brief   Inclusion of csuper-gui
  * \author  Remi BERTHO
  * \date    02/05/14
  * \version 3.0.0
  */
 
  /*
- * main.c
+ * csuper-gui.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,22 +31,19 @@
  *
  */
 
- #include "main.h"
+#ifndef CSUPER_GUI_H_INCLUDED
+#define CSUPER_GUI_H_INCLUDED
 
-int
-main (int   argc, char *argv[])
-{
-  GtkWidget *window;
+/*!
+ * \def CSUPER_GUI
+ * Define that we compile csuper-gui.
+ */
+#define CSUPER_GUI
 
-  gtk_init (&argc, &argv);
+#include <gtk/gtk.h>
+#include <stdlib.h>
+#include <glib/gi18n.h>
+#include "../libcsuper/libcsuper.h"
 
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
 
-  g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-
-  gtk_widget_show (window);
-
-  gtk_main ();
-
-  return 0;
-}
+#endif // CSUPER-GUI_H_INCLUDED

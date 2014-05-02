@@ -48,7 +48,7 @@ void displayFile()
     menuFileName(file_name);
 
     #ifndef PORTABLE
-    if(readSystemPath(file_name)==FALSE)
+    if(readSystemPath(file_name)==MY_FALSE)
         return;
     #endif // PORTABLE
 
@@ -80,7 +80,7 @@ void deleteCsuFileNom()
     addFileCsuExtension(file_name);
 
     #ifndef PORTABLE
-    if(readSystemPath(file_name)==FALSE)
+    if(readSystemPath(file_name)==MY_FALSE)
         return;
     #endif // PORTABLE
 
@@ -104,7 +104,7 @@ void listCsuFiles()
     clearScreen();
 
     #ifndef PORTABLE
-    if(readSystemPath(folder)==FALSE)
+    if(readSystemPath(folder)==MY_FALSE)
         return;
     #endif // PORTABLE
 
@@ -135,7 +135,7 @@ void listCsuFiles()
  */
 void play(csuStruct *ptr_csu_struct, char *file_name)
 {
-    int continuer=FALSE;
+    int continuer=MY_FALSE;
 
     clearScreen();
     printPoints(ptr_csu_struct);
@@ -151,12 +151,12 @@ void play(csuStruct *ptr_csu_struct, char *file_name)
         printPoints(ptr_csu_struct);
 
         if (exceedMaxNumber(ptr_csu_struct))
-            continuer=FALSE;
+            continuer=MY_FALSE;
 
         else
             continuer=menuContinue();
 
-    } while (continuer==TRUE);
+    } while (continuer==MY_TRUE);
 
     printGameOver(ptr_csu_struct);
 
@@ -189,7 +189,7 @@ void newGame()
     menuFileName(file_name);
 
     #ifndef PORTABLE
-    if(readSystemPath(file_name)==FALSE)
+    if(readSystemPath(file_name)==MY_FALSE)
         return;
     #endif // PORTABLE
 
@@ -227,7 +227,7 @@ void loadGame()
     menuFileName(file_name);
 
     #ifndef PORTABLE
-    if(readSystemPath(file_name)==FALSE)
+    if(readSystemPath(file_name)==MY_FALSE)
         return;
     #endif // PORTABLE
 
@@ -261,7 +261,7 @@ void loadGame()
 void mainMenu()
 {
     int choice;
-    int stop = FALSE;
+    int stop = MY_FALSE;
 
     do
     {
@@ -291,7 +291,7 @@ void mainMenu()
                                 break;
             case quit  :        printf(_("\nSee you.\n"));
                                 systemPause();
-                                stop=TRUE;
+                                stop=MY_TRUE;
                                 break;
             case easterEggs :   printf(_("\nYes it's the good answer but that don't help me to know what do you want to do.\n"));
                                 systemPause();
@@ -302,7 +302,7 @@ void mainMenu()
 
         clearScreen();
 
-	} while (stop==FALSE);
+	} while (stop==MY_FALSE);
 }
 
 /*!
@@ -312,7 +312,7 @@ void mainMenu()
 void preferencesMenu()
 {
     int choice;
-    int stop = FALSE;
+    int stop = MY_FALSE;
 
     do
     {
@@ -338,7 +338,7 @@ void preferencesMenu()
             case readPath :     readFilePath();
                                 break;
             #endif
-            case backMainMenu  :   stop=TRUE;
+            case backMainMenu  :   stop=MY_TRUE;
                                 break;
             case newGameConf :  newGameConfig();
                                 break;
@@ -361,7 +361,7 @@ void preferencesMenu()
 
         clearScreen();
 
-	} while (stop==FALSE);
+	} while (stop==MY_FALSE);
 }
 
 /*!
@@ -472,7 +472,7 @@ void newGameConfig()
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE
-    if (newConfigFile(config,home_path) == FALSE);
+    if (newConfigFile(config,home_path) == MY_FALSE);
         systemPause();
 }
 
@@ -599,11 +599,11 @@ void exportListGameConfig()
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
-    if(readSystemPath(file_name)==FALSE)
+    if(readSystemPath(file_name)==MY_FALSE)
         return;
     #endif // PORTABLE
 
-    if(exportConfigFile(home_path,file_name) == TRUE);
+    if(exportConfigFile(home_path,file_name) == MY_TRUE);
         printf(_("\nGame configurations are well export in %s\n"),file_name);
     systemPause();
 }
@@ -623,11 +623,11 @@ void importListGameConfig()
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
-    if(readSystemPath(file_name)==FALSE)
+    if(readSystemPath(file_name)==MY_FALSE)
         return;
     #endif // PORTABLE
 
-    if(importConfigFile(home_path,file_name) == TRUE);
+    if(importConfigFile(home_path,file_name) == MY_TRUE);
         printf(_("\nGame configurations are well import from %s\n"),file_name);
     systemPause();
 }

@@ -40,7 +40,7 @@
  * \param[in] argv the array of argument
  * \param[in] function integer which determine which function run
  * \param[in] file_place integer which determine the index of the filename
- * \return TRUE if the function founded an argument, FALSE otherwise
+ * \return MY_TRUE if the function founded an argument, MY_FALSE otherwise
  */
 int searchArgument(int argc, char *argv[], int *function, int *file_place)
 {
@@ -70,9 +70,9 @@ int searchArgument(int argc, char *argv[], int *function, int *file_place)
     }
 
     if (i == argc || *file_place >= argc)
-        return FALSE;
+        return MY_FALSE;
     else
-        return TRUE;
+        return MY_TRUE;
 }
 
 

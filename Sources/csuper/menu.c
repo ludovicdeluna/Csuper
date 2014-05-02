@@ -236,7 +236,7 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
 
     do
     {
-        validation=TRUE;
+        validation=MY_TRUE;
 
         if (ptr_csu_struct->config.turn_by_turn == 1)
         {
@@ -259,7 +259,7 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
         charKey(&valid);
 
         if (valid=='n' || valid=='N')
-            validation = FALSE;
+            validation = MY_FALSE;
 
     } while (!validation);
 
@@ -289,7 +289,7 @@ int menuPlayerIndex(csuStruct *ptr_csu_struct)
 /*!
  * \fn int menuContinue()
  *  Ask if we want to continue3
- * \return TRUE if we want to continue, FALSE otherwise
+ * \return MY_TRUE if we want to continue, MY_FALSE otherwise
  */
 int menuContinue()
 {
@@ -299,15 +299,15 @@ int menuContinue()
     charKey(&continuer);
 
     if (continuer=='n' || continuer=='N')
-        return FALSE;
+        return MY_FALSE;
 
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
  * \fn int menuDelete()
  *  Ask if we want to delete a file.
- * \return TRUE if we want to deleted the file, FALSE otherwise
+ * \return MY_TRUE if we want to deleted the file, MY_FALSE otherwise
  */
 int menuDelete()
 {
@@ -317,9 +317,9 @@ int menuDelete()
     charKey(&delete);
 
     if (delete=='o' || delete=='O' || delete == 'y' || delete == 'Y')
-        return TRUE;
+        return MY_TRUE;
 
-    return FALSE;
+    return MY_FALSE;
 }
 
 /*!
@@ -329,7 +329,7 @@ int menuDelete()
  */
 void menuNewPath(char *new_path)
 {
-    int verif=FALSE;
+    int verif=MY_FALSE;
     FILE *ptr_file_test;
     char check_path[SIZE_MAX_FILE_NAME];
 
@@ -346,12 +346,12 @@ void menuNewPath(char *new_path)
         {
             closeFile(ptr_file_test);
             remove(check_path);
-            verif=TRUE;
+            verif=MY_TRUE;
         }
         else
             printf(_("\nError : this folder is not valid.\n"));
 
-    } while (verif == FALSE);
+    } while (verif == MY_FALSE);
 
     printf(_("You chose %s\n"),new_path);
 }

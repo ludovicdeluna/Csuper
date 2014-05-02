@@ -1,5 +1,5 @@
 /*!
- * \file    main.c
+ * \file    main.h
  * \brief   Main
  * \author  Remi BERTHO
  * \date    02/05/14
@@ -7,7 +7,7 @@
  */
 
  /*
- * main.c
+ * main.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,22 +31,9 @@
  *
  */
 
- #include "main.h"
+#ifndef MAIN_H_INCLUDED
+#define MAIN_H_INCLUDED
 
-int
-main (int   argc, char *argv[])
-{
-  GtkWidget *window;
+#include "csuper-gui.h"
 
-  gtk_init (&argc, &argv);
-
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
-
-  g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
-
-  gtk_widget_show (window);
-
-  gtk_main ();
-
-  return 0;
-}
+#endif // MAIN_H_INCLUDED

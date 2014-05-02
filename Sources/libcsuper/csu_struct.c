@@ -232,7 +232,7 @@ void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
  * \fn int exceedMaxNumber(csuStruct *ptr_csu_struct)
  *  Check if someone exceed the maximum number
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
- * \return TRUE if someone exceed, FALSE otherwise
+ * \return MY_TRUE if someone exceed, MY_FALSE otherwise
  */
 int exceedMaxNumber(csuStruct *ptr_csu_struct)
 {
@@ -242,16 +242,16 @@ int exceedMaxNumber(csuStruct *ptr_csu_struct)
         if (ptr_csu_struct->config.max == 1)
         {
             if (ptr_csu_struct->total_points[i] + FLT_EPSILON >= ptr_csu_struct->config.nb_max)
-                return TRUE;
+                return MY_TRUE;
         }
         else
         {
             if (ptr_csu_struct->total_points[i] - FLT_EPSILON <= ptr_csu_struct->config.nb_max)
-                return TRUE;
+                return MY_TRUE;
         }
 
     }
-    return FALSE;
+    return MY_FALSE;
 }
 
 /*!

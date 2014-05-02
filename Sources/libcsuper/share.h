@@ -41,23 +41,25 @@
 #include <libintl.h>
 
 /*!
- * \def TRUE
- * Definit TRUE a 1
+ * \def MY_TRUE
+ * Definit MY_TRUE a 1
  */
-#define TRUE 1
+#define MY_TRUE 1
 
 /*!
- * \def FALSE
- * Definit FALSE a 0
+ * \def MY_FALSE
+ * Definit MY_FALSE a 0
  */
-#define FALSE 0
+#define MY_FALSE 0
 
 /*!
  * \def _(String)
  * Define the _ for gettext.
  */
 #ifndef CSUPER
+#ifndef CSUPER_GUI
 #define _(String) dgettext ("libcsuper", String)
+#endif // CSUPER_GUI
 #endif // CSUPER
 
 void libcsuper_initialize();

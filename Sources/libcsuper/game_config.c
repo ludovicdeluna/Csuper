@@ -68,7 +68,7 @@ void closeListGameConfig(list_game_config *ptr_list_config)
  * \fn int makeConfigListFile(char * home_path)
  *  Create the folder which contain the games configurations and the files which contain the list of games configurations
  * \param[in] *home_path the path to the home directory
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int makeConfigListFile(char * home_path)
 {
@@ -97,13 +97,13 @@ int makeConfigListFile(char * home_path)
     ptr_file=openFile(file_name,"w+");
 
     if (ptr_file==NULL)
-        return FALSE;
+        return MY_FALSE;
 
     fprintf(ptr_file,"%d",0);
 
     closeFile(ptr_file);
 
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
@@ -147,7 +147,7 @@ list_game_config *readConfigListFile(char * home_path)
  *  Add a new game configuration into the file which contain the list of game configuration.
  * \param[in] new_config_name the name of the new game configuration
  * \param[in] home_path the path to the home directory
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int addConfigListFile(char *new_config_name,char *home_path)
 {
@@ -161,7 +161,7 @@ int addConfigListFile(char *new_config_name,char *home_path)
         if (strcmp(ptr_list_config->name_game_config[i],new_config_name) == 0)
         {
             printf(_("\nThe game configuration %s already exist.\n"),new_config_name);
-            return FALSE;
+            return MY_FALSE;
         }
     }
 
@@ -171,7 +171,7 @@ int addConfigListFile(char *new_config_name,char *home_path)
     ptr_file=openFile(file_name_config,"w");
 
     if(ptr_file == NULL)
-        return FALSE;
+        return MY_FALSE;
 
     fprintf(ptr_file,"%d\n",ptr_list_config->nb_config+1);
 
@@ -183,7 +183,7 @@ int addConfigListFile(char *new_config_name,char *home_path)
 
     fprintf(ptr_file,"%s",new_config_name);
     closeFile(ptr_file);
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
@@ -192,7 +192,7 @@ int addConfigListFile(char *new_config_name,char *home_path)
  * \param[in] index_delete the index pf the file which will be deleted
  * \param[in] list_game_config the list of game configuration
  * \param[in] home_path the path to the home directory
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,char *home_path)
 {
@@ -207,7 +207,7 @@ int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,cha
     ptr_file=openFile(file_name_config,"w+");
 
     if(ptr_file == NULL)
-        return FALSE;
+        return MY_FALSE;
 
     fprintf(ptr_file,"%d\n",ptr_list_config->nb_config-1);
 
@@ -222,7 +222,7 @@ int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,cha
     closeFile(ptr_file);
     closeListGameConfig(ptr_list_config);
 
-    return TRUE;
+    return MY_TRUE;
 }
 
  /*!
@@ -230,7 +230,7 @@ int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,cha
  *  Create a game configuration file and put it into the game configuration file list.
  * \param[in] config the gale configuration
  * \param[in] home_path the path to the home directory
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int newConfigFile(game_config config,char * home_path)
 {
@@ -238,8 +238,8 @@ int newConfigFile(game_config config,char * home_path)
     char file_name[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
 
-    if(addConfigListFile(config.name,home_path) == FALSE)
-        return FALSE;
+    if(addConfigListFile(config.name,home_path) == MY_FALSE)
+        return MY_FALSE;
 
     sprintf(folder,"%s%s",home_path,MAIN_FOLDER_NAME);
 
@@ -261,7 +261,7 @@ int newConfigFile(game_config config,char * home_path)
     ptr_file=openFile(file_name,"w+");
 
     if (ptr_file==NULL)
-        return FALSE;
+        return MY_FALSE;
 
     #ifdef __unix__
     fprintf(ptr_file,"%f ",config.nb_max);
@@ -276,7 +276,7 @@ int newConfigFile(game_config config,char * home_path)
 
     closeFile(ptr_file);
 
-    return TRUE;
+    return MY_TRUE;
 }
 
  /*!
@@ -284,7 +284,7 @@ int newConfigFile(game_config config,char * home_path)
  *  Delete a game configuration.
  * \param[in] config_name the name of the game configuration which will be deleted
  * \param[in] home_path the path to the home directory
- * \return TRUE if everything is OK, FALSE otherwise
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int removeConfigFile(char *config_name,char * home_path)
 {
@@ -314,15 +314,15 @@ int removeConfigFile(char *config_name,char * home_path)
     {
         printf(_("\nThe file %s cannot be deleted.\n"),file_name);
         perror("");
-        return FALSE;
+        return MY_FALSE;
     }
     else
     {
         printf(_("\nThe file %s was well deleted.\n"),file_name);
-        return TRUE;
+        return MY_TRUE;
     }
 
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
@@ -348,7 +348,7 @@ int readConfigFile(int index_read, list_game_config *ptr_list_config, game_confi
     ptr_file=openFile(file_name_config,"r");
 
     if(ptr_file == NULL)
-        return FALSE;
+        return MY_FALSE;
 
     /*Lis les differentes config*/
     #ifdef __unix__
@@ -376,7 +376,7 @@ int readConfigFile(int index_read, list_game_config *ptr_list_config, game_confi
 
     closeFile(ptr_file);
 
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
@@ -400,7 +400,7 @@ int exportConfigFile(char *home_path,char *file_name)
     if(ptr_file_export == NULL)
     {
         printf(_("\nError while exporting game configurations.\n"));
-        return FALSE;
+        return MY_FALSE;
     }
 
     fprintf(ptr_file_export,"%d\n",ptr_list_config->nb_config);
@@ -422,7 +422,7 @@ int exportConfigFile(char *home_path,char *file_name)
     closeFile(ptr_file_export);
     closeListGameConfig(ptr_list_config);
 
-    return TRUE;
+    return MY_TRUE;
 }
 
 /*!
@@ -448,7 +448,7 @@ int importConfigFile(char *home_path,char *file_name)
     if(ptr_file_import == NULL)
     {
         printf(_("\nError while importing game configurations.\n"));
-        return FALSE;
+        return MY_FALSE;
     }
 
     fscanf(ptr_file_import,"%d",&nb_config);
@@ -481,5 +481,5 @@ int importConfigFile(char *home_path,char *file_name)
 
     closeFile(ptr_file_import);
 
-    return TRUE;
+    return MY_TRUE;
 }
