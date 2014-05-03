@@ -36,17 +36,39 @@
 int
 main (int   argc, char *argv[])
 {
-  GtkWidget *window;
+    GtkWidget *fenetre_principale = NULL;
+    globalData data;
+    GError *error = NULL;
+    gchar *filename = NULL;
 
-  gtk_init (&argc, &argv);
+    bindtextdomain("csuper-gui","./Locales");
+    bind_textdomain_codeset("csuper-gui","UTF-8");
+    textdomain("csuper-gui");
 
-  window = gtk_window_new (GTK_WINDOW_TOPLEVEL);
+    gtk_init(&argc, &argv);
 
-  g_signal_connect (window, "destroy", G_CALLBACK (gtk_main_quit), NULL);
+    data.ptr_builder = gtk_builder_new();
 
-  gtk_widget_show (window);
+    filename =  g_build_filename ("csuper-gui.glade", NULL);
 
-  gtk_main ();
+    /* Load the glade file. */
+    gtk_builder_add_from_file (data.ptr_builder, filename, &error);
+    g_free (filename);
+    if (error)
+    {
+      gint code = error->code;
+      g_printerr("%s\n", error->message);
+      g_error_free (error);
+      return code;
+    }
 
-  return 0;
+    gtk_builder_connect_signals (data.ptr_builder, &data);
+
+    fenetre_principale = GTK_WIDGET(gtk_builder_get_object (data.ptr_builder, "main_window"));
+
+    gtk_widget_show_all (fenetre_principale);
+
+    gtk_main();
+
+    return 0;
 }

@@ -1,13 +1,13 @@
 /*!
- * \file    csuper-gui.h
- * \brief   Inclusion of csuper-gui
+ * \file    main_window.c
+ * \brief   Main window
  * \author  Remi BERTHO
- * \date    02/05/14
+ * \date    03/05/14
  * \version 3.0.0
  */
 
  /*
- * csuper-gui.h
+ * main_window.c
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,30 +31,4 @@
  *
  */
 
-#ifndef CSUPER_GUI_H_INCLUDED
-#define CSUPER_GUI_H_INCLUDED
-
-/*!
- * \def CSUPER_GUI
- * Define that we compile csuper-gui.
- */
-#define CSUPER_GUI
-
-#include <gtk/gtk.h>
-#include <stdlib.h>
-#include <glib/gi18n.h>
-#include "../libcsuper/libcsuper.h"
-
-/*!
- * \struct globalData
- * Represent the global data which is passed into all signal
- */
-typedef struct
-{
-    GtkBuilder *ptr_builder;        /*!< A pointer to a GTK builder. */
-    csuStruct *ptr_csu_struct;      /*!< A pointer to a csuStruct */
-}globalData;
-
-
-
-#endif // CSUPER-GUI_H_INCLUDED
+ #include "main_window.h"

@@ -1,11 +1,19 @@
 #!/bin/bash
 xgettext --sort-by-file --add-comments=TRANSLATORS: --keyword=_ -o Translations/libcsuper/messages.pot Sources/libcsuper/*.c
 xgettext --sort-by-file --add-comments=TRANSLATORS: --keyword=_ -o Translations/csuper/messages.pot Sources/csuper/*.c
+xgettext --sort-by-file --add-comments=TRANSLATORS: --keyword=translatable --keyword=_ -o Translations/csuper-gui/messages.pot Sources/csuper-gui/*.c csuper-gui.glade
+
 for i in Translations/libcsuper/*.po
 do
 	msgmerge -U $i Translations/libcsuper/messages.pot
 done
+
 for i in Translations/csuper/*.po
 do
 	msgmerge -U $i Translations/csuper/messages.pot
+done
+
+for i in Translations/csuper-gui/*.po
+do
+	msgmerge -U $i Translations/csuper-gui/messages.pot
 done

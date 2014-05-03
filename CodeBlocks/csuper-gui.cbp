@@ -38,10 +38,23 @@
 			<Add option="`pkg-config --libs gtk+-3.0 gmodule-export-2.0 gmodule-2.0`" />
 		</Linker>
 		<Unit filename="../Sources/csuper-gui/csuper-gui.h" />
+		<Unit filename="../Sources/csuper-gui/game_configuration.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/game_configuration.h" />
 		<Unit filename="../Sources/csuper-gui/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/csuper-gui/main.h" />
+		<Unit filename="../Sources/csuper-gui/main_menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/main_menu.h" />
+		<Unit filename="../Sources/csuper-gui/main_window.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/main_window.h" />
+		<Unit filename="../csuper-gui.glade" />
 		<Extensions>
 			<code_completion />
 			<envvars />
