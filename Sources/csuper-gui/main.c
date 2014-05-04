@@ -33,13 +33,21 @@
 
  #include "main.h"
 
-int
-main (int   argc, char *argv[])
+/*!
+ * \fn int main(int argc, char *argv[])
+ *  Begin csuper-gui.
+ * \param[in] argc the number of argument.
+ * \param[in] argv the array of argument.
+ * \return EXIT_SUCCESS if everything is OK
+ */
+int main (int   argc, char *argv[])
 {
     GtkWidget *fenetre_principale = NULL;
     globalData data;
     GError *error = NULL;
     gchar *filename = NULL;
+
+    data.ptr_csu_struct=NULL;
 
     bindtextdomain("csuper-gui","./Locales");
     bind_textdomain_codeset("csuper-gui","UTF-8");
@@ -69,6 +77,8 @@ main (int   argc, char *argv[])
     gtk_widget_show_all (fenetre_principale);
 
     gtk_main();
+
+    g_object_unref(data.ptr_builder);
 
     return 0;
 }

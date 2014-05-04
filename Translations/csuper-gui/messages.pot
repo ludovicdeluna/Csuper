@@ -8,35 +8,59 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-03 23:34+0200\n"
+"POT-Creation-Date: 2014-05-04 12:09+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "Language: \n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: csuper-gui.glade:9
-msgid "Csuper-gui"
+#: Sources/csuper-gui/main_menu.c:41
+msgid "Widget about_windows is missing in file csuper-gui.glade."
 msgstr ""
 
-#: csuper-gui.glade:23
+#: csuper-gui.glade:9
+msgid "Csuper"
+msgstr ""
+
+#: csuper-gui.glade:25
 msgid "_File"
 msgstr ""
 
-#: csuper-gui.glade:80
+#: csuper-gui.glade:82
 msgid "_Edit"
 msgstr ""
 
-#: csuper-gui.glade:130
+#: csuper-gui.glade:132
 msgid "_Preference"
 msgstr ""
 
-#: csuper-gui.glade:140
+#: csuper-gui.glade:142
 msgid "Game configuration"
 msgstr ""
 
-#: csuper-gui.glade:152
+#: csuper-gui.glade:154
 msgid "_Help"
+msgstr ""
+
+#: csuper-gui.glade:187
+msgid "About Csuper"
+msgstr ""
+
+#: csuper-gui.glade:193
+msgid "Copyright © 2014 Remi BERTHO <remi.bertho@gmail.com>"
+msgstr ""
+
+#: csuper-gui.glade:194
+msgid "Universal points counter allowing reflexion exemption"
+msgstr ""
+
+#: csuper-gui.glade:196
+msgid "Visit the website of Csuper"
+msgstr ""
+
+#: csuper-gui.glade:199
+msgid "Rémi BERTHO"
 msgstr ""

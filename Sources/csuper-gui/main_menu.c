@@ -32,3 +32,20 @@
  */
 
  #include "main_menu.h"
+
+/*!
+ * \fn G_MODULE_EXPORT void openAbout(GtkWidget *widget, gpointer data)
+ *  Begin csuper.
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void openAbout(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    GtkWidget *window_about = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"about_window"));
+    if (!window_about)
+        g_critical(_("Widget about_windows is missing in file csuper-gui.glade."));
+
+    gtk_dialog_run (GTK_DIALOG (window_about));
+    gtk_widget_hide (window_about);
+}

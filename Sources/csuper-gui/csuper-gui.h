@@ -53,6 +53,7 @@ typedef struct
 {
     GtkBuilder *ptr_builder;        /*!< A pointer to a GTK builder. */
     csuStruct *ptr_csu_struct;      /*!< A pointer to a csuStruct */
+    game_config config;             /*!< A game configuration */
 }globalData;
 
 

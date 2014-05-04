@@ -7,6 +7,7 @@
     <property name="height_request">400</property>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Csuper</property>
+    <property name="icon_name">applications-games</property>
     <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
     <child>
       <object class="GtkGrid" id="main_grid">
@@ -147,7 +148,7 @@
               </object>
             </child>
             <child>
-              <object class="GtkMenuItem" id="menuitem4">
+              <object class="GtkMenuItem" id="menu_help">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">_Help</property>
@@ -157,12 +158,13 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImageMenuItem" id="imagemenuitem10">
+                      <object class="GtkImageMenuItem" id="menu_about">
                         <property name="label">gtk-about</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="activate" handler="openAbout" swapped="no"/>
                       </object>
                     </child>
                   </object>
@@ -175,6 +177,43 @@
             <property name="top_attach">0</property>
             <property name="width">2</property>
             <property name="height">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAboutDialog" id="about_window">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">About Csuper</property>
+    <property name="icon_name">applications-games</property>
+    <property name="type_hint">dialog</property>
+    <property name="transient_for">main_window</property>
+    <property name="program_name">Csuper</property>
+    <property name="version">4.0.0</property>
+    <property name="copyright" translatable="yes">Copyright © 2014 Remi BERTHO &lt;remi.bertho@gmail.com&gt;</property>
+    <property name="comments" translatable="yes">Universal points counter allowing reflexion exemption</property>
+    <property name="website">http://dalan.netne.net/wordpress</property>
+    <property name="website_label" translatable="yes">Visit the website of Csuper</property>
+    <property name="authors">Rémi BERTHO</property>
+    <property name="documenters">Rémi BERTHO</property>
+    <property name="translator_credits" translatable="yes">Rémi BERTHO</property>
+    <property name="logo_icon_name">dialog-error</property>
+    <property name="license_type">gpl-3-0</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="about_window_blop">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="aboutdialog-action_area1">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
           </packing>
         </child>
       </object>

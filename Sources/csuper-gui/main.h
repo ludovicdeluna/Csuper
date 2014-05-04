@@ -35,5 +35,6 @@
 #define MAIN_H_INCLUDED
 
 #include "csuper-gui.h"
+#include "main_menu.h"
 
 #endif // MAIN_H_INCLUDED
