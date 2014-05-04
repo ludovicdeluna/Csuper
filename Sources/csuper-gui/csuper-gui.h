@@ -51,9 +51,11 @@
  */
 typedef struct
 {
-    GtkBuilder *ptr_builder;        /*!< A pointer to a GTK builder. */
-    csuStruct *ptr_csu_struct;      /*!< A pointer to a csuStruct */
-    game_config config;             /*!< A game configuration */
+    GtkBuilder *ptr_builder;                /*!< A pointer to a GTK builder. */
+    csuStruct *ptr_csu_struct;              /*!< A pointer to a csuStruct */
+    GtkWidget *main_window;                 /*! The main window */
+    game_config config;                     /*!< A game configuration */
+    char csu_filename[SIZE_MAX_FILE_NAME];   /*!< The filename of the csu file*/
 }globalData;
 
 

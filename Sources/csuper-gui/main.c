@@ -42,7 +42,6 @@
  */
 int main (int   argc, char *argv[])
 {
-    GtkWidget *fenetre_principale = NULL;
     globalData data;
     GError *error = NULL;
     gchar *filename = NULL;
@@ -72,9 +71,9 @@ int main (int   argc, char *argv[])
 
     gtk_builder_connect_signals (data.ptr_builder, &data);
 
-    fenetre_principale = GTK_WIDGET(gtk_builder_get_object (data.ptr_builder, "main_window"));
+    data.main_window = GTK_WIDGET(gtk_builder_get_object (data.ptr_builder, "main_window"));
 
-    gtk_widget_show_all (fenetre_principale);
+    gtk_widget_show_all (data.main_window);
 
     gtk_main();
 
