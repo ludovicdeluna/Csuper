@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-04-30 18:34+0200\n"
+"POT-Creation-Date: 2014-05-04 21:38+0200\n"
 "PO-Revision-Date: 2014-04-30 18:45+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
-#: Sources/libcsuper/csu_files.c:74
+#: Sources/libcsuper/csu_files.c:78
 #, c-format
 msgid ""
 "\n"
@@ -28,7 +28,7 @@ msgstr ""
 "\n"
 "Erreur : Le fichier n'a pas pu être lu.\n"
 
-#: Sources/libcsuper/csu_files.c:85
+#: Sources/libcsuper/csu_files.c:89
 #, c-format
 msgid ""
 "\n"
@@ -37,7 +37,7 @@ msgstr ""
 "\n"
 "Erreur : Fichier non compatible.\n"
 
-#: Sources/libcsuper/csu_files.c:96
+#: Sources/libcsuper/csu_files.c:100
 #, c-format
 msgid ""
 "\n"
@@ -48,7 +48,7 @@ msgstr ""
 "Erreur la version du fichier est la %1.1f alors que le logiciel supporte "
 "uniquement les fichiers avec des versions supérieurs à la %1.1f.\n"
 
-#: Sources/libcsuper/csu_files.c:149
+#: Sources/libcsuper/csu_files.c:153
 #, c-format
 msgid ""
 "\n"
@@ -57,7 +57,7 @@ msgstr ""
 "\n"
 "Erreur : Fichier corrompu.\n"
 
-#: Sources/libcsuper/csu_files.c:174
+#: Sources/libcsuper/csu_files.c:178
 #, c-format
 msgid ""
 "\n"

@@ -47,6 +47,7 @@ int main (int   argc, char *argv[])
     gchar *filename = NULL;
 
     data.ptr_csu_struct=NULL;
+    strcpy(data.csu_filename,"");
 
     bindtextdomain("csuper-gui","./Locales");
     bind_textdomain_codeset("csuper-gui","UTF-8");

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-04 19:13+0200\n"
+"POT-Creation-Date: 2014-05-04 21:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,21 +17,21 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Sources/libcsuper/csu_files.c:74
+#: Sources/libcsuper/csu_files.c:78
 #, c-format
 msgid ""
 "\n"
 "Error: The file could not be read.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:85
+#: Sources/libcsuper/csu_files.c:89
 #, c-format
 msgid ""
 "\n"
 "Error: File not compatible.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:96
+#: Sources/libcsuper/csu_files.c:100
 #, c-format
 msgid ""
 "\n"
@@ -39,14 +39,14 @@ msgid ""
 "with versions higher than the %1.1f.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:149
+#: Sources/libcsuper/csu_files.c:153
 #, c-format
 msgid ""
 "\n"
 "Error : corrupted file.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:174
+#: Sources/libcsuper/csu_files.c:178
 #, c-format
 msgid ""
 "\n"

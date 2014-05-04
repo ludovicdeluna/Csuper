@@ -2,7 +2,7 @@
  * \file    main_menu.h
  * \brief   Main menu
  * \author  Remi BERTHO
- * \date    03/05/14
+ * \date    04/05/14
  * \version 3.0.0
  */
 
@@ -36,9 +36,11 @@
 
 #include "csuper-gui.h"
 
-G_MODULE_EXPORT void openAbout(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data);
 void openFileError(globalData *data);
-
+G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data);
+void saveFileError(globalData *data);
+void noCsuFileOpened(globalData *data);
 
 #endif // MAIN_MENU_H_INCLUDED

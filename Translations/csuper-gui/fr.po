@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-04 19:13+0200\n"
-"PO-Revision-Date: 2014-05-04 19:14+0200\n"
+"POT-Creation-Date: 2014-05-04 21:38+0200\n"
+"PO-Revision-Date: 2014-05-04 21:40+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
 "Language: fr\n"
@@ -20,19 +20,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.6\n"
 
-#: Sources/csuper-gui/main_menu.c:47 Sources/csuper-gui/main_menu.c:109
+#: Sources/csuper-gui/main_menu.c:47 Sources/csuper-gui/main_menu.c:112
+#: Sources/csuper-gui/main_menu.c:178 Sources/csuper-gui/main_menu.c:193
 msgid "Widget about_windows is missing in file csuper-gui.glade."
 msgstr "Widget about_windows est manquant dans le fichier csuper-gui.glade"
 
-#: Sources/csuper-gui/main_menu.c:65
+#: Sources/csuper-gui/main_menu.c:65 Sources/csuper-gui/main_menu.c:135
 msgid "Open csu File"
 msgstr "Ouvrir un fichier csu"
 
-#: Sources/csuper-gui/main_menu.c:71
+#: Sources/csuper-gui/main_menu.c:71 Sources/csuper-gui/main_menu.c:142
 msgid "csu files"
 msgstr "Fichiers csu"
 
-#: Sources/csuper-gui/main_menu.c:72
+#: Sources/csuper-gui/main_menu.c:72 Sources/csuper-gui/main_menu.c:143
 msgid "All"
 msgstr "Tout"
 
@@ -40,46 +41,62 @@ msgstr "Tout"
 msgid "Error while loading the file."
 msgstr "Erreur lors de l'ouverture du fichier."
 
-#: csuper-gui.glade:54
+#: csuper-gui.glade:42 csuper-gui.glade:46
+msgid "Error while saving the file."
+msgstr "Erreur lors de l'enregistrement du fichier."
+
+#: csuper-gui.glade:87
 msgid "Csuper"
 msgstr "Csuper"
 
-#: csuper-gui.glade:70
+#: csuper-gui.glade:103
 msgid "_File"
 msgstr "Fichier"
 
-#: csuper-gui.glade:128
+#: csuper-gui.glade:162
 msgid "_Edit"
 msgstr "Edition"
 
-#: csuper-gui.glade:178
+#: csuper-gui.glade:212
 msgid "_Preference"
 msgstr "Préférences"
 
-#: csuper-gui.glade:188
+#: csuper-gui.glade:222
 msgid "Game configuration"
 msgstr "Configuration de jeu"
 
-#: csuper-gui.glade:200
+#: csuper-gui.glade:234
 msgid "_Help"
 msgstr "Aide"
 
-#: csuper-gui.glade:233
+#: csuper-gui.glade:267
 msgid "About Csuper"
 msgstr "À propos de Csuper"
 
-#: csuper-gui.glade:239
+#: csuper-gui.glade:273
 msgid "Copyright © 2014 Remi BERTHO <remi.bertho@gmail.com>"
 msgstr "Copyright © 2014 Remi BERTHO <remi.bertho@gmail.com>"
 
-#: csuper-gui.glade:240
+#: csuper-gui.glade:274
 msgid "Universal points counter allowing reflexion exemption"
 msgstr "Compteur de Points Universel Permettant l'Exemption de Réflexion"
 
-#: csuper-gui.glade:242
+#: csuper-gui.glade:276
 msgid "Visit the website of Csuper"
 msgstr "Visiter le site internet de Csuper"
 
-#: csuper-gui.glade:245
+#: csuper-gui.glade:279
 msgid "Rémi BERTHO"
 msgstr "Rémi BERTHO"
+
+#: csuper-gui.glade:304
+msgid "No csu file opened"
+msgstr "Aucun fichier csu ouvert"
+
+#: csuper-gui.glade:308
+msgid ""
+"You have no csu file opened.\n"
+"Please open a csu file before try to save it."
+msgstr ""
+"Vous n'avez pas de fichier csu d'ouvert.\n"
+"Veuillez ouvrir un fichier csu avant d’essayer de le sauvegarder."
