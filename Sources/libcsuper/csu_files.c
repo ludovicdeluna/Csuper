@@ -44,6 +44,10 @@
  */
 FILE *openFileCsuExtension(char file_name[], char mode[])
 {
+    FILE *ptr_file=openFile(file_name,mode);
+    if (ptr_file != NULL)
+        return ptr_file;
+
     addFileCsuExtension(file_name);
 
     return openFile(file_name,mode);
