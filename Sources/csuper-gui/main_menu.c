@@ -84,15 +84,21 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 	{
 		case GTK_RESPONSE_ACCEPT:
 		{
-			strcpy(user_data->csu_filename,gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_open)));
+		    char *filename=gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_open));
 
 			if (user_data->ptr_csu_struct != NULL)
                 closeCsuStruct(user_data->ptr_csu_struct);
 
             user_data->ptr_csu_struct=NULL;
-            (user_data->ptr_csu_struct) = readCsuFile(user_data->csu_filename);
+            (user_data->ptr_csu_struct) = readCsuFile(filename);
             if((user_data->ptr_csu_struct) == NULL)
                 openFileError(user_data);
+            else
+            {
+                strcpy(user_data->csu_filename,filename);
+                updateCsuInfo(user_data);
+            }
+            g_free(filename);
 			break;
 		}
 		default:
@@ -158,7 +164,7 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
                 saveFileError(user_data);
             else
                 strcpy(user_data->csu_filename,filename);
-            g_free (filename);
+            g_free(filename);
 			break;
 		}
 		default:

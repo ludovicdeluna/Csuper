@@ -36,5 +36,6 @@
 
 #include "csuper-gui.h"
 #include "main_menu.h"
+#include "main_window.h"
 
 #endif // MAIN_H_INCLUDED

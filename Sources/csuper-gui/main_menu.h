@@ -35,6 +35,7 @@
 #define MAIN_MENU_H_INCLUDED
 
 #include "csuper-gui.h"
+#include "main_window.h"
 
 G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data);
