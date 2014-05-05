@@ -37,6 +37,6 @@
 #include "csuper-gui.h"
 
 void updateCsuInfo(globalData *data);
-void updateCsuInfoDistributor(globalData *data);
+void updateCsuInfoSameFile(globalData *data);
 
 #endif // MAIN_WINDOW_H_INCLUDED

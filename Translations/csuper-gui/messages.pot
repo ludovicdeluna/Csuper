@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 14:55+0200\n"
+"POT-Creation-Date: 2014-05-05 15:46+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -34,40 +34,42 @@ msgstr ""
 msgid "All"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:39
+#: Sources/csuper-gui/main_window.c:44
 #, c-format
 msgid "%02.0f/%02.0f/%4.0f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:42
+#: Sources/csuper-gui/main_window.c:47
 #, c-format
 msgid "%1.1f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:45 Sources/csuper-gui/main_window.c:48
+#: Sources/csuper-gui/main_window.c:50 Sources/csuper-gui/main_window.c:53
 #, c-format
 msgid "%.0f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:51 Sources/csuper-gui/main_window.c:57
-#: Sources/csuper-gui/main_window.c:63 Sources/csuper-gui/main_window.c:66
-#: Sources/csuper-gui/main_window.c:69 Sources/csuper-gui/main_window.c:72
+#: Sources/csuper-gui/main_window.c:56 Sources/csuper-gui/main_window.c:62
+#: Sources/csuper-gui/main_window.c:68 Sources/csuper-gui/main_window.c:71
+#: Sources/csuper-gui/main_window.c:74 Sources/csuper-gui/main_window.c:77
+#: Sources/csuper-gui/main_window.c:104
 #, c-format
 msgid "%d"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:54 Sources/csuper-gui/main_window.c:85
+#: Sources/csuper-gui/main_window.c:59 Sources/csuper-gui/main_window.c:90
+#: Sources/csuper-gui/main_window.c:101
 #, c-format
 msgid "%s"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:60 Sources/csuper-gui/main_window.c:76
-#: Sources/csuper-gui/main_window.c:81
+#: Sources/csuper-gui/main_window.c:65 Sources/csuper-gui/main_window.c:81
+#: Sources/csuper-gui/main_window.c:86
 #, c-format
 msgid "%.3f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:79
+#: Sources/csuper-gui/main_window.c:84
 msgid "inf"
 msgstr ""
 

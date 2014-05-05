@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-05 14:55+0200\n"
-"PO-Revision-Date: 2014-05-05 15:01+0200\n"
+"POT-Creation-Date: 2014-05-05 15:46+0200\n"
+"PO-Revision-Date: 2014-05-05 15:47+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
 "Language: fr\n"
@@ -37,40 +37,42 @@ msgstr "Fichiers csu"
 msgid "All"
 msgstr "Tout"
 
-#: Sources/csuper-gui/main_window.c:39
+#: Sources/csuper-gui/main_window.c:44
 #, c-format
 msgid "%02.0f/%02.0f/%4.0f"
 msgstr "%02.0f/%02.0f/%4.0f"
 
-#: Sources/csuper-gui/main_window.c:42
+#: Sources/csuper-gui/main_window.c:47
 #, c-format
 msgid "%1.1f"
 msgstr "%1.1f"
 
-#: Sources/csuper-gui/main_window.c:45 Sources/csuper-gui/main_window.c:48
+#: Sources/csuper-gui/main_window.c:50 Sources/csuper-gui/main_window.c:53
 #, c-format
 msgid "%.0f"
 msgstr "%.0f"
 
-#: Sources/csuper-gui/main_window.c:51 Sources/csuper-gui/main_window.c:57
-#: Sources/csuper-gui/main_window.c:63 Sources/csuper-gui/main_window.c:66
-#: Sources/csuper-gui/main_window.c:69 Sources/csuper-gui/main_window.c:72
+#: Sources/csuper-gui/main_window.c:56 Sources/csuper-gui/main_window.c:62
+#: Sources/csuper-gui/main_window.c:68 Sources/csuper-gui/main_window.c:71
+#: Sources/csuper-gui/main_window.c:74 Sources/csuper-gui/main_window.c:77
+#: Sources/csuper-gui/main_window.c:104
 #, c-format
 msgid "%d"
 msgstr "%d"
 
-#: Sources/csuper-gui/main_window.c:54 Sources/csuper-gui/main_window.c:85
+#: Sources/csuper-gui/main_window.c:59 Sources/csuper-gui/main_window.c:90
+#: Sources/csuper-gui/main_window.c:101
 #, c-format
 msgid "%s"
 msgstr "%s"
 
-#: Sources/csuper-gui/main_window.c:60 Sources/csuper-gui/main_window.c:76
-#: Sources/csuper-gui/main_window.c:81
+#: Sources/csuper-gui/main_window.c:65 Sources/csuper-gui/main_window.c:81
+#: Sources/csuper-gui/main_window.c:86
 #, c-format
 msgid "%.3f"
 msgstr "%.3f"
 
-#: Sources/csuper-gui/main_window.c:79
+#: Sources/csuper-gui/main_window.c:84
 msgid "inf"
 msgstr "inf"
 
@@ -156,7 +158,7 @@ msgstr "Nom de la configuration de jeu : "
 
 #: csuper-gui.glade:600
 msgid "Numbers maximum of turns : "
-msgstr "Nobre maximum de tour : "
+msgstr "Nombre maximum de tour : "
 
 #: csuper-gui.glade:615
 msgid "Number of players : "

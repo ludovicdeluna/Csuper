@@ -91,12 +91,15 @@ void updateCsuInfo(globalData *data)
 }
 
 /*!
- * \fn void updateCsuInfoDistributor(globalData *data)
+ * \fn void updateCsuInfoSameFile(globalData *data)
  *  Update the distributor informations in the right panel.
  * \param[in] data the globalData
  */
-void updateCsuInfoDistributor(globalData *data)
+void updateCsuInfoSameFile(globalData *data)
 {
     GtkLabel *label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor_change"));
     gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[(int)data->ptr_csu_struct->distributor]));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_turn_change"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("%d"),maxNbTurn(data->ptr_csu_struct)-1));
 }
