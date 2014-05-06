@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-06 00:00+0200\n"
+"POT-Creation-Date: 2014-05-06 13:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,8 +22,8 @@ msgstr ""
 msgid "Widget about_windows is missing in file csuper-gui.glade."
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:65 Sources/csuper-gui/main_menu.c:142
-msgid "Open csu File"
+#: Sources/csuper-gui/main_menu.c:65
+msgid "Open csu file"
 msgstr ""
 
 #: Sources/csuper-gui/main_menu.c:71 Sources/csuper-gui/main_menu.c:149
@@ -34,43 +34,92 @@ msgstr ""
 msgid "All"
 msgstr ""
 
+#: Sources/csuper-gui/main_menu.c:142
+msgid "Save csu file"
+msgstr ""
+
 #: Sources/csuper-gui/main_window.c:44
 #, c-format
-msgid "%02.0f/%02.0f/%4.0f"
+msgid "Created the : %02.0f/%02.0f/%4.0f"
 msgstr ""
 
 #: Sources/csuper-gui/main_window.c:47
 #, c-format
-msgid "%1.1f"
+msgid "File's version : %1.1f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:50 Sources/csuper-gui/main_window.c:53
+#: Sources/csuper-gui/main_window.c:50
 #, c-format
-msgid "%.0f"
+msgid "Size max of the names : %.0f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:56 Sources/csuper-gui/main_window.c:62
-#: Sources/csuper-gui/main_window.c:68 Sources/csuper-gui/main_window.c:71
-#: Sources/csuper-gui/main_window.c:74 Sources/csuper-gui/main_window.c:77
-#: Sources/csuper-gui/main_window.c:104
+#: Sources/csuper-gui/main_window.c:53
 #, c-format
-msgid "%d"
+msgid "Number of players : %.0f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:59 Sources/csuper-gui/main_window.c:90
+#: Sources/csuper-gui/main_window.c:56
+#, c-format
+msgid "Numbers maximum of turns : %d"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:59
+#, c-format
+msgid "Name of the game configuration : %s"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:62
+#, c-format
+msgid "Use a maximum score : %d"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:65
+#, c-format
+msgid "Initial score : %.3f"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:68
+#, c-format
+msgid "Number of decimal place : %d"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:71
+#, c-format
+msgid "First way : %d"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:74
+#, c-format
+msgid "Game in turn by turn : %d"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:77
+#, c-format
+msgid "Use a distributor : %d"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:81 Sources/csuper-gui/main_window.c:86
+#, c-format
+msgid "Number of points maximum/minimum : %.3f"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:84
+msgid "Number of points maximum/minimum : inf"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:90
+#, c-format
+msgid "Distributor : %s"
+msgstr ""
+
 #: Sources/csuper-gui/main_window.c:101
 #, c-format
 msgid "%s"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:65 Sources/csuper-gui/main_window.c:81
-#: Sources/csuper-gui/main_window.c:86
+#: Sources/csuper-gui/main_window.c:104
 #, c-format
-msgid "%.3f"
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:84
-msgid "inf"
+msgid "%d"
 msgstr ""
 
 #: csuper-gui.glade:9 csuper-gui.glade:13
@@ -89,15 +138,15 @@ msgstr ""
 msgid "_File"
 msgstr ""
 
-#: csuper-gui.glade:112 csuper-gui.glade:748
+#: csuper-gui.glade:112 csuper-gui.glade:537
 msgid "New csu file"
 msgstr ""
 
-#: csuper-gui.glade:122 csuper-gui.glade:763
+#: csuper-gui.glade:122 csuper-gui.glade:552
 msgid "Open a csu file"
 msgstr ""
 
-#: csuper-gui.glade:133 csuper-gui.glade:779
+#: csuper-gui.glade:133 csuper-gui.glade:568
 msgid "Save as a csu file"
 msgstr ""
 
@@ -113,11 +162,11 @@ msgstr ""
 msgid "_Preference"
 msgstr ""
 
-#: csuper-gui.glade:224 csuper-gui.glade:855
+#: csuper-gui.glade:224 csuper-gui.glade:644
 msgid "Open the game configuration preferences window"
 msgstr ""
 
-#: csuper-gui.glade:225 csuper-gui.glade:857
+#: csuper-gui.glade:225 csuper-gui.glade:646
 msgid "Game configuration"
 msgstr ""
 
@@ -125,135 +174,127 @@ msgstr ""
 msgid "_Help"
 msgstr ""
 
-#: csuper-gui.glade:248 csuper-gui.glade:870
+#: csuper-gui.glade:248 csuper-gui.glade:659
 msgid "About csuper"
 msgstr ""
 
-#: csuper-gui.glade:275
-msgid "Created the : "
+#: csuper-gui.glade:281
+msgid "Created the : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:290 csuper-gui.glade:305 csuper-gui.glade:320
-#: csuper-gui.glade:335 csuper-gui.glade:350 csuper-gui.glade:365
-#: csuper-gui.glade:380 csuper-gui.glade:395 csuper-gui.glade:410
-#: csuper-gui.glade:425 csuper-gui.glade:440 csuper-gui.glade:455
-#: csuper-gui.glade:664 csuper-gui.glade:679
-msgid "No csu file loaded"
+#: csuper-gui.glade:296
+msgid "Distributor : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:470
-msgid "Distributor : "
+#: csuper-gui.glade:310
+msgid "Number of points maximum/minimum : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:485
-msgid "Number of points maximum/minimum : "
+#: csuper-gui.glade:324
+msgid "Use a distributor : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:500
-msgid "Use a distributor : "
+#: csuper-gui.glade:338
+msgid "Game in turn by turn : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:515
-msgid "Game in turn by turn : "
+#: csuper-gui.glade:352
+msgid "First way : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:530
-msgid "First way : "
+#: csuper-gui.glade:366
+msgid "Number of decimal place : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:545
-msgid "Number of decimal place : "
+#: csuper-gui.glade:380
+msgid "Initial score : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:560
-msgid "Initial score : "
+#: csuper-gui.glade:394
+msgid "Use a maximum score : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:575
-msgid "Use a maximum score : "
+#: csuper-gui.glade:408
+msgid "Name of the game configuration : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:590
-msgid "Name of the game configuration : "
+#: csuper-gui.glade:422
+msgid "Numbers maximum of turns : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:605
-msgid "Numbers maximum of turns : "
+#: csuper-gui.glade:436
+msgid "Number of players : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:620
-msgid "Number of players : "
+#: csuper-gui.glade:450
+msgid "Size max of the names : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:635
-msgid "Size max of the names : "
+#: csuper-gui.glade:463
+msgid "File's version : no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:649
-msgid "File's version : "
-msgstr ""
-
-#: csuper-gui.glade:691
+#: csuper-gui.glade:475
 msgid "End of turn"
 msgstr ""
 
-#: csuper-gui.glade:750
+#: csuper-gui.glade:539
 msgid "New"
 msgstr ""
 
-#: csuper-gui.glade:765
+#: csuper-gui.glade:554
 msgid "Open"
 msgstr ""
 
-#: csuper-gui.glade:781
+#: csuper-gui.glade:570
 msgid "Save as"
 msgstr ""
 
-#: csuper-gui.glade:795 csuper-gui.glade:797
+#: csuper-gui.glade:584 csuper-gui.glade:586
 msgid "Cut"
 msgstr ""
 
-#: csuper-gui.glade:810 csuper-gui.glade:812
+#: csuper-gui.glade:599 csuper-gui.glade:601
 msgid "Copy"
 msgstr ""
 
-#: csuper-gui.glade:825 csuper-gui.glade:827
+#: csuper-gui.glade:614 csuper-gui.glade:616
 msgid "Paste"
 msgstr ""
 
-#: csuper-gui.glade:840 csuper-gui.glade:842
+#: csuper-gui.glade:629 csuper-gui.glade:631
 msgid "Delete"
 msgstr ""
 
-#: csuper-gui.glade:872
+#: csuper-gui.glade:661
 msgid "About"
 msgstr ""
 
-#: csuper-gui.glade:898
+#: csuper-gui.glade:708
 msgid "About Csuper"
 msgstr ""
 
-#: csuper-gui.glade:903
+#: csuper-gui.glade:713
 msgid "Copyright © 2014 Remi BERTHO <remi.bertho@gmail.com>"
 msgstr ""
 
-#: csuper-gui.glade:904
+#: csuper-gui.glade:714
 msgid "Universal points counter allowing reflexion exemption"
 msgstr ""
 
-#: csuper-gui.glade:906
+#: csuper-gui.glade:716
 msgid "Visit the website of Csuper"
 msgstr ""
 
-#: csuper-gui.glade:909
+#: csuper-gui.glade:719
 msgid "Rémi BERTHO"
 msgstr ""
 
-#: csuper-gui.glade:934
+#: csuper-gui.glade:744
 msgid "No csu file opened"
 msgstr ""
 
-#: csuper-gui.glade:938
+#: csuper-gui.glade:748
 msgid ""
 "You have no csu file opened.\n"
 "Please open a csu file before try to save it."

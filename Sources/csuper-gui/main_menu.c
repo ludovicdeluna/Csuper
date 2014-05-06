@@ -62,7 +62,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
     char home_path[SIZE_MAX_FILE_NAME];
 
     /* Create the file chooser dialog*/
-    GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Open csu File"),GTK_WINDOW(user_data->main_window),
+    GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Open csu file"),GTK_WINDOW(user_data->main_window),
                 GTK_FILE_CHOOSER_ACTION_OPEN,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-open",GTK_RESPONSE_ACCEPT,NULL);
 
      /*Add a .csu and a all filter*/
@@ -139,7 +139,7 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
     }
 
     /* Create the file chooser dialog*/
-    GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Open csu File"),GTK_WINDOW(user_data->main_window),
+    GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Save csu file"),GTK_WINDOW(user_data->main_window),
                 GTK_FILE_CHOOSER_ACTION_SAVE,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-save",GTK_RESPONSE_ACCEPT,NULL);
     gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_open), TRUE);
 
