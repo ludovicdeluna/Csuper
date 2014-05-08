@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-04 21:38+0200\n"
+"POT-Creation-Date: 2014-05-08 13:44+0200\n"
 "PO-Revision-Date: 2014-04-30 18:45+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "\n"
 "Erreur : Le fichier n'a pas pu être lu.\n"
 
-#: Sources/libcsuper/csu_files.c:89
+#: Sources/libcsuper/csu_files.c:89 Sources/libcsuper/game_config.c:459
 #, c-format
 msgid ""
 "\n"
@@ -126,7 +126,7 @@ msgstr ""
 "\n"
 "Erreur lors de l'exportation des configurations de jeu.\n"
 
-#: Sources/libcsuper/game_config.c:450
+#: Sources/libcsuper/game_config.c:451
 #, c-format
 msgid ""
 "\n"

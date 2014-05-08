@@ -403,7 +403,7 @@ int exportConfigFile(char *home_path,char *file_name)
         return MY_FALSE;
     }
 
-    fprintf(ptr_file_export,"%d\n",ptr_list_config->nb_config);
+    fprintf(ptr_file_export,"%s\n%d\n",STRING_CHECK_GAME_CONFIG,ptr_list_config->nb_config);
 
     for(i=0 ; i<ptr_list_config->nb_config ; i++)
     {
@@ -439,6 +439,7 @@ int importConfigFile(char *home_path,char *file_name)
     int nb_config;
     game_config config;
     FILE *ptr_file_import;
+    char check_file[sizeof(STRING_CHECK_GAME_CONFIG)+1];
     #ifdef _WIN32
     char buffer[5];
     #endif // _WIN32
@@ -448,6 +449,15 @@ int importConfigFile(char *home_path,char *file_name)
     if(ptr_file_import == NULL)
     {
         printf(_("\nError while importing game configurations.\n"));
+        return MY_FALSE;
+    }
+
+    /* Check if there is a good file */
+    fgets(check_file,strlen(STRING_CHECK_GAME_CONFIG)+1,ptr_file_import);
+    if (strcmp(STRING_CHECK_GAME_CONFIG,check_file) != 0)
+    {
+        printf(_("\nError: File not compatible.\n"));
+        closeFile(ptr_file_import);
         return MY_FALSE;
     }
 

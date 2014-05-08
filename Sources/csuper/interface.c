@@ -603,7 +603,7 @@ void exportListGameConfig()
         return;
     #endif // PORTABLE
 
-    if(exportConfigFile(home_path,file_name) == MY_TRUE);
+    if(exportConfigFile(home_path,file_name) == MY_TRUE)
         printf(_("\nGame configurations are well export in %s\n"),file_name);
     systemPause();
 }
@@ -627,7 +627,7 @@ void importListGameConfig()
         return;
     #endif // PORTABLE
 
-    if(importConfigFile(home_path,file_name) == MY_TRUE);
+    if(importConfigFile(home_path,file_name) == MY_TRUE)
         printf(_("\nGame configurations are well import from %s\n"),file_name);
     systemPause();
 }

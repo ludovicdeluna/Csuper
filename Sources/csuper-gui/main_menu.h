@@ -43,5 +43,6 @@ void openFileError(globalData *data);
 G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data);
 void saveFileError(globalData *data);
 void noCsuFileOpened(globalData *data);
+G_MODULE_EXPORT void copyToCliboard(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_MENU_H_INCLUDED

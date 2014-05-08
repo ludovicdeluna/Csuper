@@ -29,13 +29,13 @@ Executables are available on [my website](http://dalan.netne.net/wordpress).
 If you want to compile yourself, you can use the codeblocks project.
 To compile you have to have gettext installed.
 
-If you are under Linux and you want to use a portable version do `./add_library.sh` to add temporarily the current folder library file path.
+If you are under Linux you can run the softwares with the scripts `run-csuper` and `run-csuper-gui`.
 
 The update of the translation is done via the command `./update_translations` and the compilation is done via the command `./compile_translations`
 
-If you want to install it, do `./install_csuper`. To uninstall `./uninstall_csuper`
+If you want to install csuper, do `./install_csuper`. To uninstall `./uninstall_csuper`
 
-Think to comment or decomment PORTABLE in the file main.h depending on the version you want.
+Think to comment or decomment PORTABLE in the file main.h of csuper depending on the version you want.
 
 The compilation should work under Linux, Mac et Windows.
 
@@ -72,9 +72,9 @@ Pour pouvoir compiler il faut que vous ayez d'installé gettext.
 
 La mise à jour de la traduction se fait via la commande `./update_translations` et la compilation de la traduction par la commande `./compile_translations`
 
-Puis si vous êtes sous Linux et que vous voulez l'utiliser en version portable faites `./add_library.sh` pour ajouter temporairement le dossier courant dans la liste de chemin de librairie.
+Puis si vous êtes sous Linux vous pouvez lancer les logiciels avec les scripts `run-csuper` et `run-csuper-gui`.
 
-Et si vous voulez l'installer faites `./install_csuper`. Pour le désinstaller `./uninstall_csuper`
+Et si vous voulez installer csuper faites `./install_csuper`. Pour le désinstaller `./uninstall_csuper`
 
 Penser à commenter ou décommenter la constante PORTABLE du fichier main.h suivant la version que vous voulez.
 
@@ -82,4 +82,4 @@ Normalement la compilation devrait marcher sous Linux, Mac et Windows.
 
 ###Informations complémentaires
 
-Une interface graphique en GTK+ en prévu, mais cela risque de prendre du temps.
+Une interface graphique en GTK+ est en cours.

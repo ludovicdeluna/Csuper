@@ -35,7 +35,13 @@
 #define GAME_CONFIGURATION_H_INCLUDED
 
 #include "csuper-gui.h"
+#include "main_window.h"
 
-
+G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void closeGameConfigurationPreferences(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data);
+void exportGameConfigurationError(globalData *data);
+G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data);
+void importGameConfigurationError(globalData *data);
 
 #endif // GAME_CONFIGURATION_H_INCLUDED

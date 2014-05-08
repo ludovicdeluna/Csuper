@@ -37,5 +37,8 @@
 #include "csuper-gui.h"
 #include "main_menu.h"
 #include "main_window.h"
+#include "game_configuration.h"
+
+int main (int   argc, char *argv[]);
 
 #endif // MAIN_H_INCLUDED

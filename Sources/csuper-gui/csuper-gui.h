@@ -40,6 +40,12 @@
  */
 #define CSUPER_GUI
 
+/*!
+ * \def PORTABLE
+ * Define that we compile csuper-gui portable
+ */
+//#define PORTABLE
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
@@ -53,9 +59,11 @@ typedef struct
 {
     GtkBuilder *ptr_builder;                /*!< A pointer to a GTK builder. */
     csuStruct *ptr_csu_struct;              /*!< A pointer to a csuStruct */
-    GtkWidget *main_window;                 /*! The main window */
+    GtkWidget *ptr_main_window;                 /*! The main window */
     game_config config;                     /*!< A game configuration */
-    char csu_filename[SIZE_MAX_FILE_NAME];   /*!< The filename of the csu file*/
+    gchar csu_filename[SIZE_MAX_FILE_NAME];   /*!< The filename of the csu file*/
+    GtkClipboard *ptr_clipboard;                /*!< A pointer to the main clipboard */
+    GtkClipboard *ptr_clipboard_selected;       /*!< A pointer to the selected clipboard */
 }globalData;
 
 

@@ -62,7 +62,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
     char home_path[SIZE_MAX_FILE_NAME];
 
     /* Create the file chooser dialog*/
-    GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Open csu file"),GTK_WINDOW(user_data->main_window),
+    GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Open csu file"),GTK_WINDOW(user_data->ptr_main_window),
                 GTK_FILE_CHOOSER_ACTION_OPEN,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-open",GTK_RESPONSE_ACCEPT,NULL);
 
      /*Add a .csu and a all filter*/
@@ -139,27 +139,27 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
     }
 
     /* Create the file chooser dialog*/
-    GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Save csu file"),GTK_WINDOW(user_data->main_window),
+    GtkWidget *window_file_save = gtk_file_chooser_dialog_new (_("Save csu file"),GTK_WINDOW(user_data->ptr_main_window),
                 GTK_FILE_CHOOSER_ACTION_SAVE,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-save",GTK_RESPONSE_ACCEPT,NULL);
-    gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_open), TRUE);
+    gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_save), TRUE);
 
      /*Add a .csu filter*/
     GtkFileFilter *csu_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltercsu"));
     GtkFileFilter *all_filter = GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterall"));
     gtk_file_filter_set_name(csu_filter,_("csu files"));
     gtk_file_filter_set_name(all_filter,_("All"));
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_open),csu_filter);
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_open),all_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),csu_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),all_filter);
 
     /* Give filename to the old filename*/
-    gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_open),user_data->csu_filename);
+    gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_save),user_data->csu_filename);
 
-	switch (gtk_dialog_run (GTK_DIALOG (window_file_open)))
+	switch (gtk_dialog_run (GTK_DIALOG (window_file_save)))
 	{
 		case GTK_RESPONSE_ACCEPT:
 		{
 		    char *filename;
-			filename=gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_open));
+			filename=gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_save));
             if (writeCsuFile(filename,user_data->ptr_csu_struct) == MY_FALSE)
                 saveFileError(user_data);
             else
@@ -170,7 +170,7 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
 		default:
 			break;
 	}
-	gtk_widget_destroy(window_file_open);
+	gtk_widget_destroy(window_file_save);
 }
 
 /*!
@@ -201,4 +201,16 @@ void noCsuFileOpened(globalData *data)
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void copyToClipboard(GtkWidget *widget, gpointer data)
+ *  Copy the selected text to clipboard
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void copyToClipboard(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    gtk_clipboard_set_text(user_data->ptr_clipboard,gtk_clipboard_wait_for_text(user_data->ptr_clipboard_selected),-1);
 }

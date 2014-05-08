@@ -51,6 +51,12 @@
 #define CONFIGURATION_FILE_NAME "configuration"
 
 /*!
+ * \def STRING_CHECK_GAME_CONFIG
+ * String for checking if the file is game configuration file.
+ */
+#define STRING_CHECK_GAME_CONFIG "Csuper_Game_Configuration"
+
+/*!
  * \struct csuStruct
  * Represent a list of game configuration
  */
