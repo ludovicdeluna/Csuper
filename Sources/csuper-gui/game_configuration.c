@@ -77,6 +77,7 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME];
+    int error=FALSE;
 
     /* Create the file chooser dialog*/
     GtkWidget *window_file_export = gtk_file_chooser_dialog_new (_("Export game configuration"),GTK_WINDOW(user_data->ptr_main_window),
@@ -97,7 +98,7 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
             strcpy(home_path,"");
             #endif // PORTABLE
             if(exportConfigFile(home_path,filename) == MY_FALSE)
-                exportGameConfigurationError(user_data);
+                error=TRUE;
             g_free(filename);
 			break;
 		}
@@ -105,6 +106,8 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 			break;
 	}
 	gtk_widget_destroy(window_file_export);
+	if (error)
+        exportGameConfigurationError(user_data);
 }
 
 /*!
@@ -132,6 +135,7 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME];
+    int error=FALSE;
 
     /* Create the file chooser dialog*/
     GtkWidget *window_file_import = gtk_file_chooser_dialog_new (_("Export game configuration"),GTK_WINDOW(user_data->ptr_main_window),
@@ -152,7 +156,7 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
             strcpy(home_path,"");
             #endif // PORTABLE
             if(importConfigFile(home_path,filename) == MY_FALSE)
-                importGameConfigurationError(user_data);
+                error=TRUE;
             g_free(filename);
 			break;
 		}
@@ -160,6 +164,8 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 			break;
 	}
 	gtk_widget_destroy(window_file_import);
+	if (error)
+        importGameConfigurationError(user_data);
 }
 
 /*!

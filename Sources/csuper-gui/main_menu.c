@@ -60,6 +60,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME];
+    int error=FALSE;
 
     /* Create the file chooser dialog*/
     GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Open csu file"),GTK_WINDOW(user_data->ptr_main_window),
@@ -92,7 +93,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
             user_data->ptr_csu_struct=NULL;
             (user_data->ptr_csu_struct) = readCsuFile(filename);
             if((user_data->ptr_csu_struct) == NULL)
-                openFileError(user_data);
+                error=TRUE;
             else
             {
                 strcpy(user_data->csu_filename,filename);
@@ -105,6 +106,8 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 			break;
 	}
 	gtk_widget_destroy(window_file_open);
+	if (error)
+        openFileError(user_data);
 }
 
 /*!
@@ -131,6 +134,7 @@ void openFileError(globalData *data)
 G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
+    int error=FALSE;
 
     if(user_data->ptr_csu_struct == NULL)
     {
@@ -161,7 +165,7 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
 		    char *filename;
 			filename=gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_save));
             if (writeCsuFile(filename,user_data->ptr_csu_struct) == MY_FALSE)
-                saveFileError(user_data);
+                error=TRUE;
             else
                 strcpy(user_data->csu_filename,filename);
             g_free(filename);
@@ -171,6 +175,8 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
 			break;
 	}
 	gtk_widget_destroy(window_file_save);
+	if (error)
+        saveFileError(user_data);
 }
 
 /*!
