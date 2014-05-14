@@ -138,7 +138,7 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
     int error=FALSE;
 
     /* Create the file chooser dialog*/
-    GtkWidget *window_file_import = gtk_file_chooser_dialog_new (_("Export game configuration"),GTK_WINDOW(user_data->ptr_main_window),
+    GtkWidget *window_file_import = gtk_file_chooser_dialog_new (_("Import game configuration"),GTK_WINDOW(user_data->ptr_main_window),
                 GTK_FILE_CHOOSER_ACTION_OPEN,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-save",GTK_RESPONSE_ACCEPT,NULL);
     gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_import), TRUE);
 

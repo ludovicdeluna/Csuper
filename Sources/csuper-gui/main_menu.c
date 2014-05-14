@@ -35,19 +35,31 @@
 
 /*!
  * \fn G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data)
- *  Display the window about
+ *  Display the about window
  * \param[in] widget the widget which send the interrupt
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
+    GError *error = NULL;
+    GdkPixbuf *logo;
     GtkWidget *window_about = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"about_window"));
     if (!window_about)
         g_critical(_("Widget about_windows is missing in file csuper-gui.glade."));
 
+    logo=gdk_pixbuf_new_from_file("Images/Logo_200.png",&error);
+    if (error)
+    {
+        g_printerr("%s\n", error->message);
+        g_error_free (error);
+    }else
+        gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(window_about),logo);
+
     gtk_dialog_run (GTK_DIALOG (window_about));
     gtk_widget_hide (window_about);
+    if (!error)
+        g_object_unref(logo);
 }
 
 /*!

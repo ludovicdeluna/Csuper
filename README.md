@@ -1,5 +1,6 @@
 Csuper
 ======
+![Csuper logo](Images/Logo_200.png)
 
 English
 -------
