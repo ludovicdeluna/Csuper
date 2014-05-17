@@ -20,12 +20,12 @@ This software is a personnel exercise of a student. Thank you to be indulgent.
 
 The documentation is made by Doxygen.
 
-A PDF version lay in the Documentation folder and a HTML version [here for csuper](http://dalan.netne.net/Doc_csuper) and [here for libcsuper](http://dalan.netne.net/Doc_libcsuper)
+A PDF version lay in the Documentation folder and a HTML version [here for csuper](http://www.dalan.rd-h.fr/Doc_csuper) and [here for libcsuper](http://www.dalan.rd-h.fr/Doc_libcsuper)
 A file explain the .csu files.
 
 ###Installation
 
-Executables are available on [my website](http://dalan.netne.net/wordpress).
+Executables are available on [my website](http://www.dalan.rd-h.fr/wordpress).
 
 If you want to compile yourself, you can use the codeblocks project.
 To compile you have to have gettext installed.
@@ -61,12 +61,12 @@ Ce logiciel a été fait en guise d'exercice personnel pendant des études donc 
 ###Documentation
 
 La documentation se fait à l'aide de Doxygen.
-Une version PDF se trouve dans le dossier Documentation et une version HTML se trouve [ici pour csuper](http://dalan.netne.net/Doc_csuper) et [ici pour libcsuper](http://dalan.netne.net/Doc_libcsuper)
+Une version PDF se trouve dans le dossier Documentation et une version HTML se trouve [ici pour csuper](http://www.dalan.rd-h.fr/Doc_csuper) et [ici pour libcsuper](http://www.dalan.rd-h.fr/Doc_libcsuper)
 Un fichier explique aussi comment sont ordonnées les données dans les fichiers .csu
 
 ###Installation
 
-Les exécutables sont disponibles sur [mon site](http://dalan.netne.net/wordpress).
+Les exécutables sont disponibles sur [mon site](http://www.dalan.rd-h.fr/wordpress).
 
 Si vous voulez compiler vous même le logiciel, vous pouvez utiliser les projets codeblocks.
 Pour pouvoir compiler il faut que vous ayez d'installé gettext.
