@@ -3,7 +3,7 @@
  * \brief   Graphical interface
  * \author  Remi BERTHO
  * \date    29/04/14
- * \version 2.2.1
+ * \version 2.4.0
  */
 
  /*
@@ -187,6 +187,7 @@ void newGame()
 
     clearScreen();
     menuFileName(file_name);
+    addFileCsuExtension(file_name);
 
     #ifndef PORTABLE
     if(readSystemPath(file_name)==MY_FALSE)
@@ -269,7 +270,7 @@ void mainMenu()
 
         clearScreen();
 
-        printf(_("Csuper - Universal points counter allowing reflexion exemption v2.2.1\n\nWhat do you want to do ?\n "
+        printf(_("Csuper - Universal points counter allowing reflexion exemption v2.4.0\n\nWhat do you want to do ?\n "
         "(%d) Do a new game \n (%d) Load an existing game \n (%d) Display the results of an existing game "
         "\n (%d) Delete a game \n (%d) Display all existing games\n (%d) Display the preferences menu"
         "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFiles,listFile,pref,quit);

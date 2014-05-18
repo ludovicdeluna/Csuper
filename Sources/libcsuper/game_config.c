@@ -3,7 +3,7 @@
  * \brief   Game configuration
  * \author  Remi BERTHO
  * \date    29/04/14
- * \version 2.2.1
+ * \version 2.4.0
  */
 
  /*

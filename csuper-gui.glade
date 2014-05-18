@@ -650,7 +650,7 @@
     <property name="version">4.0.0</property>
     <property name="copyright" translatable="yes">Copyright © 2014 Remi BERTHO &lt;remi.bertho@gmail.com&gt;</property>
     <property name="comments" translatable="yes">Universal points counter allowing reflexion exemption</property>
-    <property name="website">http://dalan.netne.net/wordpress</property>
+    <property name="website">http://www.dalan.rd-h.fr/wordpress</property>
     <property name="website_label" translatable="yes">Visit the website of Csuper</property>
     <property name="authors">Rémi BERTHO</property>
     <property name="documenters">Rémi BERTHO</property>
