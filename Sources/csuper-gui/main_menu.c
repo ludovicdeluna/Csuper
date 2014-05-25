@@ -91,13 +91,24 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
     if (strcmp(user_data->csu_filename,"") == 0)
         gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_open),g_file_new_for_path(home_path),NULL);
     else
+    {
+        #ifdef _WIN32
+        gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_open),g_convert(user_data->csu_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
+        #else
         gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_open),user_data->csu_filename);
+        #endif
+    }
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_open)))
 	{
 		case GTK_RESPONSE_ACCEPT:
 		{
-		    char *filename=gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_open));
+		    char *filename;
+		    #ifdef _WIN32
+		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_open)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
+		    #else
+		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_open));
+		    #endif
 
 			if (user_data->ptr_csu_struct != NULL)
                 closeCsuStruct(user_data->ptr_csu_struct);
@@ -159,7 +170,7 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
                 GTK_FILE_CHOOSER_ACTION_SAVE,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-save",GTK_RESPONSE_ACCEPT,NULL);
     gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_save), TRUE);
 
-     /*Add a .csu filter*/
+     /*Add filters*/
     GtkFileFilter *csu_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltercsu"));
     GtkFileFilter *all_filter = GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterall"));
     gtk_file_filter_set_name(csu_filter,_("csu files"));
@@ -168,18 +179,32 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),all_filter);
 
     /* Give filename to the old filename*/
+    #ifdef _WIN32
+    gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_save),g_convert(user_data->csu_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
+    #else
     gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_save),user_data->csu_filename);
+    #endif
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_save)))
 	{
 		case GTK_RESPONSE_ACCEPT:
 		{
 		    char *filename;
-			filename=gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_save));
+			#ifdef _WIN32
+		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
+		    #else
+		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save));
+		    #endif
+
+            /* Add the csu extension if the filter is csu */
+			if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_save))==csu_filter)
+                addFileCsuExtension(filename);
+
             if (writeCsuFile(filename,user_data->ptr_csu_struct) == MY_FALSE)
                 error=TRUE;
             else
                 strcpy(user_data->csu_filename,filename);
+
             g_free(filename);
 			break;
 		}

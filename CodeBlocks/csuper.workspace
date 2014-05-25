@@ -3,5 +3,6 @@
 	<Workspace title="Workspace">
 		<Project filename="csuper.cbp" />
 		<Project filename="libcsuper.cbp" />
+		<Project filename="csuper-gui.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

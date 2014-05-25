@@ -157,7 +157,6 @@ int compareFloatDescending(void const *a, void const *b)
 FILE *openFile(char file_name[], char mode[])
 {
     FILE *ptr_file;
-
     libcsuper_initialize();
 
     if ((ptr_file=fopen(file_name,mode)) == (FILE *) NULL )

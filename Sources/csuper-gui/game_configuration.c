@@ -93,7 +93,13 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 		case GTK_RESPONSE_ACCEPT:
 		{
 		    char *filename;
-			filename=gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_export));
+
+			#ifdef _WIN32
+		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
+		    #else
+		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export));
+		    #endif
+
             #ifdef PORTABLE
             strcpy(home_path,"");
             #endif // PORTABLE
@@ -151,7 +157,13 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 		case GTK_RESPONSE_ACCEPT:
 		{
 		    char *filename;
-			filename=gtk_file_chooser_get_filename (GTK_FILE_CHOOSER (window_file_import));
+
+			#ifdef _WIN32
+		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_import)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
+		    #else
+		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_import));
+		    #endif
+
             #ifdef PORTABLE
             strcpy(home_path,"");
             #endif // PORTABLE

@@ -49,6 +49,7 @@
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
+#include <locale.h>
 #include "../libcsuper/libcsuper.h"
 
 /*!
