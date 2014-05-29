@@ -12,6 +12,84 @@
       <pattern>*.csu</pattern>
     </patterns>
   </object>
+  <object class="GtkMessageDialog" id="game_configuration_not_exported">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Error while exporting the games configurations.</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="message_type">error</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">Error while exporting the games configurations.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox9">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area9">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="game_configuration_not_imported">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Error while importing the games configurations.</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="message_type">error</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">Error while importing the games configurations.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox11">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area11">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Csuper</property>
@@ -763,30 +841,27 @@
     <property name="gravity">center</property>
     <property name="transient_for">main_window</property>
     <child>
-      <object class="GtkBox" id="box1">
+      <object class="GtkGrid" id="grid3">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
         <child>
           <object class="GtkScrolledWindow" id="scrolledwindow2">
+            <property name="width_request">500</property>
+            <property name="height_request">300</property>
             <property name="visible">True</property>
             <property name="can_focus">True</property>
-            <property name="hscrollbar_policy">never</property>
+            <property name="hexpand">True</property>
+            <property name="vexpand">True</property>
             <property name="shadow_type">in</property>
             <child>
-              <object class="GtkViewport" id="viewport_game_configuration-preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
+              <placeholder/>
             </child>
           </object>
           <packing>
-            <property name="expand">True</property>
-            <property name="fill">True</property>
-            <property name="position">0</property>
+            <property name="left_attach">0</property>
+            <property name="top_attach">1</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -795,6 +870,7 @@
             <property name="can_focus">False</property>
             <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
+            <property name="hexpand">True</property>
             <property name="spacing">10</property>
             <property name="homogeneous">True</property>
             <property name="layout_style">spread</property>
@@ -844,7 +920,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkButton" id="button_close_game_configuration_preferences">
+              <object class="GtkButton" id="button_close_game_configuration_preferences1">
                 <property name="label">gtk-close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
@@ -860,90 +936,32 @@
             </child>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkMessageDialog" id="game_configuration_not_exported">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Error while exporting the games configurations.</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="transient_for">game_configuration_preferences</property>
-    <property name="message_type">error</property>
-    <property name="buttons">ok</property>
-    <property name="text" translatable="yes">Error while exporting the games configurations.</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="messagedialog-vbox9">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="messagedialog-action_area9">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
+            <property name="left_attach">0</property>
+            <property name="top_attach">2</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
           </packing>
         </child>
         <child>
-          <placeholder/>
-        </child>
-      </object>
-    </child>
-  </object>
-  <object class="GtkMessageDialog" id="game_configuration_not_imported">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Error while importing the games configurations.</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="transient_for">game_configuration_preferences</property>
-    <property name="message_type">error</property>
-    <property name="buttons">ok</property>
-    <property name="text" translatable="yes">Error while importing the games configurations.</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="messagedialog-vbox11">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="messagedialog-action_area11">
+          <object class="GtkLabel" id="game_configuration_preferences_label">
+            <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <property name="label" translatable="yes">List of all your game configurations</property>
+            <property name="selectable">True</property>
+            <attributes>
+              <attribute name="font-desc" value="MathJax_SansSerif Bold 15"/>
+            </attributes>
           </object>
           <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
+            <property name="left_attach">0</property>
+            <property name="top_attach">0</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
           </packing>
-        </child>
-        <child>
-          <placeholder/>
         </child>
       </object>
     </child>

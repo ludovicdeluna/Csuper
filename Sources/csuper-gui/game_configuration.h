@@ -43,5 +43,7 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data);
 void exportGameConfigurationError(globalData *data);
 G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data);
 void importGameConfigurationError(globalData *data);
+void displayGameConfiguration(GtkWidget *window_game);
+void deleteDisplayGameConfiguration(GtkWidget *window_game);
 
 #endif // GAME_CONFIGURATION_H_INCLUDED

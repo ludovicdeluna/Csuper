@@ -45,9 +45,11 @@ G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointe
 
     GtkWidget *window_game = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences"));
     if (!window_game)
-        g_critical(_("Widget about_windows is missing in file csuper-gui.glade."));
+        g_critical(_("Widget game_configuration_preferences is missing in file csuper-gui.glade."));
 
-    gtk_widget_show(window_game);
+    displayGameConfiguration(window_game);
+
+    gtk_widget_show_all(window_game);
 }
 
 /*!
@@ -62,7 +64,9 @@ G_MODULE_EXPORT void closeGameConfigurationPreferences(GtkWidget *widget, gpoint
 
     GtkWidget *window_game = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences"));
     if (!window_game)
-        g_critical(_("Widget about_windows is missing in file csuper-gui.glade."));
+        g_critical(_("Widget game_configuration_preferences is missing in file csuper-gui.glade."));
+
+    deleteDisplayGameConfiguration(window_game);
 
     gtk_widget_hide(window_game);
 }
@@ -125,7 +129,7 @@ void exportGameConfigurationError(globalData *data)
 {
     GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"game_configuration_not_exported"));
     if (!window_error)
-        g_critical(_("Widget about_windows is missing in file csuper-gui.glade."));
+        g_critical(_("Widget game_configuration_not_exported is missing in file csuper-gui.glade."));
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);
@@ -189,8 +193,65 @@ void importGameConfigurationError(globalData *data)
 {
     GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"game_configuration_not_imported"));
     if (!window_error)
-        g_critical(_("Widget about_windows is missing in file csuper-gui.glade."));
+        g_critical(_("Widget game_configuration_not_imported is missing in file csuper-gui.glade."));
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);
+}
+
+/*!
+ * \fn void void displayGameConfiguration(GtkWidget *window_game)
+ *  Display a all the game configuration on the window
+ * \param[in] window_game the window of game configuration
+ */
+void displayGameConfiguration(GtkWidget *window_game)
+{
+    gint i;
+
+    /* Get the windows scrolled*/
+    GtkWidget *window_scrolled = gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(window_game))),0,1);
+
+    /*Read the game configurations*/
+    list_game_config *ptr_list_config;
+    char home_path[SIZE_MAX_FILE_NAME]="";
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    ptr_list_config = readConfigListFile(home_path);
+
+    /* Set the grid*/
+    GtkWidget *grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(grid),10);
+    gtk_grid_set_row_spacing(GTK_GRID(grid),10);
+    gtk_widget_set_margin_right(grid,10);
+    gtk_widget_set_margin_left(grid,10);
+    gtk_widget_set_margin_top(grid,10);
+    gtk_widget_set_margin_bottom(grid,10);
+
+    /* Fill the grid */
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+    {
+        gtk_grid_attach(GTK_GRID(grid),gtk_label_new(ptr_list_config->name_game_config[i]),1,i,1,1);
+        gtk_grid_attach(GTK_GRID(grid),gtk_button_new_with_label("See details"),2,i,1,1);
+        gtk_grid_attach(GTK_GRID(grid),gtk_button_new_from_stock("gtk-delete"),3,i,1,1);
+        gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(grid),1,i),TRUE);
+        gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),1,i)),TRUE);
+    }
+
+    /* Add the different containers */
+    GtkWidget *viewport = gtk_viewport_new(gtk_adjustment_new(0,0,0,0,0,0),gtk_adjustment_new(0,0,0,0,0,0));
+    gtk_container_add(GTK_CONTAINER(viewport),grid);
+    gtk_container_add(GTK_CONTAINER(window_scrolled),viewport);
+
+    closeListGameConfig(ptr_list_config);
+}
+
+/*!
+ * \fn void void deleteDisplayGameConfiguration(GtkWidget *window_game)
+ *  Delete the display a all the game configuration on the window
+ * \param[in] window_game the window of game configuration
+ */
+void deleteDisplayGameConfiguration(GtkWidget *window_game)
+{
+    gtk_widget_destroy(gtk_bin_get_child(GTK_BIN(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(window_game))),0,1))));
 }
