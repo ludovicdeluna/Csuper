@@ -40,6 +40,9 @@
  */
 void updateCsuInfo(globalData *data)
 {
+    char *yes=_("yes");
+    char *no=_("no");
+
     GtkLabel *label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_date"));
     gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Created the : %02.0f/%02.0f/%4.0f"),data->ptr_csu_struct->day,data->ptr_csu_struct->month,data->ptr_csu_struct->year));
 
@@ -59,7 +62,7 @@ void updateCsuInfo(globalData *data)
     gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Name of the game configuration : %s"),data->ptr_csu_struct->config.name));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_use_max"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a maximum score : %d"),data->ptr_csu_struct->config.max));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a maximum score : %s"),integerToYesNo(data->ptr_csu_struct->config.max,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_initial_score"));
     gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Initial score : %.3f"),data->ptr_csu_struct->config.begin_score));
@@ -68,13 +71,13 @@ void updateCsuInfo(globalData *data)
     gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of decimal place : %d"),data->ptr_csu_struct->config.decimal_place));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_first_way"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("First way : %d"),data->ptr_csu_struct->config.first_way));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("The first has the highest score : %s"),integerToYesNo(data->ptr_csu_struct->config.first_way,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Game in turn by turn : %d"),data->ptr_csu_struct->config.turn_by_turn));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Game in turn by turn : %s"),integerToYesNo(data->ptr_csu_struct->config.turn_by_turn,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a distributor : %d"),data->ptr_csu_struct->config.use_distributor));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a distributor : %s"),integerToYesNo(data->ptr_csu_struct->config.use_distributor,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_max"));
     #ifdef __unix__

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-18 12:48+0200\n"
+"POT-Creation-Date: 2014-06-02 12:21+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -87,24 +87,32 @@ msgid ""
 msgstr ""
 
 #: Sources/csuper/display.c:455
+msgid "yes"
+msgstr ""
+
+#: Sources/csuper/display.c:456
+msgid "no"
+msgstr ""
+
+#: Sources/csuper/display.c:457
 #, c-format
 msgid ""
 "\n"
 "Name of the game configuration : %s\n"
-"Use a maximum score : %d\n"
+"Use a maximum score : %s\n"
 "Initial score : %.3f\n"
 "Number of decimal place : %d\n"
-"First way : %d\n"
-"Game in turn by turn : %d\n"
-"Use a distributor : %d\n"
+"The first has the highest score : %s\n"
+"Game in turn by turn : %s\n"
+"Use a distributor : %s\n"
 msgstr ""
 
-#: Sources/csuper/display.c:460 Sources/csuper/display.c:465
+#: Sources/csuper/display.c:463 Sources/csuper/display.c:468
 #, c-format
 msgid "Number of points maximum/minimum : %.3f\n"
 msgstr ""
 
-#: Sources/csuper/display.c:463
+#: Sources/csuper/display.c:466
 #, c-format
 msgid "Number of points maximum/minimum : inf\n"
 msgstr ""

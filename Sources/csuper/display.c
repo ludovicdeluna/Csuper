@@ -452,10 +452,13 @@ void printLicense()
  */
 void printGameConfig(game_config config)
 {
-    printf(_("\nName of the game configuration : %s\nUse a maximum score : %d\nInitial score : %.3f\n"
-    "Number of decimal place : %d\nFirst way : %d\n"
-    "Game in turn by turn : %d\nUse a distributor : %d\n")
-    ,config.name,config.max,config.begin_score,config.decimal_place,config.first_way,config.turn_by_turn,config.use_distributor);
+    char *yes=_("yes");
+    char *no=_("no");
+    printf(_("\nName of the game configuration : %s\nUse a maximum score : %s\nInitial score : %.3f\n"
+        "Number of decimal place : %d\nThe first has the highest score : %s\n"
+        "Game in turn by turn : %s\nUse a distributor : %s\n")
+        ,config.name,integerToYesNo(config.max,yes,no),config.begin_score,config.decimal_place,integerToYesNo(config.first_way,yes,no),
+       integerToYesNo(config.turn_by_turn,yes,no),integerToYesNo(config.use_distributor,yes,no));
     #ifdef __unix__
     printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
     #elif _WIN32

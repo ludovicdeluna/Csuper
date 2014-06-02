@@ -313,3 +313,19 @@ int renameFile(char *old_name, char *new_name)
         return MY_TRUE;
     }
 }
+
+/*!
+ * \fn char *integerToYesNo(int i, char *yes, char *no)
+ *  Transform an integer to yes or no
+ * \param[in] i the integer
+ * \param[in] yes the yes string
+ * \param[in] no the no string
+ * \return yes if i > 0, no otherwise
+ */
+char *integerToYesNo(int i, char *yes, char *no)
+{
+    if (i > 0)
+        return yes;
+    else
+        return no;
+}

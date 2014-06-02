@@ -53,9 +53,6 @@ int main (int   argc, char *argv[])
     bind_textdomain_codeset("csuper-gui","UTF-8");
     textdomain("csuper-gui");
     setlocale(LC_ALL,"");
-    /*#ifdef _WIN32
-    putenv("G_FILENAME_ENCODING=ISO-8859-1");
-    #endif*/
 
     gtk_init(&argc, &argv);
 
@@ -65,7 +62,7 @@ int main (int   argc, char *argv[])
 
     filename =  g_build_filename("csuper-gui.glade", NULL);
 
-    /* Load the glade file. */
+    // Load the glade file.
     gtk_builder_add_from_file (data.ptr_builder, filename, &error);
     g_free (filename);
     if (error)
@@ -78,9 +75,9 @@ int main (int   argc, char *argv[])
 
     gtk_builder_connect_signals (data.ptr_builder, &data);
 
-    data.ptr_main_window = GTK_WIDGET(gtk_builder_get_object (data.ptr_builder, "main_window"));
+    data.ptr_main_window = GTK_WIDGET(gtk_builder_get_object(data.ptr_builder,"main_window"));
 
-    gtk_widget_show_all (data.ptr_main_window);
+    gtk_widget_show_all(data.ptr_main_window);
 
     gtk_main();
 

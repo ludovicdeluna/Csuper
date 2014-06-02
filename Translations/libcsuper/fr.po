@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-08 13:44+0200\n"
+"POT-Creation-Date: 2014-06-02 12:21+0200\n"
 "PO-Revision-Date: 2014-04-30 18:45+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
@@ -66,12 +66,12 @@ msgstr ""
 "\n"
 "Erreur lors de l’écriture du fichier.\n"
 
-#: Sources/libcsuper/csu_struct.c:228
+#: Sources/libcsuper/csu_struct.c:229
 #, c-format
 msgid "The distributor was initialize by default to %s.\n"
 msgstr "La personne qui distribue a été initialisée par défaut à %s.\n"
 
-#: Sources/libcsuper/csu_struct.c:295
+#: Sources/libcsuper/csu_struct.c:296
 #, c-format
 msgid ""
 "\n"
@@ -99,7 +99,7 @@ msgstr ""
 "\n"
 "La configuration de jeu %s existe déjà.\n"
 
-#: Sources/libcsuper/game_config.c:315 Sources/libcsuper/share.c:282
+#: Sources/libcsuper/game_config.c:315 Sources/libcsuper/share.c:281
 #, c-format
 msgid ""
 "\n"
@@ -108,7 +108,7 @@ msgstr ""
 "\n"
 "Le fichier %s n'a pas pu être supprime.\n"
 
-#: Sources/libcsuper/game_config.c:321 Sources/libcsuper/share.c:289
+#: Sources/libcsuper/game_config.c:321 Sources/libcsuper/share.c:288
 #, c-format
 msgid ""
 "\n"
@@ -187,7 +187,7 @@ msgstr ""
 "\n"
 "Erreur lors de l'effaçage de la console.\n"
 
-#: Sources/libcsuper/share.c:165
+#: Sources/libcsuper/share.c:164
 #, c-format
 msgid ""
 "\n"
@@ -196,12 +196,12 @@ msgstr ""
 "\n"
 "Erreur lors de l'ouverture du fichier %s\n"
 
-#: Sources/libcsuper/share.c:186
+#: Sources/libcsuper/share.c:185
 #, c-format
 msgid "Error while closing the file"
 msgstr "Erreur lors de la fermeture du fichier"
 
-#: Sources/libcsuper/share.c:225 Sources/libcsuper/share.c:244
+#: Sources/libcsuper/share.c:224 Sources/libcsuper/share.c:243
 #, c-format
 msgid ""
 "\n"
@@ -210,7 +210,7 @@ msgstr ""
 "\n"
 "Problème d'allocation mémoire\n"
 
-#: Sources/libcsuper/share.c:307
+#: Sources/libcsuper/share.c:306
 #, c-format
 msgid ""
 "\n"
@@ -219,7 +219,7 @@ msgstr ""
 "\n"
 "Le fichier %s n'a pas pu être renommé.\n"
 
-#: Sources/libcsuper/share.c:313
+#: Sources/libcsuper/share.c:312
 #, c-format
 msgid ""
 "\n"

@@ -39,11 +39,22 @@
 
 G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void closeGameConfigurationPreferences(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT gboolean closeGameConfigurationPreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data);
 G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data);
 void exportGameConfigurationError(globalData *data);
 G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data);
 void importGameConfigurationError(globalData *data);
-void displayGameConfiguration(GtkWidget *window_game);
-void deleteDisplayGameConfiguration(GtkWidget *window_game);
+void displayGameConfiguration(globalData *data);
+void deleteDisplayGameConfiguration(globalData *data);
+void updateDisplayGameConfiguration(globalData *data);
+G_MODULE_EXPORT void deleteGameConfiguration(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void viewGameConfiguration(GtkWidget *widget, gpointer data);
+void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboolean clear);
+G_MODULE_EXPORT void addGameConfiguration(GtkWidget *widget, gpointer data);
+game_config *newGameConfiguration(globalData *data);
+void newGameConfigurationError(globalData *data);
+G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer data);
+void changeNewGameConfigurationDialog(globalData *data,game_config config);
 
 #endif // GAME_CONFIGURATION_H_INCLUDED

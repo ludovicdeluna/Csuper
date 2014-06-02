@@ -1,5 +1,9 @@
 Csuper
 ======
+
+4.0.0
+* Add a function to transform integer to yes or no
+
 2.4.0
 
 * Add a initial turn (turn 0) with the begin score
@@ -7,6 +11,10 @@ Csuper
 
 Libcsuper
 =========
+
+4.0.0
+* Add a function to transform integer to yes or no
+
 2.4.0
 
 * Add a initial turn (turn 0) with the begin score

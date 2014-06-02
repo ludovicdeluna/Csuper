@@ -75,5 +75,6 @@ void myRealloc(void **ptr,int size_alloue);
 void addFileCsuExtension(char *file_name);
 int deleteFile(char *file_name);
 int renameFile(char *old_name, char *new_name);
+char *integerToYesNo(int i, char *yes, char *no);
 
 #endif

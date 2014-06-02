@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-18 12:48+0200\n"
-"PO-Revision-Date: 2014-05-18 12:49+0200\n"
+"POT-Creation-Date: 2014-05-31 11:57+0200\n"
+"PO-Revision-Date: 2014-05-31 11:58+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
 "Language: fr\n"
@@ -114,32 +114,40 @@ msgstr ""
 "Pour plus de détails : http://www.gnu.org/licenses/gpl.html\n"
 
 #: Sources/csuper/display.c:455
+msgid "yes"
+msgstr "oui"
+
+#: Sources/csuper/display.c:456
+msgid "no"
+msgstr "non"
+
+#: Sources/csuper/display.c:457
 #, c-format
 msgid ""
 "\n"
 "Name of the game configuration : %s\n"
-"Use a maximum score : %d\n"
+"Use a maximum score : %s\n"
 "Initial score : %.3f\n"
 "Number of decimal place : %d\n"
-"First way : %d\n"
-"Game in turn by turn : %d\n"
-"Use a distributor : %d\n"
+"The first has the highest score : %s\n"
+"Game in turn by turn : %s\n"
+"Use a distributor : %s\n"
 msgstr ""
 "\n"
 "Nom de la configuration de jeu : %s\n"
-"Utilise un nombre maximum : %d\n"
+"Utilise un nombre maximum : %s\n"
 "Score initial : %.3f\n"
 "Nombre de chiffres après la virgule utilisé à l'affichage des points : %d\n"
-"Sens du premier : %d\n"
-"Jeu en tour par tour : %d\n"
-"Utilise un distributeur tournant : %d\n"
+"Le premier a le plus de points : %s\n"
+"Jeu en tour par tour : %s\n"
+"Utilise un distributeur tournant : %s\n"
 
-#: Sources/csuper/display.c:460 Sources/csuper/display.c:465
+#: Sources/csuper/display.c:463 Sources/csuper/display.c:468
 #, c-format
 msgid "Number of points maximum/minimum : %.3f\n"
 msgstr "Nombre de points maximum/minimum : %.3f\n"
 
-#: Sources/csuper/display.c:463
+#: Sources/csuper/display.c:466
 #, c-format
 msgid "Number of points maximum/minimum : inf\n"
 msgstr "Nombre de points maximum/minimum : inf\n"
