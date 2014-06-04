@@ -93,6 +93,7 @@ void closeCsuStruct(csuStruct *ptr_csu_struct);
 void startNewTurn(csuStruct *ptr_csu_struct, int index_player);
 void endNewTurn(csuStruct *ptr_csu_struct, int index_player);
 void rankCalculation(csuStruct *ptr_csu_struct);
+int searchIndexFromPosition(csuStruct *ptr_csu_struct, int position,int *nb);
 void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name);
 int exceedMaxNumber(csuStruct *ptr_csu_struct);
 int maxNbTurn(csuStruct *ptr_csu_struct);

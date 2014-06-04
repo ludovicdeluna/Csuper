@@ -209,6 +209,39 @@ void rankCalculation(csuStruct *ptr_csu_struct)
 }
 
 /*!
+ * \fn int searchIndexFromPosition(csuStruct *ptr_csu_struct, int position,int *nb)
+ *  Search the index in the array of the person who is the 'position' position
+ * \param[in,out] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in,out] position the position
+ * \param[in,out] nb the nbth player who have the position will be selected
+ * \return the index or NULL if the position doesn't exist
+ */
+int searchIndexFromPosition(csuStruct *ptr_csu_struct, int position,int *nb)
+{
+    int i;
+    int nb_position=1;
+
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        if (ptr_csu_struct->rank[i] == position)
+        {
+            if (*nb == nb_position)
+                return i;
+            else
+                nb_position++;
+        }
+    }
+    if (position > 1)
+    {
+        *nb = *nb + 1;
+        return searchIndexFromPosition(ptr_csu_struct,position-1,nb);
+    }
+    else
+        return -1;
+}
+
+
+/*!
  * \fn void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
  *  Add the distributor on the structure
  * \param[in] *distributor_name the name of the distributor

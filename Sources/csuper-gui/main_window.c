@@ -33,76 +33,132 @@
 
 #include "main_window.h"
 
+
+
 /*!
- * \fn void updateCsuInfo(globalData *data)
- *  Update the csu informations in the right panel.
+ * \fn void noCsuFileRanking(globalData *data)
+ *  Fill the ranking with no ranking
  * \param[in] data the globalData
  */
-void updateCsuInfo(globalData *data)
+void noCsuFileRanking(globalData *data)
 {
-    char *yes=_("yes");
-    char *no=_("no");
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_grid_game_config"));
+    if (!grid)
+        g_critical(_("Widget main_window_grid_game_config is missing in file csuper-gui.glade."));
 
-    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_date"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Created the : %02.0f/%02.0f/%4.0f"),data->ptr_csu_struct->day,data->ptr_csu_struct->month,data->ptr_csu_struct->year));
+    GtkWidget *label = gtk_label_new(_("No csu file loaded"));
 
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_version"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("File's version : %1.1f"),data->ptr_csu_struct->version));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_size_max_name"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Size max of the names : %.0f"),data->ptr_csu_struct->size_max_name));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_number_player"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of players : %.0f"),data->ptr_csu_struct->nb_player));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Numbers maximum of turns : %d"),maxNbTurn(data->ptr_csu_struct)-1));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_config_name"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Name of the game configuration : %s"),data->ptr_csu_struct->config.name));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_use_max"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a maximum score : %s"),integerToYesNo(data->ptr_csu_struct->config.max,yes,no)));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_initial_score"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Initial score : %.3f"),data->ptr_csu_struct->config.begin_score));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_digit"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of decimal place : %d"),data->ptr_csu_struct->config.decimal_place));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_first_way"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("The first has the highest score : %s"),integerToYesNo(data->ptr_csu_struct->config.first_way,yes,no)));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Game in turn by turn : %s"),integerToYesNo(data->ptr_csu_struct->config.turn_by_turn,yes,no)));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a distributor : %s"),integerToYesNo(data->ptr_csu_struct->config.use_distributor,yes,no)));
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_max"));
-    #ifdef __unix__
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : %.3f"),data->ptr_csu_struct->config.nb_max));
-    #elif _WIN32
-    if (data->ptr_csu_struct->config.nb_max == INFINITY)
-        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : inf")));
-    else
-        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : %.3f"),data->ptr_csu_struct->config.nb_max));
-    #endif
-
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Distributor : %s"),data->ptr_csu_struct->player_names[(int)data->ptr_csu_struct->distributor]));
+    gtk_grid_attach(GTK_GRID(grid),label,0,1,1,1);
 }
 
 /*!
- * \fn void updateCsuInfoSameFile(globalData *data)
- *  Update the distributor informations in the right panel.
+ * \fn void deleteRanking(globalData *data)
+ *  Delete the ranking
  * \param[in] data the globalData
  */
-void updateCsuInfoSameFile(globalData *data)
+void deleteRanking(globalData *data)
 {
-    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"Distributor : label_distributor"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[(int)data->ptr_csu_struct->distributor]));
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_grid_game_config"));
+    if (!grid)
+        g_critical(_("Widget main_window_grid_game_config is missing in file csuper-gui.glade."));
 
-    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"Numbers maximum of turns : label_nb_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("%d"),maxNbTurn(data->ptr_csu_struct)-1));
+    gtk_widget_destroy(gtk_grid_get_child_at(GTK_GRID(grid),0,1));
+}
+
+/*!
+ * \fn void createRanking(globalData *data)
+ *  Create the ranking
+ * \param[in] data the globalData
+ */
+void createRanking(globalData *data)
+{
+    gint i;
+    gint index;
+    gint nb;
+
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_grid_game_config"));
+    if (!grid)
+        g_critical(_("Widget main_window_grid_game_config is missing in file csuper-gui.glade."));
+
+    /* Set the grid*/
+    GtkWidget *rank_grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(rank_grid),20);
+    gtk_grid_set_row_spacing(GTK_GRID(rank_grid),10);
+    gtk_widget_set_margin_right(rank_grid,10);
+    gtk_widget_set_margin_left(rank_grid,10);
+    gtk_widget_set_margin_top(rank_grid,10);
+    gtk_widget_set_margin_bottom(rank_grid,10);
+    gtk_grid_set_column_homogeneous(GTK_GRID(rank_grid),TRUE);
+
+    /* Set the column name */
+    gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Position")),0,0,1,1);
+    gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),0,0)),TRUE);
+    gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Name")),1,0,1,1);
+    gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),1,0)),TRUE);
+    gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Points")),2,0,1,1);
+    gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),2,0)),TRUE);
+
+    /* Set all the information*/
+    for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
+    {
+        nb=1;
+        index=searchIndexFromPosition(data->ptr_csu_struct,i+1,&nb);
+
+        gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%d"),i+2-nb)),0,i+1,1,1);
+        //gtk_label_set_markup(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),0,i+1)),"<span foreground=\"blue\"></span>");
+        gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),0,i+1)),TRUE);
+
+        gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[index])),1,i+1,1,1);
+        gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),1,i+1)),TRUE);
+
+        switch (data->ptr_csu_struct->config.decimal_place)
+        {
+        case 0 :
+            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.0f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
+            break;
+        case 1 :
+            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.1f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
+            break;
+        case 2 :
+            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.2f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
+            break;
+        case 3 :
+            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.3f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
+            break;
+        }
+        gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),2,i+1)),TRUE);
+    }
+
+    gtk_grid_attach(GTK_GRID(grid),rank_grid,0,1,1,1);
+
+    gtk_widget_show_all(rank_grid);
+}
+
+/*!
+ * \fn void updateMainWindow(globalData *data)
+ *  Update the main window
+ * \param[in] data the globalData
+ */
+void updateMainWindow(globalData *data)
+{
+    deleteRanking(data);
+    createRanking(data);
+    updateDistributorLabel(data);
+}
+
+/*!
+ * \fn void updateDistributorLabel(globalData *data)
+ *  Update the distributor
+ * \param[in] data the globalData
+ */
+void updateDistributorLabel(globalData *data)
+{
+    GtkWidget *label = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_distributor"));
+    if (!label)
+        g_critical(_("Widget main_window_label_distributor is missing in file csuper-gui.glade."));
+
+    if (data->ptr_csu_struct->config.use_distributor == 1)
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("%s is the distributor"),data->ptr_csu_struct->player_names[(gint)data->ptr_csu_struct->distributor]));
+    else
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There is no distributor")));
 }

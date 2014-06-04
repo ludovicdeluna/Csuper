@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-02 12:21+0200\n"
+"POT-Creation-Date: 2014-06-04 22:24+0200\n"
 "PO-Revision-Date: 2014-04-30 18:45+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
@@ -66,12 +66,12 @@ msgstr ""
 "\n"
 "Erreur lors de l’écriture du fichier.\n"
 
-#: Sources/libcsuper/csu_struct.c:229
+#: Sources/libcsuper/csu_struct.c:262
 #, c-format
 msgid "The distributor was initialize by default to %s.\n"
 msgstr "La personne qui distribue a été initialisée par défaut à %s.\n"
 
-#: Sources/libcsuper/csu_struct.c:296
+#: Sources/libcsuper/csu_struct.c:329
 #, c-format
 msgid ""
 "\n"

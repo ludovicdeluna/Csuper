@@ -36,7 +36,10 @@
 
 #include "csuper-gui.h"
 
-void updateCsuInfo(globalData *data);
-void updateCsuInfoSameFile(globalData *data);
+void noCsuFileRanking(globalData *data);
+void deleteRanking(globalData *data);
+void createRanking(globalData *data);
+void updateMainWindow(globalData *data);
+void updateDistributorLabel(globalData *data);
 
 #endif // MAIN_WINDOW_H_INCLUDED

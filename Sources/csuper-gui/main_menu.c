@@ -72,7 +72,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME];
-    int error=FALSE;
+    gboolean error=FALSE;
 
     /* Create the file chooser dialog*/
     GtkWidget *window_file_open = gtk_file_chooser_dialog_new (_("Open csu file"),GTK_WINDOW(user_data->ptr_main_window),
@@ -120,7 +120,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
             else
             {
                 strcpy(user_data->csu_filename,filename);
-                updateCsuInfo(user_data);
+                updateMainWindow(user_data);
             }
             g_free(filename);
 			break;
@@ -225,7 +225,7 @@ void saveFileError(globalData *data)
 {
     GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"file_not_save"));
     if (!window_error)
-        g_critical(_("Widget about_windows is missing in file csuper-gui.glade."));
+        g_critical(_("Widget file_not_save is missing in file csuper-gui.glade."));
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);
@@ -240,7 +240,7 @@ void noCsuFileOpened(globalData *data)
 {
     GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"no_csu_file_opened"));
     if (!window_error)
-        g_critical(_("Widget about_windows is missing in file csuper-gui.glade."));
+        g_critical(_("Widget no_csu_file_opened is missing in file csuper-gui.glade."));
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);
@@ -256,4 +256,107 @@ G_MODULE_EXPORT void copyToClipboard(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     gtk_clipboard_set_text(user_data->ptr_clipboard,gtk_clipboard_wait_for_text(user_data->ptr_clipboard_selected),-1);
+}
+
+/*!
+ * \fn void updateCsuInfo(globalData *data)
+ *  Update the csu informations in the right panel.
+ * \param[in] data the globalData
+ */
+void updateCsuInfo(globalData *data)
+{
+    char *yes=_("yes");
+    char *no=_("no");
+
+    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_date"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Created the : %02.0f/%02.0f/%4.0f"),data->ptr_csu_struct->day,data->ptr_csu_struct->month,data->ptr_csu_struct->year));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_version"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("File's version : %1.1f"),data->ptr_csu_struct->version));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_size_max_name"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Size max of the names : %.0f"),data->ptr_csu_struct->size_max_name));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_number_player"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of players : %.0f"),data->ptr_csu_struct->nb_player));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_turn"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Numbers maximum of turns : %d"),maxNbTurn(data->ptr_csu_struct)-1));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_config_name"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Name of the game configuration : %s"),data->ptr_csu_struct->config.name));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_use_max"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a maximum score : %s"),integerToYesNo(data->ptr_csu_struct->config.max,yes,no)));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_initial_score"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Initial score : %.3f"),data->ptr_csu_struct->config.begin_score));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_digit"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of decimal place : %d"),data->ptr_csu_struct->config.decimal_place));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_first_way"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("The first has the highest score : %s"),integerToYesNo(data->ptr_csu_struct->config.first_way,yes,no)));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_turn"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Game in turn by turn : %s"),integerToYesNo(data->ptr_csu_struct->config.turn_by_turn,yes,no)));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor_turn"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a distributor : %s"),integerToYesNo(data->ptr_csu_struct->config.use_distributor,yes,no)));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_max"));
+    #ifdef __unix__
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : %.3f"),data->ptr_csu_struct->config.nb_max));
+    #elif _WIN32
+    if (data->ptr_csu_struct->config.nb_max == INFINITY)
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : inf")));
+    else
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : %.3f"),data->ptr_csu_struct->config.nb_max));
+    #endif
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor"));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Distributor : %s"),data->ptr_csu_struct->player_names[(int)data->ptr_csu_struct->distributor]));
+}
+
+/*!
+ * \fn void propertiesFileError(globalData *data)
+ *  Display a dialog box which said that there is a problem when loading the file.
+ * \param[in] data the globalData
+ */
+void propertiesFileError(globalData *data)
+{
+    GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"no_csu_file_opened_properties"));
+    if (!window_error)
+        g_critical(_("Widget no_csu_file_opened_properties is missing in file csuper-gui.glade."));
+
+    gtk_dialog_run (GTK_DIALOG (window_error));
+    gtk_widget_hide (window_error);
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data)
+ *  Show the properties window
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    if (user_data->ptr_csu_struct == NULL)
+    {
+        propertiesFileError(user_data);
+        return;
+    }
+
+    /* Get the dialog box */
+    GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"csu_file_properties_dialog_box"));
+    if (!dialog)
+        g_critical(_("Widget csu_file_properties_dialog_box is missing in file csuper-gui.glade."));
+
+    updateCsuInfo(user_data);
+
+    gtk_widget_show_all(dialog);
+
+    gtk_dialog_run(GTK_DIALOG(dialog));
 }

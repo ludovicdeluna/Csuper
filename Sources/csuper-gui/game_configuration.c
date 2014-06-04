@@ -758,3 +758,4 @@ void changeNewGameConfigurationDialog(globalData *data,game_config config)
         break;
     }
 }
+

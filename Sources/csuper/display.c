@@ -49,7 +49,7 @@ void printNames(csuStruct *ptr_csu_struct, int *ptr_size_line)
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         /*Display the player name*/
-        if (i == ptr_csu_struct->distributor)
+        if (i == ptr_csu_struct->distributor && ptr_csu_struct->config.use_distributor == 1)
             color(writingUnderline);
 
         switch ((int)ptr_csu_struct->rank[i])
