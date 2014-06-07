@@ -47,5 +47,7 @@ G_MODULE_EXPORT void copyToCliboard(GtkWidget *widget, gpointer data);
 void updateCsuInfo(globalData *data);
 void propertiesFileError(globalData *data);
 G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_MENU_H_INCLUDED

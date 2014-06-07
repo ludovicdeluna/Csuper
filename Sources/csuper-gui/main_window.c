@@ -105,7 +105,6 @@ void createRanking(globalData *data)
         index=searchIndexFromPosition(data->ptr_csu_struct,i+1,&nb);
 
         gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%d"),i+2-nb)),0,i+1,1,1);
-        //gtk_label_set_markup(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),0,i+1)),"<span foreground=\"blue\"></span>");
         gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),0,i+1)),TRUE);
 
         gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[index])),1,i+1,1,1);

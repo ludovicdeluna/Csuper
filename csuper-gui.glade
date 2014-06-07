@@ -90,11 +90,6 @@
       </object>
     </child>
   </object>
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-preferences</property>
-  </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Csuper</property>
@@ -129,6 +124,7 @@
                         <property name="tooltip_text" translatable="yes">New csu file</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="activate" handler="openAssistantNewCsu" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -253,7 +249,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Open the game configuration preferences window</property>
-                        <property name="image">image1</property>
                         <property name="use_stock">False</property>
                         <signal name="activate" handler="openGameConfigurationPreferences" swapped="no"/>
                       </object>
@@ -327,7 +322,7 @@
                 <property name="label" translatable="yes">Ranking</property>
                 <property name="selectable">True</property>
                 <attributes>
-                  <attribute name="font-desc" value="&lt;Saisir une valeur&gt; 14"/>
+                  <attribute name="font-desc" value="Sans 14"/>
                 </attributes>
               </object>
               <packing>
@@ -427,6 +422,7 @@
                 <property name="label" translatable="yes">New</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-new</property>
+                <signal name="clicked" handler="openAssistantNewCsu" swapped="no"/>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1119,8 +1115,7 @@
             <property name="label" translatable="yes">List of all your game configurations</property>
             <property name="selectable">True</property>
             <attributes>
-              <attribute name="font-desc" value="&lt;Saisir une valeur&gt; 13"/>
-              <attribute name="weight" value="bold"/>
+              <attribute name="font-desc" value="Sans Bold 13"/>
             </attributes>
           </object>
           <packing>
@@ -1165,8 +1160,7 @@
             <property name="label" translatable="yes">The selected game configurations</property>
             <property name="selectable">True</property>
             <attributes>
-              <attribute name="font-desc" value="&lt;Saisir une valeur&gt; 13"/>
-              <attribute name="weight" value="bold"/>
+              <attribute name="font-desc" value="Sans Bold 13"/>
             </attributes>
           </object>
           <packing>
@@ -1278,6 +1272,112 @@ Please open a csu file before try to save it.</property>
           </packing>
         </child>
       </object>
+    </child>
+  </object>
+  <object class="GtkMessageDialog" id="no_csu_file_opened_properties">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">No csu file opened</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="gravity">center</property>
+    <property name="transient_for">main_window</property>
+    <property name="message_type">error</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">You have no csu file opened.
+Please open a csu file before try to see properties.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox17">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area17">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+  <object class="GtkAdjustment" id="new_csu_file_assistant_nb_player_adjustement">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkGrid" id="grid_new_csu_file_assistant_1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="row_spacing">10</property>
+    <property name="column_spacing">10</property>
+    <child>
+      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_name">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Name of the new csu file</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_nb_player">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Number of player on the game</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkEntry" id="grid_new_csu_file_assistant_1_entry_name">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <signal name="changed" handler="validAssistantNewCsuOne" swapped="no"/>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSpinButton" id="grid_new_csu_file_assistant_1_spin_nb_player">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="input_purpose">number</property>
+        <property name="adjustment">new_csu_file_assistant_nb_player_adjustement</property>
+        <property name="climb_rate">1</property>
+        <property name="value">1</property>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
     </child>
   </object>
   <object class="GtkAdjustment" id="new_game_configuration_initial_score_adjustement">
@@ -1630,44 +1730,5 @@ Please open a csu file before try to save it.</property>
       <action-widget response="-6">button_cancel_new_game_configuration</action-widget>
       <action-widget response="-3">button_ok_new_game_configuration</action-widget>
     </action-widgets>
-  </object>
-  <object class="GtkMessageDialog" id="no_csu_file_opened_properties">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">No csu file opened</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="gravity">center</property>
-    <property name="transient_for">main_window</property>
-    <property name="message_type">error</property>
-    <property name="buttons">ok</property>
-    <property name="text" translatable="yes">You have no csu file opened.
-Please open a csu file before try to see properties.</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="messagedialog-vbox17">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="messagedialog-action_area17">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
   </object>
 </interface>
