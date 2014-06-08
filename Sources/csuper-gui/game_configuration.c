@@ -376,8 +376,12 @@ G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data)
     ptr_list_config = readConfigListFile(home_path);
     readConfigFile(i,ptr_list_config,&config,home_path);
 
+    GtkWidget *preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences"));
+    if (!preferences)
+        g_critical(_("Widget game_configuration_preferences is missing in file csuper-gui.glade."));
+
     changeNewGameConfigurationDialog(user_data,config);
-    ptr_config = newGameConfiguration(user_data);
+    ptr_config = newGameConfiguration(user_data,GTK_WINDOW(preferences));
     if(ptr_config != NULL)
     {
         removeConfigListFile(i,ptr_list_config,home_path);
@@ -514,8 +518,12 @@ G_MODULE_EXPORT void addGameConfiguration(GtkWidget *widget, gpointer data)
     char home_path[SIZE_MAX_FILE_NAME]="";
     game_config config = {0,1,1,0,-1,-1,"",0};
 
+    GtkWidget *preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences"));
+    if (!preferences)
+        g_critical(_("Widget game_configuration_preferences is missing in file csuper-gui.glade."));
+
     changeNewGameConfigurationDialog(user_data,config);
-    ptr_config=newGameConfiguration(user_data);
+    ptr_config=newGameConfiguration(user_data,GTK_WINDOW(preferences));
     if (ptr_config == NULL)
         return;
 
@@ -532,11 +540,12 @@ G_MODULE_EXPORT void addGameConfiguration(GtkWidget *widget, gpointer data)
 
 
 /*!
- * \fn game_config *newGameConfiguration(globalData *data)
+ * \fn game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window)
  *  Display the window of creating a game configuration and return the game configuration created
  * \param[in] data the globalData
+ * \param[in] parent_window the parent window
  */
-game_config *newGameConfiguration(globalData *data)
+game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window)
 {
     game_config config;
     game_config *ptr_config = NULL;
@@ -546,6 +555,8 @@ game_config *newGameConfiguration(globalData *data)
     GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"new_game_configuration_dialog"));
     if (!dialog)
         g_critical(_("Widget new_game_configuration_dialog is missing in file csuper-gui.glade."));
+
+    gtk_window_set_transient_for(GTK_WINDOW(dialog),parent_window);
 
     /* Get the grid */
     GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"new_game_configuration_dialog_grid"));
@@ -643,21 +654,24 @@ game_config *newGameConfiguration(globalData *data)
 	}
 
     if (ptr_config == NULL)
-        newGameConfigurationError(data);
+        newGameConfigurationError(data,parent_window);
 
 	return ptr_config;
 }
 
 /*!
- * \fn void newGameConfigurationError(globalData *data)
+ * \fn void newGameConfigurationError(globalData *data, GtkWindow *parent_window)
  *  Display a dialog box which said that there is a problem on the new game configuration.
  * \param[in] data the globalData
+ * \param[in] parent_window the parent window
  */
-void newGameConfigurationError(globalData *data)
+void newGameConfigurationError(globalData *data, GtkWindow *parent_window)
 {
     GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"message_dialog_error_add_game_configuration"));
     if (!window_error)
         g_critical(_("Widget message_dialog_error_add_game_configuration is missing in file csuper-gui.glade."));
+
+    gtk_window_set_transient_for(GTK_WINDOW(window_error),parent_window);
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);

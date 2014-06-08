@@ -38,6 +38,7 @@
 #include "main_menu.h"
 #include "main_window.h"
 #include "game_configuration.h"
+#include "new_file_assistant.h"
 
 int main (int   argc, char *argv[]);
 

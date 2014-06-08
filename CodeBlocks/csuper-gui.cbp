@@ -56,6 +56,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/csuper-gui/main_window.h" />
+		<Unit filename="../Sources/csuper-gui/new_file_assistant.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/new_file_assistant.h" />
 		<Unit filename="../csuper-gui.glade" />
 		<Extensions>
 			<code_completion />

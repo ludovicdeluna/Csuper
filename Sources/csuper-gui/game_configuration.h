@@ -52,8 +52,8 @@ G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void viewGameConfiguration(GtkWidget *widget, gpointer data);
 void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboolean clear);
 G_MODULE_EXPORT void addGameConfiguration(GtkWidget *widget, gpointer data);
-game_config *newGameConfiguration(globalData *data);
-void newGameConfigurationError(globalData *data);
+game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window);
+void newGameConfigurationError(globalData *data, GtkWindow *parent_window);
 G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer data);
 void changeNewGameConfigurationDialog(globalData *data,game_config config);
 

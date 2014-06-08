@@ -59,6 +59,7 @@ int main (int   argc, char *argv[])
     data.ptr_builder = gtk_builder_new();
     data.ptr_clipboard=gtk_clipboard_get(gdk_atom_intern("CLIPBOARD",TRUE));
     data.ptr_clipboard_selected=gtk_clipboard_get(gdk_atom_intern("PRIMARY",TRUE));
+    data.ptr_csu_struct_tmp=NULL;
 
     filename =  g_build_filename("csuper-gui.glade", NULL);
 

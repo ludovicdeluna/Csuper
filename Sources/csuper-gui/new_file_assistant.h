@@ -1,13 +1,13 @@
 /*!
- * \file    main_menu.h
- * \brief   Main menu
+ * \file    new_file_assistant.h
+ * \brief   The new file assistant function
  * \author  Remi BERTHO
  * \date    04/05/14
- * \version 3.0.0
+ * \version 4.0.0
  */
 
  /*
- * main_menu.h
+ * new_file_assistant.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,22 +31,17 @@
  *
  */
 
-#ifndef MAIN_MENU_H_INCLUDED
-#define MAIN_MENU_H_INCLUDED
+#ifndef NEW_FILE_ASSISTANT_H_INCLUDED
+#define NEW_FILE_ASSISTANT_H_INCLUDED
 
 #include "csuper-gui.h"
 #include "main_window.h"
 #include "game_configuration.h"
 
-G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data);
-G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data);
-void openFileError(globalData *data);
-G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data);
-void saveFileError(globalData *data);
-void noCsuFileOpened(globalData *data);
-G_MODULE_EXPORT void copyToCliboard(GtkWidget *widget, gpointer data);
-void updateCsuInfo(globalData *data);
-void propertiesFileError(globalData *data);
-G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer data);
+void validAssistantNewCsuOne(globalData *data);
+G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpointer data);
 
-#endif // MAIN_MENU_H_INCLUDED
+#endif // NEW_FILE_ASSISTANT_H_INCLUDED

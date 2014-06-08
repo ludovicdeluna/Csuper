@@ -245,11 +245,12 @@
                     <property name="can_focus">False</property>
                     <child>
                       <object class="GtkImageMenuItem" id="menu_preference_game_config">
-                        <property name="label" translatable="yes">Game configuration preferences</property>
+                        <property name="label">gtk-preferences</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Open the game configuration preferences window</property>
-                        <property name="use_stock">False</property>
+                        <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="openGameConfigurationPreferences" swapped="no"/>
                       </object>
                     </child>
@@ -1196,45 +1197,6 @@
       </object>
     </child>
   </object>
-  <object class="GtkMessageDialog" id="message_dialog_error_add_game_configuration">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Game configuration not correct</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="gravity">center</property>
-    <property name="transient_for">game_configuration_preferences</property>
-    <property name="message_type">error</property>
-    <property name="buttons">ok</property>
-    <property name="text" translatable="yes">The new game configuration is not correct.
-So the new game configuration is not save.</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="messagedialog-vbox13">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="messagedialog-action_area13">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkMessageDialog" id="no_csu_file_opened">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">No csu file opened</property>
@@ -1313,6 +1275,43 @@ Please open a csu file before try to see properties.</property>
       </object>
     </child>
   </object>
+  <object class="GtkMessageDialog" id="message_dialog_error_add_game_configuration">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Game configuration not correct</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="gravity">center</property>
+    <property name="message_type">error</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">The new game configuration is not correct.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox13">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area13">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkAdjustment" id="new_csu_file_assistant_nb_player_adjustement">
     <property name="lower">1</property>
     <property name="upper">100</property>
@@ -1322,13 +1321,14 @@ Please open a csu file before try to see properties.</property>
   <object class="GtkGrid" id="grid_new_csu_file_assistant_1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
-    <property name="row_spacing">10</property>
-    <property name="column_spacing">10</property>
+    <property name="row_spacing">15</property>
+    <property name="column_spacing">25</property>
     <child>
       <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_name">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Name of the new csu file</property>
+        <property name="selectable">True</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -1342,6 +1342,7 @@ Please open a csu file before try to see properties.</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Number of player on the game</property>
+        <property name="selectable">True</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -1354,7 +1355,7 @@ Please open a csu file before try to see properties.</property>
       <object class="GtkEntry" id="grid_new_csu_file_assistant_1_entry_name">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
-        <signal name="changed" handler="validAssistantNewCsuOne" swapped="no"/>
+        <signal name="changed" handler="validAssistantNewCsuOneName" swapped="no"/>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -1379,6 +1380,23 @@ Please open a csu file before try to see properties.</property>
         <property name="height">1</property>
       </packing>
     </child>
+    <child>
+      <object class="GtkLabel" id="label1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Your game configuration</property>
+        <property name="selectable">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">2</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
   </object>
   <object class="GtkAdjustment" id="new_game_configuration_initial_score_adjustement">
     <property name="lower">-1e+18</property>
@@ -1402,7 +1420,6 @@ Please open a csu file before try to see properties.</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
     <property name="gravity">center</property>
-    <property name="transient_for">game_configuration_preferences</property>
     <signal name="response" handler="gtk_widget_hide" swapped="no"/>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox1">
