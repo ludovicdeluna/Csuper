@@ -249,6 +249,7 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Open the game configuration preferences window</property>
+                        <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="openGameConfigurationPreferences" swapped="no"/>
@@ -1323,16 +1324,17 @@ Please open a csu file before try to see properties.</property>
     <property name="can_focus">False</property>
     <property name="row_spacing">15</property>
     <property name="column_spacing">25</property>
+    <property name="column_homogeneous">True</property>
     <child>
-      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_name">
+      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_folder">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Name of the new csu file</property>
+        <property name="label" translatable="yes">Folder where the new csu file will save</property>
         <property name="selectable">True</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
-        <property name="top_attach">0</property>
+        <property name="top_attach">1</property>
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>
@@ -1346,20 +1348,7 @@ Please open a csu file before try to see properties.</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
-        <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkEntry" id="grid_new_csu_file_assistant_1_entry_name">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <signal name="changed" handler="validAssistantNewCsuOneName" swapped="no"/>
-      </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">0</property>
+        <property name="top_attach">2</property>
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>
@@ -1368,14 +1357,16 @@ Please open a csu file before try to see properties.</property>
       <object class="GtkSpinButton" id="grid_new_csu_file_assistant_1_spin_nb_player">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
+        <property name="xalign">0.5</property>
         <property name="input_purpose">number</property>
         <property name="adjustment">new_csu_file_assistant_nb_player_adjustement</property>
         <property name="climb_rate">1</property>
         <property name="value">1</property>
+        <signal name="value-changed" handler="validAssistantNewCsuOneNumber" swapped="no"/>
       </object>
       <packing>
         <property name="left_attach">1</property>
-        <property name="top_attach">1</property>
+        <property name="top_attach">2</property>
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>
@@ -1389,7 +1380,50 @@ Please open a csu file before try to see properties.</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
-        <property name="top_attach">2</property>
+        <property name="top_attach">3</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkFileChooserButton" id="grid_new_csu_file_assistant_1_folder_chooser">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="action">select-folder</property>
+        <property name="local_only">False</property>
+        <signal name="file-set" handler="validAssistantNewCsuOneName" swapped="no"/>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_folder1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Name of the new csu file</property>
+        <property name="selectable">True</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkEntry" id="grid_new_csu_file_assistant_1_name_entry">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="xalign">0.5</property>
+        <signal name="changed" handler="validAssistantNewCsuOneName" swapped="no"/>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">0</property>
         <property name="width">1</property>
         <property name="height">1</property>
       </packing>
@@ -1747,5 +1781,20 @@ Please open a csu file before try to see properties.</property>
       <action-widget response="-6">button_cancel_new_game_configuration</action-widget>
       <action-widget response="-3">button_ok_new_game_configuration</action-widget>
     </action-widgets>
+  </object>
+  <object class="GtkScrolledWindow" id="scrolled_window_new_csu_file_assistant_2">
+    <property name="visible">True</property>
+    <property name="can_focus">True</property>
+    <property name="hscrollbar_policy">never</property>
+    <property name="shadow_type">in</property>
+    <child>
+      <object class="GtkViewport" id="view_port_new_csu_file_assistant_2">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
   </object>
 </interface>

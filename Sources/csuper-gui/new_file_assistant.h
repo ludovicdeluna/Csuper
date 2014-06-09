@@ -41,7 +41,10 @@
 G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void validAssistantNewCsuOneNumber(GtkWidget *widget, gpointer data);
 void validAssistantNewCsuOne(globalData *data);
 G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data);
 
 #endif // NEW_FILE_ASSISTANT_H_INCLUDED
