@@ -72,6 +72,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"delete-event", G_CALLBACK(deleteEventAssistantNewCsu),user_data);
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"cancel", G_CALLBACK(deleteAssistantNewCsu),user_data);
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"prepare", G_CALLBACK(preparePageAssistantNewCsu),user_data);
+    g_signal_connect(user_data->ptr_new_csu_file_assistant,"apply", G_CALLBACK(endAssistantNewCsu),user_data);
 
 
     /* Set the first page */
@@ -122,10 +123,16 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
 
 
     /* Set the third page */
-    GtkWidget *grid_3 = gtk_grid_new();
+    GtkWidget *grid_3 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_3"));
+    if (!grid_1)
+        g_critical(_("Widget grid_new_csu_file_assistant_3 is missing in file csuper-gui.glade."));
     gtk_assistant_append_page(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_3);
     gtk_assistant_set_page_type(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_3,GTK_ASSISTANT_PAGE_CONFIRM);
     gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_3,_("Distributor and validation"));
+
+    GtkWidget *combo_distributor = gtk_combo_box_text_new();
+    gtk_grid_attach(GTK_GRID(grid_3),combo_distributor,1,0,1,1);
+    g_signal_connect(combo_distributor,"changed", G_CALLBACK(validAssistantNewCsuThree),user_data);
 
     gtk_widget_show_all(user_data->ptr_new_csu_file_assistant);
 }
@@ -160,6 +167,11 @@ G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data)
     if (!page_2)
         g_critical(_("Widget scrolled_window_new_csu_file_assistant_2 is missing in file csuper-gui.glade."));
     gtk_widget_destroy(gtk_bin_get_child(GTK_BIN(gtk_bin_get_child(GTK_BIN(page_2)))));
+
+    GtkWidget *page_3 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_3"));
+    if (!page_3)
+        g_critical(_("Widget grid_new_csu_file_assistant_3 is missing in file csuper-gui.glade."));
+    gtk_widget_destroy(gtk_grid_get_child_at(GTK_GRID(page_3),1,0));
 
     if (user_data->ptr_csu_struct_tmp != NULL)
     {
@@ -322,9 +334,6 @@ G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidge
         {
             gtk_widget_destroy(gtk_grid_get_child_at(grid,0,i-1));
             gtk_widget_destroy(gtk_grid_get_child_at(grid,1,i-1));
-            #ifndef  _WIN32
-            //gtk_grid_remove_row(grid,i-1);
-            #endif // _WIN32
         }
         validAssistantNewCsuTwo(NULL,user_data);
         gtk_widget_show_all(GTK_WIDGET(grid));
@@ -332,9 +341,22 @@ G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidge
 
     if (page == 2)
     {
-        /*
-        recharche si bouton mis en place, si non le cre, si oui met a jour le nom des joueurs et le cureseur si changement du nombre de personnes
-        */
+        GtkGrid *grid = GTK_GRID(widget);
+
+        if (user_data->ptr_csu_struct_tmp->config.use_distributor == 0)
+        {
+            gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(gtk_grid_get_child_at(grid,1,0)));
+            gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(grid),TRUE);
+        }
+        else
+        {
+            gint index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(grid,1,0)));
+            gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(gtk_grid_get_child_at(grid,1,0)));
+            for (i = 0 ; i<user_data->ptr_csu_struct_tmp->nb_player ; i++)
+                gtk_combo_box_text_insert(GTK_COMBO_BOX_TEXT(gtk_grid_get_child_at(grid,1,0)),i,NULL,user_data->ptr_csu_struct_tmp->player_names[i]);
+            if (index <= user_data->ptr_csu_struct_tmp->nb_player)
+                gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(grid,1,0)),index);
+        }
     }
 }
 
@@ -369,4 +391,38 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(scrolled_window),TRUE);
     else
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(scrolled_window),FALSE);
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
+ *  Valid the third page of the assistant for a new csu file
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    gint index;
+
+    GtkWidget *grid= GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_3"));
+    if (!grid)
+        g_critical(_("Widget grid_new_csu_file_assistant_3 is missing in file csuper-gui.glade."));
+
+    index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,0)));
+
+    if (index >= 0)
+        gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(grid),TRUE);
+    else
+        gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(grid),FALSE);
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
+ *  End the assistant for a new csu file
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
+{
+
 }

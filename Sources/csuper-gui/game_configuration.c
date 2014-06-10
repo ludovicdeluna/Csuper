@@ -697,7 +697,7 @@ G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer da
         return;
 
     if (strcmp(buffer,_("Neither")) == 0)
-            gtk_editable_set_editable(GTK_EDITABLE(max),FALSE);
+        gtk_editable_set_editable(GTK_EDITABLE(max),FALSE);
     else
         gtk_editable_set_editable(GTK_EDITABLE(max),TRUE);
 

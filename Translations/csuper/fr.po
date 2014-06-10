@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-05-31 11:57+0200\n"
+"POT-Creation-Date: 2014-06-10 19:34+0200\n"
 "PO-Revision-Date: 2014-05-31 11:58+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
@@ -484,7 +484,7 @@ msgstr ""
 "Votre choix : "
 
 #: Sources/csuper/menu.c:189 Sources/csuper/menu.c:210
-#: Sources/csuper/menu.c:283 Sources/csuper/menu.c:356
+#: Sources/csuper/menu.c:283 Sources/csuper/menu.c:345
 #, c-format
 msgid "You chose %s\n"
 msgstr "Vous avez choisi %s\n"
@@ -576,7 +576,7 @@ msgstr ""
 "\n"
 "Voulez-vous supprimer le fichier (o/N) : "
 
-#: Sources/csuper/menu.c:338
+#: Sources/csuper/menu.c:336
 #, c-format
 msgid ""
 "\n"
@@ -593,14 +593,12 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper/menu.c:352
-#, c-format
-msgid ""
-"\n"
-"Error : this folder is not valid.\n"
-msgstr ""
-"\n"
-"Erreur le chemin de fichier donnée n'est pas valide.\n"
+#~ msgid ""
+#~ "\n"
+#~ "Error : this folder is not valid.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Erreur le chemin de fichier donnée n'est pas valide.\n"
 
 #, fuzzy
 #~ msgid "You choice %s\n"

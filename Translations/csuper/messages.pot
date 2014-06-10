@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-09 21:53+0200\n"
+"POT-Creation-Date: 2014-06-10 19:34+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -368,7 +368,7 @@ msgid ""
 msgstr ""
 
 #: Sources/csuper/menu.c:189 Sources/csuper/menu.c:210
-#: Sources/csuper/menu.c:283 Sources/csuper/menu.c:356
+#: Sources/csuper/menu.c:283 Sources/csuper/menu.c:345
 #, c-format
 msgid "You chose %s\n"
 msgstr ""
@@ -439,7 +439,7 @@ msgid ""
 "Would ou like to delete the file (y/N) : "
 msgstr ""
 
-#: Sources/csuper/menu.c:338
+#: Sources/csuper/menu.c:336
 #, c-format
 msgid ""
 "\n"
@@ -447,11 +447,4 @@ msgid ""
 "Chech if the folder exist and that you have the read and write rights.\n"
 "\n"
 "Your choice: "
-msgstr ""
-
-#: Sources/csuper/menu.c:352
-#, c-format
-msgid ""
-"\n"
-"Error : this folder is not valid.\n"
 msgstr ""
