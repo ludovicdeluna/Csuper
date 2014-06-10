@@ -56,6 +56,7 @@ int createFileSystemPath();
 int readFileSystemPath(char *file_name);
 int readSystemPath(char *file_name);
 int changeSystemPath(char *new_path);
+int checkPath(char *path);
 void readHomePath(char *path);
 void readHomePathSlash(char *path);
 

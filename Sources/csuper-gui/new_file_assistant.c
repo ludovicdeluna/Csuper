@@ -43,15 +43,22 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME]="";
+    gchar system_path[SIZE_MAX_FILE_NAME]="";
     list_game_config *ptr_list_config;
     gint i;
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
+    readSystemPath(system_path);
+    #else
+    readHomePath(system_path);
     #endif // PORTABLE
+
 
     /* creating of the assistant */
     user_data->ptr_new_csu_file_assistant = gtk_assistant_new();
+
+    /* Set the assistant windows */
     gtk_window_set_transient_for(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),GTK_WINDOW(user_data->ptr_main_window));
     gtk_window_set_gravity(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),GDK_GRAVITY_CENTER);
     gtk_window_set_position(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),GTK_WIN_POS_CENTER_ON_PARENT);
@@ -59,20 +66,23 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_window_set_hide_titlebar_when_maximized(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),TRUE);
     gtk_window_set_type_hint(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),GDK_WINDOW_TYPE_HINT_DIALOG);
     gtk_window_resize(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),700,400);
-    g_signal_connect(user_data->ptr_new_csu_file_assistant,"delete-event", G_CALLBACK(deleteAssistantNewCsu),user_data);
+    gtk_window_set_title(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),_("New csu file assistant"));
+
+    /*Set the signal pf the assistant */
+    g_signal_connect(user_data->ptr_new_csu_file_assistant,"delete-event", G_CALLBACK(deleteEventAssistantNewCsu),user_data);
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"cancel", G_CALLBACK(deleteAssistantNewCsu),user_data);
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"prepare", G_CALLBACK(preparePageAssistantNewCsu),user_data);
-    gtk_window_set_title(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),_("New csu file assistant"));
+
 
     /* Set the first page */
     GtkWidget *grid_1 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_1"));
     if (!grid_1)
         g_critical(_("Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."));
-    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(home_path),NULL);
-    gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0)),SIZE_MAX_NAME);
     gtk_assistant_append_page(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1);
     gtk_assistant_set_page_type(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,GTK_ASSISTANT_PAGE_INTRO);
     gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,_("General informations"));
+
+    /* Set the combo  box of the game configuration */
     GtkWidget *combo_config = gtk_combo_box_text_new();
     ptr_list_config = readConfigListFile(home_path);
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
@@ -83,13 +93,24 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     g_signal_connect(combo_config,"changed", G_CALLBACK(chooseGameConfigurationNewAssistant),user_data);
     closeListGameConfig(ptr_list_config);
 
+    /* Configure the file chooser */
+    #ifdef _WIN32
+    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(g_convert(system_path,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL)),NULL);
+    #else
+    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(system_path),NULL);
+    #endif
+    gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0)),SIZE_MAX_NAME);
+
     /* Set the second page */
     GtkWidget *scrolled_window_name = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"scrolled_window_new_csu_file_assistant_2"));
     if (!scrolled_window_name)
         g_critical(_("Widget scrolled_window_new_csu_file_assistant_2 is missing in file csuper-gui.glade."));
-    GtkWidget *grid_name = gtk_grid_new();
-    gtk_container_add(GTK_CONTAINER(gtk_bin_get_child(GTK_BIN(scrolled_window_name))),grid_name);
+    gtk_assistant_append_page(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name);
+    gtk_assistant_set_page_type(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name,GTK_ASSISTANT_PAGE_CONTENT);
+    gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name,_("Player names"));
 
+    /* Set the grid */
+    GtkWidget *grid_name = gtk_grid_new();
     gtk_grid_set_column_spacing(GTK_GRID(grid_name),10);
     gtk_grid_set_row_spacing(GTK_GRID(grid_name),10);
     gtk_grid_set_column_homogeneous(GTK_GRID(grid_name),TRUE);
@@ -97,10 +118,8 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_widget_set_margin_left(grid_name,10);
     gtk_widget_set_margin_top(grid_name,10);
     gtk_widget_set_margin_bottom(grid_name,10);
+    gtk_container_add(GTK_CONTAINER(gtk_bin_get_child(GTK_BIN(scrolled_window_name))),grid_name);
 
-    gtk_assistant_append_page(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name);
-    gtk_assistant_set_page_type(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name,GTK_ASSISTANT_PAGE_CONTENT);
-    gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name,_("Player names"));
 
     /* Set the third page */
     GtkWidget *grid_3 = gtk_grid_new();
@@ -112,6 +131,17 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
 }
 
 /*!
+ * \fn G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data)
+ *  Open the assistant for a new csu file
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data)
+{
+    deleteAssistantNewCsu(widget,data);
+}
+
+/*!
  * \fn G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
  *  Open the assistant for a new csu file
  * \param[in] widget the widget which send the interrupt
@@ -120,8 +150,6 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
 G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-
-    gtk_widget_destroy(widget);
 
     GtkWidget *page_1 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_1"));
     if (!page_1)
@@ -138,6 +166,8 @@ G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data)
         closeCsuStruct(user_data->ptr_csu_struct_tmp);
         user_data->ptr_csu_struct_tmp = NULL;
     }
+
+    gtk_widget_destroy(widget);
 }
 
 /*!
@@ -174,6 +204,8 @@ void validAssistantNewCsuOne(globalData *data)
 {
     gchar name[SIZE_MAX_NAME];
     gint index;
+    gchar *folder;
+    gint folder_ok;
 
     GtkWidget *grid_1 = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_new_csu_file_assistant_1"));
     if (!grid_1)
@@ -181,8 +213,18 @@ void validAssistantNewCsuOne(globalData *data)
 
     strcpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0))));
     index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid_1),1,3)));
+    #ifdef _WIN32
+    folder = g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
+    #else
+    folder = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)));
+    #endif // _WIN32
+    #ifndef PORTABLE
+    folder_ok = changeSystemPath(folder);
+    #else
+    folder_ok = checkPath(folder);
+    #endif // PORTABLE
 
-    if (strcmp(name,"") != 0 && index >=0)
+    if (strcmp(name,"") != 0 && index >=0 && folder_ok != MY_FALSE)
     {
         gtk_assistant_set_page_complete(GTK_ASSISTANT(data->ptr_new_csu_file_assistant),grid_1,TRUE);
         if (data->ptr_csu_struct_tmp != NULL)
@@ -191,6 +233,8 @@ void validAssistantNewCsuOne(globalData *data)
     }
     else
         gtk_assistant_set_page_complete(GTK_ASSISTANT(data->ptr_new_csu_file_assistant),grid_1,FALSE);
+
+    g_free(folder);
 }
 
 /*!
@@ -321,7 +365,7 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
         }
     }
 
-    if (valid)
+    if (valid && differentsPlayerName(user_data->ptr_csu_struct_tmp) == MY_TRUE)
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(scrolled_window),TRUE);
     else
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(scrolled_window),FALSE);

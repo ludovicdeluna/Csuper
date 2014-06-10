@@ -71,7 +71,6 @@ G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data)
 G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-    char home_path[SIZE_MAX_FILE_NAME];
     gboolean error=FALSE;
 
     /* Create the file chooser dialog*/
@@ -87,9 +86,23 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_open),all_filter);
 
     /* Give the home path to the current folder or the last filename if there is one*/
-    readHomePath(home_path);
+
     if (strcmp(user_data->csu_filename,"") == 0)
+    {
+        #ifdef PORTABLE
+        char home_path[SIZE_MAX_FILE_NAME];
+        readHomePath(home_path);
         gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_open),g_file_new_for_path(home_path),NULL);
+        #else
+        gchar system_path[SIZE_MAX_FILE_NAME]="";
+        readSystemPath(system_path);
+        #ifndef _WIN32
+        gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_open),g_file_new_for_path(system_path),NULL);
+        #else
+        gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_open),g_file_new_for_path(g_convert(system_path,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL)),NULL);
+        #endif // _WIN32
+        #endif
+    }
     else
     {
         #ifdef _WIN32
@@ -103,12 +116,19 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 	{
 		case GTK_RESPONSE_ACCEPT:
 		{
-		    char *filename;
+		    gchar *filename;
 		    #ifdef _WIN32
 		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_open)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
 		    #else
-		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_open));
+		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(window_file_open));
 		    #endif
+
+		    #ifndef PORTABLE
+		    gchar folder[SIZE_MAX_FILE_NAME];
+		    strcpy(folder,filename);
+		    if (getFolderFromFilename(folder) == MY_TRUE)
+                changeSystemPath(folder);
+		    #endif // PORTABLE
 
 			if (user_data->ptr_csu_struct != NULL)
                 closeCsuStruct(user_data->ptr_csu_struct);

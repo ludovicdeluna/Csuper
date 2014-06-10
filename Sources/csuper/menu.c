@@ -330,8 +330,6 @@ int menuDelete()
 void menuNewPath(char *new_path)
 {
     int verif=MY_FALSE;
-    FILE *ptr_file_test;
-    char check_path[SIZE_MAX_FILE_NAME];
 
     do
     {
@@ -340,16 +338,7 @@ void menuNewPath(char *new_path)
         stringKey(new_path,SIZE_MAX_FILE_NAME);
 
         /*Check if the path is valid*/
-        sprintf(check_path,"%s/test-chemin_fichier_csuper",new_path);
-        ptr_file_test=openFile(check_path,"w+");
-        if (ptr_file_test != NULL)
-        {
-            closeFile(ptr_file_test);
-            remove(check_path);
-            verif=MY_TRUE;
-        }
-        else
-            printf(_("\nError : this folder is not valid.\n"));
+        verif = checkPath(new_path);
 
     } while (verif == MY_FALSE);
 

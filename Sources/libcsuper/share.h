@@ -76,5 +76,6 @@ void addFileCsuExtension(char *file_name);
 int deleteFile(char *file_name);
 int renameFile(char *old_name, char *new_name);
 char *integerToYesNo(int i, char *yes, char *no);
+int getFolderFromFilename(char *file_name_to_folder);
 
 #endif

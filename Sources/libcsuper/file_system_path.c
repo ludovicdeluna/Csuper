@@ -3,7 +3,7 @@
  * \brief   Fonctions qui l'emrankment des fichiers sauvegardes
  * \author  Remi BERTHO
  * \date    13/02/14
- * \version 2.0
+ * \version 4.0
  */
 
  /*
@@ -127,13 +127,16 @@ int readSystemPath(char *file_name)
 /*!
  * \fn int changeSystemPath(char *new_path)
  *  Change the system path
- * \param[in,out] *new_path le nomveau chemin
+ * \param[in,out] *new_path the new path
  * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int changeSystemPath(char *new_path)
 {
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
+
+    if (checkPath(new_path) == MY_FALSE)
+        return MY_FALSE;
 
     if (createFileSystemPath()==MY_FALSE)
         return MY_FALSE;
@@ -152,6 +155,32 @@ int changeSystemPath(char *new_path)
     closeFile(ptr_file);
 
     return MY_TRUE;
+}
+
+/*!
+ * \fn int checkPath(char *path)
+ *  Test if the path is valid
+ * \param[in,out] *new_path the path
+ * \return MY_TRUE if the path is valid OK, MY_FALSE otherwise
+ */
+int checkPath(char *path)
+{
+    FILE *ptr_file_test;
+    char check_path[SIZE_MAX_FILE_NAME];
+
+    sprintf(check_path,"%s/test-chemin_fichier_csuper",path);
+    ptr_file_test=openFile(check_path,"w+");
+    if (ptr_file_test != NULL)
+    {
+        closeFile(ptr_file_test);
+        remove(check_path);
+        return MY_TRUE;
+    }
+    else
+    {
+        printf(_("\nError : this folder is not valid.\n"));
+        return MY_FALSE;
+    }
 }
 
 /*!

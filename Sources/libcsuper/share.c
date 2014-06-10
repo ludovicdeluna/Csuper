@@ -329,3 +329,30 @@ char *integerToYesNo(int i, char *yes, char *no)
     else
         return no;
 }
+
+/*!
+ * \fn int getFolderFromFilename(char *file_name_to_folder)
+ *  Transform a filename into his folder
+ * \param[in] file_name_to_folder the filename
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ */
+int getFolderFromFilename(char *file_name_to_folder)
+{
+    int i;
+    int ok = MY_FALSE;
+    for (i=strlen(file_name_to_folder) ; i>=0 ; i--)
+    {
+        #ifdef _WIN32
+        if (file_name_to_folder[i] == '\\')
+        #else
+        if (file_name_to_folder[i] == '/')
+        #endif // _WIN32
+        {
+            ok = MY_TRUE;
+            file_name_to_folder[i] = '\0';
+            break;
+        }
+    }
+
+    return ok;
+}

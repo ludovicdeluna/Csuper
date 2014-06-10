@@ -329,3 +329,26 @@ int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
     printf(_("\nError this name doesn't exist.\n"));
     return -1;
 }
+
+/*!
+ * \fn int differentsPlayerName(csuStruct *ptr_csu_struct)
+ *  Search the index of a person
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \return MY_TRUE if all player names are different, MY_FALSE otherwise
+ */
+int differentsPlayerName(csuStruct *ptr_csu_struct)
+{
+    int i;
+    int j;
+
+    for (i=0 ; i<ptr_csu_struct->nb_player -1 ; i++)
+    {
+        for (j=i+1 ; j<ptr_csu_struct->nb_player ; j++)
+        {
+            if (strcmp(ptr_csu_struct->player_names[i],ptr_csu_struct->player_names[j]) == 0)
+                return MY_FALSE;
+        }
+    }
+
+    return MY_TRUE;
+}

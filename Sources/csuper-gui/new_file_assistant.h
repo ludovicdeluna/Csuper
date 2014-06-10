@@ -39,6 +39,7 @@
 #include "game_configuration.h"
 
 G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data);
 G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void validAssistantNewCsuOneNumber(GtkWidget *widget, gpointer data);

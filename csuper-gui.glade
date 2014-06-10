@@ -1391,7 +1391,7 @@ Please open a csu file before try to see properties.</property>
         <property name="can_focus">False</property>
         <property name="action">select-folder</property>
         <property name="local_only">False</property>
-        <signal name="file-set" handler="validAssistantNewCsuOneName" swapped="no"/>
+        <signal name="selection-changed" handler="validAssistantNewCsuOneName" swapped="no"/>
       </object>
       <packing>
         <property name="left_attach">1</property>
