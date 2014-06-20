@@ -3,7 +3,7 @@
  * \brief   Game configuration
  * \author  Remi BERTHO
  * \date    03/05/14
- * \version 3.0.0
+ * \version 4.0.0
  */
 
  /*
@@ -250,7 +250,7 @@ void displayGameConfiguration(globalData *data)
     {
         gtk_grid_attach(GTK_GRID(grid),gtk_label_new(ptr_list_config->name_game_config[i]),0,i,1,1);
         gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(grid),0,i),TRUE);
-        gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),TRUE);
+        //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),TRUE);
         #ifdef _WIN32
         gtk_grid_attach(GTK_GRID(grid),gtk_button_new_from_stock("gtk-edit"),1,i,1,1);
         gtk_grid_attach(GTK_GRID(grid),gtk_button_new_from_stock("gtk-properties"),2,i,1,1);

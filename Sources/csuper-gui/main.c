@@ -3,7 +3,7 @@
  * \brief   Main
  * \author  Remi BERTHO
  * \date    02/05/14
- * \version 3.0.0
+ * \version 4.0.0
  */
 
  /*
@@ -86,5 +86,5 @@ int main (int   argc, char *argv[])
 
     g_object_unref(data.ptr_builder);
 
-    return 0;
+    return EXIT_SUCCESS;
 }

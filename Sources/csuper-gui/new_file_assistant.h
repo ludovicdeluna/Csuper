@@ -36,7 +36,9 @@
 
 #include "csuper-gui.h"
 #include "main_window.h"
+#include "main_menu.h"
 #include "game_configuration.h"
+#include "utils.h"
 
 G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data);
@@ -49,5 +51,6 @@ G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidge
 G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data);
+void cleanAssistantNewCsu(globalData *data);
 
 #endif // NEW_FILE_ASSISTANT_H_INCLUDED

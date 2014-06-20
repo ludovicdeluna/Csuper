@@ -3,7 +3,7 @@
  * \brief   Inclusion of csuper-gui
  * \author  Remi BERTHO
  * \date    02/05/14
- * \version 3.0.0
+ * \version 4.0.0
  */
 
  /*

@@ -109,9 +109,6 @@
         <property name="height">1</property>
       </packing>
     </child>
-    <child>
-      <placeholder/>
-    </child>
   </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
@@ -345,7 +342,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Ranking</property>
-                <property name="selectable">True</property>
                 <attributes>
                   <attribute name="font-desc" value="Sans 14"/>
                 </attributes>
@@ -399,7 +395,6 @@
                 <property name="label" translatable="yes">No csu file loaded</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -729,7 +724,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Created the : no csu file loaded</property>
-                <property name="selectable">True</property>
                 <property name="ellipsize">start</property>
               </object>
               <packing>
@@ -744,7 +738,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">File's version : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -758,7 +751,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Size max of the names : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -772,7 +764,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Number of players : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -786,7 +777,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Numbers maximum of turns : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -800,7 +790,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Name of the game configuration : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -814,7 +803,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Use a maximum score : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -828,7 +816,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Initial score : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -842,7 +829,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Number of decimal place : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -856,7 +842,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">First way : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -870,7 +855,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Game in turn by turn : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -884,7 +868,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Use a distributor : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -898,7 +881,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Number of points maximum/minimum : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -912,7 +894,6 @@
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Distributor : no csu file loaded</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1138,7 +1119,6 @@
             <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
             <property name="label" translatable="yes">List of all your game configurations</property>
-            <property name="selectable">True</property>
             <attributes>
               <attribute name="font-desc" value="Sans Bold 13"/>
             </attributes>
@@ -1161,7 +1141,6 @@
             <property name="yalign">0</property>
             <property name="label" translatable="yes">You have no game configuration selected.</property>
             <property name="justify">center</property>
-            <property name="selectable">True</property>
             <attributes>
               <attribute name="font-desc" value="Sans 12"/>
             </attributes>
@@ -1183,7 +1162,6 @@
             <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
             <property name="label" translatable="yes">The selected game configurations</property>
-            <property name="selectable">True</property>
             <attributes>
               <attribute name="font-desc" value="Sans Bold 13"/>
             </attributes>
@@ -1353,7 +1331,6 @@ Please open a csu file before try to see properties.</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Folder where the new csu file will save</property>
-        <property name="selectable">True</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -1367,7 +1344,6 @@ Please open a csu file before try to see properties.</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Number of player on the game</property>
-        <property name="selectable">True</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -1399,7 +1375,6 @@ Please open a csu file before try to see properties.</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Your game configuration</property>
-        <property name="selectable">True</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -1428,7 +1403,6 @@ Please open a csu file before try to see properties.</property>
         <property name="visible">True</property>
         <property name="can_focus">False</property>
         <property name="label" translatable="yes">Name of the new csu file</property>
-        <property name="selectable">True</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
@@ -1541,7 +1515,6 @@ Please open a csu file before try to see properties.</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Name of the game configuration</property>
                 <property name="justify">center</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1556,7 +1529,6 @@ Please open a csu file before try to see properties.</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Use a maximum or minimum score or neither</property>
                 <property name="justify">center</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1571,7 +1543,6 @@ Please open a csu file before try to see properties.</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Initial score</property>
                 <property name="justify">center</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1586,7 +1557,6 @@ Please open a csu file before try to see properties.</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Number of decimal place</property>
                 <property name="justify">center</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1601,7 +1571,6 @@ Please open a csu file before try to see properties.</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">The first is the player who have the higher score</property>
                 <property name="justify">center</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1616,7 +1585,6 @@ Please open a csu file before try to see properties.</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">The points will be attribute in turn by turn</property>
                 <property name="justify">center</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1631,7 +1599,6 @@ Please open a csu file before try to see properties.</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Use a distributor</property>
                 <property name="justify">center</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1646,7 +1613,6 @@ Please open a csu file before try to see properties.</property>
                 <property name="can_focus">False</property>
                 <property name="label" translatable="yes">Maximal or minimal score which a player can reach in the game</property>
                 <property name="justify">center</property>
-                <property name="selectable">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>

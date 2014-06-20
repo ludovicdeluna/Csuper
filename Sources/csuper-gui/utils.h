@@ -1,13 +1,13 @@
 /*!
- * \file    main.h
- * \brief   Main
+ * \file    utils.h
+ * \brief   The new file assistant function
  * \author  Remi BERTHO
- * \date    02/05/14
- * \version 3.0.0
+ * \date    20/06/14
+ * \version 4.0.0
  */
 
  /*
- * main.h
+ * utils.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,16 +31,11 @@
  *
  */
 
-#ifndef MAIN_H_INCLUDED
-#define MAIN_H_INCLUDED
+#ifndef UTILS_H_INCLUDED
+#define UTILS_H_INCLUDED
 
 #include "csuper-gui.h"
-#include "main_menu.h"
-#include "main_window.h"
-#include "game_configuration.h"
-#include "new_file_assistant.h"
-#include "utils.h"
 
-int main (int   argc, char *argv[]);
+void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue);
 
-#endif // MAIN_H_INCLUDED
+#endif // UTILS_H_INCLUDED

@@ -60,6 +60,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/csuper-gui/new_file_assistant.h" />
+		<Unit filename="../Sources/csuper-gui/utils.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/utils.h" />
 		<Unit filename="../csuper-gui.glade" />
 		<Extensions>
 			<code_completion />

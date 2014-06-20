@@ -72,7 +72,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"delete-event", G_CALLBACK(deleteEventAssistantNewCsu),user_data);
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"cancel", G_CALLBACK(deleteAssistantNewCsu),user_data);
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"prepare", G_CALLBACK(preparePageAssistantNewCsu),user_data);
-    g_signal_connect(user_data->ptr_new_csu_file_assistant,"apply", G_CALLBACK(endAssistantNewCsu),user_data);
+    g_signal_connect(user_data->ptr_new_csu_file_assistant,"close", G_CALLBACK(endAssistantNewCsu),user_data);
 
 
     /* Set the first page */
@@ -134,6 +134,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_grid_attach(GTK_GRID(grid_3),combo_distributor,1,0,1,1);
     g_signal_connect(combo_distributor,"changed", G_CALLBACK(validAssistantNewCsuThree),user_data);
 
+    cleanAssistantNewCsu(user_data);
     gtk_widget_show_all(user_data->ptr_new_csu_file_assistant);
 }
 
@@ -158,28 +159,32 @@ G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
+    /* Destroy the combo box for the game configuration */
     GtkWidget *page_1 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_1"));
     if (!page_1)
         g_critical(_("Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."));
     gtk_widget_destroy(gtk_grid_get_child_at(GTK_GRID(page_1),1,3));
 
+    /* Destroy the grid of the page 2 */
     GtkWidget *page_2 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"scrolled_window_new_csu_file_assistant_2"));
     if (!page_2)
         g_critical(_("Widget scrolled_window_new_csu_file_assistant_2 is missing in file csuper-gui.glade."));
     gtk_widget_destroy(gtk_bin_get_child(GTK_BIN(gtk_bin_get_child(GTK_BIN(page_2)))));
 
+    /* Destroy the combo box for the distributor */
     GtkWidget *page_3 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_3"));
     if (!page_3)
         g_critical(_("Widget grid_new_csu_file_assistant_3 is missing in file csuper-gui.glade."));
     gtk_widget_destroy(gtk_grid_get_child_at(GTK_GRID(page_3),1,0));
 
+    /* Close the csu structure */
     if (user_data->ptr_csu_struct_tmp != NULL)
     {
         closeCsuStruct(user_data->ptr_csu_struct_tmp);
         user_data->ptr_csu_struct_tmp = NULL;
     }
 
-    gtk_widget_destroy(widget);
+    gtk_widget_destroy(user_data->ptr_new_csu_file_assistant);
 }
 
 /*!
@@ -223,6 +228,7 @@ void validAssistantNewCsuOne(globalData *data)
     if (!grid_1)
         g_critical(_("Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."));
 
+    /* Get the filename, the index of the game configuration and the folder */
     strcpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0))));
     index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid_1),1,3)));
     #ifdef _WIN32
@@ -236,6 +242,25 @@ void validAssistantNewCsuOne(globalData *data)
     folder_ok = checkPath(folder);
     #endif // PORTABLE
 
+    /* Test the filename */
+    if (strcmp(name,"") == 0)
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,TRUE,65535,0,0,FALSE,0,0,0);
+    else
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,FALSE,65535,0,0,FALSE,0,0,0);
+
+    /* Test if a game configuration is selected */
+    if (index < 0 )
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,3)),0,TRUE,65535,0,0,FALSE,0,0,0);
+    else
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,3)),0,FALSE,65535,0,0,FALSE,0,0,0);
+
+    /* Test the folder */
+    if (folder_ok == MY_FALSE)
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,TRUE,65535,0,0,FALSE,0,0,0);
+    else
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,FALSE,65535,0,0,FALSE,0,0,0);
+
+    /* Test if the page one is valid or not */
     if (strcmp(name,"") != 0 && index >=0 && folder_ok != MY_FALSE)
     {
         gtk_assistant_set_page_complete(GTK_ASSISTANT(data->ptr_new_csu_file_assistant),grid_1,TRUE);
@@ -262,6 +287,7 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
     game_config *ptr_config = NULL;
     game_config config = {0,1,1,0,-1,-1,"",0};
 
+    /* Read the game configuration list */
     char home_path[SIZE_MAX_FILE_NAME]="";
     list_game_config *ptr_list_config;
     #ifndef PORTABLE
@@ -271,14 +297,17 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
 
     index = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 
+    /* If the index if not valid return */
     if (index < 0)
     {
         closeListGameConfig(ptr_list_config);
         return;
     }
 
+    /* if the index correspond to to a game configuration, read it */
     if (index < ptr_list_config->nb_config)
         readConfigFile(index,ptr_list_config,&(user_data->config),home_path);
+    /* Otherwise ask a new game configuratiob */
     else
     {
         changeNewGameConfigurationDialog(user_data,config);
@@ -289,8 +318,11 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
             validAssistantNewCsuOne(data);
             return;
         }
+
+        /* Save the game configuration if ask */
         if (index == ptr_list_config->nb_config)
             newConfigFile(*ptr_config,home_path);
+
         user_data->config = *ptr_config;
         free(ptr_config);
     }
@@ -343,21 +375,30 @@ G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidge
     {
         GtkGrid *grid = GTK_GRID(widget);
 
+        /* If there is no distributor valid the page 3 */
         if (user_data->ptr_csu_struct_tmp->config.use_distributor == 0)
         {
             gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(gtk_grid_get_child_at(grid,1,0)));
             gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(grid),TRUE);
         }
+        /* Otherwise Create a combo box to choose the distributor */
         else
         {
             gint index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(grid,1,0)));
             gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(gtk_grid_get_child_at(grid,1,0)));
             for (i = 0 ; i<user_data->ptr_csu_struct_tmp->nb_player ; i++)
                 gtk_combo_box_text_insert(GTK_COMBO_BOX_TEXT(gtk_grid_get_child_at(grid,1,0)),i,NULL,user_data->ptr_csu_struct_tmp->player_names[i]);
+
+            /* If the last distributor still exist, choose it */
             if (index <= user_data->ptr_csu_struct_tmp->nb_player)
                 gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(grid,1,0)),index);
+
+            validAssistantNewCsuThree(NULL,user_data);
         }
     }
+
+    if (page == 0)
+        validAssistantNewCsuOne(user_data);
 }
 
 /*!
@@ -371,22 +412,41 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
     globalData *user_data = (globalData*) data;
     gboolean valid = TRUE;
     gint i;
+    gint j;
 
+    /* Get the grid */
     GtkWidget *scrolled_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"scrolled_window_new_csu_file_assistant_2"));
     if (!scrolled_window)
         g_critical(_("Widget scrolled_window_new_csu_file_assistant_2 is missing in file csuper-gui.glade."));
     GtkGrid *grid = GTK_GRID(gtk_bin_get_child(GTK_BIN(gtk_bin_get_child(GTK_BIN(scrolled_window)))));
 
+    /* Save all the name in the csu structure and check if there are non null */
     for (i=0 ; i<user_data->ptr_csu_struct_tmp->nb_player ; i++)
     {
         strcpy(user_data->ptr_csu_struct_tmp->player_names[i],gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(grid,1,i))));
         if (strcmp(user_data->ptr_csu_struct_tmp->player_names[i],"") == 0)
         {
             valid = FALSE;
-            break;
+            setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,TRUE,65535,0,0,FALSE,0,0,0);
+        }
+        else
+            setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,FALSE,65535,0,0,FALSE,0,0,0);
+    }
+
+    /* Check if all the name are different */
+    for (i=0 ; i<user_data->ptr_csu_struct_tmp->nb_player ; i++)
+    {
+        for (j=i+1 ; j<user_data->ptr_csu_struct_tmp->nb_player ; j++)
+        {
+            if (strcmp(user_data->ptr_csu_struct_tmp->player_names[i],user_data->ptr_csu_struct_tmp->player_names[j]) == 0)
+            {
+                setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,TRUE,65535,0,0,FALSE,0,0,0);
+                setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,j)),0,TRUE,65535,0,0,FALSE,0,0,0);
+            }
         }
     }
 
+    /* Check if the page is valid */
     if (valid && differentsPlayerName(user_data->ptr_csu_struct_tmp) == MY_TRUE)
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(scrolled_window),TRUE);
     else
@@ -411,9 +471,16 @@ G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
     index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,0)));
 
     if (index >= 0)
+    {
+        user_data->ptr_csu_struct_tmp->distributor = index;
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,FALSE,65535,0,0,FALSE,0,0,0);
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(grid),TRUE);
+    }
     else
+    {
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,TRUE,65535,0,0,FALSE,0,0,0);
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(grid),FALSE);
+    }
 }
 
 /*!
@@ -424,5 +491,52 @@ G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
  */
 G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
 {
+    globalData *user_data = (globalData*) data;
+    gchar name[SIZE_MAX_NAME];
+    gchar *folder;
 
+
+    /* Get the filename */
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_1"));
+    if (!grid)
+        g_critical(_("Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."));
+
+    #ifdef _WIN32
+    folder = g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid),1,1))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
+    strcpy(name,g_convert(gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL));
+    #else
+    folder = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid),1,1)));
+    strcpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))));
+    #endif // _WIN32
+
+    sprintf(user_data->csu_filename,"%s/%s",folder,name);
+    addFileCsuExtension(user_data->csu_filename);
+
+
+    /* Update the information of the global data */
+    if (user_data->ptr_csu_struct != NULL)
+        closeCsuStruct(user_data->ptr_csu_struct);
+    user_data->ptr_csu_struct = user_data->ptr_csu_struct_tmp;
+    user_data->ptr_csu_struct_tmp = NULL;
+
+    updateMainWindow(user_data);
+    writeCsuFile(user_data->csu_filename,user_data->ptr_csu_struct);
+
+    deleteAssistantNewCsu(NULL,user_data);
+    g_free(folder);
+}
+
+/*!
+ * \fn cleanAssistantNewCsu(globalData *data)
+ *  Clean all value of the assistant
+ * \param[in] data the globalData
+ */
+void cleanAssistantNewCsu(globalData *data)
+{
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_new_csu_file_assistant_1"));
+    if (!grid)
+        g_critical(_("Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."));
+
+    gtk_entry_set_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),"");
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),1);
 }
