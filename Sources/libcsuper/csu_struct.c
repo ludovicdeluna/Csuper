@@ -144,10 +144,13 @@ void endNewTurn(csuStruct *ptr_csu_struct, int index_player)
     int i;
 
     /*Update the total points*/
-    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    if (index_player == -1)
     {
-        ptr_csu_struct->total_points[i]+=ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]];
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            ptr_csu_struct->total_points[i]+=ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]];
     }
+    else
+        ptr_csu_struct->total_points[index_player]+=ptr_csu_struct->point[index_player][(int)ptr_csu_struct->nb_turn[index_player]];
 
     /*Update the number of turn*/
     if (index_player == -1)

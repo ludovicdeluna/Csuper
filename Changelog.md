@@ -23,6 +23,7 @@ Libcsuper
 * New function checkPath
 * New function getFolderFromFilename
 * New function differentsPlayerName
+* Fix a bug with a game not in turn by turn
 
 2.4.0
 

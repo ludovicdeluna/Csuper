@@ -79,6 +79,7 @@ int main (int   argc, char *argv[])
     data.ptr_main_window = GTK_WIDGET(gtk_builder_get_object(data.ptr_builder,"main_window"));
 
     noCsuFileRanking(&data);
+    noCsuFilePoints(&data);
 
     gtk_widget_show_all(data.ptr_main_window);
 

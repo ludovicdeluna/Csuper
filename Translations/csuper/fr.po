@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-10 19:34+0200\n"
+"POT-Creation-Date: 2014-06-21 15:54+0200\n"
 "PO-Revision-Date: 2014-05-31 11:58+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
@@ -30,7 +30,7 @@ msgstr ""
 "Nom     | "
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper/display.c:115
+#: Sources/csuper/display.c:113
 #, c-format
 msgid ""
 "\n"
@@ -39,7 +39,7 @@ msgstr ""
 "\n"
 "Total   |"
 
-#: Sources/csuper/display.c:172
+#: Sources/csuper/display.c:168
 #, c-format
 msgid ""
 "\n"
@@ -48,7 +48,7 @@ msgstr ""
 "\n"
 "C'est à %s de distribuer."
 
-#: Sources/csuper/display.c:183
+#: Sources/csuper/display.c:179
 #, c-format
 msgid ""
 "\n"
@@ -68,7 +68,7 @@ msgstr ""
 "Nombre de tours maximums : %d"
 
 #. TRANSLATORS:The number of characters before the | and without the %2.0f must be six
-#: Sources/csuper/display.c:206
+#: Sources/csuper/display.c:202
 #, c-format
 msgid ""
 "\n"
@@ -78,7 +78,7 @@ msgstr ""
 "Tour %2.0f |"
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper/display.c:270
+#: Sources/csuper/display.c:266
 #, c-format
 msgid ""
 "\n"
@@ -87,7 +87,7 @@ msgstr ""
 "\n"
 "Position|"
 
-#: Sources/csuper/display.c:355
+#: Sources/csuper/display.c:351
 #, c-format
 msgid ""
 "\n"
@@ -96,7 +96,7 @@ msgstr ""
 "\n"
 "La partie est terminée.\n"
 
-#: Sources/csuper/display.c:443
+#: Sources/csuper/display.c:439
 #, c-format
 msgid ""
 "\n"
@@ -113,15 +113,15 @@ msgstr ""
 "certaines conditions. \n"
 "Pour plus de détails : http://www.gnu.org/licenses/gpl.html\n"
 
-#: Sources/csuper/display.c:455
+#: Sources/csuper/display.c:451
 msgid "yes"
 msgstr "oui"
 
-#: Sources/csuper/display.c:456
+#: Sources/csuper/display.c:452
 msgid "no"
 msgstr "non"
 
-#: Sources/csuper/display.c:457
+#: Sources/csuper/display.c:453
 #, c-format
 msgid ""
 "\n"
@@ -142,12 +142,12 @@ msgstr ""
 "Jeu en tour par tour : %s\n"
 "Utilise un distributeur tournant : %s\n"
 
-#: Sources/csuper/display.c:463 Sources/csuper/display.c:468
+#: Sources/csuper/display.c:459 Sources/csuper/display.c:464
 #, c-format
 msgid "Number of points maximum/minimum : %.3f\n"
 msgstr "Nombre de points maximum/minimum : %.3f\n"
 
-#: Sources/csuper/display.c:466
+#: Sources/csuper/display.c:462
 #, c-format
 msgid "Number of points maximum/minimum : inf\n"
 msgstr "Nombre de points maximum/minimum : inf\n"

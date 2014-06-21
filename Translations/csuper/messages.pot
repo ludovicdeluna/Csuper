@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-20 19:17+0200\n"
+"POT-Creation-Date: 2014-06-21 16:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,21 +26,21 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper/display.c:115
+#: Sources/csuper/display.c:113
 #, c-format
 msgid ""
 "\n"
 "Total   |"
 msgstr ""
 
-#: Sources/csuper/display.c:172
+#: Sources/csuper/display.c:168
 #, c-format
 msgid ""
 "\n"
 "%s is the distributor."
 msgstr ""
 
-#: Sources/csuper/display.c:183
+#: Sources/csuper/display.c:179
 #, c-format
 msgid ""
 "\n"
@@ -53,7 +53,7 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | and without the %2.0f must be six
-#: Sources/csuper/display.c:206
+#: Sources/csuper/display.c:202
 #, c-format
 msgid ""
 "\n"
@@ -61,21 +61,21 @@ msgid ""
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper/display.c:270
+#: Sources/csuper/display.c:266
 #, c-format
 msgid ""
 "\n"
 "Ranking |"
 msgstr ""
 
-#: Sources/csuper/display.c:355
+#: Sources/csuper/display.c:351
 #, c-format
 msgid ""
 "\n"
 "The game is over.\n"
 msgstr ""
 
-#: Sources/csuper/display.c:443
+#: Sources/csuper/display.c:439
 #, c-format
 msgid ""
 "\n"
@@ -86,15 +86,15 @@ msgid ""
 "Fore more details : http://www.gnu.org/licenses/gpl.html\n"
 msgstr ""
 
-#: Sources/csuper/display.c:455
+#: Sources/csuper/display.c:451
 msgid "yes"
 msgstr ""
 
-#: Sources/csuper/display.c:456
+#: Sources/csuper/display.c:452
 msgid "no"
 msgstr ""
 
-#: Sources/csuper/display.c:457
+#: Sources/csuper/display.c:453
 #, c-format
 msgid ""
 "\n"
@@ -107,12 +107,12 @@ msgid ""
 "Use a distributor : %s\n"
 msgstr ""
 
-#: Sources/csuper/display.c:463 Sources/csuper/display.c:468
+#: Sources/csuper/display.c:459 Sources/csuper/display.c:464
 #, c-format
 msgid "Number of points maximum/minimum : %.3f\n"
 msgstr ""
 
-#: Sources/csuper/display.c:466
+#: Sources/csuper/display.c:462
 #, c-format
 msgid "Number of points maximum/minimum : inf\n"
 msgstr ""

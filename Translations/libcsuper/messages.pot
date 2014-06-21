@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-20 19:17+0200\n"
+"POT-Creation-Date: 2014-06-21 16:45+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,12 +53,12 @@ msgid ""
 "Error while writing file.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_struct.c:262
+#: Sources/libcsuper/csu_struct.c:265
 #, c-format
 msgid "The distributor was initialize by default to %s.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_struct.c:329
+#: Sources/libcsuper/csu_struct.c:332
 #, c-format
 msgid ""
 "\n"

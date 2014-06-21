@@ -35,6 +35,7 @@
 #define GAME_CONFIGURATION_H_INCLUDED
 
 #include "csuper-gui.h"
+#include "utils.h"
 #include "main_window.h"
 
 G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointer data);
@@ -53,6 +54,7 @@ G_MODULE_EXPORT void viewGameConfiguration(GtkWidget *widget, gpointer data);
 void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboolean clear);
 G_MODULE_EXPORT void addGameConfiguration(GtkWidget *widget, gpointer data);
 game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window);
+G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer data);
 void newGameConfigurationError(globalData *data, GtkWindow *parent_window);
 G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer data);
 void changeNewGameConfigurationDialog(globalData *data,game_config config);

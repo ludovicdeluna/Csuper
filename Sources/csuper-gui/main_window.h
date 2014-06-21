@@ -41,5 +41,10 @@ void deleteRanking(globalData *data);
 void createRanking(globalData *data);
 void updateMainWindow(globalData *data);
 void updateDistributorLabel(globalData *data);
+G_MODULE_EXPORT void updateTotalPointsInTurnLabel(GtkWidget *widget, gpointer data);
+void noCsuFilePoints(globalData *data);
+void deletePoints(globalData *data);
+void createPointsGrid(globalData *data);
+G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_WINDOW_H_INCLUDED

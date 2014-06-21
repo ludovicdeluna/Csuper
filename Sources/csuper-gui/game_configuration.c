@@ -566,6 +566,8 @@ game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window)
     /* Define the size max of the game configuration name */
     gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),SIZE_MAX_NAME);
 
+    checkGoodNewGameConfiguration(NULL,data);
+
     gtk_widget_show_all(dialog);
 
     switch (gtk_dialog_run(GTK_DIALOG(dialog)))
@@ -657,6 +659,42 @@ game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window)
         newGameConfigurationError(data,parent_window);
 
 	return ptr_config;
+}
+
+/*!
+ * \fn G_MODULE_EXPORT checkGoodNewGameConfiguration(GtkWidget *widget, gpointer data)
+ *  Check if the game configuration is complete
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    gchar name[SIZE_MAX_NAME];
+    gint index;
+
+    /* Get the grid */
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"new_game_configuration_dialog_grid"));
+    if (!grid)
+        g_critical(_("Widget new_game_configuration_dialog_grid is missing in file csuper-gui.glade."));
+
+    strcpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))));
+    if (strcmp(name,"") == 0)
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,TRUE,65535,0,0,FALSE,0,0,0);
+    else
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,FALSE,65535,0,0,FALSE,0,0,0);
+
+    index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,1)));
+    if (index < 0)
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,1)),0,TRUE,65535,0,0,FALSE,0,0,0);
+    else
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,1)),0,FALSE,65535,0,0,FALSE,0,0,0);
+
+    index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,7)));
+    if (index < 0)
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,7)),0,TRUE,65535,0,0,FALSE,0,0,0);
+    else
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,7)),0,FALSE,65535,0,0,FALSE,0,0,0);
 }
 
 /*!

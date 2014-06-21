@@ -96,9 +96,7 @@ void printLigne(int size_line)
     printf("\n\t");
 
     for (i=0 ; i<size_line ; i++)
-    {
         printf("-");
-    }
 }
 
 /*!
@@ -153,9 +151,7 @@ void printTotalPoints(csuStruct *ptr_csu_struct)
 
         /*Add space at the end to keep the form*/
         for (j=4 ; j<strlen(ptr_csu_struct->player_names[i]); j++)
-        {
             printf(" ");
-        }
 
         printf("|");
     }

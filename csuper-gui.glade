@@ -316,7 +316,6 @@
           <object class="GtkGrid" id="main_window_grid_game_config">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="valign">center</property>
             <property name="margin_left">10</property>
             <property name="margin_right">10</property>
             <property name="margin_top">10</property>
@@ -329,10 +328,11 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
+                <property name="vexpand">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
+                <property name="top_attach">6</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -341,6 +341,7 @@
               <object class="GtkLabel" id="label_ranking_main_window">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Ranking</property>
                 <attributes>
                   <attribute name="font-desc" value="Sans 14"/>
@@ -360,14 +361,19 @@
                 <property name="height_request">40</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
+                <property name="can_default">True</property>
+                <property name="has_default">True</property>
                 <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Save the new points</property>
                 <property name="halign">center</property>
-                <property name="valign">center</property>
+                <property name="valign">end</property>
+                <property name="vexpand">True</property>
                 <property name="image_position">bottom</property>
+                <signal name="clicked" handler="endOfTurn" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
+                <property name="top_attach">7</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -378,6 +384,7 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
+                <property name="vexpand">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -392,9 +399,47 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">No csu file loaded</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="main_window_label_total_points_in_turn">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">No csu file loaded</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="main_window_label_gale_informations">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Game informations</property>
+                <property name="wrap">True</property>
+                <attributes>
+                  <attribute name="font-desc" value="Sans 14"/>
+                </attributes>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -1629,6 +1674,7 @@ Please open a csu file before try to see properties.</property>
                 <property name="width_chars">30</property>
                 <property name="xalign">0.5</property>
                 <property name="input_hints">GTK_INPUT_HINT_UPPERCASE_WORDS | GTK_INPUT_HINT_NONE</property>
+                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1693,6 +1739,7 @@ Please open a csu file before try to see properties.</property>
                   <item id="2" translatable="yes">2</item>
                   <item id="3" translatable="yes">3</item>
                 </items>
+                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -1712,6 +1759,7 @@ Please open a csu file before try to see properties.</property>
                   <item id="min" translatable="yes">Minimum</item>
                   <item id="neither" translatable="yes">Neither</item>
                 </items>
+                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
                 <signal name="changed" handler="noMaxMinNewGameConfiguration" swapped="no"/>
               </object>
               <packing>
