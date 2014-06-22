@@ -116,6 +116,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 	{
 		case GTK_RESPONSE_ACCEPT:
 		{
+		    /* Get the filename*/
 		    gchar *filename;
 		    #ifdef _WIN32
 		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_open)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
@@ -123,6 +124,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(window_file_open));
 		    #endif
 
+		    /* Save the folder */
 		    #ifndef PORTABLE
 		    gchar folder[SIZE_MAX_FILE_NAME];
 		    strcpy(folder,filename);
@@ -141,6 +143,8 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
             {
                 strcpy(user_data->csu_filename,filename);
                 updateMainWindow(user_data);
+                deleteAllLastCsuStruct(user_data);
+                addLastCsuStruct(user_data);
             }
             g_free(filename);
 			break;
@@ -180,10 +184,7 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
     int error=FALSE;
 
     if(user_data->ptr_csu_struct == NULL)
-    {
-        noCsuFileOpened(user_data);
         return;
-    }
 
     /* Create the file chooser dialog*/
     GtkWidget *window_file_save = gtk_file_chooser_dialog_new (_("Save csu file"),GTK_WINDOW(user_data->ptr_main_window),
@@ -251,20 +252,6 @@ void saveFileError(globalData *data)
     gtk_widget_hide (window_error);
 }
 
-/*!
- * \fn void noCsuFileOpened(globalData *data)
- *  Display a dialog box which said that there is a problem when loading the file.
- * \param[in] data the globalData
- */
-void noCsuFileOpened(globalData *data)
-{
-    GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"no_csu_file_opened"));
-    if (!window_error)
-        g_critical(_("Widget no_csu_file_opened is missing in file csuper-gui.glade."));
-
-    gtk_dialog_run (GTK_DIALOG (window_error));
-    gtk_widget_hide (window_error);
-}
 
 /*!
  * \fn G_MODULE_EXPORT void copyToClipboard(GtkWidget *widget, gpointer data)
@@ -288,7 +275,12 @@ void updateCsuInfo(globalData *data)
     char *yes=_("yes");
     char *no=_("no");
 
-    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_date"));
+    GtkLabel *label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_filename"));
+    gchar filename[SIZE_MAX_FILE_NAME];
+    getSimpleFilenameFromFullFilename(data->csu_filename,filename);
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Filename : %s"),filename));
+
+    label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_date"));
     gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Created the : %02.0f/%02.0f/%4.0f"),data->ptr_csu_struct->day,data->ptr_csu_struct->month,data->ptr_csu_struct->year));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_version"));
@@ -339,21 +331,6 @@ void updateCsuInfo(globalData *data)
 }
 
 /*!
- * \fn void propertiesFileError(globalData *data)
- *  Display a dialog box which said that there is a problem when loading the file.
- * \param[in] data the globalData
- */
-void propertiesFileError(globalData *data)
-{
-    GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"no_csu_file_opened_properties"));
-    if (!window_error)
-        g_critical(_("Widget no_csu_file_opened_properties is missing in file csuper-gui.glade."));
-
-    gtk_dialog_run (GTK_DIALOG (window_error));
-    gtk_widget_hide (window_error);
-}
-
-/*!
  * \fn G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data)
  *  Show the properties window
  * \param[in] widget the widget which send the interrupt
@@ -364,10 +341,7 @@ G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data)
     globalData *user_data = (globalData*) data;
 
     if (user_data->ptr_csu_struct == NULL)
-    {
-        propertiesFileError(user_data);
         return;
-    }
 
     /* Get the dialog box */
     GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"csu_file_properties_dialog_box"));
@@ -381,3 +355,91 @@ G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data)
     gtk_dialog_run(GTK_DIALOG(dialog));
 }
 
+/*!
+ * \fn void addLastCsuStruct(globalData *data)
+ *  Add the current csu structure into the last csu structure
+ * \param[in] data the globalData
+ */
+void addLastCsuStruct(globalData *data)
+{
+    gint i;
+
+    /* Delete the last redo available */
+    if (data->indexLastCsuStruct > 0)
+    {
+        for (i=0 ; i < data->nbLastCsuStruct - data->indexLastCsuStruct ; i++)
+            data->lastCsuStruct[i] = data->lastCsuStruct[i+data->indexLastCsuStruct];
+
+        data->nbLastCsuStruct -= data->indexLastCsuStruct;
+        data->indexLastCsuStruct = 0;
+    }
+
+
+    /* Delete the last csu structure if the array is full */
+    if (data->nbLastCsuStruct == NB_LAST_CSU_STRUCT)
+        closeCsuStruct(data->lastCsuStruct[NB_LAST_CSU_STRUCT-1]);
+    else
+        data->nbLastCsuStruct++;
+
+    /* Add the current csu structure */
+    for (i=data->nbLastCsuStruct - 2 ; i >= 0 ; i--)
+        data->lastCsuStruct[i+1] = data->lastCsuStruct[i];
+    data->lastCsuStruct[0] = copyCsuStruct(data->ptr_csu_struct);
+
+}
+
+/*!
+ * \fn void deleteAllLastCsuStruct(globalData *data)
+ *  Delete all the last csu structure
+ * \param[in] data the globalData
+ */
+void deleteAllLastCsuStruct(globalData *data)
+{
+    gint i;
+
+    for (i=0 ; i < data->nbLastCsuStruct -1 ; i++)
+        closeCsuStruct(data->lastCsuStruct[i]);
+
+    data->indexLastCsuStruct = 0;
+    data->nbLastCsuStruct = 0;
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data)
+ *  Get the last csu structure
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    if (user_data->indexLastCsuStruct < user_data->nbLastCsuStruct-1)
+    {
+        closeCsuStruct(user_data->ptr_csu_struct);
+        user_data->indexLastCsuStruct++;
+        user_data->ptr_csu_struct = copyCsuStruct(user_data->lastCsuStruct[user_data->indexLastCsuStruct]);
+        writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct);
+        updateMainWindow(user_data);
+    }
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data)
+ *  Get the last new csu structure
+ * \param[in] widget the widget which send the interrupt
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    if (user_data->indexLastCsuStruct > 0)
+    {
+        closeCsuStruct(user_data->ptr_csu_struct);
+        user_data->indexLastCsuStruct--;
+        user_data->ptr_csu_struct = copyCsuStruct(user_data->lastCsuStruct[user_data->indexLastCsuStruct]);
+        writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct);
+        updateMainWindow(user_data);
+    }
+}

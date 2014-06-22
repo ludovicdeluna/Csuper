@@ -521,6 +521,8 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
 
     updateMainWindow(user_data);
     writeCsuFile(user_data->csu_filename,user_data->ptr_csu_struct);
+    deleteAllLastCsuStruct(user_data);
+    addLastCsuStruct(user_data);
 
     deleteAssistantNewCsu(NULL,user_data);
     g_free(folder);

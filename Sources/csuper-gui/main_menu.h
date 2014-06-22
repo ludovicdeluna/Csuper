@@ -43,10 +43,12 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data);
 void openFileError(globalData *data);
 G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data);
 void saveFileError(globalData *data);
-void noCsuFileOpened(globalData *data);
 G_MODULE_EXPORT void copyToCliboard(GtkWidget *widget, gpointer data);
 void updateCsuInfo(globalData *data);
-void propertiesFileError(globalData *data);
 G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data);
+void addLastCsuStruct(globalData *data);
+void deleteAllLastCsuStruct(globalData *data);
+G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_MENU_H_INCLUDED

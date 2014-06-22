@@ -24,6 +24,8 @@ Libcsuper
 * New function getFolderFromFilename
 * New function differentsPlayerName
 * Fix a bug with a game not in turn by turn
+* New function getSimpleFilenameFromFullFilename
+* New function copyCsuStruct
 
 2.4.0
 
@@ -33,3 +35,7 @@ Libcsuper
 
 Csuper-gui
 ==========
+
+4.0.0
+
+* Initial release

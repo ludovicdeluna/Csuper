@@ -355,3 +355,50 @@ int differentsPlayerName(csuStruct *ptr_csu_struct)
 
     return MY_TRUE;
 }
+
+/*!
+ * \fn csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct)
+ *  Copy a csu structure
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \return a pointer on the new csu structure
+ */
+csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct)
+{
+    csuStruct *ptr_copy_csu_struct=(csuStruct *)myAlloc(sizeof(csuStruct));
+    int i;
+
+    ptr_copy_csu_struct->version = ptr_csu_struct->version;
+    ptr_copy_csu_struct->size_max_name = ptr_csu_struct->size_max_name;
+    ptr_copy_csu_struct->day = ptr_csu_struct->day;
+    ptr_copy_csu_struct->month = ptr_csu_struct->month;
+    ptr_copy_csu_struct->year = ptr_csu_struct->year;
+    ptr_copy_csu_struct->nb_player = ptr_csu_struct->nb_player;
+    ptr_copy_csu_struct->config = ptr_csu_struct->config;
+
+    ptr_copy_csu_struct->player_names=(char **)myAlloc(ptr_csu_struct->nb_player*sizeof(char*));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        ptr_copy_csu_struct->player_names[i]=(char *)myAlloc(ptr_csu_struct->size_max_name*sizeof(char));
+        memcpy(ptr_copy_csu_struct->player_names[i],ptr_csu_struct->player_names[i],sizeof(char)*ptr_copy_csu_struct->size_max_name);
+    }
+
+    ptr_copy_csu_struct->total_points=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
+    memcpy(ptr_copy_csu_struct->total_points,ptr_csu_struct->total_points,sizeof(float)*ptr_copy_csu_struct->nb_player);
+
+    ptr_copy_csu_struct->rank=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
+    memcpy(ptr_copy_csu_struct->rank,ptr_csu_struct->rank,sizeof(float)*ptr_copy_csu_struct->nb_player);
+
+    ptr_copy_csu_struct->nb_turn=(float *)myAlloc(ptr_csu_struct->nb_player*sizeof(float));
+    memcpy(ptr_copy_csu_struct->nb_turn,ptr_csu_struct->nb_turn,sizeof(float)*ptr_copy_csu_struct->nb_player);
+
+    ptr_copy_csu_struct->distributor = ptr_csu_struct->distributor;
+
+    ptr_copy_csu_struct->point=(float **)myAlloc(ptr_csu_struct->nb_player*sizeof(float*));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        ptr_copy_csu_struct->point[i]=(float *)myAlloc(ptr_csu_struct->nb_turn[i]*sizeof(float));
+        memcpy(ptr_copy_csu_struct->point[i],ptr_csu_struct->point[i],sizeof(float)*ptr_csu_struct->nb_turn[i]);
+    }
+
+    return ptr_copy_csu_struct;
+}

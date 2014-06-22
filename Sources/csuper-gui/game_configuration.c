@@ -655,9 +655,6 @@ game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window)
 			break;
 	}
 
-    if (ptr_config == NULL)
-        newGameConfigurationError(data,parent_window);
-
 	return ptr_config;
 }
 
@@ -671,12 +668,17 @@ G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer d
 {
     globalData *user_data = (globalData*) data;
     gchar name[SIZE_MAX_NAME];
-    gint index;
+    gint index,index_2;
 
     /* Get the grid */
     GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"new_game_configuration_dialog_grid"));
     if (!grid)
         g_critical(_("Widget new_game_configuration_dialog_grid is missing in file csuper-gui.glade."));
+
+    /* Get the button */
+    GtkWidget *validat_button = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"button_ok_new_game_configuration"));
+    if (!validat_button)
+        g_critical(_("Widget button_ok_new_game_configuration is missing in file csuper-gui.glade."));
 
     strcpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))));
     if (strcmp(name,"") == 0)
@@ -690,29 +692,17 @@ G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer d
     else
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,1)),0,FALSE,65535,0,0,FALSE,0,0,0);
 
-    index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,7)));
-    if (index < 0)
+    index_2 = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,7)));
+    if (index_2 < 0)
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,7)),0,TRUE,65535,0,0,FALSE,0,0,0);
     else
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,7)),0,FALSE,65535,0,0,FALSE,0,0,0);
-}
 
-/*!
- * \fn void newGameConfigurationError(globalData *data, GtkWindow *parent_window)
- *  Display a dialog box which said that there is a problem on the new game configuration.
- * \param[in] data the globalData
- * \param[in] parent_window the parent window
- */
-void newGameConfigurationError(globalData *data, GtkWindow *parent_window)
-{
-    GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"message_dialog_error_add_game_configuration"));
-    if (!window_error)
-        g_critical(_("Widget message_dialog_error_add_game_configuration is missing in file csuper-gui.glade."));
+    if (strcmp(name,"") == 0 || index < 0 || index_2 < 0)
+        gtk_widget_set_sensitive(validat_button,FALSE);
+    else
+        gtk_widget_set_sensitive(validat_button,TRUE);
 
-    gtk_window_set_transient_for(GTK_WINDOW(window_error),parent_window);
-
-    gtk_dialog_run (GTK_DIALOG (window_error));
-    gtk_widget_hide (window_error);
 }
 
 /*!

@@ -99,5 +99,6 @@ int exceedMaxNumber(csuStruct *ptr_csu_struct);
 int maxNbTurn(csuStruct *ptr_csu_struct);
 int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name);
 int differentsPlayerName(csuStruct *ptr_csu_struct);
+csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct);
 
 #endif

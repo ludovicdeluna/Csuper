@@ -77,5 +77,6 @@ int deleteFile(char *file_name);
 int renameFile(char *old_name, char *new_name);
 char *integerToYesNo(int i, char *yes, char *no);
 int getFolderFromFilename(char *file_name_to_folder);
+int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename);
 
 #endif

@@ -82,3 +82,24 @@ void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foregrou
         pango_attr_list_unref(attribut_list);
     pango_attr_list_unref(attribut_list);
 }
+
+ /*!
+ * \fn GtkLabel *createGtkLabelWithAttributes(gchar *text, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue)
+ *  Set the foreground color, the background color and the size of a gtklabel
+ * \param[in] text the text for the new gtklabel
+ * \param[in] use_foreground indicate if it use the foreground color, if FALSE use the default color
+ * \param[in] foreground_red the red value of the foreground (ranging from 0 to 65535)
+ * \param[in] foreground_green the green value of the foreground (ranging from 0 to 65535)
+ * \param[in] foreground_blue the blue value of the foreground (ranging from 0 to 65535)
+ * \param[in] use_background indicate if it use the background color, if FALSE use the default color
+ * \param[in] background_red the red value of the background (ranging from 0 to 65535)
+ * \param[in] background_green the green value of the background (ranging from 0 to 65535)
+ * \param[in] background_blue the blue value of the background (ranging from 0 to 65535)
+ * \return a new allocate gtklabel with attributes
+ */
+GtkLabel *createGtkLabelWithAttributes(gchar *text, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue)
+{
+    GtkWidget *label = gtk_label_new(text);
+    setGtkLabelAttributes(GTK_LABEL(label),text_size,use_foreground,foreground_red,foreground_green,foreground_blue,use_background,background_red,background_green,background_blue);
+    return GTK_LABEL(label);
+}

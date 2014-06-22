@@ -356,3 +356,31 @@ int getFolderFromFilename(char *file_name_to_folder)
 
     return ok;
 }
+
+/*!
+ * \fn int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
+ *  Transform a full filename into his simple filename (without the folder)
+ * \param[in] full_filename the full filename
+ * \param[in] simple_filename the full filename
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ */
+int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
+{
+    int i;
+    int ok = MY_FALSE;
+    for (i=strlen(full_filename) ; i>=0 ; i--)
+    {
+        #ifdef _WIN32
+        if (full_filename[i] == '\\')
+        #else
+        if (full_filename[i] == '/')
+        #endif // _WIN32
+        {
+            ok = MY_TRUE;
+            strcpy(simple_filename,full_filename+i+1);
+            break;
+        }
+    }
+
+    return ok;
+}

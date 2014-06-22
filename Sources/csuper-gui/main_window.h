@@ -35,6 +35,8 @@
 #define MAIN_WINDOW_H_INCLUDED
 
 #include "csuper-gui.h"
+#include "utils.h"
+#include "main_menu.h"
 
 void noCsuFileRanking(globalData *data);
 void deleteRanking(globalData *data);
@@ -46,5 +48,6 @@ void noCsuFilePoints(globalData *data);
 void deletePoints(globalData *data);
 void createPointsGrid(globalData *data);
 G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data);
+void setButtonMainWindowSensitive(globalData *data);
 
 #endif // MAIN_WINDOW_H_INCLUDED

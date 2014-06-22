@@ -46,6 +46,12 @@
  */
 //#define PORTABLE
 
+/*!
+ * \def NB_LAST_CSU_STRUCT
+ * Define the number of last csu structure saved
+ */
+#define NB_LAST_CSU_STRUCT 10
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
@@ -67,6 +73,9 @@ typedef struct
     gchar csu_filename[SIZE_MAX_FILE_NAME];   /*!< The filename of the csu file*/
     GtkClipboard *ptr_clipboard;                /*!< A pointer to the main clipboard */
     GtkClipboard *ptr_clipboard_selected;       /*!< A pointer to the selected clipboard */
+    csuStruct *lastCsuStruct[NB_LAST_CSU_STRUCT]; /*!< A array of pointer to the last csu structure */
+    gint indexLastCsuStruct;                /*!< A index on the lastCsuStruct array */
+    gint nbLastCsuStruct;                   /*!< the number of last csu structure */
 }globalData;
 
 
