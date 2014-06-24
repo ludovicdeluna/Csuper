@@ -36,7 +36,7 @@
 
 #include "csuper-gui.h"
 #include "main_window.h"
-#include "game_configuration.h"
+#include "preferences.h"
 
 G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data);
@@ -44,11 +44,15 @@ void openFileError(globalData *data);
 G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data);
 void saveFileError(globalData *data);
 G_MODULE_EXPORT void copyToCliboard(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void pastFromClipboard(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void deleteSelectedText(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void cutToClipboard(GtkWidget *widget, gpointer data);
 void updateCsuInfo(globalData *data);
 G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data);
 void addLastCsuStruct(globalData *data);
 void deleteAllLastCsuStruct(globalData *data);
 G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data);
+void updateToolbarButton(globalData *data);
 
 #endif // MAIN_MENU_H_INCLUDED

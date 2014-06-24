@@ -51,10 +51,6 @@
 		<Unit filename="../Sources/libcsuper/csu_struct.h">
 			<Option weight="0" />
 		</Unit>
-		<Unit filename="../Sources/libcsuper/file_system_path.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/libcsuper/file_system_path.h" />
 		<Unit filename="../Sources/libcsuper/game_config.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -64,6 +60,13 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/libcsuper/main_argument.h" />
+		<Unit filename="../Sources/libcsuper/preferences_files.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/preferences_files.h" />
+		<Unit filename="../Sources/libcsuper/ressources_windows.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Unit filename="../Sources/libcsuper/share.c">
 			<Option compilerVar="CC" />
 		</Unit>

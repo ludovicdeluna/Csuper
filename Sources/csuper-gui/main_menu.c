@@ -36,7 +36,7 @@
 /*!
  * \fn G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data)
  *  Display the about window
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data)
@@ -65,7 +65,7 @@ G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
  *  Choose and open a csu file.
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
@@ -145,6 +145,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
                 updateMainWindow(user_data);
                 deleteAllLastCsuStruct(user_data);
                 addLastCsuStruct(user_data);
+                setButtonMainWindowSensitive(user_data);
             }
             g_free(filename);
 			break;
@@ -175,7 +176,7 @@ void openFileError(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
  *  Choose and save a csu file.
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
@@ -256,13 +257,57 @@ void saveFileError(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT void copyToClipboard(GtkWidget *widget, gpointer data)
  *  Copy the selected text to clipboard
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void copyToClipboard(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-    gtk_clipboard_set_text(user_data->ptr_clipboard,gtk_clipboard_wait_for_text(user_data->ptr_clipboard_selected),-1);
+
+    if (GTK_IS_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))))
+        gtk_editable_copy_clipboard(GTK_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))));
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void pastFromClipboard(GtkWidget *widget, gpointer data)
+ *  Past a text from the clipboard
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void pastFromClipboard(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    if (GTK_IS_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))))
+        gtk_editable_paste_clipboard(GTK_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))));
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void deleteSelectedText(GtkWidget *widget, gpointer data)
+ *  Delete the selected text
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void deleteSelectedText(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    if (GTK_IS_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))))
+        gtk_editable_delete_selection(GTK_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))));
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void cutToClipboard(GtkWidget *widget, gpointer data)
+ *  Cut the selected text to clipboard
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void cutToClipboard(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    if (GTK_IS_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))))
+        gtk_editable_cut_clipboard(GTK_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))));
 }
 
 /*!
@@ -333,7 +378,7 @@ void updateCsuInfo(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data)
  *  Show the properties window
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void showPropertiesDialogBox(GtkWidget *widget, gpointer data)
@@ -407,7 +452,7 @@ void deleteAllLastCsuStruct(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data)
  *  Get the last csu structure
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data)
@@ -427,7 +472,7 @@ G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data)
  *  Get the last new csu structure
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data)
@@ -442,4 +487,123 @@ G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data)
         writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct);
         updateMainWindow(user_data);
     }
+}
+
+/*!
+ * \fn void updateToolbarButton(globalData *data)
+ *  Show or hide button of the toolbar
+ * \param[in] data the globalData
+ */
+void updateToolbarButton(globalData *data)
+{
+    toolbar_button_preferences_struct toolbar_preferences;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePath(home_path);
+    #endif // PORTABLE
+    readFileToolbarButtonPreferences(home_path,&toolbar_preferences);
+    /*printf("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",toolbar_preferences.new,toolbar_preferences.open,toolbar_preferences.save_as,
+            toolbar_preferences.separator_1,toolbar_preferences.undo,toolbar_preferences.redo,toolbar_preferences.separator_2,toolbar_preferences.cut,toolbar_preferences.copy,toolbar_preferences.paste,
+            toolbar_preferences.delete,toolbar_preferences.separator_3,toolbar_preferences.properties,toolbar_preferences.separator_4,toolbar_preferences.preferences,
+            toolbar_preferences.game_configuration_preferences,toolbar_preferences.toolbar_button_preferences,toolbar_preferences.separator_5,toolbar_preferences.about);*/
+
+    GtkWidget *main_toolbar = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_toolbar"));
+    if (!main_toolbar)
+        g_critical(_("Widget main_toolbar is missing in file csuper-gui.glade."));
+
+    if (toolbar_preferences.new == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),0)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),0)));
+
+    if (toolbar_preferences.open == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),1)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),1)));
+
+    if (toolbar_preferences.save_as == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),2)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),2)));
+
+    if (toolbar_preferences.separator_1 == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),3)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),3)));
+
+    if (toolbar_preferences.undo == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),4)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),4)));
+
+    if (toolbar_preferences.redo == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),5)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),5)));
+
+    if (toolbar_preferences.separator_2 == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),6)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),6)));
+
+    if (toolbar_preferences.cut == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)));
+
+    if (toolbar_preferences.copy == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)));
+
+    if (toolbar_preferences.paste == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)));
+
+    if (toolbar_preferences.delete == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)));
+
+    if (toolbar_preferences.separator_3 == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),11)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),11)));
+
+    if (toolbar_preferences.properties == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),12)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),12)));
+
+    if (toolbar_preferences.separator_4 == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),13)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),13)));
+
+    if (toolbar_preferences.preferences == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),14)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),14)));
+
+    if (toolbar_preferences.game_configuration_preferences == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),15)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),15)));
+
+    if (toolbar_preferences.toolbar_button_preferences == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),16)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),16)));
+
+    if (toolbar_preferences.separator_5 == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),17)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),17)));
+
+    if (toolbar_preferences.about == MY_FALSE)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),18)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),18)));
 }

@@ -1,13 +1,13 @@
 /*!
- * \file    game_configuration.h
- * \brief   Game configuration
+ * \file    preferences.h
+ * \brief   The preferences of csuper
  * \author  Remi BERTHO
  * \date    03/05/14
  * \version 4.0.0
  */
 
  /*
- * game_configuration.h
+ * preferences.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -38,9 +38,11 @@
 #include "utils.h"
 #include "main_window.h"
 
+G_MODULE_EXPORT void openPreferences(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointer data);
-G_MODULE_EXPORT void closeGameConfigurationPreferences(GtkWidget *widget, gpointer data);
-G_MODULE_EXPORT gboolean closeGameConfigurationPreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data);
+G_MODULE_EXPORT void openToolbarButtonPreferences(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void closePreferences(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data);
 G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data);
 void exportGameConfigurationError(globalData *data);
 G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data);
@@ -57,5 +59,9 @@ game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window);
 G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer data);
 void changeNewGameConfigurationDialog(globalData *data,game_config config);
+void updateToolbarButtonPreferencesSwitch(globalData *data);
+void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar_preferences);
+G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget, GParamSpec *pspec,gpointer data);
+G_MODULE_EXPORT void validToolbarButtonPreferences(GtkWidget *widget, gpointer data);
 
 #endif // GAME_CONFIGURATION_H_INCLUDED

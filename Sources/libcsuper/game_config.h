@@ -36,7 +36,7 @@
 
 #include <math.h>
 #include "csu_struct.h"
-#include "file_system_path.h"
+#include "preferences_files.h"
 
 /*!
  * \def CONFIGURATION_FOLDER_NAME
@@ -57,7 +57,7 @@
 #define STRING_CHECK_GAME_CONFIG "Csuper_Game_Configuration"
 
 /*!
- * \struct csuStruct
+ * \struct list_game_config
  * Represent a list of game configuration
  */
 typedef struct

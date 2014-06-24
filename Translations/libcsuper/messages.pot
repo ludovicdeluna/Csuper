@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-22 13:44+0200\n"
+"POT-Creation-Date: 2014-06-24 22:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,21 +63,6 @@ msgstr ""
 msgid ""
 "\n"
 "Error this name doesn't exist.\n"
-msgstr ""
-
-#: Sources/libcsuper/file_system_path.c:115
-#: Sources/libcsuper/file_system_path.c:120
-#, c-format
-msgid ""
-"\n"
-"Error while reading the file containing the system path.\n"
-msgstr ""
-
-#: Sources/libcsuper/file_system_path.c:181
-#, c-format
-msgid ""
-"\n"
-"Error : this folder is not valid.\n"
 msgstr ""
 
 #: Sources/libcsuper/game_config.c:163
@@ -140,6 +125,21 @@ msgstr ""
 msgid ""
 "\t- Use the argument '%s' or '%s' followed by the file name to display "
 "directly the content of the file.\n"
+msgstr ""
+
+#: Sources/libcsuper/preferences_files.c:240
+#: Sources/libcsuper/preferences_files.c:245
+#, c-format
+msgid ""
+"\n"
+"Error while reading the file containing the system path.\n"
+msgstr ""
+
+#: Sources/libcsuper/preferences_files.c:306
+#, c-format
+msgid ""
+"\n"
+"Error : this folder is not valid.\n"
 msgstr ""
 
 #: Sources/libcsuper/share.c:58

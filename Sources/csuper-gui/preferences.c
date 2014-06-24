@@ -1,13 +1,13 @@
 /*!
- * \file    game_configuration.c
- * \brief   Game configuration
+ * \file    preferences.c
+ * \brief   The preferences of csuper
  * \author  Remi BERTHO
  * \date    03/05/14
  * \version 4.0.0
  */
 
  /*
- * game_configuration.c
+ * preferences.c
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,40 +31,80 @@
  *
  */
 
- #include "game_configuration.h"
+ #include "preferences.h"
+
+/*!
+ * \fn G_MODULE_EXPORT void openPreferences(GtkWidget *widget, gpointer data)
+ *  Open the preferences
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void openPreferences(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    GtkWidget *window_game = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
+    if (!window_game)
+        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+
+    displayGameConfiguration(user_data);
+    updateToolbarButtonPreferencesSwitch(user_data);
+    checkToolbarButtonPreferencesChanged(NULL,NULL,user_data);
+
+    gtk_widget_show_all(window_game);
+}
 
 /*!
  * \fn G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointer data)
  *  Open the game configuration preferences
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *window_game = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences"));
-    if (!window_game)
-        g_critical(_("Widget game_configuration_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *notebook_preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"notebook_preferences"));
+    if (!notebook_preferences)
+        g_critical(_("Widget notebook_preferences is missing in file csuper-gui.glade."));
 
-    displayGameConfiguration(user_data);
+    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_preferences),0);
 
-    gtk_widget_show_all(window_game);
+    openPreferences(NULL,user_data);
 }
 
 /*!
- * \fn G_MODULE_EXPORT void closeGameConfigurationPreferences(GtkWidget *widget, gpointer data)
- *  Close the game configuration preferences
- * \param[in] widget the widget which send the interrupt
+ * \fn G_MODULE_EXPORT void openToolbarButtonPreferences(GtkWidget *widget, gpointer data)
+ *  Open the toolbar button preferences
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
-G_MODULE_EXPORT void closeGameConfigurationPreferences(GtkWidget *widget, gpointer data)
+G_MODULE_EXPORT void openToolbarButtonPreferences(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *window_game = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences"));
+    GtkWidget *notebook_preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"notebook_preferences"));
+    if (!notebook_preferences)
+        g_critical(_("Widget notebook_preferences is missing in file csuper-gui.glade."));
+
+    gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_preferences),1);
+
+    openPreferences(NULL,user_data);
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void closePreferences(GtkWidget *widget, gpointer data)
+ *  Close the preferences
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void closePreferences(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    GtkWidget *window_game = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
     if (!window_game)
-        g_critical(_("Widget game_configuration_preferences is missing in file csuper-gui.glade."));
+        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
 
     deleteDisplayGameConfiguration(user_data);
 
@@ -72,22 +112,22 @@ G_MODULE_EXPORT void closeGameConfigurationPreferences(GtkWidget *widget, gpoint
 }
 
 /*!
- * \fn G_MODULE_EXPORT gboolean closeGameConfigurationPreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data)
- *  Close the game configuration preferences
- * \param[in] widget the widget which send the interrupt
+ * \fn G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data)
+ *  Close the preferences
+ * \param[in] widget the widget which send the signal
  * \param[in] event the event which triggered this signal
  * \param[in] data the globalData
  */
-G_MODULE_EXPORT gboolean closeGameConfigurationPreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data)
+G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data)
 {
-    closeGameConfigurationPreferences(widget,user_data);
+    closePreferences(widget,user_data);
     return TRUE;
 }
 
 /*!
  * \fn G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
  *  Exporte the games configurations
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
@@ -151,7 +191,7 @@ void exportGameConfigurationError(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
  *  Exporte the games configurations
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
@@ -309,7 +349,7 @@ void updateDisplayGameConfiguration(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT void deleteGameConfiguration(GtkWidget *widget, gpointer data)
  *  Delete a game configuration
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void deleteGameConfiguration(GtkWidget *widget, gpointer data)
@@ -346,7 +386,7 @@ G_MODULE_EXPORT void deleteGameConfiguration(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data)
  *  Edit a game configuration
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data)
@@ -376,9 +416,9 @@ G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data)
     ptr_list_config = readConfigListFile(home_path);
     readConfigFile(i,ptr_list_config,&config,home_path);
 
-    GtkWidget *preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences"));
+    GtkWidget *preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
     if (!preferences)
-        g_critical(_("Widget game_configuration_preferences is missing in file csuper-gui.glade."));
+        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
 
     changeNewGameConfigurationDialog(user_data,config);
     ptr_config = newGameConfiguration(user_data,GTK_WINDOW(preferences));
@@ -397,7 +437,7 @@ G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT viewGameConfiguration(GtkWidget *widget, gpointer data)
  *  Display the game configuration
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void viewGameConfiguration(GtkWidget *widget, gpointer data)
@@ -508,7 +548,7 @@ void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboole
 /*!
  * \fn G_MODULE_EXPORT addGameConfiguration(GtkWidget *widget, gpointer data)
  *  Add a game configuration
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void addGameConfiguration(GtkWidget *widget, gpointer data)
@@ -518,9 +558,9 @@ G_MODULE_EXPORT void addGameConfiguration(GtkWidget *widget, gpointer data)
     char home_path[SIZE_MAX_FILE_NAME]="";
     game_config config = {0,1,1,0,-1,-1,"",0};
 
-    GtkWidget *preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences"));
+    GtkWidget *preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
     if (!preferences)
-        g_critical(_("Widget game_configuration_preferences is missing in file csuper-gui.glade."));
+        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
 
     changeNewGameConfigurationDialog(user_data,config);
     ptr_config=newGameConfiguration(user_data,GTK_WINDOW(preferences));
@@ -661,7 +701,7 @@ game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window)
 /*!
  * \fn G_MODULE_EXPORT checkGoodNewGameConfiguration(GtkWidget *widget, gpointer data)
  *  Check if the game configuration is complete
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer data)
@@ -708,7 +748,7 @@ G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer d
 /*!
  * \fn G_MODULE_EXPORT noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer data)
  *  Change text editable propriety of the max/min value
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer data)
@@ -801,3 +841,278 @@ void changeNewGameConfigurationDialog(globalData *data,game_config config)
     }
 }
 
+/*!
+ * \fn void updateToolbarButtonPreferencesSwitch(globalData *data)
+ *  Update the switch of the toolbar button preferences
+ * \param[in] data the globalData
+ */
+void updateToolbarButtonPreferencesSwitch(globalData *data)
+{
+    toolbar_button_preferences_struct toolbar_preferences;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePath(home_path);
+    #endif // PORTABLE
+    readFileToolbarButtonPreferences(home_path,&toolbar_preferences);
+
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_toolbar_button_preferences"));
+    if (!grid)
+        g_critical(_("Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."));
+
+    if (toolbar_preferences.new == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),TRUE);
+
+    if (toolbar_preferences.open == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1)),TRUE);
+
+    if (toolbar_preferences.save_as == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),TRUE);
+
+    if (toolbar_preferences.separator_1 == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),TRUE);
+
+    if (toolbar_preferences.undo == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),TRUE);
+
+    if (toolbar_preferences.redo == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),TRUE);
+
+    if (toolbar_preferences.separator_2 == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),TRUE);
+
+    if (toolbar_preferences.cut == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),TRUE);
+
+    if (toolbar_preferences.copy == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),TRUE);
+
+    if (toolbar_preferences.paste == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),TRUE);
+
+    if (toolbar_preferences.delete == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),TRUE);
+
+    if (toolbar_preferences.separator_3 == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),TRUE);
+
+    if (toolbar_preferences.properties == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),TRUE);
+
+    if (toolbar_preferences.separator_4 == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),TRUE);
+
+    if (toolbar_preferences.preferences == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),TRUE);
+
+    if (toolbar_preferences.game_configuration_preferences == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),TRUE);
+
+    if (toolbar_preferences.toolbar_button_preferences == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),TRUE);
+
+    if (toolbar_preferences.separator_5 == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),TRUE);
+
+    if (toolbar_preferences.about == MY_FALSE)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),TRUE);
+}
+
+/*!
+ * \fn void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar_preferences)
+ *  Read the toolbar_button_preferences_struct with the switch of the preferences
+ * \param[in] data the globalData
+ * \param[in] toolbar_preferences the toolbar button preferences
+ */
+void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar_preferences)
+{
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_toolbar_button_preferences"));
+    if (!grid)
+        g_critical(_("Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."));
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0))))
+        toolbar_preferences->new=MY_TRUE;
+    else
+        toolbar_preferences->new=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1))))
+        toolbar_preferences->open=MY_TRUE;
+    else
+        toolbar_preferences->open=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2))))
+        toolbar_preferences->save_as=MY_TRUE;
+    else
+        toolbar_preferences->save_as=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3))))
+        toolbar_preferences->separator_1=MY_TRUE;
+    else
+        toolbar_preferences->separator_1=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4))))
+        toolbar_preferences->undo=MY_TRUE;
+    else
+        toolbar_preferences->undo=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5))))
+        toolbar_preferences->redo=MY_TRUE;
+    else
+        toolbar_preferences->redo=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6))))
+        toolbar_preferences->separator_2=MY_TRUE;
+    else
+        toolbar_preferences->separator_2=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7))))
+        toolbar_preferences->cut=MY_TRUE;
+    else
+        toolbar_preferences->cut=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8))))
+        toolbar_preferences->copy=MY_TRUE;
+    else
+        toolbar_preferences->copy=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9))))
+        toolbar_preferences->paste=MY_TRUE;
+    else
+        toolbar_preferences->paste=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0))))
+        toolbar_preferences->delete=MY_TRUE;
+    else
+        toolbar_preferences->delete=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1))))
+        toolbar_preferences->separator_3=MY_TRUE;
+    else
+        toolbar_preferences->separator_3=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2))))
+        toolbar_preferences->properties=MY_TRUE;
+    else
+        toolbar_preferences->properties=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3))))
+        toolbar_preferences->separator_4=MY_TRUE;
+    else
+        toolbar_preferences->separator_4=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4))))
+        toolbar_preferences->preferences=MY_TRUE;
+    else
+        toolbar_preferences->preferences=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5))))
+        toolbar_preferences->game_configuration_preferences=MY_TRUE;
+    else
+        toolbar_preferences->game_configuration_preferences=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6))))
+        toolbar_preferences->toolbar_button_preferences=MY_TRUE;
+    else
+        toolbar_preferences->toolbar_button_preferences=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7))))
+        toolbar_preferences->separator_5=MY_TRUE;
+    else
+        toolbar_preferences->separator_5=MY_FALSE;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8))))
+        toolbar_preferences->about=MY_TRUE;
+    else
+        toolbar_preferences->about=MY_FALSE;
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget,GParamSpec *pspec, gpointer data)
+ *  Check if the toolbar button preferences change relative this save in the file
+ * \param[in] widget the widget which send the signal
+ * \param[in] pspec the GParamSpec of the property which changed.
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget, GParamSpec *pspec,gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    toolbar_button_preferences_struct toolbar_file;
+    toolbar_button_preferences_struct toolbar_preferences;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePath(home_path);
+    #endif // PORTABLE
+    readFileToolbarButtonPreferences(home_path,&toolbar_file);
+    readToolbarButtonPreferencesSwitch(user_data,&toolbar_preferences);
+
+    GtkWidget *apply_button = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"apply_button_toolbar_preferences"));
+    if (!apply_button)
+        g_critical(_("Widget apply_button_toolbar_preferences is missing in file csuper-gui.glade."));
+
+    if (differentsToolbarButtonPreferencesStruct(toolbar_file,toolbar_preferences) == MY_TRUE)
+        gtk_widget_set_sensitive(apply_button,TRUE);
+    else
+        gtk_widget_set_sensitive(apply_button,FALSE);
+}
+
+
+/*!
+ * \fn G_MODULE_EXPORT void validToolbarButtonPreferences(GtkWidget *widget, gpointer data)
+ *  Validate the new toolbar button preferences
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void validToolbarButtonPreferences(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    toolbar_button_preferences_struct toolbar_preferences;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePath(home_path);
+    #endif // PORTABLE
+    readToolbarButtonPreferencesSwitch(user_data,&toolbar_preferences);
+
+    createFileToolbarButtonPreferences(home_path,toolbar_preferences);
+    updateToolbarButton(user_data);
+    checkToolbarButtonPreferencesChanged(NULL,NULL,user_data);
+}

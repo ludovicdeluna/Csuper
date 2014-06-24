@@ -40,10 +40,6 @@
 			<Add directory="../" />
 		</Linker>
 		<Unit filename="../Sources/csuper-gui/csuper-gui.h" />
-		<Unit filename="../Sources/csuper-gui/game_configuration.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/csuper-gui/game_configuration.h" />
 		<Unit filename="../Sources/csuper-gui/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -60,6 +56,13 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/csuper-gui/new_file_assistant.h" />
+		<Unit filename="../Sources/csuper-gui/preferences.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/preferences.h" />
+		<Unit filename="../Sources/csuper-gui/ressources_windows.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Unit filename="../Sources/csuper-gui/utils.c">
 			<Option compilerVar="CC" />
 		</Unit>

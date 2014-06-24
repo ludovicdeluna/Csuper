@@ -84,6 +84,7 @@ int main (int   argc, char *argv[])
     noCsuFilePoints(&data);
     setButtonMainWindowSensitive(&data);
 
+    updateToolbarButton(&data);
     gtk_widget_show_all(data.ptr_main_window);
 
     gtk_main();

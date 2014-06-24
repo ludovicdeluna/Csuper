@@ -36,7 +36,7 @@
  /*!
  * \fn G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
  *  Open the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
@@ -53,7 +53,6 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     #else
     readHomePath(system_path);
     #endif // PORTABLE
-
 
     /* creating of the assistant */
     user_data->ptr_new_csu_file_assistant = gtk_assistant_new();
@@ -83,6 +82,14 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_assistant_set_page_type(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,GTK_ASSISTANT_PAGE_INTRO);
     gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,_("General informations"));
 
+    /* Configure the file chooser */
+    gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0)),SIZE_MAX_NAME);
+    #ifdef _WIN32
+    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(g_convert(system_path,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL)),NULL);
+    #else
+    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(system_path),NULL);
+    #endif
+
     /* Set the combo  box of the game configuration */
     GtkWidget *combo_config = gtk_combo_box_text_new();
     ptr_list_config = readConfigListFile(home_path);
@@ -93,14 +100,6 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_grid_attach(GTK_GRID(grid_1),combo_config,1,3,1,1);
     g_signal_connect(combo_config,"changed", G_CALLBACK(chooseGameConfigurationNewAssistant),user_data);
     closeListGameConfig(ptr_list_config);
-
-    /* Configure the file chooser */
-    #ifdef _WIN32
-    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(g_convert(system_path,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL)),NULL);
-    #else
-    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(system_path),NULL);
-    #endif
-    gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0)),SIZE_MAX_NAME);
 
     /* Set the second page */
     GtkWidget *scrolled_window_name = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"scrolled_window_new_csu_file_assistant_2"));
@@ -141,7 +140,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data)
  *  Open the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data)
@@ -152,7 +151,7 @@ G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *eve
 /*!
  * \fn G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
  *  Open the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data)
@@ -190,7 +189,7 @@ G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer data)
  *  Valid name of the first page of the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer data)
@@ -202,7 +201,7 @@ G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer dat
 /*!
  * \fn G_MODULE_EXPORT void validAssistantNewCsuOneNumber(GtkWidget *widget, gpointer data)
  *  Valid name of the first page of the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void validAssistantNewCsuOneNumber(GtkWidget *widget, gpointer data)
@@ -214,7 +213,7 @@ G_MODULE_EXPORT void validAssistantNewCsuOneNumber(GtkWidget *widget, gpointer d
 /*!
  * \fn void validAssistantNewCsuOne(globalData *data)
  *  Valid the first page of the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 void validAssistantNewCsuOne(globalData *data)
@@ -277,7 +276,7 @@ void validAssistantNewCsuOne(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpointer data)
  *  Load the game configuration
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpointer data)
@@ -334,7 +333,7 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
 /*!
  * \fn G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidget *widget, gpointer data)
  *  Prepare the new pages
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidget *widget, gpointer data)
@@ -404,7 +403,7 @@ G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidge
 /*!
  * \fn G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
  *  Valid name of the second page of the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
@@ -423,7 +422,11 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
     /* Save all the name in the csu structure and check if there are non null */
     for (i=0 ; i<user_data->ptr_csu_struct_tmp->nb_player ; i++)
     {
-        strcpy(user_data->ptr_csu_struct_tmp->player_names[i],gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(grid,1,i))));
+        /*#ifdef _WIN32
+        strcpy(user_data->ptr_csu_struct_tmp->player_names[i],g_convert(gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(grid,1,i))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL));
+        #else*/
+        strncpy(user_data->ptr_csu_struct_tmp->player_names[i],gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(grid,1,i))),SIZE_MAX_NAME-1);
+        //#endif
         if (strcmp(user_data->ptr_csu_struct_tmp->player_names[i],"") == 0)
         {
             valid = FALSE;
@@ -456,7 +459,7 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
  *  Valid the third page of the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
@@ -486,7 +489,7 @@ G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
  *  End the assistant for a new csu file
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)

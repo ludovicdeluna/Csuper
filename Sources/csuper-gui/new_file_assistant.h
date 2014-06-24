@@ -37,7 +37,7 @@
 #include "csuper-gui.h"
 #include "main_window.h"
 #include "main_menu.h"
-#include "game_configuration.h"
+#include "preferences.h"
 #include "utils.h"
 
 G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data);

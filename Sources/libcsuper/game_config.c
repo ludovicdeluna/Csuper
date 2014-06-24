@@ -76,7 +76,7 @@ int makeConfigListFile(char * home_path)
     char file_name[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
 
-    sprintf(folder,"%s%s",home_path,MAIN_FOLDER_NAME);
+    sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
     #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -120,7 +120,7 @@ list_game_config *readConfigListFile(char * home_path)
     int nb_config;
     int i;
 
-    sprintf(file_name_config,"%s%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
+    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FILE_NAME);
 
     ptr_file=openFile(file_name_config,"r");
 
@@ -166,7 +166,7 @@ int addConfigListFile(char *new_config_name,char *home_path)
     }
 
 
-    sprintf(file_name_config,"%s%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
+    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FILE_NAME);
 
     ptr_file=openFile(file_name_config,"w");
 
@@ -202,7 +202,7 @@ int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,cha
 
     ptr_list_config=readConfigListFile(home_path);
 
-    sprintf(file_name_config,"%s%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FILE_NAME);
+    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FILE_NAME);
 
     ptr_file=openFile(file_name_config,"w+");
 
@@ -241,7 +241,7 @@ int newConfigFile(game_config config,char * home_path)
     if(addConfigListFile(config.name,home_path) == MY_FALSE)
         return MY_FALSE;
 
-    sprintf(folder,"%s%s",home_path,MAIN_FOLDER_NAME);
+    sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
     #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -293,7 +293,7 @@ int removeConfigFile(char *config_name,char * home_path)
 
     libcsuper_initialize();
 
-    sprintf(folder,"%s%s",home_path,MAIN_FOLDER_NAME);
+    sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
     #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -343,7 +343,7 @@ int readConfigFile(int index_read, list_game_config *ptr_list_config, game_confi
     char buffer[5];
     #endif // _WIN32
 
-    sprintf(file_name_config,"%s%s/%s/%s",home_path,MAIN_FOLDER_NAME,CONFIGURATION_FOLDER_NAME,ptr_list_config->name_game_config[index_read]);
+    sprintf(file_name_config,"%s%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FOLDER_NAME,ptr_list_config->name_game_config[index_read]);
 
     ptr_file=openFile(file_name_config,"r");
 

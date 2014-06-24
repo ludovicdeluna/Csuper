@@ -37,7 +37,7 @@
 #include "csuper-gui.h"
 #include "main_menu.h"
 #include "main_window.h"
-#include "game_configuration.h"
+#include "preferences.h"
 #include "new_file_assistant.h"
 #include "utils.h"
 

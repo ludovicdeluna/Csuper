@@ -62,6 +62,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/csuper/menu.h" />
+		<Unit filename="../Sources/csuper/ressources_windows.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
 		<Extensions>
 			<code_completion />
 			<debugger />

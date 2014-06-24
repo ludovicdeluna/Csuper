@@ -320,7 +320,8 @@ void createPointsGrid(globalData *data)
         if (exceedMaxNumber(data->ptr_csu_struct) == MY_TRUE)
             gtk_editable_set_editable(GTK_EDITABLE(new_points_button),FALSE);
         gtk_grid_attach(GTK_GRID(points_grid),new_points_button,2*(i+1),2*(max_nb_turn+1),1,1);
-        g_signal_connect (new_points_button,"changed", G_CALLBACK(updateTotalPointsInTurnLabel),data);
+        g_signal_connect (new_points_button,"value-changed", G_CALLBACK(updateTotalPointsInTurnLabel),data);
+        //g_signal_connect (new_points_button,"changed", G_CALLBACK(setButtonMainWindowClipboardSensitive),data);
     }
 
     /* Write a blank line */
@@ -365,7 +366,7 @@ void createPointsGrid(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT endOfTurn(GtkWidget *widget, gpointer data)
  *  End of a turn
- * \param[in] widget the widget which send the interrupt
+ * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
@@ -381,8 +382,6 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
 
     /* Test if there is a csu file opened or if the game is not finished */
     if (user_data->ptr_csu_struct == NULL)
-        return;
-    if (exceedMaxNumber(user_data->ptr_csu_struct) == MY_TRUE)
         return;
 
     gint max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
@@ -406,9 +405,24 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
         writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct);
         addLastCsuStruct(user_data);
         updateMainWindow(user_data);
+        if (exceedMaxNumber(user_data->ptr_csu_struct) == MY_TRUE)
+        {
+            GtkWidget *window_game_over = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"messagedialog_game_over"));
+            if (!window_game_over)
+                g_critical(_("Widget messagedialog_game_over is missing in file csuper-gui.glade."));
+
+            gtk_dialog_run(GTK_DIALOG (window_game_over));
+            gtk_widget_hide (window_game_over);
+            return;
+        }
     }
 }
 
+/*!
+ * \fn void setButtonMainWindowSensitive(globalData *data)
+ *  Set the button of the main window sensitive or not
+ * \param[in] data the globalData
+ */
 void setButtonMainWindowSensitive(globalData *data)
 {
     GtkWidget *button_end_of_turn = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"button_end_of_turn"));
@@ -476,5 +490,106 @@ void setButtonMainWindowSensitive(globalData *data)
     {
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),5)),FALSE);
         gtk_widget_set_sensitive(menu_redo,FALSE);
+    }
+
+    setButtonMainWindowClipboardSensitive(NULL,data);
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gpointer data)
+ *  Delete the selected text
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    GtkWidget *main_toolbar = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_toolbar"));
+    if (!main_toolbar)
+        g_critical(_("Widget main_toolbar is missing in file csuper-gui.glade."));
+
+    GtkWidget *menu_cut = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_cut"));
+    if (!menu_cut)
+        g_critical(_("Widget menu_cut is missing in file csuper-gui.glade."));
+    GtkWidget *menu_copy = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_copy"));
+    if (!menu_copy)
+        g_critical(_("Widget menu_copy is missing in file csuper-gui.glade."));
+    GtkWidget *menu_paste = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_paste"));
+    if (!menu_paste)
+        g_critical(_("Widget menu_paste is missing in file csuper-gui.glade."));
+    GtkWidget *menu_delete = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_delete"));
+    if (!menu_delete)
+        g_critical(_("Widget menu_delete is missing in file csuper-gui.glade."));
+
+    /*Decomment when i found the signal which is adapted
+
+    if(GTK_IS_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))))
+    {
+        if (gtk_clipboard_wait_for_text(user_data->ptr_clipboard_selected) == NULL)
+        {
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),FALSE);
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),FALSE);
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)),FALSE);
+            gtk_widget_set_sensitive(menu_cut,FALSE);
+            gtk_widget_set_sensitive(menu_copy,FALSE);
+            gtk_widget_set_sensitive(menu_delete,FALSE);
+        }
+        else
+        {
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),TRUE);
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),TRUE);
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)),TRUE);
+            gtk_widget_set_sensitive(menu_cut,TRUE);
+            gtk_widget_set_sensitive(menu_copy,TRUE);
+            gtk_widget_set_sensitive(menu_delete,TRUE);
+        }
+
+        if (gtk_clipboard_wait_for_text(user_data->ptr_clipboard) == NULL)
+        {
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)),FALSE);
+            gtk_widget_set_sensitive(menu_paste,FALSE);
+        }
+        else
+        {
+            gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)),TRUE);
+            gtk_widget_set_sensitive(menu_paste,TRUE);
+        }
+    }
+    else
+    {
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)),FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)),FALSE);
+        gtk_widget_set_sensitive(menu_cut,FALSE);
+        gtk_widget_set_sensitive(menu_copy,FALSE);
+        gtk_widget_set_sensitive(menu_paste,FALSE);
+        gtk_widget_set_sensitive(menu_delete,FALSE);
+    }*/
+
+    if (user_data->ptr_csu_struct == NULL)
+    {
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)),FALSE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)),FALSE);
+
+        gtk_widget_set_sensitive(menu_cut,FALSE);
+        gtk_widget_set_sensitive(menu_copy,FALSE);
+        gtk_widget_set_sensitive(menu_paste,FALSE);
+        gtk_widget_set_sensitive(menu_delete,FALSE);
+    }
+    else
+    {
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),TRUE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),TRUE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)),TRUE);
+        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)),TRUE);
+
+        gtk_widget_set_sensitive(menu_cut,TRUE);
+        gtk_widget_set_sensitive(menu_copy,TRUE);
+        gtk_widget_set_sensitive(menu_delete,TRUE);
+        gtk_widget_set_sensitive(menu_paste,TRUE);
     }
 }

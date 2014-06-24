@@ -199,7 +199,7 @@ void menuPlayersName(csuStruct *ptr_csu_struct)
     int i;
     char name[SIZE_MAX_NAME];
 
-    printf(_("\nThe players's names must have between 2 and %.0f characters with no special characters.\n"),ptr_csu_struct->size_max_name);
+    printf(_("\nThe players's names must have between 2 and %.0f characters with no special characters.\n"),ptr_csu_struct->size_max_name-1);
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
@@ -210,7 +210,7 @@ void menuPlayersName(csuStruct *ptr_csu_struct)
             printf(_("You chose %s\n"),name);
         } while (strlen(name) <2 || strlen(name) > ptr_csu_struct->size_max_name);
 
-        strcpy(ptr_csu_struct->player_names[i],name);
+        strncpy(ptr_csu_struct->player_names[i],name,SIZE_MAX_NAME-1);
     }
 }
 

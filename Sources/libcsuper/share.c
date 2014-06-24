@@ -370,11 +370,7 @@ int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
     int ok = MY_FALSE;
     for (i=strlen(full_filename) ; i>=0 ; i--)
     {
-        #ifdef _WIN32
-        if (full_filename[i] == '\\')
-        #else
         if (full_filename[i] == '/')
-        #endif // _WIN32
         {
             ok = MY_TRUE;
             strcpy(simple_filename,full_filename+i+1);

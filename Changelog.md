@@ -26,6 +26,7 @@ Libcsuper
 * Fix a bug with a game not in turn by turn
 * New function getSimpleFilenameFromFullFilename
 * New function copyCsuStruct
+* New source file : preferences
 
 2.4.0
 

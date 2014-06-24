@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-21 15:54+0200\n"
+"POT-Creation-Date: 2014-06-24 22:06+0200\n"
 "PO-Revision-Date: 2014-06-09 21:54+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
@@ -79,25 +79,6 @@ msgid ""
 msgstr ""
 "\n"
 "Erreur ce nom n'existe pas.\n"
-
-#: Sources/libcsuper/file_system_path.c:115
-#: Sources/libcsuper/file_system_path.c:120
-#, c-format
-msgid ""
-"\n"
-"Error while reading the file containing the system path.\n"
-msgstr ""
-"\n"
-"Erreur lors de la lecture du fichier contenant le répertoire des fichiers.\n"
-
-#: Sources/libcsuper/file_system_path.c:181
-#, c-format
-msgid ""
-"\n"
-"Error : this folder is not valid.\n"
-msgstr ""
-"\n"
-"Erreur : Le dossier n'est pas valide.\n"
 
 #: Sources/libcsuper/game_config.c:163
 #, c-format
@@ -177,6 +158,25 @@ msgid ""
 msgstr ""
 "\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour afficher "
 "directement le contenu du fichier.\n"
+
+#: Sources/libcsuper/preferences_files.c:240
+#: Sources/libcsuper/preferences_files.c:245
+#, c-format
+msgid ""
+"\n"
+"Error while reading the file containing the system path.\n"
+msgstr ""
+"\n"
+"Erreur lors de la lecture du fichier contenant le répertoire des fichiers.\n"
+
+#: Sources/libcsuper/preferences_files.c:306
+#, c-format
+msgid ""
+"\n"
+"Error : this folder is not valid.\n"
+msgstr ""
+"\n"
+"Erreur : Le dossier n'est pas valide.\n"
 
 #: Sources/libcsuper/share.c:58
 #, c-format

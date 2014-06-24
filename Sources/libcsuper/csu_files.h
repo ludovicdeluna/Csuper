@@ -40,9 +40,9 @@
 
 /*!
  * \def SIZE_MAX_FILE_NAME
- * Define the size maximum of a filename to 250
+ * Define the size maximum of a filename to 1024
  */
-#define SIZE_MAX_FILE_NAME 250
+#define SIZE_MAX_FILE_NAME 1024
 
 /*!
  * \def FILE_EXTENSION
