@@ -528,6 +528,7 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
     addLastCsuStruct(user_data);
 
     deleteAssistantNewCsu(NULL,user_data);
+    setButtonMainWindowSensitive(user_data);
     g_free(folder);
 }
 

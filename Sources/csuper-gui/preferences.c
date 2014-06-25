@@ -291,7 +291,7 @@ void displayGameConfiguration(globalData *data)
         gtk_grid_attach(GTK_GRID(grid),gtk_label_new(ptr_list_config->name_game_config[i]),0,i,1,1);
         gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(grid),0,i),TRUE);
         //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),TRUE);
-        #ifdef _WIN32
+        #if GTK_MINOR_VERSION < 10
         gtk_grid_attach(GTK_GRID(grid),gtk_button_new_from_stock("gtk-edit"),1,i,1,1);
         gtk_grid_attach(GTK_GRID(grid),gtk_button_new_from_stock("gtk-properties"),2,i,1,1);
         gtk_grid_attach(GTK_GRID(grid),gtk_button_new_from_stock("gtk-delete"),3,i,1,1);
@@ -302,7 +302,7 @@ void displayGameConfiguration(globalData *data)
         gtk_button_set_label(GTK_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,i)),_("Edit"));
         gtk_button_set_label(GTK_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),2,i)),_("Properties"));
         gtk_button_set_label(GTK_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),3,i)),_("Delete"));
-        #endif // _WIN32
+        #endif
         g_signal_connect (gtk_grid_get_child_at(GTK_GRID(grid),3,i),"clicked", G_CALLBACK(deleteGameConfiguration),data);
         g_signal_connect (gtk_grid_get_child_at(GTK_GRID(grid),2,i),"clicked", G_CALLBACK(viewGameConfiguration),data);
         g_signal_connect (gtk_grid_get_child_at(GTK_GRID(grid),1,i),"clicked", G_CALLBACK(editGameConfiguration),data);

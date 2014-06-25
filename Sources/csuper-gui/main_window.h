@@ -50,5 +50,7 @@ void createPointsGrid(globalData *data);
 G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data);
 void setButtonMainWindowSensitive(globalData *data);
 G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gpointer data);
+void readMainWindowSize(globalData *data);
+G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gpointer user_data);
 
 #endif // MAIN_WINDOW_H_INCLUDED

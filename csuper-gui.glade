@@ -110,22 +110,15 @@
       </packing>
     </child>
   </object>
-  <object class="GtkImage" id="image1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-preferences</property>
-  </object>
-  <object class="GtkImage" id="image2">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="stock">gtk-preferences</property>
-  </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Csuper</property>
     <property name="window_position">center</property>
+    <property name="default_width">851</property>
+    <property name="default_height">422</property>
     <property name="icon">Images/Logo_40.png</property>
     <property name="gravity">center</property>
+    <signal name="configure-event" handler="saveMainWindowSize" swapped="no"/>
     <signal name="destroy" handler="gtk_main_quit" swapped="no"/>
     <child>
       <object class="GtkGrid" id="main_grid">
@@ -263,6 +256,7 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <signal name="activate" handler="cutToClipboard" swapped="no"/>
                       </object>
                     </child>
                     <child>
@@ -310,35 +304,21 @@
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <child>
-                      <object class="GtkImageMenuItem" id="menu_preference1">
-                        <property name="label">gtk-preferences</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">Open the preferences window</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <property name="always_show_image">True</property>
-                        <signal name="activate" handler="openPreferences" swapped="no"/>
-                      </object>
-                    </child>
-                    <child>
                       <object class="GtkImageMenuItem" id="menu_preference_game_config">
-                        <property name="label" translatable="yes">Game configuration preferences</property>
+                        <property name="label" translatable="yes">Game configuration</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Open the game configuration preferences window</property>
-                        <property name="image">image1</property>
                         <property name="use_stock">False</property>
                         <signal name="activate" handler="openGameConfigurationPreferences" swapped="no"/>
                       </object>
                     </child>
                     <child>
                       <object class="GtkImageMenuItem" id="menu_preferences_toolbar_button">
-                        <property name="label" translatable="yes">Toolbar button preferences</property>
+                        <property name="label" translatable="yes">Toolbar button</property>
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Open the toolbar button preferences window</property>
-                        <property name="image">image2</property>
                         <property name="use_stock">False</property>
                         <signal name="activate" handler="openToolbarButtonPreferences" swapped="no"/>
                       </object>
@@ -773,7 +753,7 @@
                 <property name="no_show_all">True</property>
                 <property name="tooltip_text" translatable="yes">Open the game configuration preferences window</property>
                 <property name="is_important">True</property>
-                <property name="label" translatable="yes">Game configuration preferences</property>
+                <property name="label" translatable="yes">Game configuration</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-preferences</property>
                 <signal name="clicked" handler="openGameConfigurationPreferences" swapped="no"/>
@@ -789,7 +769,7 @@
                 <property name="no_show_all">True</property>
                 <property name="tooltip_text" translatable="yes">Open the toolbar button preferences window</property>
                 <property name="is_important">True</property>
-                <property name="label" translatable="yes">Toolbar button preferences</property>
+                <property name="label" translatable="yes">Toolbar button</property>
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-preferences</property>
                 <signal name="clicked" handler="openToolbarButtonPreferences" swapped="no"/>

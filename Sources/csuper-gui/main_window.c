@@ -593,3 +593,65 @@ G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gp
         gtk_widget_set_sensitive(menu_paste,TRUE);
     }
 }
+
+/*!
+ * \fn void readMainWindowSize(globalData *data)
+ *  Read and apply the main window size store is the file
+ * \param[in] data the globalData
+ */
+void readMainWindowSize(globalData *data)
+{
+    main_window_size size;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePath(home_path);
+    #endif // PORTABLE
+    readFileMainWidowSize(home_path,&size);
+
+    GtkWidget *main_window = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window"));
+    if (!main_window)
+        g_critical(_("Widget main_window is missing in file csuper-gui.glade."));
+
+    gtk_window_resize(GTK_WINDOW(main_window),size.width,size.height);
+
+    if (size.is_maximize == MY_TRUE)
+        gtk_window_maximize(GTK_WINDOW(main_window));
+    else
+        gtk_window_unmaximize(GTK_WINDOW(main_window));
+}
+
+/*!
+ * \fn G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gpointer user_data)
+ *  Save the main window size in a file
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ * \param[in] event the GdkEventConfigure which triggered this signal
+ */
+G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    main_window_size size;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+    GdkEventConfigure configure_event = event->configure;
+
+    #ifndef PORTABLE
+    readHomePath(home_path);
+    #endif // PORTABLE
+
+    GtkWidget *main_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window"));
+    if (!main_window)
+        g_critical(_("Widget main_window is missing in file csuper-gui.glade."));
+
+    size.height = configure_event.height;
+    size.width = configure_event.width;
+    #if GTK_MINOR_VERSION >= 12
+    size.is_maximize=gtk_window_is_maximized(GTK_WINDOW(main_window));
+    #else
+    size.is_maximize=MY_FALSE;
+    #endif
+
+    createFileMainWidowSize(home_path,size);
+
+    return FALSE;
+}

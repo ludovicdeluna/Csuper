@@ -41,16 +41,22 @@
 
 
 /*!
- * \def FILE_NAME_SYSTEM_PATH
+ * \def FILENAME_SYSTEM_PATH
  * Define filename of the file which contain the system path
  */
-#define FILE_NAME_SYSTEM_PATH "system_path.txt"
+#define FILENAME_SYSTEM_PATH "system_path.txt"
 
 /*!
- * \def FILE_NAME_TOOLBAR_BUTTON_PREFERENCES
+ * \def FILENAME_TOOLBAR_BUTTON_PREFERENCES
  * Define filename of the file which contain the toolbar button preferences
  */
-#define FILE_NAME_TOOLBAR_BUTTON_PREFERENCES "toolbar_button_preferences.txt"
+#define FILENAME_TOOLBAR_BUTTON_PREFERENCES "toolbar_button_preferences.txt"
+
+/*!
+ * \def FILENAME_TOOLBAR_BUTTON_PREFERENCES
+ * Define filename of the file which contain the toolbar button preferences
+ */
+#define FILENAME_MAIN_WINDOW_SIZE "main_window_size.txt"
 
 /*!
  * \def PREFERENCES_FOLDER_NAME
@@ -85,11 +91,24 @@ typedef struct
     int about;              /*!< The about button */
 }toolbar_button_preferences_struct;
 
+/*!
+ * \struct main_window_size
+ * All component of the man window size
+ */
+typedef struct
+{
+    int width;              /*!< The width of the main window */
+    int height;              /*!< The height of the main window */
+    int is_maximize;              /*!< Said if the main window is maximize or not */
+}main_window_size;
+
 
 void createPreferencesFolder(char *home_path);
 int createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar);
 int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar);
 int differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2);
+int createFileMainWidowSize(char *home_path, main_window_size size);
+int readFileMainWidowSize(char *home_path, main_window_size *size);
 int createFileSystemPath();
 int readFileSystemPath(char *file_name);
 int readSystemPath(char *file_name);

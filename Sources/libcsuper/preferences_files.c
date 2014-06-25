@@ -63,7 +63,7 @@ int createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferenc
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
 
-    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILE_NAME_TOOLBAR_BUTTON_PREFERENCES);
+    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_TOOLBAR_BUTTON_PREFERENCES);
 
     createPreferencesFolder(home_path);
 
@@ -115,7 +115,7 @@ int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences
 
     createPreferencesFolder(home_path);
 
-    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILE_NAME_TOOLBAR_BUTTON_PREFERENCES);
+    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_TOOLBAR_BUTTON_PREFERENCES);
 
     ptr_file=openFile(file_name,"r");
 
@@ -159,6 +159,71 @@ int differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct t
 }
 
 /*!
+ * \fn int createFileMainWidowSize(char *home_path, main_window_size size)
+ *  Create the file which contain the main window size
+ * \param[in] home_path the path to the home directory
+ * \param[in] size the size of the main window
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ */
+int createFileMainWidowSize(char *home_path, main_window_size size)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIZE);
+
+    createPreferencesFolder(home_path);
+
+    ptr_file=openFile(file_name,"w+");
+
+    if (ptr_file==NULL)
+        return MY_FALSE;
+
+    fprintf(ptr_file,"%d %d %d",size.width,size.height,size.is_maximize);
+
+    closeFile(ptr_file);
+
+    return MY_TRUE;
+}
+
+/*!
+ * \fn int readFileMainWidowSize(char *home_path, main_window_size *size)
+ *  Read the file which contain the main window size
+ * \param[in] home_path the path to the home directory
+ * \param[in] size the size of the main window
+ * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ */
+int readFileMainWidowSize(char *home_path, main_window_size *size)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    size->height=422;
+    size->width=851;
+    size->is_maximize = MY_FALSE;
+
+    createPreferencesFolder(home_path);
+
+    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIZE);
+
+    ptr_file=openFile(file_name,"r");
+
+    if (ptr_file==NULL)
+    {
+        if (createFileMainWidowSize(home_path,*size) == MY_FALSE)
+            return MY_FALSE;
+        else
+            return MY_TRUE;
+    }
+
+    fscanf(ptr_file,"%d %d %d",&(size->width),&(size->height),&(size->is_maximize));
+
+    closeFile(ptr_file);
+
+    return MY_TRUE;
+}
+
+/*!
  * \fn void createFileSystemPath()
  *  Create the folder and the file which contain the system path
  * \return MY_TRUE if everything is OK, MY_FALSE otherwise
@@ -178,7 +243,7 @@ int createFileSystemPath()
     mkdir(folder);
     #endif
 
-    sprintf(file_name,"%s/%s",folder,FILE_NAME_SYSTEM_PATH);
+    sprintf(file_name,"%s/%s",folder,FILENAME_SYSTEM_PATH);
 
     ptr_file=openFile(file_name,"w+");
 
@@ -206,7 +271,7 @@ int readFileSystemPath(char *file_name)
     FILE *ptr_file;
 
     readHomePath(file_name_preferences);
-    sprintf(file_name_preferences,"%s/%s/%s",file_name_preferences,PREFERENCES_FOLDER_NAME,FILE_NAME_SYSTEM_PATH);
+    sprintf(file_name_preferences,"%s/%s/%s",file_name_preferences,PREFERENCES_FOLDER_NAME,FILENAME_SYSTEM_PATH);
 
     ptr_file=openFile(file_name_preferences,"r");
 
@@ -268,7 +333,7 @@ int changeSystemPath(char *new_path)
 
     readHomePath(file_name);
 
-    sprintf(file_name,"%s/%s/%s",file_name,PREFERENCES_FOLDER_NAME,FILE_NAME_SYSTEM_PATH);
+    sprintf(file_name,"%s/%s/%s",file_name,PREFERENCES_FOLDER_NAME,FILENAME_SYSTEM_PATH);
 
     ptr_file=openFile(file_name,"w+");
 

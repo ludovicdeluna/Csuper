@@ -503,10 +503,6 @@ void updateToolbarButton(globalData *data)
     readHomePath(home_path);
     #endif // PORTABLE
     readFileToolbarButtonPreferences(home_path,&toolbar_preferences);
-    /*printf("%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",toolbar_preferences.new,toolbar_preferences.open,toolbar_preferences.save_as,
-            toolbar_preferences.separator_1,toolbar_preferences.undo,toolbar_preferences.redo,toolbar_preferences.separator_2,toolbar_preferences.cut,toolbar_preferences.copy,toolbar_preferences.paste,
-            toolbar_preferences.delete,toolbar_preferences.separator_3,toolbar_preferences.properties,toolbar_preferences.separator_4,toolbar_preferences.preferences,
-            toolbar_preferences.game_configuration_preferences,toolbar_preferences.toolbar_button_preferences,toolbar_preferences.separator_5,toolbar_preferences.about);*/
 
     GtkWidget *main_toolbar = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_toolbar"));
     if (!main_toolbar)

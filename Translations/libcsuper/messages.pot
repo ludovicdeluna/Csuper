@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-24 22:06+0200\n"
+"POT-Creation-Date: 2014-06-25 22:02+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -127,15 +127,15 @@ msgid ""
 "directly the content of the file.\n"
 msgstr ""
 
-#: Sources/libcsuper/preferences_files.c:240
-#: Sources/libcsuper/preferences_files.c:245
+#: Sources/libcsuper/preferences_files.c:305
+#: Sources/libcsuper/preferences_files.c:310
 #, c-format
 msgid ""
 "\n"
 "Error while reading the file containing the system path.\n"
 msgstr ""
 
-#: Sources/libcsuper/preferences_files.c:306
+#: Sources/libcsuper/preferences_files.c:371
 #, c-format
 msgid ""
 "\n"

@@ -84,11 +84,13 @@ int main (int   argc, char *argv[])
     noCsuFilePoints(&data);
     setButtonMainWindowSensitive(&data);
 
+    readMainWindowSize(&data);
     updateToolbarButton(&data);
     gtk_widget_show_all(data.ptr_main_window);
 
     gtk_main();
 
+    //saveMainWindowSize(&data);
     g_object_unref(data.ptr_builder);
 
     return EXIT_SUCCESS;
