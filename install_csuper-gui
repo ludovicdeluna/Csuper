@@ -1,0 +1,15 @@
+#!/bin/bash
+sudo mkdir -p /opt/csuper-gui
+sudo cp csuper-gui /opt/csuper-gui
+sudo cp csuper-gui.glade /opt/csuper-gui/csuper-gui.glade
+sudo cp libcsuper.so /usr/local/lib
+sudo echo "if [ \"\$1\" != \"\$HOME\" ] ; then
+nom=\$(pwd)/\$1
+fi
+cd /opt/csuper-gui
+/opt/csuper-gui/csuper-gui \"\$nom\"" > csuper_install
+sudo chmod +x csuper_install
+sudo mv csuper_install /usr/local/bin/csuper-gui
+sudo cp -R Locales /opt/csuper-gui
+sudo cp -R Images /opt/csuper-gui
+sudo chmod -R a+r /opt/csuper-gui

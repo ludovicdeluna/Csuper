@@ -124,14 +124,6 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(window_file_open));
 		    #endif
 
-		    /* Save the folder */
-		    #ifndef PORTABLE
-		    gchar folder[SIZE_MAX_FILE_NAME];
-		    strcpy(folder,filename);
-		    if (getFolderFromFilename(folder) == MY_TRUE)
-                changeSystemPath(folder);
-		    #endif // PORTABLE
-
 			if (user_data->ptr_csu_struct != NULL)
                 closeCsuStruct(user_data->ptr_csu_struct);
 
@@ -141,6 +133,14 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
                 error=TRUE;
             else
             {
+                /* Save the folder */
+                #ifndef PORTABLE
+                gchar folder[SIZE_MAX_FILE_NAME];
+                strcpy(folder,filename);
+                if (getFolderFromFilename(folder) == MY_TRUE)
+                    changeSystemPath(folder);
+                #endif // PORTABLE
+
                 strcpy(user_data->csu_filename,filename);
                 updateMainWindow(user_data);
                 deleteAllLastCsuStruct(user_data);

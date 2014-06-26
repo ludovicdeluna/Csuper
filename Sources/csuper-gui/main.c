@@ -40,7 +40,7 @@
  * \param[in] argv the array of argument.
  * \return EXIT_SUCCESS if everything is OK
  */
-int main (int   argc, char *argv[])
+int main (int argc, char *argv[])
 {
     globalData data;
     GError *error = NULL;
@@ -86,12 +86,51 @@ int main (int   argc, char *argv[])
 
     readMainWindowSize(&data);
     updateToolbarButton(&data);
+
+    openFileWithMainArgument(&data,argc,argv);
+
     gtk_widget_show_all(data.ptr_main_window);
 
     gtk_main();
 
-    //saveMainWindowSize(&data);
     g_object_unref(data.ptr_builder);
 
     return EXIT_SUCCESS;
+}
+
+void openFileWithMainArgument(globalData *data,int argc, char *argv[])
+{
+    if (argc < 2)
+        return;
+
+    gchar filename[SIZE_MAX_FILE_NAME];
+    printf("%s",argv[1]);
+
+    #ifdef _WIN32
+    strncpy(filename,g_convert(argv[1],-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL),SIZE_MAX_FILE_NAME-1);
+    #else
+    strncpy(filename,argv[1],SIZE_MAX_FILE_NAME-1);
+    #endif // _WIN32
+
+    if (data->ptr_csu_struct != NULL)
+        closeCsuStruct(data->ptr_csu_struct);
+
+    data->ptr_csu_struct=NULL;
+    (data->ptr_csu_struct) = readCsuFile(filename);
+    if((data->ptr_csu_struct) != NULL)
+    {
+        /* Save the folder */
+        #ifndef PORTABLE
+        gchar folder[SIZE_MAX_FILE_NAME];
+        strcpy(folder,filename);
+        if (getFolderFromFilename(folder) == MY_TRUE)
+            changeSystemPath(folder);
+        #endif // PORTABLE
+
+        strcpy(data->csu_filename,filename);
+        updateMainWindow(data);
+        deleteAllLastCsuStruct(data);
+        addLastCsuStruct(data);
+        setButtonMainWindowSensitive(data);
+    }
 }
