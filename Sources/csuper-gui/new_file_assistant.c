@@ -2,7 +2,7 @@
  * \file    new_file_assistant.c
  * \brief   The new file assistant function
  * \author  Remi BERTHO
- * \date    04/05/14
+ * \date    26/06/14
  * \version 4.0.0
  */
 
@@ -141,9 +141,10 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
  * \fn G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data)
  *  Open the assistant for a new csu file
  * \param[in] widget the widget which send the signal
+ * \param[in] event the GdkEvent
  * \param[in] data the globalData
  */
-G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data)
+G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent *event, gpointer data)
 {
     deleteAssistantNewCsu(widget,data);
 }
@@ -187,43 +188,20 @@ G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data)
 }
 
 /*!
- * \fn G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer data)
- *  Valid name of the first page of the assistant for a new csu file
- * \param[in] widget the widget which send the signal
- * \param[in] data the globalData
- */
-G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer data)
-{
-    globalData *user_data = (globalData*) data;
-    validAssistantNewCsuOne(user_data);
-}
-
-/*!
- * \fn G_MODULE_EXPORT void validAssistantNewCsuOneNumber(GtkWidget *widget, gpointer data)
- *  Valid name of the first page of the assistant for a new csu file
- * \param[in] widget the widget which send the signal
- * \param[in] data the globalData
- */
-G_MODULE_EXPORT void validAssistantNewCsuOneNumber(GtkWidget *widget, gpointer data)
-{
-    globalData *user_data = (globalData*) data;
-    validAssistantNewCsuOne(user_data);
-}
-
-/*!
- * \fn void validAssistantNewCsuOne(globalData *data)
+ * \fn G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
  *  Valid the first page of the assistant for a new csu file
  * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
-void validAssistantNewCsuOne(globalData *data)
+G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
 {
+    globalData *user_data = (globalData*) data;
     gchar name[SIZE_MAX_NAME];
     gint index;
     gchar *folder;
     gint folder_ok;
 
-    GtkWidget *grid_1 = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_new_csu_file_assistant_1"));
+    GtkWidget *grid_1 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_1"));
     if (!grid_1)
         g_critical(_("Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."));
 
@@ -262,13 +240,13 @@ void validAssistantNewCsuOne(globalData *data)
     /* Test if the page one is valid or not */
     if (strcmp(name,"") != 0 && index >=0 && folder_ok != MY_FALSE)
     {
-        gtk_assistant_set_page_complete(GTK_ASSISTANT(data->ptr_new_csu_file_assistant),grid_1,TRUE);
-        if (data->ptr_csu_struct_tmp != NULL)
-            closeCsuStruct(data->ptr_csu_struct_tmp);
-        data->ptr_csu_struct_tmp = newCsuStruct(gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid_1),1,2))),data->config);
+        gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,TRUE);
+        if (user_data->ptr_csu_struct_tmp != NULL)
+            closeCsuStruct(user_data->ptr_csu_struct_tmp);
+        user_data->ptr_csu_struct_tmp = newCsuStruct(gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid_1),1,2))),user_data->config);
     }
     else
-        gtk_assistant_set_page_complete(GTK_ASSISTANT(data->ptr_new_csu_file_assistant),grid_1,FALSE);
+        gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,FALSE);
 
     g_free(folder);
 }
@@ -306,7 +284,7 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
     /* if the index correspond to to a game configuration, read it */
     if (index < ptr_list_config->nb_config)
         readConfigFile(index,ptr_list_config,&(user_data->config),home_path);
-    /* Otherwise ask a new game configuratiob */
+    /* Otherwise ask a new game configuration */
     else
     {
         changeNewGameConfigurationDialog(user_data,config);
@@ -314,7 +292,7 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
         if (ptr_config == NULL)
         {
             gtk_combo_box_set_active(GTK_COMBO_BOX(widget),-1);
-            validAssistantNewCsuOne(data);
+            validAssistantNewCsuOne(NULL,data);
             return;
         }
 
@@ -326,13 +304,14 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
         free(ptr_config);
     }
 
-    validAssistantNewCsuOne(data);
+    validAssistantNewCsuOne(NULL,data);
     closeListGameConfig(ptr_list_config);
 }
 
 /*!
  * \fn G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidget *widget, gpointer data)
  *  Prepare the new pages
+ * \param[in] assistant the GtkAssistant
  * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
@@ -360,7 +339,7 @@ G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidge
             g_signal_connect(gtk_grid_get_child_at(GTK_GRID(grid),1,i),"changed", G_CALLBACK(validAssistantNewCsuTwo),user_data);
         }
 
-        /* Remove the lines */
+        /* Remove the unwanted lines */
         for (i = nb_ligne ; i > user_data->ptr_csu_struct_tmp->nb_player ; i--)
         {
             gtk_widget_destroy(gtk_grid_get_child_at(grid,0,i-1));
@@ -397,7 +376,7 @@ G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidge
     }
 
     if (page == 0)
-        validAssistantNewCsuOne(user_data);
+        validAssistantNewCsuOne(NULL,user_data);
 }
 
 /*!
@@ -422,11 +401,7 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
     /* Save all the name in the csu structure and check if there are non null */
     for (i=0 ; i<user_data->ptr_csu_struct_tmp->nb_player ; i++)
     {
-        /*#ifdef _WIN32
-        strcpy(user_data->ptr_csu_struct_tmp->player_names[i],g_convert(gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(grid,1,i))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL));
-        #else*/
         strncpy(user_data->ptr_csu_struct_tmp->player_names[i],gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(grid,1,i))),SIZE_MAX_NAME-1);
-        //#endif
         if (strcmp(user_data->ptr_csu_struct_tmp->player_names[i],"") == 0)
         {
             valid = FALSE;
@@ -506,10 +481,10 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
 
     #ifdef _WIN32
     folder = g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid),1,1))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
-    strcpy(name,g_convert(gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL));
+    strncpy(name,g_convert(gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL),SIZE_MAX_FILE_NAME-1);
     #else
     folder = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid),1,1)));
-    strcpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))));
+    strncpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),SIZE_MAX_FILE_NAME-1);
     #endif // _WIN32
 
     sprintf(user_data->csu_filename,"%s/%s",folder,name);

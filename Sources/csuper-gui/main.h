@@ -2,8 +2,8 @@
  * \file    main.h
  * \brief   Main
  * \author  Remi BERTHO
- * \date    02/05/14
- * \version 3.0.0
+ * \date    26/06/14
+ * \version 4.0.0
  */
 
  /*

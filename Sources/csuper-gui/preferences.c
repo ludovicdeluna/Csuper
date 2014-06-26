@@ -2,7 +2,7 @@
  * \file    preferences.c
  * \brief   The preferences of csuper
  * \author  Remi BERTHO
- * \date    03/05/14
+ * \date    26/06/14
  * \version 4.0.0
  */
 
@@ -95,7 +95,7 @@ G_MODULE_EXPORT void openToolbarButtonPreferences(GtkWidget *widget, gpointer da
 /*!
  * \fn G_MODULE_EXPORT void closePreferences(GtkWidget *widget, gpointer data)
  *  Close the preferences
- * \param[in] widget the widget which send the signal
+ * \param[in] widget the button which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void closePreferences(GtkWidget *widget, gpointer data)
@@ -112,13 +112,13 @@ G_MODULE_EXPORT void closePreferences(GtkWidget *widget, gpointer data)
 }
 
 /*!
- * \fn G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data)
+ * \fn G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent *event, gpointer user_data)
  *  Close the preferences
  * \param[in] widget the widget which send the signal
  * \param[in] event the event which triggered this signal
- * \param[in] data the globalData
+ * \param[in] user_data the globalData
  */
-G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data)
+G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 {
     closePreferences(widget,user_data);
     return TRUE;
@@ -133,7 +133,7 @@ G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent  *even
 G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-    char home_path[SIZE_MAX_FILE_NAME];
+    char home_path[SIZE_MAX_FILE_NAME]="";
     int error=FALSE;
 
     /* Create the file chooser dialog*/
@@ -142,7 +142,9 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
     gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_export), TRUE);
 
     /* Give the home path to the current folder */
+    #ifndef PORTABLE
     readHomePathSlash(home_path);
+    #endif // PORTABLE
     gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_export),g_file_new_for_path(home_path),NULL);
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_export)))
@@ -157,9 +159,6 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export));
 		    #endif
 
-            #ifdef PORTABLE
-            strcpy(home_path,"");
-            #endif // PORTABLE
             if(exportConfigFile(home_path,filename) == MY_FALSE)
                 error=TRUE;
             g_free(filename);
@@ -197,7 +196,7 @@ void exportGameConfigurationError(globalData *data)
 G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-    char home_path[SIZE_MAX_FILE_NAME];
+    char home_path[SIZE_MAX_FILE_NAME]="";
     int error=FALSE;
 
     /* Create the file chooser dialog*/
@@ -206,7 +205,9 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
     gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_import), TRUE);
 
     /* Give the home path to the current folder */
+    #ifndef PORTABLE
     readHomePathSlash(home_path);
+    #endif // PORTABLE
     gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_import),g_file_new_for_path(home_path),NULL);
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_import)))
@@ -221,9 +222,6 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_import));
 		    #endif
 
-            #ifdef PORTABLE
-            strcpy(home_path,"");
-            #endif // PORTABLE
             if(importConfigFile(home_path,filename) == MY_FALSE)
                 error=TRUE;
             g_free(filename);
@@ -250,8 +248,8 @@ void importGameConfigurationError(globalData *data)
     if (!window_error)
         g_critical(_("Widget game_configuration_not_imported is missing in file csuper-gui.glade."));
 
-    gtk_dialog_run (GTK_DIALOG (window_error));
-    gtk_widget_hide (window_error);
+    gtk_dialog_run(GTK_DIALOG(window_error));
+    gtk_widget_hide(window_error);
 }
 
 /*!
@@ -288,9 +286,12 @@ void displayGameConfiguration(globalData *data)
     /* Fill the grid */
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
     {
+        /* Write the name of the game configuration */
         gtk_grid_attach(GTK_GRID(grid),gtk_label_new(ptr_list_config->name_game_config[i]),0,i,1,1);
         gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(grid),0,i),TRUE);
         //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),TRUE);
+
+        /* Add the button */
         #if GTK_MINOR_VERSION < 10
         gtk_grid_attach(GTK_GRID(grid),gtk_button_new_from_stock("gtk-edit"),1,i,1,1);
         gtk_grid_attach(GTK_GRID(grid),gtk_button_new_from_stock("gtk-properties"),2,i,1,1);
@@ -303,12 +304,14 @@ void displayGameConfiguration(globalData *data)
         gtk_button_set_label(GTK_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),2,i)),_("Properties"));
         gtk_button_set_label(GTK_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),3,i)),_("Delete"));
         #endif
+        gtk_widget_set_tooltip_markup(gtk_grid_get_child_at(GTK_GRID(grid),2,i),_("View the details of the game configuration"));
+        gtk_widget_set_tooltip_markup(gtk_grid_get_child_at(GTK_GRID(grid),3,i),_("Delete the game configuration"));
+        gtk_widget_set_tooltip_markup(gtk_grid_get_child_at(GTK_GRID(grid),1,i),_("Edit the game configuration"));
+
+        /* Add the signal for the button */
         g_signal_connect (gtk_grid_get_child_at(GTK_GRID(grid),3,i),"clicked", G_CALLBACK(deleteGameConfiguration),data);
         g_signal_connect (gtk_grid_get_child_at(GTK_GRID(grid),2,i),"clicked", G_CALLBACK(viewGameConfiguration),data);
         g_signal_connect (gtk_grid_get_child_at(GTK_GRID(grid),1,i),"clicked", G_CALLBACK(editGameConfiguration),data);
-
-        gtk_widget_set_tooltip_markup(gtk_grid_get_child_at(GTK_GRID(grid),2,i),_("View the details of the game configuration"));
-        gtk_widget_set_tooltip_markup(gtk_grid_get_child_at(GTK_GRID(grid),3,i),_("Delete the game configuration"));
     }
 
     /* Add the different containers */
@@ -410,6 +413,7 @@ G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data)
         i++;
     }
 
+    /* Get the game configuration */
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE

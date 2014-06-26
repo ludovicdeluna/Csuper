@@ -2,8 +2,8 @@
  * \file    main_window.h
  * \brief   Main window
  * \author  Remi BERTHO
- * \date    03/05/14
- * \version 3.0.0
+ * \date    26/04/14
+ * \version 4.0.0
  */
 
  /*

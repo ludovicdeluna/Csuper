@@ -2,7 +2,7 @@
  * \file    preferences.h
  * \brief   The preferences of csuper
  * \author  Remi BERTHO
- * \date    03/05/14
+ * \date    26/06/14
  * \version 4.0.0
  */
 

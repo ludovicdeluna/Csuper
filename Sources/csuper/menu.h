@@ -2,8 +2,8 @@
  * \file    menu.h
  * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    17/04/14
- * \version 2.2.0
+ * \date    17/06/14
+ * \version 4.0.0
  */
 
  /*

@@ -2,7 +2,7 @@
  * \file    utils.h
  * \brief   The new file assistant function
  * \author  Remi BERTHO
- * \date    20/06/14
+ * \date    26/06/14
  * \version 4.0.0
  */
 
@@ -38,5 +38,4 @@
 
 void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue);
 GtkLabel *createGtkLabelWithAttributes(gchar *text, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue);
-
 #endif // UTILS_H_INCLUDED

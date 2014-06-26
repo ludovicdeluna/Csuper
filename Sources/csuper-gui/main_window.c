@@ -2,8 +2,8 @@
  * \file    main_window.c
  * \brief   Main window
  * \author  Remi BERTHO
- * \date    03/05/14
- * \version 3.0.0
+ * \date    26/06/14
+ * \version 4.0.0
  */
 
  /*
@@ -405,6 +405,8 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
         writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct);
         addLastCsuStruct(user_data);
         updateMainWindow(user_data);
+
+        /* Test if the game is over */
         if (exceedMaxNumber(user_data->ptr_csu_struct) == MY_TRUE)
         {
             GtkWidget *window_game_over = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"messagedialog_game_over"));
@@ -413,7 +415,6 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
 
             gtk_dialog_run(GTK_DIALOG (window_game_over));
             gtk_widget_hide (window_game_over);
-            return;
         }
     }
 }
@@ -441,6 +442,7 @@ void setButtonMainWindowSensitive(globalData *data)
     if (!menu_properties)
         g_critical(_("Widget menu_properties is missing in file csuper-gui.glade."));
 
+    /* Properties save as and end of turn button */
     if (data->ptr_csu_struct == NULL)
     {
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),2)),FALSE);
@@ -622,7 +624,7 @@ void readMainWindowSize(globalData *data)
 }
 
 /*!
- * \fn G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gpointer user_data)
+ * \fn G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gpointer data)
  *  Save the main window size in a file
  * \param[in] widget the widget which send the signal
  * \param[in] data the globalData

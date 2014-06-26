@@ -2,7 +2,7 @@
  * \file    main.c
  * \brief   Main
  * \author  Remi BERTHO
- * \date    02/05/14
+ * \date    26/06/14
  * \version 4.0.0
  */
 
@@ -44,11 +44,9 @@ int main (int argc, char *argv[])
 {
     globalData data;
     GError *error = NULL;
-    gchar *filename = NULL;
+    gchar *glade_filename = NULL;
 
-    data.ptr_csu_struct=NULL;
-    strcpy(data.csu_filename,"");
-
+    /* Set locales */
     bindtextdomain("csuper-gui","./Locales");
     bind_textdomain_codeset("csuper-gui","UTF-8");
     textdomain("csuper-gui");
@@ -56,18 +54,20 @@ int main (int argc, char *argv[])
 
     gtk_init(&argc, &argv);
 
+    /* Init the global data*/
     data.ptr_builder = gtk_builder_new();
     data.ptr_clipboard=gtk_clipboard_get(gdk_atom_intern("CLIPBOARD",TRUE));
     data.ptr_clipboard_selected=gtk_clipboard_get(gdk_atom_intern("PRIMARY",TRUE));
     data.ptr_csu_struct_tmp=NULL;
     data.indexLastCsuStruct=0;
     data.nbLastCsuStruct=0;
+    data.ptr_csu_struct=NULL;
+    strcpy(data.csu_filename,"");
 
-    filename =  g_build_filename("csuper-gui.glade", NULL);
-
-    // Load the glade file.
-    gtk_builder_add_from_file (data.ptr_builder, filename, &error);
-    g_free (filename);
+    /* Load the glade file.*/
+    glade_filename =  g_build_filename("csuper-gui.glade", NULL);
+    gtk_builder_add_from_file (data.ptr_builder, glade_filename, &error);
+    g_free (glade_filename);
     if (error)
     {
       gint code = error->code;
@@ -80,10 +80,10 @@ int main (int argc, char *argv[])
 
     data.ptr_main_window = GTK_WIDGET(gtk_builder_get_object(data.ptr_builder,"main_window"));
 
+    /* Set csuper */
     noCsuFileRanking(&data);
     noCsuFilePoints(&data);
     setButtonMainWindowSensitive(&data);
-
     readMainWindowSize(&data);
     updateToolbarButton(&data);
 
@@ -98,6 +98,13 @@ int main (int argc, char *argv[])
     return EXIT_SUCCESS;
 }
 
+/*!
+ * \fn void openFileWithMainArgument(globalData *data,int argc, char *argv[])
+ *  Open directly a file if there is one in the main argument
+ * \param[in] data the globalData
+ * \param[in] argc the number of argument.
+ * \param[in] argv the array of argument.
+ */
 void openFileWithMainArgument(globalData *data,int argc, char *argv[])
 {
     if (argc < 2)

@@ -2,7 +2,7 @@
  * \file    utils.c
  * \brief   The new file assistant function
  * \author  Remi BERTHO
- * \date    20/06/14
+ * \date    26/06/14
  * \version 4.0.0
  */
 
@@ -37,6 +37,7 @@
  * \fn void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue)
  *  Set the foreground color, the background color and the size of a gtklabel
  * \param[in] label the label
+ * \param[in] text_size the size of the text, -1 if not used
  * \param[in] use_foreground indicate if it use the foreground color, if FALSE use the default color
  * \param[in] foreground_red the red value of the foreground (ranging from 0 to 65535)
  * \param[in] foreground_green the green value of the foreground (ranging from 0 to 65535)
@@ -87,6 +88,7 @@ void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foregrou
  * \fn GtkLabel *createGtkLabelWithAttributes(gchar *text, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue)
  *  Set the foreground color, the background color and the size of a gtklabel
  * \param[in] text the text for the new gtklabel
+ * \param[in] text_size the size of the text, -1 if not used
  * \param[in] use_foreground indicate if it use the foreground color, if FALSE use the default color
  * \param[in] foreground_red the red value of the foreground (ranging from 0 to 65535)
  * \param[in] foreground_green the green value of the foreground (ranging from 0 to 65535)

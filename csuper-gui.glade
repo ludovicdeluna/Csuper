@@ -2106,6 +2106,7 @@ Congratulation to the winner !</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Apply the new preferences for the new toolbar button displayed</property>
                     <property name="use_stock">True</property>
                     <signal name="clicked" handler="validToolbarButtonPreferences" swapped="no"/>
                   </object>
@@ -2121,6 +2122,7 @@ Congratulation to the winner !</property>
                     <property name="visible">True</property>
                     <property name="can_focus">True</property>
                     <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Close the game preferences window</property>
                     <property name="use_stock">True</property>
                     <signal name="clicked" handler="closePreferences" swapped="no"/>
                   </object>
@@ -2210,7 +2212,7 @@ Congratulation to the winner !</property>
         <property name="adjustment">new_csu_file_assistant_nb_player_adjustement</property>
         <property name="climb_rate">1</property>
         <property name="value">1</property>
-        <signal name="value-changed" handler="validAssistantNewCsuOneNumber" swapped="no"/>
+        <signal name="value-changed" handler="validAssistantNewCsuOne" swapped="no"/>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -2238,7 +2240,7 @@ Congratulation to the winner !</property>
         <property name="can_focus">False</property>
         <property name="action">select-folder</property>
         <property name="local_only">False</property>
-        <signal name="selection-changed" handler="validAssistantNewCsuOneName" swapped="no"/>
+        <signal name="selection-changed" handler="validAssistantNewCsuOne" swapped="no"/>
       </object>
       <packing>
         <property name="left_attach">1</property>
@@ -2265,7 +2267,7 @@ Congratulation to the winner !</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0.5</property>
-        <signal name="changed" handler="validAssistantNewCsuOneName" swapped="no"/>
+        <signal name="changed" handler="validAssistantNewCsuOne" swapped="no"/>
       </object>
       <packing>
         <property name="left_attach">1</property>

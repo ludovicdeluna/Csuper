@@ -2,7 +2,7 @@
  * \file    new_file_assistant.h
  * \brief   The new file assistant function
  * \author  Remi BERTHO
- * \date    04/05/14
+ * \date    26/06/14
  * \version 4.0.0
  */
 
@@ -43,9 +43,7 @@
 G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void deleteEventAssistantNewCsu(GtkWidget *widget,GdkEvent  *event, gpointer data);
 G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data);
-G_MODULE_EXPORT void validAssistantNewCsuOneName(GtkWidget *widget, gpointer data);
-G_MODULE_EXPORT void validAssistantNewCsuOneNumber(GtkWidget *widget, gpointer data);
-void validAssistantNewCsuOne(globalData *data);
+G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data);

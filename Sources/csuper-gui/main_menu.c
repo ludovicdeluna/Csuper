@@ -2,8 +2,8 @@
  * \file    main_menu.c
  * \brief   Main menu
  * \author  Remi BERTHO
- * \date    04/05/14
- * \version 3.0.0
+ * \date    26/06/14
+ * \version 4.0.0
  */
 
  /*
@@ -86,7 +86,6 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_open),all_filter);
 
     /* Give the home path to the current folder or the last filename if there is one*/
-
     if (strcmp(user_data->csu_filename,"") == 0)
     {
         #ifdef PORTABLE
@@ -225,7 +224,7 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
             if (writeCsuFile(filename,user_data->ptr_csu_struct) == MY_FALSE)
                 error=TRUE;
             else
-                strcpy(user_data->csu_filename,filename);
+                strncpy(user_data->csu_filename,filename,SIZE_MAX_FILE_NAME-1);
 
             g_free(filename);
 			break;

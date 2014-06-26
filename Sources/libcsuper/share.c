@@ -2,8 +2,8 @@
  * \file    share.c
  * \brief   Essential function of libcsuper
  * \author  Remi BERTHO
- * \date    15/04/14
- * \version 2.2.0
+ * \date    15/06/14
+ * \version 4.0.0
  */
 
  /*

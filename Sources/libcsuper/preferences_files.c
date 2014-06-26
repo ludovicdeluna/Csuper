@@ -3,7 +3,7 @@
  * \brief   Function which store preferences into files
  * \author  Remi BERTHO
  * \date    24/06/14
- * \version 4.0
+ * \version 4.0.0
  */
 
  /*
@@ -141,7 +141,7 @@ int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences
  * \fn int differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
  *  Test if the two toolbar button preferences are different
  * \param[in] toolbar1 the first toolbar button preferences
- * \param[in] toolbar1 the second toolbar button preferences
+ * \param[in] toolbar2 the second toolbar button preferences
  * \return MY_TRUE if everything is OK, MY_FALSE otherwise
  */
 int differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
@@ -350,7 +350,7 @@ int changeSystemPath(char *new_path)
 /*!
  * \fn int checkPath(char *path)
  *  Test if the path is valid
- * \param[in,out] *new_path the path
+ * \param[in,out] *path the path
  * \return MY_TRUE if the path is valid OK, MY_FALSE otherwise
  */
 int checkPath(char *path)

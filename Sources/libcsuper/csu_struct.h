@@ -2,8 +2,8 @@
  * \file    csu_struct.h
  * \brief   Management of the csu files header
  * \author  Remi BERTHO
- * \date    16/04/14
- * \version 2.2.0
+ * \date    16/06/14
+ * \version 4.0.0
  */
 
  /*
