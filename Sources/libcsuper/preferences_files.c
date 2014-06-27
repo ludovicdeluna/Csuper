@@ -42,7 +42,7 @@ void createPreferencesFolder(char *home_path)
 {
     char folder[SIZE_MAX_FILE_NAME];
 
-    sprintf(folder,"%s/%s",home_path,PREFERENCES_FOLDER_NAME);
+    sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
     #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
@@ -63,7 +63,7 @@ int createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferenc
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
 
-    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_TOOLBAR_BUTTON_PREFERENCES);
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_TOOLBAR_BUTTON_PREFERENCES);
 
     createPreferencesFolder(home_path);
 
@@ -115,7 +115,7 @@ int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences
 
     createPreferencesFolder(home_path);
 
-    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_TOOLBAR_BUTTON_PREFERENCES);
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_TOOLBAR_BUTTON_PREFERENCES);
 
     ptr_file=openFile(file_name,"r");
 
@@ -170,7 +170,7 @@ int createFileMainWidowSize(char *home_path, main_window_size size)
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
 
-    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIZE);
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIZE);
 
     createPreferencesFolder(home_path);
 
@@ -204,7 +204,7 @@ int readFileMainWidowSize(char *home_path, main_window_size *size)
 
     createPreferencesFolder(home_path);
 
-    sprintf(file_name,"%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIZE);
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIZE);
 
     ptr_file=openFile(file_name,"r");
 

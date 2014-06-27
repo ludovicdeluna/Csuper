@@ -856,7 +856,7 @@ void updateToolbarButtonPreferencesSwitch(globalData *data)
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
-    readHomePath(home_path);
+    readHomePathSlash(home_path);
     #endif // PORTABLE
     readFileToolbarButtonPreferences(home_path,&toolbar_preferences);
 
@@ -1083,7 +1083,7 @@ G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget, GPa
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
-    readHomePath(home_path);
+    readHomePathSlash(home_path);
     #endif // PORTABLE
     readFileToolbarButtonPreferences(home_path,&toolbar_file);
     readToolbarButtonPreferencesSwitch(user_data,&toolbar_preferences);
@@ -1112,7 +1112,7 @@ G_MODULE_EXPORT void validToolbarButtonPreferences(GtkWidget *widget, gpointer d
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
-    readHomePath(home_path);
+    readHomePathSlash(home_path);
     #endif // PORTABLE
     readToolbarButtonPreferencesSwitch(user_data,&toolbar_preferences);
 

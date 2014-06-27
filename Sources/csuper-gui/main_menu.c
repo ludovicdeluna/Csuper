@@ -499,7 +499,7 @@ void updateToolbarButton(globalData *data)
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
-    readHomePath(home_path);
+    readHomePathSlash(home_path);
     #endif // PORTABLE
     readFileToolbarButtonPreferences(home_path,&toolbar_preferences);
 

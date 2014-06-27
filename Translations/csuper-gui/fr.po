@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-26 23:33+0200\n"
+"POT-Creation-Date: 2014-06-27 12:46+0200\n"
 "PO-Revision-Date: 2014-06-26 23:34+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <>\n"
@@ -344,8 +344,8 @@ msgstr "Assistant de création d'un nouveau fichier csu"
 #: Sources/csuper-gui/new_file_assistant.c:80
 #: Sources/csuper-gui/new_file_assistant.c:165
 #: Sources/csuper-gui/new_file_assistant.c:206
-#: Sources/csuper-gui/new_file_assistant.c:479
-#: Sources/csuper-gui/new_file_assistant.c:518
+#: Sources/csuper-gui/new_file_assistant.c:480
+#: Sources/csuper-gui/new_file_assistant.c:519
 msgid ""
 "Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."
 msgstr ""
@@ -366,7 +366,7 @@ msgstr "Utiliser une autre configuration de jeu"
 
 #: Sources/csuper-gui/new_file_assistant.c:107
 #: Sources/csuper-gui/new_file_assistant.c:171
-#: Sources/csuper-gui/new_file_assistant.c:397
+#: Sources/csuper-gui/new_file_assistant.c:398
 msgid ""
 "Widget scrolled_window_new_csu_file_assistant_2 is missing in file csuper-"
 "gui.glade."
@@ -380,7 +380,7 @@ msgstr "Nom des joueurs"
 
 #: Sources/csuper-gui/new_file_assistant.c:127
 #: Sources/csuper-gui/new_file_assistant.c:177
-#: Sources/csuper-gui/new_file_assistant.c:446
+#: Sources/csuper-gui/new_file_assistant.c:447
 msgid ""
 "Widget grid_new_csu_file_assistant_3 is missing in file csuper-gui.glade."
 msgstr ""
@@ -391,7 +391,7 @@ msgstr ""
 msgid "Distributor and validation"
 msgstr "Distributeur et validation"
 
-#: Sources/csuper-gui/new_file_assistant.c:334
+#: Sources/csuper-gui/new_file_assistant.c:335
 #, c-format
 msgid "Name of the %dth player"
 msgstr "Nom du %dème joueur"

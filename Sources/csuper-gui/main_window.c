@@ -607,7 +607,7 @@ void readMainWindowSize(globalData *data)
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
-    readHomePath(home_path);
+    readHomePathSlash(home_path);
     #endif // PORTABLE
     readFileMainWidowSize(home_path,&size);
 
@@ -638,7 +638,7 @@ G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gp
     GdkEventConfigure configure_event = event->configure;
 
     #ifndef PORTABLE
-    readHomePath(home_path);
+    readHomePathSlash(home_path);
     #endif // PORTABLE
 
     GtkWidget *main_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window"));

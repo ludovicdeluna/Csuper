@@ -270,7 +270,7 @@ void mainMenu()
 
         clearScreen();
 
-        printf(_("Csuper - Universal points counter allowing reflexion exemption v2.4.0\n\nWhat do you want to do ?\n "
+        printf(_("Csuper - Universal points counter allowing reflexion exemption v4.0.0\n\nWhat do you want to do ?\n "
         "(%d) Do a new game \n (%d) Load an existing game \n (%d) Display the results of an existing game "
         "\n (%d) Delete a game \n (%d) Display all existing games\n (%d) Display the preferences menu"
         "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFiles,listFile,pref,quit);
