@@ -37,6 +37,11 @@ Libcsuper
 Csuper-gui
 ==========
 
+4.0.1
+
+* Fixed the bug when the filename is too long
+* We can use csuper-gui.exe with "open with" in windows explorer
+
 4.0.0
 
 * Initial release

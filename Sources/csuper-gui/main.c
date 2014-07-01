@@ -46,6 +46,14 @@ int main (int argc, char *argv[])
     GError *error = NULL;
     gchar *glade_filename = NULL;
 
+    /* Change the directory to the directory of the executable */
+    #ifdef _WIN32
+    char directory[SIZE_MAX_FILE_NAME];
+    strncpy(directory,argv[0],SIZE_MAX_FILE_NAME-1);
+    if (getFolderFromFilename(directory) == MY_TRUE)
+        chdir(directory);
+    #endif // _WIN32
+
     /* Set locales */
     bindtextdomain("csuper-gui","./Locales");
     bind_textdomain_codeset("csuper-gui","UTF-8");
@@ -107,6 +115,7 @@ int main (int argc, char *argv[])
  */
 void openFileWithMainArgument(globalData *data,int argc, char *argv[])
 {
+    /* Open the file which is on second argument id there is one*/
     if (argc < 2)
         return;
 
