@@ -9,9 +9,9 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-06-27 12:46+0200\n"
-"PO-Revision-Date: 2014-06-26 23:34+0200\n"
+"PO-Revision-Date: 2014-07-02 19:41+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
-"Language-Team: français <>\n"
+"Language-Team: français <wesnoth@ml.free.fr>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -747,7 +747,7 @@ msgstr "Copyright © 2014 Remi BERTHO <remi.bertho@gmail.com>"
 
 #: csuper-gui.glade:853
 msgid "Universal points counter allowing reflexion exemption"
-msgstr "Compteur de Points Universel Permettant l'Exemption de Réflexion"
+msgstr "Compteur de Score Universel Permettant l'Exemption de Réflexion"
 
 #: csuper-gui.glade:855
 msgid "Visit the website of Csuper"

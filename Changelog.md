@@ -41,6 +41,8 @@ Csuper-gui
 
 * Fixed the bug when the filename is too long
 * We can use csuper-gui.exe with "open with" in windows explorer
+* Fixed a bug with the distributor
+* Update the translations
 
 4.0.0
 

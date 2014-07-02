@@ -4,7 +4,7 @@
  * \brief   Management of the csu files
  * \author  Remi BERTHO
  * \date    15/06/14
- * \version 4.0.4
+ * \version 4.0.0
  */
 
  /*

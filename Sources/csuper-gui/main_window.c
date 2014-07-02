@@ -2,8 +2,8 @@
  * \file    main_window.c
  * \brief   Main window
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    02/07/14
+ * \version 4.0.1
  */
 
  /*
@@ -387,17 +387,31 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
     gint max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
 
     /* Save the scores in the structure */
-    for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+    if (user_data->ptr_csu_struct->config.turn_by_turn == 0)
     {
-        tmp_score = gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),2*(i+1),2*(max_nb_turn+1))));
-
-        if (user_data->ptr_csu_struct->config.turn_by_turn == 1 || tmp_score != 0)
+        /* Save the scores in the structure */
+        for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
         {
-            startNewTurn(user_data->ptr_csu_struct,i);
-            user_data->ptr_csu_struct->point[i][(int)user_data->ptr_csu_struct->nb_turn[i]] = tmp_score;
-            endNewTurn(user_data->ptr_csu_struct,i);
-            has_changed = TRUE;
+            tmp_score = gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),2*(i+1),2*(max_nb_turn+1))));
+
+            if (tmp_score != 0)
+            {
+                startNewTurn(user_data->ptr_csu_struct,i);
+                user_data->ptr_csu_struct->point[i][(int)user_data->ptr_csu_struct->nb_turn[i]] = tmp_score;
+                endNewTurn(user_data->ptr_csu_struct,i);
+                has_changed = TRUE;
+            }
         }
+    }
+    else
+    {
+        startNewTurn(user_data->ptr_csu_struct,-1);
+        for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+            user_data->ptr_csu_struct->point[i][(int)user_data->ptr_csu_struct->nb_turn[i]] = gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),2*(i+1),2*(max_nb_turn+1))));
+        endNewTurn(user_data->ptr_csu_struct,-1);
+
+        has_changed = TRUE;
+
     }
 
     if (has_changed)
