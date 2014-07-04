@@ -51,6 +51,14 @@
 		<Unit filename="../Sources/libcsuper/csu_struct.h">
 			<Option weight="0" />
 		</Unit>
+		<Unit filename="../Sources/libcsuper/file.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/file.h" />
+		<Unit filename="../Sources/libcsuper/filename.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/filename.h" />
 		<Unit filename="../Sources/libcsuper/game_config.c">
 			<Option compilerVar="CC" />
 		</Unit>

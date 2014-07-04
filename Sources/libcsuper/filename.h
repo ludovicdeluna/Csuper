@@ -1,13 +1,13 @@
 /*!
- * \file    libcsuper.h
- * \brief   Inclusion of all header files of libcsuper
+ * \file    filename.h
+ * \brief   Header for the essential function of libcsuper
  * \author  Remi BERTHO
- * \date    05/04/14
- * \version 2.2.0
+ * \date    05/07/14
+ * \version 4.0.1
  */
 
  /*
- * libcsuper.h
+ * filename.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,16 +31,17 @@
  *
  */
 
-#ifndef LIBCSUPER_H_INCLUDED
-#define LIBCSUPER_H_INCLUDED
+#ifndef FILENAME_H_INCLUDED
+#define FILENAME_H_INCLUDED
 
-#include "csu_struct.h"
-#include "share.h"
-#include "csu_files.h"
 #include "preferences_files.h"
-#include "main_argument.h"
-#include "game_config.h"
-#include "file.h"
-#include "filename.h"
 
-#endif
+void addFileCsuExtension(char *file_name);
+int getFolderFromFilename(char *file_name_to_folder);
+int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename);
+int checkPath(char *path);
+int checkFilename(char *filename,char * folder);
+void readHomePath(char *path);
+void readHomePathSlash(char *path);
+
+#endif // FILENAME_H_INCLUDED

@@ -83,7 +83,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,_("General informations"));
 
     /* Configure the file chooser */
-    gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0)),SIZE_MAX_NAME);
+    gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0)),SIZE_MAX_FILE_NAME/8);
     #ifdef _WIN32
     gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(g_convert(system_path,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL)),NULL);
     #else
@@ -196,17 +196,18 @@ G_MODULE_EXPORT void deleteAssistantNewCsu(GtkWidget *widget, gpointer data)
 G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-    gchar name[SIZE_MAX_NAME];
+    gchar name[SIZE_MAX_FILE_NAME];
     gint index;
     gchar *folder;
     gint folder_ok;
+    gint filename_ok;
 
     GtkWidget *grid_1 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_1"));
     if (!grid_1)
         g_critical(_("Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."));
 
     /* Get the filename, the index of the game configuration and the folder */
-    strncpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0))),SIZE_MAX_NAME-1);
+    g_utf8_strncpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0))),SIZE_MAX_FILE_NAME/8);
     index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid_1),1,3)));
     #ifdef _WIN32
     folder = g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
@@ -218,9 +219,10 @@ G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
     #else
     folder_ok = checkPath(folder);
     #endif // PORTABLE
+    filename_ok = checkFilename(name,folder);
 
     /* Test the filename */
-    if (strcmp(name,"") == 0)
+    if (strcmp(name,"") == 0 || filename_ok == MY_FALSE)
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,TRUE,65535,0,0,FALSE,0,0,0);
     else
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,FALSE,65535,0,0,FALSE,0,0,0);
@@ -238,7 +240,7 @@ G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,FALSE,65535,0,0,FALSE,0,0,0);
 
     /* Test if the page one is valid or not */
-    if (strcmp(name,"") != 0 && index >=0 && folder_ok != MY_FALSE)
+    if (strcmp(name,"") != 0 && index >=0 && folder_ok != MY_FALSE && filename_ok == MY_TRUE)
     {
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,TRUE);
         if (user_data->ptr_csu_struct_tmp != NULL)
@@ -470,7 +472,7 @@ G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
 G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-    gchar name[SIZE_MAX_NAME];
+    gchar name[SIZE_MAX_FILE_NAME];
     gchar *folder;
 
 
@@ -484,7 +486,7 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
     strncpy(name,g_convert(gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL),SIZE_MAX_NAME-1);
     #else
     folder = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid),1,1)));
-    strncpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),SIZE_MAX_NAME-2);
+    g_utf8_strncpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),SIZE_MAX_FILE_NAME/8);
     #endif // _WIN32
 
 

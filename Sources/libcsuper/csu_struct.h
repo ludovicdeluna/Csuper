@@ -37,6 +37,7 @@
 #include <time.h>
 #include <float.h>
 #include "share.h"
+#include "file.h"
 
 /*!
  * \def SIZE_MAX_NAME

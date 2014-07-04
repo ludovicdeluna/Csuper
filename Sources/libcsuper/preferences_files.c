@@ -2,8 +2,8 @@
  * \file    preferences_files.c
  * \brief   Function which store preferences into files
  * \author  Remi BERTHO
- * \date    24/06/14
- * \version 4.0.0
+ * \date    05/07/14
+ * \version 4.0.1
  */
 
  /*
@@ -347,57 +347,4 @@ int changeSystemPath(char *new_path)
     return MY_TRUE;
 }
 
-/*!
- * \fn int checkPath(char *path)
- *  Test if the path is valid
- * \param[in,out] *path the path
- * \return MY_TRUE if the path is valid OK, MY_FALSE otherwise
- */
-int checkPath(char *path)
-{
-    FILE *ptr_file_test;
-    char check_path[SIZE_MAX_FILE_NAME];
 
-    sprintf(check_path,"%s/test-chemin_fichier_csuper",path);
-    ptr_file_test=openFile(check_path,"w+");
-    if (ptr_file_test != NULL)
-    {
-        closeFile(ptr_file_test);
-        remove(check_path);
-        return MY_TRUE;
-    }
-    else
-    {
-        printf(_("\nError : this folder is not valid.\n"));
-        return MY_FALSE;
-    }
-}
-
-/*!
- * \fn void readHomePath(char *path)
- *  Read the home path
- * \param[in,out] path the path
- */
-void readHomePath(char *path)
-{
-    #ifdef __unix__
-    strcpy(path,getenv("HOME"));
-    #elif _WIN32
-    strcpy(path,getenv("USERPROFILE"));
-    #endif
-}
-
-/*!
- * \fn void readHomePath(char *path)
- *  Read the home path with a slash at the end
- * \param[in,out] path the path
- */
-void readHomePathSlash(char *path)
-{
-    #ifdef __unix__
-    strcpy(path,getenv("HOME"));
-    #elif _WIN32
-    strcpy(path,getenv("USERPROFILE"));
-    #endif
-    sprintf(path,"%s/",path);
-}

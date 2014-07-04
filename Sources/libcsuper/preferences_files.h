@@ -2,8 +2,8 @@
  * \file    preferences_files.h
  * \brief   Prototypes des fonctions qui l'emrankment des fichiers sauvegardes
  * \author  Remi BERTHO
- * \date    24/06/14
- * \version 4.0.0
+ * \date    05/07/14
+ * \version 4.0.1
  */
 
  /*
@@ -38,6 +38,7 @@
 #include <sys/types.h>
 #include "csu_struct.h"
 #include "csu_files.h"
+#include "filename.h"
 
 
 /*!
@@ -113,8 +114,5 @@ int createFileSystemPath();
 int readFileSystemPath(char *file_name);
 int readSystemPath(char *file_name);
 int changeSystemPath(char *new_path);
-int checkPath(char *path);
-void readHomePath(char *path);
-void readHomePathSlash(char *path);
 
 #endif

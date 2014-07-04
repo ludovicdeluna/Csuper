@@ -18,6 +18,7 @@ Libcsuper
 4.0.1
 
 * Fix a bug on windows in the function getSimpleFilenameFromFullFilename
+* New function checkFilename
 
 4.0.0
 
@@ -47,6 +48,7 @@ Csuper-gui
 * We can use csuper-gui.exe with "open with" in windows explorer
 * Fixed a bug with the distributor
 * Update the translations
+* Check the filename of the new file
 
 4.0.0
 

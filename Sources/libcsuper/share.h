@@ -2,8 +2,8 @@
  * \file    share.h
  * \brief   Header for the essential function of libcsuper
  * \author  Remi BERTHO
- * \date    15/06/14
- * \version 4.0.0
+ * \date    05/07/14
+ * \version 4.0.1
  */
 
  /*
@@ -67,16 +67,8 @@ void wrongChoice();
 void clearScreen();
 int compareFloatDescending(void const *a, void const *b);
 int compareFloatAscending(void const *a, void const *b);
-FILE *openFile(char nome[], char mode[]);
-int closeFile(FILE *ptr_file);
-int readFileSize(FILE *ptr_file);
 void *myAlloc(int size_alloue);
 void myRealloc(void **ptr,int size_alloue);
-void addFileCsuExtension(char *file_name);
-int deleteFile(char *file_name);
-int renameFile(char *old_name, char *new_name);
 char *integerToYesNo(int i, char *yes, char *no);
-int getFolderFromFilename(char *file_name_to_folder);
-int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename);
 
 #endif

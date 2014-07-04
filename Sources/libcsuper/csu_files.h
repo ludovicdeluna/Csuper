@@ -35,6 +35,7 @@
 #define FICHIER_JEU_H_INCLUDED
 
 #include "csu_struct.h"
+#include "filename.h"
 #include <unistd.h>
 
 

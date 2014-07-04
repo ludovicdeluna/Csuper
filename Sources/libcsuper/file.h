@@ -1,13 +1,13 @@
 /*!
- * \file    libcsuper.h
- * \brief   Inclusion of all header files of libcsuper
+ * \file    file.h
+ * \brief   Header for the files function of libcsuper
  * \author  Remi BERTHO
- * \date    05/04/14
- * \version 2.2.0
+ * \date    05/07/14
+ * \version 4.0.1
  */
 
  /*
- * libcsuper.h
+ * file.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,16 +31,16 @@
  *
  */
 
-#ifndef LIBCSUPER_H_INCLUDED
-#define LIBCSUPER_H_INCLUDED
-
-#include "csu_struct.h"
 #include "share.h"
-#include "csu_files.h"
-#include "preferences_files.h"
-#include "main_argument.h"
-#include "game_config.h"
-#include "file.h"
-#include "filename.h"
 
-#endif
+#ifndef FILE_H_INCLUDED
+#define FILE_H_INCLUDED
+
+FILE *openFile(char nome[], char mode[]);
+int closeFile(FILE *ptr_file);
+int readFileSize(FILE *ptr_file);
+int deleteFile(char *file_name);
+int renameFile(char *old_name, char *new_name);
+
+
+#endif // FILE_H_INCLUDED
