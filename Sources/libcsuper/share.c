@@ -2,8 +2,8 @@
  * \file    share.c
  * \brief   Essential function of libcsuper
  * \author  Remi BERTHO
- * \date    15/06/14
- * \version 4.0.0
+ * \date    04/07/14
+ * \version 4.0.1
  */
 
  /*
@@ -343,7 +343,7 @@ int getFolderFromFilename(char *file_name_to_folder)
     for (i=strlen(file_name_to_folder) ; i>=0 ; i--)
     {
         #ifdef _WIN32
-        if (file_name_to_folder[i] == '\\')
+        if (file_name_to_folder[i] == '\\' || file_name_to_folder[i] == '/')
         #else
         if (file_name_to_folder[i] == '/')
         #endif // _WIN32
@@ -370,7 +370,11 @@ int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
     int ok = MY_FALSE;
     for (i=strlen(full_filename) ; i>=0 ; i--)
     {
+        #ifdef _WIN32
+        if (full_filename[i] == '/' || full_filename[i] == '\\')
+        #else
         if (full_filename[i] == '/')
+        #endif // _WIN32
         {
             ok = MY_TRUE;
             strcpy(simple_filename,full_filename+i+1);

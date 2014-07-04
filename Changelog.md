@@ -15,6 +15,10 @@ Csuper
 Libcsuper
 =========
 
+4.0.1
+
+* Fix a bug on windows in the function getSimpleFilenameFromFullFilename
+
 4.0.0
 
 * Add a function to transform integer to yes or no
