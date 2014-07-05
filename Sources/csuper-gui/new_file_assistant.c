@@ -62,7 +62,6 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_window_set_gravity(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),GDK_GRAVITY_CENTER);
     gtk_window_set_position(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),GTK_WIN_POS_CENTER_ON_PARENT);
     gtk_window_set_modal(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),TRUE);
-    gtk_window_set_hide_titlebar_when_maximized(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),TRUE);
     gtk_window_set_type_hint(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),GDK_WINDOW_TYPE_HINT_DIALOG);
     gtk_window_resize(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),700,400);
     gtk_window_set_title(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),_("New csu file assistant"));
@@ -337,6 +336,7 @@ G_MODULE_EXPORT void preparePageAssistantNewCsu(GtkAssistant *assistant,GtkWidge
             gtk_grid_attach(grid,gtk_label_new(g_strdup_printf(_("Name of the %dth player"),i+1)),0,i,1,1);
             gtk_grid_attach(grid,gtk_entry_new(),1,i,1,1);
             gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,i)),SIZE_MAX_NAME);
+            gtk_entry_set_placeholder_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,i)),g_strdup_printf(_("Type here the name of the %dth player"),i+1));
             gtk_entry_set_alignment(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,i)),0.5);
             g_signal_connect(gtk_grid_get_child_at(GTK_GRID(grid),1,i),"changed", G_CALLBACK(validAssistantNewCsuTwo),user_data);
         }

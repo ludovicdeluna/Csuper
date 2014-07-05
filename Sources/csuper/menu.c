@@ -2,8 +2,8 @@
  * \file    menu.c
  * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    15/06/14
- * \version 4.0.0
+ * \date    05/07/14
+ * \version 4.0.1
  */
 
  /*
@@ -41,9 +41,18 @@
  */
 char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
 {
-    printf(_("Give the name of the file with at the most %d characters.\nYour choice : "),SIZE_MAX_FILE_NAME-1);
-    stringKey(file_name,SIZE_MAX_FILE_NAME);
-    printf("Vous avez choisi %s\n",file_name);
+    char test_filename[SIZE_MAX_FILE_NAME/8];
+
+    do
+    {
+        printf(_("Give the name of the file with at the most %d characters.\nYour choice : "),SIZE_MAX_FILE_NAME/8);
+        stringKey(test_filename,SIZE_MAX_FILE_NAME/8);
+        printf("Vous avez choisi %s\n",test_filename);
+        strcpy(file_name,test_filename);
+        #ifndef PORTABLE
+        readSystemPath(test_filename);
+        #endif // PORTABLE
+    } while (checkFilename(test_filename,"") == MY_FALSE);
 
     return file_name;
 }

@@ -2269,6 +2269,7 @@ Congratulation to the winner !</property>
         <property name="visible">True</property>
         <property name="can_focus">True</property>
         <property name="xalign">0.5</property>
+        <property name="placeholder_text" translatable="yes">Type here the name of the new csu file</property>
         <signal name="changed" handler="validAssistantNewCsuOne" swapped="no"/>
       </object>
       <packing>
@@ -2298,7 +2299,6 @@ Congratulation to the winner !</property>
     <property name="name">New game configuration</property>
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">New game configuration</property>
-    <property name="resizable">False</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="type_hint">dialog</property>
@@ -2366,6 +2366,7 @@ Congratulation to the winner !</property>
               <object class="GtkLabel" id="new_game_configuration_label_name">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Name of the game configuration</property>
                 <property name="justify">center</property>
               </object>
@@ -2380,6 +2381,7 @@ Congratulation to the winner !</property>
               <object class="GtkLabel" id="new_game_configuration_label_use_maximum">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Use a maximum or minimum score or neither</property>
                 <property name="justify">center</property>
               </object>
@@ -2394,6 +2396,7 @@ Congratulation to the winner !</property>
               <object class="GtkLabel" id="new_game_configuration_label_initial_score">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Initial score</property>
                 <property name="justify">center</property>
               </object>
@@ -2408,6 +2411,7 @@ Congratulation to the winner !</property>
               <object class="GtkLabel" id="new_game_configuration_label_nb_digit">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Number of decimal place</property>
                 <property name="justify">center</property>
               </object>
@@ -2422,6 +2426,7 @@ Congratulation to the winner !</property>
               <object class="GtkLabel" id="new_game_configuration_label_first_way">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">The first is the player who have the higher score</property>
                 <property name="justify">center</property>
               </object>
@@ -2436,6 +2441,7 @@ Congratulation to the winner !</property>
               <object class="GtkLabel" id="new_game_configuration_label_turn_by_turn">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">The points will be attribute in turn by turn</property>
                 <property name="justify">center</property>
               </object>
@@ -2450,6 +2456,7 @@ Congratulation to the winner !</property>
               <object class="GtkLabel" id="new_game_configuration_label_distrubutor">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Use a distributor</property>
                 <property name="justify">center</property>
               </object>
@@ -2464,6 +2471,7 @@ Congratulation to the winner !</property>
               <object class="GtkLabel" id="new_game_configuration_label_nb_max">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">Maximal or minimal score which a player can reach in the game</property>
                 <property name="justify">center</property>
               </object>
@@ -2481,6 +2489,7 @@ Congratulation to the winner !</property>
                 <property name="hexpand">True</property>
                 <property name="width_chars">30</property>
                 <property name="xalign">0.5</property>
+                <property name="placeholder_text" translatable="yes">Type here the name of the game configuration</property>
                 <property name="input_hints">GTK_INPUT_HINT_UPPERCASE_WORDS | GTK_INPUT_HINT_NONE</property>
                 <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
               </object>

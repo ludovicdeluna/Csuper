@@ -1,6 +1,10 @@
 Csuper
 ======
 
+4.0.1
+
+* Security update
+
 4.0.0
 
 * Change the display of a game configuration with yes or no instead of 1 and 0
