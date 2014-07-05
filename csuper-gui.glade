@@ -1196,7 +1196,8 @@ Rémi BERTHO</property>
     <property name="transient_for">main_window</property>
     <property name="message_type">error</property>
     <property name="buttons">ok</property>
-    <property name="text" translatable="yes">Error while saving the file.</property>
+    <property name="text" translatable="yes">Error while saving the file.
+Please try to use an other folder and/or filename.</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="messagedialog-vbox5">
         <property name="can_focus">False</property>

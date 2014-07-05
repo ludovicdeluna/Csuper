@@ -416,7 +416,8 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
 
     if (has_changed)
     {
-        writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct);
+        if (writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct) == MY_FALSE)
+            saveFileError(user_data);
         addLastCsuStruct(user_data);
         updateMainWindow(user_data);
 

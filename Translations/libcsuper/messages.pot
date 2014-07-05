@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-27 13:02+0200\n"
+"POT-Creation-Date: 2014-07-05 11:19+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -65,25 +65,58 @@ msgid ""
 "Error this name doesn't exist.\n"
 msgstr ""
 
-#: Sources/libcsuper/game_config.c:163
+#: Sources/libcsuper/file.c:50
 #, c-format
 msgid ""
 "\n"
-"The game configuration %s already exist.\n"
+"Error while opening %s\n"
 msgstr ""
 
-#: Sources/libcsuper/game_config.c:315 Sources/libcsuper/share.c:281
+#: Sources/libcsuper/file.c:71
+#, c-format
+msgid "Error while closing the file"
+msgstr ""
+
+#: Sources/libcsuper/file.c:108 Sources/libcsuper/game_config.c:315
 #, c-format
 msgid ""
 "\n"
 "The file %s cannot be deleted.\n"
 msgstr ""
 
-#: Sources/libcsuper/game_config.c:321 Sources/libcsuper/share.c:288
+#: Sources/libcsuper/file.c:115 Sources/libcsuper/game_config.c:321
 #, c-format
 msgid ""
 "\n"
 "The file %s was well deleted.\n"
+msgstr ""
+
+#: Sources/libcsuper/file.c:133
+#, c-format
+msgid ""
+"\n"
+"The file %s cannot be renamed.\n"
+msgstr ""
+
+#: Sources/libcsuper/file.c:139
+#, c-format
+msgid ""
+"\n"
+"The file %s was well renamed in %s.\n"
+msgstr ""
+
+#: Sources/libcsuper/filename.c:132 Sources/libcsuper/filename.c:159
+#, c-format
+msgid ""
+"\n"
+"Error : this folder is not valid.\n"
+msgstr ""
+
+#: Sources/libcsuper/game_config.c:163
+#, c-format
+msgid ""
+"\n"
+"The game configuration %s already exist.\n"
 msgstr ""
 
 #: Sources/libcsuper/game_config.c:402
@@ -135,13 +168,6 @@ msgid ""
 "Error while reading the file containing the system path.\n"
 msgstr ""
 
-#: Sources/libcsuper/preferences_files.c:371
-#, c-format
-msgid ""
-"\n"
-"Error : this folder is not valid.\n"
-msgstr ""
-
 #: Sources/libcsuper/share.c:58
 #, c-format
 msgid ""
@@ -156,35 +182,9 @@ msgid ""
 "Error while clearing the screen.\n"
 msgstr ""
 
-#: Sources/libcsuper/share.c:164
-#, c-format
-msgid ""
-"\n"
-"Error while opening %s\n"
-msgstr ""
-
-#: Sources/libcsuper/share.c:185
-#, c-format
-msgid "Error while closing the file"
-msgstr ""
-
-#: Sources/libcsuper/share.c:224 Sources/libcsuper/share.c:243
+#: Sources/libcsuper/share.c:165 Sources/libcsuper/share.c:184
 #, c-format
 msgid ""
 "\n"
 "Memory allocation problem\n"
-msgstr ""
-
-#: Sources/libcsuper/share.c:306
-#, c-format
-msgid ""
-"\n"
-"The file %s cannot be renamed.\n"
-msgstr ""
-
-#: Sources/libcsuper/share.c:312
-#, c-format
-msgid ""
-"\n"
-"The file %s was well renamed in %s.\n"
 msgstr ""

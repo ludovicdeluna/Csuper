@@ -49,6 +49,7 @@ Csuper-gui
 * Fixed a bug with the distributor
 * Update the translations
 * Check the filename of the new file
+* Open a error dialog when there is a error when saving the file
 
 4.0.0
 

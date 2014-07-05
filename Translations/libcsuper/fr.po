@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-06-25 22:02+0200\n"
+"POT-Creation-Date: 2014-07-05 11:19+0200\n"
 "PO-Revision-Date: 2014-06-09 21:54+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
@@ -80,16 +80,21 @@ msgstr ""
 "\n"
 "Erreur ce nom n'existe pas.\n"
 
-#: Sources/libcsuper/game_config.c:163
+#: Sources/libcsuper/file.c:50
 #, c-format
 msgid ""
 "\n"
-"The game configuration %s already exist.\n"
+"Error while opening %s\n"
 msgstr ""
 "\n"
-"La configuration de jeu %s existe déjà.\n"
+"Erreur lors de l'ouverture du fichier %s\n"
 
-#: Sources/libcsuper/game_config.c:315 Sources/libcsuper/share.c:281
+#: Sources/libcsuper/file.c:71
+#, c-format
+msgid "Error while closing the file"
+msgstr "Erreur lors de la fermeture du fichier"
+
+#: Sources/libcsuper/file.c:108 Sources/libcsuper/game_config.c:315
 #, c-format
 msgid ""
 "\n"
@@ -98,7 +103,7 @@ msgstr ""
 "\n"
 "Le fichier %s n'a pas pu être supprime.\n"
 
-#: Sources/libcsuper/game_config.c:321 Sources/libcsuper/share.c:288
+#: Sources/libcsuper/file.c:115 Sources/libcsuper/game_config.c:321
 #, c-format
 msgid ""
 "\n"
@@ -106,6 +111,42 @@ msgid ""
 msgstr ""
 "\n"
 "Le fichier %s a bien été supprimé.\n"
+
+#: Sources/libcsuper/file.c:133
+#, c-format
+msgid ""
+"\n"
+"The file %s cannot be renamed.\n"
+msgstr ""
+"\n"
+"Le fichier %s n'a pas pu être renommé.\n"
+
+#: Sources/libcsuper/file.c:139
+#, c-format
+msgid ""
+"\n"
+"The file %s was well renamed in %s.\n"
+msgstr ""
+"\n"
+"Le fichier %s a bien été renommé en %s.\n"
+
+#: Sources/libcsuper/filename.c:132 Sources/libcsuper/filename.c:159
+#, c-format
+msgid ""
+"\n"
+"Error : this folder is not valid.\n"
+msgstr ""
+"\n"
+"Erreur : Le dossier n'est pas valide.\n"
+
+#: Sources/libcsuper/game_config.c:163
+#, c-format
+msgid ""
+"\n"
+"The game configuration %s already exist.\n"
+msgstr ""
+"\n"
+"La configuration de jeu %s existe déjà.\n"
 
 #: Sources/libcsuper/game_config.c:402
 #, c-format
@@ -169,15 +210,6 @@ msgstr ""
 "\n"
 "Erreur lors de la lecture du fichier contenant le répertoire des fichiers.\n"
 
-#: Sources/libcsuper/preferences_files.c:371
-#, c-format
-msgid ""
-"\n"
-"Error : this folder is not valid.\n"
-msgstr ""
-"\n"
-"Erreur : Le dossier n'est pas valide.\n"
-
 #: Sources/libcsuper/share.c:58
 #, c-format
 msgid ""
@@ -196,21 +228,7 @@ msgstr ""
 "\n"
 "Erreur lors de l'effaçage de la console.\n"
 
-#: Sources/libcsuper/share.c:164
-#, c-format
-msgid ""
-"\n"
-"Error while opening %s\n"
-msgstr ""
-"\n"
-"Erreur lors de l'ouverture du fichier %s\n"
-
-#: Sources/libcsuper/share.c:185
-#, c-format
-msgid "Error while closing the file"
-msgstr "Erreur lors de la fermeture du fichier"
-
-#: Sources/libcsuper/share.c:224 Sources/libcsuper/share.c:243
+#: Sources/libcsuper/share.c:165 Sources/libcsuper/share.c:184
 #, c-format
 msgid ""
 "\n"
@@ -218,24 +236,6 @@ msgid ""
 msgstr ""
 "\n"
 "Problème d'allocation mémoire\n"
-
-#: Sources/libcsuper/share.c:306
-#, c-format
-msgid ""
-"\n"
-"The file %s cannot be renamed.\n"
-msgstr ""
-"\n"
-"Le fichier %s n'a pas pu être renommé.\n"
-
-#: Sources/libcsuper/share.c:312
-#, c-format
-msgid ""
-"\n"
-"The file %s was well renamed in %s.\n"
-msgstr ""
-"\n"
-"Le fichier %s a bien été renommé en %s.\n"
 
 #~ msgid ""
 #~ "\n"
