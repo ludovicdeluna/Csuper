@@ -160,12 +160,12 @@ void menuGameConfig(game_config *ptr_config)
         ptr_config->first_way=1;
 
     /*Turn by turn*/
-    printf(_("\nThe points will be attribute in turn by turn (Y/n) : "));
+    printf(_("\nThis is a turn-based game (Y/n) : "));
     charKey(&turn);
     if (turn=='n' || turn == 'N')
-        ptr_config->turn_by_turn=0;
+        ptr_config->turn_based=0;
     else
-        ptr_config->turn_by_turn=1;
+        ptr_config->turn_based=1;
 
     /*Distributor*/
     printf(_("\nWe use a distributor (Y/n) : "));
@@ -236,7 +236,7 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
     int index_player;
     float total=0;
 
-    if (ptr_csu_struct->config.turn_by_turn == 1)
+    if (ptr_csu_struct->config.turn_based == 1)
         index_player = -1;
     else
         index_player = menuPlayerIndex(ptr_csu_struct);
@@ -247,7 +247,7 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
     {
         validation=MY_TRUE;
 
-        if (ptr_csu_struct->config.turn_by_turn == 1)
+        if (ptr_csu_struct->config.turn_based == 1)
         {
             for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
             {

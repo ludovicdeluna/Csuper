@@ -355,7 +355,7 @@ void updateCsuInfo(globalData *data)
     gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("The first has the highest score : %s"),integerToYesNo(data->ptr_csu_struct->config.first_way,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Game in turn by turn : %s"),integerToYesNo(data->ptr_csu_struct->config.turn_by_turn,yes,no)));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Turn-based game : %s"),integerToYesNo(data->ptr_csu_struct->config.turn_based,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor_turn"));
     gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a distributor : %s"),integerToYesNo(data->ptr_csu_struct->config.use_distributor,yes,no)));

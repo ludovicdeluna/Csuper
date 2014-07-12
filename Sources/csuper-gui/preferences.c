@@ -514,24 +514,24 @@ void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboole
         {
             gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score : %s\nNumber of points maximum/minimum : %.3f\n"
                 "Initial score : %.3f\nNumber of decimal place : %d\nThe first has the highest score : %s\n"
-                "Game in turn by turn : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no),config.nb_max
+                "Turn-based game : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no),config.nb_max
                 ,config.begin_score,config.decimal_place,integerToYesNo(config.first_way,yes,no),
-                integerToYesNo(config.turn_by_turn,yes,no),integerToYesNo(config.use_distributor,yes,no)));
+                integerToYesNo(config.turn_based,yes,no),integerToYesNo(config.use_distributor,yes,no)));
         }
         else
         {
             gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score : %s\nNumber of points maximum/minimum : inf\n"
                 "Initial score : %.3f\nNumber of decimal place : %d\nThe first has the highest score : %s\n"
-                "Game in turn by turn : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no)
+                "Turn-based game : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no)
                 ,config.begin_score,config.decimal_place,integerToYesNo(config.first_way,yes,no),
-                integerToYesNo(config.turn_by_turn,yes,no),integerToYesNo(config.use_distributor,yes,no)));
+                integerToYesNo(config.turn_based,yes,no),integerToYesNo(config.use_distributor,yes,no)));
         }
         #else
         gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score : %s\nNumber of points maximum/minimum : %.3f\n"
             "Initial score : %.3f\nNumber of decimal place : %d\nThe first has the highest score : %s\n"
-            "Game in turn by turn : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no),config.nb_max
+            "Turn-based game : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no),config.nb_max
             ,config.begin_score,config.decimal_place,integerToYesNo(config.first_way,yes,no),
-            integerToYesNo(config.turn_by_turn,yes,no),integerToYesNo(config.use_distributor,yes,no)));
+            integerToYesNo(config.turn_based,yes,no),integerToYesNo(config.use_distributor,yes,no)));
         #endif // _win32
         gtk_label_set_text(GTK_LABEL(label_name),g_strdup_printf(_("%s"),config.name));
 
@@ -656,9 +656,9 @@ game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window)
 
             /* Turn by turn */
             if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5))))
-                config.turn_by_turn = 1;
+                config.turn_based = 1;
             else
-                config.turn_by_turn = 0;
+                config.turn_based = 0;
 
             /* Distributor */
             if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6))))
@@ -815,7 +815,7 @@ void changeNewGameConfigurationDialog(globalData *data,game_config config)
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),FALSE);
 
-    if(config.turn_by_turn == 1)
+    if(config.turn_based == 1)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),TRUE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),FALSE);

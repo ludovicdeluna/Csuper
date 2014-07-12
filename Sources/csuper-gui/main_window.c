@@ -315,7 +315,7 @@ void createPointsGrid(globalData *data)
         GtkWidget *new_points_button = gtk_spin_button_new(adju,1,data->ptr_csu_struct->config.decimal_place);
         gtk_entry_set_alignment (GTK_ENTRY(new_points_button),0.5);
         gtk_entry_set_width_chars(GTK_ENTRY(new_points_button),3);
-        if (data->ptr_csu_struct->config.turn_by_turn == MY_FALSE)
+        if (data->ptr_csu_struct->config.turn_based == MY_FALSE)
             gtk_entry_set_activates_default(GTK_ENTRY(new_points_button),TRUE);
         if (exceedMaxNumber(data->ptr_csu_struct) == MY_TRUE)
             gtk_editable_set_editable(GTK_EDITABLE(new_points_button),FALSE);
@@ -387,7 +387,7 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
     gint max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
 
     /* Save the scores in the structure */
-    if (user_data->ptr_csu_struct->config.turn_by_turn == 0)
+    if (user_data->ptr_csu_struct->config.turn_based == 0)
     {
         /* Save the scores in the structure */
         for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)

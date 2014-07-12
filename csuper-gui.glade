@@ -1072,7 +1072,7 @@ Rémi BERTHO</property>
               <object class="GtkLabel" id="label_turn">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Game in turn by turn : no csu file loaded</property>
+                <property name="label" translatable="yes">Turn-based game : no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
@@ -2437,11 +2437,11 @@ Congratulation to the winner !</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="new_game_configuration_label_turn_by_turn">
+              <object class="GtkLabel" id="new_game_configuration_label_turn_based">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">The points will be attribute in turn by turn</property>
+                <property name="label" translatable="yes">The points will be attribute in turn-based</property>
                 <property name="justify">center</property>
               </object>
               <packing>
@@ -2515,7 +2515,7 @@ Congratulation to the winner !</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="new_game_configuration_switch_turn_by_turn">
+              <object class="GtkSwitch" id="new_game_configuration_switch_turn_based">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="halign">center</property>

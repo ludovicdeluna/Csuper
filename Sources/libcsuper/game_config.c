@@ -272,7 +272,7 @@ int newConfigFile(game_config config,char * home_path)
         fprintf(ptr_file,"%f ",config.nb_max);
     #endif
 
-    fprintf(ptr_file,"%f %d %d %d %d %d",config.begin_score,config.decimal_place,config.first_way,config.max,config.turn_by_turn,config.use_distributor);
+    fprintf(ptr_file,"%f %d %d %d %d %d",config.begin_score,config.decimal_place,config.first_way,config.max,config.turn_based,config.use_distributor);
 
     closeFile(ptr_file);
 
@@ -368,7 +368,7 @@ int readConfigFile(int index_read, list_game_config *ptr_list_config, game_confi
     fscanf(ptr_file,"%d",&tmp);
     ptr_config->max=tmp;
     fscanf(ptr_file,"%d",&tmp);
-    ptr_config->turn_by_turn=tmp;
+    ptr_config->turn_based=tmp;
     fscanf(ptr_file,"%d",&tmp);
     ptr_config->use_distributor=tmp;
 
@@ -416,7 +416,7 @@ int exportConfigFile(char *home_path,char *file_name)
         else
             fprintf(ptr_file_export,"%f ",config.nb_max);
         #endif
-        fprintf(ptr_file_export,"%f %s %d %d %d %d %d\n",config.begin_score,config.name,config.decimal_place,config.first_way,config.max,config.turn_by_turn,config.use_distributor);
+        fprintf(ptr_file_export,"%f %s %d %d %d %d %d\n",config.begin_score,config.name,config.decimal_place,config.first_way,config.max,config.turn_based,config.use_distributor);
     }
 
     closeFile(ptr_file_export);
@@ -482,7 +482,7 @@ int importConfigFile(char *home_path,char *file_name)
         fscanf(ptr_file_import,"%d",&tmp);
         config.max=tmp;
         fscanf(ptr_file_import,"%d",&tmp);
-        config.turn_by_turn=tmp;
+        config.turn_based=tmp;
         fscanf(ptr_file_import,"%d",&tmp);
         config.use_distributor=tmp;
 

@@ -59,7 +59,7 @@ typedef struct
 {
     float nb_max;               /*!< Number maximum or minimum that can reach a player. */
     char first_way;             /*!< Is 1 if the first those has the maximum of points, -1 otherwise */
-    char turn_by_turn;          /*!< Is 1 if the game is on turn by turn, 0 otherwise */
+    char turn_based;          /*!< Is 1 if this is a turn-based game, 0 otherwise */
     char use_distributor;       /*!< Is 1 if the game use a distributor, 0 otherwise */
     char decimal_place;         /*!< The number of decimal place which are display */
     char max;                   /*!< Is 1 if the game use a maximum, 0 if it's a minimum */
