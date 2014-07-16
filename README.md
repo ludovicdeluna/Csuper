@@ -20,7 +20,7 @@ This software is a personnel exercise of a student. Thank you to be indulgent.
 
 The documentation is made by Doxygen.
 
-A PDF version lay in the Documentation folder and a HTML version [here for csuper](http://www.dalan.rd-h.fr/Doc_csuper), [here for libcsuper](http://www.dalan.rd-h.fr/Doc_libcsuper) and [here for csuper-gui](http://www.dalan.rd-h.fr/Doc_csuper-gui)
+A PDF version lay in the Documentation folder and a HTML version [here for csuper](http://www.dalan.rd-h.fr/documentation/doc_csuper), [here for libcsuper](http://www.dalan.rd-h.fr/documentation/doc_libcsuper) and [here for csuper-gui](http://www.dalan.rd-h.fr/documentation/doc_csuper-gui)
 A file explain the .csu files.
 
 ###Installation
@@ -62,7 +62,7 @@ Ce logiciel a été fait en guise d'exercice personnel pendant des études donc 
 ###Documentation
 
 La documentation se fait à l'aide de Doxygen.
-Une version PDF se trouve dans le dossier Documentation et une version HTML se trouve [ici pour csuper](http://www.dalan.rd-h.fr/Doc_csuper), [ici pour libcsuper](http://www.dalan.rd-h.fr/Doc_libcsuper) et [ici pour csuper-gui](http://www.dalan.rd-h.fr/Doc_csuper-gui).
+Une version PDF se trouve dans le dossier Documentation et une version HTML se trouve [ici pour csuper](http://www.dalan.rd-h.fr/documentation/doc_csuper), [ici pour libcsuper](http://www.dalan.rd-h.fr/documentation/doc_libcsuper) et [ici pour csuper-gui](http://www.dalan.rd-h.fr/documentation/doc_csuper-gui).
 Un fichier explique aussi comment sont ordonnées les données dans les fichiers .csu
 
 ###Installation

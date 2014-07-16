@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-07-12 11:24+0200\n"
-"PO-Revision-Date: 2014-07-12 11:26+0200\n"
+"PO-Revision-Date: 2014-07-15 19:25+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>\n"
 "Language: fr\n"
@@ -376,7 +376,7 @@ msgstr ""
 
 #: Sources/csuper-gui/new_file_assistant.c:109
 msgid "Player names"
-msgstr "Nom des joueurs"
+msgstr "Noms des joueurs"
 
 #: Sources/csuper-gui/new_file_assistant.c:126
 #: Sources/csuper-gui/new_file_assistant.c:176
@@ -526,7 +526,7 @@ msgstr ""
 
 #: Sources/csuper-gui/preferences.c:544 csuper-gui.glade:1417
 msgid "You have no game configuration selected."
-msgstr "Vous n'avez pas de configurations de jeu selectionnée."
+msgstr "Vous n'avez pas de configuration de jeu selectionnée."
 
 #: Sources/csuper-gui/preferences.c:601
 msgid ""
@@ -877,7 +877,7 @@ msgstr "Liste de toutes vos configurations de jeu"
 
 #: csuper-gui.glade:1439
 msgid "The selected game configurations"
-msgstr "La configuration de jeu selectionné"
+msgstr "La configuration de jeu selectionnée"
 
 #: csuper-gui.glade:1495
 msgid "\"New\" button"
@@ -952,7 +952,7 @@ msgstr "Dossier où le nouveau fichier csu va être enregistré"
 
 #: csuper-gui.glade:2198
 msgid "Number of player on the game"
-msgstr "Nombre de joueur dans le jeu"
+msgstr "Nombre de joueurs dans le jeu"
 
 #: csuper-gui.glade:2229
 msgid "Your game configuration"
