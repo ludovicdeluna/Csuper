@@ -2,8 +2,8 @@
  * \file    main.h
  * \brief   Main
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    19/07/14
+ * \version 4.0.2
  */
 
  /*
@@ -42,6 +42,6 @@
 #include "utils.h"
 
 int main (int   argc, char *argv[]);
-void openFileWithMainArgument(globalData *data,int argc, char *argv[]);
+int openFileWithMainArgument(globalData *data,int argc, char *argv[]);
 
 #endif // MAIN_H_INCLUDED

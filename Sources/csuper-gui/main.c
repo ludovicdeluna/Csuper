@@ -2,8 +2,8 @@
  * \file    main.c
  * \brief   Main
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    19/07/14
+ * \version 4.0.2
  */
 
  /*
@@ -95,7 +95,8 @@ int main (int argc, char *argv[])
     readMainWindowSize(&data);
     updateToolbarButton(&data);
 
-    openFileWithMainArgument(&data,argc,argv);
+    if (openFileWithMainArgument(&data,argc,argv) == FALSE)
+        return EXIT_FAILURE;
 
     gtk_widget_show_all(data.ptr_main_window);
 
@@ -107,17 +108,18 @@ int main (int argc, char *argv[])
 }
 
 /*!
- * \fn void openFileWithMainArgument(globalData *data,int argc, char *argv[])
+ * \fn int openFileWithMainArgument(globalData *data,int argc, char *argv[])
  *  Open directly a file if there is one in the main argument
  * \param[in] data the globalData
  * \param[in] argc the number of argument.
  * \param[in] argv the array of argument.
+ * \return TRUE if everything is OK, FALSE if there is an error while loading the file
  */
-void openFileWithMainArgument(globalData *data,int argc, char *argv[])
+int openFileWithMainArgument(globalData *data,int argc, char *argv[])
 {
     /* Open the file which is on second argument id there is one*/
     if (argc < 2)
-        return;
+        return TRUE;
 
     gchar filename[SIZE_MAX_FILE_NAME];
     printf("%s",argv[1]);
@@ -128,10 +130,6 @@ void openFileWithMainArgument(globalData *data,int argc, char *argv[])
     strncpy(filename,argv[1],SIZE_MAX_FILE_NAME-1);
     #endif // _WIN32
 
-    if (data->ptr_csu_struct != NULL)
-        closeCsuStruct(data->ptr_csu_struct);
-
-    data->ptr_csu_struct=NULL;
     (data->ptr_csu_struct) = readCsuFile(filename);
     if((data->ptr_csu_struct) != NULL)
     {
@@ -149,4 +147,13 @@ void openFileWithMainArgument(globalData *data,int argc, char *argv[])
         addLastCsuStruct(data);
         setButtonMainWindowSensitive(data);
     }
+    else
+    {
+        if (strcmp(argv[1],"") != 0)
+        {
+            openFileError(data);
+            return FALSE;
+        }
+    }
+    return TRUE;
 }

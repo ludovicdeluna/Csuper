@@ -46,6 +46,10 @@ Libcsuper
 Csuper-gui
 ==========
 
+4.0.2
+
+* Add an error message when there is an error when loading the file with the main arguments
+
 4.0.1
 
 * Fixed the bug when the filename is too long
