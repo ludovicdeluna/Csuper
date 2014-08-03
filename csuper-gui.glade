@@ -1,7 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 -->
+<!-- Generated with glade 3.18.3 
+
+Copyright (C) 2014 Rémi BERTHO <remi.bertho@gmail.com>
+
+This file is part of Csuper.
+
+Csuper is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Csuper is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Csuper.  If not, see <http://www.gnu.org/licenses/>.
+
+Author: Rémi BERTHO
+
+-->
 <interface domain="csuper-gui">
   <requires lib="gtk+" version="3.6"/>
+  <!-- interface-license-type gplv3 -->
+  <!-- interface-name Csuper -->
+  <!-- interface-description Universal points counter allowing a dispense with reflection -->
+  <!-- interface-copyright 2014 R\303\251mi BERTHO <remi.bertho@gmail.com> -->
+  <!-- interface-authors R\303\251mi BERTHO -->
   <object class="GtkFileFilter" id="filefilterall">
     <patterns>
       <pattern>*</pattern>
@@ -105,8 +131,6 @@
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
   </object>
@@ -147,6 +171,7 @@
                         <property name="tooltip_text" translatable="yes">New csu file</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="openAssistantNewCsu" swapped="no"/>
                       </object>
                     </child>
@@ -158,6 +183,7 @@
                         <property name="tooltip_text" translatable="yes">Open a csu file</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="chooseCsuFileOpen" swapped="no"/>
                       </object>
                     </child>
@@ -169,6 +195,7 @@
                         <property name="tooltip_text" translatable="yes">Save as a csu file</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="chooseCsuFileSave" swapped="no"/>
                       </object>
                     </child>
@@ -204,6 +231,7 @@
                         <property name="tooltip_text" translatable="yes">Quit csuper</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="gtk_main_quit" swapped="no"/>
                       </object>
                     </child>
@@ -229,6 +257,7 @@
                         <property name="tooltip_text" translatable="yes">Undo the last "End of turn"</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="undoCsuStruct" swapped="no"/>
                       </object>
                     </child>
@@ -240,6 +269,7 @@
                         <property name="tooltip_text" translatable="yes">Redo the last "End of turn"</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="redoCsuStruct" swapped="no"/>
                       </object>
                     </child>
@@ -256,6 +286,7 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="cutToClipboard" swapped="no"/>
                       </object>
                     </child>
@@ -266,6 +297,7 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="copyToClipboard" swapped="no"/>
                       </object>
                     </child>
@@ -276,6 +308,7 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="pastFromClipboard" swapped="no"/>
                       </object>
                     </child>
@@ -286,6 +319,7 @@
                         <property name="can_focus">False</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="deleteSelectedText" swapped="no"/>
                       </object>
                     </child>
@@ -310,6 +344,7 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Open the game configuration preferences window</property>
                         <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="openGameConfigurationPreferences" swapped="no"/>
                       </object>
                     </child>
@@ -320,6 +355,7 @@
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Open the toolbar button preferences window</property>
                         <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="openToolbarButtonPreferences" swapped="no"/>
                       </object>
                     </child>
@@ -345,6 +381,7 @@
                         <property name="tooltip_text" translatable="yes">About csuper</property>
                         <property name="use_underline">True</property>
                         <property name="use_stock">True</property>
+                        <property name="always_show_image">True</property>
                         <signal name="activate" handler="displayAbout" swapped="no"/>
                       </object>
                     </child>
@@ -357,7 +394,6 @@
             <property name="left_attach">0</property>
             <property name="top_attach">0</property>
             <property name="width">3</property>
-            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -381,8 +417,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -398,8 +432,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -422,8 +454,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -437,8 +467,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -455,8 +483,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -472,8 +498,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -492,8 +516,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -503,8 +525,6 @@
           <packing>
             <property name="left_attach">2</property>
             <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -516,8 +536,6 @@
           <packing>
             <property name="left_attach">1</property>
             <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -811,7 +829,6 @@
             <property name="left_attach">0</property>
             <property name="top_attach">1</property>
             <property name="width">3</property>
-            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -834,8 +851,6 @@
           <packing>
             <property name="left_attach">0</property>
             <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
           </packing>
         </child>
       </object>
@@ -849,9 +864,9 @@
     <property name="skip_taskbar_hint">True</property>
     <property name="transient_for">main_window</property>
     <property name="program_name">Csuper</property>
-    <property name="version">4.0.1</property>
-    <property name="copyright" translatable="yes">Copyright © 2014 Remi BERTHO &lt;remi.bertho@gmail.com&gt;</property>
-    <property name="comments" translatable="yes">Universal points counter allowing reflexion exemption</property>
+    <property name="version">4.0.2</property>
+    <property name="copyright" translatable="yes">Copyright © 2014 Rémi BERTHO &lt;remi.bertho@gmail.com&gt;</property>
+    <property name="comments" translatable="yes">Universal points counter allowing a dispense with reflection</property>
     <property name="website">http://www.dalan.rd-h.fr/wordpress</property>
     <property name="website_label" translatable="yes">Visit the website of Csuper</property>
     <property name="authors">Rémi BERTHO</property>
@@ -947,8 +962,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -960,8 +973,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -973,8 +984,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -986,8 +995,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -999,8 +1006,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1012,8 +1017,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1025,8 +1028,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1038,8 +1039,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1051,8 +1050,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1064,8 +1061,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">10</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1077,8 +1072,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">11</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1090,8 +1083,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">12</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1103,8 +1094,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">13</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1116,8 +1105,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">14</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1130,8 +1117,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -1300,7 +1285,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
                 <property name="height">2</property>
               </packing>
             </child>
@@ -1381,7 +1365,6 @@ Congratulation to the winner !</property>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
                 <property name="width">2</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1401,8 +1384,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1423,8 +1404,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1444,8 +1423,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1466,8 +1443,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -1497,8 +1472,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1512,8 +1485,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1527,8 +1498,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1542,8 +1511,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1557,8 +1524,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1572,8 +1537,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1587,8 +1550,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1602,8 +1563,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1617,8 +1576,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1632,8 +1589,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1649,8 +1604,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1666,8 +1619,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1683,8 +1634,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1700,8 +1649,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1717,8 +1664,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1734,8 +1679,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1751,8 +1694,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1768,8 +1709,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1785,8 +1724,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1802,8 +1739,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1817,8 +1752,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1832,8 +1765,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1847,8 +1778,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1862,8 +1791,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1877,8 +1804,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1892,8 +1817,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1907,8 +1830,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1922,8 +1843,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1937,8 +1856,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1954,8 +1871,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1971,8 +1886,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1988,8 +1901,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2005,8 +1916,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2022,8 +1931,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2039,8 +1946,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2056,8 +1961,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2073,8 +1976,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2090,8 +1991,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2138,7 +2037,6 @@ Congratulation to the winner !</property>
                 <property name="left_attach">0</property>
                 <property name="top_attach">10</property>
                 <property name="width">4</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2187,8 +2085,6 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2200,8 +2096,6 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">2</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2218,8 +2112,6 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">2</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2231,8 +2123,6 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">3</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2246,8 +2136,6 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2259,8 +2147,6 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2274,8 +2160,6 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2372,8 +2256,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2387,8 +2269,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2402,8 +2282,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2417,8 +2295,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2432,8 +2308,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2447,8 +2321,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2462,8 +2334,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2477,8 +2347,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2495,8 +2363,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2510,8 +2376,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2525,8 +2389,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2539,8 +2401,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2560,8 +2420,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2581,8 +2439,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2599,8 +2455,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2617,8 +2471,6 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>

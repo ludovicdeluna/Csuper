@@ -5,7 +5,7 @@ Csuper
 English
 -------
 
-Csuper (Universal points counter allowing reflexion exemption)
+Csuper (Universal points counter allowing a dispense with reflection)
 
 ###Informations
 
