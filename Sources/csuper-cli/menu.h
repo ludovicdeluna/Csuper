@@ -1,17 +1,17 @@
 /*!
- * \file    keyboarding.h
- * \brief   Function of keyboarding
+ * \file    menu.h
+ * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    26/04/14
- * \version 2.2.0
+ * \date    17/06/14
+ * \version 4.0.0
  */
 
  /*
- * keyboarding.h
+ * menu.h
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
- * This file is part of Csuper.
+ * This file is part of Csuper-cli.
  *
  * Csuper is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -31,38 +31,23 @@
  *
  */
 
-#ifndef SAISIE_CLAVIER_H_INCLUDED
-#define SAISIE_CLAVIER_H_INCLUDED
+#ifndef MENU_H_INCLUDED
+#define MENU_H_INCLUDED
 
-#include "csuper.h"
-#include <locale.h>
-#include <string.h>
-#include <math.h>
+#include "keyboarding.h"
 #include "main.h"
-/*!
- * \def NB_CARACT_INT
- * Define the number of characters that need an int.
- */
-#define NB_CARACT_INT 12
+#include "csuper.h"
 
-/*!
- * \def NB_CARACT_FLOAT
- *  Define the number of characters that need a float.
- */
-#define NB_CARACT_FLOAT 39
 
-/*!
- * \def NB_CARACT_DOUB
- * Define the number of characters that need a double
- */
-#define NB_CARACT_DOUB 309
-
-void clean_stdin(void);
-char *stringKey(char *string, int nb_char_plus_one);
-void intKey(int *nb);
-void floatKey(float *nb);
-void floatKeyNoComma(float *nb);
-char *charKey(char *c);
-void systemPause();
+char *menuFileName(char file_name[SIZE_MAX_FILE_NAME]);
+void menuStartGame(float *ptr_nb_player, game_config *ptr_config);
+void menuGameConfig(game_config *ptr_config);
+void menuDistributor(char *distributor_name);
+void menuPlayersName(csuStruct *ptr_csu_struct);
+void menuPlayersPoints(csuStruct *ptr_csu_struct);
+int menuPlayerIndex(csuStruct *ptr_csu_struct);
+int menuContinue();
+int menuDelete();
+void menuNewPath(char *new_path);
 
 #endif

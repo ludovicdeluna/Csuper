@@ -113,8 +113,13 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_grid_set_column_spacing(GTK_GRID(grid_name),10);
     gtk_grid_set_row_spacing(GTK_GRID(grid_name),10);
     gtk_grid_set_column_homogeneous(GTK_GRID(grid_name),TRUE);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(grid_name,10);
+    gtk_widget_set_margin_start(grid_name,10);
+    #else
     gtk_widget_set_margin_right(grid_name,10);
     gtk_widget_set_margin_left(grid_name,10);
+    #endif // GTK_MINOR_VERSION
     gtk_widget_set_margin_top(grid_name,10);
     gtk_widget_set_margin_bottom(grid_name,10);
     gtk_container_add(GTK_CONTAINER(gtk_bin_get_child(GTK_BIN(scrolled_window_name))),grid_name);

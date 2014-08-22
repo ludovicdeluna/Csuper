@@ -86,8 +86,13 @@ void createRanking(globalData *data)
     GtkWidget *rank_grid = gtk_grid_new();
     gtk_grid_set_column_spacing(GTK_GRID(rank_grid),20);
     gtk_grid_set_row_spacing(GTK_GRID(rank_grid),10);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(rank_grid,10);
+    gtk_widget_set_margin_start(rank_grid,10);
+    #else
     gtk_widget_set_margin_right(rank_grid,10);
     gtk_widget_set_margin_left(rank_grid,10);
+    #endif // GTK_MINOR_VERSION
     gtk_widget_set_margin_top(rank_grid,10);
     gtk_widget_set_margin_bottom(rank_grid,10);
     gtk_grid_set_column_homogeneous(GTK_GRID(rank_grid),TRUE);
@@ -258,8 +263,13 @@ void createPointsGrid(globalData *data)
     GtkWidget *points_grid = gtk_grid_new();
     gtk_grid_set_column_spacing(GTK_GRID(points_grid),5);
     gtk_grid_set_row_spacing(GTK_GRID(points_grid),5);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(points_grid,10);
+    gtk_widget_set_margin_start(points_grid,10);
+    #else
     gtk_widget_set_margin_right(points_grid,10);
     gtk_widget_set_margin_left(points_grid,10);
+    #endif // GTK_MINOR_VERSION
     gtk_widget_set_margin_top(points_grid,10);
     gtk_widget_set_margin_bottom(points_grid,10);
     gtk_widget_set_valign(GTK_WIDGET(points_grid),GTK_ALIGN_START);

@@ -11,7 +11,7 @@
  *
  * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
  *
- * This file is part of Csuper.
+ * This file is part of Csuper-cli.
  *
  * Csuper is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by

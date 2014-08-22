@@ -1,0 +1,8 @@
+#!/bin/bash
+sudo mkdir -p /opt/csuper-cli
+sudo cp csuper /opt/csuper-cli
+sudo cp libcsuper.so /usr/local/lib
+sudo echo "nom=\$(pwd)/\$2 && cd /opt/csuper-cli && /opt/csuper/csuper-cli \$1 \"\$nom\"" > csuper_install
+sudo chmod +x csuper_install
+sudo mv csuper_install /usr/local/bin/csuper
+sudo cp -R Locales /opt/csuper-cli

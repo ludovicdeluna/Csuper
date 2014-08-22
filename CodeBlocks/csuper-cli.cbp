@@ -2,12 +2,12 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="csuper" />
+		<Option title="csuper-cli" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="../csuper" prefix_auto="1" extension_auto="1" />
+				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
 				<Option object_output="../Compilation/obj/Debug" />
 				<Option type="1" />
@@ -17,7 +17,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="../csuper" prefix_auto="1" extension_auto="1" />
+				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
 				<Option object_output="../Compilation/obj/Release" />
 				<Option type="1" />
@@ -41,28 +41,28 @@
 			<Add library="libcsuper" />
 			<Add directory="../" />
 		</Linker>
-		<Unit filename="../Sources/csuper/csuper.h" />
-		<Unit filename="../Sources/csuper/display.c">
+		<Unit filename="../Sources/csuper-cli/csuper.h" />
+		<Unit filename="../Sources/csuper-cli/display.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/csuper/display.h" />
-		<Unit filename="../Sources/csuper/interface.c">
+		<Unit filename="../Sources/csuper-cli/display.h" />
+		<Unit filename="../Sources/csuper-cli/interface.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/csuper/interface.h" />
-		<Unit filename="../Sources/csuper/keyboarding.c">
+		<Unit filename="../Sources/csuper-cli/interface.h" />
+		<Unit filename="../Sources/csuper-cli/keyboarding.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/csuper/keyboarding.h" />
-		<Unit filename="../Sources/csuper/main.c">
+		<Unit filename="../Sources/csuper-cli/keyboarding.h" />
+		<Unit filename="../Sources/csuper-cli/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/csuper/main.h" />
-		<Unit filename="../Sources/csuper/menu.c">
+		<Unit filename="../Sources/csuper-cli/main.h" />
+		<Unit filename="../Sources/csuper-cli/menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Sources/csuper/menu.h" />
-		<Unit filename="../Sources/csuper/ressources_windows.rc">
+		<Unit filename="../Sources/csuper-cli/menu.h" />
+		<Unit filename="../Sources/csuper-cli/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
 		<Extensions>
