@@ -331,7 +331,10 @@ void createPointsGrid(globalData *data)
             gtk_editable_set_editable(GTK_EDITABLE(new_points_button),FALSE);
         gtk_grid_attach(GTK_GRID(points_grid),new_points_button,2*(i+1),2*(max_nb_turn+1),1,1);
         g_signal_connect (new_points_button,"value-changed", G_CALLBACK(updateTotalPointsInTurnLabel),data);
-        //g_signal_connect (new_points_button,"changed", G_CALLBACK(setButtonMainWindowClipboardSensitive),data);
+
+
+        /* g_signal_connect (new_points_button,"changed", G_CALLBACK(setButtonMainWindowClipboardSensitive),data);*/
+        g_timeout_add(50,&setButtonMainWindowClipboardSensitive,data);
     }
 
     /* Write a blank line */
@@ -519,16 +522,16 @@ void setButtonMainWindowSensitive(globalData *data)
         gtk_widget_set_sensitive(menu_redo,FALSE);
     }
 
-    setButtonMainWindowClipboardSensitive(NULL,data);
+    //setButtonMainWindowClipboardSensitive(NULL,data);
 }
 
 /*!
- * \fn G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gpointer data)
+ * \fn G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data)
  *  Delete the selected text
  * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
-G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gpointer data)
+G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
@@ -549,7 +552,7 @@ G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gp
     if (!menu_delete)
         g_critical(_("Widget menu_delete is missing in file csuper-gui.glade."));
 
-    /*Decomment when i found the signal which is adapted
+    //Decomment when i found the signal which is adapted
 
     if(GTK_IS_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))))
     {
@@ -593,9 +596,9 @@ G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gp
         gtk_widget_set_sensitive(menu_copy,FALSE);
         gtk_widget_set_sensitive(menu_paste,FALSE);
         gtk_widget_set_sensitive(menu_delete,FALSE);
-    }*/
+    }
 
-    if (user_data->ptr_csu_struct == NULL)
+    /*if (user_data->ptr_csu_struct == NULL)
     {
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),FALSE);
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),FALSE);
@@ -618,7 +621,9 @@ G_MODULE_EXPORT void setButtonMainWindowClipboardSensitive(GtkWidget *widget, gp
         gtk_widget_set_sensitive(menu_copy,TRUE);
         gtk_widget_set_sensitive(menu_delete,TRUE);
         gtk_widget_set_sensitive(menu_paste,TRUE);
-    }
+    }*/
+
+    return G_SOURCE_CONTINUE;
 }
 
 /*!

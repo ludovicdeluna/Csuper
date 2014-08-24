@@ -20,7 +20,7 @@ This software is a personnel exercise of a student. Thank you to be indulgent.
 
 The documentation is made by Doxygen.
 
-A PDF version lay in the Documentation folder and a HTML version [here for csuper](http://www.dalan.rd-h.fr/documentation/doc_csuper), [here for libcsuper](http://www.dalan.rd-h.fr/documentation/doc_libcsuper) and [here for csuper-gui](http://www.dalan.rd-h.fr/documentation/doc_csuper-gui)
+A PDF version lay in the Documentation folder and a HTML version [here for csuper-cli](http://www.dalan.rd-h.fr/documentation/doc_csuper), [here for libcsuper](http://www.dalan.rd-h.fr/documentation/doc_libcsuper) and [here for csuper-gui](http://www.dalan.rd-h.fr/documentation/doc_csuper-gui)
 A file explain the .csu files.
 
 ###Installation
@@ -29,16 +29,16 @@ Executables are available on [my website](http://www.dalan.rd-h.fr/wordpress).
 
 If you want to compile yourself, you can use the codeblocks project.
 You can also use cmake. On Linux type `cmake . -G"Unix Makefiles"` then `make`.
-To compile libcsuper and csuper you have to have gettext installed.
+To compile libcsuper and csuper-cli you have to have gettext installed.
 To compile csuper-gui you have to have GTK3 installed.
 
 If you are under Linux you can run the softwares with the scripts `run-csuper` and `run-csuper-gui`.
 
 The update of the translation is done via the command `./update_translations` and the compilation is done via the command `./compile_translations`
 
-If you want to install csuper, do `./install_csuper` or `./install_csuper-gui`. To uninstall `./uninstall_csuper` or `./uninstall_csuper-gui`
+If you want to install csuper, do `./install_csuper-cli` or `./install_csuper-gui`. To uninstall `./uninstall_csuper-cli` or `./uninstall_csuper-gui`
 
-Think to comment or decomment PORTABLE in the file main.h for csuper or the file csuper-gui.h for csuper-gui depending on the version you want.
+Think to comment or decomment PORTABLE in the file main.h for csuper-cli or the file csuper-gui.h for csuper-gui depending on the version you want.
 
 The compilation should work under Linux, Mac et Windows.
 
@@ -63,7 +63,7 @@ Ce logiciel a été fait en guise d'exercice personnel pendant des études donc 
 ###Documentation
 
 La documentation se fait à l'aide de Doxygen.
-Une version PDF se trouve dans le dossier Documentation et une version HTML se trouve [ici pour csuper](http://www.dalan.rd-h.fr/documentation/doc_csuper), [ici pour libcsuper](http://www.dalan.rd-h.fr/documentation/doc_libcsuper) et [ici pour csuper-gui](http://www.dalan.rd-h.fr/documentation/doc_csuper-gui).
+Une version PDF se trouve dans le dossier Documentation et une version HTML se trouve [ici pour csuper-cli](http://www.dalan.rd-h.fr/documentation/doc_csuper), [ici pour libcsuper](http://www.dalan.rd-h.fr/documentation/doc_libcsuper) et [ici pour csuper-gui](http://www.dalan.rd-h.fr/documentation/doc_csuper-gui).
 Un fichier explique aussi comment sont ordonnées les données dans les fichiers .csu
 
 ###Installation
@@ -72,16 +72,16 @@ Les exécutables sont disponibles sur [mon site](http://www.dalan.rd-h.fr/wordpr
 
 Si vous voulez compiler vous même le logiciel, vous pouvez utiliser les projets codeblocks.
 Vous pouvez aussi compiler en utilisant cmake. Sous Linux aller à la racine du projet avec votre terminal puis taper `cmake . -G"Unix Makefiles"` et enfin `make`.
-Pour pouvoir compiler libcsuper et csuper il faut que vous ayez d'installé gettext.
+Pour pouvoir compiler libcsuper et csuper-cli il faut que vous ayez d'installé gettext.
 Et pour csuper-gui il faut avoir GTK3 d'installé.
 
 La mise à jour de la traduction se fait via la commande `./update_translations` et la compilation de la traduction par la commande `./compile_translations`
 
-Puis si vous êtes sous Linux vous pouvez lancer les logiciels avec les scripts `run-csuper` et `run-csuper-gui`.
+Puis si vous êtes sous Linux vous pouvez lancer les logiciels avec les scripts `run-csuper-cli` et `run-csuper-gui`.
 
-Et si vous voulez installer csuper faites `./install_csuper` ou `./install_csuper-gui`. Pour le désinstaller `./uninstall_csuper` ou `./uninstall_csuper-gui`
+Et si vous voulez installer csuper faites `./install_csuper-cli` ou `./install_csuper-gui`. Pour le désinstaller `./uninstall_csuper-cli` ou `./uninstall_csuper-gui`
 
-Penser à commenter ou décommenter la constante PORTABLE du fichier main.h pour csuper et csuper-gui.h pour csuper-gui suivant la version que vous voulez.
+Penser à commenter ou décommenter la constante PORTABLE du fichier main.h pour csuper-cli et csuper-gui.h pour csuper-gui suivant la version que vous voulez.
 
 Normalement la compilation devrait marcher sous Linux, Mac et Windows.
 
