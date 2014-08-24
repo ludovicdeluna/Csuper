@@ -34,15 +34,15 @@
 #include "main_argument.h"
 
 /*!
- * \fn int searchArgument(int argc, char *argv[], int *function, int *file_place)
+ * \fn bool searchArgument(int argc, char *argv[], int *function, int *file_place)
  *  Search the argument passed to the main function
  * \param[in] argc the number of argument
  * \param[in] argv the array of argument
  * \param[in] function integer which determine which function run
  * \param[in] file_place integer which determine the index of the filename
- * \return MY_TRUE if the function founded an argument, MY_FALSE otherwise
+ * \return true if the function founded an argument, false otherwise
  */
-int searchArgument(int argc, char *argv[], int *function, int *file_place)
+bool searchArgument(int argc, char *argv[], int *function, int *file_place)
 {
     int i;
 
@@ -70,9 +70,9 @@ int searchArgument(int argc, char *argv[], int *function, int *file_place)
     }
 
     if (i == argc || *file_place >= argc)
-        return MY_FALSE;
+        return false;
     else
-        return MY_TRUE;
+        return true;
 }
 
 

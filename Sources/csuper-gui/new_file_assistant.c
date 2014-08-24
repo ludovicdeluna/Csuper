@@ -203,8 +203,8 @@ G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
     gchar name[SIZE_MAX_FILE_NAME];
     gint index;
     gchar *folder;
-    gint folder_ok;
-    gint filename_ok;
+    bool folder_ok;
+    bool filename_ok;
 
     GtkWidget *grid_1 = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_1"));
     if (!grid_1)
@@ -226,7 +226,7 @@ G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
     filename_ok = checkFilename(name,folder);
 
     /* Test the filename */
-    if (strcmp(name,"") == 0 || filename_ok == MY_FALSE)
+    if (strcmp(name,"") == 0 || filename_ok == false)
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,TRUE,65535,0,0,FALSE,0,0,0);
     else
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,FALSE,65535,0,0,FALSE,0,0,0);
@@ -238,13 +238,13 @@ G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,3)),0,FALSE,65535,0,0,FALSE,0,0,0);
 
     /* Test the folder */
-    if (folder_ok == MY_FALSE)
+    if (folder_ok == false)
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,TRUE,65535,0,0,FALSE,0,0,0);
     else
         setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,FALSE,65535,0,0,FALSE,0,0,0);
 
     /* Test if the page one is valid or not */
-    if (strcmp(name,"") != 0 && index >=0 && folder_ok != MY_FALSE && filename_ok == MY_TRUE)
+    if (strcmp(name,"") != 0 && index >=0 && folder_ok != false && filename_ok == true)
     {
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,TRUE);
         if (user_data->ptr_csu_struct_tmp != NULL)
@@ -432,7 +432,7 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
     }
 
     /* Check if the page is valid */
-    if (valid && differentsPlayerName(user_data->ptr_csu_struct_tmp) == MY_TRUE)
+    if (valid && differentsPlayerName(user_data->ptr_csu_struct_tmp) == true)
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(scrolled_window),TRUE);
     else
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(scrolled_window),FALSE);
@@ -506,7 +506,7 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
     user_data->ptr_csu_struct_tmp = NULL;
 
     updateMainWindow(user_data);
-    if (writeCsuFile(user_data->csu_filename,user_data->ptr_csu_struct) == MY_FALSE)
+    if (writeCsuFile(user_data->csu_filename,user_data->ptr_csu_struct) == false)
         saveFileError(user_data);
     deleteAllLastCsuStruct(user_data);
     addLastCsuStruct(user_data);

@@ -52,7 +52,7 @@ char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
         #ifndef PORTABLE
         readSystemPath(test_filename);
         #endif // PORTABLE
-    } while (checkFilename(test_filename,"") == MY_FALSE);
+    } while (checkFilename(test_filename,"") == false);
 
     return file_name;
 }
@@ -245,7 +245,7 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
 
     do
     {
-        validation=MY_TRUE;
+        validation=true;
 
         if (ptr_csu_struct->config.turn_based == 1)
         {
@@ -268,7 +268,7 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
         charKey(&valid);
 
         if (valid=='n' || valid=='N')
-            validation = MY_FALSE;
+            validation = false;
 
     } while (!validation);
 
@@ -296,11 +296,11 @@ int menuPlayerIndex(csuStruct *ptr_csu_struct)
 }
 
 /*!
- * \fn int menuContinue()
+ * \fn bool menuContinue()
  *  Ask if we want to continue3
- * \return MY_TRUE if we want to continue, MY_FALSE otherwise
+ * \return true if we want to continue, false otherwise
  */
-int menuContinue()
+bool menuContinue()
 {
     char continuer;
 
@@ -308,17 +308,17 @@ int menuContinue()
     charKey(&continuer);
 
     if (continuer=='n' || continuer=='N')
-        return MY_FALSE;
+        return false;
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn int menuDelete()
+ * \fn bool menuDelete()
  *  Ask if we want to delete a file.
- * \return MY_TRUE if we want to deleted the file, MY_FALSE otherwise
+ * \return true if we want to deleted the file, false otherwise
  */
-int menuDelete()
+bool menuDelete()
 {
     char delete;
 
@@ -326,9 +326,9 @@ int menuDelete()
     charKey(&delete);
 
     if (delete=='o' || delete=='O' || delete == 'y' || delete == 'Y')
-        return MY_TRUE;
+        return true;
 
-    return MY_FALSE;
+    return false;
 }
 
 /*!
@@ -338,7 +338,7 @@ int menuDelete()
  */
 void menuNewPath(char *new_path)
 {
-    int verif=MY_FALSE;
+    int verif=false;
 
     do
     {
@@ -349,7 +349,7 @@ void menuNewPath(char *new_path)
         /*Check if the path is valid*/
         verif = checkPath(new_path);
 
-    } while (verif == MY_FALSE);
+    } while (verif == false);
 
     printf(_("You chose %s\n"),new_path);
 }

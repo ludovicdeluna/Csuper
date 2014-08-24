@@ -46,8 +46,8 @@ void menuDistributor(char *distributor_name);
 void menuPlayersName(csuStruct *ptr_csu_struct);
 void menuPlayersPoints(csuStruct *ptr_csu_struct);
 int menuPlayerIndex(csuStruct *ptr_csu_struct);
-int menuContinue();
-int menuDelete();
+bool menuContinue();
+bool menuDelete();
 void menuNewPath(char *new_path);
 
 #endif

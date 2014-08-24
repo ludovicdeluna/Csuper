@@ -59,7 +59,7 @@
 
 FILE *openFileCsuExtension(char file_name[], char mode[]);
 csuStruct *readCsuFile(char *file_name);
-int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct);
-int writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct);
+bool writeCsuFile(char *file_name, csuStruct *ptr_csu_struct);
+bool writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct);
 
 #endif

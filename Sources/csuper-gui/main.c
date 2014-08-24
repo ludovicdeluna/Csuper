@@ -50,7 +50,7 @@ int main (int argc, char *argv[])
     #ifdef _WIN32
     char directory[SIZE_MAX_FILE_NAME];
     strncpy(directory,argv[0],SIZE_MAX_FILE_NAME-1);
-    if (getFolderFromFilename(directory) == MY_TRUE)
+    if (getFolderFromFilename(directory) == true)
         chdir(directory);
     #endif // _WIN32
 
@@ -108,18 +108,18 @@ int main (int argc, char *argv[])
 }
 
 /*!
- * \fn int openFileWithMainArgument(globalData *data,int argc, char *argv[])
+ * \fn bool openFileWithMainArgument(globalData *data,int argc, char *argv[])
  *  Open directly a file if there is one in the main argument
  * \param[in] data the globalData
  * \param[in] argc the number of argument.
  * \param[in] argv the array of argument.
- * \return TRUE if everything is OK, FALSE if there is an error while loading the file
+ * \return true if everything is OK, FALSE if there is an error while loading the file
  */
-int openFileWithMainArgument(globalData *data,int argc, char *argv[])
+bool openFileWithMainArgument(globalData *data,int argc, char *argv[])
 {
     /* Open the file which is on second argument id there is one*/
     if (argc < 2)
-        return TRUE;
+        return true;
 
     gchar filename[SIZE_MAX_FILE_NAME];
     printf("%s",argv[1]);
@@ -137,7 +137,7 @@ int openFileWithMainArgument(globalData *data,int argc, char *argv[])
         #ifndef PORTABLE
         gchar folder[SIZE_MAX_FILE_NAME];
         strcpy(folder,filename);
-        if (getFolderFromFilename(folder) == MY_TRUE)
+        if (getFolderFromFilename(folder) == true)
             changeSystemPath(folder);
         #endif // PORTABLE
 
@@ -152,8 +152,8 @@ int openFileWithMainArgument(globalData *data,int argc, char *argv[])
         if (strcmp(argv[1],"") != 0)
         {
             openFileError(data);
-            return FALSE;
+            return false;
         }
     }
-    return TRUE;
+    return true;
 }

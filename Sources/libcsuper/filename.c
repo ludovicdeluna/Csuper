@@ -54,15 +54,15 @@ void addFileCsuExtension(char *file_name)
 }
 
 /*!
- * \fn int getFolderFromFilename(char *file_name_to_folder)
+ * \fn bool getFolderFromFilename(char *file_name_to_folder)
  *  Transform a filename into his folder
  * \param[in] file_name_to_folder the filename
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int getFolderFromFilename(char *file_name_to_folder)
+bool getFolderFromFilename(char *file_name_to_folder)
 {
     int i;
-    int ok = MY_FALSE;
+    bool ok = false;
     for (i=strlen(file_name_to_folder) ; i>=0 ; i--)
     {
         #ifdef _WIN32
@@ -71,7 +71,7 @@ int getFolderFromFilename(char *file_name_to_folder)
         if (file_name_to_folder[i] == '/')
         #endif // _WIN32
         {
-            ok = MY_TRUE;
+            ok = true;
             file_name_to_folder[i] = '\0';
             break;
         }
@@ -81,16 +81,16 @@ int getFolderFromFilename(char *file_name_to_folder)
 }
 
 /*!
- * \fn int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
+ * \fn bool getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
  *  Transform a full filename into his simple filename (without the folder)
  * \param[in] full_filename the full filename
  * \param[in] simple_filename the full filename
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
+bool getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
 {
     int i;
-    int ok = MY_FALSE;
+    bool ok = false;
     for (i=strlen(full_filename) ; i>=0 ; i--)
     {
         #ifdef _WIN32
@@ -99,7 +99,7 @@ int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
         if (full_filename[i] == '/')
         #endif // _WIN32
         {
-            ok = MY_TRUE;
+            ok = true;
             strcpy(simple_filename,full_filename+i+1);
             break;
         }
@@ -109,12 +109,12 @@ int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename)
 }
 
 /*!
- * \fn int checkPath(char *path)
+ * \fn bool checkPath(char *path)
  *  Test if the path is valid
  * \param[in,out] *path the path
- * \return MY_TRUE if the path is valid OK, MY_FALSE otherwise
+ * \return true if the path is valid OK, false otherwise
  */
-int checkPath(char *path)
+bool checkPath(char *path)
 {
     FILE *ptr_file_test;
     char check_path[SIZE_MAX_FILE_NAME];
@@ -125,23 +125,23 @@ int checkPath(char *path)
     {
         closeFile(ptr_file_test);
         remove(check_path);
-        return MY_TRUE;
+        return true;
     }
     else
     {
         printf(_("\nError : this folder is not valid.\n"));
-        return MY_FALSE;
+        return false;
     }
 }
 
 /*!
- * \fn int checkFilename(char *filename,char * folder)
+ * \fn bool checkFilename(char *filename,char * folder)
  *  Test if the filename is valid
  * \param[in,out] *filename the filename
  * \param[in,out] *folder the folder where the filename will be tested, may be ""
- * \return MY_TRUE if the filename is valid OK, MY_FALSE otherwise
+ * \return true if the filename is valid OK, false otherwise
  */
-int checkFilename(char *filename,char *folder)
+bool checkFilename(char *filename,char *folder)
 {
     FILE *ptr_file_test;
     char check_filename[SIZE_MAX_FILE_NAME+10]="";
@@ -152,12 +152,12 @@ int checkFilename(char *filename,char *folder)
     {
         closeFile(ptr_file_test);
         remove(check_filename);
-        return MY_TRUE;
+        return true;
     }
     else
     {
         printf(_("\nError : this folder is not valid.\n"));
-        return MY_FALSE;
+        return false;
     }
 }
 

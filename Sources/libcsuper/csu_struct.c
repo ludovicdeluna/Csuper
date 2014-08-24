@@ -266,12 +266,12 @@ void addDistributorCsuStruct(csuStruct *ptr_csu_struct, char *distributor_name)
 }
 
 /*!
- * \fn int exceedMaxNumber(csuStruct *ptr_csu_struct)
+ * \fn bool exceedMaxNumber(csuStruct *ptr_csu_struct)
  *  Check if someone exceed the maximum number
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
- * \return MY_TRUE if someone exceed, MY_FALSE otherwise
+ * \return true if someone exceed, false otherwise
  */
-int exceedMaxNumber(csuStruct *ptr_csu_struct)
+bool exceedMaxNumber(csuStruct *ptr_csu_struct)
 {
     int i;
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
@@ -279,16 +279,16 @@ int exceedMaxNumber(csuStruct *ptr_csu_struct)
         if (ptr_csu_struct->config.max == 1)
         {
             if (ptr_csu_struct->total_points[i] + FLT_EPSILON >= ptr_csu_struct->config.nb_max)
-                return MY_TRUE;
+                return true;
         }
         else
         {
             if (ptr_csu_struct->total_points[i] - FLT_EPSILON <= ptr_csu_struct->config.nb_max)
-                return MY_TRUE;
+                return true;
         }
 
     }
-    return MY_FALSE;
+    return false;
 }
 
 /*!
@@ -334,12 +334,12 @@ int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
 }
 
 /*!
- * \fn int differentsPlayerName(csuStruct *ptr_csu_struct)
+ * \fn bool differentsPlayerName(csuStruct *ptr_csu_struct)
  *  Search the index of a person
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
- * \return MY_TRUE if all player names are different, MY_FALSE otherwise
+ * \return true if all player names are different, false otherwise
  */
-int differentsPlayerName(csuStruct *ptr_csu_struct)
+bool differentsPlayerName(csuStruct *ptr_csu_struct)
 {
     int i;
     int j;
@@ -349,11 +349,11 @@ int differentsPlayerName(csuStruct *ptr_csu_struct)
         for (j=i+1 ; j<ptr_csu_struct->nb_player ; j++)
         {
             if (strcmp(ptr_csu_struct->player_names[i],ptr_csu_struct->player_names[j]) == 0)
-                return MY_FALSE;
+                return false;
         }
     }
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!

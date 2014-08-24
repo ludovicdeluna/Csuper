@@ -42,6 +42,6 @@
 #include "utils.h"
 
 int main (int   argc, char *argv[]);
-int openFileWithMainArgument(globalData *data,int argc, char *argv[]);
+bool openFileWithMainArgument(globalData *data,int argc, char *argv[]);
 
 #endif // MAIN_H_INCLUDED

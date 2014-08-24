@@ -37,10 +37,10 @@
 #include "preferences_files.h"
 
 void addFileCsuExtension(char *file_name);
-int getFolderFromFilename(char *file_name_to_folder);
-int getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename);
-int checkPath(char *path);
-int checkFilename(char *filename,char * folder);
+bool getFolderFromFilename(char *file_name_to_folder);
+bool getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename);
+bool checkPath(char *path);
+bool checkFilename(char *filename,char * folder);
 void readHomePath(char *path);
 void readHomePathSlash(char *path);
 

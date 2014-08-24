@@ -40,11 +40,11 @@
  */
 void libcsuper_initialize()
 {
-    static char initialized=MY_FALSE;
-    if (initialized == MY_FALSE)
+    static char initialized=false;
+    if (initialized == false)
     {
         bindtextdomain("libcsuper","./Locales");
-        initialized = MY_TRUE;
+        initialized = true;
     }
 }
 

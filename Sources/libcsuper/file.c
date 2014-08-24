@@ -94,12 +94,12 @@ int readFileSize(FILE *ptr_file)
 }
 
 /*!
- * \fn int deleteFile(char *file_name)
+ * \fn bool deleteFile(char *file_name)
  *  Delete a file
  * \param[in] *file_name the filename
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int deleteFile(char *file_name)
+bool deleteFile(char *file_name)
 {
     libcsuper_initialize();
 
@@ -107,36 +107,36 @@ int deleteFile(char *file_name)
     {
         printf(_("\nThe file %s cannot be deleted.\n"),file_name);
         perror("");
-        return MY_FALSE;
+        return false;
     }
 
     else
     {
         printf(_("\nThe file %s was well deleted.\n"),file_name);
-        return MY_TRUE;
+        return true;
     }
 }
 
 /*!
- * \fn int renameFile(char *old_name, char *new_name)
+ * \fn bool renameFile(char *old_name, char *new_name)
  *  Rename a file.
  * \param[in] *old_name the old name of the file
  * \param[in] *new_name the new name of the file
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int renameFile(char *old_name, char *new_name)
+bool renameFile(char *old_name, char *new_name)
 {
     libcsuper_initialize();
 
     if(rename(old_name,new_name))
     {
         printf(_("\nThe file %s cannot be renamed.\n"),old_name);
-        return MY_FALSE;
+        return false;
     }
 
     else
     {
         printf(_("\nThe file %s was well renamed in %s.\n"),old_name,new_name);
-        return MY_TRUE;
+        return true;
     }
 }

@@ -90,7 +90,7 @@
  */
 #define HELP 2
 
-int searchArgument(int argc, char *argv[], int *function, int *file_place);
+bool searchArgument(int argc, char *argv[], int *function, int *file_place);
 void displayHelp();
 
 #endif

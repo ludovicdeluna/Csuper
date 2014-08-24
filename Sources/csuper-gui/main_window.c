@@ -325,9 +325,9 @@ void createPointsGrid(globalData *data)
         GtkWidget *new_points_button = gtk_spin_button_new(adju,1,data->ptr_csu_struct->config.decimal_place);
         gtk_entry_set_alignment (GTK_ENTRY(new_points_button),0.5);
         gtk_entry_set_width_chars(GTK_ENTRY(new_points_button),3);
-        if (data->ptr_csu_struct->config.turn_based == MY_FALSE)
-            gtk_entry_set_activates_default(GTK_ENTRY(new_points_button),TRUE);
-        if (exceedMaxNumber(data->ptr_csu_struct) == MY_TRUE)
+        if (data->ptr_csu_struct->config.turn_based == false)
+            gtk_entry_set_activates_default(GTK_ENTRY(new_points_button),true);
+        if (exceedMaxNumber(data->ptr_csu_struct) == true)
             gtk_editable_set_editable(GTK_EDITABLE(new_points_button),FALSE);
         gtk_grid_attach(GTK_GRID(points_grid),new_points_button,2*(i+1),2*(max_nb_turn+1),1,1);
         g_signal_connect (new_points_button,"value-changed", G_CALLBACK(updateTotalPointsInTurnLabel),data);
@@ -429,13 +429,13 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
 
     if (has_changed)
     {
-        if (writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct) == MY_FALSE)
+        if (writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct) == false)
             saveFileError(user_data);
         addLastCsuStruct(user_data);
         updateMainWindow(user_data);
 
         /* Test if the game is over */
-        if (exceedMaxNumber(user_data->ptr_csu_struct) == MY_TRUE)
+        if (exceedMaxNumber(user_data->ptr_csu_struct) == true)
         {
             GtkWidget *window_game_over = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"messagedialog_game_over"));
             if (!window_game_over)
@@ -481,7 +481,7 @@ void setButtonMainWindowSensitive(globalData *data)
     }
     else
     {
-        if (exceedMaxNumber(data->ptr_csu_struct) == MY_TRUE)
+        if (exceedMaxNumber(data->ptr_csu_struct) == true)
             gtk_widget_set_sensitive(button_end_of_turn,FALSE);
         else
             gtk_widget_set_sensitive(button_end_of_turn,TRUE);
@@ -552,8 +552,6 @@ G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data)
     if (!menu_delete)
         g_critical(_("Widget menu_delete is missing in file csuper-gui.glade."));
 
-    //Decomment when i found the signal which is adapted
-
     if(GTK_IS_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))))
     {
         if (gtk_clipboard_wait_for_text(user_data->ptr_clipboard_selected) == NULL)
@@ -598,31 +596,6 @@ G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data)
         gtk_widget_set_sensitive(menu_delete,FALSE);
     }
 
-    /*if (user_data->ptr_csu_struct == NULL)
-    {
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),FALSE);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),FALSE);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)),FALSE);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)),FALSE);
-
-        gtk_widget_set_sensitive(menu_cut,FALSE);
-        gtk_widget_set_sensitive(menu_copy,FALSE);
-        gtk_widget_set_sensitive(menu_paste,FALSE);
-        gtk_widget_set_sensitive(menu_delete,FALSE);
-    }
-    else
-    {
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),TRUE);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),TRUE);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)),TRUE);
-        gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)),TRUE);
-
-        gtk_widget_set_sensitive(menu_cut,TRUE);
-        gtk_widget_set_sensitive(menu_copy,TRUE);
-        gtk_widget_set_sensitive(menu_delete,TRUE);
-        gtk_widget_set_sensitive(menu_paste,TRUE);
-    }*/
-
     return G_SOURCE_CONTINUE;
 }
 
@@ -647,7 +620,7 @@ void readMainWindowSize(globalData *data)
 
     gtk_window_resize(GTK_WINDOW(main_window),size.width,size.height);
 
-    if (size.is_maximize == MY_TRUE)
+    if (size.is_maximize == TRUE)
         gtk_window_maximize(GTK_WINDOW(main_window));
     else
         gtk_window_unmaximize(GTK_WINDOW(main_window));
@@ -680,7 +653,7 @@ G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gp
     #if GTK_MINOR_VERSION >= 12
     size.is_maximize=gtk_window_is_maximized(GTK_WINDOW(main_window));
     #else
-    size.is_maximize=MY_FALSE;
+    size.is_maximize=false;
     #endif
 
     createFileMainWidowSize(home_path,size);

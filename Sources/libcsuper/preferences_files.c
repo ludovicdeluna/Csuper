@@ -52,13 +52,13 @@ void createPreferencesFolder(char *home_path)
 }
 
 /*!
- * \fn int createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar)
+ * \fn bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar)
  *  Create the file which contain the preferences for the toolbar button
  * \param[in] home_path the path to the home directory
  * \param[in] toolbar the toolbar button preferences
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar)
+bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar)
 {
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
@@ -70,7 +70,7 @@ int createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferenc
     ptr_file=openFile(file_name,"w+");
 
     if (ptr_file==NULL)
-        return MY_FALSE;
+        return false;
 
     fprintf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",toolbar.new,toolbar.open,toolbar.save_as,
             toolbar.separator_1,toolbar.undo,toolbar.redo,toolbar.separator_2,toolbar.cut,toolbar.copy,toolbar.paste,
@@ -79,39 +79,39 @@ int createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferenc
 
     closeFile(ptr_file);
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar)
+ * \fn bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar)
  *  Read the file which contain the preferences for the toolbar button
  * \param[in] home_path the path to the home directory
  * \param[in] toolbar the toolbar button preferences
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar)
+bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar)
 {
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
-    toolbar->open=MY_TRUE;
-    toolbar->new=MY_TRUE;
-    toolbar->save_as=MY_TRUE;
-    toolbar->separator_1=MY_TRUE;
-    toolbar->undo=MY_TRUE;
-    toolbar->redo=MY_TRUE;
-    toolbar->separator_2=MY_TRUE;
-    toolbar->cut=MY_FALSE;
-    toolbar->copy=MY_FALSE;
-    toolbar->paste=MY_FALSE;
-    toolbar->delete=MY_FALSE;
-    toolbar->separator_3=MY_FALSE;
-    toolbar->properties=MY_TRUE;
-    toolbar->separator_4=MY_TRUE;
-    toolbar->preferences=MY_TRUE;
-    toolbar->game_configuration_preferences=MY_FALSE;
-    toolbar->toolbar_button_preferences=MY_FALSE;
-    toolbar->separator_5=MY_TRUE;
-    toolbar->about=MY_TRUE;
+    toolbar->open=true;
+    toolbar->new=true;
+    toolbar->save_as=true;
+    toolbar->separator_1=true;
+    toolbar->undo=true;
+    toolbar->redo=true;
+    toolbar->separator_2=true;
+    toolbar->cut=false;
+    toolbar->copy=false;
+    toolbar->paste=false;
+    toolbar->delete=false;
+    toolbar->separator_3=false;
+    toolbar->properties=true;
+    toolbar->separator_4=true;
+    toolbar->preferences=true;
+    toolbar->game_configuration_preferences=false;
+    toolbar->toolbar_button_preferences=false;
+    toolbar->separator_5=true;
+    toolbar->about=true;
 
     createPreferencesFolder(home_path);
 
@@ -121,10 +121,10 @@ int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences
 
     if (ptr_file==NULL)
     {
-        if (createFileToolbarButtonPreferences(home_path,*toolbar) == MY_FALSE)
-            return MY_FALSE;
+        if (createFileToolbarButtonPreferences(home_path,*toolbar) == false)
+            return false;
         else
-            return MY_TRUE;
+            return true;
     }
 
     fscanf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",&(toolbar->new),&(toolbar->open),&(toolbar->save_as),
@@ -134,17 +134,17 @@ int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences
 
     closeFile(ptr_file);
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn int differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
+ * \fn bool differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
  *  Test if the two toolbar button preferences are different
  * \param[in] toolbar1 the first toolbar button preferences
  * \param[in] toolbar2 the second toolbar button preferences
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
+bool differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
 {
     if (toolbar1.new != toolbar2.new || toolbar1.open != toolbar2.open || toolbar1.save_as != toolbar2.save_as || toolbar1.separator_1 != toolbar2.separator_1
             || toolbar1.undo != toolbar2.undo || toolbar1.redo != toolbar2.redo || toolbar1.separator_2 != toolbar2.separator_2 ||
@@ -153,19 +153,19 @@ int differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct t
             || toolbar1.preferences != toolbar2.preferences || toolbar1.game_configuration_preferences != toolbar2.game_configuration_preferences ||
             toolbar1.toolbar_button_preferences != toolbar2.toolbar_button_preferences || toolbar1.separator_5 != toolbar2.separator_5
             || toolbar1.about != toolbar2.about)
-        return MY_TRUE;
+        return true;
     else
-        return MY_FALSE;
+        return false;
 }
 
 /*!
- * \fn int createFileMainWidowSize(char *home_path, main_window_size size)
+ * \fn bool createFileMainWidowSize(char *home_path, main_window_size size)
  *  Create the file which contain the main window size
  * \param[in] home_path the path to the home directory
  * \param[in] size the size of the main window
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int createFileMainWidowSize(char *home_path, main_window_size size)
+bool createFileMainWidowSize(char *home_path, main_window_size size)
 {
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
@@ -177,30 +177,30 @@ int createFileMainWidowSize(char *home_path, main_window_size size)
     ptr_file=openFile(file_name,"w+");
 
     if (ptr_file==NULL)
-        return MY_FALSE;
+        return false;
 
     fprintf(ptr_file,"%d %d %d",size.width,size.height,size.is_maximize);
 
     closeFile(ptr_file);
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn int readFileMainWidowSize(char *home_path, main_window_size *size)
+ * \fn bool readFileMainWidowSize(char *home_path, main_window_size *size)
  *  Read the file which contain the main window size
  * \param[in] home_path the path to the home directory
  * \param[in] size the size of the main window
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int readFileMainWidowSize(char *home_path, main_window_size *size)
+bool readFileMainWidowSize(char *home_path, main_window_size *size)
 {
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
 
     size->height=422;
     size->width=851;
-    size->is_maximize = MY_FALSE;
+    size->is_maximize = false;
 
     createPreferencesFolder(home_path);
 
@@ -210,25 +210,25 @@ int readFileMainWidowSize(char *home_path, main_window_size *size)
 
     if (ptr_file==NULL)
     {
-        if (createFileMainWidowSize(home_path,*size) == MY_FALSE)
-            return MY_FALSE;
+        if (createFileMainWidowSize(home_path,*size) == false)
+            return false;
         else
-            return MY_TRUE;
+            return true;
     }
 
     fscanf(ptr_file,"%d %d %d",&(size->width),&(size->height),&(size->is_maximize));
 
     closeFile(ptr_file);
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn void createFileSystemPath()
+ * \fn bool createFileSystemPath()
  *  Create the folder and the file which contain the system path
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int createFileSystemPath()
+bool createFileSystemPath()
 {
     char folder[SIZE_MAX_FILE_NAME];
     char file_name[SIZE_MAX_FILE_NAME];
@@ -248,22 +248,22 @@ int createFileSystemPath()
     ptr_file=openFile(file_name,"w+");
 
     if (ptr_file==NULL)
-        return MY_FALSE;
+        return false;
 
     fprintf(ptr_file,"%s",folder);
 
     closeFile(ptr_file);
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn int readFileSystemPath(char *file_name)
+ * \fn bool readFileSystemPath(char *file_name)
  *  Read the system path and the path read to the filename
  * \param[in,out] *file_name the filename
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int readFileSystemPath(char *file_name)
+bool readFileSystemPath(char *file_name)
 {
     char file_name_preferences[SIZE_MAX_FILE_NAME];
     char folder[SIZE_MAX_FILE_NAME];
@@ -276,7 +276,7 @@ int readFileSystemPath(char *file_name)
     ptr_file=openFile(file_name_preferences,"r");
 
     if(ptr_file == NULL)
-        return MY_FALSE;
+        return false;
 
     file_size=readFileSize(ptr_file);
     fgets(folder,file_size+1,ptr_file);
@@ -285,51 +285,51 @@ int readFileSystemPath(char *file_name)
     sprintf(folder,"%s/%s",folder,file_name);
     strcpy(file_name,folder);
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn int readSystemPath(char *file_name)
+ * \fn bool readSystemPath(char *file_name)
  *  Add the system path, if the file system path doesn't exist, it create it.
  * \param[in,out] *file_name the filename
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int readSystemPath(char *file_name)
+bool readSystemPath(char *file_name)
 {
     libcsuper_initialize();
 
-    if (readFileSystemPath(file_name)==MY_FALSE)
+    if (readFileSystemPath(file_name)==false)
     {
-        if(createFileSystemPath()==MY_FALSE)
+        if(createFileSystemPath()==false)
         {
             printf(_("\nError while reading the file containing the system path.\n"));
-            return MY_FALSE;
+            return false;
         }
-        if (readFileSystemPath(file_name)==MY_FALSE)
+        if (readFileSystemPath(file_name)==false)
         {
             printf(_("\nError while reading the file containing the system path.\n"));
-            return MY_FALSE;
+            return false;
         }
     }
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn int changeSystemPath(char *new_path)
+ * \fn bool changeSystemPath(char *new_path)
  *  Change the system path
  * \param[in,out] *new_path the new path
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int changeSystemPath(char *new_path)
+bool changeSystemPath(char *new_path)
 {
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
 
-    if (checkPath(new_path) == MY_FALSE)
-        return MY_FALSE;
+    if (checkPath(new_path) == false)
+        return false;
 
-    if (createFileSystemPath()==MY_FALSE)
-        return MY_FALSE;
+    if (createFileSystemPath()==false)
+        return false;
 
     readHomePath(file_name);
 
@@ -338,13 +338,13 @@ int changeSystemPath(char *new_path)
     ptr_file=openFile(file_name,"w+");
 
     if (ptr_file==NULL)
-        return MY_FALSE;
+        return false;
 
     fprintf(ptr_file,"%s",new_path);
 
     closeFile(ptr_file);
 
-    return MY_TRUE;
+    return true;
 }
 
 

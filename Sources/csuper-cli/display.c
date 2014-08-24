@@ -345,8 +345,8 @@ void printGameOver(csuStruct *ptr_csu_struct)
 {
     int pos[3]={0,1,2};
     int i;
-    int un_pris=MY_FALSE;
-    int deux_pris=MY_FALSE;
+    int un_pris=false;
+    int deux_pris=false;
 
     printf(_("\nThe game is over.\n"));
 
@@ -359,12 +359,12 @@ void printGameOver(csuStruct *ptr_csu_struct)
         if ((ptr_csu_struct->rank[i] == 2 && !deux_pris ) || (un_pris && ptr_csu_struct->rank[i] == 1 && !deux_pris))
         {
             pos[1]=i;
-            deux_pris=MY_TRUE;
+            deux_pris=true;
         }
         if (ptr_csu_struct->rank[i] == 1 && !un_pris)
         {
             pos[0]=i;
-            un_pris=MY_TRUE;
+            un_pris=true;
         }
     }
 

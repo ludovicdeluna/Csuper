@@ -105,14 +105,14 @@ typedef struct
 
 
 void createPreferencesFolder(char *home_path);
-int createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar);
-int readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar);
-int differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2);
-int createFileMainWidowSize(char *home_path, main_window_size size);
-int readFileMainWidowSize(char *home_path, main_window_size *size);
-int createFileSystemPath();
-int readFileSystemPath(char *file_name);
-int readSystemPath(char *file_name);
-int changeSystemPath(char *new_path);
+bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar);
+bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar);
+bool differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2);
+bool createFileMainWidowSize(char *home_path, main_window_size size);
+bool readFileMainWidowSize(char *home_path, main_window_size *size);
+bool createFileSystemPath();
+bool readFileSystemPath(char *file_name);
+bool readSystemPath(char *file_name);
+bool changeSystemPath(char *new_path);
 
 #endif

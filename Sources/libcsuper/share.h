@@ -39,18 +39,8 @@
 #include <errno.h>
 #include <string.h>
 #include <libintl.h>
+#include <stdbool.h>
 
-/*!
- * \def MY_TRUE
- * Definit MY_TRUE a 1
- */
-#define MY_TRUE 1
-
-/*!
- * \def MY_FALSE
- * Definit MY_FALSE a 0
- */
-#define MY_FALSE 0
 
 /*!
  * \def _(String)

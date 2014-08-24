@@ -158,13 +158,13 @@ csuStruct *readCsuFile(char *file_name)
 }
 
 /*!
- * \fn int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
+ * \fn bool writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
  *  Write a csu file
  * \param[in] *file_name the filename
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
+bool writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
 {
     int i;
     FILE *ptr_file;
@@ -176,7 +176,7 @@ int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
     if (ptr_file == NULL)
     {
         printf(_("\nError while writing file.\n"));
-        return MY_FALSE;
+        return false;
     }
 
     fseek(ptr_file,0,SEEK_SET);
@@ -203,17 +203,17 @@ int writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
 
     closeFile(ptr_file);
 
-    return MY_TRUE;
+    return true;
 }
 
 /*!
- * \fn void writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
+ * \fn bool writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
  *  Update the file with the new scores
  * \param[in] *file_name the filename
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
- * \return MY_TRUE if everything is OK, MY_FALSE otherwise
+ * \return true if everything is OK, false otherwise
  */
-int writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
+bool writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
 {
     char file_name_2[SIZE_MAX_FILE_NAME+4];
     int successful;
@@ -227,9 +227,9 @@ int writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
         if(deleteFile(file_name))
         {
             if(renameFile(file_name_2,file_name))
-                return MY_TRUE;
+                return true;
         }
     }
 
-    return MY_FALSE;
+    return false;
 }

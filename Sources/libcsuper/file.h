@@ -39,8 +39,8 @@
 FILE *openFile(char nome[], char mode[]);
 int closeFile(FILE *ptr_file);
 int readFileSize(FILE *ptr_file);
-int deleteFile(char *file_name);
-int renameFile(char *old_name, char *new_name);
+bool deleteFile(char *file_name);
+bool renameFile(char *old_name, char *new_name);
 
 
 #endif // FILE_H_INCLUDED

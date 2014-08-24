@@ -134,7 +134,7 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME]="";
-    int error=FALSE;
+    bool error=false;
 
     /* Create the file chooser dialog*/
     GtkWidget *window_file_export = gtk_file_chooser_dialog_new (_("Export game configuration"),GTK_WINDOW(user_data->ptr_main_window),
@@ -159,8 +159,8 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export));
 		    #endif
 
-            if(exportConfigFile(home_path,filename) == MY_FALSE)
-                error=TRUE;
+            if(exportConfigFile(home_path,filename) == false)
+                error=true;
             g_free(filename);
 			break;
 		}
@@ -197,7 +197,7 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME]="";
-    int error=FALSE;
+    bool error=false;
 
     /* Create the file chooser dialog*/
     GtkWidget *window_file_import = gtk_file_chooser_dialog_new (_("Import game configuration"),GTK_WINDOW(user_data->ptr_main_window),
@@ -222,8 +222,8 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_import));
 		    #endif
 
-            if(importConfigFile(home_path,filename) == MY_FALSE)
-                error=TRUE;
+            if(importConfigFile(home_path,filename) == false)
+                error=true;
             g_free(filename);
 			break;
 		}
@@ -289,7 +289,7 @@ void displayGameConfiguration(globalData *data)
         /* Write the name of the game configuration */
         gtk_grid_attach(GTK_GRID(grid),gtk_label_new(ptr_list_config->name_game_config[i]),0,i,1,1);
         gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(grid),0,i),TRUE);
-        //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),TRUE);
+        //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),true);
 
         /* Add the button */
         #if GTK_MINOR_VERSION < 10
@@ -469,12 +469,13 @@ G_MODULE_EXPORT void viewGameConfiguration(GtkWidget *widget, gpointer data)
  *  Update the current game configuration label
  * \param[in] data the globalData
  * \param[in] index the index of the game configuration, -1 if you want to clear the label
- * \param[in] clear if TRUE the label is reset if the index is the same than the last call to the function otherwise the label is update
+ * \param[in] clear if true the label is reset if the index is the same than the last call to the function otherwise the label is update
  */
 void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboolean clear)
 {
     globalData *user_data = (globalData*) data;
-    static gint last_index=-1;char *yes=_("yes");
+    static gint last_index=-1;
+    char *yes=_("yes");
     char *no=_("no");
 
     if (last_index == index && clear)
@@ -864,97 +865,97 @@ void updateToolbarButtonPreferencesSwitch(globalData *data)
     if (!grid)
         g_critical(_("Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."));
 
-    if (toolbar_preferences.new == MY_FALSE)
+    if (toolbar_preferences.new == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),TRUE);
 
-    if (toolbar_preferences.open == MY_FALSE)
+    if (toolbar_preferences.open == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1)),TRUE);
 
-    if (toolbar_preferences.save_as == MY_FALSE)
+    if (toolbar_preferences.save_as == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),TRUE);
 
-    if (toolbar_preferences.separator_1 == MY_FALSE)
+    if (toolbar_preferences.separator_1 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),TRUE);
 
-    if (toolbar_preferences.undo == MY_FALSE)
+    if (toolbar_preferences.undo == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),TRUE);
 
-    if (toolbar_preferences.redo == MY_FALSE)
+    if (toolbar_preferences.redo == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),TRUE);
 
-    if (toolbar_preferences.separator_2 == MY_FALSE)
+    if (toolbar_preferences.separator_2 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),TRUE);
 
-    if (toolbar_preferences.cut == MY_FALSE)
+    if (toolbar_preferences.cut == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),TRUE);
 
-    if (toolbar_preferences.copy == MY_FALSE)
+    if (toolbar_preferences.copy == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),TRUE);
 
-    if (toolbar_preferences.paste == MY_FALSE)
+    if (toolbar_preferences.paste == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),TRUE);
 
-    if (toolbar_preferences.delete == MY_FALSE)
+    if (toolbar_preferences.delete == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),TRUE);
 
-    if (toolbar_preferences.separator_3 == MY_FALSE)
+    if (toolbar_preferences.separator_3 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),TRUE);
 
-    if (toolbar_preferences.properties == MY_FALSE)
+    if (toolbar_preferences.properties == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),TRUE);
 
-    if (toolbar_preferences.separator_4 == MY_FALSE)
+    if (toolbar_preferences.separator_4 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),TRUE);
 
-    if (toolbar_preferences.preferences == MY_FALSE)
+    if (toolbar_preferences.preferences == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),TRUE);
 
-    if (toolbar_preferences.game_configuration_preferences == MY_FALSE)
+    if (toolbar_preferences.game_configuration_preferences == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),TRUE);
 
-    if (toolbar_preferences.toolbar_button_preferences == MY_FALSE)
+    if (toolbar_preferences.toolbar_button_preferences == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),TRUE);
 
-    if (toolbar_preferences.separator_5 == MY_FALSE)
+    if (toolbar_preferences.separator_5 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),TRUE);
 
-    if (toolbar_preferences.about == MY_FALSE)
+    if (toolbar_preferences.about == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),TRUE);
@@ -973,99 +974,99 @@ void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_prefere
         g_critical(_("Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."));
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0))))
-        toolbar_preferences->new=MY_TRUE;
+        toolbar_preferences->new=true;
     else
-        toolbar_preferences->new=MY_FALSE;
+        toolbar_preferences->new=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1))))
-        toolbar_preferences->open=MY_TRUE;
+        toolbar_preferences->open=true;
     else
-        toolbar_preferences->open=MY_FALSE;
+        toolbar_preferences->open=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2))))
-        toolbar_preferences->save_as=MY_TRUE;
+        toolbar_preferences->save_as=true;
     else
-        toolbar_preferences->save_as=MY_FALSE;
+        toolbar_preferences->save_as=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3))))
-        toolbar_preferences->separator_1=MY_TRUE;
+        toolbar_preferences->separator_1=true;
     else
-        toolbar_preferences->separator_1=MY_FALSE;
+        toolbar_preferences->separator_1=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4))))
-        toolbar_preferences->undo=MY_TRUE;
+        toolbar_preferences->undo=true;
     else
-        toolbar_preferences->undo=MY_FALSE;
+        toolbar_preferences->undo=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5))))
-        toolbar_preferences->redo=MY_TRUE;
+        toolbar_preferences->redo=true;
     else
-        toolbar_preferences->redo=MY_FALSE;
+        toolbar_preferences->redo=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6))))
-        toolbar_preferences->separator_2=MY_TRUE;
+        toolbar_preferences->separator_2=true;
     else
-        toolbar_preferences->separator_2=MY_FALSE;
+        toolbar_preferences->separator_2=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7))))
-        toolbar_preferences->cut=MY_TRUE;
+        toolbar_preferences->cut=true;
     else
-        toolbar_preferences->cut=MY_FALSE;
+        toolbar_preferences->cut=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8))))
-        toolbar_preferences->copy=MY_TRUE;
+        toolbar_preferences->copy=true;
     else
-        toolbar_preferences->copy=MY_FALSE;
+        toolbar_preferences->copy=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9))))
-        toolbar_preferences->paste=MY_TRUE;
+        toolbar_preferences->paste=true;
     else
-        toolbar_preferences->paste=MY_FALSE;
+        toolbar_preferences->paste=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0))))
-        toolbar_preferences->delete=MY_TRUE;
+        toolbar_preferences->delete=true;
     else
-        toolbar_preferences->delete=MY_FALSE;
+        toolbar_preferences->delete=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1))))
-        toolbar_preferences->separator_3=MY_TRUE;
+        toolbar_preferences->separator_3=true;
     else
-        toolbar_preferences->separator_3=MY_FALSE;
+        toolbar_preferences->separator_3=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2))))
-        toolbar_preferences->properties=MY_TRUE;
+        toolbar_preferences->properties=true;
     else
-        toolbar_preferences->properties=MY_FALSE;
+        toolbar_preferences->properties=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3))))
-        toolbar_preferences->separator_4=MY_TRUE;
+        toolbar_preferences->separator_4=true;
     else
-        toolbar_preferences->separator_4=MY_FALSE;
+        toolbar_preferences->separator_4=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4))))
-        toolbar_preferences->preferences=MY_TRUE;
+        toolbar_preferences->preferences=true;
     else
-        toolbar_preferences->preferences=MY_FALSE;
+        toolbar_preferences->preferences=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5))))
-        toolbar_preferences->game_configuration_preferences=MY_TRUE;
+        toolbar_preferences->game_configuration_preferences=true;
     else
-        toolbar_preferences->game_configuration_preferences=MY_FALSE;
+        toolbar_preferences->game_configuration_preferences=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6))))
-        toolbar_preferences->toolbar_button_preferences=MY_TRUE;
+        toolbar_preferences->toolbar_button_preferences=true;
     else
-        toolbar_preferences->toolbar_button_preferences=MY_FALSE;
+        toolbar_preferences->toolbar_button_preferences=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7))))
-        toolbar_preferences->separator_5=MY_TRUE;
+        toolbar_preferences->separator_5=true;
     else
-        toolbar_preferences->separator_5=MY_FALSE;
+        toolbar_preferences->separator_5=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8))))
-        toolbar_preferences->about=MY_TRUE;
+        toolbar_preferences->about=true;
     else
-        toolbar_preferences->about=MY_FALSE;
+        toolbar_preferences->about=false;
 }
 
 /*!
@@ -1092,7 +1093,7 @@ G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget, GPa
     if (!apply_button)
         g_critical(_("Widget apply_button_toolbar_preferences is missing in file csuper-gui.glade."));
 
-    if (differentsToolbarButtonPreferencesStruct(toolbar_file,toolbar_preferences) == MY_TRUE)
+    if (differentsToolbarButtonPreferencesStruct(toolbar_file,toolbar_preferences) == true)
         gtk_widget_set_sensitive(apply_button,TRUE);
     else
         gtk_widget_set_sensitive(apply_button,FALSE);

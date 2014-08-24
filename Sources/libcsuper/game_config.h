@@ -69,14 +69,14 @@ typedef struct
 
 list_game_config *newListGameConfig(int nb_config);
 void closeListGameConfig(list_game_config *ptr_list_config);
-int makeConfigListFile(char * home_path);
+bool makeConfigListFile(char * home_path);
 list_game_config *readConfigListFile(char * home_path);
-int addConfigListFile(char *new_config_name, char * home_path);
-int removeConfigListFile(int index_delete, list_game_config *ptr_list_config,char * home_path);
-int newConfigFile(game_config config,char * home_path);
-int removeConfigFile(char *config_name,char * home_path);
-int readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path);
-int exportConfigFile(char *home_path,char *file_name);
-int importConfigFile(char *home_path,char *file_name);
+bool addConfigListFile(char *new_config_name, char * home_path);
+bool removeConfigListFile(int index_delete, list_game_config *ptr_list_config,char * home_path);
+bool newConfigFile(game_config config,char * home_path);
+bool removeConfigFile(char *config_name,char * home_path);
+bool readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path);
+bool exportConfigFile(char *home_path,char *file_name);
+bool importConfigFile(char *home_path,char *file_name);
 
 #endif
