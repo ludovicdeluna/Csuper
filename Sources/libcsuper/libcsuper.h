@@ -2,8 +2,8 @@
  * \file    libcsuper.h
  * \brief   Inclusion of all header files of libcsuper
  * \author  Remi BERTHO
- * \date    05/04/14
- * \version 2.2.0
+ * \date    25/08/14
+ * \version 4.0.2
  */
 
  /*
@@ -33,6 +33,12 @@
 
 #ifndef LIBCSUPER_H_INCLUDED
 #define LIBCSUPER_H_INCLUDED
+
+/*!
+ * \def NOT_LIBCSUPER
+ * Define that we don't compile libcsuper
+ */
+#define NOT_LIBCSUPER
 
 #include "csu_struct.h"
 #include "share.h"

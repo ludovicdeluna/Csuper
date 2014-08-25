@@ -2,8 +2,8 @@
  * \file    share.h
  * \brief   Header for the essential function of libcsuper
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    25/08/14
+ * \version 4.0.2
  */
 
  /*
@@ -46,11 +46,9 @@
  * \def _(String)
  * Define the _ for gettext.
  */
-#ifndef CSUPER
-#ifndef CSUPER_GUI
+#ifndef NOT_LIBCSUPER
 #define _(String) dgettext ("libcsuper", String)
-#endif // CSUPER_GUI
-#endif // CSUPER
+#endif // _
 
 void libcsuper_initialize();
 void wrongChoice();
