@@ -84,7 +84,7 @@ void displayHelp()
 {
     libcsuper_initialize();
 
-    printf(_("\nCsuper - Universal points counter allowing reflexion exemption\nHere is the syntax to use it.\n"));
+    printf(_("\nCsuper - Universal points counter allowing reflection exemption\nHere is the syntax to use it.\n"));
     printf(_("\t- Do not use argument to launch the main menu.\n"));
     printf(_("\t- Use the argument '%s' or '%s' followed by the file name to launch directly the program on this file.\n"),STRING_OPEN_FILE,STRING_OPEN_FILE_RED);
     printf(_("\t- Use the argument '%s' or '%s' followed by the file name to display directly the content of the file.\n"),STRING_READ_FILE,STRING_READ_FILE_RED);

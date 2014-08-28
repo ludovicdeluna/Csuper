@@ -97,8 +97,8 @@ csuStruct *readCsuFile(char *file_name)
     check_file_size+=(sizeof(float)*fread(&(ptr_csu_struct->version),sizeof(float),1,ptr_file));
     if (ptr_csu_struct->version + 0.01 < VERSION && ptr_csu_struct->version - 0.01 > VERSION)
     {
-        printf(_("\nError the file's version is the %1.1f while the software only support files with versions"
-               " higher than the %1.1f.\n"),ptr_csu_struct->version,VERSION);
+        printf(_("\nError: the file's version is the %1.1f whereas the software only supports files "
+                 "with versions higher than the %1.1f.\n"),ptr_csu_struct->version,VERSION);
         closeFile(ptr_file);
         return NULL;
     }
@@ -150,7 +150,7 @@ csuStruct *readCsuFile(char *file_name)
     /*Check the size of the file*/
     if (file_size != check_file_size)
     {
-        printf(_("\nError : corrupted file.\n"));
+        printf(_("\nError: corrupted file.\n"));
         return NULL;
     }
 
@@ -175,7 +175,7 @@ bool writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
 
     if (ptr_file == NULL)
     {
-        printf(_("\nError while writing file.\n"));
+        printf(_("\nError while writing the file.\n"));
         return false;
     }
 

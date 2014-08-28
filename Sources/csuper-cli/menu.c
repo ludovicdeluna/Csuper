@@ -45,9 +45,9 @@ char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
 
     do
     {
-        printf(_("Give the name of the file with at the most %d characters.\nYour choice : "),SIZE_MAX_FILE_NAME/8);
+        printf(_("Give a name to the file with at most %d characters.\nYour choice: "),SIZE_MAX_FILE_NAME/8);
         stringKey(test_filename,SIZE_MAX_FILE_NAME/8);
-        printf("Vous avez choisi %s\n",test_filename);
+        printf(_("You choose %s\n"),test_filename);
         strcpy(file_name,test_filename);
         #ifndef PORTABLE
         readSystemPath(test_filename);
@@ -73,7 +73,7 @@ void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
     /*Number of player*/
     do
     {
-        printf(_("\nGive the number of player in the game (>0).\nYour choice : "));
+        printf(_("\nGive the number of players in the game (>0).\nYour choice: "));
         floatKeyNoComma(ptr_nb_player);
         printf(_("You chose %.0f\n"),*ptr_nb_player);
     } while (*ptr_nb_player <= 0);
@@ -83,15 +83,15 @@ void menuStartGame(float *ptr_nb_player, game_config *ptr_config)
     readHomePathSlash(home_path);
     #endif // PORTABLE
     ptr_list_config = readConfigListFile(home_path);
-    printf(_("\nWhich game configuration would you want to use ?\n"));
+    printf(_("\nWhich game configuration would you like to use?\n"));
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
-        printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
+        printf(_("(%d) %s\n"),i+1,ptr_list_config->name_game_config[i]);
     printf(_("(%d) Other\n"),i+1);
 
     /*Ask which one will be chose*/
     do
     {
-        printf(_("\nYour choice : "));
+        printf(_("\nYour choice: "));
         intKey(&game_config_choice);
         printf(_("You chose %d\n"),game_config_choice);
     } while (game_config_choice <1 || game_config_choice >i+1);
@@ -123,7 +123,7 @@ void menuGameConfig(game_config *ptr_config)
     int comma;
 
     /*Maximum number*/
-    printf(_("\nWould you want to use a maximum or minimum score (Y/n) : "));
+    printf(_("\nWould you like to use a maximum or a minimum score (Y/n): "));
     charKey(&nbmax);
     if (nbmax=='n' || nbmax=='N')
     {
@@ -132,7 +132,7 @@ void menuGameConfig(game_config *ptr_config)
     } else
     {
         /*Maximum or minimum*/
-        printf(_("\nWould you want to use a maximum score (Y/n) : "));
+        printf(_("\nWould you like to use a maximum score (Y/n): "));
         charKey(&max);
         if (max=='n' || max == 'N')
             ptr_config->max=0;
@@ -141,18 +141,18 @@ void menuGameConfig(game_config *ptr_config)
 
         /*Number maximum or minimum.*/
         printf(_("\nGive the maximal or minimal score which a player can reach in the game."
-        "\nYour choice : "));
+        "\nYour choice: "));
         floatKey(&(ptr_config->nb_max));
         printf(_("You chose %.3f\n"),ptr_config->nb_max);
     }
 
     /*Score at the beginning*/
-    printf(_("\nGive the initial score of the players .\nYour choice: "));
+    printf(_("\nGive the initial score of the players.\nYour choice: "));
     floatKey(&(ptr_config->begin_score));
     printf(_("You chose %.3f\n"),ptr_config->begin_score);
 
     /*First way*/
-    printf(_("\nThe first is the player who have the higher score (Y/n) : "));
+    printf(_("\nThe winner is the player who has the highest score (Y/n): "));
     charKey(&first_max);
     if (first_max=='n' || first_max == 'N')
         ptr_config->first_way=-1;
@@ -160,7 +160,7 @@ void menuGameConfig(game_config *ptr_config)
         ptr_config->first_way=1;
 
     /*Turn by turn*/
-    printf(_("\nThis is a turn-based game (Y/n) : "));
+    printf(_("\nThis is a turn-based game (Y/n): "));
     charKey(&turn);
     if (turn=='n' || turn == 'N')
         ptr_config->turn_based=0;
@@ -168,7 +168,7 @@ void menuGameConfig(game_config *ptr_config)
         ptr_config->turn_based=1;
 
     /*Distributor*/
-    printf(_("\nWe use a distributor (Y/n) : "));
+    printf(_("\nA distributor is used (Y/n): "));
     charKey(&distrib);
     if (distrib=='n' || distrib == 'N')
         ptr_config->use_distributor=0;
@@ -178,8 +178,7 @@ void menuGameConfig(game_config *ptr_config)
     /*Number of decimal place.*/
     do
     {
-        printf(_("\nGive the number of decimal place. This number must be"
-        " between 0 and 3\nYour choice : "));
+        printf(_("\nGive the number of decimals displayed. This number must be between 0 and 3.\nYour choice: "));
         intKey(&comma);
         printf(_("You chose %.0d\n"),comma);
     } while (comma < 0 || comma > 3);
@@ -193,7 +192,7 @@ void menuGameConfig(game_config *ptr_config)
  */
 void menuDistributor(char *distributor_name)
 {
-    printf(_("\nGive the name (or the firsts letters of the name) of the person who begin to distribute.\nYour choice : "));
+    printf(_("\nGive the name (or the first letters of the name) of the person who will distribute first.\nYour choice: "));
     stringKey(distributor_name,SIZE_MAX_NAME);
     printf(_("You chose %s\n"),distributor_name);
 }
@@ -208,13 +207,13 @@ void menuPlayersName(csuStruct *ptr_csu_struct)
     int i;
     char name[SIZE_MAX_NAME];
 
-    printf(_("\nThe players's names must have between 2 and %.0f characters with no special characters.\n"),ptr_csu_struct->size_max_name-1);
+    printf(_("\nThe players' names must have between 2 and %.0f characters and mustn't include any special character.\n"),ptr_csu_struct->size_max_name-1);
 
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         do
         {
-            printf(_("\nGive the name of the %dth person : "),i+1);
+            printf(_("\nGive the name of the %dth person: "),i+1);
             stringKey(name,SIZE_MAX_NAME);
             printf(_("You chose %s\n"),name);
         } while (strlen(name) <2 || strlen(name) > ptr_csu_struct->size_max_name);
@@ -255,16 +254,16 @@ void menuPlayersPoints(csuStruct *ptr_csu_struct)
                 floatKey(&(ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]));
                 printf(_("You chose %.3f\n"),ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]]);
                 total += ptr_csu_struct->point[i][(int)ptr_csu_struct->nb_turn[i]];
-                printf(_("\nTotal points at that turn : %.3f\n"),total);
+                printf(_("\nTotal number of points distributed in that turn: %.3f\n"),total);
             }
         } else
         {
-            printf(_("\nGive their points : "));
+            printf(_("\nGive their points: "));
             floatKey(&(ptr_csu_struct->point[index_player][(int)ptr_csu_struct->nb_turn[index_player]]));
             printf(_("You chose %.3f\n"),ptr_csu_struct->point[index_player][(int)ptr_csu_struct->nb_turn[index_player]]);
         }
 
-        printf(_("\nYou confirm these scores (Y/n) : "));
+        printf(_("\nDo you confirm these scores (Y/n)? "));
         charKey(&valid);
 
         if (valid=='n' || valid=='N')
@@ -287,7 +286,7 @@ int menuPlayerIndex(csuStruct *ptr_csu_struct)
 
     do
     {
-        printf(_("\nGive the name (or the firsts letters of the name) of the person who will earn points.\nYour choice: "));
+        printf(_("\nGive the name (or the first letters of the name) of the person who will earn points.\nYour choice: "));
         stringKey(name,SIZE_MAX_NAME);
         printf(_("You chose %s\n"),name);
     } while ((index_player = searchPlayerIndex(ptr_csu_struct,name)) == -1);
@@ -304,7 +303,7 @@ bool menuContinue()
 {
     char continuer;
 
-    printf(_("\nWould you like to continue the game (Y/n) : "));
+    printf(_("\nWould you like to continue the game (Y/n)? "));
     charKey(&continuer);
 
     if (continuer=='n' || continuer=='N')
@@ -322,7 +321,7 @@ bool menuDelete()
 {
     char delete;
 
-    printf(_("\nWould ou like to delete the file (y/N) : "));
+    printf(_("\nWould you like to delete the file (y/N)? "));
     charKey(&delete);
 
     if (delete=='o' || delete=='O' || delete == 'y' || delete == 'Y')
@@ -342,8 +341,8 @@ void menuNewPath(char *new_path)
 
     do
     {
-        printf(_("\nGive the new folder which you would like to save your files.\nChech if the folder exist"
-        " and that you have the read and write rights.\n\nYour choice: "));
+        printf(_("\nGive the new folder in which you would like to save your files\nCheck "
+                 "if the folder exists and if you have the read and write rights.\n\nYour choice: "));
         stringKey(new_path,SIZE_MAX_FILE_NAME);
 
         /*Check if the path is valid*/

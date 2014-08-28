@@ -129,7 +129,7 @@ bool checkPath(char *path)
     }
     else
     {
-        printf(_("\nError : this folder is not valid.\n"));
+        printf(_("\nError: this folder is not valid.\n"));
         return false;
     }
 }

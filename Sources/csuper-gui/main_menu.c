@@ -322,56 +322,56 @@ void updateCsuInfo(globalData *data)
     GtkLabel *label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_filename"));
     gchar filename[SIZE_MAX_FILE_NAME];
     getSimpleFilenameFromFullFilename(data->csu_filename,filename);
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Filename : %s"),filename));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Filename: %s"),filename));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_date"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Created the : %02.0f/%02.0f/%4.0f"),data->ptr_csu_struct->day,data->ptr_csu_struct->month,data->ptr_csu_struct->year));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Created on the: %02.0f/%02.0f/%4.0f"),data->ptr_csu_struct->day,data->ptr_csu_struct->month,data->ptr_csu_struct->year));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_version"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("File's version : %1.1f"),data->ptr_csu_struct->version));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("File's version: %1.1f"),data->ptr_csu_struct->version));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_size_max_name"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Size max of the names : %.0f"),data->ptr_csu_struct->size_max_name));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Maximum size of the names: %.0f"),data->ptr_csu_struct->size_max_name));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_number_player"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of players : %.0f"),data->ptr_csu_struct->nb_player));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of players: %.0f"),data->ptr_csu_struct->nb_player));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Numbers maximum of turns : %d"),maxNbTurn(data->ptr_csu_struct)-1));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Maximum number of turns: %d"),maxNbTurn(data->ptr_csu_struct)-1));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_config_name"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Name of the game configuration : %s"),data->ptr_csu_struct->config.name));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Name of the game configuration: %s"),data->ptr_csu_struct->config.name));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_use_max"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a maximum score : %s"),integerToYesNo(data->ptr_csu_struct->config.max,yes,no)));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a maximum score: %s"),integerToYesNo(data->ptr_csu_struct->config.max,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_initial_score"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Initial score : %.3f"),data->ptr_csu_struct->config.begin_score));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Initial score: %.3f"),data->ptr_csu_struct->config.begin_score));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_digit"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of decimal place : %d"),data->ptr_csu_struct->config.decimal_place));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of decimals displayed: %d"),data->ptr_csu_struct->config.decimal_place));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_first_way"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("The first has the highest score : %s"),integerToYesNo(data->ptr_csu_struct->config.first_way,yes,no)));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("The winner is the player who has the highest score: %s"),integerToYesNo(data->ptr_csu_struct->config.first_way,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Turn-based game : %s"),integerToYesNo(data->ptr_csu_struct->config.turn_based,yes,no)));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Turn-based game: %s"),integerToYesNo(data->ptr_csu_struct->config.turn_based,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor_turn"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a distributor : %s"),integerToYesNo(data->ptr_csu_struct->config.use_distributor,yes,no)));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Use a distributor: %s"),integerToYesNo(data->ptr_csu_struct->config.use_distributor,yes,no)));
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_nb_max"));
     #ifdef __unix__
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : %.3f"),data->ptr_csu_struct->config.nb_max));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Maximum/minimum number of points: %.3f"),data->ptr_csu_struct->config.nb_max));
     #elif _WIN32
     if (data->ptr_csu_struct->config.nb_max == INFINITY)
-        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : inf")));
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Maximum/minimum number of points: inf")));
     else
-        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Number of points maximum/minimum : %.3f"),data->ptr_csu_struct->config.nb_max));
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Maximum/minimum number of points: %.3f"),data->ptr_csu_struct->config.nb_max));
     #endif
 
     label = GTK_LABEL(gtk_builder_get_object(data->ptr_builder,"label_distributor"));
-    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Distributor : %s"),data->ptr_csu_struct->player_names[(int)data->ptr_csu_struct->distributor]));
+    gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("Distributor: %s"),data->ptr_csu_struct->player_names[(int)data->ptr_csu_struct->distributor]));
 }
 
 /*!

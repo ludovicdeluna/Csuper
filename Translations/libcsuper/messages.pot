@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-07-22 19:04+0200\n"
+"POT-Creation-Date: 2014-08-28 19:28+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,34 +35,34 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Error the file's version is the %1.1f while the software only support files "
-"with versions higher than the %1.1f.\n"
+"Error: the file's version is the %1.1f whereas the software only supports "
+"files with versions higher than the %1.1f.\n"
 msgstr ""
 
 #: Sources/libcsuper/csu_files.c:153
 #, c-format
 msgid ""
 "\n"
-"Error : corrupted file.\n"
+"Error: corrupted file.\n"
 msgstr ""
 
 #: Sources/libcsuper/csu_files.c:178
 #, c-format
 msgid ""
 "\n"
-"Error while writing file.\n"
+"Error while writing the file.\n"
 msgstr ""
 
 #: Sources/libcsuper/csu_struct.c:265
 #, c-format
-msgid "The distributor was initialize by default to %s.\n"
+msgid "The distributor was initializes by default to %s.\n"
 msgstr ""
 
 #: Sources/libcsuper/csu_struct.c:332
 #, c-format
 msgid ""
 "\n"
-"Error this name doesn't exist.\n"
+"Error: this name doesn't exist.\n"
 msgstr ""
 
 #: Sources/libcsuper/file.c:50
@@ -84,11 +84,11 @@ msgid ""
 "The file %s cannot be deleted.\n"
 msgstr ""
 
-#: Sources/libcsuper/file.c:115 Sources/libcsuper/game_config.c:321
+#: Sources/libcsuper/file.c:115
 #, c-format
 msgid ""
 "\n"
-"The file %s was well deleted.\n"
+"The file %s was deleted successfully.\n"
 msgstr ""
 
 #: Sources/libcsuper/file.c:133
@@ -105,7 +105,14 @@ msgid ""
 "The file %s was well renamed in %s.\n"
 msgstr ""
 
-#: Sources/libcsuper/filename.c:132 Sources/libcsuper/filename.c:159
+#: Sources/libcsuper/filename.c:132
+#, c-format
+msgid ""
+"\n"
+"Error: this folder is not valid.\n"
+msgstr ""
+
+#: Sources/libcsuper/filename.c:159
 #, c-format
 msgid ""
 "\n"
@@ -116,7 +123,14 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"The game configuration %s already exist.\n"
+"The game configuration %s already exists.\n"
+msgstr ""
+
+#: Sources/libcsuper/game_config.c:321
+#, c-format
+msgid ""
+"\n"
+"The file %s was well deleted.\n"
 msgstr ""
 
 #: Sources/libcsuper/game_config.c:402
@@ -137,7 +151,7 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Csuper - Universal points counter allowing reflexion exemption\n"
+"Csuper - Universal points counter allowing reflection exemption\n"
 "Here is the syntax to use it.\n"
 msgstr ""
 

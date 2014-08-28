@@ -160,7 +160,7 @@ bool addConfigListFile(char *new_config_name,char *home_path)
     {
         if (strcmp(ptr_list_config->name_game_config[i],new_config_name) == 0)
         {
-            printf(_("\nThe game configuration %s already exist.\n"),new_config_name);
+            printf(_("\nThe game configuration %s already exists.\n"),new_config_name);
             return false;
         }
     }

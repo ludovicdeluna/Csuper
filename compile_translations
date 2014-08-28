@@ -1,5 +1,5 @@
 #!/bin/bash
 mkdir -p Locales/fr_FR/LC_MESSAGES
 msgfmt Translations/libcsuper/fr.po -o Locales/fr_FR/LC_MESSAGES/libcsuper.mo
-msgfmt Translations/csuper/fr.po -o Locales/fr_FR/LC_MESSAGES/csuper.mo
+msgfmt Translations/csuper-cli/fr.po -o Locales/fr_FR/LC_MESSAGES/csuper-cli.mo
 msgfmt Translations/csuper-gui/fr.po -o Locales/fr_FR/LC_MESSAGES/csuper-gui.mo

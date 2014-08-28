@@ -513,24 +513,24 @@ void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboole
         #ifdef _WIN32
         if (config.nb_max != INFINITY)
         {
-            gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score : %s\nNumber of points maximum/minimum : %.3f\n"
-                "Initial score : %.3f\nNumber of decimal place : %d\nThe first has the highest score : %s\n"
-                "Turn-based game : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no),config.nb_max
+            gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score: %s\nMaximum/minimum number of points: %.3f\n"
+                "Initial score: %.3f\nNumber of decimals displayed: %d\nThe winner is the player with the most points: %s\n"
+                "Turn-based game: %s\nUse of a distributor: %s"),integerToYesNo(config.max,yes,no),config.nb_max
                 ,config.begin_score,config.decimal_place,integerToYesNo(config.first_way,yes,no),
                 integerToYesNo(config.turn_based,yes,no),integerToYesNo(config.use_distributor,yes,no)));
         }
         else
         {
-            gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score : %s\nNumber of points maximum/minimum : inf\n"
-                "Initial score : %.3f\nNumber of decimal place : %d\nThe first has the highest score : %s\n"
-                "Turn-based game : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no)
+            gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score: %s\nMaximum/minimum number of points: inf\n"
+                "Initial score: %.3f\nNumber of decimals displayed: %d\nThe winner is the player with the most points: %s\n"
+                "Turn-based game: %s\nUse of a distributor: %s"),integerToYesNo(config.max,yes,no)
                 ,config.begin_score,config.decimal_place,integerToYesNo(config.first_way,yes,no),
                 integerToYesNo(config.turn_based,yes,no),integerToYesNo(config.use_distributor,yes,no)));
         }
         #else
-        gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score : %s\nNumber of points maximum/minimum : %.3f\n"
-            "Initial score : %.3f\nNumber of decimal place : %d\nThe first has the highest score : %s\n"
-            "Turn-based game : %s\nUse a distributor : %s"),integerToYesNo(config.max,yes,no),config.nb_max
+        gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("Use a maximum score: %s\nMaximum/minimum number of points: %.3f\n"
+            "Initial score: %.3f\nNumber of decimals displayed: %d\nThe winner is the player with the most points: %s\n"
+            "Turn-based game: %s\nUse of a distributor: %s"),integerToYesNo(config.max,yes,no),config.nb_max
             ,config.begin_score,config.decimal_place,integerToYesNo(config.first_way,yes,no),
             integerToYesNo(config.turn_based,yes,no),integerToYesNo(config.use_distributor,yes,no)));
         #endif // _win32

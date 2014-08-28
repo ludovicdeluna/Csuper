@@ -106,7 +106,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
         g_critical(_("Widget scrolled_window_new_csu_file_assistant_2 is missing in file csuper-gui.glade."));
     gtk_assistant_append_page(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name);
     gtk_assistant_set_page_type(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name,GTK_ASSISTANT_PAGE_CONTENT);
-    gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name,_("Player names"));
+    gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),scrolled_window_name,_("Player's names"));
 
     /* Set the grid */
     GtkWidget *grid_name = gtk_grid_new();

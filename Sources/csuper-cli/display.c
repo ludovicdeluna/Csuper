@@ -176,8 +176,8 @@ void printDistributor(csuStruct *ptr_csu_struct)
  */
 void printHeader(csuStruct *ptr_csu_struct)
 {
-    printf(_("\nCsu file\nCreated the %02.0f/%02.0f/%4.0f\nFile's version : %1.1f\nSize max of the names : %.0f"
-    "\nNumber of players : %.0f\nNumbers maximum of turns : %d")
+    printf(_("\nCsu file\nCreated on the %02.0f/%02.0f/%4.0f\nFile's version: %1.1f\nMaximum size of the names: %.0f"
+    "\nNumber of players: %.0f\nMaximum number of turns: %d")
     ,ptr_csu_struct->day,ptr_csu_struct->month,ptr_csu_struct->year,ptr_csu_struct->version,ptr_csu_struct->size_max_name
     ,ptr_csu_struct->nb_player,maxNbTurn(ptr_csu_struct)-1);
     printGameConfig(ptr_csu_struct->config);
@@ -450,18 +450,18 @@ void printGameConfig(game_config config)
 {
     char *yes=_("yes");
     char *no=_("no");
-    printf(_("\nName of the game configuration : %s\nUse a maximum score : %s\nInitial score : %.3f\n"
-        "Number of decimal place : %d\nThe first has the highest score : %s\n"
-        "Turn-based game : %s\nUse a distributor : %s\n")
+    printf(_("\nName of the game configuration: %s\nUse of a maximum score: %s\nInitial score: %.3f\n"
+        "Number of decimals displayed: %d\nThe first has the highest score: %s\n"
+        "Turn-based game: %s\nUse of a distributor: %s\n")
         ,config.name,integerToYesNo(config.max,yes,no),config.begin_score,config.decimal_place,integerToYesNo(config.first_way,yes,no),
        integerToYesNo(config.turn_based,yes,no),integerToYesNo(config.use_distributor,yes,no));
     #ifdef __unix__
-    printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
+    printf(_("Maximum/minimum number of points: %.3f\n"),config.nb_max);
     #elif _WIN32
     if (config.nb_max == INFINITY)
-        printf(_("Number of points maximum/minimum : inf\n"));
+        printf(_("Maximum/minimum number of points: inf\n"));
     else
-        printf(_("Number of points maximum/minimum : %.3f\n"),config.nb_max);
+        printf(_("Maximum/minimum number of points: %.3f\n"),config.nb_max);
     #endif
 }
 

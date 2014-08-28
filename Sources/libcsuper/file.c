@@ -112,7 +112,7 @@ bool deleteFile(char *file_name)
 
     else
     {
-        printf(_("\nThe file %s was well deleted.\n"),file_name);
+        printf(_("\nThe file %s was deleted successfully.\n"),file_name);
         return true;
     }
 }

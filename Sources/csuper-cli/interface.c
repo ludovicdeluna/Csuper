@@ -110,7 +110,7 @@ void listCsuFiles()
 
     rep = opendir(folder);
 
-    printf(_("Here all your csu files :\n"));
+    printf(_("Here are all your csu files:\n"));
 
     while ((lecture = readdir(rep))) {
         for (i=0 ; i<3 ; i++)
@@ -270,9 +270,9 @@ void mainMenu()
 
         clearScreen();
 
-        printf(_("Csuper - Universal points counter allowing a dispense with reflection v4.0.2\n\nWhat do you want to do ?\n "
-        "(%d) Do a new game \n (%d) Load an existing game \n (%d) Display the results of an existing game "
-        "\n (%d) Delete a game \n (%d) Display all existing games\n (%d) Display the preferences menu"
+        printf(_("Csuper - Universal points counter allowing a dispense with reflection v4.0.2\n\nWhat do you want to do?\n "
+        "(%d) Play a new game\n (%d) Load an existing game\n (%d) Display the results of an existing game"
+        "\n (%d) Delete a game\n (%d) Display all existing games\n (%d) Display the preferences menu"
         "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFiles,listFile,pref,quit);
 
         intKey(&choice);
@@ -294,7 +294,7 @@ void mainMenu()
                                 systemPause();
                                 stop=true;
                                 break;
-            case easterEggs :   printf(_("\nYes it's the good answer but that don't help me to know what do you want to do.\n"));
+            case easterEggs :   printf(_("\nYes, it's the correct answer, but that doesn't help me to know what you want to do.\n"));
                                 systemPause();
                                 break;
             default :           wrongChoice();
@@ -321,12 +321,12 @@ void preferencesMenu()
 
         clearScreen();
 
-        printf(_("\nWhat do you want to do ?\n"));
+        printf(_("\nWhat do you want to do?\n"));
         #ifndef PORTABLE
-        printf(_("\n (%d) Change the folder for saving files\n (%d) Display the folder for saving files"),newPath,readPath);
+        printf(_("\n (%d) Change the folder where files will be saved\n (%d) Display the folder where files will be saved"),newPath,readPath);
         #endif
         printf(_("\n (%d) Make a new game configuration\n (%d) Delete an existing game configuration"
-        "\n (%d) Display the list of the game configurations\n (%d) Display a game configuration"
+        "\n (%d) Display the list of game configurations\n (%d) Display a game configuration"
         "\n (%d) Export game configurations\n (%d) Import game configurations\n (%d) Back to main menu\n\nYour choice : ")
                ,newGameConf,removeGameConf,printListGameConf,printGameConf,exportGameConf,importGameConf,backMainMenu);
 
@@ -349,7 +349,7 @@ void preferencesMenu()
                                 break;
             case printGameConf: printGameConfigFile();
                                 break;
-            case easterEggs2 :  printf(_("\nYes it's the good answer but that don't help me to know what do you want to do.\n"));
+            case easterEggs2 :  printf(_("\nYes, it's the correct answer, but that doesn't help me to know what you want to do.\n"));
                                 systemPause();
                                 break;
             case exportGameConf:exportListGameConfig();
@@ -497,14 +497,14 @@ void removeGameConfig()
     if (ptr_list_config->nb_config > 0)
     {
         /*Affichage des diffrentes configurations*/
-        printf(_("\nWhich game configuration would you like to use ?\n"));
+        printf(_("\nWhich game configuration would you like to use?\n"));
         for (i=0 ; i<ptr_list_config->nb_config ; i++)
             printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
 
         /*Demande du choice*/
         do
         {
-            printf(_("\nYour choice : "));
+            printf(_("\nYour choice: "));
             intKey(&game_config_choice);
             printf(_("You chose %d\n"),game_config_choice);
         } while (game_config_choice <1 || game_config_choice >i);
@@ -513,7 +513,7 @@ void removeGameConfig()
     }
 
     else
-        printf(_("\nYou do not have any game configuration files.\n"));
+        printf(_("\nYou do not have any game configuration file.\n"));
 
     systemPause();
 }
@@ -534,7 +534,7 @@ void printListGameConfig()
     readHomePathSlash(home_path);
     #endif // PORTABLE
     ptr_list_config = readConfigListFile(home_path);
-    printf(_("\nHere all your game configurations:\n"));
+    printf(_("\nHere are all your game configurations:\n"));
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
         printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
     closeListGameConfig(ptr_list_config);
@@ -562,14 +562,14 @@ void printGameConfigFile()
     ptr_list_config = readConfigListFile(home_path);
     if (ptr_list_config->nb_config > 0)
     {
-        printf(_("\nWhich game configuration would you like to display ?\n"));
+        printf(_("\nWhich game configuration would you like to display?\n"));
         for (i=0 ; i<ptr_list_config->nb_config ; i++)
             printf("(%d) %s\n",i+1,ptr_list_config->name_game_config[i]);
 
         /*Demande du choice*/
         do
         {
-            printf(_("\nYour choice : "));
+            printf(_("\nYour choice: "));
             intKey(&game_config_choice);
             printf(_("You chose %d\n"),game_config_choice);
         } while (game_config_choice <1 || game_config_choice >i);
@@ -580,7 +580,7 @@ void printGameConfigFile()
     }
 
     else
-        printf(_("\nYou do not have any game configuration files.\n"));
+        printf(_("\nYou do not have any game configuration file.\n"));
 
     systemPause();
 }
@@ -605,7 +605,7 @@ void exportListGameConfig()
     #endif // PORTABLE
 
     if(exportConfigFile(home_path,file_name) == true)
-        printf(_("\nGame configurations are well export in %s\n"),file_name);
+        printf(_("\nGame configurations were exported successfully in %s\n"),file_name);
     systemPause();
 }
 
@@ -629,6 +629,6 @@ void importListGameConfig()
     #endif // PORTABLE
 
     if(importConfigFile(home_path,file_name) == true)
-        printf(_("\nGame configurations are well import from %s\n"),file_name);
+        printf(_("\nGame configurations were successfully imported from %s\n"),file_name);
     systemPause();
 }

@@ -99,11 +99,8 @@ void createRanking(globalData *data)
 
     /* Set the column name */
     gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Position")),0,0,1,1);
-    //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),0,0)),TRUE);
     gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Name")),1,0,1,1);
-    //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),1,0)),TRUE);
     gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Points")),2,0,1,1);
-    //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),2,0)),TRUE);
 
     /* Set all the information*/
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
@@ -112,10 +109,8 @@ void createRanking(globalData *data)
         index=searchIndexFromPosition(data->ptr_csu_struct,i+1,&nb);
 
         gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%d"),i+2-nb)),0,i+1,1,1);
-        //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),0,i+1)),TRUE);
 
         gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[index])),1,i+1,1,1);
-        //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),1,i+1)),TRUE);
 
         switch (data->ptr_csu_struct->config.decimal_place)
         {
@@ -132,7 +127,6 @@ void createRanking(globalData *data)
             gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.3f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
             break;
         }
-        //gtk_label_set_selectable(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(rank_grid),2,i+1)),TRUE);
     }
 
     gtk_widget_set_vexpand(rank_grid,TRUE);
@@ -201,16 +195,16 @@ G_MODULE_EXPORT void updateTotalPointsInTurnLabel(GtkWidget *widget, gpointer da
     switch (user_data->ptr_csu_struct->config.decimal_place)
     {
     case 0 :
-        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There is %.0f points in the turn"),total_points));
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There are %.0f points given in the turn"),total_points));
         break;
     case 1 :
-        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There is %.1f points in the turn"),total_points));
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There are %.1f points given in the turn"),total_points));
         break;
     case 2 :
-        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There is %.2f points in the turn"),total_points));
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There are %.2f points given in the turn"),total_points));
         break;
     case 3 :
-        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There is %.3f points in the turn"),total_points));
+        gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("There are %.3f points given in the turn"),total_points));
         break;
     }
 }
@@ -346,7 +340,7 @@ void createPointsGrid(globalData *data)
         gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(createGtkLabelWithAttributes(g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[i]),15,FALSE,0,0,0,FALSE,0,0,0)),2*(i+1),2*(max_nb_turn+3),1,1);
 
     /* Write the total points of the players */
-    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Total points")),0,2*(max_nb_turn+4),1,1);
+    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Total number of points")),0,2*(max_nb_turn+4),1,1);
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
     {
         switch (data->ptr_csu_struct->config.decimal_place)

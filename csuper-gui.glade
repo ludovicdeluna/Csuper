@@ -1,33 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 
-
-Copyright (C) 2014 Rémi BERTHO <remi.bertho@gmail.com>
-
-This file is part of Csuper.
-
-Csuper is free software: you can redistribute it and/or modify
-it under the terms of the GNU General Public License as published by
-the Free Software Foundation, either version 3 of the License, or
-(at your option) any later version.
-
-Csuper is distributed in the hope that it will be useful,
-but WITHOUT ANY WARRANTY; without even the implied warranty of
-MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-GNU General Public License for more details.
-
-You should have received a copy of the GNU General Public License
-along with Csuper.  If not, see <http://www.gnu.org/licenses/>.
-
-Author: Rémi BERTHO
-
--->
+<!-- Generated with glade 3.16.1 -->
 <interface domain="csuper-gui">
   <requires lib="gtk+" version="3.6"/>
-  <!-- interface-license-type gplv3 -->
-  <!-- interface-name Csuper -->
-  <!-- interface-description Universal points counter allowing a dispense with reflection -->
-  <!-- interface-copyright 2014 R\303\251mi BERTHO <remi.bertho@gmail.com> -->
-  <!-- interface-authors R\303\251mi BERTHO -->
   <object class="GtkFileFilter" id="filefilterall">
     <patterns>
       <pattern>*</pattern>
@@ -47,7 +21,7 @@ Author: Rémi BERTHO
     <property name="skip_taskbar_hint">True</property>
     <property name="message_type">error</property>
     <property name="buttons">ok</property>
-    <property name="text" translatable="yes">Error while exporting the games configurations.</property>
+    <property name="text" translatable="yes">Error while exporting the game configurations.</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="messagedialog-vbox9">
         <property name="can_focus">False</property>
@@ -86,7 +60,7 @@ Author: Rémi BERTHO
     <property name="skip_taskbar_hint">True</property>
     <property name="message_type">error</property>
     <property name="buttons">ok</property>
-    <property name="text" translatable="yes">Error while importing the games configurations.</property>
+    <property name="text" translatable="yes">Error while importing the game configurations.</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="messagedialog-vbox11">
         <property name="can_focus">False</property>
@@ -131,6 +105,8 @@ Author: Rémi BERTHO
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
   </object>
@@ -394,6 +370,7 @@ Author: Rémi BERTHO
             <property name="left_attach">0</property>
             <property name="top_attach">0</property>
             <property name="width">3</property>
+            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -417,6 +394,8 @@ Author: Rémi BERTHO
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -432,6 +411,8 @@ Author: Rémi BERTHO
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -454,6 +435,8 @@ Author: Rémi BERTHO
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -467,6 +450,8 @@ Author: Rémi BERTHO
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -483,6 +468,8 @@ Author: Rémi BERTHO
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -498,6 +485,8 @@ Author: Rémi BERTHO
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -516,6 +505,8 @@ Author: Rémi BERTHO
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -525,6 +516,8 @@ Author: Rémi BERTHO
           <packing>
             <property name="left_attach">2</property>
             <property name="top_attach">2</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -536,6 +529,8 @@ Author: Rémi BERTHO
           <packing>
             <property name="left_attach">1</property>
             <property name="top_attach">2</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -829,6 +824,7 @@ Author: Rémi BERTHO
             <property name="left_attach">0</property>
             <property name="top_attach">1</property>
             <property name="width">3</property>
+            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -851,6 +847,8 @@ Author: Rémi BERTHO
           <packing>
             <property name="left_attach">0</property>
             <property name="top_attach">2</property>
+            <property name="width">1</property>
+            <property name="height">1</property>
           </packing>
         </child>
       </object>
@@ -860,8 +858,10 @@ Author: Rémi BERTHO
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">About Csuper</property>
     <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
     <property name="type_hint">dialog</property>
     <property name="skip_taskbar_hint">True</property>
+    <property name="gravity">center</property>
     <property name="transient_for">main_window</property>
     <property name="program_name">Csuper</property>
     <property name="version">4.0.2</property>
@@ -871,7 +871,8 @@ Author: Rémi BERTHO
     <property name="website_label" translatable="yes">Visit the website of Csuper</property>
     <property name="authors">Rémi BERTHO</property>
     <property name="documenters">Rémi BERTHO</property>
-    <property name="translator_credits" translatable="yes">Rémi BERTHO</property>
+    <property name="translator_credits" translatable="yes">Rémi BERTHO
+Nicolas DANKAR</property>
     <property name="artists">Olivier FRISCH
 Rémi BERTHO</property>
     <property name="logo_icon_name">Logo_400.png</property>
@@ -956,167 +957,197 @@ Rémi BERTHO</property>
               <object class="GtkLabel" id="label_date">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Created the : no csu file loaded</property>
+                <property name="label" translatable="yes">Created on the: no csu file loaded</property>
                 <property name="ellipsize">start</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_version">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">File's version : no csu file loaded</property>
+                <property name="label" translatable="yes">File's version: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_size_max_name">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Size max of the names : no csu file loaded</property>
+                <property name="label" translatable="yes">Maximum size of the names: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_number_player">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Number of players : no csu file loaded</property>
+                <property name="label" translatable="yes">Number of players: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_nb_turn">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Numbers maximum of turns : no csu file loaded</property>
+                <property name="label" translatable="yes">Maximum number of turns: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_config_name">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Name of the game configuration : no csu file loaded</property>
+                <property name="label" translatable="yes">Name of the game configuration: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_use_max">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Use a maximum score : no csu file loaded</property>
+                <property name="label" translatable="yes">Use a maximum score: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_initial_score">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Initial score : no csu file loaded</property>
+                <property name="label" translatable="yes">Initial score: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">8</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_nb_digit">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Number of decimal place : no csu file loaded</property>
+                <property name="label" translatable="yes">Number of decimals displayed: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">9</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_first_way">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">First way : no csu file loaded</property>
+                <property name="label" translatable="yes">First way: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">10</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_turn">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Turn-based game : no csu file loaded</property>
+                <property name="label" translatable="yes">Turn-based game: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">11</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_distributor_turn">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Use a distributor : no csu file loaded</property>
+                <property name="label" translatable="yes">Use a distributor: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">12</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_nb_max">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Number of points maximum/minimum : no csu file loaded</property>
+                <property name="label" translatable="yes">Maximum/minimum number of points: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">13</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_distributor">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Distributor : no csu file loaded</property>
+                <property name="label" translatable="yes">Distributor: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">14</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_filename">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">Filename : no csu file loaded</property>
+                <property name="label" translatable="yes">Filename: no csu file loaded</property>
                 <property name="ellipsize">start</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -1220,7 +1251,7 @@ Please try to use an other folder and/or filename.</property>
     <property name="transient_for">main_window</property>
     <property name="buttons">ok</property>
     <property name="text" translatable="yes">The game is over.
-Congratulation to the winner !</property>
+Congratulation to the winner!</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="messagedialog-vbox10">
         <property name="can_focus">False</property>
@@ -1285,6 +1316,7 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
                 <property name="height">2</property>
               </packing>
             </child>
@@ -1365,6 +1397,7 @@ Congratulation to the winner !</property>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
                 <property name="width">2</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1384,6 +1417,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1404,6 +1439,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1423,6 +1460,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1443,6 +1482,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -1472,6 +1513,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1485,6 +1528,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1498,6 +1543,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1511,6 +1558,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1524,6 +1573,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">9</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1537,6 +1588,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">8</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1550,6 +1603,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1563,6 +1618,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1576,6 +1633,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1589,6 +1648,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1604,6 +1665,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1619,6 +1682,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1634,6 +1699,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1649,6 +1716,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1664,6 +1733,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1679,6 +1750,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1694,6 +1767,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1709,6 +1784,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">8</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1724,6 +1801,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1739,6 +1818,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">9</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1752,6 +1833,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1765,6 +1848,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1778,6 +1863,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1791,6 +1878,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1804,6 +1893,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1817,6 +1908,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1830,6 +1923,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1843,6 +1938,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1856,6 +1953,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">2</property>
                 <property name="top_attach">8</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1871,6 +1970,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1886,6 +1987,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1901,6 +2004,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1916,6 +2021,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1931,6 +2038,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1946,6 +2055,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1961,6 +2072,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1976,6 +2089,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1991,6 +2106,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">3</property>
                 <property name="top_attach">8</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2037,6 +2154,7 @@ Congratulation to the winner !</property>
                 <property name="left_attach">0</property>
                 <property name="top_attach">10</property>
                 <property name="width">4</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2080,22 +2198,26 @@ Congratulation to the winner !</property>
       <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_folder">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Folder where the new csu file will save</property>
+        <property name="label" translatable="yes">Folder where the new csu file will be saved</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
       <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_nb_player">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Number of player on the game</property>
+        <property name="label" translatable="yes">Number of players on the game</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">2</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2112,6 +2234,8 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">2</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2123,6 +2247,8 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">3</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2136,6 +2262,8 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2147,6 +2275,8 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2160,6 +2290,8 @@ Congratulation to the winner !</property>
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -2256,6 +2388,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2269,6 +2403,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2282,6 +2418,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2289,12 +2427,14 @@ Congratulation to the winner !</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Number of decimal place</property>
+                <property name="label" translatable="yes">Number of decimals displayed</property>
                 <property name="justify">center</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2302,12 +2442,14 @@ Congratulation to the winner !</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">The first is the player who have the higher score</property>
+                <property name="label" translatable="yes">The winner is the player with the highest score</property>
                 <property name="justify">center</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2315,12 +2457,14 @@ Congratulation to the winner !</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">The points will be attribute in turn-based</property>
+                <property name="label" translatable="yes">The points will be attributed in turn-based</property>
                 <property name="justify">center</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2328,12 +2472,14 @@ Congratulation to the winner !</property>
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Use a distributor</property>
+                <property name="label" translatable="yes">Use of a distributor</property>
                 <property name="justify">center</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2347,6 +2493,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2363,6 +2511,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2376,6 +2526,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2389,6 +2541,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2401,6 +2555,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2420,6 +2576,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2439,6 +2597,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2455,6 +2615,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2471,6 +2633,8 @@ Congratulation to the winner !</property>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
               </packing>
             </child>
           </object>
