@@ -2,8 +2,8 @@
  * \file    preferences.c
  * \brief   The preferences of csuper
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    31/08/14
+ * \version 4.2.0
  */
 
  /*
@@ -880,85 +880,100 @@ void updateToolbarButtonPreferencesSwitch(globalData *data)
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),TRUE);
 
-    if (toolbar_preferences.separator_1 == false)
+    if (toolbar_preferences.separator_6 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),TRUE);
 
-    if (toolbar_preferences.undo == false)
+    if (toolbar_preferences.delete_file == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),TRUE);
 
-    if (toolbar_preferences.redo == false)
+    if (toolbar_preferences.print == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),TRUE);
 
-    if (toolbar_preferences.separator_2 == false)
+    if (toolbar_preferences.separator_1 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),TRUE);
 
-    if (toolbar_preferences.cut == false)
+    if (toolbar_preferences.undo == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),TRUE);
 
-    if (toolbar_preferences.copy == false)
+    if (toolbar_preferences.redo == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),TRUE);
 
-    if (toolbar_preferences.paste == false)
+    if (toolbar_preferences.separator_2 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),TRUE);
 
-    if (toolbar_preferences.delete == false)
+    if (toolbar_preferences.cut == false)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,10)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,10)),TRUE);
+
+    if (toolbar_preferences.copy == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),TRUE);
 
-    if (toolbar_preferences.separator_3 == false)
+    if (toolbar_preferences.paste == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),TRUE);
 
-    if (toolbar_preferences.properties == false)
+    if (toolbar_preferences.delete == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),TRUE);
 
-    if (toolbar_preferences.separator_4 == false)
+    if (toolbar_preferences.separator_3 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),TRUE);
 
-    if (toolbar_preferences.preferences == false)
+    if (toolbar_preferences.properties == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),TRUE);
 
-    if (toolbar_preferences.game_configuration_preferences == false)
+    if (toolbar_preferences.separator_4 == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),TRUE);
 
-    if (toolbar_preferences.toolbar_button_preferences == false)
+    if (toolbar_preferences.preferences == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),TRUE);
 
-    if (toolbar_preferences.separator_5 == false)
+    if (toolbar_preferences.game_configuration_preferences == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),TRUE);
 
-    if (toolbar_preferences.about == false)
+    if (toolbar_preferences.toolbar_button_preferences == false)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),FALSE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),TRUE);
+
+    if (toolbar_preferences.separator_5 == false)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,9)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,9)),TRUE);
+
+    if (toolbar_preferences.about == false)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,10)),FALSE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,10)),TRUE);
 }
 
 /*!
@@ -989,81 +1004,96 @@ void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_prefere
         toolbar_preferences->save_as=false;
 
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3))))
+        toolbar_preferences->separator_6=true;
+    else
+        toolbar_preferences->separator_6=false;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4))))
+        toolbar_preferences->delete_file=true;
+    else
+        toolbar_preferences->delete_file=false;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5))))
+        toolbar_preferences->print=true;
+    else
+        toolbar_preferences->print=false;
+
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6))))
         toolbar_preferences->separator_1=true;
     else
         toolbar_preferences->separator_1=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7))))
         toolbar_preferences->undo=true;
     else
         toolbar_preferences->undo=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8))))
         toolbar_preferences->redo=true;
     else
         toolbar_preferences->redo=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9))))
         toolbar_preferences->separator_2=true;
     else
         toolbar_preferences->separator_2=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,10))))
         toolbar_preferences->cut=true;
     else
         toolbar_preferences->cut=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0))))
         toolbar_preferences->copy=true;
     else
         toolbar_preferences->copy=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1))))
         toolbar_preferences->paste=true;
     else
         toolbar_preferences->paste=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2))))
         toolbar_preferences->delete=true;
     else
         toolbar_preferences->delete=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3))))
         toolbar_preferences->separator_3=true;
     else
         toolbar_preferences->separator_3=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4))))
         toolbar_preferences->properties=true;
     else
         toolbar_preferences->properties=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5))))
         toolbar_preferences->separator_4=true;
     else
         toolbar_preferences->separator_4=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6))))
         toolbar_preferences->preferences=true;
     else
         toolbar_preferences->preferences=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7))))
         toolbar_preferences->game_configuration_preferences=true;
     else
         toolbar_preferences->game_configuration_preferences=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8))))
         toolbar_preferences->toolbar_button_preferences=true;
     else
         toolbar_preferences->toolbar_button_preferences=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,9))))
         toolbar_preferences->separator_5=true;
     else
         toolbar_preferences->separator_5=false;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8))))
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,10))))
         toolbar_preferences->about=true;
     else
         toolbar_preferences->about=false;

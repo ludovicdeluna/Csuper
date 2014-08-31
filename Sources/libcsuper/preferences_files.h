@@ -2,8 +2,8 @@
  * \file    preferences_files.h
  * \brief   Prototypes des fonctions qui l'emrankment des fichiers sauvegardes
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    31/08/14
+ * \version 4.2.0
  */
 
  /*
@@ -74,6 +74,9 @@ typedef struct
     int new;              /*!< The new button */
     int open;              /*!< The open button */
     int save_as;              /*!< The save_as button */
+    int separator_6;              /*!< The separator 6*/
+    int delete_file;              /*!< The delete file button */
+    int print;              /*!< The print button */
     int separator_1;              /*!< The separator 1*/
     int undo;              /*!< The undo button */
     int redo;              /*!< The redo button */

@@ -2,8 +2,8 @@
  * \file    interface.c
  * \brief   Graphical interface
  * \author  Remi BERTHO
- * \date    20/07/14
- * \version 4.0.2
+ * \date    31/08/14
+ * \version 4.1.0
  */
 
  /*
@@ -270,7 +270,9 @@ void mainMenu()
 
         clearScreen();
 
-        printf(_("Csuper - Universal points counter allowing a dispense with reflection v4.0.2\n\nWhat do you want to do?\n "
+        printf(_("Csuper - Universal points counter allowing a dispense with reflection v"));
+        printf(_("%s"),CSUPER_VERSION);
+        printf(_("\n\nWhat do you want to do?\n "
         "(%d) Play a new game\n (%d) Load an existing game\n (%d) Display the results of an existing game"
         "\n (%d) Delete a game\n (%d) Display all existing games\n (%d) Display the preferences menu"
         "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFiles,listFile,pref,quit);

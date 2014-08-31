@@ -41,12 +41,13 @@
 void noCsuFileRanking(globalData *data);
 void deleteRanking(globalData *data);
 void createRanking(globalData *data);
-void updateMainWindow(globalData *data);
+void updateMainWindow(globalData *data,bool editable);
 void updateDistributorLabel(globalData *data);
-G_MODULE_EXPORT void updateTotalPointsInTurnLabel(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void updateTotalPointsInTurnLabelSignal(GtkWidget *widget, gpointer data);
+void updateTotalPointsInTurnLabel(globalData *data,bool updatable_points);
 void noCsuFilePoints(globalData *data);
 void deletePoints(globalData *data);
-void createPointsGrid(globalData *data);
+void createPointsGrid(globalData *data,bool spin_button);
 G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data);
 void setButtonMainWindowSensitive(globalData *data);
 G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data);

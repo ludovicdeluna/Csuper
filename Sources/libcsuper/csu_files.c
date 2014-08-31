@@ -2,8 +2,8 @@
  * \file    csu_files.c
  * \brief   Files management
  * \author  Remi BERTHO
- * \date    27/04/14
- * \version 2.2.0
+ * \date    31/08/14
+ * \version 4.2.0
  */
 
  /*
@@ -215,20 +215,22 @@ bool writeCsuFile(char *file_name, csuStruct *ptr_csu_struct)
  */
 bool writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct)
 {
-    char file_name_2[SIZE_MAX_FILE_NAME+4];
-    int successful;
+    char filename_2[SIZE_MAX_FILE_NAME+4];
 
-    sprintf(file_name_2,"%s_tmp",file_name);
+    sprintf(filename_2,"%s_tmp",file_name);
 
-    successful=writeCsuFile(file_name_2,ptr_csu_struct);
 
-    if (successful)
+    if (writeCsuFile(filename_2,ptr_csu_struct))
     {
         if(deleteFile(file_name))
         {
-            if(renameFile(file_name_2,file_name))
+            if(renameFile(filename_2,file_name))
                 return true;
+            else
+                deleteFile(filename_2);
         }
+        else
+            deleteFile(filename_2);
     }
 
     return false;

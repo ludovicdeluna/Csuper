@@ -142,7 +142,7 @@ bool openFileWithMainArgument(globalData *data,int argc, char *argv[])
         #endif // PORTABLE
 
         strcpy(data->csu_filename,filename);
-        updateMainWindow(data);
+        updateMainWindow(data,!exceedMaxNumber(data->ptr_csu_struct));
         deleteAllLastCsuStruct(data);
         addLastCsuStruct(data);
         setButtonMainWindowSensitive(data);

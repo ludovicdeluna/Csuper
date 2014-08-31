@@ -2,8 +2,8 @@
  * \file    main_menu.c
  * \brief   Main menu
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    31/08/14
+ * \version 4.2.0
  */
 
  /*
@@ -55,6 +55,8 @@ G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data)
         g_error_free (error);
     }else
         gtk_about_dialog_set_logo(GTK_ABOUT_DIALOG(window_about),logo);
+
+    gtk_about_dialog_set_version(GTK_ABOUT_DIALOG(window_about),CSUPER_VERSION);
 
     gtk_dialog_run (GTK_DIALOG (window_about));
     gtk_widget_hide (window_about);
@@ -141,7 +143,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
                 #endif // PORTABLE
 
                 strcpy(user_data->csu_filename,filename);
-                updateMainWindow(user_data);
+                updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
                 deleteAllLastCsuStruct(user_data);
                 addLastCsuStruct(user_data);
                 setButtonMainWindowSensitive(user_data);
@@ -211,20 +213,22 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
 		case GTK_RESPONSE_ACCEPT:
 		{
 		    char *filename;
+		    char true_filename[SIZE_MAX_FILE_NAME];
 			#ifdef _WIN32
 		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
 		    #else
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save));
 		    #endif
+		    strcpy(true_filename,filename);
 
             /* Add the csu extension if the filter is csu */
 			if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_save))==csu_filter)
-                addFileCsuExtension(filename);
+                addFileCsuExtension(true_filename);
 
-            if (writeCsuFile(filename,user_data->ptr_csu_struct) == false)
+            if (writeCsuFile(true_filename,user_data->ptr_csu_struct) == false)
                 error=TRUE;
             else
-                strncpy(user_data->csu_filename,filename,SIZE_MAX_FILE_NAME-1);
+                strncpy(user_data->csu_filename,true_filename,SIZE_MAX_FILE_NAME-1);
 
             g_free(filename);
 			break;
@@ -464,7 +468,7 @@ G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data)
         user_data->indexLastCsuStruct++;
         user_data->ptr_csu_struct = copyCsuStruct(user_data->lastCsuStruct[user_data->indexLastCsuStruct]);
         writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct);
-        updateMainWindow(user_data);
+        updateMainWindow(user_data,TRUE);
     }
 }
 
@@ -484,7 +488,7 @@ G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data)
         user_data->indexLastCsuStruct--;
         user_data->ptr_csu_struct = copyCsuStruct(user_data->lastCsuStruct[user_data->indexLastCsuStruct]);
         writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct);
-        updateMainWindow(user_data);
+        updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
     }
 }
 
@@ -522,83 +526,135 @@ void updateToolbarButton(globalData *data)
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),2)));
 
-    if (toolbar_preferences.separator_1 == false)
+    if (toolbar_preferences.separator_6 == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),3)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),3)));
 
-    if (toolbar_preferences.undo == false)
+    if (toolbar_preferences.delete_file == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),4)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),4)));
 
-    if (toolbar_preferences.redo == false)
+    if (toolbar_preferences.print == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),5)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),5)));
 
-    if (toolbar_preferences.separator_2 == false)
+    if (toolbar_preferences.separator_1 == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),6)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),6)));
 
-    if (toolbar_preferences.cut == false)
+    if (toolbar_preferences.undo == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)));
 
-    if (toolbar_preferences.copy == false)
+    if (toolbar_preferences.redo == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)));
 
-    if (toolbar_preferences.paste == false)
+    if (toolbar_preferences.separator_2 == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)));
 
-    if (toolbar_preferences.delete == false)
+    if (toolbar_preferences.cut == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)));
 
-    if (toolbar_preferences.separator_3 == false)
+    if (toolbar_preferences.copy == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),11)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),11)));
 
-    if (toolbar_preferences.properties == false)
+    if (toolbar_preferences.paste == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),12)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),12)));
 
-    if (toolbar_preferences.separator_4 == false)
+    if (toolbar_preferences.delete == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),13)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),13)));
 
-    if (toolbar_preferences.preferences == false)
+    if (toolbar_preferences.separator_3 == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),14)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),14)));
 
-    if (toolbar_preferences.game_configuration_preferences == false)
+    if (toolbar_preferences.properties == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),15)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),15)));
 
-    if (toolbar_preferences.toolbar_button_preferences == false)
+    if (toolbar_preferences.separator_4 == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),16)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),16)));
 
-    if (toolbar_preferences.separator_5 == false)
+    if (toolbar_preferences.preferences == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),17)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),17)));
 
-    if (toolbar_preferences.about == false)
+    if (toolbar_preferences.game_configuration_preferences == false)
         gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),18)));
     else
         gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),18)));
+
+    if (toolbar_preferences.toolbar_button_preferences == false)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),19)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),19)));
+
+    if (toolbar_preferences.separator_5 == false)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),20)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),20)));
+
+    if (toolbar_preferences.about == false)
+        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),21)));
+    else
+        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),21)));
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data)
+ *  Delete the current file
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    if (deleteFile(user_data->csu_filename))
+    {
+        updateMainWindow(user_data,FALSE);
+        closeCsuStruct(user_data->ptr_csu_struct);
+        user_data->ptr_csu_struct = NULL;
+        deleteAllLastCsuStruct(user_data);
+        setButtonMainWindowSensitive(user_data);
+    }
+    else
+        deleteFileError(user_data);
+}
+
+/*!
+ * \fn void deleteFileError(globalData *data)
+ *  Display a dialog box which said that there is a problem when deleting the file.
+ * \param[in] data the globalData
+ */
+void deleteFileError(globalData *data)
+{
+    GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"file_not_deleted"));
+    if (!window_error)
+        g_critical(_("Widget file_not_deleted is missing in file csuper-gui.glade."));
+
+    gtk_dialog_run (GTK_DIALOG (window_error));
+    gtk_widget_hide (window_error);
 }

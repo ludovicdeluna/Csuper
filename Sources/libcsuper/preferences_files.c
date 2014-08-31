@@ -2,8 +2,8 @@
  * \file    preferences_files.c
  * \brief   Function which store preferences into files
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    31/08/14
+ * \version 4.2.0
  */
 
  /*
@@ -72,7 +72,8 @@ bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferen
     if (ptr_file==NULL)
         return false;
 
-    fprintf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",toolbar.new,toolbar.open,toolbar.save_as,
+    fprintf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",toolbar.new,toolbar.open,toolbar.save_as,
+            toolbar.separator_6,toolbar.delete_file,toolbar.print,
             toolbar.separator_1,toolbar.undo,toolbar.redo,toolbar.separator_2,toolbar.cut,toolbar.copy,toolbar.paste,
             toolbar.delete,toolbar.separator_3,toolbar.properties,toolbar.separator_4,toolbar.preferences,
             toolbar.game_configuration_preferences,toolbar.toolbar_button_preferences,toolbar.separator_5,toolbar.about);
@@ -96,6 +97,9 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
     toolbar->open=true;
     toolbar->new=true;
     toolbar->save_as=true;
+    toolbar->separator_6=true;
+    toolbar->delete_file=false;
+    toolbar->print=true;
     toolbar->separator_1=true;
     toolbar->undo=true;
     toolbar->redo=true;
@@ -127,7 +131,8 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
             return true;
     }
 
-    fscanf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",&(toolbar->new),&(toolbar->open),&(toolbar->save_as),
+    fscanf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",&(toolbar->new),&(toolbar->open),&(toolbar->save_as),
+           &(toolbar->separator_6),&(toolbar->delete_file),&(toolbar->print),
         &(toolbar->separator_1),&(toolbar->undo),&(toolbar->redo),&(toolbar->separator_2),&(toolbar->cut),&(toolbar->copy),&(toolbar->paste),
         &(toolbar->delete),&(toolbar->separator_3),&(toolbar->properties),&(toolbar->separator_4),&(toolbar->preferences),
         &(toolbar->game_configuration_preferences),&(toolbar->toolbar_button_preferences),&(toolbar->separator_5),&(toolbar->about));
@@ -147,6 +152,7 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
 bool differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
 {
     if (toolbar1.new != toolbar2.new || toolbar1.open != toolbar2.open || toolbar1.save_as != toolbar2.save_as || toolbar1.separator_1 != toolbar2.separator_1
+            || toolbar1.separator_6 != toolbar2.separator_6 || toolbar1.delete_file != toolbar2.delete_file || toolbar1.print != toolbar2.print
             || toolbar1.undo != toolbar2.undo || toolbar1.redo != toolbar2.redo || toolbar1.separator_2 != toolbar2.separator_2 ||
             toolbar1.cut != toolbar2.cut || toolbar1.copy != toolbar2.copy || toolbar1.paste != toolbar2.paste || toolbar1.delete != toolbar2.delete
             || toolbar1.separator_3 != toolbar2.separator_3 || toolbar1.properties != toolbar2.properties || toolbar1.separator_4 != toolbar2.separator_4

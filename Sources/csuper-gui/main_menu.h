@@ -2,8 +2,8 @@
  * \file    main_menu.h
  * \brief   Main menu
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    31/08/14
+ * \version 4.2.0
  */
 
  /*
@@ -54,5 +54,7 @@ void deleteAllLastCsuStruct(globalData *data);
 G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data);
 void updateToolbarButton(globalData *data);
+G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data);
+void deleteFileError(globalData *data);
 
 #endif // MAIN_MENU_H_INCLUDED

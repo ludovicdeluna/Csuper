@@ -2,8 +2,8 @@
  * \file    share.h
  * \brief   Header for the essential function of libcsuper
  * \author  Remi BERTHO
- * \date    25/08/14
- * \version 4.0.2
+ * \date    31/08/14
+ * \version 4.1.0
  */
 
  /*
@@ -49,6 +49,12 @@
 #ifndef NOT_LIBCSUPER
 #define _(String) dgettext ("libcsuper", String)
 #endif // _
+
+/*!
+ * \def CSUPER_VERSION
+ * Define the version of csuper
+ */
+#define CSUPER_VERSION "4.1.0"
 
 void libcsuper_initialize();
 void wrongChoice();

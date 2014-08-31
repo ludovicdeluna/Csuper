@@ -505,7 +505,7 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
     user_data->ptr_csu_struct = user_data->ptr_csu_struct_tmp;
     user_data->ptr_csu_struct_tmp = NULL;
 
-    updateMainWindow(user_data);
+    updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
     if (writeCsuFile(user_data->csu_filename,user_data->ptr_csu_struct) == false)
         saveFileError(user_data);
     deleteAllLastCsuStruct(user_data);
