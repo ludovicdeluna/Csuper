@@ -349,7 +349,6 @@ void createPointsGrid(globalData *data,bool spin_button)
 
 
             /* g_signal_connect (new_points_button,"changed", G_CALLBACK(setButtonMainWindowClipboardSensitive),data);*/
-            g_timeout_add(50,&setButtonMainWindowClipboardSensitive,data);
         }
 
         /* Write a blank line */

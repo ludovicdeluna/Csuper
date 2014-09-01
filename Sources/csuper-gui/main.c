@@ -100,6 +100,8 @@ int main (int argc, char *argv[])
 
     gtk_widget_show_all(data.ptr_main_window);
 
+    g_timeout_add(50,&setButtonMainWindowClipboardSensitive,&data);
+
     gtk_main();
 
     g_object_unref(data.ptr_builder);

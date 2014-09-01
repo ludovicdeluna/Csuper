@@ -46,6 +46,11 @@ Libcsuper
 Csuper-gui
 ==========
 
+4.2.0
+
+* Add a delete file button
+* Add the possibility to display only the image in the toolbar
+
 4.0.2
 
 * Add an error message when there is an error when loading the file with the main arguments

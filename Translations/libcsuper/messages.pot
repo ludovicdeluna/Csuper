@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-31 18:53+0200\n"
+"POT-Creation-Date: 2014-09-01 12:58+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -174,8 +174,8 @@ msgid ""
 "directly the content of the file.\n"
 msgstr ""
 
+#: Sources/libcsuper/preferences_files.c:306
 #: Sources/libcsuper/preferences_files.c:311
-#: Sources/libcsuper/preferences_files.c:316
 #, c-format
 msgid ""
 "\n"

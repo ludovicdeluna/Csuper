@@ -2,8 +2,8 @@
  * \file    preferences.h
  * \brief   The preferences of csuper
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    01/09/14
+ * \version 4.2.0
  */
 
  /*
@@ -60,8 +60,8 @@ G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer d
 G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer data);
 void changeNewGameConfigurationDialog(globalData *data,game_config config);
 void updateToolbarButtonPreferencesSwitch(globalData *data);
-void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar_preferences);
-G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget, GParamSpec *pspec,gpointer data);
+void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar);
+G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget,gpointer data);
 G_MODULE_EXPORT void validToolbarButtonPreferences(GtkWidget *widget, gpointer data);
 
 #endif // GAME_CONFIGURATION_H_INCLUDED

@@ -2,48 +2,6 @@
 <!-- Generated with glade 3.16.1 -->
 <interface domain="csuper-gui">
   <requires lib="gtk+" version="3.6"/>
-  <object class="GtkMessageDialog" id="file_not_deleted">
-    <property name="width_request">200</property>
-    <property name="height_request">100</property>
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Error while loading the file.</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="transient_for">main_window</property>
-    <property name="message_type">error</property>
-    <property name="buttons">ok</property>
-    <property name="text" translatable="yes">Error while deleting the file.</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="messagedialog-vbox14">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="messagedialog-action_area14">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <placeholder/>
-            </child>
-            <child>
-              <placeholder/>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <placeholder/>
-        </child>
-      </object>
-    </child>
-  </object>
   <object class="GtkFileFilter" id="filefilterall">
     <patterns>
       <pattern>*</pattern>
@@ -1286,6 +1244,48 @@ Rémi BERTHO</property>
       <action-widget response="-3">button_validate_properties</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkMessageDialog" id="file_not_deleted">
+    <property name="width_request">200</property>
+    <property name="height_request">100</property>
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Error while loading the file.</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">main_window</property>
+    <property name="message_type">error</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">Error while deleting the file.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox14">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area14">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkMessageDialog" id="file_not_open">
     <property name="width_request">200</property>
     <property name="height_request">100</property>
@@ -1625,6 +1625,12 @@ Congratulation to the winner!</property>
           <object class="GtkGrid" id="grid_toolbar_button_preferences">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <property name="row_spacing">5</property>
+            <property name="column_spacing">5</property>
             <child>
               <object class="GtkLabel" id="toolbar_button_preferences_label_new">
                 <property name="visible">True</property>
@@ -1666,210 +1672,6 @@ Congratulation to the winner!</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_new">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_save_as">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_open">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_delete">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_separator_3">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_properties">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_separator_4">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_game_configuration_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_toolbar_button_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_separator_5">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_about">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">10</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>
@@ -2057,23 +1859,6 @@ Congratulation to the winner!</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_paste">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="toolbar_button_preferences_label_paste">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -2104,23 +1889,6 @@ Congratulation to the winner!</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_copy">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="toolbar_button_preferences_label_cut">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -2136,7 +1904,7 @@ Congratulation to the winner!</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_separator_">
+              <object class="GtkLabel" id="toolbar_button_preferences_label_separator_3">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="hexpand">True</property>
@@ -2145,40 +1913,6 @@ Congratulation to the winner!</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_cut">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">10</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_separator_2">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
                 <property name="top_attach">9</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
@@ -2215,40 +1949,6 @@ Congratulation to the winner!</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_redo">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_undo">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="toolbar_button_preferences_label_delete_file">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -2258,23 +1958,6 @@ Congratulation to the winner!</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_delete_file">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
                 <property name="top_attach">4</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
@@ -2296,23 +1979,6 @@ Congratulation to the winner!</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_separator_1">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="toolbar_button_preferences_label_separator_6">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -2322,23 +1988,6 @@ Congratulation to the winner!</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_separator_6">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
                 <property name="top_attach">3</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
@@ -2360,18 +2009,441 @@ Congratulation to the winner!</property>
               </packing>
             </child>
             <child>
-              <object class="GtkSwitch" id="toolbar_button_preferences_switch_print">
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_new">
                 <property name="visible">True</property>
-                <property name="can_focus">True</property>
+                <property name="can_focus">False</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <signal name="notify::active" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                <items>
+                  <item id="0" translatable="yes">Do not display</item>
+                  <item id="1" translatable="yes">Display image</item>
+                  <item id="2" translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_open">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_save_as">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_6">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_delete_file">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_print">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
               </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_undo">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_1">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">9</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_redo">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">8</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_cut">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">10</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_paste">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_copy">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_delete">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_properties">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_4">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_game_configuration_preferences">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_toolbar_button_preferences">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">8</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_preferences">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_5">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">9</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_about">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item translatable="yes">Do not display</item>
+                  <item translatable="yes">Display image</item>
+                  <item translatable="yes">Display text and image</item>
+                </items>
+                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">10</property>
                 <property name="width">1</property>
                 <property name="height">1</property>
               </packing>

@@ -49,7 +49,7 @@ G_MODULE_EXPORT void openPreferences(GtkWidget *widget, gpointer data)
 
     displayGameConfiguration(user_data);
     updateToolbarButtonPreferencesSwitch(user_data);
-    checkToolbarButtonPreferencesChanged(NULL,NULL,user_data);
+    checkToolbarButtonPreferencesChanged(NULL,user_data);
 
     gtk_widget_show_all(window_game);
 }
@@ -853,260 +853,95 @@ void changeNewGameConfigurationDialog(globalData *data,game_config config)
  */
 void updateToolbarButtonPreferencesSwitch(globalData *data)
 {
-    toolbar_button_preferences_struct toolbar_preferences;
+    toolbar_button_preferences_struct toolbar;
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE
-    readFileToolbarButtonPreferences(home_path,&toolbar_preferences);
+    readFileToolbarButtonPreferences(home_path,&toolbar);
 
     GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_toolbar_button_preferences"));
     if (!grid)
         g_critical(_("Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."));
 
-    if (toolbar_preferences.new == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),TRUE);
+    gint i;
 
-    if (toolbar_preferences.open == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1)),TRUE);
+    for (i=0 ; i<= 21 ; i++)
+        gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),(i/11)*2+1,i%11)),*(&toolbar.new+i));
 
-    if (toolbar_preferences.save_as == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),TRUE);
-
-    if (toolbar_preferences.separator_6 == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),TRUE);
-
-    if (toolbar_preferences.delete_file == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),TRUE);
-
-    if (toolbar_preferences.print == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),TRUE);
-
-    if (toolbar_preferences.separator_1 == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),TRUE);
-
-    if (toolbar_preferences.undo == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),TRUE);
-
-    if (toolbar_preferences.redo == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),TRUE);
-
-    if (toolbar_preferences.separator_2 == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),TRUE);
-
-    if (toolbar_preferences.cut == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,10)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,10)),TRUE);
-
-    if (toolbar_preferences.copy == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),TRUE);
-
-    if (toolbar_preferences.paste == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),TRUE);
-
-    if (toolbar_preferences.delete == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),TRUE);
-
-    if (toolbar_preferences.separator_3 == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),TRUE);
-
-    if (toolbar_preferences.properties == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),TRUE);
-
-    if (toolbar_preferences.separator_4 == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),TRUE);
-
-    if (toolbar_preferences.preferences == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),TRUE);
-
-    if (toolbar_preferences.game_configuration_preferences == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),TRUE);
-
-    if (toolbar_preferences.toolbar_button_preferences == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),TRUE);
-
-    if (toolbar_preferences.separator_5 == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,9)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,9)),TRUE);
-
-    if (toolbar_preferences.about == false)
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,10)),FALSE);
-    else
-        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,10)),TRUE);
+    /*gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),toolbar.new);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,1)),toolbar.open);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,2)),toolbar.save_as);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),toolbar.separator_6);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),toolbar.delete_file);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,5)),toolbar.print);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),toolbar.separator_1);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),toolbar.undo);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,8)),toolbar.redo);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,9)),toolbar.separator_2);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,10)),toolbar.cut);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,0)),toolbar.copy);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,1)),toolbar.paste);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,2)),toolbar.delete);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),toolbar.separator_3);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),toolbar.properties);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,5)),toolbar.separator_4);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),toolbar.preferences);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,7)),toolbar.game_configuration_preferences);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,8)),toolbar.toolbar_button_preferences);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,9)),toolbar.separator_5);
+    gtk_combo_box_set_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,10)),toolbar.about);*/
 }
 
 /*!
- * \fn void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar_preferences)
+ * \fn void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar)
  *  Read the toolbar_button_preferences_struct with the switch of the preferences
  * \param[in] data the globalData
- * \param[in] toolbar_preferences the toolbar button preferences
+ * \param[in] toolbar the toolbar button preferences
  */
-void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar_preferences)
+void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar)
 {
     GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_toolbar_button_preferences"));
     if (!grid)
         g_critical(_("Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."));
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,0))))
-        toolbar_preferences->new=true;
-    else
-        toolbar_preferences->new=false;
+    gint i;
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1))))
-        toolbar_preferences->open=true;
-    else
-        toolbar_preferences->open=false;
+    for (i=0 ; i<= 21 ; i++)
+        *(&toolbar->new+i)=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),(i/11)*2+1,i%11)));
 
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,2))))
-        toolbar_preferences->save_as=true;
-    else
-        toolbar_preferences->save_as=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,3))))
-        toolbar_preferences->separator_6=true;
-    else
-        toolbar_preferences->separator_6=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4))))
-        toolbar_preferences->delete_file=true;
-    else
-        toolbar_preferences->delete_file=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,5))))
-        toolbar_preferences->print=true;
-    else
-        toolbar_preferences->print=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,6))))
-        toolbar_preferences->separator_1=true;
-    else
-        toolbar_preferences->separator_1=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7))))
-        toolbar_preferences->undo=true;
-    else
-        toolbar_preferences->undo=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,8))))
-        toolbar_preferences->redo=true;
-    else
-        toolbar_preferences->redo=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,9))))
-        toolbar_preferences->separator_2=true;
-    else
-        toolbar_preferences->separator_2=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,10))))
-        toolbar_preferences->cut=true;
-    else
-        toolbar_preferences->cut=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,0))))
-        toolbar_preferences->copy=true;
-    else
-        toolbar_preferences->copy=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,1))))
-        toolbar_preferences->paste=true;
-    else
-        toolbar_preferences->paste=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,2))))
-        toolbar_preferences->delete=true;
-    else
-        toolbar_preferences->delete=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3))))
-        toolbar_preferences->separator_3=true;
-    else
-        toolbar_preferences->separator_3=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4))))
-        toolbar_preferences->properties=true;
-    else
-        toolbar_preferences->properties=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,5))))
-        toolbar_preferences->separator_4=true;
-    else
-        toolbar_preferences->separator_4=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,6))))
-        toolbar_preferences->preferences=true;
-    else
-        toolbar_preferences->preferences=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,7))))
-        toolbar_preferences->game_configuration_preferences=true;
-    else
-        toolbar_preferences->game_configuration_preferences=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,8))))
-        toolbar_preferences->toolbar_button_preferences=true;
-    else
-        toolbar_preferences->toolbar_button_preferences=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,9))))
-        toolbar_preferences->separator_5=true;
-    else
-        toolbar_preferences->separator_5=false;
-
-    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,10))))
-        toolbar_preferences->about=true;
-    else
-        toolbar_preferences->about=false;
+    /*toolbar->new=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,0)));
+    toolbar->open=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,1)));
+    toolbar->save_as=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,2)));
+    toolbar->separator_6=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,3)));
+    toolbar->delete_file=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,4)));
+    toolbar->print=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,5)));
+    toolbar->separator_1=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,6)));
+    toolbar->undo=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,7)));
+    toolbar->redo=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,8)));
+    toolbar->separator_2=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,9)));
+    toolbar->cut=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,10)));
+    toolbar->copy=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,0)));
+    toolbar->paste=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,1)));
+    toolbar->delete=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,2)));
+    toolbar->separator_3=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,3)));
+    toolbar->properties=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,4)));
+    toolbar->separator_4=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,5)));
+    toolbar->preferences=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,6)));
+    toolbar->game_configuration_preferences=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,7)));
+    toolbar->toolbar_button_preferences=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,8)));
+    toolbar->separator_5=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,9)));
+    toolbar->about=gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,10)));*/
 }
 
 /*!
- * \fn G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget,GParamSpec *pspec, gpointer data)
+ * \fn G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget,gpointer data)
  *  Check if the toolbar button preferences change relative this save in the file
  * \param[in] widget the widget which send the signal
- * \param[in] pspec the GParamSpec of the property which changed.
  * \param[in] data the globalData
  */
-G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget, GParamSpec *pspec,gpointer data)
+G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget,gpointer data)
 {
     globalData *user_data = (globalData*) data;
     toolbar_button_preferences_struct toolbar_file;
@@ -1123,10 +958,7 @@ G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget, GPa
     if (!apply_button)
         g_critical(_("Widget apply_button_toolbar_preferences is missing in file csuper-gui.glade."));
 
-    if (differentsToolbarButtonPreferencesStruct(toolbar_file,toolbar_preferences) == true)
-        gtk_widget_set_sensitive(apply_button,TRUE);
-    else
-        gtk_widget_set_sensitive(apply_button,FALSE);
+    gtk_widget_set_sensitive(apply_button,differentsToolbarButtonPreferencesStruct(toolbar_file,toolbar_preferences));
 }
 
 
@@ -1139,15 +971,15 @@ G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget, GPa
 G_MODULE_EXPORT void validToolbarButtonPreferences(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-    toolbar_button_preferences_struct toolbar_preferences;
+    toolbar_button_preferences_struct toolbar;
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE
-    readToolbarButtonPreferencesSwitch(user_data,&toolbar_preferences);
+    readToolbarButtonPreferencesSwitch(user_data,&toolbar);
 
-    createFileToolbarButtonPreferences(home_path,toolbar_preferences);
+    createFileToolbarButtonPreferences(home_path,toolbar);
     updateToolbarButton(user_data);
-    checkToolbarButtonPreferencesChanged(NULL,NULL,user_data);
+    checkToolbarButtonPreferencesChanged(NULL,user_data);
 }

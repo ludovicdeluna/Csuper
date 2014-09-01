@@ -55,7 +55,7 @@ void createPreferencesFolder(char *home_path)
  * \fn bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar)
  *  Create the file which contain the preferences for the toolbar button
  * \param[in] home_path the path to the home directory
- * \param[in] toolbar the toolbar button preferences
+ * \param[in] toolbar the toolbar button preferences for displaying
  * \return true if everything is OK, false otherwise
  */
 bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar)
@@ -72,11 +72,12 @@ bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferen
     if (ptr_file==NULL)
         return false;
 
-    fprintf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",toolbar.new,toolbar.open,toolbar.save_as,
-            toolbar.separator_6,toolbar.delete_file,toolbar.print,
-            toolbar.separator_1,toolbar.undo,toolbar.redo,toolbar.separator_2,toolbar.cut,toolbar.copy,toolbar.paste,
-            toolbar.delete,toolbar.separator_3,toolbar.properties,toolbar.separator_4,toolbar.preferences,
-            toolbar.game_configuration_preferences,toolbar.toolbar_button_preferences,toolbar.separator_5,toolbar.about);
+    fprintf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",toolbar.new,toolbar.open,
+            toolbar.save_as,toolbar.separator_6,toolbar.delete_file,toolbar.print,
+            toolbar.separator_1,toolbar.undo,toolbar.redo,toolbar.separator_2,toolbar.cut,
+            toolbar.copy,toolbar.paste,toolbar.delete,toolbar.separator_3,toolbar.properties,
+            toolbar.separator_4,toolbar.preferences,toolbar.game_configuration_preferences,
+            toolbar.toolbar_button_preferences,toolbar.separator_5,toolbar.about);
 
     closeFile(ptr_file);
 
@@ -87,35 +88,35 @@ bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferen
  * \fn bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar)
  *  Read the file which contain the preferences for the toolbar button
  * \param[in] home_path the path to the home directory
- * \param[in] toolbar the toolbar button preferences
+ * \param[in] toolbar the toolbar button preferences for displaying
  * \return true if everything is OK, false otherwise
  */
 bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar)
 {
     char file_name[SIZE_MAX_FILE_NAME];
     FILE *ptr_file;
-    toolbar->open=true;
-    toolbar->new=true;
-    toolbar->save_as=true;
-    toolbar->separator_6=true;
-    toolbar->delete_file=false;
-    toolbar->print=true;
-    toolbar->separator_1=true;
-    toolbar->undo=true;
-    toolbar->redo=true;
-    toolbar->separator_2=true;
-    toolbar->cut=false;
-    toolbar->copy=false;
-    toolbar->paste=false;
-    toolbar->delete=false;
-    toolbar->separator_3=false;
-    toolbar->properties=true;
-    toolbar->separator_4=true;
-    toolbar->preferences=true;
-    toolbar->game_configuration_preferences=false;
-    toolbar->toolbar_button_preferences=false;
-    toolbar->separator_5=true;
-    toolbar->about=true;
+    toolbar->open=2;
+    toolbar->new=2;
+    toolbar->save_as=2;
+    toolbar->separator_6=2;
+    toolbar->delete_file=0;
+    toolbar->print=1;
+    toolbar->separator_1=2;
+    toolbar->undo=2;
+    toolbar->redo=2;
+    toolbar->separator_2=2;
+    toolbar->cut=1;
+    toolbar->copy=1;
+    toolbar->paste=1;
+    toolbar->delete=1;
+    toolbar->separator_3=2;
+    toolbar->properties=1;
+    toolbar->separator_4=2;
+    toolbar->preferences=2;
+    toolbar->game_configuration_preferences=0;
+    toolbar->toolbar_button_preferences=0;
+    toolbar->separator_5=2;
+    toolbar->about=1;
 
     createPreferencesFolder(home_path);
 
@@ -124,18 +125,15 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
     ptr_file=openFile(file_name,"r");
 
     if (ptr_file==NULL)
-    {
-        if (createFileToolbarButtonPreferences(home_path,*toolbar) == false)
-            return false;
-        else
-            return true;
-    }
+        return createFileToolbarButtonPreferences(home_path,*toolbar);
 
-    fscanf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",&(toolbar->new),&(toolbar->open),&(toolbar->save_as),
-           &(toolbar->separator_6),&(toolbar->delete_file),&(toolbar->print),
-        &(toolbar->separator_1),&(toolbar->undo),&(toolbar->redo),&(toolbar->separator_2),&(toolbar->cut),&(toolbar->copy),&(toolbar->paste),
-        &(toolbar->delete),&(toolbar->separator_3),&(toolbar->properties),&(toolbar->separator_4),&(toolbar->preferences),
-        &(toolbar->game_configuration_preferences),&(toolbar->toolbar_button_preferences),&(toolbar->separator_5),&(toolbar->about));
+    fscanf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",&(toolbar->new),&(toolbar->open),
+           &(toolbar->save_as),&(toolbar->separator_6),&(toolbar->delete_file),&(toolbar->print),
+           &(toolbar->separator_1),&(toolbar->undo),&(toolbar->redo),&(toolbar->separator_2),
+           &(toolbar->cut),&(toolbar->copy),&(toolbar->paste),&(toolbar->delete),
+           &(toolbar->separator_3),&(toolbar->properties),&(toolbar->separator_4),&(toolbar->preferences),
+           &(toolbar->game_configuration_preferences),&(toolbar->toolbar_button_preferences),&(toolbar->separator_5),
+           &(toolbar->about));
 
     closeFile(ptr_file);
 
@@ -151,17 +149,14 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
  */
 bool differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
 {
-    if (toolbar1.new != toolbar2.new || toolbar1.open != toolbar2.open || toolbar1.save_as != toolbar2.save_as || toolbar1.separator_1 != toolbar2.separator_1
+    return (toolbar1.new != toolbar2.new || toolbar1.open != toolbar2.open || toolbar1.save_as != toolbar2.save_as || toolbar1.separator_1 != toolbar2.separator_1
             || toolbar1.separator_6 != toolbar2.separator_6 || toolbar1.delete_file != toolbar2.delete_file || toolbar1.print != toolbar2.print
             || toolbar1.undo != toolbar2.undo || toolbar1.redo != toolbar2.redo || toolbar1.separator_2 != toolbar2.separator_2 ||
             toolbar1.cut != toolbar2.cut || toolbar1.copy != toolbar2.copy || toolbar1.paste != toolbar2.paste || toolbar1.delete != toolbar2.delete
             || toolbar1.separator_3 != toolbar2.separator_3 || toolbar1.properties != toolbar2.properties || toolbar1.separator_4 != toolbar2.separator_4
             || toolbar1.preferences != toolbar2.preferences || toolbar1.game_configuration_preferences != toolbar2.game_configuration_preferences ||
             toolbar1.toolbar_button_preferences != toolbar2.toolbar_button_preferences || toolbar1.separator_5 != toolbar2.separator_5
-            || toolbar1.about != toolbar2.about)
-        return true;
-    else
-        return false;
+            || toolbar1.about != toolbar2.about);
 }
 
 /*!

@@ -499,127 +499,36 @@ G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data)
  */
 void updateToolbarButton(globalData *data)
 {
-    toolbar_button_preferences_struct toolbar_preferences;
+    toolbar_button_preferences_struct toolbar;
     gchar home_path[SIZE_MAX_FILE_NAME]="";
+    gint i;
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE
-    readFileToolbarButtonPreferences(home_path,&toolbar_preferences);
+    readFileToolbarButtonPreferences(home_path,&toolbar);
 
     GtkWidget *main_toolbar = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_toolbar"));
     if (!main_toolbar)
         g_critical(_("Widget main_toolbar is missing in file csuper-gui.glade."));
 
-    if (toolbar_preferences.new == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),0)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),0)));
-
-    if (toolbar_preferences.open == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),1)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),1)));
-
-    if (toolbar_preferences.save_as == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),2)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),2)));
-
-    if (toolbar_preferences.separator_6 == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),3)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),3)));
-
-    if (toolbar_preferences.delete_file == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),4)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),4)));
-
-    if (toolbar_preferences.print == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),5)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),5)));
-
-    if (toolbar_preferences.separator_1 == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),6)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),6)));
-
-    if (toolbar_preferences.undo == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)));
-
-    if (toolbar_preferences.redo == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)));
-
-    if (toolbar_preferences.separator_2 == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),9)));
-
-    if (toolbar_preferences.cut == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),10)));
-
-    if (toolbar_preferences.copy == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),11)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),11)));
-
-    if (toolbar_preferences.paste == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),12)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),12)));
-
-    if (toolbar_preferences.delete == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),13)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),13)));
-
-    if (toolbar_preferences.separator_3 == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),14)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),14)));
-
-    if (toolbar_preferences.properties == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),15)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),15)));
-
-    if (toolbar_preferences.separator_4 == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),16)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),16)));
-
-    if (toolbar_preferences.preferences == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),17)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),17)));
-
-    if (toolbar_preferences.game_configuration_preferences == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),18)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),18)));
-
-    if (toolbar_preferences.toolbar_button_preferences == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),19)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),19)));
-
-    if (toolbar_preferences.separator_5 == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),20)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),20)));
-
-    if (toolbar_preferences.about == false)
-        gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),21)));
-    else
-        gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),21)));
+    for (i=0 ; i<= 21 ; i++)
+    {
+        switch (*(&toolbar.new+i))
+        {
+        case 0:
+            gtk_widget_hide(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),i)));
+            break;
+        case 1:
+            gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),i)));
+            gtk_tool_item_set_is_important(GTK_TOOL_ITEM(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),i)),FALSE);
+            break;
+        case 2:
+            gtk_widget_show(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),i)));
+            gtk_tool_item_set_is_important(GTK_TOOL_ITEM(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),i)),TRUE);
+            break;
+        }
+    }
 }
 
 /*!
