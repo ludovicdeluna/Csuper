@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 12:58+0200\n"
+"POT-Creation-Date: 2014-09-02 00:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -24,7 +24,8 @@ msgid ""
 "Error: The file could not be read.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:89 Sources/libcsuper/game_config.c:459
+#: Sources/libcsuper/csu_files.c:89 Sources/libcsuper/game_config.c:468
+#: Sources/libcsuper/game_config.c:547
 #, c-format
 msgid ""
 "\n"
@@ -112,11 +113,11 @@ msgid ""
 "Error: this folder is not valid.\n"
 msgstr ""
 
-#: Sources/libcsuper/filename.c:159
+#: Sources/libcsuper/filename.c:162
 #, c-format
 msgid ""
 "\n"
-"Error : this folder is not valid.\n"
+"Error : this filename is not valid.\n"
 msgstr ""
 
 #: Sources/libcsuper/game_config.c:163
@@ -133,14 +134,15 @@ msgid ""
 "The file %s was well deleted.\n"
 msgstr ""
 
-#: Sources/libcsuper/game_config.c:402
+#: Sources/libcsuper/game_config.c:401 Sources/libcsuper/game_config.c:409
 #, c-format
 msgid ""
 "\n"
 "Error while exporting game configurations.\n"
 msgstr ""
 
-#: Sources/libcsuper/game_config.c:451
+#: Sources/libcsuper/game_config.c:460 Sources/libcsuper/game_config.c:476
+#: Sources/libcsuper/game_config.c:539
 #, c-format
 msgid ""
 "\n"

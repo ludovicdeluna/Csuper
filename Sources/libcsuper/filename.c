@@ -146,7 +146,10 @@ bool checkFilename(char *filename,char *folder)
     FILE *ptr_file_test;
     char check_filename[SIZE_MAX_FILE_NAME+10]="";
 
-    sprintf(check_filename,"%s/%s_test.csu",folder,filename);
+    if (strcmp(folder,"") == 0)
+        sprintf(check_filename,"%s_test.csu",filename);
+    else
+        sprintf(check_filename,"%s/%s_test.csu",folder,filename);
     ptr_file_test=openFile(check_filename,"w+");
     if (ptr_file_test != NULL)
     {
@@ -156,7 +159,7 @@ bool checkFilename(char *filename,char *folder)
     }
     else
     {
-        printf(_("\nError : this folder is not valid.\n"));
+        printf(_("\nError : this filename is not valid.\n"));
         return false;
     }
 }

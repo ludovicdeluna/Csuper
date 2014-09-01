@@ -1,6 +1,10 @@
 Csuper
 ======
 
+4.2.0
+
+* Add the possibility to choose which game configuration will be import/export
+
 4.0.1
 
 * Security update
@@ -18,6 +22,10 @@ Csuper
 
 Libcsuper
 =========
+
+4.2.0
+
+* Add the possibility to choose which game configuration will be import/export
 
 4.0.1
 
@@ -50,6 +58,7 @@ Csuper-gui
 
 * Add a delete file button
 * Add the possibility to display only the image in the toolbar
+* Add the possibility to choose which game configuration will be import/export
 
 4.0.2
 

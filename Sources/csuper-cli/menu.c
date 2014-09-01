@@ -2,8 +2,8 @@
  * \file    menu.c
  * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    01/09/14
+ * \version 4.2.0
  */
 
  /*
@@ -351,4 +351,115 @@ void menuNewPath(char *new_path)
     } while (verif == false);
 
     printf(_("You chose %s\n"),new_path);
+}
+
+/*!
+ * \fn bool menuExportListGameConfig(int **id,int *nb_id)
+ *  Choose the game configuration which will be exported
+ * \param[in] id the id of the game configuration which will be exported
+ * \param[in] nb_id the number of game configuration which will be exported
+ * \return true if there is no problem, false otherwise
+ */
+bool menuExportListGameConfig(int **id,int *nb_id)
+{
+    int i;
+    list_game_config *ptr_list_config;
+    char home_path[SIZE_MAX_FILE_NAME]="";
+
+    clearScreen();
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    ptr_list_config = readConfigListFile(home_path);
+    if (ptr_list_config == NULL)
+        return false;
+    printf(_("\nHere are all your game configurations:\n"));
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+        printf("(%d) %s\n",i,ptr_list_config->name_game_config[i]);
+
+    do
+    {
+        printf(_("\nGive the number of game configuration you want to export or -1 if you want to export all of them.\nYour choice: "));
+        intKey(nb_id);
+    } while (*nb_id < -1 || *nb_id > ptr_list_config->nb_config || *nb_id == 0);
+
+    if (*nb_id != -1)
+    {
+        *id = (int*)myAlloc(*nb_id * sizeof(int));
+        for (i=0 ; i<*nb_id ; i++)
+        {
+            do
+            {
+                printf(_("\nGive the id of the %dth configuration you want to export.\nYour choice: "),i);
+                intKey(*id+i);
+                printf(_("You chose %d\n"),(*id)[i]);
+            } while ((*id)[i] <0 || (*id)[i] >= ptr_list_config->nb_config);
+        }
+    }
+    else
+    {
+        *id = (int*)myAlloc(ptr_list_config->nb_config * sizeof(int));
+        *nb_id = ptr_list_config->nb_config;
+        for (i=0 ; i< ptr_list_config->nb_config ; i++)
+            (*id)[i]=i;
+    }
+
+    closeListGameConfig(ptr_list_config);
+
+    return true;
+}
+
+/*!
+ * \fn bool menuImportListGameConfig(int **id,int *nb_id,char *filename)
+ *  Choose the game configuration which will be imported
+ * \param[in] file_name the filename of the imported file.
+ * \param[in] id the id of the game configuration which will be imported
+ * \param[in] nb_id the number of game configuration which will be imported
+ * \return true if there is no problem, false otherwise
+ */
+bool menuImportListGameConfig(int **id,int *nb_id,char *filename)
+{
+    int i;
+    list_game_config *ptr_list_config;
+
+    clearScreen();
+
+    ptr_list_config = newListGameConfigFromImport(filename);
+    if (ptr_list_config == NULL)
+        return false;
+    printf(_("\nHere are all the game configurations in this file:\n"));
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+        printf("(%d) %s\n",i,ptr_list_config->name_game_config[i]);
+
+    do
+    {
+        printf(_("\nGive the number of game configuration you want to import or -1 if you want to import all of them.\nYour choice: "));
+        intKey(nb_id);
+    } while (*nb_id < -1 || *nb_id > ptr_list_config->nb_config);
+
+    if (*nb_id != -1)
+    {
+        *id = (int*) myAlloc(*nb_id * sizeof(int));
+        for (i=0 ; i<*nb_id ; i++)
+        {
+            do
+            {
+                printf(_("\nGive the id of the %dth configuration you want to import.\nYour choice: "),i);
+                intKey(*id+i);
+                printf(_("You chose %d\n"),(*id)[i]);
+            } while ((*id)[i] <0 || (*id)[i] >= ptr_list_config->nb_config);
+        }
+    }
+    else
+    {
+        *id = (int*) myAlloc(ptr_list_config->nb_config * sizeof(int));
+        *nb_id = ptr_list_config->nb_config;
+        for (i=0 ; i< ptr_list_config->nb_config ; i++)
+            (*id)[i]=i;
+    }
+
+    closeListGameConfig(ptr_list_config);
+
+    return true;
 }

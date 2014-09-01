@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-31 15:20+0200\n"
-"PO-Revision-Date: 2014-08-31 15:23+0200\n"
+"POT-Creation-Date: 2014-09-01 23:20+0200\n"
+"PO-Revision-Date: 2014-09-02 00:08+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>>\n"
 "Language: fr\n"
@@ -287,7 +287,8 @@ msgstr ""
 "Votre choix : "
 
 #: Sources/csuper-cli/interface.c:511 Sources/csuper-cli/interface.c:576
-#: Sources/csuper-cli/menu.c:96
+#: Sources/csuper-cli/menu.c:96 Sources/csuper-cli/menu.c:396
+#: Sources/csuper-cli/menu.c:450
 #, c-format
 msgid "You chose %d\n"
 msgstr "Vous avez choisi %d\n"
@@ -301,7 +302,7 @@ msgstr ""
 "\n"
 "Vous n'avez pas encore de fichiers de configurations de jeu.\n"
 
-#: Sources/csuper-cli/interface.c:539
+#: Sources/csuper-cli/interface.c:539 Sources/csuper-cli/menu.c:377
 #, c-format
 msgid ""
 "\n"
@@ -319,7 +320,7 @@ msgstr ""
 "\n"
 "Quelle configuration de jeu voulez vous afficher ?\n"
 
-#: Sources/csuper-cli/interface.c:610
+#: Sources/csuper-cli/interface.c:615
 #, c-format
 msgid ""
 "\n"
@@ -328,7 +329,7 @@ msgstr ""
 "\n"
 "Les configurations de jeu ont bien été exporté dans le fichier %s\n"
 
-#: Sources/csuper-cli/interface.c:634
+#: Sources/csuper-cli/interface.c:646
 #, c-format
 msgid ""
 "\n"
@@ -602,6 +603,63 @@ msgstr ""
 "Vérifiez bien que le dossier existe et que vous y avez les droits en lecture "
 "et écriture.\n"
 "\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:383
+#, c-format
+msgid ""
+"\n"
+"Give the number of game configuration you want to export or -1 if you want "
+"to export all of them.\n"
+"Your choice: "
+msgstr ""
+"\n"
+"Donner le nombre de configurations de jeu que vous voulez exporter, -1 si "
+"vous voulez toutes les exporter.\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:394
+#, c-format
+msgid ""
+"\n"
+"Give the id of the %dth configuration you want to export.\n"
+"Your choice: "
+msgstr ""
+"\n"
+"Donnez l'indice de la %dème configuration de jeu que vous voulez exporter.\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:431
+#, c-format
+msgid ""
+"\n"
+"Here are all the game configurations in this file:\n"
+msgstr ""
+"\n"
+"Voici la liste des configurations de jeu présentes dans ce fichier :\n"
+
+#: Sources/csuper-cli/menu.c:437
+#, c-format
+msgid ""
+"\n"
+"Give the number of game configuration you want to import or -1 if you want "
+"to import all of them.\n"
+"Your choice: "
+msgstr ""
+"\n"
+"Donner le nombre de configurations de jeu que vous voulez importer, -1 si "
+"vous voulez toutes les importer.\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:448
+#, c-format
+msgid ""
+"\n"
+"Give the id of the %dth configuration you want to import.\n"
+"Your choice: "
+msgstr ""
+"\n"
+"Donnez l'indice de la %dème configuration de jeu que vous voulez importer.\n"
 "Votre choix : "
 
 #~ msgid "Number of points maximum/minimum : %.3f\n"

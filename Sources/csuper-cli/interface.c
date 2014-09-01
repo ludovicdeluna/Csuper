@@ -2,8 +2,8 @@
  * \file    interface.c
  * \brief   Graphical interface
  * \author  Remi BERTHO
- * \date    31/08/14
- * \version 4.1.0
+ * \date    01/09/14
+ * \version 4.2.0
  */
 
  /*
@@ -595,6 +595,8 @@ void exportListGameConfig()
 {
     char home_path[SIZE_MAX_FILE_NAME]="";
     char file_name[SIZE_MAX_FILE_NAME]="";
+    int *id;
+    int nb_id;
 
     clearScreen();
 
@@ -606,8 +608,13 @@ void exportListGameConfig()
         return;
     #endif // PORTABLE
 
-    if(exportConfigFile(home_path,file_name) == true)
+    if (!menuExportListGameConfig(&id,&nb_id))
+        return;
+
+    if(exportConfigFile(home_path,file_name,id,nb_id) == true)
         printf(_("\nGame configurations were exported successfully in %s\n"),file_name);
+
+    free(id);
     systemPause();
 }
 
@@ -618,19 +625,26 @@ void exportListGameConfig()
 void importListGameConfig()
 {
     char home_path[SIZE_MAX_FILE_NAME]="";
-    char file_name[SIZE_MAX_FILE_NAME]="";
+    char filename[SIZE_MAX_FILE_NAME]="";
+    int *id;
+    int nb_id=0;
 
     clearScreen();
 
-    menuFileName(file_name);
+    menuFileName(filename);
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
-    if(readSystemPath(file_name)==false)
+    if(readSystemPath(filename)==false)
         return;
     #endif // PORTABLE
 
-    if(importConfigFile(home_path,file_name) == true)
-        printf(_("\nGame configurations were successfully imported from %s\n"),file_name);
+    if (!menuImportListGameConfig(&id,&nb_id,filename))
+        return;
+
+    if(importConfigFile(home_path,filename,id,nb_id) == true)
+        printf(_("\nGame configurations were successfully imported from %s\n"),filename);
+
+    free(id);
     systemPause();
 }

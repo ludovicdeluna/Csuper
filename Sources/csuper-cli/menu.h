@@ -2,8 +2,8 @@
  * \file    menu.h
  * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    17/06/14
- * \version 4.0.0
+ * \date    01/09/14
+ * \version 4.2.0
  */
 
  /*
@@ -49,5 +49,7 @@ int menuPlayerIndex(csuStruct *ptr_csu_struct);
 bool menuContinue();
 bool menuDelete();
 void menuNewPath(char *new_path);
+bool menuExportListGameConfig(int **id,int *nb_id);
+bool menuImportListGameConfig(int **id,int *nb_id,char *filename);
 
 #endif

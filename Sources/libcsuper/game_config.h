@@ -76,7 +76,8 @@ bool removeConfigListFile(int index_delete, list_game_config *ptr_list_config,ch
 bool newConfigFile(game_config config,char * home_path);
 bool removeConfigFile(char *config_name,char * home_path);
 bool readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path);
-bool exportConfigFile(char *home_path,char *file_name);
-bool importConfigFile(char *home_path,char *file_name);
+bool exportConfigFile(char *home_path,char *file_name, int *id,int nb_id);
+bool importConfigFile(char *home_path,char *file_name, int *id,int nb_id);
+list_game_config *newListGameConfigFromImport(char *filename);
 
 #endif

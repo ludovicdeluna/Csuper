@@ -43,6 +43,9 @@ G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointe
 G_MODULE_EXPORT void openToolbarButtonPreferences(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void closePreferences(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent  *event, gpointer user_data);
+G_MODULE_EXPORT void chooseExportedFileDialogSelect(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void chooseExportedFileDialogDeselect(GtkWidget *widget, gpointer data);
+bool dialogMenuImportExportGameConfig(globalData *data,list_game_config *ptr_list_config,int **id,int *nb_id);
 G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data);
 void exportGameConfigurationError(globalData *data);
 G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data);

@@ -125,6 +125,150 @@ G_MODULE_EXPORT gboolean closePreferencesQuit(GtkWidget *widget, GdkEvent *event
 }
 
 /*!
+ * \fn bool dialogMenuImportExportGameConfig(globalData *data,list_game_config *ptr_list_config,int **id,int *nb_id)
+ *  Open a dialog box which can be use to choose which game configuration import or export
+ * \param[in] id the id of the game configuration which will be imported
+ * \param[in] nb_id the number of game configuration which will be imported
+ * \param[in] data the globalData
+ * \param[in] list_game_config the list of game configuration
+ */
+bool dialogMenuImportExportGameConfig(globalData *data,list_game_config *ptr_list_config,int **id,int *nb_id)
+{
+    gint i,j=0;
+    GtkWidget *grid,*scrolled_window,*viewport;
+    GtkWidget *content_area;
+
+    GtkWidget *preferences_window = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"preferences_window"));
+    if (!preferences_window)
+        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+
+    /* Create the dialog box which the user will choose the game configuration to export*/
+    GtkWidget *window_choose_file_export = gtk_dialog_new_with_buttons(_("Import/export game configuration"),GTK_WINDOW(preferences_window),
+                GTK_FILE_CHOOSER_ACTION_SAVE,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-ok",GTK_RESPONSE_ACCEPT,NULL);
+    content_area = gtk_dialog_get_content_area (GTK_DIALOG (window_choose_file_export));
+
+    /* Create the grid */
+    grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(grid),10);
+    gtk_grid_set_row_spacing(GTK_GRID(grid),5);
+    gtk_widget_set_hexpand(grid,TRUE);
+    gtk_widget_set_vexpand(grid,TRUE);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(grid,10);
+    gtk_widget_set_margin_start(grid,10);
+    #else
+    gtk_widget_set_margin_right(grid,10);
+    gtk_widget_set_margin_left(grid,10);
+    #endif // GTK_MINOR_VERSION
+    gtk_widget_set_margin_top(grid,10);
+    gtk_widget_set_margin_bottom(grid,10);
+
+    /* Set the contain of the grid */
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+    {
+        gtk_grid_attach(GTK_GRID(grid),gtk_label_new(ptr_list_config->name_game_config[i]),0,i,1,1);
+        gtk_widget_set_halign(gtk_grid_get_child_at(GTK_GRID(grid),0,i),GTK_ALIGN_CENTER);
+        gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(grid),0,i),TRUE);
+        gtk_grid_attach(GTK_GRID(grid),gtk_check_button_new(),1,i,2,1);
+        gtk_widget_set_halign(gtk_grid_get_child_at(GTK_GRID(grid),1,i),GTK_ALIGN_CENTER);
+    }
+    gtk_grid_attach(GTK_GRID(grid),gtk_button_new_with_label(_("Select all")),1,ptr_list_config->nb_config,1,1);
+    gtk_widget_set_halign(gtk_grid_get_child_at(GTK_GRID(grid),1,ptr_list_config->nb_config),GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(gtk_grid_get_child_at(GTK_GRID(grid),1,ptr_list_config->nb_config),GTK_ALIGN_CENTER);
+    g_signal_connect(gtk_grid_get_child_at(GTK_GRID(grid),1,ptr_list_config->nb_config),"clicked", G_CALLBACK(chooseExportedFileDialogSelect),grid);
+    gtk_grid_attach(GTK_GRID(grid),gtk_button_new_with_label(_("Deselect all")),2,ptr_list_config->nb_config,1,1);
+    gtk_widget_set_halign(gtk_grid_get_child_at(GTK_GRID(grid),2,ptr_list_config->nb_config),GTK_ALIGN_CENTER);
+    gtk_widget_set_valign(gtk_grid_get_child_at(GTK_GRID(grid),2,ptr_list_config->nb_config),GTK_ALIGN_CENTER);
+    g_signal_connect(gtk_grid_get_child_at(GTK_GRID(grid),2,ptr_list_config->nb_config),"clicked", G_CALLBACK(chooseExportedFileDialogDeselect),grid);
+
+    /* Set the scrolled window */
+    scrolled_window = gtk_scrolled_window_new(NULL,NULL);
+    gtk_widget_set_hexpand(scrolled_window,TRUE);
+    gtk_widget_set_vexpand(scrolled_window,TRUE);
+    gtk_scrolled_window_set_min_content_height(GTK_SCROLLED_WINDOW(scrolled_window),300);
+    gtk_scrolled_window_set_min_content_width(GTK_SCROLLED_WINDOW(scrolled_window),450);
+    gtk_scrolled_window_set_policy(GTK_SCROLLED_WINDOW(scrolled_window),GTK_POLICY_NEVER,GTK_POLICY_AUTOMATIC);
+    viewport = gtk_viewport_new(NULL,NULL);
+
+    /* Run the dialog box which the user will choose the game configuration to export*/
+    gtk_container_add(GTK_CONTAINER(viewport),grid);
+    gtk_container_add(GTK_CONTAINER(scrolled_window),viewport);
+    gtk_container_add(GTK_CONTAINER(content_area),scrolled_window);
+    gtk_widget_show_all(window_choose_file_export);
+    switch (gtk_dialog_run (GTK_DIALOG (window_choose_file_export)))
+	{
+		case GTK_RESPONSE_ACCEPT:
+		{
+		    /* Get the number of id */
+		    for (i=0 ; i< ptr_list_config->nb_config ; i++)
+            {
+                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,i))))
+                    (*nb_id)++;
+            }
+
+            /* get the id */
+            *id = (int*)myAlloc(*nb_id * sizeof(int));
+            for (i=0 ; i< ptr_list_config->nb_config ; i++)
+            {
+                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,i))))
+                {
+                    (*id)[j]=i;
+                    j++;
+                }
+            }
+            closeListGameConfig(ptr_list_config);
+            gtk_widget_destroy(window_choose_file_export);
+            return true;
+			break;
+		}
+		case GTK_RESPONSE_CANCEL:
+        {
+            gtk_widget_destroy(window_choose_file_export);
+            closeListGameConfig(ptr_list_config);
+            return false;
+        }
+		default:
+		    closeListGameConfig(ptr_list_config);
+		    return false;
+			break;
+	}
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void chooseExportedFileDialogSelect(GtkWidget *widget, gpointer data)
+ *  Select all configuration
+ * \param[in] widget the button which send the signal
+ * \param[in] data the grid
+ */
+G_MODULE_EXPORT void chooseExportedFileDialogSelect(GtkWidget *widget, gpointer data)
+{
+    GtkWidget *grid = GTK_WIDGET(data);
+    gint i=0;
+    while (GTK_IS_CHECK_BUTTON((gtk_grid_get_child_at(GTK_GRID(grid),1,i))))
+    {
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,i)),TRUE);
+        i++;
+    }
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void chooseExportedFileDialogDeselect(GtkWidget *widget, gpointer data)
+ *  Deselect all configuration
+ * \param[in] widget the button which send the signal
+ * \param[in] data the grid
+ */
+G_MODULE_EXPORT void chooseExportedFileDialogDeselect(GtkWidget *widget, gpointer data)
+{
+    gint i=0;
+    GtkWidget *grid = GTK_WIDGET(data);
+    while (GTK_IS_CHECK_BUTTON((gtk_grid_get_child_at(GTK_GRID(grid),1,i))))
+    {
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,i)),FALSE);
+        i++;
+    }
+}
+
+/*!
  * \fn G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
  *  Exporte the games configurations
  * \param[in] widget the widget which send the signal
@@ -135,16 +279,33 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME]="";
     bool error=false;
+    list_game_config *ptr_list_config;
+    int *id,nb_id=0;
+
+    GtkWidget *preferences_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
+    if (!preferences_window)
+        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+
+    ptr_list_config = readConfigListFile(home_path);
+    if (ptr_list_config == NULL)
+    {
+        exportGameConfigurationError(user_data);
+        return;
+    }
+
+    if (dialogMenuImportExportGameConfig(user_data,ptr_list_config,&id,&nb_id) == false)
+        return;
 
     /* Create the file chooser dialog*/
-    GtkWidget *window_file_export = gtk_file_chooser_dialog_new (_("Export game configuration"),GTK_WINDOW(user_data->ptr_main_window),
+    GtkWidget *window_file_export = gtk_file_chooser_dialog_new (_("Export game configuration"),GTK_WINDOW(preferences_window),
                 GTK_FILE_CHOOSER_ACTION_SAVE,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-save",GTK_RESPONSE_ACCEPT,NULL);
     gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_export), TRUE);
 
     /* Give the home path to the current folder */
-    #ifndef PORTABLE
-    readHomePathSlash(home_path);
-    #endif // PORTABLE
     gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_export),g_file_new_for_path(home_path),NULL);
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_export)))
@@ -159,9 +320,10 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export));
 		    #endif
 
-            if(exportConfigFile(home_path,filename) == false)
+            if(exportConfigFile(home_path,filename,id,nb_id) == false)
                 error=true;
             g_free(filename);
+            free(id);
 			break;
 		}
 		default:
@@ -187,6 +349,7 @@ void exportGameConfigurationError(globalData *data)
     gtk_widget_hide (window_error);
 }
 
+
 /*!
  * \fn G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
  *  Exporte the games configurations
@@ -198,9 +361,15 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
     globalData *user_data = (globalData*) data;
     char home_path[SIZE_MAX_FILE_NAME]="";
     bool error=false;
+    list_game_config *ptr_list_config;
+    int *id,nb_id=0;
+
+    GtkWidget *preferences_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
+    if (!preferences_window)
+        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
 
     /* Create the file chooser dialog*/
-    GtkWidget *window_file_import = gtk_file_chooser_dialog_new (_("Import game configuration"),GTK_WINDOW(user_data->ptr_main_window),
+    GtkWidget *window_file_import = gtk_file_chooser_dialog_new (_("Import game configuration"),GTK_WINDOW(preferences_window),
                 GTK_FILE_CHOOSER_ACTION_OPEN,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-save",GTK_RESPONSE_ACCEPT,NULL);
     gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_import), TRUE);
 
@@ -222,9 +391,21 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_import));
 		    #endif
 
-            if(importConfigFile(home_path,filename) == false)
-                error=true;
-            g_free(filename);
+		    gtk_widget_hide(window_file_import);
+
+		    ptr_list_config = newListGameConfigFromImport(filename);
+		    if (ptr_list_config == NULL)
+                error = true;
+            else
+            {
+                if (dialogMenuImportExportGameConfig(user_data,ptr_list_config,&id,&nb_id))
+                {
+                    if(importConfigFile(home_path,filename,id,nb_id) == false)
+                        error=true;
+                    free(id);
+                }
+                g_free(filename);
+            }
 			break;
 		}
 		default:

@@ -40,15 +40,15 @@
  * \return une list_game_config
  */
 list_game_config *newListGameConfig(int nb_config)
- {
-     int i;
-     list_game_config *config=(list_game_config *)myAlloc(sizeof(list_game_config));
-     config->nb_config=nb_config;
-     config->name_game_config = (char **)myAlloc(nb_config*sizeof(char*));
-     for (i=0 ; i< nb_config ; i++)
-        config->name_game_config[i]=(char *)myAlloc(sizeof(char)*SIZE_MAX_FILE_NAME);
+{
+    int i;
+    list_game_config *config=(list_game_config *)myAlloc(sizeof(list_game_config));
+    config->nb_config=nb_config;
+    config->name_game_config = (char **)myAlloc(nb_config*sizeof(char*));
+    for (i=0 ; i< nb_config ; i++)
+    config->name_game_config[i]=(char *)myAlloc(sizeof(char)*SIZE_MAX_FILE_NAME);
     return config;
- }
+}
 
 /*!
  * \fn void closeListGameConfig(list_game_config *ptr_list_config)
@@ -56,13 +56,13 @@ list_game_config *newListGameConfig(int nb_config)
  * \param[in] *ptr_list_config a pointer on a list of game configuration
  */
 void closeListGameConfig(list_game_config *ptr_list_config)
- {
-     int i;
-     for (i=0 ; i<ptr_list_config->nb_config ; i++)
-        free(ptr_list_config->name_game_config[i]);
-     free(ptr_list_config->name_game_config);
-     free(ptr_list_config);
- }
+{
+    int i;
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+       free(ptr_list_config->name_game_config[i]);
+    free(ptr_list_config->name_game_config);
+    free(ptr_list_config);
+}
 
  /*!
  * \fn bool makeConfigListFile(char * home_path)
@@ -380,13 +380,15 @@ bool readConfigFile(int index_read, list_game_config *ptr_list_config, game_conf
 }
 
 /*!
- * \fn bool exportConfigFile(char *home_path,char *file_name)
+ * \fn bool exportConfigFile(char *home_path,char *file_name, int *id,int nb_id)
  *  Export all config file into a file.
  * \param[in] file_name the filename of the exported file.
  * \param[in] home_path the path to the home directory
- * \return a list_game_config
+ * \param[in] id the id of the game configuration which will be exported
+ * \param[in] nb_id the number of game configuration which will be exported
+ * \return true if there is no problem, false otherwise
  */
-bool exportConfigFile(char *home_path,char *file_name)
+bool exportConfigFile(char *home_path,char *file_name, int *id,int nb_id)
 {
     int i;
     list_game_config *ptr_list_config;
@@ -394,6 +396,11 @@ bool exportConfigFile(char *home_path,char *file_name)
     FILE *ptr_file_export;
 
     ptr_list_config = readConfigListFile(home_path);
+    if (nb_id > ptr_list_config->nb_config)
+    {
+        printf(_("\nError while exporting game configurations.\n"));
+        return false;
+    }
 
     ptr_file_export=openFile(file_name,"w");
 
@@ -403,11 +410,11 @@ bool exportConfigFile(char *home_path,char *file_name)
         return false;
     }
 
-    fprintf(ptr_file_export,"%s\n%d\n",STRING_CHECK_GAME_CONFIG,ptr_list_config->nb_config);
+    fprintf(ptr_file_export,"%s\n%d\n",STRING_CHECK_GAME_CONFIG,nb_id);
 
-    for(i=0 ; i<ptr_list_config->nb_config ; i++)
+    for(i=0 ; i<nb_id ; i++)
     {
-        readConfigFile(i,ptr_list_config,&config,home_path);
+        readConfigFile(id[i],ptr_list_config,&config,home_path);
         #ifdef __unix__
         fprintf(ptr_file_export,"%f ",config.nb_max);
         #elif _WIN32
@@ -426,15 +433,17 @@ bool exportConfigFile(char *home_path,char *file_name)
 }
 
 /*!
- * \fn bool importConfigFile(char *home_path,char *file_name)
+ * \fn bool importConfigFile(char *home_path,char *file_name, int *id,int nb_id)
  *  Import all config file from a file.
- * \param[in] file_name the filename of the exported file.
+ * \param[in] file_name the filename of the imported file.
  * \param[in] home_path the path to the home directory
- * \return a list_game_config
+ * \param[in] id the id of the game configuration which will be imported
+ * \param[in] nb_id the number of game configuration which will be imported
+ * \return true if there is no problem, false otherwise
  */
-bool importConfigFile(char *home_path,char *file_name)
+bool importConfigFile(char *home_path,char *file_name, int *id,int nb_id)
 {
-    int i;
+    int i,j;
     int tmp;
     int nb_config;
     game_config config;
@@ -462,8 +471,13 @@ bool importConfigFile(char *home_path,char *file_name)
     }
 
     fscanf(ptr_file_import,"%d",&nb_config);
+    if(nb_id > nb_config)
+    {
+        printf(_("\nError while importing game configurations.\n"));
+        return false;
+    }
 
-    for(i=0 ; i<nb_config ; i++)
+    for(i=0,j=0 ; i<nb_config && j<nb_id ; i++)
     {
         #ifdef __unix__
         fscanf(ptr_file_import,"%f",&(config.nb_max));
@@ -486,10 +500,78 @@ bool importConfigFile(char *home_path,char *file_name)
         fscanf(ptr_file_import,"%d",&tmp);
         config.use_distributor=tmp;
 
-        newConfigFile(config,home_path);
+        if (i == id[j])
+        {
+            newConfigFile(config,home_path);
+            j++;
+        }
     }
 
     closeFile(ptr_file_import);
 
     return true;
+}
+
+/*!
+ * \fn list_game_config *newListGameConfigFromImport(char *filename)
+ *  Create a list_game_config with a import file
+ * \param[in] filename the filename of the exported file.
+ * \return a list_game_config
+ */
+list_game_config *newListGameConfigFromImport(char *filename)
+{
+    int i;
+    int tmp;
+    float buf;
+    int nb_config;
+    FILE *ptr_file_import;
+    char check_file[sizeof(STRING_CHECK_GAME_CONFIG)+1];
+    #ifdef _WIN32
+    char buffer[5];
+    #endif // _WIN32
+    char config_name[SIZE_MAX_FILE_NAME];
+    list_game_config* list_config;
+
+    ptr_file_import=openFile(filename,"r");
+
+    if(ptr_file_import == NULL)
+    {
+        printf(_("\nError while importing game configurations.\n"));
+        return NULL;
+    }
+
+    /* Check if there is a good file */
+    fgets(check_file,strlen(STRING_CHECK_GAME_CONFIG)+1,ptr_file_import);
+    if (strcmp(STRING_CHECK_GAME_CONFIG,check_file) != 0)
+    {
+        printf(_("\nError: File not compatible.\n"));
+        closeFile(ptr_file_import);
+        return NULL;
+    }
+
+    fscanf(ptr_file_import,"%d",&nb_config);
+
+    list_config = newListGameConfig(nb_config);
+
+    for(i=0 ; i<nb_config ; i++)
+    {
+        #ifdef __unix__
+        fscanf(ptr_file_import,"%f",&buf);
+        #elif _WIN32
+        if (fscanf(ptr_file_import,"%f",&buf)==0)
+            fscanf(ptr_file_import,"%s",buffer);
+        #endif
+        fscanf(ptr_file_import,"%f%s",&buf,config_name);
+        fscanf(ptr_file_import,"%d",&tmp);
+        fscanf(ptr_file_import,"%d",&tmp);
+        fscanf(ptr_file_import,"%d",&tmp);
+        fscanf(ptr_file_import,"%d",&tmp);
+        fscanf(ptr_file_import,"%d",&tmp);
+
+        strcpy(list_config->name_game_config[i],config_name);
+    }
+
+    closeFile(ptr_file_import);
+
+    return list_config;
 }

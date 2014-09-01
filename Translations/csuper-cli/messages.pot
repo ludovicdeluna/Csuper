@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 12:58+0200\n"
+"POT-Creation-Date: 2014-09-02 00:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -215,7 +215,8 @@ msgid ""
 msgstr ""
 
 #: Sources/csuper-cli/interface.c:511 Sources/csuper-cli/interface.c:576
-#: Sources/csuper-cli/menu.c:96
+#: Sources/csuper-cli/menu.c:96 Sources/csuper-cli/menu.c:396
+#: Sources/csuper-cli/menu.c:450
 #, c-format
 msgid "You chose %d\n"
 msgstr ""
@@ -227,7 +228,7 @@ msgid ""
 "You do not have any game configuration file.\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:539
+#: Sources/csuper-cli/interface.c:539 Sources/csuper-cli/menu.c:377
 #, c-format
 msgid ""
 "\n"
@@ -241,14 +242,14 @@ msgid ""
 "Which game configuration would you like to display?\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:610
+#: Sources/csuper-cli/interface.c:615
 #, c-format
 msgid ""
 "\n"
 "Game configurations were exported successfully in %s\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:634
+#: Sources/csuper-cli/interface.c:646
 #, c-format
 msgid ""
 "\n"
@@ -459,5 +460,46 @@ msgid ""
 "Give the new folder in which you would like to save your files\n"
 "Check if the folder exists and if you have the read and write rights.\n"
 "\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:383
+#, c-format
+msgid ""
+"\n"
+"Give the number of game configuration you want to export or -1 if you want "
+"to export all of them.\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:394
+#, c-format
+msgid ""
+"\n"
+"Give the id of the %dth configuration you want to export.\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:431
+#, c-format
+msgid ""
+"\n"
+"Here are all the game configurations in this file:\n"
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:437
+#, c-format
+msgid ""
+"\n"
+"Give the number of game configuration you want to import or -1 if you want "
+"to import all of them.\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:448
+#, c-format
+msgid ""
+"\n"
+"Give the id of the %dth configuration you want to import.\n"
 "Your choice: "
 msgstr ""

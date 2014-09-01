@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-01 12:58+0200\n"
-"PO-Revision-Date: 2014-08-27 20:32+0200\n"
+"POT-Creation-Date: 2014-09-02 00:06+0200\n"
+"PO-Revision-Date: 2014-09-02 00:07+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>>\n"
 "Language: fr\n"
@@ -28,7 +28,8 @@ msgstr ""
 "\n"
 "Erreur : Le fichier n'a pas pu être lu.\n"
 
-#: Sources/libcsuper/csu_files.c:89 Sources/libcsuper/game_config.c:459
+#: Sources/libcsuper/csu_files.c:89 Sources/libcsuper/game_config.c:468
+#: Sources/libcsuper/game_config.c:547
 #, c-format
 msgid ""
 "\n"
@@ -139,14 +140,14 @@ msgstr ""
 "\n"
 "Erreur : Le dossier n'est pas valide.\n"
 
-#: Sources/libcsuper/filename.c:159
+#: Sources/libcsuper/filename.c:162
 #, c-format
 msgid ""
 "\n"
-"Error : this folder is not valid.\n"
+"Error : this filename is not valid.\n"
 msgstr ""
 "\n"
-"Erreur : Le dossier n'est pas valide.\n"
+"Erreur : Le nom de fichier n'est pas valide.\n"
 
 #: Sources/libcsuper/game_config.c:163
 #, c-format
@@ -166,7 +167,7 @@ msgstr ""
 "\n"
 "Le fichier %s a bien été supprimé.\n"
 
-#: Sources/libcsuper/game_config.c:402
+#: Sources/libcsuper/game_config.c:401 Sources/libcsuper/game_config.c:409
 #, c-format
 msgid ""
 "\n"
@@ -175,7 +176,8 @@ msgstr ""
 "\n"
 "Erreur lors de l'exportation des configurations de jeu.\n"
 
-#: Sources/libcsuper/game_config.c:451
+#: Sources/libcsuper/game_config.c:460 Sources/libcsuper/game_config.c:476
+#: Sources/libcsuper/game_config.c:539
 #, c-format
 msgid ""
 "\n"
