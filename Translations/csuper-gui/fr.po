@@ -6,10 +6,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-08-28 19:23+0200\n"
-"PO-Revision-Date: 2014-08-28 19:31+0200\n"
+"POT-Creation-Date: 2014-09-10 15:36+0200\n"
+"PO-Revision-Date: 2014-09-10 15:36+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>>\n"
 "Language: fr\n"
@@ -69,7 +69,7 @@ msgstr "Version du fichier : %1.1f"
 #: Sources/csuper-gui/main_menu.c:334
 #, c-format
 msgid "Maximum size of the names: %.0f"
-msgstr "Taille maximum des joueurs : %.0f"
+msgstr "Taille maximum du nom des joueurs : %.0f"
 
 #: Sources/csuper-gui/main_menu.c:337
 #, c-format
@@ -79,7 +79,7 @@ msgstr "Nombre de joueurs : %.0f"
 #: Sources/csuper-gui/main_menu.c:340
 #, c-format
 msgid "Maximum number of turns: %d"
-msgstr "Nombre maximum de tour : %d"
+msgstr "Nombre maximum de tours : %d"
 
 #: Sources/csuper-gui/main_menu.c:343
 #, c-format
@@ -104,7 +104,7 @@ msgstr "Nombre de chiffres après la virgule : %d"
 #: Sources/csuper-gui/main_menu.c:355
 #, c-format
 msgid "The winner is the player who has the highest score: %s"
-msgstr "Le premier est le joueur qui a le plus de points : %s"
+msgstr "Le gagnant est le joueur qui a le plus de points : %s"
 
 #: Sources/csuper-gui/main_menu.c:358
 #, c-format
@@ -501,7 +501,7 @@ msgstr ""
 "Nombre de points maximum/minimum : %.3f\n"
 "Score initial : %.3f\n"
 "Nombre de chiffres après la virgule : %d\n"
-"Le premier a le plus de points : %s\n"
+"Le gagnant est le joueur qui a le plus de points : %s\n"
 "Jeu en tour par tour : %s\n"
 "Utilise un distributeur : %s"
 
@@ -520,7 +520,7 @@ msgstr ""
 "Nombre de points maximum/minimum : inf\n"
 "Score initial : %.3f\n"
 "Nombre de chiffres après la virgule : %d\n"
-"Le premier a le plus de points : %s\n"
+"Le gagnant est le joueur qui a le plus de points : %s\n"
 "Jeu en tour par tour : %s\n"
 "Utilise un distributeur : %s"
 
@@ -796,7 +796,7 @@ msgstr "Nombre de joueurs : aucun fichier csu chargé"
 
 #: csuper-gui.glade:1013
 msgid "Maximum number of turns: no csu file loaded"
-msgstr "Nombre maximum de tour : aucun fichier csu chargé"
+msgstr "Nombre maximum de tours : aucun fichier csu chargé"
 
 #: csuper-gui.glade:1026
 msgid "Name of the game configuration: no csu file loaded"
@@ -815,8 +815,9 @@ msgid "Number of decimals displayed: no csu file loaded"
 msgstr "Nombre de chiffres après la virgule : aucun fichier csu chargé"
 
 #: csuper-gui.glade:1078
-msgid "First way: no csu file loaded"
-msgstr "Sens du premier : aucun fichier csu chargé"
+msgid "The winner is the player who has the highest score: no csu file loaded"
+msgstr ""
+"Le gagnant est le joueur qui a le plus de points : aucun fichier csu chargé"
 
 #: csuper-gui.glade:1091
 msgid "Turn-based game: no csu file loaded"
@@ -857,7 +858,7 @@ msgstr ""
 
 #: csuper-gui.glade:1245
 msgid "The game is over"
-msgstr "La partie est terminé"
+msgstr "La partie est terminée"
 
 #: csuper-gui.glade:1253
 msgid ""
@@ -1020,11 +1021,14 @@ msgstr "Utilise un distributeur"
 
 #: csuper-gui.glade:2490
 msgid "Maximal or minimal score which a player can reach in the game"
-msgstr "Points maximum ou minimum qu'un joueur peut atteindre dans une partie"
+msgstr "Score maximum ou minimum qu'un joueur peut atteindre dans une partie"
 
 #: csuper-gui.glade:2507
 msgid "Type here the name of the game configuration"
 msgstr "Écrire ici le nom de la configuration de jeu"
+
+#~ msgid "First way: no csu file loaded"
+#~ msgstr "Sens du premier : aucun fichier csu chargé"
 
 #~ msgid "The first has the highest score : %s"
 #~ msgstr "Le premier a le plus de points : %s"

@@ -522,7 +522,6 @@ void setButtonMainWindowSensitive(globalData *data)
 /*!
  * \fn G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data)
  *  Delete the selected text
- * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data)

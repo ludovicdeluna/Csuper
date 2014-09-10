@@ -1075,7 +1075,7 @@ Rémi BERTHO</property>
               <object class="GtkLabel" id="label_first_way">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="label" translatable="yes">First way: no csu file loaded</property>
+                <property name="label" translatable="yes">The winner is the player who has the highest score: no csu file loaded</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>

@@ -6,18 +6,18 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2014-08-27 20:28+0200\n"
-"PO-Revision-Date: 2014-08-27 20:32+0200\n"
+"PO-Revision-Date: 2014-09-01 22:02+0100\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
-"Language-Team: français <wesnoth@ml.free.fr>>\n"
+"Language-Team: français <wesnoth@ml.free.fr>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Poedit 1.6.8\n"
 
 #: Sources/libcsuper/csu_files.c:78
 #, c-format
@@ -45,8 +45,8 @@ msgid ""
 "files with versions higher than the %1.1f.\n"
 msgstr ""
 "\n"
-"Erreur la version du fichier est la %1.1f alors que le logiciel supporte "
-"uniquement les fichiers avec des versions supérieurs à la %1.1f.\n"
+"Erreur : la version du fichier est la %1.1f alors que le logiciel supporte "
+"uniquement les fichiers avec des versions supérieures à la %1.1f.\n"
 
 #: Sources/libcsuper/csu_files.c:153
 #, c-format
@@ -78,7 +78,7 @@ msgid ""
 "Error: this name doesn't exist.\n"
 msgstr ""
 "\n"
-"Erreur ce nom n'existe pas.\n"
+"Erreur : ce nom n'existe pas.\n"
 
 #: Sources/libcsuper/file.c:50
 #, c-format
@@ -101,7 +101,7 @@ msgid ""
 "The file %s cannot be deleted.\n"
 msgstr ""
 "\n"
-"Le fichier %s n'a pas pu être supprime.\n"
+"Le fichier %s n'a pas pu être supprimé.\n"
 
 #: Sources/libcsuper/file.c:115
 #, c-format
@@ -198,7 +198,7 @@ msgstr ""
 #: Sources/libcsuper/main_argument.c:88
 #, c-format
 msgid "\t- Do not use argument to launch the main menu.\n"
-msgstr "\t- N'utiliser pas d'argument pour lancer le programme sur le menu.\n"
+msgstr "\t- N'utilisez pas d'argument pour lancer le programme sur le menu.\n"
 
 #: Sources/libcsuper/main_argument.c:89
 #, c-format
@@ -206,7 +206,7 @@ msgid ""
 "\t- Use the argument '%s' or '%s' followed by the file name to launch "
 "directly the program on this file.\n"
 msgstr ""
-"\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour lancer le "
+"\t- Utilisez l'option '%s' ou '%s' suivi du nom de fichier pour lancer le "
 "jeu directement sur ce fichier.\n"
 
 #: Sources/libcsuper/main_argument.c:90
@@ -215,7 +215,7 @@ msgid ""
 "\t- Use the argument '%s' or '%s' followed by the file name to display "
 "directly the content of the file.\n"
 msgstr ""
-"\t- Utiliser l'option '%s' ou '%s' suivi du nom de fichier pour afficher "
+"\t- Utilisez l'option '%s' ou '%s' suivi du nom de fichier pour afficher "
 "directement le contenu du fichier.\n"
 
 #: Sources/libcsuper/preferences_files.c:305
@@ -235,7 +235,7 @@ msgid ""
 "Error: you didn't enter a good value.\n"
 msgstr ""
 "\n"
-"Erreur : vous n'avez pas entre une bonne valeur.\n"
+"Erreur : vous n'avez pas entré une bonne valeur.\n"
 
 #: Sources/libcsuper/share.c:81
 #, c-format
