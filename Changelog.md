@@ -1,6 +1,10 @@
 Csuper
 ======
 
+4.0.2
+
+* Improve translation
+
 4.0.1
 
 * Security update
@@ -18,6 +22,10 @@ Csuper
 
 Libcsuper
 =========
+
+4.0.2
+
+* Improve translation
 
 4.0.1
 
@@ -49,6 +57,7 @@ Csuper-gui
 4.0.2
 
 * Add an error message when there is an error when loading the file with the main arguments
+* Improve translation
 
 4.0.1
 

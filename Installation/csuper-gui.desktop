@@ -1,0 +1,12 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=Csuper
+Icon=/usr/share/csuper/Images/Logo_100.png
+Exec=csuper-gui
+NoDisplay=false
+Categories=Game;
+StartupNotify=false
+Terminal=false
+MimeType=application/csu;
+Name[fr_FR]=Csuper

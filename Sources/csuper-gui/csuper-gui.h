@@ -44,7 +44,7 @@
  * \def PORTABLE
  * Define that we compile csuper-gui portable
  */
-//#define PORTABLE
+#define PORTABLE
 
 /*!
  * \def NB_LAST_CSU_STRUCT

@@ -35,11 +35,6 @@
 #ifndef CSUPER_H_INCLUDED
 #define CSUPER_H_INCLUDED
 
-/*!
- * \def CSUPER
- * Define that we compile csuper.
- */
-#define CSUPER
 
 #include "../libcsuper/libcsuper.h"
 #include <stdio.h>

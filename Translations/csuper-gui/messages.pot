@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-10 15:36+0200\n"
+"POT-Creation-Date: 2014-09-10 17:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -134,7 +134,7 @@ msgid ""
 msgstr ""
 
 #: Sources/csuper-gui/main_menu.c:508 Sources/csuper-gui/main_window.c:457
-#: Sources/csuper-gui/main_window.c:534
+#: Sources/csuper-gui/main_window.c:533
 msgid "Widget main_toolbar is missing in file csuper-gui.glade."
 msgstr ""
 
@@ -300,23 +300,23 @@ msgstr ""
 msgid "Widget menu_redo is missing in file csuper-gui.glade."
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:538
+#: Sources/csuper-gui/main_window.c:537
 msgid "Widget menu_cut is missing in file csuper-gui.glade."
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:541
+#: Sources/csuper-gui/main_window.c:540
 msgid "Widget menu_copy is missing in file csuper-gui.glade."
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:544
+#: Sources/csuper-gui/main_window.c:543
 msgid "Widget menu_paste is missing in file csuper-gui.glade."
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:547
+#: Sources/csuper-gui/main_window.c:546
 msgid "Widget menu_delete is missing in file csuper-gui.glade."
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:613 Sources/csuper-gui/main_window.c:643
+#: Sources/csuper-gui/main_window.c:612 Sources/csuper-gui/main_window.c:642
 msgid "Widget main_window is missing in file csuper-gui.glade."
 msgstr ""
 
