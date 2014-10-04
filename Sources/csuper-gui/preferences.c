@@ -459,8 +459,13 @@ void displayGameConfiguration(globalData *data)
     GtkWidget *grid = gtk_grid_new();
     gtk_grid_set_column_spacing(GTK_GRID(grid),10);
     gtk_grid_set_row_spacing(GTK_GRID(grid),10);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(grid,10);
+    gtk_widget_set_margin_start(grid,10);
+    #else
     gtk_widget_set_margin_right(grid,10);
     gtk_widget_set_margin_left(grid,10);
+    #endif // GTK_MINOR_VERSION
     gtk_widget_set_margin_top(grid,10);
     gtk_widget_set_margin_bottom(grid,10);
 

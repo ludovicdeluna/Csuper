@@ -116,10 +116,16 @@ bool getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename
  */
 bool checkPath(char *path)
 {
-    FILE *ptr_file_test;
-    char check_path[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file_test=NULL;
+    char check_path[SIZE_MAX_FILE_NAME]="";
 
-    sprintf(check_path,"%s/test-chemin_fichier_csuper",path);
+    if (path == NULL)
+        return false;
+
+    if(path[strlen(path)-1] == '\\')
+        sprintf(check_path,"%stest-chemin_fichier_csuper",path);
+    else
+        sprintf(check_path,"%s/test-chemin_fichier_csuper",path);
     ptr_file_test=openFile(check_path,"w+");
     if (ptr_file_test != NULL)
     {
@@ -146,10 +152,15 @@ bool checkFilename(char *filename,char *folder)
     FILE *ptr_file_test;
     char check_filename[SIZE_MAX_FILE_NAME+10]="";
 
-    if (strcmp(folder,"") == 0)
+    if (folder == NULL || strcmp(folder,"") == 0)
         sprintf(check_filename,"%s_test.csu",filename);
     else
-        sprintf(check_filename,"%s/%s_test.csu",folder,filename);
+    {
+        if(folder[strlen(folder)-1] == '\\')
+            sprintf(check_filename,"%s%s_test.csu",folder,filename);
+        else
+            sprintf(check_filename,"%s/%s_test.csu",folder,filename);
+    }
     ptr_file_test=openFile(check_filename,"w+");
     if (ptr_file_test != NULL)
     {
