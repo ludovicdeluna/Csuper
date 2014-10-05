@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 00:06+0200\n"
+"POT-Creation-Date: 2014-10-05 19:47+0200\n"
 "PO-Revision-Date: 2014-09-02 00:07+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
 "Language-Team: français <wesnoth@ml.free.fr>>\n"
@@ -131,7 +131,7 @@ msgstr ""
 "\n"
 "Le fichier %s a bien été renommé en %s.\n"
 
-#: Sources/libcsuper/filename.c:132
+#: Sources/libcsuper/filename.c:138
 #, c-format
 msgid ""
 "\n"
@@ -140,7 +140,7 @@ msgstr ""
 "\n"
 "Erreur : Le dossier n'est pas valide.\n"
 
-#: Sources/libcsuper/filename.c:162
+#: Sources/libcsuper/filename.c:173
 #, c-format
 msgid ""
 "\n"

@@ -1,15 +1,15 @@
 #!/bin/bash
-sudo mkdir -p /opt/csuper-gui
-sudo cp csuper-gui /opt/csuper-gui
-sudo cp csuper-gui.glade /opt/csuper-gui/csuper-gui.glade
-sudo cp libcsuper.so /usr/local/lib
-sudo echo "if [ \"\$1\" != \"\$HOME\" ] ; then
-nom=\$(pwd)/\$1
-fi
-cd /opt/csuper-gui
-/opt/csuper-gui/csuper-gui \"\$nom\"" > csuper_install
-sudo chmod +x csuper_install
-sudo mv csuper_install /usr/local/bin/csuper-gui
-sudo cp -R Locales /opt/csuper-gui
-sudo cp -R Images /opt/csuper-gui
-sudo chmod -R a+r /opt/csuper-gui
+sudo mkdir -p /usr/share/csuper
+sudo cp csuper-gui /usr/share/csuper/csuper-gui
+sudo cp csuper-gui.glade /usr/share/csuper/csuper-gui.glade
+sudo cp libcsuper.so /usr/lib
+sudo cp Installation/csuper-gui /usr/local/bin/csuper-gui
+sudo cp -R Locales /usr/share/csuper
+sudo cp -R Images /usr/share/csuper
+sudo chmod -R a+rx /usr/share/csuper
+sudo cp Installation/Mime/csuper.xml /usr/share/mime/packages/
+sudo cp Installation/Mime/application-csu.png /usr/share/icons/hicolor/48x48/mimetypes
+sudo cp Installation/csuper-gui.desktop /usr/share/applications/
+update-mime-database usr/share/mime &> /dev/null
+[[ -x usr/bin/update-desktop-database ]] && update-desktop-database -q || true
+sudo ldconfig 

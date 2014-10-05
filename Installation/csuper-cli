@@ -1,0 +1,4 @@
+#!/bin/bash
+nom=$(pwd)/$2
+cd /usr/share/csuper
+./csuper-cli $1 "$nom"

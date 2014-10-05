@@ -124,7 +124,6 @@ bool openFileWithMainArgument(globalData *data,int argc, char *argv[])
         return true;
 
     gchar filename[SIZE_MAX_FILE_NAME];
-    printf("%s",argv[1]);
 
     #ifdef _WIN32
     strncpy(filename,g_convert(argv[1],-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL),SIZE_MAX_FILE_NAME-1);

@@ -1,4 +1,10 @@
 #!/bin/bash
-sudo rm -R /opt/csuper-gui
+sudo rm -R /usr/share/csuper
 sudo rm /usr/local/bin/csuper-gui
-sudo rm /usr/local/lib/libcsuper.so
+sudo rm /usr/lib/libcsuper.so
+sudo rm /usr/share/mime/packages/csuper.xml
+sudo rm /usr/share/icons/hicolor/48x48/mimetypes/application-csu.png
+sudo rm /usr/share/applications/csuper-gui.desktop
+update-mime-database usr/share/mime &> /dev/null
+[[ -x usr/bin/update-desktop-database ]] && update-desktop-database -q || true
+sudo ldconfig 

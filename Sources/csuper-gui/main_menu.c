@@ -541,16 +541,28 @@ G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
-    if (deleteFile(user_data->csu_filename))
-    {
-        updateMainWindow(user_data,FALSE);
-        closeCsuStruct(user_data->ptr_csu_struct);
-        user_data->ptr_csu_struct = NULL;
-        deleteAllLastCsuStruct(user_data);
-        setButtonMainWindowSensitive(user_data);
-    }
-    else
-        deleteFileError(user_data);
+    GtkWidget *window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"message_dialog_delete_file"));
+    if (!window)
+        g_critical(_("Widget message_dialog_delete_file is missing in file csuper-gui.glade."));
+
+    switch (gtk_dialog_run (GTK_DIALOG (window)))
+	{
+		case GTK_RESPONSE_YES:
+            if (deleteFile(user_data->csu_filename))
+            {
+                updateMainWindow(user_data,FALSE);
+                closeCsuStruct(user_data->ptr_csu_struct);
+                user_data->ptr_csu_struct = NULL;
+                deleteAllLastCsuStruct(user_data);
+                setButtonMainWindowSensitive(user_data);
+            }
+            else
+                deleteFileError(user_data);
+            break;
+        case GTK_RESPONSE_NO:
+            break;
+	}
+	gtk_widget_hide (window);
 }
 
 /*!

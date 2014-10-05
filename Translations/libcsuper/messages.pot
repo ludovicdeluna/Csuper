@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-09-02 00:06+0200\n"
+"POT-Creation-Date: 2014-10-05 19:47+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -106,14 +106,14 @@ msgid ""
 "The file %s was well renamed in %s.\n"
 msgstr ""
 
-#: Sources/libcsuper/filename.c:132
+#: Sources/libcsuper/filename.c:138
 #, c-format
 msgid ""
 "\n"
 "Error: this folder is not valid.\n"
 msgstr ""
 
-#: Sources/libcsuper/filename.c:162
+#: Sources/libcsuper/filename.c:173
 #, c-format
 msgid ""
 "\n"
