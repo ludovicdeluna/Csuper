@@ -409,6 +409,10 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
     if (!viewport)
         g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
 
+    GtkWidget *scrolled_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_scrolled_window"));
+    if (!scrolled_window)
+        g_critical(_("Widget main_window_scrolled_window is missing in file csuper-gui.glade."));
+
     /* Test if there is a csu file opened or if the game is not finished */
     if (user_data->ptr_csu_struct == NULL)
         return;
@@ -436,7 +440,8 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
     {
         startNewTurn(user_data->ptr_csu_struct,-1);
         for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
-            user_data->ptr_csu_struct->point[i][(int)user_data->ptr_csu_struct->nb_turn[i]] = gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),2*(i+1),2*(max_nb_turn+1))));
+            user_data->ptr_csu_struct->point[i][(int)user_data->ptr_csu_struct->nb_turn[i]] =
+                gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),2*(i+1),2*(max_nb_turn+1))));
         endNewTurn(user_data->ptr_csu_struct,-1);
 
         has_changed = TRUE;
@@ -449,6 +454,16 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
             saveFileError(user_data);
         addLastCsuStruct(user_data);
         updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
+
+        /* Scroll the window at the bottom */
+        gtk_adjustment_set_upper(gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrolled_window)),
+            gtk_adjustment_get_upper(gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrolled_window)))+
+            gtk_adjustment_get_step_increment(gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrolled_window))));
+
+        gtk_adjustment_set_value(gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrolled_window)),
+            gtk_adjustment_get_upper(gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrolled_window)))
+            -gtk_adjustment_get_page_size(gtk_scrolled_window_get_vadjustment(GTK_SCROLLED_WINDOW(scrolled_window))));
+
 
         /* Test if the game is over */
         if (exceedMaxNumber(user_data->ptr_csu_struct) == true)

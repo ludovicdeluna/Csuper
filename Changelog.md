@@ -59,6 +59,7 @@ Csuper-gui
 * Add a delete file button
 * Add the possibility to display only the image in the toolbar
 * Add the possibility to choose which game configuration will be import/export
+* When there is a hew turn, the point window scroll at the bottom
 
 4.0.2
 
