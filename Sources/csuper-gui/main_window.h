@@ -53,5 +53,6 @@ void setButtonMainWindowSensitive(globalData *data);
 G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data);
 void readMainWindowSize(globalData *data);
 G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gpointer user_data);
+G_MODULE_EXPORT void changeDistributorButton(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_WINDOW_H_INCLUDED

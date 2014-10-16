@@ -489,6 +489,10 @@ void setButtonMainWindowSensitive(globalData *data)
     if (!button_end_of_turn)
         g_critical(_("Widget button_end_of_turn is missing in file csuper-gui.glade."));
 
+    GtkWidget *button_change_distributor = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_button_change_distributor"));
+    if (!button_change_distributor)
+        g_critical(_("Widget main_window_button_change_distributor is missing in file csuper-gui.glade."));
+
     GtkWidget *main_toolbar = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_toolbar"));
     if (!main_toolbar)
         g_critical(_("Widget main_toolbar is missing in file csuper-gui.glade."));
@@ -509,7 +513,7 @@ void setButtonMainWindowSensitive(globalData *data)
     if (!menu_properties)
         g_critical(_("Widget menu_print is missing in file csuper-gui.glade."));
 
-    /* Properties, save as,delete file,print and end of turn button */
+    /* If there is no csu file opened */
     if (data->ptr_csu_struct == NULL)
     {
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),2)),FALSE);
@@ -521,6 +525,7 @@ void setButtonMainWindowSensitive(globalData *data)
         gtk_widget_set_sensitive(menu_delete_file,FALSE);
         gtk_widget_set_sensitive(menu_print,FALSE);
         gtk_widget_set_sensitive(button_end_of_turn,FALSE);
+        gtk_widget_set_sensitive(button_change_distributor,FALSE);
     }
     else
     {
@@ -528,6 +533,11 @@ void setButtonMainWindowSensitive(globalData *data)
             gtk_widget_set_sensitive(button_end_of_turn,FALSE);
         else
             gtk_widget_set_sensitive(button_end_of_turn,TRUE);
+
+        if (data->ptr_csu_struct->config.use_distributor == 0)
+            gtk_widget_set_sensitive(button_change_distributor,FALSE);
+        else
+            gtk_widget_set_sensitive(button_change_distributor,TRUE);
 
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),2)),TRUE);
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),4)),TRUE);
@@ -706,4 +716,76 @@ G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gp
     createFileMainWidowSize(home_path,size);
 
     return FALSE;
+}
+
+/*!
+ * \fn G_MODULE_EXPORT changeDistributorButton(GtkWidget *widget, gpointer data)
+ *  Change distributor
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void changeDistributorButton(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    gint i;
+
+    GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"change_distributor_dialog"));
+    if (!dialog)
+        g_critical(_("Widget change_distributor_dialog is missing in file csuper-gui.glade."));
+
+    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"change_distributor_dialog_viewport"));
+    if (!viewport)
+        g_critical(_("Widget change_distributor_dialog_viewport is missing in file csuper-gui.glade."));
+
+
+    /* Set the grid */
+    GtkWidget *grid = gtk_grid_new();
+    gtk_grid_set_row_spacing(GTK_GRID(grid),5);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(grid,10);
+    gtk_widget_set_margin_start(grid,10);
+    #else
+    gtk_widget_set_margin_right(grid,10);
+    gtk_widget_set_margin_left(grid,10);
+    #endif // GTK_MINOR_VERSION
+    gtk_widget_set_margin_top(grid,10);
+    gtk_widget_set_margin_bottom(grid,10);
+    gtk_widget_set_vexpand(grid,TRUE);
+
+
+    /* Set the rbdio button */
+    gtk_grid_attach(GTK_GRID(grid),gtk_radio_button_new_with_label(NULL,user_data->ptr_csu_struct->player_names[0]),0,0,1,1);
+
+    for (i=1 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+        gtk_grid_attach(GTK_GRID(grid),gtk_radio_button_new_with_label_from_widget(
+            GTK_RADIO_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),
+            user_data->ptr_csu_struct->player_names[i]),0,i,1,1);
+
+    gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),0,user_data->ptr_csu_struct->distributor)),TRUE);
+
+    gtk_container_add(GTK_CONTAINER(viewport),grid);
+
+    gtk_widget_show_all(dialog);
+
+    switch (gtk_dialog_run(GTK_DIALOG(dialog)))
+	{
+		case GTK_RESPONSE_ACCEPT:
+		{
+            for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+            {
+                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),0,i))))
+                    break;
+            }
+            changeDistributor(user_data->ptr_csu_struct,i);
+            updateDistributorLabel(user_data);
+			break;
+		}
+		case GTK_RESPONSE_CANCEL:
+        {
+            break;
+        }
+	}
+
+	gtk_widget_hide(dialog);
+	gtk_widget_destroy(grid);
 }

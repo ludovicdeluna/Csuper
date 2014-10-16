@@ -135,7 +135,8 @@ void listCsuFiles()
  */
 void play(csuStruct *ptr_csu_struct, char *file_name)
 {
-    int continuer=false;
+    ContinueChangeDistributorOrQuit choice;
+    bool continuer=true;
 
     clearScreen();
     printPoints(ptr_csu_struct);
@@ -154,7 +155,13 @@ void play(csuStruct *ptr_csu_struct, char *file_name)
             continuer=false;
 
         else
-            continuer=menuContinue();
+        {
+            choice=menuContinueChangeDistributorOrQuit();
+            if (choice == Quit)
+                continuer = false;
+            if (choice == ChangeDistributor)
+                menuChangeDistributor(ptr_csu_struct);
+        }
 
     } while (continuer==true);
 

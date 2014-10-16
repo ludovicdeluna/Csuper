@@ -402,3 +402,19 @@ csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct)
 
     return ptr_copy_csu_struct;
 }
+
+/*!
+ * \fn bool changeDistributor(csuStruct *ptr_csu_struct, int index)
+ *  Change the ditributor
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \return true if the distributor can be change, false otherwise
+ */
+bool changeDistributor(csuStruct *ptr_csu_struct, int index)
+{
+    if (index >= ptr_csu_struct->nb_player + 0.1)
+        return false;
+
+    ptr_csu_struct->distributor = index;
+
+    return true;
+}

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-05 19:47+0200\n"
+"POT-Creation-Date: 2014-10-16 17:39+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -122,17 +122,17 @@ msgstr ""
 msgid "Here are all your csu files:\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:273
+#: Sources/csuper-cli/interface.c:280
 #, c-format
 msgid "Csuper - Universal points counter allowing a dispense with reflection v"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:274
+#: Sources/csuper-cli/interface.c:281
 #, c-format
 msgid "%s"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:275
+#: Sources/csuper-cli/interface.c:282
 #, c-format
 msgid ""
 "\n"
@@ -149,14 +149,14 @@ msgid ""
 "Your choice : "
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:295
+#: Sources/csuper-cli/interface.c:302
 #, c-format
 msgid ""
 "\n"
 "See you.\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:299 Sources/csuper-cli/interface.c:354
+#: Sources/csuper-cli/interface.c:306 Sources/csuper-cli/interface.c:361
 #, c-format
 msgid ""
 "\n"
@@ -164,14 +164,14 @@ msgid ""
 "to do.\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:326
+#: Sources/csuper-cli/interface.c:333
 #, c-format
 msgid ""
 "\n"
 "What do you want to do?\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:328
+#: Sources/csuper-cli/interface.c:335
 #, c-format
 msgid ""
 "\n"
@@ -179,7 +179,7 @@ msgid ""
 " (%d) Display the folder where files will be saved"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:330
+#: Sources/csuper-cli/interface.c:337
 #, c-format
 msgid ""
 "\n"
@@ -194,19 +194,19 @@ msgid ""
 "Your choice : "
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:400
+#: Sources/csuper-cli/interface.c:407
 #, c-format
 msgid "Your files are saved in %s\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:502 Sources/csuper-cli/menu.c:86
+#: Sources/csuper-cli/interface.c:509 Sources/csuper-cli/menu.c:86
 #, c-format
 msgid ""
 "\n"
 "Which game configuration would you like to use?\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:509 Sources/csuper-cli/interface.c:574
+#: Sources/csuper-cli/interface.c:516 Sources/csuper-cli/interface.c:581
 #: Sources/csuper-cli/menu.c:94
 #, c-format
 msgid ""
@@ -214,42 +214,42 @@ msgid ""
 "Your choice: "
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:511 Sources/csuper-cli/interface.c:576
-#: Sources/csuper-cli/menu.c:96 Sources/csuper-cli/menu.c:396
-#: Sources/csuper-cli/menu.c:450
+#: Sources/csuper-cli/interface.c:518 Sources/csuper-cli/interface.c:583
+#: Sources/csuper-cli/menu.c:96 Sources/csuper-cli/menu.c:422
+#: Sources/csuper-cli/menu.c:476
 #, c-format
 msgid "You chose %d\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:518 Sources/csuper-cli/interface.c:585
+#: Sources/csuper-cli/interface.c:525 Sources/csuper-cli/interface.c:592
 #, c-format
 msgid ""
 "\n"
 "You do not have any game configuration file.\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:539 Sources/csuper-cli/menu.c:377
+#: Sources/csuper-cli/interface.c:546 Sources/csuper-cli/menu.c:403
 #, c-format
 msgid ""
 "\n"
 "Here are all your game configurations:\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:567
+#: Sources/csuper-cli/interface.c:574
 #, c-format
 msgid ""
 "\n"
 "Which game configuration would you like to display?\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:615
+#: Sources/csuper-cli/interface.c:622
 #, c-format
 msgid ""
 "\n"
 "Game configurations were exported successfully in %s\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:646
+#: Sources/csuper-cli/interface.c:653
 #, c-format
 msgid ""
 "\n"
@@ -288,7 +288,7 @@ msgstr ""
 msgid "You chose %.0f\n"
 msgstr ""
 
-#: Sources/csuper-cli/menu.c:88
+#: Sources/csuper-cli/menu.c:88 Sources/csuper-cli/menu.c:333
 #, c-format
 msgid "(%d) %s\n"
 msgstr ""
@@ -382,7 +382,7 @@ msgid ""
 msgstr ""
 
 #: Sources/csuper-cli/menu.c:197 Sources/csuper-cli/menu.c:218
-#: Sources/csuper-cli/menu.c:291 Sources/csuper-cli/menu.c:353
+#: Sources/csuper-cli/menu.c:291 Sources/csuper-cli/menu.c:379
 #, c-format
 msgid "You chose %s\n"
 msgstr ""
@@ -443,17 +443,33 @@ msgstr ""
 #, c-format
 msgid ""
 "\n"
-"Would you like to continue the game (Y/n)? "
+"What do you want to do?\n"
+" (%d) Continue the game (default)\n"
+" (%d) Change the distributor and continue the game\n"
+" (%d) Stop the game\n"
+"Your choice: "
 msgstr ""
 
-#: Sources/csuper-cli/menu.c:324
+#: Sources/csuper-cli/menu.c:331
+#, c-format
+msgid ""
+"\n"
+"Choose the new disributor\n"
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:334
+#, c-format
+msgid "Your choice: \n"
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:350
 #, c-format
 msgid ""
 "\n"
 "Would you like to delete the file (y/N)? "
 msgstr ""
 
-#: Sources/csuper-cli/menu.c:344
+#: Sources/csuper-cli/menu.c:370
 #, c-format
 msgid ""
 "\n"
@@ -463,7 +479,7 @@ msgid ""
 "Your choice: "
 msgstr ""
 
-#: Sources/csuper-cli/menu.c:383
+#: Sources/csuper-cli/menu.c:409
 #, c-format
 msgid ""
 "\n"
@@ -472,7 +488,7 @@ msgid ""
 "Your choice: "
 msgstr ""
 
-#: Sources/csuper-cli/menu.c:394
+#: Sources/csuper-cli/menu.c:420
 #, c-format
 msgid ""
 "\n"
@@ -480,14 +496,14 @@ msgid ""
 "Your choice: "
 msgstr ""
 
-#: Sources/csuper-cli/menu.c:431
+#: Sources/csuper-cli/menu.c:457
 #, c-format
 msgid ""
 "\n"
 "Here are all the game configurations in this file:\n"
 msgstr ""
 
-#: Sources/csuper-cli/menu.c:437
+#: Sources/csuper-cli/menu.c:463
 #, c-format
 msgid ""
 "\n"
@@ -496,7 +512,7 @@ msgid ""
 "Your choice: "
 msgstr ""
 
-#: Sources/csuper-cli/menu.c:448
+#: Sources/csuper-cli/menu.c:474
 #, c-format
 msgid ""
 "\n"

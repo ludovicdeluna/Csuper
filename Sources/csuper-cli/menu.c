@@ -295,21 +295,47 @@ int menuPlayerIndex(csuStruct *ptr_csu_struct)
 }
 
 /*!
- * \fn bool menuContinue()
- *  Ask if we want to continue3
- * \return true if we want to continue, false otherwise
+ * \fn ContinueChangeDistributorOrQuit menuContinueChangeDistributorOrQuit()
+ *  Ask if we want to continue
+ * \return a ContinueChangeDistributorOrQuit
  */
-bool menuContinue()
+ContinueChangeDistributorOrQuit menuContinueChangeDistributorOrQuit()
 {
-    char continuer;
+    char choice;
 
-    printf(_("\nWould you like to continue the game (Y/n)? "));
-    charKey(&continuer);
+    printf(_("\nWhat do you want to do?\n (%d) Continue the game (default)\n (%d) Change the distributor and continue the game"
+             "\n (%d) Stop the game\nYour choice: "),1,2,3);
+    charKey(&choice);
 
-    if (continuer=='n' || continuer=='N')
-        return false;
+    if (choice=='2' || choice=='2')
+        return ChangeDistributor;
 
-    return true;
+    if (choice=='3' || choice=='3')
+        return Quit;
+
+    return Continue;
+}
+
+/*!
+ * \fn void menuChangeDistributor(csuStruct *ptr_csu_struct)
+ *  Ask and validate the new distributor
+ * \param[in,out] *ptr_csu_struct a pointer on a csu structure
+ */
+void menuChangeDistributor(csuStruct *ptr_csu_struct)
+{
+    int i;
+    int choice;
+
+    do
+    {
+        printf(_("\nChoose the new disributor\n"));
+        for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            printf(_("(%d) %s\n"),i+1,ptr_csu_struct->player_names[i]);
+        printf(_("Your choice: \n"));
+        intKey(&choice);
+    } while (choice < 1 || choice > ptr_csu_struct->nb_player);
+
+    changeDistributor(ptr_csu_struct,choice-1);
 }
 
 /*!

@@ -1,9 +1,10 @@
-Csuper
-======
+Csuper-cli
+==========
 
 4.2.0
 
 * Add the possibility to choose which game configuration will be import/export
+* You can now change the distributore during the game
 
 4.0.1
 
@@ -26,6 +27,7 @@ Libcsuper
 4.2.0
 
 * Add the possibility to choose which game configuration will be import/export
+* New function changeDistributor 
 
 4.0.1
 
@@ -60,6 +62,7 @@ Csuper-gui
 * Add the possibility to display only the image in the toolbar
 * Add the possibility to choose which game configuration will be import/export
 * When there is a hew turn, the point window scroll at the bottom
+* You can now change the distributore during the game
 
 4.0.2
 

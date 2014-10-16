@@ -38,6 +38,8 @@
 #include "main.h"
 #include "csuper.h"
 
+typedef enum {Continue , ChangeDistributor , Quit} ContinueChangeDistributorOrQuit;
+
 
 char *menuFileName(char file_name[SIZE_MAX_FILE_NAME]);
 void menuStartGame(float *ptr_nb_player, game_config *ptr_config);
@@ -46,7 +48,8 @@ void menuDistributor(char *distributor_name);
 void menuPlayersName(csuStruct *ptr_csu_struct);
 void menuPlayersPoints(csuStruct *ptr_csu_struct);
 int menuPlayerIndex(csuStruct *ptr_csu_struct);
-bool menuContinue();
+ContinueChangeDistributorOrQuit menuContinueChangeDistributorOrQuit();
+void menuChangeDistributor(csuStruct *ptr_csu_struct);
 bool menuDelete();
 void menuNewPath(char *new_path);
 bool menuExportListGameConfig(int **id,int *nb_id);

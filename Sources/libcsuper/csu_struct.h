@@ -101,5 +101,6 @@ int maxNbTurn(csuStruct *ptr_csu_struct);
 int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name);
 bool differentsPlayerName(csuStruct *ptr_csu_struct);
 csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct);
+bool changeDistributor(csuStruct *ptr_csu_struct, int index);
 
 #endif
