@@ -95,7 +95,6 @@ void createRanking(globalData *data)
     #endif // GTK_MINOR_VERSION
     gtk_widget_set_margin_top(rank_grid,10);
     gtk_widget_set_margin_bottom(rank_grid,10);
-    gtk_grid_set_column_homogeneous(GTK_GRID(rank_grid),TRUE);
 
     /* Set the column name */
     gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Position")),0,0,1,1);
@@ -467,15 +466,82 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
 
         /* Test if the game is over */
         if (exceedMaxNumber(user_data->ptr_csu_struct) == true)
-        {
-            GtkWidget *window_game_over = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"messagedialog_game_over"));
-            if (!window_game_over)
-                g_critical(_("Widget messagedialog_game_over is missing in file csuper-gui.glade."));
+            gameOver(user_data);
+    }
+}
 
-            gtk_dialog_run(GTK_DIALOG (window_game_over));
-            gtk_widget_hide (window_game_over);
+
+/*!
+ * \fn void gameOver(globalData *data)
+ *  Display the game over window
+ * \param[in] data the globalData
+ */
+void gameOver(globalData *data)
+{
+    GtkWidget *window_game_over = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"dialog_game_over"));
+    if (!window_game_over)
+        g_critical(_("Widget dialog_game_over is missing in file csuper-gui.glade."));
+
+    GtkWidget *fixed = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"dialog_game_over_fixed"));
+    if (!fixed)
+        g_critical(_("Widget dialog_game_over_fixed is missing in file csuper-gui.glade."));
+
+    GtkWidget *podium =gtk_image_new_from_file("Images/Podium.svg");
+    gtk_fixed_put(GTK_FIXED(fixed),podium,0,20);
+
+
+    /*Initialization of the position array*/
+    int pos[3]={0,1,2};
+    int i;
+    int un_pris=false;
+    int deux_pris=false;
+    for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
+    {
+        if (data->ptr_csu_struct->rank[i] == 3 || (un_pris && deux_pris && data->ptr_csu_struct->rank[i] == 1) || (deux_pris && data->ptr_csu_struct->rank[i] == 2))
+            pos[2]=i;
+
+        if ((data->ptr_csu_struct->rank[i] == 2 && !deux_pris ) || (un_pris && data->ptr_csu_struct->rank[i] == 1 && !deux_pris))
+        {
+            pos[1]=i;
+            deux_pris=true;
+        }
+        if (data->ptr_csu_struct->rank[i] == 1 && !un_pris)
+        {
+            pos[0]=i;
+            un_pris=true;
         }
     }
+
+
+    /* Put the different names */
+    GtkWidget *label_1 = GTK_WIDGET(createGtkLabelWithAttributes(data->ptr_csu_struct->player_names[pos[0]],15,TRUE,0,50,0,FALSE,0,0,0));
+    gtk_fixed_put(GTK_FIXED(fixed),label_1,250-g_utf8_strlen(data->ptr_csu_struct->player_names[pos[0]],SIZE_MAX_NAME)*9/2,47);
+
+    GtkWidget *label_2;
+    if (data->ptr_csu_struct->nb_player >=2)
+    {
+        label_2 = GTK_WIDGET(createGtkLabelWithAttributes(data->ptr_csu_struct->player_names[pos[1]],15,TRUE,0,0,100,FALSE,0,0,0));
+        gtk_fixed_put(GTK_FIXED(fixed),label_2,90-g_utf8_strlen(data->ptr_csu_struct->player_names[pos[1]],SIZE_MAX_NAME)*9/2,118);
+    }
+
+    GtkWidget *label_3;
+    if (data->ptr_csu_struct->nb_player >=3)
+    {
+        label_3 = GTK_WIDGET(createGtkLabelWithAttributes(data->ptr_csu_struct->player_names[pos[2]],15,TRUE,100,0,0,FALSE,0,0,0));
+        gtk_fixed_put(GTK_FIXED(fixed),label_3,410-g_utf8_strlen(data->ptr_csu_struct->player_names[pos[2]],SIZE_MAX_NAME)*9/2,158);
+    }
+
+
+    gtk_widget_show_all(window_game_over);
+    gtk_dialog_run(GTK_DIALOG (window_game_over));
+    gtk_widget_hide (window_game_over);
+
+    gtk_widget_destroy(podium);
+    gtk_widget_destroy(label_1);
+    if (data->ptr_csu_struct->nb_player >=2)
+        gtk_widget_destroy(label_2);
+    if (data->ptr_csu_struct->nb_player >=3)
+        gtk_widget_destroy(label_3);
 }
 
 /*!

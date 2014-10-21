@@ -913,21 +913,21 @@ G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer d
 
     strcpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))));
     if (strcmp(name,"") == 0)
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,TRUE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,TRUE,100,0,0,FALSE,0,0,0);
     else
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,FALSE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,FALSE,100,0,0,FALSE,0,0,0);
 
     index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,1)));
     if (index < 0)
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,1)),0,TRUE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,1)),0,TRUE,100,0,0,FALSE,0,0,0);
     else
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,1)),0,FALSE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,1)),0,FALSE,100,0,0,FALSE,0,0,0);
 
     index_2 = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),1,7)));
     if (index_2 < 0)
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,7)),0,TRUE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,7)),0,TRUE,100,0,0,FALSE,0,0,0);
     else
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,7)),0,FALSE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,7)),0,FALSE,100,0,0,FALSE,0,0,0);
 
     if (strcmp(name,"") == 0 || index < 0 || index_2 < 0)
         gtk_widget_set_sensitive(validat_button,FALSE);

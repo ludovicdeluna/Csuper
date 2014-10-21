@@ -39,20 +39,20 @@
  * \param[in] label the label
  * \param[in] text_size the size of the text, -1 if not used
  * \param[in] use_foreground indicate if it use the foreground color, if FALSE use the default color
- * \param[in] foreground_red the red value of the foreground (ranging from 0 to 65535)
- * \param[in] foreground_green the green value of the foreground (ranging from 0 to 65535)
- * \param[in] foreground_blue the blue value of the foreground (ranging from 0 to 65535)
+ * \param[in] foreground_red the red value of the foreground (ranging from 0 to 100)
+ * \param[in] foreground_green the green value of the foreground (ranging from 0 to 100)
+ * \param[in] foreground_blue the blue value of the foreground (ranging from 0 to 100)
  * \param[in] use_background indicate if it use the background color, if FALSE use the default color
- * \param[in] background_red the red value of the background (ranging from 0 to 65535)
- * \param[in] background_green the green value of the background (ranging from 0 to 65535)
- * \param[in] background_blue the blue value of the background (ranging from 0 to 65535)
+ * \param[in] background_red the red value of the background (ranging from 0 to 100)
+ * \param[in] background_green the green value of the background (ranging from 0 to 100)
+ * \param[in] background_blue the blue value of the background (ranging from 0 to 100)
  */
 void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue)
 {
     PangoAttrList *attribut_list = pango_attr_list_new();
     PangoAttribute *size = pango_attr_size_new(text_size*PANGO_SCALE);
-    PangoAttribute *foreground = pango_attr_foreground_new(foreground_red,foreground_green,foreground_blue);
-    PangoAttribute *background = pango_attr_background_new(background_red,background_green,background_blue);
+    PangoAttribute *foreground = pango_attr_foreground_new(foreground_red*655.35,foreground_green*655.35,foreground_blue*655.35);
+    PangoAttribute *background = pango_attr_background_new(background_red*655.35,background_green*655.35,background_blue*655.35);
 
     if (text_size > 0)
     {
@@ -90,13 +90,13 @@ void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foregrou
  * \param[in] text the text for the new gtklabel
  * \param[in] text_size the size of the text, -1 if not used
  * \param[in] use_foreground indicate if it use the foreground color, if FALSE use the default color
- * \param[in] foreground_red the red value of the foreground (ranging from 0 to 65535)
- * \param[in] foreground_green the green value of the foreground (ranging from 0 to 65535)
- * \param[in] foreground_blue the blue value of the foreground (ranging from 0 to 65535)
+ * \param[in] foreground_red the red value of the foreground (ranging from 0 to 100)
+ * \param[in] foreground_green the green value of the foreground (ranging from 0 to 100)
+ * \param[in] foreground_blue the blue value of the foreground (ranging from 0 to 100)
  * \param[in] use_background indicate if it use the background color, if FALSE use the default color
- * \param[in] background_red the red value of the background (ranging from 0 to 65535)
- * \param[in] background_green the green value of the background (ranging from 0 to 65535)
- * \param[in] background_blue the blue value of the background (ranging from 0 to 65535)
+ * \param[in] background_red the red value of the background (ranging from 0 to 100)
+ * \param[in] background_green the green value of the background (ranging from 0 to 100)
+ * \param[in] background_blue the blue value of the background (ranging from 0 to 100)
  * \return a new allocate gtklabel with attributes
  */
 GtkLabel *createGtkLabelWithAttributes(gchar *text, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue)

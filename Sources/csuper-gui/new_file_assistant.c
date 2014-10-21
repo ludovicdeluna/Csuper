@@ -227,21 +227,21 @@ G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
 
     /* Test the filename */
     if (strcmp(name,"") == 0 || filename_ok == false)
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,TRUE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,TRUE,100,0,0,FALSE,0,0,0);
     else
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,FALSE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,0)),0,FALSE,100,0,0,FALSE,0,0,0);
 
     /* Test if a game configuration is selected */
     if (index < 0 )
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,3)),0,TRUE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,3)),0,TRUE,100,0,0,FALSE,0,0,0);
     else
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,3)),0,FALSE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,3)),0,FALSE,100,0,0,FALSE,0,0,0);
 
     /* Test the folder */
     if (folder_ok == false)
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,TRUE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,TRUE,100,0,0,FALSE,0,0,0);
     else
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,FALSE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid_1),0,1)),0,FALSE,100,0,0,FALSE,0,0,0);
 
     /* Test if the page one is valid or not */
     if (strcmp(name,"") != 0 && index >=0 && folder_ok != false && filename_ok == true)
@@ -412,10 +412,10 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
         if (strcmp(user_data->ptr_csu_struct_tmp->player_names[i],"") == 0)
         {
             valid = FALSE;
-            setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,TRUE,65535,0,0,FALSE,0,0,0);
+            setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,TRUE,100,0,0,FALSE,0,0,0);
         }
         else
-            setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,FALSE,65535,0,0,FALSE,0,0,0);
+            setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,FALSE,100,0,0,FALSE,0,0,0);
     }
 
     /* Check if all the name are different */
@@ -425,8 +425,8 @@ G_MODULE_EXPORT void validAssistantNewCsuTwo(GtkWidget *widget, gpointer data)
         {
             if (strcmp(user_data->ptr_csu_struct_tmp->player_names[i],user_data->ptr_csu_struct_tmp->player_names[j]) == 0)
             {
-                setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,TRUE,65535,0,0,FALSE,0,0,0);
-                setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,j)),0,TRUE,65535,0,0,FALSE,0,0,0);
+                setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,i)),0,TRUE,100,0,0,FALSE,0,0,0);
+                setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,j)),0,TRUE,100,0,0,FALSE,0,0,0);
             }
         }
     }
@@ -458,12 +458,12 @@ G_MODULE_EXPORT void validAssistantNewCsuThree(GtkWidget *widget, gpointer data)
     if (index >= 0)
     {
         user_data->ptr_csu_struct_tmp->distributor = index;
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,FALSE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,FALSE,100,0,0,FALSE,0,0,0);
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(grid),TRUE);
     }
     else
     {
-        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,TRUE,65535,0,0,FALSE,0,0,0);
+        setGtkLabelAttributes(GTK_LABEL(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),0,TRUE,100,0,0,FALSE,0,0,0);
         gtk_assistant_set_page_complete(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),GTK_WIDGET(grid),FALSE);
     }
 }
