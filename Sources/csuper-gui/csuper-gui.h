@@ -75,7 +75,8 @@ typedef struct
     GtkClipboard *ptr_clipboard_selected;       /*!< A pointer to the selected clipboard */
     csuStruct *lastCsuStruct[NB_LAST_CSU_STRUCT]; /*!< A array of pointer to the last csu structure */
     gint indexLastCsuStruct;                /*!< A index on the lastCsuStruct array */
-    gint nbLastCsuStruct;                   /*!< the number of last csu structure */
+    gint nbLastCsuStruct;                   /*!< The number of last csu structure */
+    gboolean save_new_game_config;          /*!< Indicate if we would save the new game configuration */
 }globalData;
 
 

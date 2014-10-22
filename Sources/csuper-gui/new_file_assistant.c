@@ -304,7 +304,9 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
 
         /* Save the game configuration if ask */
         if (index == ptr_list_config->nb_config)
-            newConfigFile(*ptr_config,home_path);
+            user_data->save_new_game_config = TRUE;
+        else
+            user_data->save_new_game_config = FALSE;
 
         user_data->config = *ptr_config;
         free(ptr_config);
@@ -480,6 +482,12 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
     gchar name[SIZE_MAX_FILE_NAME];
     gchar *folder;
 
+    /* Read the game configuration list */
+    char home_path[SIZE_MAX_FILE_NAME]="";
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+
 
     /* Get the filename */
     GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"grid_new_csu_file_assistant_1"));
@@ -498,6 +506,9 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
     sprintf(user_data->csu_filename,"%s/%s",folder,name);
     addFileCsuExtension(user_data->csu_filename);
 
+    /* Save the game configuration if ask */
+    if (user_data->save_new_game_config)
+        newConfigFile(user_data->config,home_path);
 
     /* Update the information of the global data */
     if (user_data->ptr_csu_struct != NULL)
