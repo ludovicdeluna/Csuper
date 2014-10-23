@@ -65,6 +65,7 @@ Csuper-gui
 * You can now change the distributore during the game
 * Add shortcuts
 * Add a podium at the end of the game
+* Add the possibility to open recent file
 
 4.0.2
 

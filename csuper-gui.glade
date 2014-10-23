@@ -65,9 +65,479 @@
       </packing>
     </child>
   </object>
-  <object class="GtkImage" id="image1">
+  <object class="GtkAdjustment" id="new_csu_file_assistant_nb_player_adjustement">
+    <property name="lower">1</property>
+    <property name="upper">100</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkGrid" id="grid_new_csu_file_assistant_1">
     <property name="visible">True</property>
     <property name="can_focus">False</property>
+    <property name="row_spacing">15</property>
+    <property name="column_spacing">25</property>
+    <property name="column_homogeneous">True</property>
+    <child>
+      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_folder">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Folder where the new csu file will be saved</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_nb_player">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Number of players on the game</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">2</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkSpinButton" id="grid_new_csu_file_assistant_1_spin_nb_player">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="xalign">0.5</property>
+        <property name="input_purpose">number</property>
+        <property name="adjustment">new_csu_file_assistant_nb_player_adjustement</property>
+        <property name="climb_rate">1</property>
+        <property name="value">1</property>
+        <signal name="value-changed" handler="validAssistantNewCsuOne" swapped="no"/>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">2</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="label1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Your game configuration</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">3</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkFileChooserButton" id="grid_new_csu_file_assistant_1_folder_chooser">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="action">select-folder</property>
+        <property name="local_only">False</property>
+        <signal name="selection-changed" handler="validAssistantNewCsuOne" swapped="no"/>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">1</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_folder1">
+        <property name="visible">True</property>
+        <property name="can_focus">False</property>
+        <property name="label" translatable="yes">Name of the new csu file</property>
+      </object>
+      <packing>
+        <property name="left_attach">0</property>
+        <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <object class="GtkEntry" id="grid_new_csu_file_assistant_1_name_entry">
+        <property name="visible">True</property>
+        <property name="can_focus">True</property>
+        <property name="xalign">0.5</property>
+        <property name="placeholder_text" translatable="yes">Type here the name of the new csu file</property>
+        <signal name="changed" handler="validAssistantNewCsuOne" swapped="no"/>
+      </object>
+      <packing>
+        <property name="left_attach">1</property>
+        <property name="top_attach">0</property>
+        <property name="width">1</property>
+        <property name="height">1</property>
+      </packing>
+    </child>
+    <child>
+      <placeholder/>
+    </child>
+  </object>
+  <object class="GtkAdjustment" id="new_game_configuration_initial_score_adjustement">
+    <property name="lower">-1e+18</property>
+    <property name="upper">1e+18</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="new_game_configuration_score_max_adjustement">
+    <property name="lower">-1e+18</property>
+    <property name="upper">1e+18</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkDialog" id="new_game_configuration_dialog">
+    <property name="name">New game configuration</property>
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">New game configuration</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="gravity">center</property>
+    <signal name="response" handler="gtk_widget_hide" swapped="no"/>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox1">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area1">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="button_cancel_new_game_configuration">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Cancel and go back to the game configuration preferences</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="button_ok_new_game_configuration">
+                <property name="label">gtk-ok</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Validate the new game configuration</property>
+                <property name="use_stock">True</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="new_game_configuration_dialog_grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <property name="row_spacing">10</property>
+            <property name="column_spacing">10</property>
+            <child>
+              <object class="GtkLabel" id="new_game_configuration_label_name">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Name of the game configuration</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="new_game_configuration_label_use_maximum">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Use a maximum or minimum score or neither</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="new_game_configuration_label_initial_score">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Initial score</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="new_game_configuration_label_nb_digit">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Number of decimals displayed</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="new_game_configuration_label_first_way">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">The winner is the player with the highest score</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="new_game_configuration_label_turn_based">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">The points will be attributed in turn-based</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="new_game_configuration_label_distrubutor">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Use of a distributor</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="new_game_configuration_label_nb_max">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="vexpand">True</property>
+                <property name="label" translatable="yes">Maximal or minimal score which a player can reach in the game</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="new_game_configuration_entry_name">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="width_chars">30</property>
+                <property name="xalign">0.5</property>
+                <property name="placeholder_text" translatable="yes">Type here the name of the game configuration</property>
+                <property name="input_hints">GTK_INPUT_HINT_UPPERCASE_WORDS | GTK_INPUT_HINT_NONE</property>
+                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">0</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="new_game_configuration_switch_first_way">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="active">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">4</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="new_game_configuration_switch_turn_based">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="active">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">5</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="new_game_configuration_switch_distrubutor">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">6</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="new_game_configuration_combo_nb_digit">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item id="0" translatable="yes">0</item>
+                  <item id="1" translatable="yes">1</item>
+                  <item id="2" translatable="yes">2</item>
+                  <item id="3" translatable="yes">3</item>
+                </items>
+                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">7</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="new_game_configuration_combo_max">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <items>
+                  <item id="max" translatable="yes">Maximum</item>
+                  <item id="min" translatable="yes">Minimum</item>
+                  <item id="neither" translatable="yes">Neither</item>
+                </items>
+                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
+                <signal name="changed" handler="noMaxMinNewGameConfiguration" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="new_game_configuration_spin_initial_score">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="xalign">0.5</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">number</property>
+                <property name="adjustment">new_game_configuration_initial_score_adjustement</property>
+                <property name="climb_rate">1</property>
+                <property name="digits">3</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="new_game_configuration_spin_nb_max">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="xalign">0.5</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="input_purpose">number</property>
+                <property name="adjustment">new_game_configuration_score_max_adjustement</property>
+                <property name="climb_rate">1</property>
+                <property name="digits">3</property>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+                <property name="width">1</property>
+                <property name="height">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-6">button_cancel_new_game_configuration</action-widget>
+      <action-widget response="-3">button_ok_new_game_configuration</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkRecentFilter" id="recent_filter_csu">
+    <patterns>
+      <pattern>*.csu</pattern>
+    </patterns>
   </object>
   <object class="GtkWindow" id="main_window">
     <property name="can_focus">False</property>
@@ -122,6 +592,25 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="chooseCsuFileOpen" swapped="no"/>
                         <accelerator key="o" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menu_open_recent">
+                        <property name="label" translatable="yes">Recently open</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Open a recent csu file</property>
+                        <property name="use_stock">False</property>
+                        <child type="submenu">
+                          <object class="GtkRecentChooserMenu" id="menu_open_recent_chooser">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="filter">recent_filter_csu</property>
+                            <property name="limit">10</property>
+                            <property name="show_not_found">False</property>
+                            <signal name="item-activated" handler="recentCsuFileOpen" swapped="no"/>
+                          </object>
+                        </child>
                       </object>
                     </child>
                     <child>
@@ -327,7 +816,6 @@
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                         <property name="tooltip_text" translatable="yes">Display the podium</property>
-                        <property name="image">image1</property>
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="displayPodium" swapped="no"/>
@@ -619,7 +1107,7 @@
               </packing>
             </child>
             <child>
-              <object class="GtkToolButton" id="toolbutton_open">
+              <object class="GtkMenuToolButton" id="toolbutton_open">
                 <property name="can_focus">False</property>
                 <property name="no_show_all">True</property>
                 <property name="tooltip_text" translatable="yes">Open a csu file</property>
@@ -631,7 +1119,7 @@
               </object>
               <packing>
                 <property name="expand">False</property>
-                <property name="homogeneous">True</property>
+                <property name="homogeneous">False</property>
               </packing>
             </child>
             <child>
@@ -2760,475 +3248,6 @@ Congratulation to the winner!</property>
         </child>
       </object>
     </child>
-  </object>
-  <object class="GtkAdjustment" id="new_csu_file_assistant_nb_player_adjustement">
-    <property name="lower">1</property>
-    <property name="upper">100</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkGrid" id="grid_new_csu_file_assistant_1">
-    <property name="visible">True</property>
-    <property name="can_focus">False</property>
-    <property name="row_spacing">15</property>
-    <property name="column_spacing">25</property>
-    <property name="column_homogeneous">True</property>
-    <child>
-      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_folder">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Folder where the new csu file will be saved</property>
-      </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_nb_player">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Number of players on the game</property>
-      </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">2</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkSpinButton" id="grid_new_csu_file_assistant_1_spin_nb_player">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="xalign">0.5</property>
-        <property name="input_purpose">number</property>
-        <property name="adjustment">new_csu_file_assistant_nb_player_adjustement</property>
-        <property name="climb_rate">1</property>
-        <property name="value">1</property>
-        <signal name="value-changed" handler="validAssistantNewCsuOne" swapped="no"/>
-      </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">2</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkLabel" id="label1">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Your game configuration</property>
-      </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">3</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkFileChooserButton" id="grid_new_csu_file_assistant_1_folder_chooser">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="action">select-folder</property>
-        <property name="local_only">False</property>
-        <signal name="selection-changed" handler="validAssistantNewCsuOne" swapped="no"/>
-      </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_folder1">
-        <property name="visible">True</property>
-        <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Name of the new csu file</property>
-      </object>
-      <packing>
-        <property name="left_attach">0</property>
-        <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <object class="GtkEntry" id="grid_new_csu_file_assistant_1_name_entry">
-        <property name="visible">True</property>
-        <property name="can_focus">True</property>
-        <property name="xalign">0.5</property>
-        <property name="placeholder_text" translatable="yes">Type here the name of the new csu file</property>
-        <signal name="changed" handler="validAssistantNewCsuOne" swapped="no"/>
-      </object>
-      <packing>
-        <property name="left_attach">1</property>
-        <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
-      </packing>
-    </child>
-    <child>
-      <placeholder/>
-    </child>
-  </object>
-  <object class="GtkAdjustment" id="new_game_configuration_initial_score_adjustement">
-    <property name="lower">-1e+18</property>
-    <property name="upper">1e+18</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkAdjustment" id="new_game_configuration_score_max_adjustement">
-    <property name="lower">-1e+18</property>
-    <property name="upper">1e+18</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">10</property>
-  </object>
-  <object class="GtkDialog" id="new_game_configuration_dialog">
-    <property name="name">New game configuration</property>
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">New game configuration</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="gravity">center</property>
-    <signal name="response" handler="gtk_widget_hide" swapped="no"/>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox1">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area1">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="button_cancel_new_game_configuration">
-                <property name="label">gtk-cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Cancel and go back to the game configuration preferences</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="button_ok_new_game_configuration">
-                <property name="label">gtk-ok</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="tooltip_text" translatable="yes">Validate the new game configuration</property>
-                <property name="use_stock">True</property>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="pack_type">end</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkGrid" id="new_game_configuration_dialog_grid">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <property name="margin_left">10</property>
-            <property name="margin_right">10</property>
-            <property name="margin_top">10</property>
-            <property name="margin_bottom">10</property>
-            <property name="row_spacing">10</property>
-            <property name="column_spacing">10</property>
-            <child>
-              <object class="GtkLabel" id="new_game_configuration_label_name">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Name of the game configuration</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="new_game_configuration_label_use_maximum">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Use a maximum or minimum score or neither</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="new_game_configuration_label_initial_score">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Initial score</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="new_game_configuration_label_nb_digit">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Number of decimals displayed</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="new_game_configuration_label_first_way">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">The winner is the player with the highest score</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="new_game_configuration_label_turn_based">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">The points will be attributed in turn-based</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="new_game_configuration_label_distrubutor">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Use of a distributor</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="new_game_configuration_label_nb_max">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Maximal or minimal score which a player can reach in the game</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkEntry" id="new_game_configuration_entry_name">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hexpand">True</property>
-                <property name="width_chars">30</property>
-                <property name="xalign">0.5</property>
-                <property name="placeholder_text" translatable="yes">Type here the name of the game configuration</property>
-                <property name="input_hints">GTK_INPUT_HINT_UPPERCASE_WORDS | GTK_INPUT_HINT_NONE</property>
-                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="new_game_configuration_switch_first_way">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="active">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="new_game_configuration_switch_turn_based">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <property name="active">True</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSwitch" id="new_game_configuration_switch_distrubutor">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="new_game_configuration_combo_nb_digit">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item id="0" translatable="yes">0</item>
-                  <item id="1" translatable="yes">1</item>
-                  <item id="2" translatable="yes">2</item>
-                  <item id="3" translatable="yes">3</item>
-                </items>
-                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="new_game_configuration_combo_max">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item id="max" translatable="yes">Maximum</item>
-                  <item id="min" translatable="yes">Minimum</item>
-                  <item id="neither" translatable="yes">Neither</item>
-                </items>
-                <signal name="changed" handler="checkGoodNewGameConfiguration" swapped="no"/>
-                <signal name="changed" handler="noMaxMinNewGameConfiguration" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="new_game_configuration_spin_initial_score">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="xalign">0.5</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">number</property>
-                <property name="adjustment">new_game_configuration_initial_score_adjustement</property>
-                <property name="climb_rate">1</property>
-                <property name="digits">3</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkSpinButton" id="new_game_configuration_spin_nb_max">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="xalign">0.5</property>
-                <property name="caps_lock_warning">False</property>
-                <property name="input_purpose">number</property>
-                <property name="adjustment">new_game_configuration_score_max_adjustement</property>
-                <property name="climb_rate">1</property>
-                <property name="digits">3</property>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="-6">button_cancel_new_game_configuration</action-widget>
-      <action-widget response="-3">button_ok_new_game_configuration</action-widget>
-    </action-widgets>
   </object>
   <object class="GtkScrolledWindow" id="scrolled_window_new_csu_file_assistant_2">
     <property name="visible">True</property>

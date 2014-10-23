@@ -160,6 +160,48 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 }
 
 /*!
+ * \fn G_MODULE_EXPORT void recentCsuFileOpen(GtkRecentChooser *chooser, gpointer data)
+ *  Open a recent csu file.
+ * \param[in] the GtkRecentChooser which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void recentCsuFileOpen(GtkRecentChooser *chooser, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    /* Get the filename*/
+    gchar *uri,*filename;
+    uri=gtk_recent_chooser_get_current_uri(GTK_RECENT_CHOOSER(chooser));
+    filename=g_filename_from_uri(uri,NULL,NULL);
+
+    if (user_data->ptr_csu_struct != NULL)
+        closeCsuStruct(user_data->ptr_csu_struct);
+
+    user_data->ptr_csu_struct=NULL;
+    (user_data->ptr_csu_struct) = readCsuFile(filename);
+    if((user_data->ptr_csu_struct) == NULL)
+        openFileError(user_data);
+    else
+    {
+        /* Save the folder */
+        #ifndef PORTABLE
+        gchar folder[SIZE_MAX_FILE_NAME];
+        strcpy(folder,filename);
+        if (getFolderFromFilename(folder) == true)
+            changeSystemPath(folder);
+        #endif // PORTABLE
+
+        strcpy(user_data->csu_filename,filename);
+        updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
+        deleteAllLastCsuStruct(user_data);
+        addLastCsuStruct(user_data);
+        setButtonMainWindow(user_data);
+    }
+    g_free(uri);
+    g_free(filename);
+}
+
+/*!
  * \fn void openFileError(globalData *data)
  *  Display a dialog box which said that there is a problem when loading the file.
  * \param[in] data the globalData

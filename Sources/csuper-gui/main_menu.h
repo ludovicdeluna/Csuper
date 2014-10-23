@@ -40,6 +40,7 @@
 
 G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void recentCsuFileOpen(GtkRecentChooser *chooser, gpointer data);
 void openFileError(globalData *data);
 G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data);
 void saveFileError(globalData *data);

@@ -583,6 +583,16 @@ void setButtonMainWindow(globalData *data)
     if (!menu_podium)
         g_critical(_("Widget menu_display_podium is missing in file csuper-gui.glade."));
 
+    GtkRecentFilter *recent_filter_csu = GTK_RECENT_FILTER(gtk_builder_get_object(data->ptr_builder,"recent_filter_csu"));
+    if (!recent_filter_csu)
+        g_critical(_("Widget recent_filter_csu is missing in file csuper-gui.glade."));
+
+    GtkWidget *recent_chooser = gtk_recent_chooser_menu_new();
+    gtk_recent_chooser_set_filter(GTK_RECENT_CHOOSER(recent_chooser),recent_filter_csu);
+    gtk_recent_chooser_set_show_not_found(GTK_RECENT_CHOOSER(recent_chooser),FALSE);
+    gtk_menu_tool_button_set_menu(GTK_MENU_TOOL_BUTTON(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),1)),recent_chooser);
+    g_signal_connect(recent_chooser,"item-activated", G_CALLBACK(recentCsuFileOpen),data);
+
     #ifdef ENABLE_DEPRECIATE_FUNCTIONS
     GtkWidget *menu_preferences_game = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_preference_game_config"));
     if (!menu_preferences_game)
