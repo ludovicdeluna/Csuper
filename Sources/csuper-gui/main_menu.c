@@ -146,7 +146,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
                 updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
                 deleteAllLastCsuStruct(user_data);
                 addLastCsuStruct(user_data);
-                setButtonMainWindowSensitive(user_data);
+                setButtonMainWindow(user_data);
             }
             g_free(filename);
 			break;
@@ -554,7 +554,7 @@ G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data)
                 closeCsuStruct(user_data->ptr_csu_struct);
                 user_data->ptr_csu_struct = NULL;
                 deleteAllLastCsuStruct(user_data);
-                setButtonMainWindowSensitive(user_data);
+                setButtonMainWindow(user_data);
             }
             else
                 deleteFileError(user_data);
@@ -578,4 +578,18 @@ void deleteFileError(globalData *data)
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);
+}
+
+/*!
+ * \fn G_MODULE_EXPORT void displayPodium(GtkWidget *widget, gpointer data)
+ *  Display the podium
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void displayPodium(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    if (user_data->ptr_csu_struct != NULL)
+        gameOver(user_data);
 }

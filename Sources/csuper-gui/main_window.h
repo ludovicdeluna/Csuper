@@ -50,7 +50,7 @@ void deletePoints(globalData *data);
 void createPointsGrid(globalData *data,bool spin_button);
 G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data);
 void gameOver(globalData *data);
-void setButtonMainWindowSensitive(globalData *data);
+void setButtonMainWindow(globalData *data);
 G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data);
 void readMainWindowSize(globalData *data);
 G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gpointer user_data);

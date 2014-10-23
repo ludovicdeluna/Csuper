@@ -91,7 +91,7 @@ int main (int argc, char *argv[])
     /* Set csuper */
     noCsuFileRanking(&data);
     noCsuFilePoints(&data);
-    setButtonMainWindowSensitive(&data);
+    setButtonMainWindow(&data);
     readMainWindowSize(&data);
     updateToolbarButton(&data);
 
@@ -146,7 +146,7 @@ bool openFileWithMainArgument(globalData *data,int argc, char *argv[])
         updateMainWindow(data,!exceedMaxNumber(data->ptr_csu_struct));
         deleteAllLastCsuStruct(data);
         addLastCsuStruct(data);
-        setButtonMainWindowSensitive(data);
+        setButtonMainWindow(data);
     }
     else
     {

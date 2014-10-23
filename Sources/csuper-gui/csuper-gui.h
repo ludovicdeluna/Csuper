@@ -47,6 +47,12 @@
 //#define PORTABLE
 
 /*!
+ * \def ENABLE_DEPRECIATE_FUNCTIONS
+ * Define that we enable using depreciate function
+ */
+#define ENABLE_DEPRECIATE_FUNCTIONS
+
+/*!
  * \def NB_LAST_CSU_STRUCT
  * Define the number of last csu structure saved
  */

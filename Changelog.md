@@ -63,7 +63,8 @@ Csuper-gui
 * Add the possibility to choose which game configuration will be import/export
 * When there is a hew turn, the point window scroll at the bottom
 * You can now change the distributore during the game
-* Add shortcut
+* Add shortcuts
+* Add a podium at the end of the game
 
 4.0.2
 

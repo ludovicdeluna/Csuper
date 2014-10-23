@@ -149,7 +149,7 @@ void updateMainWindow(globalData *data,bool editable)
     deletePoints(data);
     createPointsGrid(data,editable);
     updateTotalPointsInTurnLabel(data,editable);
-    setButtonMainWindowSensitive(data);
+    setButtonMainWindow(data);
 }
 
 /*!
@@ -545,11 +545,11 @@ void gameOver(globalData *data)
 }
 
 /*!
- * \fn void setButtonMainWindowSensitive(globalData *data)
+ * \fn void setButtonMainWindow(globalData *data)
  *  Set the button of the main window sensitive or not
  * \param[in] data the globalData
  */
-void setButtonMainWindowSensitive(globalData *data)
+void setButtonMainWindow(globalData *data)
 {
     GtkWidget *button_end_of_turn = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"button_end_of_turn"));
     if (!button_end_of_turn)
@@ -579,6 +579,25 @@ void setButtonMainWindowSensitive(globalData *data)
     if (!menu_properties)
         g_critical(_("Widget menu_print is missing in file csuper-gui.glade."));
 
+    GtkWidget *menu_podium = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_podium"));
+    if (!menu_podium)
+        g_critical(_("Widget menu_display_podium is missing in file csuper-gui.glade."));
+
+    #ifdef ENABLE_DEPRECIATE_FUNCTIONS
+    GtkWidget *menu_preferences_game = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_preference_game_config"));
+    if (!menu_preferences_game)
+        g_critical(_("Widget menu_preference_game_config is missing in file csuper-gui.glade."));
+
+    GtkWidget *menu_preferences_toolbar = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_preferences_toolbar_button"));
+    if (!menu_preferences_toolbar)
+        g_critical(_("Widget menu_preferences_toolbar_button is missing in file csuper-gui.glade."));
+
+    /* Set the image of the menu */
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menu_podium),gtk_image_new_from_file("Images/Podium_icon.svg"));
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menu_preferences_game),gtk_image_new_from_stock("gtk-preferences",GTK_ICON_SIZE_MENU));
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menu_preferences_toolbar),gtk_image_new_from_stock("gtk-preferences",GTK_ICON_SIZE_MENU));
+    #endif
+
     /* If there is no csu file opened */
     if (data->ptr_csu_struct == NULL)
     {
@@ -590,6 +609,7 @@ void setButtonMainWindowSensitive(globalData *data)
         gtk_widget_set_sensitive(menu_save_as,FALSE);
         gtk_widget_set_sensitive(menu_delete_file,FALSE);
         gtk_widget_set_sensitive(menu_print,FALSE);
+        gtk_widget_set_sensitive(menu_podium,FALSE);
         gtk_widget_set_sensitive(button_end_of_turn,FALSE);
         gtk_widget_set_sensitive(button_change_distributor,FALSE);
     }
@@ -613,6 +633,7 @@ void setButtonMainWindowSensitive(globalData *data)
         gtk_widget_set_sensitive(menu_save_as,TRUE);
         gtk_widget_set_sensitive(menu_delete_file,TRUE);
         gtk_widget_set_sensitive(menu_print,TRUE);
+        gtk_widget_set_sensitive(menu_podium,TRUE);
     }
 
     /* The undo buttons */
@@ -644,8 +665,6 @@ void setButtonMainWindowSensitive(globalData *data)
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),FALSE);
         gtk_widget_set_sensitive(menu_redo,FALSE);
     }
-
-    //setButtonMainWindowClipboardSensitive(NULL,data);
 }
 
 /*!
