@@ -558,6 +558,7 @@
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <property name="hexpand">True</property>
+            <property name="take_focus">False</property>
             <child>
               <object class="GtkMenuItem" id="menu_file">
                 <property name="visible">True</property>
@@ -822,6 +823,39 @@
                         <accelerator key="e" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="menu_display_consecutive">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Display the points differences between two consecutive player in the ranking</property>
+                        <property name="label" translatable="yes">Display the difference between two player consecutive</property>
+                        <property name="use_underline">True</property>
+                        <signal name="toggled" handler="changeDisplayDifferencePoints" swapped="no"/>
+                        <accelerator key="c" signal="activate" modifiers="GDK_CONTROL_MASK | GDK_MOD1_MASK"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="menu_display_first">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Display the points differences between a player and the first one in the ranking</property>
+                        <property name="label" translatable="yes">Display the difference with the first</property>
+                        <property name="use_underline">True</property>
+                        <signal name="toggled" handler="changeDisplayDifferencePoints" swapped="no"/>
+                        <accelerator key="f" signal="activate" modifiers="GDK_CONTROL_MASK | GDK_MOD1_MASK"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkCheckMenuItem" id="menu_display_last">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Display the points differences between a player and the last one in the ranking</property>
+                        <property name="label" translatable="yes">Display the difference with the last</property>
+                        <property name="use_underline">True</property>
+                        <signal name="toggled" handler="changeDisplayDifferencePoints" swapped="no"/>
+                        <accelerator key="l" signal="activate" modifiers="GDK_CONTROL_MASK | GDK_MOD1_MASK"/>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
@@ -955,9 +989,9 @@
                 <property name="halign">center</property>
                 <property name="valign">end</property>
                 <property name="vexpand">True</property>
+                <property name="focus_on_click">False</property>
                 <property name="image_position">bottom</property>
                 <signal name="clicked" handler="endOfTurn" swapped="no"/>
-                <accelerator key="e" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
                 <accelerator key="Return" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
               </object>
               <packing>
@@ -1042,13 +1076,14 @@
                 <property name="label" translatable="yes">Change distributor</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
+                <property name="receives_default">False</property>
                 <property name="tooltip_text" translatable="yes">Change the distributor</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
                 <property name="vexpand">True</property>
+                <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="changeDistributorButton" swapped="no"/>
                 <accelerator key="d" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
               </object>

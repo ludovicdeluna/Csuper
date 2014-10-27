@@ -335,7 +335,7 @@ int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
 
 /*!
  * \fn bool differentsPlayerName(csuStruct *ptr_csu_struct)
- *  Search the index of a person
+ *  Search if all the name are different
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
  * \return true if all player names are different, false otherwise
  */

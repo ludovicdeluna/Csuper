@@ -635,3 +635,44 @@ G_MODULE_EXPORT void displayPodium(GtkWidget *widget, gpointer data)
     if (user_data->ptr_csu_struct != NULL)
         gameOver(user_data);
 }
+
+/*!
+ * \fn G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer data)
+ *  Update the preference of the differences ont the points in the ranking
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    difference_between_player diff;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+
+    GtkWidget *consecutive = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_consecutive"));
+    if (!consecutive)
+        g_critical(_("Widget menu_display_consecutive is missing in file csuper-gui.glade."));
+
+    GtkWidget *first = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_first"));
+    if (!first)
+        g_critical(_("Widget menu_display_consecutive is missing in file csuper-gui.glade."));
+
+    GtkWidget *last = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_last"));
+    if (!last)
+        g_critical(_("Widget menu_display_last is missing in file csuper-gui.glade."));
+
+    diff.consecutive=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(consecutive));
+    diff.first=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(first));
+    diff.last=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(last));
+
+    createFileDifferenceBetweenPlayer(home_path,diff);
+
+    if (user_data->ptr_csu_struct != NULL)
+    {
+        deleteRanking(user_data);
+        createRanking(user_data);
+    }
+}

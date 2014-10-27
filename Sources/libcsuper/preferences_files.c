@@ -348,4 +348,63 @@ bool changeSystemPath(char *new_path)
     return true;
 }
 
+/*!
+ * \fn bool createFileDifferenceBetweenPlayer(char *home_path, difference_between_player diff)
+ *  Create the file which contain the data which explain that we display the differences between players
+ * \param[in] home_path the path to the home directory
+ * \param[in] diff the difference structure
+ * \return true if everything is OK, false otherwise
+ */
+bool createFileDifferenceBetweenPlayer(char *home_path, difference_between_player diff)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
 
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_DIFFERENCE_BETWEEN_PLAYER);
+
+    createPreferencesFolder(home_path);
+
+    ptr_file=openFile(file_name,"w+");
+
+    if (ptr_file==NULL)
+        return false;
+
+    fprintf(ptr_file,"%d %d %d",diff.consecutive,diff.first,diff.last);
+
+    closeFile(ptr_file);
+
+    return true;
+}
+
+
+/*!
+ * \fn bool readFileDifferenceBetweenPlayer(char *home_path, difference_between_player *diff)
+ *  Read the file which contain the data which explain that we display the differences between players
+ * \param[in] home_path the path to the home directory
+ * \param[in] diff the difference structure
+ * \return true if everything is OK, false otherwise
+ */
+bool readFileDifferenceBetweenPlayer(char *home_path, difference_between_player *diff)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    diff->consecutive=false;
+    diff->first=false;
+    diff->last=false;
+
+    createPreferencesFolder(home_path);
+
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_DIFFERENCE_BETWEEN_PLAYER);
+
+    ptr_file=openFile(file_name,"r");
+
+    if (ptr_file==NULL)
+        return createFileDifferenceBetweenPlayer(home_path,*diff);
+
+    fscanf(ptr_file,"%d %d %d",(int*)&(diff->consecutive),(int*)&(diff->first),(int*)&(diff->last));
+
+    closeFile(ptr_file);
+
+    return true;
+}

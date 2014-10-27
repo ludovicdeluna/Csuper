@@ -60,6 +60,12 @@
 #define FILENAME_MAIN_WINDOW_SIZE "main_window_size.txt"
 
 /*!
+ * \def FILENAME_DIFFERENCE_BETWEEN_PLAYER
+ * Define filename of the file which contain the difference preference
+ */
+#define FILENAME_DIFFERENCE_BETWEEN_PLAYER "difference_beteween_player.txt"
+
+/*!
  * \def PREFERENCES_FOLDER_NAME
  * Define the folder name of the csuper preferences
  */
@@ -106,6 +112,17 @@ typedef struct
     int is_maximize;              /*!< Said if the main window is maximize or not */
 }main_window_size;
 
+/*!
+ * \struct difference_between_player
+ * Indicate which difference between player will be displayed in the ranking
+ */
+typedef struct
+{
+    bool consecutive;   /*!< Between two player consecutive */
+    bool first;         /*!< Between the player and the first */
+    bool last;          /*!< Between the player and the last one */
+}difference_between_player;
+
 
 void createPreferencesFolder(char *home_path);
 bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar);
@@ -117,5 +134,7 @@ bool createFileSystemPath();
 bool readFileSystemPath(char *file_name);
 bool readSystemPath(char *file_name);
 bool changeSystemPath(char *new_path);
+bool createFileDifferenceBetweenPlayer(char *home_path, difference_between_player diff);
+bool readFileDifferenceBetweenPlayer(char *home_path, difference_between_player *diff);
 
 #endif

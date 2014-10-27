@@ -77,6 +77,7 @@ void createRanking(globalData *data)
     gint i;
     gint index;
     gint nb;
+    gfloat points,points_first,points_last,previous_points;;
 
     GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_grid_game_config"));
     if (!grid)
@@ -95,17 +96,37 @@ void createRanking(globalData *data)
     #endif // GTK_MINOR_VERSION
     gtk_widget_set_margin_top(rank_grid,10);
     gtk_widget_set_margin_bottom(rank_grid,10);
+    gtk_widget_set_vexpand(rank_grid,TRUE);
+
+    /* Get the diff structure*/
+    difference_between_player diff;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    readFileDifferenceBetweenPlayer(home_path,&diff);
 
     /* Set the column name */
     gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Position")),0,0,1,1);
     gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Name")),1,0,1,1);
     gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Points")),2,0,1,1);
+    if (diff.consecutive)
+        gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Diff cons")),3,0,1,1);
+    if (diff.first)
+        gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Diff first")),4,0,1,1);
+    if (diff.last)
+        gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(_("Diff last")),5,0,1,1);
+
+    nb=1;
+    points_first = data->ptr_csu_struct->total_points[searchIndexFromPosition(data->ptr_csu_struct,1,&nb)];
+    points_last = data->ptr_csu_struct->total_points[searchIndexFromPosition(data->ptr_csu_struct,data->ptr_csu_struct->nb_player,&nb)];
 
     /* Set all the information*/
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
     {
         nb=1;
         index=searchIndexFromPosition(data->ptr_csu_struct,i+1,&nb);
+        points=data->ptr_csu_struct->total_points[index];
 
         gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%d"),i+2-nb)),0,i+1,1,1);
 
@@ -114,21 +135,45 @@ void createRanking(globalData *data)
         switch (data->ptr_csu_struct->config.decimal_place)
         {
         case 0 :
-            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.0f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
+            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.0f"),points)),2,i+1,1,1);
+            if (diff.first)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.0f"),fabs(points_first-points))),4,i+1,1,1);
+            if (diff.last)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.0f"),fabs(points_last-points))),5,i+1,1,1);
+            if (diff.consecutive && i>0)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.0f"),fabs(previous_points-points))),3,i+1,1,1);
             break;
         case 1 :
-            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.1f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
+            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.1f"),points)),2,i+1,1,1);
+            if (diff.first)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.1f"),fabs(points_first-points))),4,i+1,1,1);
+            if (diff.last)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.1f"),fabs(points_last-points))),5,i+1,1,1);
+            if (diff.consecutive && i>0)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.1f"),fabs(previous_points-points))),3,i+1,1,1);
             break;
         case 2 :
-            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.2f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
+            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.2f"),points)),2,i+1,1,1);
+            if (diff.first)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.2f"),fabs(points_first-points))),4,i+1,1,1);
+            if (diff.last)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.2f"),fabs(points_last-points))),5,i+1,1,1);
+            if (diff.consecutive && i>0)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.2f"),fabs(previous_points-points))),3,i+1,1,1);
             break;
         case 3 :
-            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.3f"),data->ptr_csu_struct->total_points[index])),2,i+1,1,1);
+            gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.3f"),points)),2,i+1,1,1);
+            if (diff.first)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.3f"),fabs(points_first-points))),4,i+1,1,1);
+            if (diff.last)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.3f"),fabs(points_last-points))),5,i+1,1,1);
+            if (diff.consecutive && i>0)
+                gtk_grid_attach(GTK_GRID(rank_grid),gtk_label_new(g_strdup_printf(_("%.3f"),fabs(previous_points-points))),3,i+1,1,1);
             break;
         }
-    }
 
-    gtk_widget_set_vexpand(rank_grid,TRUE);
+        previous_points=points;
+    }
 
     gtk_grid_attach(GTK_GRID(grid),rank_grid,0,1,1,1);
 
@@ -486,7 +531,7 @@ void gameOver(globalData *data)
     if (!fixed)
         g_critical(_("Widget dialog_game_over_fixed is missing in file csuper-gui.glade."));
 
-    GtkWidget *podium =gtk_image_new_from_file("Images/Podium.svg");
+    GtkWidget *podium =gtk_image_new_from_file("Images/Podium.png");
     gtk_fixed_put(GTK_FIXED(fixed),podium,0,20);
 
 
@@ -583,6 +628,8 @@ void setButtonMainWindow(globalData *data)
     if (!menu_podium)
         g_critical(_("Widget menu_display_podium is missing in file csuper-gui.glade."));
 
+
+    /* Set the recent csu file open */
     GtkRecentFilter *recent_filter_csu = GTK_RECENT_FILTER(gtk_builder_get_object(data->ptr_builder,"recent_filter_csu"));
     if (!recent_filter_csu)
         g_critical(_("Widget recent_filter_csu is missing in file csuper-gui.glade."));
@@ -603,10 +650,37 @@ void setButtonMainWindow(globalData *data)
         g_critical(_("Widget menu_preferences_toolbar_button is missing in file csuper-gui.glade."));
 
     /* Set the image of the menu */
-    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menu_podium),gtk_image_new_from_file("Images/Podium_icon.svg"));
+    gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menu_podium),gtk_image_new_from_file("Images/Podium_icon.png"));
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menu_preferences_game),gtk_image_new_from_stock("gtk-preferences",GTK_ICON_SIZE_MENU));
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menu_preferences_toolbar),gtk_image_new_from_stock("gtk-preferences",GTK_ICON_SIZE_MENU));
     #endif
+
+
+    /* Set the toggle button of the display preferences */
+    difference_between_player diff;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    readFileDifferenceBetweenPlayer(home_path,&diff);
+
+    GtkWidget *consecutive = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_consecutive"));
+    if (!consecutive)
+        g_critical(_("Widget menu_display_consecutive is missing in file csuper-gui.glade."));
+
+    GtkWidget *first = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_first"));
+    if (!first)
+        g_critical(_("Widget menu_display_consecutive is missing in file csuper-gui.glade."));
+
+    GtkWidget *last = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_last"));
+    if (!last)
+        g_critical(_("Widget menu_display_last is missing in file csuper-gui.glade."));
+
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(consecutive),diff.consecutive);
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(first),diff.first);
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(last),diff.last);
+
 
     /* If there is no csu file opened */
     if (data->ptr_csu_struct == NULL)

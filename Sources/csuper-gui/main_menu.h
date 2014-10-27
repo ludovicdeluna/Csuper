@@ -58,5 +58,6 @@ void updateToolbarButton(globalData *data);
 G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data);
 void deleteFileError(globalData *data);
 G_MODULE_EXPORT void displayPodium(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_MENU_H_INCLUDED

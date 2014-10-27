@@ -66,6 +66,7 @@ Csuper-gui
 * Add shortcuts
 * Add a podium at the end of the game
 * Add the possibility to open recent file
+* Add the possibilty to display difference between players
 
 4.0.2
 
