@@ -7,32 +7,32 @@
  * \version 4.0.0
  */
 
- /*
- * csu_struct.c
- *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
- *
- * This file is part of LibCsuper.
- *
- * LibCsuper is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * LibCsuper is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- *
- */
+/*
+* csu_struct.c
+*
+* Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+*
+* This file is part of LibCsuper.
+*
+* LibCsuper is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 3 of the License, or
+* (at your option) any later version.
+*
+* LibCsuper is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+* MA 02110-1301, USA.
+*
+*
+*/
 
- #include "csu_struct.h"
+#include "csu_struct.h"
 
 /*!
  * \fn csuStruct *newCsuStruct(float nb_player , game_config config)
@@ -126,7 +126,7 @@ void startNewTurn(csuStruct *ptr_csu_struct,int index_player)
 
     if (index_player == -1)
     {
-         for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
             myRealloc((void**)&(ptr_csu_struct->point[i]),ptr_csu_struct->nb_player*((ptr_csu_struct->nb_turn[0])+1)*sizeof(float));
     }
     else
@@ -202,9 +202,7 @@ void rankCalculation(csuStruct *ptr_csu_struct)
         for(j=0 ; j<ptr_csu_struct->nb_player ; j++)
         {
             if (sort_points[i]==ptr_csu_struct->total_points[j])
-            {
                 ptr_csu_struct->rank[j]=i+1;
-            }
         }
     }
 
@@ -405,16 +403,51 @@ csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct)
 
 /*!
  * \fn bool changeDistributor(csuStruct *ptr_csu_struct, int index)
- *  Change the ditributor
+ *  Change the distributor
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] index the index of the player
  * \return true if the distributor can be change, false otherwise
  */
 bool changeDistributor(csuStruct *ptr_csu_struct, int index)
 {
     if (index >= ptr_csu_struct->nb_player + 0.1)
+    {
+        printf(_("\nError: this index doesn't exist\n"));
         return false;
+    }
 
     ptr_csu_struct->distributor = index;
 
     return true;
+}
+
+
+/*!
+ * \fn float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+ *  Return the number of points of a player at a specific turn
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \param[in] turn she turn
+ * \return true if the distributor can be change, false otherwise
+ */
+float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+{
+    if (ptr_csu_struct->nb_turn[player_index] < turn)
+    {
+        printf(_("\nError: %s only have %.0f turn but you ask the %d turn\n"),ptr_csu_struct->player_names[player_index],ptr_csu_struct->nb_turn[player_index],turn);
+        return 0;
+    }
+    if (turn < 0)
+    {
+        printf(_("\nError: negative turns doesn't exist\n"));
+        return 0;
+    }
+
+    int i;
+    float points=0;
+
+    for (i=0 ; i<=turn ; i++)
+        points += ptr_csu_struct->point[player_index][i];
+
+    return points;
 }

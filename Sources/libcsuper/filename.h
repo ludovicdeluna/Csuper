@@ -2,14 +2,14 @@
  * \file    filename.h
  * \brief   Header for the essential function of libcsuper
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    22/12/14
+ * \version 4.1.0
  */
 
  /*
  * filename.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of LibCsuper.
  *
@@ -37,11 +37,15 @@
 #include "preferences_files.h"
 
 void addFileCsuExtension(char *file_name);
+void addFilePdfExtension(char *file_name);
+void addFileCsvExtension(char *file_name);
+void removeFileExtension(char *file_name);
 bool getFolderFromFilename(char *file_name_to_folder);
 bool getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename);
 bool checkPath(char *path);
 bool checkFilename(char *filename,char * folder);
 void readHomePath(char *path);
 void readHomePathSlash(char *path);
+bool removeFilenameExtension(char *filename);
 
 #endif // FILENAME_H_INCLUDED

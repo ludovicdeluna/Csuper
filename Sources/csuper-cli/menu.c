@@ -9,7 +9,7 @@
  /*
  * menu.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-cli.
  *
@@ -37,7 +37,7 @@
  * \fn char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
  *  Ask and save the filename.
  * \param[in,out] file_name the filename
- * \return filename
+ * \return the filename
  */
 char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
 {
@@ -488,4 +488,82 @@ bool menuImportListGameConfig(int **id,int *nb_id,char *filename)
     closeListGameConfig(ptr_list_config);
 
     return true;
+}
+
+
+/*!
+ * \fn void menuPdfPreferences(export_pdf_preferences *pref)
+ *  Fill a export pdf preferences structure
+ * \param[in] ptr_pref a pointer on a export_pdf_preferences
+ */
+void menuPdfPreferences(export_pdf_preferences *pref)
+{
+    clearScreen();
+
+    char choice;
+    int nb;
+
+    // Charset
+    if (canUseUtf8Pdf())
+    {
+        printf(_("The UTF-8 character set permit to display all the character with the cost of bigger pdf file.\n\nWould you like to use the UTF-8 character set (y/N)? "));
+        charKey(&choice);
+        if (choice=='Y' || choice == 'y')
+            pref->charset = UTF8;
+        else
+        pref->charset = ISO885915;
+    }
+
+    // Direction
+    printf(_("\n\nWhat page direction of the page do you want?\n (1) Portrait (default)\n (2) Landscape\nYour choice: "));
+    charKey(&choice);
+    if (choice=='2' || choice=='2')
+        pref->direction = HPDF_PAGE_LANDSCAPE;
+    else
+        pref->direction = HPDF_PAGE_PORTRAIT;
+
+    // Size
+    printf(_("\n\nWhat size of page do you want?\n (1) A3\n (2) A4 (default)\n (3) A5 \nYour choice: "));
+    charKey(&choice);
+    if (choice=='1')
+        pref->size = HPDF_PAGE_SIZE_A3 ;
+    else if (choice=='3')
+        pref->size = HPDF_PAGE_SIZE_A5;
+    else
+        pref->size = HPDF_PAGE_SIZE_A4;
+
+    // Margin
+    do
+    {
+        printf(_("\nGive the margin you want or -1 if want to keep the old one (%d). It will be between 0 and 200.\nYour choice: "),pref->margin);
+        intKey(&nb);
+    } while (nb < -1 || nb > 200);
+    if (nb != -1)
+        pref->margin = nb;
+
+    // Font size
+    do
+    {
+        printf(_("\nGive the font size you want or -1 if want to keep the old one (%d). It will be between 4 and 40.\nYour choice: "),pref->font_size);
+        intKey(&nb);
+    } while ((nb < 4 || nb > 40) && nb != -1);
+    if (nb != -1)
+        pref->font_size = nb;
+}
+
+
+/*!
+ * \fn FileType menuChooseExportFileType()
+ *  Choose the file type which will be exported
+ */
+FileType menuChooseExportFileType()
+{
+    char choice;
+
+    printf(_("\nIn what file type would you like to export?\n (1) PDF file (default)\n (2) CSV file\nYour choice: "));
+    charKey(&choice);
+    if (choice=='2' || choice=='2')
+        return csv_file;
+    else
+        return pdf_file;
 }

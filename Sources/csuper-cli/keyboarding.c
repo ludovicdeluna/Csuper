@@ -9,7 +9,7 @@
  /*
  * keyboarding.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-cli.
  *

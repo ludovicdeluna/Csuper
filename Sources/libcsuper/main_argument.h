@@ -9,7 +9,7 @@
 /*
  * main_argument.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of LibCsuper.
  *
@@ -36,6 +36,15 @@
 
 #include "share.h"
 
+typedef enum
+{
+    read_file,
+    open_file,
+    help,
+    export_to_pdf,
+    export_to_csv
+} main_argument_function;
+
 /*!
  * \def STRING_READ_FILE
  * Define the argument which call to read a file to "--read"
@@ -47,12 +56,6 @@
  * Define the reduce argument which call to read a file to "-r"
  */
 #define STRING_READ_FILE_RED "-r"
-
-/*!
- * \def READ_FILE
- * Define the call to read a file to 0
- */
-#define READ_FILE 0
 
 /*!
  * \def STRING_OPEN_FILE
@@ -67,12 +70,6 @@
 #define STRING_OPEN_FILE_RED "-o"
 
 /*!
- * \def OPEN_FILE
- * Define the call to read a file to 1
- */
-#define OPEN_FILE 1
-
-/*!
  * \def STRING_HELP
  * Define the argument which call help to "--help"
  */
@@ -85,12 +82,31 @@
 #define STRING_HELP_RED "-h"
 
 /*!
- * \def HELP
- * Define the call help to 2
+ * \def STRING_EXPORT_TO_PDF
+ * Define the argument which call to export to pdf to "--to-pdf"
  */
-#define HELP 2
+#define STRING_EXPORT_TO_PDF "--to-pdf"
 
-bool searchArgument(int argc, char *argv[], int *function, int *file_place);
+/*!
+ * \def STRING_EXPORT_TO_PDF_RED
+ * Define the reduce argument which call to export to pdf to "-p"
+ */
+#define STRING_EXPORT_TO_PDF_RED "-p"
+
+
+/*!
+ * \def STRING_EXPORT_TO_CSV
+ * Define the argument which call to export to csv to "--to-csv"
+ */
+#define STRING_EXPORT_TO_CSV "--to-csv"
+
+/*!
+ * \def STRING_EXPORT_TO_CSV_RED
+ * Define the reduce argument which call to export to csv to "-c"
+ */
+#define STRING_EXPORT_TO_CSV_RED "-c"
+
+bool searchArgument(int argc, char *argv[], main_argument_function *function, int *file_place);
 void displayHelp();
 
 #endif

@@ -1,13 +1,13 @@
 /*!
- * \file    utils.h
- * \brief   The new file assistant function
+ * \file    toolbar_button_preferences.h
+ * \brief   The preferences of csuper
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    10/01/15
+ * \version 4.2.0
  */
 
  /*
- * utils.h
+ * toolbar_button_preferences.h
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,11 +31,16 @@
  *
  */
 
-#ifndef UTILS_H_INCLUDED
-#define UTILS_H_INCLUDED
+#ifndef TOOLBAR_BUTTON_PREFERENCES_H_INCLUDED
+#define TOOLBAR_BUTTON_PREFERENCES_H_INCLUDED
 
 #include "csuper-gui.h"
+#include "utils.h"
+#include "main_window.h"
 
-void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue);
-GtkLabel *createGtkLabelWithAttributes(gchar *text, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue);
-#endif // UTILS_H_INCLUDED
+void updateToolbarButtonPreferencesSwitch(globalData *data);
+void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar);
+G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget,gpointer data);
+G_MODULE_EXPORT void validToolbarButtonPreferences(GtkWidget *widget, gpointer data);
+
+#endif // TOOLBAR_BUTTON_PREFERENCES_H_INCLUDED

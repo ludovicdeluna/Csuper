@@ -6,32 +6,32 @@
  * \version 2.4.0
  */
 
- /*
- * game_config.c
- *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
- *
- * This file is part of LibCsuper.
- *
- * LibCsuper is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * LibCsuper is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- *
- */
+/*
+* game_config.c
+*
+* Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+*
+* This file is part of LibCsuper.
+*
+* LibCsuper is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 3 of the License, or
+* (at your option) any later version.
+*
+* LibCsuper is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+* MA 02110-1301, USA.
+*
+*
+*/
 
- #include "game_config.h"
+#include "game_config.h"
 
 /*!
  * \fn list_game_config *newListGameConfig(int nb_config)
@@ -46,7 +46,7 @@ list_game_config *newListGameConfig(int nb_config)
     config->nb_config=nb_config;
     config->name_game_config = (char **)myAlloc(nb_config*sizeof(char*));
     for (i=0 ; i< nb_config ; i++)
-    config->name_game_config[i]=(char *)myAlloc(sizeof(char)*SIZE_MAX_FILE_NAME);
+        config->name_game_config[i]=(char *)myAlloc(sizeof(char)*SIZE_MAX_FILE_NAME);
     return config;
 }
 
@@ -59,17 +59,17 @@ void closeListGameConfig(list_game_config *ptr_list_config)
 {
     int i;
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
-       free(ptr_list_config->name_game_config[i]);
+        free(ptr_list_config->name_game_config[i]);
     free(ptr_list_config->name_game_config);
     free(ptr_list_config);
 }
 
- /*!
- * \fn bool makeConfigListFile(char * home_path)
- *  Create the folder which contain the games configurations and the files which contain the list of games configurations
- * \param[in] *home_path the path to the home directory
- * \return true if everything is OK, false otherwise
- */
+/*!
+* \fn bool makeConfigListFile(char * home_path)
+*  Create the folder which contain the games configurations and the files which contain the list of games configurations
+* \param[in] *home_path the path to the home directory
+* \return true if everything is OK, false otherwise
+*/
 bool makeConfigListFile(char * home_path)
 {
     char folder[SIZE_MAX_FILE_NAME]="";
@@ -78,20 +78,20 @@ bool makeConfigListFile(char * home_path)
 
     sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
-    #ifdef __unix__
+#ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    #elif _WIN32
+#elif _WIN32
     mkdir(folder);
-    #endif
+#endif
 
     sprintf(file_name,"%s/%s",folder,CONFIGURATION_FILE_NAME);
 
     sprintf(folder,"%s/%s",folder,CONFIGURATION_FOLDER_NAME);
-    #ifdef __unix__
+#ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    #elif _WIN32
+#elif _WIN32
     mkdir(folder);
-    #endif
+#endif
 
 
     ptr_file=openFile(file_name,"w+");
@@ -225,13 +225,13 @@ bool removeConfigListFile(int index_delete, list_game_config *ptr_list_config,ch
     return true;
 }
 
- /*!
- * \fn bool newConfigFile(game_config config,char * home_path)
- *  Create a game configuration file and put it into the game configuration file list.
- * \param[in] config the gale configuration
- * \param[in] home_path the path to the home directory
- * \return true if everything is OK, false otherwise
- */
+/*!
+* \fn bool newConfigFile(game_config config,char * home_path)
+*  Create a game configuration file and put it into the game configuration file list.
+* \param[in] config the gale configuration
+* \param[in] home_path the path to the home directory
+* \return true if everything is OK, false otherwise
+*/
 bool newConfigFile(game_config config,char * home_path)
 {
     char folder[SIZE_MAX_FILE_NAME]="";
@@ -243,18 +243,18 @@ bool newConfigFile(game_config config,char * home_path)
 
     sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
-    #ifdef __unix__
+#ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    #elif _WIN32
+#elif _WIN32
     mkdir(folder);
-    #endif
+#endif
 
     sprintf(folder,"%s/%s",folder,CONFIGURATION_FOLDER_NAME);
-    #ifdef __unix__
+#ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    #elif _WIN32
+#elif _WIN32
     mkdir(folder);
-    #endif
+#endif
 
     sprintf(file_name,"%s/%s",folder,config.name);
 
@@ -263,14 +263,14 @@ bool newConfigFile(game_config config,char * home_path)
     if (ptr_file==NULL)
         return false;
 
-    #ifdef __unix__
+#ifdef __unix__
     fprintf(ptr_file,"%f ",config.nb_max);
-    #elif _WIN32
+#elif _WIN32
     if (config.nb_max == INFINITY)
         fprintf(ptr_file,"inf ");
     else
         fprintf(ptr_file,"%f ",config.nb_max);
-    #endif
+#endif
 
     fprintf(ptr_file,"%f %d %d %d %d %d",config.begin_score,config.decimal_place,config.first_way,config.max,config.turn_based,config.use_distributor);
 
@@ -279,13 +279,13 @@ bool newConfigFile(game_config config,char * home_path)
     return true;
 }
 
- /*!
- * \fn bool removeConfigFile(char *config_name,char * home_path)
- *  Delete a game configuration.
- * \param[in] config_name the name of the game configuration which will be deleted
- * \param[in] home_path the path to the home directory
- * \return true if everything is OK, false otherwise
- */
+/*!
+* \fn bool removeConfigFile(char *config_name,char * home_path)
+*  Delete a game configuration.
+* \param[in] config_name the name of the game configuration which will be deleted
+* \param[in] home_path the path to the home directory
+* \return true if everything is OK, false otherwise
+*/
 bool removeConfigFile(char *config_name,char * home_path)
 {
     char folder[SIZE_MAX_FILE_NAME]="";
@@ -295,18 +295,18 @@ bool removeConfigFile(char *config_name,char * home_path)
 
     sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
-    #ifdef __unix__
+#ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    #elif _WIN32
+#elif _WIN32
     mkdir(folder);
-    #endif
+#endif
 
     sprintf(folder,"%s/%s",folder,CONFIGURATION_FOLDER_NAME);
-    #ifdef __unix__
+#ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    #elif _WIN32
+#elif _WIN32
     mkdir(folder);
-    #endif
+#endif
 
     sprintf(file_name,"%s/%s",folder,config_name);
 
@@ -339,9 +339,9 @@ bool readConfigFile(int index_read, list_game_config *ptr_list_config, game_conf
     char file_name_config[SIZE_MAX_FILE_NAME]="";
     FILE *ptr_file;
     int tmp;
-    #ifdef _WIN32
+#ifdef _WIN32
     char buffer[5];
-    #endif // _WIN32
+#endif // _WIN32
 
     sprintf(file_name_config,"%s%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FOLDER_NAME,ptr_list_config->name_game_config[index_read]);
 
@@ -351,15 +351,15 @@ bool readConfigFile(int index_read, list_game_config *ptr_list_config, game_conf
         return false;
 
     /*Lis les differentes config*/
-    #ifdef __unix__
+#ifdef __unix__
     fscanf(ptr_file,"%f",&(ptr_config->nb_max));
-    #elif _WIN32
+#elif _WIN32
     if (fscanf(ptr_file,"%f",&(ptr_config->nb_max))==0)
     {
         ptr_config->nb_max = INFINITY;
         fscanf(ptr_file,"%s",buffer);
     }
-    #endif
+#endif
     fscanf(ptr_file,"%f",&(ptr_config->begin_score));
     fscanf(ptr_file,"%d",&tmp);
     ptr_config->decimal_place=tmp;
@@ -415,14 +415,14 @@ bool exportConfigFile(char *home_path,char *file_name, int *id,int nb_id)
     for(i=0 ; i<nb_id ; i++)
     {
         readConfigFile(id[i],ptr_list_config,&config,home_path);
-        #ifdef __unix__
+#ifdef __unix__
         fprintf(ptr_file_export,"%f ",config.nb_max);
-        #elif _WIN32
+#elif _WIN32
         if (config.nb_max == INFINITY)
             fprintf(ptr_file_export,"inf ");
         else
             fprintf(ptr_file_export,"%f ",config.nb_max);
-        #endif
+#endif
         fprintf(ptr_file_export,"%f %s %d %d %d %d %d\n",config.begin_score,config.name,config.decimal_place,config.first_way,config.max,config.turn_based,config.use_distributor);
     }
 
@@ -449,9 +449,9 @@ bool importConfigFile(char *home_path,char *file_name, int *id,int nb_id)
     game_config config;
     FILE *ptr_file_import;
     char check_file[sizeof(STRING_CHECK_GAME_CONFIG)+1];
-    #ifdef _WIN32
+#ifdef _WIN32
     char buffer[5];
-    #endif // _WIN32
+#endif // _WIN32
 
     ptr_file_import=openFile(file_name,"r");
 
@@ -479,15 +479,15 @@ bool importConfigFile(char *home_path,char *file_name, int *id,int nb_id)
 
     for(i=0,j=0 ; i<nb_config && j<nb_id ; i++)
     {
-        #ifdef __unix__
+#ifdef __unix__
         fscanf(ptr_file_import,"%f",&(config.nb_max));
-        #elif _WIN32
+#elif _WIN32
         if (fscanf(ptr_file_import,"%f",&(config.nb_max))==0)
         {
             config.nb_max = INFINITY;
             fscanf(ptr_file_import,"%s",buffer);
         }
-        #endif
+#endif
         fscanf(ptr_file_import,"%f%s",&(config.begin_score),config.name);
         fscanf(ptr_file_import,"%d",&tmp);
         config.decimal_place=tmp;
@@ -526,9 +526,9 @@ list_game_config *newListGameConfigFromImport(char *filename)
     int nb_config;
     FILE *ptr_file_import;
     char check_file[sizeof(STRING_CHECK_GAME_CONFIG)+1];
-    #ifdef _WIN32
+#ifdef _WIN32
     char buffer[5];
-    #endif // _WIN32
+#endif // _WIN32
     char config_name[SIZE_MAX_FILE_NAME];
     list_game_config* list_config;
 
@@ -555,12 +555,12 @@ list_game_config *newListGameConfigFromImport(char *filename)
 
     for(i=0 ; i<nb_config ; i++)
     {
-        #ifdef __unix__
+#ifdef __unix__
         fscanf(ptr_file_import,"%f",&buf);
-        #elif _WIN32
+#elif _WIN32
         if (fscanf(ptr_file_import,"%f",&buf)==0)
             fscanf(ptr_file_import,"%s",buffer);
-        #endif
+#endif
         fscanf(ptr_file_import,"%f%s",&buf,config_name);
         fscanf(ptr_file_import,"%d",&tmp);
         fscanf(ptr_file_import,"%d",&tmp);

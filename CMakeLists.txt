@@ -16,6 +16,19 @@ add_library(
 	${source_files_libcsuper}
 )
 
+if(WIN32)
+	target_link_libraries(
+		csuper 
+		-lhpdf
+		-lintl
+	)
+else (WIN32)
+	target_link_libraries(
+		csuper 
+		-lhpdf
+	)
+endif (WIN32)
+
 
 #csuper-cli
 file(

@@ -9,7 +9,7 @@
  /*
  * menu.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-cli.
  *
@@ -37,6 +37,7 @@
 #include "keyboarding.h"
 #include "main.h"
 #include "csuper.h"
+#include "interface.h"
 
 typedef enum {Continue , ChangeDistributor , Quit} ContinueChangeDistributorOrQuit;
 
@@ -54,5 +55,7 @@ bool menuDelete();
 void menuNewPath(char *new_path);
 bool menuExportListGameConfig(int **id,int *nb_id);
 bool menuImportListGameConfig(int **id,int *nb_id,char *filename);
+void menuPdfPreferences(export_pdf_preferences *pref);
+FileType menuChooseExportFileType();
 
 #endif

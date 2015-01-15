@@ -2,14 +2,14 @@
  * \file    filename.c
  * \brief   Essential function of libcsuper
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    22/12/14
+ * \version 4.1.0
  */
 
  /*
  * filename.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of LibCsuper.
  *
@@ -33,14 +33,13 @@
 
  #include "filename.h"
 
- /*!
+/*!
  * \fn void addFileCsuExtension(char *file_name)
  *  Add the csu file extension
  * \param[in] file_name the filename
  */
 void addFileCsuExtension(char *file_name)
 {
-    char file_extension[4]=FILE_EXTENSION;
     char ext[4]="abc";
     int i;
 
@@ -49,9 +48,60 @@ void addFileCsuExtension(char *file_name)
             ext[-strlen(file_name)+i+3]=file_name[i];
 
     /*Add the csu extension if it is not there*/
-    if (strcmp(file_extension,ext)!=0)
-        sprintf(file_name,"%s.%s",file_name,FILE_EXTENSION);
+    if (strcmp(FILE_EXTENSION_CSU,ext)!=0)
+        sprintf(file_name,"%s.%s",file_name,FILE_EXTENSION_CSU);
 }
+
+/*!
+ * \fn void addFilePdfExtension(char *file_name)
+ *  Add the pdf file extension
+ * \param[in] file_name the filename
+ */
+void addFilePdfExtension(char *file_name)
+{
+    char ext[4]="abc";
+    int i;
+
+    /*Read the extension of the file*/
+    for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)
+            ext[-strlen(file_name)+i+3]=file_name[i];
+
+    /*Add the csu extension if it is not there*/
+    if (strcmp("pdf",ext)!=0)
+        sprintf(file_name,"%s.%s",file_name,"pdf");
+}
+
+
+/*!
+ * \fn void addFileCsvExtension(char *file_name)
+ *  Add the csv file extension
+ * \param[in] file_name the filename
+ */
+void addFileCsvExtension(char *file_name)
+{
+    char ext[4]="abc";
+    int i;
+
+    /*Read the extension of the file*/
+    for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)
+            ext[-strlen(file_name)+i+3]=file_name[i];
+
+    /*Add the csu extension if it is not there*/
+    if (strcmp("csv",ext)!=0)
+        sprintf(file_name,"%s.%s",file_name,"csv");
+}
+
+/*!
+ * \fn void removeFileExtension(char *file_name)
+ *  Remove the file extension file extension
+ * \param[in] file_name the filename
+ */
+void removeFileExtension(char *file_name)
+{
+    if (file_name[strlen(file_name)-4] == '.')
+        file_name[strlen(file_name)-4]='\0';
+}
+
 
 /*!
  * \fn bool getFolderFromFilename(char *file_name_to_folder)
@@ -72,7 +122,14 @@ bool getFolderFromFilename(char *file_name_to_folder)
         #endif // _WIN32
         {
             ok = true;
+            #ifdef _WIN32
+            if (i==2 && strlen(file_name_to_folder) > i)
+                file_name_to_folder[3] = '\0';
+            else
+                file_name_to_folder[i] = '\0';
+            #else
             file_name_to_folder[i] = '\0';
+            #endif // _WIN32
             break;
         }
     }
@@ -91,6 +148,7 @@ bool getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename
 {
     int i;
     bool ok = false;
+    strcpy(simple_filename,full_filename);
     for (i=strlen(full_filename) ; i>=0 ; i--)
     {
         #ifdef _WIN32
@@ -202,4 +260,27 @@ void readHomePathSlash(char *path)
     strcpy(path,getenv("USERPROFILE"));
     #endif
     sprintf(path,"%s/",path);
+}
+
+/*!
+ * \fn bool removeFilenameExtension(char *filename)
+ *  Remove the file extension of the filename
+ * \param[in] filename the filename
+ * \return true if everything is OK, false otherwise
+ */
+bool removeFilenameExtension(char *filename)
+{
+    int i;
+    bool ok = false;
+    for (i=strlen(filename) ; i>=0 ; i--)
+    {
+        if (filename[i] == '.')
+        {
+            ok = true;
+            filename[i] = '\0';
+            break;
+        }
+    }
+
+    return ok;
 }

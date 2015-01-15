@@ -9,7 +9,7 @@
  /*
  * main_menu.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-gui.
  *
@@ -283,9 +283,99 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
         saveFileError(user_data);
 }
 
+
+/*!
+ * \fn G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
+ *  Choose and export the current file file
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    int error=FALSE;
+    gchar export_filename[SIZE_MAX_FILE_NAME];
+    gchar folder[SIZE_MAX_FILE_NAME];
+
+    if(user_data->ptr_csu_struct == NULL)
+        return;
+
+    /* Create the file chooser dialog*/
+    GtkWidget *window_file_save = gtk_file_chooser_dialog_new (_("Export csu file"),GTK_WINDOW(user_data->ptr_main_window),
+                GTK_FILE_CHOOSER_ACTION_SAVE,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-save",GTK_RESPONSE_ACCEPT,NULL);
+    gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_save), true);
+
+    /* Give filename to the old filename*/
+    getSimpleFilenameFromFullFilename(user_data->csu_filename,export_filename);
+    strcpy(folder,user_data->csu_filename);
+    getFolderFromFilename(folder);
+    removeFileExtension(export_filename);
+    #ifdef _WIN32
+    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_save),g_convert(export_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
+    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_save),g_convert(folder,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
+    #else
+    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_save),export_filename);
+    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_save),folder);
+    #endif
+
+     /*Add filters*/
+    GtkFileFilter *pdf_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterpdf"));
+    GtkFileFilter *csv_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltercsv"));
+    GtkFileFilter *all_filter = GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterall"));
+    gtk_file_filter_set_name(pdf_filter,_("PDF files"));
+    gtk_file_filter_set_name(csv_filter,_("CSV files"));
+    gtk_file_filter_set_name(all_filter,_("All"));
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),csv_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),pdf_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),all_filter);
+    gtk_file_chooser_set_filter(GTK_FILE_CHOOSER (window_file_save),pdf_filter);
+
+	switch (gtk_dialog_run (GTK_DIALOG (window_file_save)))
+	{
+		case GTK_RESPONSE_ACCEPT:
+		{
+		    char *filename;
+		    char true_filename[SIZE_MAX_FILE_NAME];
+			#ifdef _WIN32
+		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
+		    #else
+		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save));
+		    #endif
+		    strcpy(true_filename,filename);
+
+            /* Export */
+			if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_save))==pdf_filter)
+            {
+                addFilePdfExtension(true_filename);
+                if (exportToPdf(user_data->ptr_csu_struct,true_filename) == false)
+                    error=TRUE;
+            }
+            else if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_save))==csv_filter)
+            {
+                addFileCsvExtension(true_filename);
+                if (exportToCsv(user_data->ptr_csu_struct,true_filename) == false)
+                    error=TRUE;
+            }
+            else
+            {
+                if (exportToPdf(user_data->ptr_csu_struct,true_filename) == false)
+                    error=TRUE;
+            }
+
+            g_free(filename);
+			break;
+		}
+		default:
+			break;
+	}
+	gtk_widget_destroy(window_file_save);
+	if (error)
+        exportFileError(user_data);
+}
+
 /*!
  * \fn void saveFileError(globalData *data)
- *  Display a dialog box which said that there is a problem when loading the file.
+ *  Display a dialog box which said that there is a problem when saving the file.
  * \param[in] data the globalData
  */
 void saveFileError(globalData *data)
@@ -293,6 +383,21 @@ void saveFileError(globalData *data)
     GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"file_not_save"));
     if (!window_error)
         g_critical(_("Widget file_not_save is missing in file csuper-gui.glade."));
+
+    gtk_dialog_run (GTK_DIALOG (window_error));
+    gtk_widget_hide (window_error);
+}
+
+/*!
+ * \fn void exportFileError(globalData *data)
+ *  Display a dialog box which said that there is a problem when exporting the file.
+ * \param[in] data the globalData
+ */
+void exportFileError(globalData *data)
+{
+    GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"file_not_export"));
+    if (!window_error)
+        g_critical(_("Widget file_not_export is missing in file csuper-gui.glade."));
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);
@@ -554,7 +659,7 @@ void updateToolbarButton(globalData *data)
     if (!main_toolbar)
         g_critical(_("Widget main_toolbar is missing in file csuper-gui.glade."));
 
-    for (i=0 ; i<= 21 ; i++)
+    for (i=0 ; i<= 22 ; i++)
     {
         switch (*(&toolbar.new+i))
         {

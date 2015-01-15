@@ -2,36 +2,36 @@
  * \file    preferences_files.c
  * \brief   Function which store preferences into files
  * \author  Remi BERTHO
- * \date    31/08/14
+ * \date    07/01/15
  * \version 4.2.0
  */
 
- /*
- * preferences_files.c
- *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
- *
- * This file is part of LibCsuper.
- *
- * LibCsuper is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * LibCsuper is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- *
- */
+/*
+* preferences_files.c
+*
+* Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+*
+* This file is part of LibCsuper.
+*
+* LibCsuper is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 3 of the License, or
+* (at your option) any later version.
+*
+* LibCsuper is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+* MA 02110-1301, USA.
+*
+*
+*/
 
- #include "preferences_files.h"
+#include "preferences_files.h"
 
 /*!
  * \fn void createPreferencesFolder(char *home_path)
@@ -44,11 +44,11 @@ void createPreferencesFolder(char *home_path)
 
     sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
-    #ifdef __unix__
+#ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    #elif _WIN32
+#elif _WIN32
     mkdir(folder);
-    #endif
+#endif
 }
 
 /*!
@@ -72,12 +72,12 @@ bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferen
     if (ptr_file==NULL)
         return false;
 
-    fprintf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",toolbar.new,toolbar.open,
-            toolbar.save_as,toolbar.separator_6,toolbar.delete_file,toolbar.print,
+    fprintf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",toolbar.new,toolbar.open,
+            toolbar.save_as,toolbar.export,toolbar.separator_6,toolbar.delete_file,
             toolbar.separator_1,toolbar.undo,toolbar.redo,toolbar.separator_2,toolbar.cut,
             toolbar.copy,toolbar.paste,toolbar.delete,toolbar.separator_3,toolbar.properties,
             toolbar.separator_4,toolbar.preferences,toolbar.game_configuration_preferences,
-            toolbar.toolbar_button_preferences,toolbar.separator_5,toolbar.about);
+            toolbar.toolbar_button_preferences,toolbar.exportation_preferences,toolbar.separator_5,toolbar.about);
 
     closeFile(ptr_file);
 
@@ -98,9 +98,9 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
     toolbar->open=2;
     toolbar->new=2;
     toolbar->save_as=2;
+    toolbar->export=1;
     toolbar->separator_6=2;
-    toolbar->delete_file=0;
-    toolbar->print=1;
+    toolbar->delete_file=1;
     toolbar->separator_1=2;
     toolbar->undo=2;
     toolbar->redo=2;
@@ -115,6 +115,7 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
     toolbar->preferences=2;
     toolbar->game_configuration_preferences=0;
     toolbar->toolbar_button_preferences=0;
+    toolbar->exportation_preferences=0;
     toolbar->separator_5=2;
     toolbar->about=1;
 
@@ -127,13 +128,13 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
     if (ptr_file==NULL)
         return createFileToolbarButtonPreferences(home_path,*toolbar);
 
-    fscanf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",&(toolbar->new),&(toolbar->open),
-           &(toolbar->save_as),&(toolbar->separator_6),&(toolbar->delete_file),&(toolbar->print),
+    fscanf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",&(toolbar->new),&(toolbar->open),
+           &(toolbar->save_as),&(toolbar->export),&(toolbar->separator_6),&(toolbar->delete_file),
            &(toolbar->separator_1),&(toolbar->undo),&(toolbar->redo),&(toolbar->separator_2),
            &(toolbar->cut),&(toolbar->copy),&(toolbar->paste),&(toolbar->delete),
            &(toolbar->separator_3),&(toolbar->properties),&(toolbar->separator_4),&(toolbar->preferences),
-           &(toolbar->game_configuration_preferences),&(toolbar->toolbar_button_preferences),&(toolbar->separator_5),
-           &(toolbar->about));
+           &(toolbar->game_configuration_preferences),&(toolbar->toolbar_button_preferences),
+           &(toolbar->exportation_preferences),&(toolbar->separator_5),&(toolbar->about));
 
     closeFile(ptr_file);
 
@@ -150,13 +151,13 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
 bool differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2)
 {
     return (toolbar1.new != toolbar2.new || toolbar1.open != toolbar2.open || toolbar1.save_as != toolbar2.save_as || toolbar1.separator_1 != toolbar2.separator_1
-            || toolbar1.separator_6 != toolbar2.separator_6 || toolbar1.delete_file != toolbar2.delete_file || toolbar1.print != toolbar2.print
+            || toolbar1.separator_6 != toolbar2.separator_6 || toolbar1.delete_file != toolbar2.delete_file || toolbar1.export != toolbar2.export
             || toolbar1.undo != toolbar2.undo || toolbar1.redo != toolbar2.redo || toolbar1.separator_2 != toolbar2.separator_2 ||
             toolbar1.cut != toolbar2.cut || toolbar1.copy != toolbar2.copy || toolbar1.paste != toolbar2.paste || toolbar1.delete != toolbar2.delete
             || toolbar1.separator_3 != toolbar2.separator_3 || toolbar1.properties != toolbar2.properties || toolbar1.separator_4 != toolbar2.separator_4
             || toolbar1.preferences != toolbar2.preferences || toolbar1.game_configuration_preferences != toolbar2.game_configuration_preferences ||
             toolbar1.toolbar_button_preferences != toolbar2.toolbar_button_preferences || toolbar1.separator_5 != toolbar2.separator_5
-            || toolbar1.about != toolbar2.about);
+            || toolbar1.about != toolbar2.about || toolbar1.exportation_preferences != toolbar2.exportation_preferences);
 }
 
 /*!
@@ -238,11 +239,11 @@ bool createFileSystemPath()
     /*Read the home directory and create the folder*/
     readHomePath(folder);
     sprintf(folder,"%s/%s",folder,PREFERENCES_FOLDER_NAME);
-    #ifdef __unix__
+#ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-    #elif _WIN32
+#elif _WIN32
     mkdir(folder);
-    #endif
+#endif
 
     sprintf(file_name,"%s/%s",folder,FILENAME_SYSTEM_PATH);
 
@@ -407,4 +408,84 @@ bool readFileDifferenceBetweenPlayer(char *home_path, difference_between_player 
     closeFile(ptr_file);
 
     return true;
+}
+
+
+/*!
+ * \fn bool createFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
+ *  Create the file which contain the preferences export into a pdf file
+ * \param[in] home_path the path to the home directory
+ * \param[in] ptr_pref a pointer on a export_pdf_preferences
+ * \return true if everything is OK, false otherwise
+ */
+bool createFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_PDF_PREFERENCES);
+
+    createPreferencesFolder(home_path);
+
+    ptr_file=openFile(file_name,"w+");
+
+    if (ptr_file==NULL)
+        return false;
+
+    fprintf(ptr_file,"%d %d %d %d %d",ptr_pref->charset,ptr_pref->font_size,
+            ptr_pref->direction,ptr_pref->size,ptr_pref->margin);
+
+    closeFile(ptr_file);
+
+    return true;
+}
+
+
+/*!
+ * \fn bool readFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
+ *  Read the file which contain the preferences export into a pdf file
+ * \param[in] home_path the path to the home directory
+ * \param[in] ptr_pref a pointer on a export_pdf_preferences
+ * \return true if everything is OK, false otherwise
+ */
+bool readFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    ptr_pref->font_size = DEFAULT_FONT_SIZE;
+    ptr_pref->charset = ISO885915;
+    ptr_pref->size = HPDF_PAGE_SIZE_A4;
+    ptr_pref->direction = HPDF_PAGE_PORTRAIT;
+    ptr_pref->margin = DEFAULT_MARGIN;
+
+    createPreferencesFolder(home_path);
+
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_PDF_PREFERENCES);
+
+    ptr_file=openFile(file_name,"r");
+
+    if (ptr_file==NULL)
+        return createFilePdfPreferences(home_path,ptr_pref);
+
+    fscanf(ptr_file,"%d %d %d %d %d",(int*)&(ptr_pref->charset),(int*)&(ptr_pref->font_size)
+           ,(int*)&(ptr_pref->direction),(int*)&(ptr_pref->size),(int*)&(ptr_pref->margin));
+
+    closeFile(ptr_file);
+
+    return true;
+}
+
+
+/*!
+ * \fn bool differentsTExportPdfPreferencesStruct(export_pdf_preferences pdf_1, export_pdf_preferences pdf_2)
+ *  Test if the two pdf export preferences are different
+ * \param[in] pdf_1 the first pdf export preferences
+ * \param[in] pdf_2 the second pdf export preferences
+ * \return true if everything is OK, false otherwise
+ */
+bool differentsTExportPdfPreferencesStruct(export_pdf_preferences pdf_1, export_pdf_preferences pdf_2)
+{
+    return (pdf_1.charset != pdf_2.charset || pdf_1.direction != pdf_2.direction
+            || pdf_1.font_size != pdf_2.font_size || pdf_1.margin != pdf_2.margin || pdf_1.size != pdf_2.size);
 }

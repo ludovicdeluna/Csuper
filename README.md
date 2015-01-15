@@ -29,7 +29,7 @@ Executables are available on [my website](http://www.dalan.rd-h.fr/wordpress).
 
 If you want to compile yourself, you can use the codeblocks project.
 You can also use cmake. On Linux type `cmake . -G"Unix Makefiles"` then `make`.
-To compile libcsuper and csuper-cli you have to have gettext installed.
+To compile libcsuper and csuper-cli you have to have gettext and liphpdf/libharu installed.
 To compile csuper-gui you have to have GTK3 installed.
 
 If you are under Linux you can run the softwares with the scripts `run-csuper` and `run-csuper-gui`.
@@ -72,7 +72,7 @@ Les exécutables sont disponibles sur [mon site](http://www.dalan.rd-h.fr/wordpr
 
 Si vous voulez compiler vous même le logiciel, vous pouvez utiliser les projets codeblocks.
 Vous pouvez aussi compiler en utilisant cmake. Sous Linux aller à la racine du projet avec votre terminal puis taper `cmake . -G"Unix Makefiles"` et enfin `make`.
-Pour pouvoir compiler libcsuper et csuper-cli il faut que vous ayez d'installé gettext.
+Pour pouvoir compiler libcsuper et csuper-cli il faut que vous ayez d'installé gettext et libhpdf/libharu.
 Et pour csuper-gui il faut avoir GTK3 d'installé.
 
 La mise à jour de la traduction se fait via la commande `./update_translations` et la compilation de la traduction par la commande `./compile_translations`

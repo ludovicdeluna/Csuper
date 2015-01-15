@@ -9,7 +9,7 @@
  /*
  * new_file_assistant.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-gui.
  *
@@ -37,7 +37,7 @@
 #include "csuper-gui.h"
 #include "main_window.h"
 #include "main_menu.h"
-#include "preferences.h"
+#include "game_config_preferences.h"
 #include "utils.h"
 
 G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data);

@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.16.1 -->
+<!-- Generated with glade 3.18.3 -->
 <interface domain="csuper-gui">
   <requires lib="gtk+" version="3.6"/>
+  <object class="GtkAdjustment" id="adjustment_exportation_pdf_preferences_fontsize">
+    <property name="lower">4</property>
+    <property name="upper">40</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_exportation_pdf_preferences_margin">
+    <property name="upper">200</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">10</property>
+  </object>
   <object class="GtkFileFilter" id="filefilterall">
     <patterns>
       <pattern>*</pattern>
@@ -11,6 +22,16 @@
     <patterns>
       <pattern>*.csu</pattern>
     </patterns>
+  </object>
+  <object class="GtkFileFilter" id="filefiltercsv">
+    <mime-types>
+      <mime-type>text/csv</mime-type>
+    </mime-types>
+  </object>
+  <object class="GtkFileFilter" id="filefilterpdf">
+    <mime-types>
+      <mime-type>application/pdf</mime-type>
+    </mime-types>
   </object>
   <object class="GtkMessageDialog" id="game_configuration_not_exported">
     <property name="can_focus">False</property>
@@ -60,10 +81,13 @@
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
+  </object>
+  <object class="GtkImage" id="image1">
+    <property name="visible">True</property>
+    <property name="can_focus">False</property>
+    <property name="stock">gtk-harddisk</property>
   </object>
   <object class="GtkAdjustment" id="new_csu_file_assistant_nb_player_adjustement">
     <property name="lower">1</property>
@@ -86,8 +110,6 @@
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -99,8 +121,6 @@
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">2</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -117,8 +137,6 @@
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">2</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -130,8 +148,6 @@
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">3</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -145,8 +161,6 @@
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">1</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -158,8 +172,6 @@
       <packing>
         <property name="left_attach">0</property>
         <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -173,8 +185,6 @@
       <packing>
         <property name="left_attach">1</property>
         <property name="top_attach">0</property>
-        <property name="width">1</property>
-        <property name="height">1</property>
       </packing>
     </child>
     <child>
@@ -271,8 +281,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -286,8 +294,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -301,8 +307,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -316,8 +320,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -331,8 +333,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -346,8 +346,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -361,8 +359,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -376,8 +372,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -394,8 +388,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -409,8 +401,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -424,8 +414,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -438,8 +426,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -459,8 +445,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -480,8 +464,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -498,8 +480,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -516,8 +496,6 @@
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -628,6 +606,19 @@
                       </object>
                     </child>
                     <child>
+                      <object class="GtkImageMenuItem" id="menu_export">
+                        <property name="label">Export</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Export the current game to a pdf or a csv file</property>
+                        <property name="image">image1</property>
+                        <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
+                        <signal name="activate" handler="chooseExportFile" swapped="no"/>
+                        <accelerator key="e" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                      </object>
+                    </child>
+                    <child>
                       <object class="GtkSeparatorMenuItem" id="separatormenuitem2">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
@@ -667,24 +658,6 @@
                     </child>
                     <child>
                       <object class="GtkSeparatorMenuItem" id="menuitem2">
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkImageMenuItem" id="menu_print">
-                        <property name="label">gtk-print</property>
-                        <property name="visible">True</property>
-                        <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">Print the current game</property>
-                        <property name="use_underline">True</property>
-                        <property name="use_stock">True</property>
-                        <property name="always_show_image">True</property>
-                        <accelerator key="p" signal="activate" modifiers="GDK_CONTROL_MASK"/>
-                      </object>
-                    </child>
-                    <child>
-                      <object class="GtkSeparatorMenuItem" id="menuitem3">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
                       </object>
@@ -820,7 +793,7 @@
                         <property name="use_stock">False</property>
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="displayPodium" swapped="no"/>
-                        <accelerator key="e" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                        <accelerator key="p" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -894,6 +867,18 @@
                         <accelerator key="t" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
+                    <child>
+                      <object class="GtkImageMenuItem" id="menu_preferences_exportation">
+                        <property name="label" translatable="yes">Exportation</property>
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Open the exportation preferences window</property>
+                        <property name="use_stock">False</property>
+                        <property name="always_show_image">True</property>
+                        <signal name="activate" handler="openExporationPreferences" swapped="no"/>
+                        <accelerator key="r" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                      </object>
+                    </child>
                   </object>
                 </child>
               </object>
@@ -930,7 +915,6 @@
             <property name="left_attach">0</property>
             <property name="top_attach">0</property>
             <property name="width">3</property>
-            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -949,30 +933,23 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="vexpand">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="label_ranking_main_window">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Ranking</property>
-                <attributes>
-                  <attribute name="font-desc" value="Sans 14"/>
-                </attributes>
+                <property name="vexpand">False</property>
+                <property name="label" translatable="yes">&lt;span size="x-large"&gt;Ranking&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -988,7 +965,7 @@
                 <property name="tooltip_text" translatable="yes">Save the new points</property>
                 <property name="halign">center</property>
                 <property name="valign">end</property>
-                <property name="vexpand">True</property>
+                <property name="relief">half</property>
                 <property name="focus_on_click">False</property>
                 <property name="image_position">bottom</property>
                 <signal name="clicked" handler="endOfTurn" swapped="no"/>
@@ -997,8 +974,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1007,13 +982,10 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="vexpand">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1022,7 +994,6 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">No csu file loaded</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
@@ -1030,8 +1001,6 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1040,15 +1009,12 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="vexpand">True</property>
                 <property name="label" translatable="yes">No csu file loaded</property>
                 <property name="wrap">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1057,18 +1023,13 @@
                 <property name="can_focus">False</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Game informations</property>
-                <property name="wrap">True</property>
-                <attributes>
-                  <attribute name="font-desc" value="Sans 14"/>
-                </attributes>
+                <property name="label" translatable="yes">&lt;span size="x-large"&gt;Game informations&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+                <property name="single_line_mode">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1082,7 +1043,6 @@
                 <property name="valign">center</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="vexpand">True</property>
                 <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="changeDistributorButton" swapped="no"/>
                 <accelerator key="d" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
@@ -1090,19 +1050,34 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
-              <placeholder/>
+              <object class="GtkScrolledWindow" id="scrolledwindow_ranking">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="vexpand">True</property>
+                <property name="hscrollbar_policy">never</property>
+                <child>
+                  <object class="GtkViewport" id="viewport_ranking">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
             </child>
           </object>
           <packing>
             <property name="left_attach">2</property>
             <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -1114,8 +1089,6 @@
           <packing>
             <property name="left_attach">1</property>
             <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -1174,6 +1147,22 @@
               </packing>
             </child>
             <child>
+              <object class="GtkToolButton" id="toolbutton_export">
+                <property name="can_focus">False</property>
+                <property name="no_show_all">True</property>
+                <property name="tooltip_text" translatable="yes">Export the current game to a pdf or a csv file</property>
+                <property name="is_important">True</property>
+                <property name="label" translatable="yes">Export</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-harddisk</property>
+                <signal name="clicked" handler="chooseExportFile" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkSeparatorToolItem" id="toolbutton_separator_6">
                 <property name="can_focus">False</property>
                 <property name="no_show_all">True</property>
@@ -1194,21 +1183,6 @@
                 <property name="use_underline">True</property>
                 <property name="stock_id">gtk-delete</property>
                 <signal name="clicked" handler="deleteFileButton" swapped="no"/>
-              </object>
-              <packing>
-                <property name="expand">False</property>
-                <property name="homogeneous">True</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkToolButton" id="toolbutton_print">
-                <property name="can_focus">False</property>
-                <property name="no_show_all">True</property>
-                <property name="tooltip_text" translatable="yes">Print the current game</property>
-                <property name="is_important">True</property>
-                <property name="label" translatable="yes">Print</property>
-                <property name="use_underline">True</property>
-                <property name="stock_id">gtk-print</property>
               </object>
               <packing>
                 <property name="expand">False</property>
@@ -1420,6 +1394,21 @@
               </packing>
             </child>
             <child>
+              <object class="GtkToolButton" id="toolbutton_exportation_preferences">
+                <property name="can_focus">False</property>
+                <property name="no_show_all">True</property>
+                <property name="tooltip_text" translatable="yes">Open the exportationpreferences window</property>
+                <property name="label" translatable="yes">Exportation</property>
+                <property name="use_underline">True</property>
+                <property name="stock_id">gtk-preferences</property>
+                <signal name="clicked" handler="openExporationPreferences" swapped="no"/>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="homogeneous">True</property>
+              </packing>
+            </child>
+            <child>
               <object class="GtkSeparatorToolItem" id="toolbutton_separator_4">
                 <property name="can_focus">False</property>
                 <property name="no_show_all">True</property>
@@ -1451,7 +1440,6 @@
             <property name="left_attach">0</property>
             <property name="top_attach">1</property>
             <property name="width">3</property>
-            <property name="height">1</property>
           </packing>
         </child>
         <child>
@@ -1465,6 +1453,7 @@
               <object class="GtkViewport" id="main_window_viewport">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
+                <property name="shadow_type">none</property>
                 <child>
                   <placeholder/>
                 </child>
@@ -1474,8 +1463,6 @@
           <packing>
             <property name="left_attach">0</property>
             <property name="top_attach">2</property>
-            <property name="width">1</property>
-            <property name="height">1</property>
           </packing>
         </child>
       </object>
@@ -1492,7 +1479,7 @@
     <property name="transient_for">main_window</property>
     <property name="program_name">Csuper</property>
     <property name="version">4.0.2</property>
-    <property name="copyright" translatable="yes">Copyright © 2014 Rémi BERTHO &lt;remi.bertho@gmail.com&gt;</property>
+    <property name="copyright" translatable="yes">Copyright © 2014-2015 Rémi BERTHO &lt;remi.bertho@gmail.com&gt;</property>
     <property name="comments" translatable="yes">Universal points counter allowing a dispense with reflection</property>
     <property name="website">http://www.dalan.rd-h.fr/wordpress</property>
     <property name="website_label" translatable="yes">Visit the website of Csuper</property>
@@ -1593,7 +1580,6 @@ Rémi BERTHO</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
                 <property name="hscrollbar_policy">never</property>
-                <property name="shadow_type">in</property>
                 <property name="min_content_height">300</property>
                 <child>
                   <object class="GtkViewport" id="change_distributor_dialog_viewport">
@@ -1601,6 +1587,7 @@ Rémi BERTHO</property>
                     <property name="can_focus">False</property>
                     <property name="hexpand">True</property>
                     <property name="vexpand">True</property>
+                    <property name="shadow_type">none</property>
                     <child>
                       <placeholder/>
                     </child>
@@ -1610,8 +1597,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1624,16 +1609,12 @@ Rémi BERTHO</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
                 <property name="hexpand">True</property>
-                <property name="label" translatable="yes">Please choose the new distributor</property>
-                <attributes>
-                  <attribute name="font-desc" value="Sans 14"/>
-                </attributes>
+                <property name="label" translatable="yes">&lt;span size="x-large"&gt;Please choose the new distributor&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -1714,8 +1695,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1727,8 +1706,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1740,8 +1717,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1753,8 +1728,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1766,8 +1739,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1779,8 +1750,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1792,8 +1761,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1805,8 +1772,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1818,8 +1783,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1831,8 +1794,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">10</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1844,8 +1805,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">11</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1857,8 +1816,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">12</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1870,8 +1827,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">13</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1883,8 +1838,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">14</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -1897,8 +1850,6 @@ Rémi BERTHO</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -1925,7 +1876,6 @@ Rémi BERTHO</property>
     <property name="skip_pager_hint">True</property>
     <property name="gravity">center</property>
     <property name="transient_for">main_window</property>
-    <property name="has_resize_grip">False</property>
     <child internal-child="vbox">
       <object class="GtkBox" id="dialog-vbox5">
         <property name="can_focus">False</property>
@@ -2027,6 +1977,49 @@ Rémi BERTHO</property>
       </object>
     </child>
   </object>
+  <object class="GtkMessageDialog" id="file_not_export">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Error while exporting the file.</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">main_window</property>
+    <property name="message_type">error</property>
+    <property name="buttons">ok</property>
+    <property name="text" translatable="yes">Error while exporting the file.
+Please try to use an other folder and/or filename.</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="messagedialog-vbox19">
+        <property name="can_focus">False</property>
+        <property name="margin_top">10</property>
+        <property name="margin_bottom">10</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="messagedialog-action_area19">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="pack_type">end</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <placeholder/>
+        </child>
+      </object>
+    </child>
+  </object>
   <object class="GtkMessageDialog" id="file_not_open">
     <property name="width_request">200</property>
     <property name="height_request">100</property>
@@ -2107,6 +2100,7 @@ Please try to use an other folder and/or filename.</property>
     <property name="window_position">center-on-parent</property>
     <property name="type_hint">normal</property>
     <property name="skip_taskbar_hint">True</property>
+    <property name="skip_pager_hint">True</property>
     <property name="urgency_hint">True</property>
     <property name="gravity">center</property>
     <property name="transient_for">main_window</property>
@@ -2194,6 +2188,7 @@ Congratulation to the winner!</property>
       <object class="GtkNotebook" id="notebook_preferences">
         <property name="visible">True</property>
         <property name="can_focus">True</property>
+        <property name="scrollable">True</property>
         <child>
           <object class="GtkGrid" id="grid_game_configuration_preferences">
             <property name="visible">True</property>
@@ -2218,7 +2213,6 @@ Congratulation to the winner!</property>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
                 <property name="height">2</property>
               </packing>
             </child>
@@ -2299,7 +2293,6 @@ Congratulation to the winner!</property>
                 <property name="left_attach">0</property>
                 <property name="top_attach">3</property>
                 <property name="width">2</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2311,16 +2304,12 @@ Congratulation to the winner!</property>
                 <property name="margin_right">10</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="label" translatable="yes">List of all your game configurations</property>
-                <attributes>
-                  <attribute name="font-desc" value="Sans Bold 13"/>
-                </attributes>
+                <property name="label" translatable="yes">&lt;span font_weight="bold" size="large"&gt;List of all your game configurations&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2332,17 +2321,13 @@ Congratulation to the winner!</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
                 <property name="yalign">0</property>
-                <property name="label" translatable="yes">You have no game configuration selected.</property>
+                <property name="label" translatable="yes">&lt;span size="large"&gt;You have no game configuration selected.&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
                 <property name="justify">center</property>
-                <attributes>
-                  <attribute name="font-desc" value="Sans 12"/>
-                </attributes>
               </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2354,16 +2339,12 @@ Congratulation to the winner!</property>
                 <property name="margin_right">10</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="label" translatable="yes">The selected game configurations</property>
-                <attributes>
-                  <attribute name="font-desc" value="Sans Bold 13"/>
-                </attributes>
+                <property name="label" translatable="yes">&lt;span font_weight="bold" size="large"&gt;The selected game configurations&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
@@ -2375,17 +2356,12 @@ Congratulation to the winner!</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
                 <property name="yalign">0.80000001192092896</property>
+                <property name="use_markup">True</property>
                 <property name="ellipsize">start</property>
-                <attributes>
-                  <attribute name="font-desc" value="Sans Bold 12"/>
-                  <attribute name="underline" value="True"/>
-                </attributes>
               </object>
               <packing>
                 <property name="left_attach">1</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -2401,65 +2377,767 @@ Congratulation to the winner!</property>
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="grid_toolbar_button_preferences">
+          <object class="GtkGrid" id="main_grid_toolbar_button_preferences">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
-            <property name="margin_left">10</property>
-            <property name="margin_right">10</property>
-            <property name="margin_top">10</property>
             <property name="margin_bottom">10</property>
-            <property name="row_spacing">5</property>
-            <property name="column_spacing">5</property>
+            <property name="row_spacing">10</property>
             <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_new">
+              <object class="GtkScrolledWindow" id="scrolledwindow_toolbar_preferences">
                 <property name="visible">True</property>
-                <property name="can_focus">False</property>
+                <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
                 <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"New" button</property>
+                <property name="hscrollbar_policy">never</property>
+                <property name="shadow_type">in</property>
+                <child>
+                  <object class="GtkViewport" id="viewport_toolbar_preferences">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <object class="GtkGrid" id="grid_toolbar_button_preferences">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="margin_left">10</property>
+                        <property name="margin_right">10</property>
+                        <property name="margin_top">10</property>
+                        <property name="margin_bottom">10</property>
+                        <property name="row_spacing">5</property>
+                        <property name="column_spacing">5</property>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_new">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"New" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_open">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Open" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_save_as">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Save as" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_about">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"About" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">10</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_separator_5">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">Separator</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">9</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_delete_file">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Delete file" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_export">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Export" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_new">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_open">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_save_as">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_delete_file">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_export">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_5">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">9</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_about">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">10</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_paste">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Paste" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_paste">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item translatable="yes">Do not display</item>
+                              <item translatable="yes">Display image</item>
+                              <item translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_delete">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Delete" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_delete">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item translatable="yes">Do not display</item>
+                              <item translatable="yes">Display image</item>
+                              <item translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_separator_2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">Separator</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_2">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">2</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_properties">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Properties" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_properties">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">3</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_separator_4">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">Separator</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_4">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_preferences">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Preferences" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_preferences">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">5</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_game_configuration_preferences">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Game configuration preferences" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">6</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_game_configuration_preferences">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">6</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_toolbar_button_preferences">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Toolbar butoon preferences" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_toolbar_button_preferences">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_exportation_preferences">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Exportation preferences" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">2</property>
+                            <property name="top_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_exportation_preferences">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">3</property>
+                            <property name="top_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_copy">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">11</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_copy">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Copy" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">11</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_cut">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">10</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_cut">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Cut" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">10</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_3">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">9</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_separator_3">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">Separator</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">9</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_redo">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_redo">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Redo" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">8</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_undo">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_undo">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">"Undo" button</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">7</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">6</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_separator_1">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">Separator</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">6</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_6">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="halign">center</property>
+                            <property name="valign">center</property>
+                            <items>
+                              <item id="0" translatable="yes">Do not display</item>
+                              <item id="1" translatable="yes">Display image</item>
+                              <item id="2" translatable="yes">Display text and image</item>
+                            </items>
+                            <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="left_attach">1</property>
+                            <property name="top_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="toolbar_button_preferences_label_separator_6">
+                            <property name="visible">True</property>
+                            <property name="can_focus">False</property>
+                            <property name="hexpand">True</property>
+                            <property name="vexpand">True</property>
+                            <property name="label" translatable="yes">Separator</property>
+                          </object>
+                          <packing>
+                            <property name="left_attach">0</property>
+                            <property name="top_attach">4</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                        <child>
+                          <placeholder/>
+                        </child>
+                      </object>
+                    </child>
+                  </object>
+                </child>
               </object>
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_open">
+              <object class="GtkButtonBox" id="buttonbox_toolbar_preferences">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Open" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_save_as">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Save as" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButtonBox" id="buttonbox1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="vexpand">True</property>
                 <property name="spacing">10</property>
                 <property name="layout_style">spread</property>
                 <child>
@@ -2497,734 +3175,7 @@ Congratulation to the winner!</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">11</property>
-                <property name="width">4</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_about">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"About" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">10</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_separator_5">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Separator</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_toolbar_button_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Toolbar butoon preferences" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_game_configuration_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Game configuration preferences" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Preferences" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_separator_4">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Separator</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_properties">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Properties" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_separator_2">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Separator</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_delete">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Delete" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_paste">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Paste" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
                 <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_copy">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Copy" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">2</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_cut">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Cut" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">10</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_separator_3">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Separator</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_redo">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Redo" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_undo">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Undo" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_delete_file">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Delete file" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_separator_1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Separator</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_separator_6">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">Separator</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="toolbar_button_preferences_label_print">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="label" translatable="yes">"Print" button</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_new">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item id="0" translatable="yes">Do not display</item>
-                  <item id="1" translatable="yes">Display image</item>
-                  <item id="2" translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_open">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_save_as">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_6">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_delete_file">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_print">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_undo">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_1">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_3">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_redo">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_cut">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">1</property>
-                <property name="top_attach">10</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_paste">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">1</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_copy">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">0</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_delete">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">2</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_properties">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">4</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_4">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">5</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_2">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">3</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_game_configuration_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">7</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_toolbar_button_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">8</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_preferences">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">6</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_separator_5">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">9</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkComboBoxText" id="comboboxtext_preferences_label_about">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="halign">center</property>
-                <property name="valign">center</property>
-                <items>
-                  <item translatable="yes">Do not display</item>
-                  <item translatable="yes">Display image</item>
-                  <item translatable="yes">Display text and image</item>
-                </items>
-                <signal name="changed" handler="checkToolbarButtonPreferencesChanged" swapped="no"/>
-              </object>
-              <packing>
-                <property name="left_attach">3</property>
-                <property name="top_attach">10</property>
-                <property name="width">1</property>
-                <property name="height">1</property>
               </packing>
             </child>
           </object>
@@ -3240,6 +3191,256 @@ Congratulation to the winner!</property>
           </object>
           <packing>
             <property name="position">1</property>
+            <property name="tab_fill">False</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="grid_exportation_preferences">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="margin_left">10</property>
+            <property name="margin_right">10</property>
+            <property name="margin_top">10</property>
+            <property name="margin_bottom">10</property>
+            <property name="row_spacing">10</property>
+            <property name="column_spacing">10</property>
+            <child>
+              <object class="GtkLabel" id="exportation_preferences_label_pdf">
+                <property name="width_request">400</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <property name="label" translatable="yes">&lt;span font_weight="bold" size="large"&gt;PDF exportation&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+                <property name="width">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButtonBox" id="buttonbox2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">end</property>
+                <property name="vexpand">True</property>
+                <property name="spacing">10</property>
+                <property name="layout_style">spread</property>
+                <child>
+                  <object class="GtkButton" id="apply_button_exportation_preferences">
+                    <property name="label">gtk-apply</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Apply the new preferences for the new toolbar button displayed</property>
+                    <property name="use_stock">True</property>
+                    <signal name="clicked" handler="validExportationPreferences" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="close_button_exportation_preferences">
+                    <property name="label">gtk-close</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Close the game preferences window</property>
+                    <property name="use_stock">True</property>
+                    <signal name="clicked" handler="closePreferences" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">4</property>
+                <property name="width">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_exportation_pdf_utf8">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">The UTF-8 character set permit to display all the character with the cost of bigger pdf file.</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Use the UTF-8 character set</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="switch_exportation_pdf_utf8">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <signal name="notify::active" handler="checkExportationPreferencesChangedSwitchButton" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_exportation_pdf_direction">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Direction of the pdf document</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_exportation_pdf_direction">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <items>
+                  <item id="0" translatable="yes">Portrait</item>
+                  <item id="1" translatable="yes">Landscape</item>
+                </items>
+                <signal name="changed" handler="checkExportationPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_exportation_pdf_size">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Size of the pdf document</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkComboBoxText" id="comboboxtext_exportation_pdf_size">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <items>
+                  <item id="0" translatable="yes">A5</item>
+                  <item id="1" translatable="yes">A4</item>
+                  <item id="2" translatable="yes">A3</item>
+                </items>
+                <signal name="changed" handler="checkExportationPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_exportation_pdf_margin">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Margin of the pdf document</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton_exportation_pdf_margin">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <property name="xalign">0.5</property>
+                <property name="input_purpose">number</property>
+                <property name="adjustment">adjustment_exportation_pdf_preferences_margin</property>
+                <property name="climb_rate">1</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="value-changed" handler="checkExportationPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_exportation_pdf_fontsize">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Font size of the pdf document</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton_exportation_pdf_fontsize">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <property name="xalign">0.5</property>
+                <property name="input_purpose">number</property>
+                <property name="adjustment">adjustment_exportation_pdf_preferences_fontsize</property>
+                <property name="climb_rate">1</property>
+                <property name="snap_to_ticks">True</property>
+                <property name="numeric">True</property>
+                <signal name="value-changed" handler="checkExportationPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="position">2</property>
+          </packing>
+        </child>
+        <child type="tab">
+          <object class="GtkLabel" id="label_notebook_exportation_preferences">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <property name="label" translatable="yes">Exportation</property>
+          </object>
+          <packing>
+            <property name="position">2</property>
             <property name="tab_fill">False</property>
           </packing>
         </child>

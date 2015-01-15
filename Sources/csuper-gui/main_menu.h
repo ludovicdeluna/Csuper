@@ -9,7 +9,7 @@
  /*
  * main_menu.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-gui.
  *
@@ -36,14 +36,15 @@
 
 #include "csuper-gui.h"
 #include "main_window.h"
-#include "preferences.h"
 
 G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void recentCsuFileOpen(GtkRecentChooser *chooser, gpointer data);
 void openFileError(globalData *data);
 G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data);
 void saveFileError(globalData *data);
+void exportFileError(globalData *data);
 G_MODULE_EXPORT void copyToCliboard(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void pastFromClipboard(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void deleteSelectedText(GtkWidget *widget, gpointer data);
@@ -59,5 +60,8 @@ G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data);
 void deleteFileError(globalData *data);
 G_MODULE_EXPORT void displayPodium(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void printDialog(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void beginPrint(GtkPrintOperation *operation, GtkPrintContext *context,gpointer user_data);
+G_MODULE_EXPORT void drawPrintPage(GtkPrintOperation *operation,GtkPrintContext *context,gint page_nr,gpointer user_data);
 
 #endif // MAIN_MENU_H_INCLUDED

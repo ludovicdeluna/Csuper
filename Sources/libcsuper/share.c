@@ -9,7 +9,7 @@
  /*
  * share.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of LibCsuper.
  *
@@ -205,3 +205,159 @@ char *integerToYesNo(int i, char *yes, char *no)
         return no;
 }
 
+
+/*!
+ * \fn char *utf8ToLatin9(const char *const string)
+ * Create a dynamically allocated copy of string,
+ * changing the encoding from UTF-8 to ISO-8859-15.
+ * Unsupported code points are ignored.
+ * \param[in] string the input string in UTF-8
+ * \return a newly allocated string in ISO-8859-15
+ */
+char *utf8ToLatin9(const char *const string)
+{
+    size_t         size = 0;
+    size_t         used = 0;
+    unsigned char *result = NULL;
+
+    if (string) {
+        const unsigned char  *s = (const unsigned char *)string;
+
+        while (*s) {
+
+            if (used >= size) {
+                void *const old = result;
+
+                size = (used | 255) + 257;
+                result = realloc(result, size);
+                if (!result) {
+                    if (old)
+                        free(old);
+                    errno = ENOMEM;
+                    return NULL;
+                }
+            }
+
+            if (*s < 128) {
+                result[used++] = *(s++);
+                continue;
+
+            } else
+            if (s[0] == 226 && s[1] == 130 && s[2] == 172) {
+                result[used++] = 164;
+                s += 3;
+                continue;
+
+            } else
+            if (s[0] == 194 && s[1] >= 128 && s[1] <= 191) {
+                result[used++] = s[1];
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 195 && s[1] >= 128 && s[1] <= 191) {
+                result[used++] = s[1] + 64;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 160) {
+                result[used++] = 166;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 161) {
+                result[used++] = 168;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 189) {
+                result[used++] = 180;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 190) {
+                result[used++] = 184;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 146) {
+                result[used++] = 188;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 147) {
+                result[used++] = 189;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 184) {
+                result[used++] = 190;
+                s += 2;
+                continue;
+
+            }
+
+            if (s[0] >= 192 && s[0] < 224 &&
+                s[1] >= 128 && s[1] < 192) {
+                s += 2;
+                continue;
+            } else
+            if (s[0] >= 224 && s[0] < 240 &&
+                s[1] >= 128 && s[1] < 192 &&
+                s[2] >= 128 && s[2] < 192) {
+                s += 3;
+                continue;
+            } else
+            if (s[0] >= 240 && s[0] < 248 &&
+                s[1] >= 128 && s[1] < 192 &&
+                s[2] >= 128 && s[2] < 192 &&
+                s[3] >= 128 && s[3] < 192) {
+                s += 4;
+                continue;
+            } else
+            if (s[0] >= 248 && s[0] < 252 &&
+                s[1] >= 128 && s[1] < 192 &&
+                s[2] >= 128 && s[2] < 192 &&
+                s[3] >= 128 && s[3] < 192 &&
+                s[4] >= 128 && s[4] < 192) {
+                s += 5;
+                continue;
+            } else
+            if (s[0] >= 252 && s[0] < 254 &&
+                s[1] >= 128 && s[1] < 192 &&
+                s[2] >= 128 && s[2] < 192 &&
+                s[3] >= 128 && s[3] < 192 &&
+                s[4] >= 128 && s[4] < 192 &&
+                s[5] >= 128 && s[5] < 192) {
+                s += 6;
+                continue;
+            }
+
+            s++;
+        }
+    }
+    {
+        void *const old = result;
+
+        size = (used | 7) + 1;
+
+        result = realloc(result, size);
+        if (!result) {
+            if (old)
+                free(old);
+            errno = ENOMEM;
+            return NULL;
+        }
+
+        memset(result + used, 0, size - used);
+    }
+
+    return (char *)result;
+}

@@ -9,7 +9,7 @@
  /*
  * csu_files.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of LibCsuper.
  *
@@ -46,10 +46,10 @@
 #define SIZE_MAX_FILE_NAME 1024
 
 /*!
- * \def FILE_EXTENSION
+ * \def FILE_EXTENSION_CSU
  * Define the file extension to "csu"
  */
-#define FILE_EXTENSION "csu"
+#define FILE_EXTENSION_CSU "csu"
 
 /*!
  * \def STRING_CHECK_CSU_FILE

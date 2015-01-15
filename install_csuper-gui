@@ -6,6 +6,7 @@ sudo cp libcsuper.so /usr/lib
 sudo cp Installation/csuper-gui /usr/local/bin/csuper-gui
 sudo cp -R Locales /usr/share/csuper
 sudo cp -R Images /usr/share/csuper
+sudo cp -R Fonts /usr/share/csuper
 sudo chmod -R a+rx /usr/share/csuper
 sudo cp Installation/Mime/csuper.xml /usr/share/mime/packages/
 sudo cp Installation/Mime/application-csu.png /usr/share/icons/hicolor/48x48/mimetypes

@@ -24,3 +24,6 @@ libcsuper.def
 /Makefile
 /Csuper.cbp
 /Csuper.layout
+/test.csu
+/test.pdf
+/test.csv

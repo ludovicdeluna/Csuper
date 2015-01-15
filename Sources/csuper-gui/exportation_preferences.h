@@ -1,13 +1,13 @@
 /*!
- * \file    utils.h
- * \brief   The new file assistant function
+ * \file    exportation_preferences.h
+ * \brief   The preferences of csuper
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    10/01/15
+ * \version 4.2.0
  */
 
  /*
- * utils.h
+ * exportation_preferences.h
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
@@ -31,11 +31,15 @@
  *
  */
 
-#ifndef UTILS_H_INCLUDED
-#define UTILS_H_INCLUDED
+#ifndef EXPORTATION_PREFERENCES_H_INCLUDED
+#define EXPORTATION_PREFERENCES_H_INCLUDED
 
 #include "csuper-gui.h"
 
-void setGtkLabelAttributes(GtkLabel *label, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue);
-GtkLabel *createGtkLabelWithAttributes(gchar *text, int text_size, gboolean use_foreground,guint16 foreground_red, guint16 foreground_green, guint16 foreground_blue, gboolean use_background,guint16 background_red, guint16 background_green, guint16 background_blue);
-#endif // UTILS_H_INCLUDED
+void updateExportationPreferences(globalData *data);
+void readExportationPreferences(globalData *data, export_pdf_preferences *pref);
+G_MODULE_EXPORT void checkExportationPreferencesChanged(GtkWidget *widget,gpointer data);
+G_MODULE_EXPORT void checkExportationPreferencesChangedSwitchButton(GObject *gobject,GParamSpec *pspec,gpointer user_data);
+G_MODULE_EXPORT void validExportationPreferences(GtkWidget *widget, gpointer data);
+
+#endif // EXPORTATION_PREFERENCES_H_INCLUDED

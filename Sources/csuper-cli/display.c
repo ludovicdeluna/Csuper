@@ -9,7 +9,7 @@
  /*
  * display.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-cli.
  *
@@ -343,35 +343,15 @@ void printCsuStruct(csuStruct *ptr_csu_struct)
  */
 void printGameOver(csuStruct *ptr_csu_struct)
 {
-    int pos[3]={0,1,2};
     int i;
-    int un_pris=false;
-    int deux_pris=false;
+    int nb=1;
 
     printf(_("\nThe game is over.\n"));
-
-    /*Initialization of the position array*/
-    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-    {
-        if (ptr_csu_struct->rank[i] == 3 || (un_pris && deux_pris && ptr_csu_struct->rank[i] == 1) || (deux_pris && ptr_csu_struct->rank[i] == 2))
-            pos[2]=i;
-
-        if ((ptr_csu_struct->rank[i] == 2 && !deux_pris ) || (un_pris && ptr_csu_struct->rank[i] == 1 && !deux_pris))
-        {
-            pos[1]=i;
-            deux_pris=true;
-        }
-        if (ptr_csu_struct->rank[i] == 1 && !un_pris)
-        {
-            pos[0]=i;
-            un_pris=true;
-        }
-    }
 
     /*Print the first line*/
     printf("\n\t\t\t");
     color(foregroundGreen);
-    printStringThreeTabs(ptr_csu_struct->player_names[pos[0]]);
+    printStringThreeTabs(ptr_csu_struct->player_names[searchIndexFromPosition(ptr_csu_struct,1,&nb)]);
     color(writingReset);
     printf("\n");
 
@@ -379,7 +359,8 @@ void printGameOver(csuStruct *ptr_csu_struct)
     if(ptr_csu_struct->nb_player >=2)
     {
         color(foregroundCyan);
-        printStringThreeTabs(ptr_csu_struct->player_names[pos[1]]);
+        nb=1;
+        printStringThreeTabs(ptr_csu_struct->player_names[searchIndexFromPosition(ptr_csu_struct,2,&nb)]);
     }
     else
         printf("\t\t\t");
@@ -399,7 +380,8 @@ void printGameOver(csuStruct *ptr_csu_struct)
     {
         printf("\t\t\t");
         color(foregroundRed);
-        printStringThreeTabs(ptr_csu_struct->player_names[pos[2]]);
+        nb=1;
+        printStringThreeTabs(ptr_csu_struct->player_names[searchIndexFromPosition(ptr_csu_struct,3,&nb)]);
         printf("\n\t\t\t\t\t\t");
         for (i=0 ; i<24 ; i++)
             printSpecial("-",1,foregroundRed);
@@ -436,7 +418,7 @@ void printStringThreeTabs(char *string)
  */
 void printLicense()
 {
-    printf(_("\nCsuper Copyright (C) 2014 Remi BERTHO <remi.bertho@gmail.com>\n"
+    printf(_("\nCsuper Copyright (C) 2014-2015 Remi BERTHO <remi.bertho@gmail.com>\n"
     "This program comes with ABSOLUTELY NO WARRANTY. \nThis is free software, and you are welcome to redistribute it"
     " under certain conditions. \nFore more details : http://www.gnu.org/licenses/gpl.html\n"));
 }

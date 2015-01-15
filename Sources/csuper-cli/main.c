@@ -9,7 +9,7 @@
 /*
  * main.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-cli.
  *
@@ -42,24 +42,37 @@
  */
 int main(int argc, char *argv[])
 {
-    int function;
+    main_argument_function function;
     int file_place;
+    int new_argc=argc;
+
     setlocale(LC_ALL,"");
     bindtextdomain("csuper-cli","Locales");
     textdomain("csuper-cli");
+
     #ifdef PORTABLE
     printLicense();
     systemPause();
     #endif
-    if (argc >= 2 && searchArgument(argc,argv,&function,&file_place))
+
+    // Delete the empty arguments
+    while (new_argc>0 && strcmp(argv[new_argc-1],"") == 0)
+        new_argc--;
+
+    if (new_argc >= 2)
     {
+        searchArgument(new_argc,argv,&function,&file_place);
         switch (function)
         {
-            case READ_FILE    :   displayFileLocale(argv[file_place]);
+            case read_file    :   displayFileLocale(argv[file_place]);
                                         break;
-            case OPEN_FILE  :   loadGameLocale(argv[file_place]);
+            case open_file  :   loadGameLocale(argv[file_place]);
                                         break;
-            case HELP               :   systemPause();
+            case export_to_pdf  :   exportToPdfLocale(argv[file_place],argv[file_place+1]);
+                                        break;
+            case export_to_csv  :   exportToCsvLocale(argv[file_place],argv[file_place+1]);
+                                        break;
+            case help               :   systemPause();
                                         break;
         }
     }

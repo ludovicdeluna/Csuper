@@ -9,7 +9,7 @@
  /*
  * new_file_assistant.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
  *
  * This file is part of Csuper-gui.
  *
@@ -280,7 +280,7 @@ G_MODULE_EXPORT void chooseGameConfigurationNewAssistant(GtkWidget *widget, gpoi
 
     index = gtk_combo_box_get_active(GTK_COMBO_BOX(widget));
 
-    /* If the index if not valid return */
+    /* If the index is not valid return */
     if (index < 0)
     {
         closeListGameConfig(ptr_list_config);
