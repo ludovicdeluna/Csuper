@@ -2,8 +2,8 @@
  * \file    csu_struct.h
  * \brief   Management of the csu files header
  * \author  Remi BERTHO
- * \date    16/06/14
- * \version 4.0.0
+ * \date    25/01/15
+ * \version 4.01.0
  */
 
 /*
@@ -103,5 +103,6 @@ bool differentsPlayerName(csuStruct *ptr_csu_struct);
 csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct);
 bool changeDistributor(csuStruct *ptr_csu_struct, int index);
 float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn);
+int rankAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn);
 
 #endif

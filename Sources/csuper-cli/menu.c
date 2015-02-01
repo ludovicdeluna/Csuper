@@ -511,7 +511,7 @@ void menuPdfPreferences(export_pdf_preferences *pref)
         if (choice=='Y' || choice == 'y')
             pref->charset = UTF8;
         else
-        pref->charset = ISO885915;
+            pref->charset = ISO885915;
     }
 
     // Direction
@@ -549,6 +549,22 @@ void menuPdfPreferences(export_pdf_preferences *pref)
     } while ((nb < 4 || nb > 40) && nb != -1);
     if (nb != -1)
         pref->font_size = nb;
+
+    // Total points by turn
+    printf(_("\nWould you like to display the total points in each turn (y/N)? "));
+    charKey(&choice);
+    if (choice=='Y' || choice == 'y')
+        pref->total_points_turn = true;
+    else
+        pref->total_points_turn = false;
+
+    // Ranking by turn
+    printf(_("\nWould you like to display the ranking in each turn (y/N)? "));
+    charKey(&choice);
+    if (choice=='Y' || choice == 'y')
+        pref->ranking_turn = true;
+    else
+        pref->ranking_turn = false;
 }
 
 

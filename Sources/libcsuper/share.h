@@ -2,7 +2,7 @@
  * \file    share.h
  * \brief   Header for the essential function of libcsuper
  * \author  Remi BERTHO
- * \date    22/12/14
+ * \date    25/01/15
  * \version 4.1.0
  */
 
@@ -70,5 +70,6 @@ void *myAlloc(int size_alloue);
 void myRealloc(void **ptr,int size_alloue);
 char *integerToYesNo(int i, char *yes, char *no);
 char *utf8ToLatin9(const char *const string);
+void convertFloatString(char *output, float input,int decimal_place);
 
 #endif

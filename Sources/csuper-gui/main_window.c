@@ -249,7 +249,7 @@ void updateTotalPointsInTurnLabel(globalData *data,bool updatable_points)
             g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
 
         for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
-            total_points += gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),2*(i+1),2*(max_nb_turn+1))));
+            total_points += gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),6*i+2,2*(max_nb_turn+1)+2)));
 
         switch (data->ptr_csu_struct->config.decimal_place)
         {
@@ -311,10 +311,23 @@ void createPointsGrid(globalData *data,bool spin_button)
 {
     gint i,k;
     gint max_nb_turn = maxNbTurn(data->ptr_csu_struct);
+    gint points_grid_width;
 
     GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_viewport"));
     if (!viewport)
         g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+
+    // Read the preferences
+    score_display score;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    readFileScoreDisplay(home_path,&score);
+    if (score.total_points || score.ranking)
+        points_grid_width = 1;
+    else
+        points_grid_width = 5;
 
     /* Set the grid*/
     GtkWidget *points_grid = gtk_grid_new();
@@ -333,52 +346,103 @@ void createPointsGrid(globalData *data,bool spin_button)
 
     /* Add separator */
     for (i=0 ; i<data->ptr_csu_struct->nb_player; i++)
-        gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),2*i+1,0,1,2*(max_nb_turn+6));
+        gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+1,0,1,2*(max_nb_turn+8));
     for (i=0 ; i< max_nb_turn + 5 ; i++)
-        gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,2*i+1,2*(data->ptr_csu_struct->nb_player+1),1);
+        gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,2*i+3,6*data->ptr_csu_struct->nb_player+1,1);
 
     /* Write the names of the players and set the expand*/
     gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Name")),0,0,1,1);
     gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(points_grid),0,0),TRUE);
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
     {
-        gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(createGtkLabelWithAttributes(g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[i]),15,FALSE,0,0,0,FALSE,0,0,0)),2*(i+1),0,1,1);
-        gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(points_grid),2*(i+1),0),TRUE);
+        gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(createGtkLabelWithAttributes(g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[i]),15,FALSE,0,0,0,FALSE,0,0,0)),6*i+2,0,5,1);
+        gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(points_grid),6*i+2,0),TRUE);
     }
 
 
-    /* Write all the points of the players */
+    // Set the legend
+    gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,1,6*data->ptr_csu_struct->nb_player+1,1);
+    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Legend")),0,2,1,1);
+    for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
+    {
+        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Points")),6*i+2,2,points_grid_width,1);
+        gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(points_grid),6*i+2,2),TRUE);
+    }
+    if (score.total_points)
+    {
+        for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
+        {
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+3,2,1,2*(max_nb_turn+1));
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Total")),6*i+4,2,1,1);
+            gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(points_grid),6*i+4,2),TRUE);
+        }
+    }
+    if (score.ranking)
+    {
+        for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
+        {
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+5,2,1,2*(max_nb_turn+1));
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Ranking")),6*i+6,2,1,1);
+            gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(points_grid),6*i+6,2),TRUE);
+        }
+        }
+
+
+    /* Write all the points, the total point and the ranking of the players */
     for (i=0 ; i<max_nb_turn ; i++)
     {
-        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("Turn %d"),i)),0,2*(i+1),1,1);
+        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("Turn %d"),i)),0,2*(i+1)+2,1,1);
 
         for (k=0 ; k<data->ptr_csu_struct->nb_player ; k++)
         {
+            // Points
             if (data->ptr_csu_struct->nb_turn[k] >= i+1)
             {
                 switch (data->ptr_csu_struct->config.decimal_place)
                 {
                 case 0 :
-                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.0f"),data->ptr_csu_struct->point[k][i])),2*(k+1),2*(i+1),1,1);
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.0f"),data->ptr_csu_struct->point[k][i])),6*k+2,2*(i+1)+2,points_grid_width,1);
                     break;
                 case 1 :
-                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.1f"),data->ptr_csu_struct->point[k][i])),2*(k+1),2*(i+1),1,1);
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.1f"),data->ptr_csu_struct->point[k][i])),6*k+2,2*(i+1)+2,points_grid_width,1);
                     break;
                 case 2 :
-                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.2f"),data->ptr_csu_struct->point[k][i])),2*(k+1),2*(i+1),1,1);
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.2f"),data->ptr_csu_struct->point[k][i])),6*k+2,2*(i+1)+2,points_grid_width,1);
                     break;
                 case 3 :
-                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.3f"),data->ptr_csu_struct->point[k][i])),2*(k+1),2*(i+1),1,1);
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.3f"),data->ptr_csu_struct->point[k][i])),6*k+2,2*(i+1)+2,points_grid_width,1);
                     break;
                 }
             }
+            // Total points
+            if (score.total_points)
+            {
+                switch (data->ptr_csu_struct->config.decimal_place)
+                {
+                case 0 :
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.0f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
+                    break;
+                case 1 :
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.1f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
+                    break;
+                case 2 :
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.2f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
+                    break;
+                case 3 :
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.3f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
+                    break;
+                }
+            }
+            // Ranking
+            if (score.ranking)
+                gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%d"),rankAtTurn(data->ptr_csu_struct,k,i))),6*k+6,2*(i+1)+2,1,1);
         }
     }
 
     /* Put the spin button for the new points */
     if (spin_button)
     {
-        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("New points")),0,2*(max_nb_turn+1),1,1);
+        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("New points")),0,2*(max_nb_turn+1)+2,1,1);
         for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
         {
             GtkAdjustment *adju = gtk_adjustment_new(0,-G_MAXDOUBLE,G_MAXDOUBLE,1,0,0);
@@ -389,7 +453,7 @@ void createPointsGrid(globalData *data,bool spin_button)
                 gtk_entry_set_activates_default(GTK_ENTRY(new_points_button),true);
             if (exceedMaxNumber(data->ptr_csu_struct) == true)
                 gtk_editable_set_editable(GTK_EDITABLE(new_points_button),FALSE);
-            gtk_grid_attach(GTK_GRID(points_grid),new_points_button,2*(i+1),2*(max_nb_turn+1),1,1);
+            gtk_grid_attach(GTK_GRID(points_grid),new_points_button,6*i+2,2*(max_nb_turn+1)+2,5,1);
             g_signal_connect (new_points_button,"value-changed", G_CALLBACK(updateTotalPointsInTurnLabelSignal),data);
 
 
@@ -397,39 +461,39 @@ void createPointsGrid(globalData *data,bool spin_button)
         }
 
         /* Write a blank line */
-        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(""),0,2*(max_nb_turn+2),1,1);
+        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(""),0,2*(max_nb_turn+2)+2,1,1);
     }
 
     /* Write the names of the players*/
-    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Name")),0,2*(max_nb_turn+3),1,1);
+    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Name")),0,2*(max_nb_turn+3)+2,1,1);
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
-        gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(createGtkLabelWithAttributes(g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[i]),15,FALSE,0,0,0,FALSE,0,0,0)),2*(i+1),2*(max_nb_turn+3),1,1);
+        gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(createGtkLabelWithAttributes(g_strdup_printf(_("%s"),data->ptr_csu_struct->player_names[i]),15,FALSE,0,0,0,FALSE,0,0,0)),6*i+2,2*(max_nb_turn+3)+2,5,1);
 
     /* Write the total points of the players */
-    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Total number of points")),0,2*(max_nb_turn+4),1,1);
+    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Total number of points")),0,2*(max_nb_turn+4)+2,1,1);
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
     {
         switch (data->ptr_csu_struct->config.decimal_place)
         {
         case 0 :
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%0.f"),data->ptr_csu_struct->total_points[i])),2*(i+1),2*(max_nb_turn+4),1,1);
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%0.f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
             break;
         case 1 :
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%1.f"),data->ptr_csu_struct->total_points[i])),2*(i+1),2*(max_nb_turn+4),1,1);
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%1.f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
             break;
         case 2 :
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%2.f"),data->ptr_csu_struct->total_points[i])),2*(i+1),2*(max_nb_turn+4),1,1);
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%2.f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
             break;
         case 3 :
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%3.f"),data->ptr_csu_struct->total_points[i])),2*(i+1),2*(max_nb_turn+4),1,1);
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%3.f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
             break;
         }
     }
 
     /* Write the ranking of the players */
-    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Ranking")),0,2*(max_nb_turn+5),1,1);
+    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Ranking")),0,2*(max_nb_turn+5)+2,1,1);
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
-        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%0.f"),data->ptr_csu_struct->rank[i])),2*(i+1),2*(max_nb_turn+5),1,1);
+        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%0.f"),data->ptr_csu_struct->rank[i])),6*i+2,2*(max_nb_turn+5)+2,5,1);
 
     gtk_container_add(GTK_CONTAINER(viewport),points_grid);
 
@@ -710,6 +774,24 @@ void setButtonMainWindow(globalData *data)
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(consecutive),diff.consecutive);
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(first),diff.first);
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(last),diff.last);
+
+
+
+    // Set the toggle button of the points grid
+    score_display score;
+    readFileScoreDisplay(home_path,&score);
+
+    GtkWidget *total_points = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_totalpoints"));
+    if (!total_points)
+        g_critical(_("Widget menu_display_totalpoints is missing in file csuper-gui.glade."));
+
+    GtkWidget *ranking = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_ranking"));
+    if (!ranking)
+        g_critical(_("Widget menu_display_ranking is missing in file csuper-gui.glade."));
+
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(ranking),score.ranking);
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(total_points),score.total_points);
+
 
 
 

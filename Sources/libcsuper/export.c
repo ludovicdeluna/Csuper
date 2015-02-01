@@ -198,9 +198,9 @@ bool exportToPdf(csuStruct *ptr_csu_struct, char *filename)
 bool initializePdfExport(export_pdf *ptr_export_pdf,csuStruct *ptr_csu_struct)
 {
     char home_path[SIZE_MAX_FILE_NAME]="";
-#ifndef PORTABLE
+    #ifndef PORTABLE
     readHomePathSlash(home_path);
-#endif // PORTABLE
+    #endif // PORTABLE
 
     // Create the pdf
     ptr_export_pdf->pdf = HPDF_New(errorHandler,NULL);
@@ -215,6 +215,8 @@ bool initializePdfExport(export_pdf *ptr_export_pdf,csuStruct *ptr_csu_struct)
     ptr_export_pdf->line = 0;
     ptr_export_pdf->num_page = 2;
     readFilePdfPreferences(home_path,&(ptr_export_pdf->pref));
+    if (ptr_csu_struct->config.turn_based == 0)
+        ptr_export_pdf->pref.ranking_turn = false;
     ptr_export_pdf->line_height = ptr_export_pdf->pref.font_size;
     ptr_export_pdf->table_line_height = 1.8*ptr_export_pdf->pref.font_size;
     ptr_export_pdf->total_points_ranking_print = false;
@@ -223,9 +225,9 @@ bool initializePdfExport(export_pdf *ptr_export_pdf,csuStruct *ptr_csu_struct)
     // Initialize the font
     if (ptr_export_pdf->pref.charset == UTF8)
     {
-#if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
+    #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
         ptr_export_pdf->font = HPDF_GetFont(ptr_export_pdf->pdf,"Times-Roman", "ISO8859-15");
-#else
+    #else
         char font_name[SIZE_MAX_FILE_NAME];
         HPDF_UseUTFEncodings(ptr_export_pdf->pdf);
         strncpy(font_name,HPDF_LoadTTFontFromFile(ptr_export_pdf->pdf,"Fonts/DejaVuSans.ttf", HPDF_TRUE),SIZE_MAX_FILE_NAME);
@@ -235,7 +237,7 @@ bool initializePdfExport(export_pdf *ptr_export_pdf,csuStruct *ptr_csu_struct)
             return false;
         }
         ptr_export_pdf->font = HPDF_GetFont(ptr_export_pdf->pdf,font_name, "UTF-8");
-#endif // HPDF_MAJOR_VERSION
+    #endif // HPDF_MAJOR_VERSION
     }
     else
         ptr_export_pdf->font = HPDF_GetFont(ptr_export_pdf->pdf,"Times-Roman", "ISO8859-15");
@@ -286,40 +288,176 @@ void printPointsPdf(HPDF_Page page, float *pos_y, csuStruct *ptr_csu_struct,expo
 {
     char text_buffer[TEXT_BUFFER_SIZE]="";
     int i;
+    int decimal_place = ptr_csu_struct->config.decimal_place;
 
+    HPDF_Page_BeginText(page);
     while ((*pos_y > ptr_export_pdf->pref.margin + ptr_export_pdf->pref.font_size ) && (ptr_export_pdf->line < maxNbTurn(ptr_csu_struct)))
     {
         sprintf(text_buffer,_("Turn %d"),ptr_export_pdf->line);
         pdfTextOutTable(page,ptr_export_pdf->pref.margin,*pos_y,text_buffer,table_width,0,ptr_export_pdf);
 
+        // For each turn
         for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
         {
+            // Test if the player has points in this turn
             if (ptr_csu_struct->nb_turn[i] >= ptr_export_pdf->line+1)
             {
-                switch (ptr_csu_struct->config.decimal_place)
+                convertFloatString(text_buffer,ptr_csu_struct->point[i][ptr_export_pdf->line],decimal_place);
+                // If the total points and the ranking needs to be display
+                if (ptr_export_pdf->pref.total_points_turn && ptr_export_pdf->pref.ranking_turn)
                 {
-                case 0 :
-                    sprintf(text_buffer,"%.0f",ptr_csu_struct->point[i][ptr_export_pdf->line]);
-                    break;
-                case 1 :
-                    sprintf(text_buffer,"%.1f",ptr_csu_struct->point[i][ptr_export_pdf->line]);
-                    break;
-                case 2 :
-                    sprintf(text_buffer,"%.2f",ptr_csu_struct->point[i][ptr_export_pdf->line]);
-                    break;
-                case 3 :
-                    sprintf(text_buffer,"%.3f",ptr_csu_struct->point[i][ptr_export_pdf->line]);
-                    break;
+                    pdfTextOutTable(page,ptr_export_pdf->pref.margin + (3*i+1)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                    convertFloatString(text_buffer,pointsAtTurn(ptr_csu_struct,i,ptr_export_pdf->line),decimal_place);
+                    pdfTextOutTable(page,ptr_export_pdf->pref.margin + (3*i+2)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                    sprintf(text_buffer,"%d",rankAtTurn(ptr_csu_struct,i,ptr_export_pdf->line));
+                    pdfTextOutTable(page,ptr_export_pdf->pref.margin + (3*i+3)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                } else
+                // If the total points needs to be display
+                if (ptr_export_pdf->pref.total_points_turn)
+                {
+                    pdfTextOutTable(page,ptr_export_pdf->pref.margin + (2*i+1)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                    convertFloatString(text_buffer,pointsAtTurn(ptr_csu_struct,i,ptr_export_pdf->line),decimal_place);
+                    pdfTextOutTable(page,ptr_export_pdf->pref.margin + 2*(i+1)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                }else
+                // If the ranking needs to be display
+                if (ptr_export_pdf->pref.ranking_turn)
+                {
+                    pdfTextOutTable(page,ptr_export_pdf->pref.margin + (2*i+1)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                    sprintf(text_buffer,"%d",rankAtTurn(ptr_csu_struct,i,ptr_export_pdf->line));
+                    pdfTextOutTable(page,ptr_export_pdf->pref.margin + 2*(i+1)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
                 }
-                pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                else
+                    pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,*pos_y,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
             }
         }
 
         (ptr_export_pdf->line) += 1;
         *pos_y -= ptr_export_pdf->table_line_height;
     }
+    HPDF_Page_EndText(page);
 }
 
+
+/*!
+ * \fn void printNamesPdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,float *pos_y, float table_width, HPDF_Page page)
+ *  Print the names on a pdf page
+ * \param[in] page the page
+ * \param[in] pos_y a pointer to the first position on the y axis
+ * \param[in] table_width the width of a table
+ * \param[in] ptr_csu_struct a pointer on a csuStruct
+ * \param[in] ptr_export_pdf a pointer on a export_pdf
+ */
+void printNamesPdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,float *pos_y, float table_width, HPDF_Page page)
+{
+    int i;
+    float width = HPDF_Page_GetWidth (page);
+
+    HPDF_Page_BeginText(page);
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,*pos_y,_("Name"),table_width,0,ptr_export_pdf);
+
+    if (ptr_export_pdf->pref.total_points_turn && ptr_export_pdf->pref.ranking_turn)
+    {
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            pdfTextOutTable(page,ptr_export_pdf->pref.margin + (3*i+1)*table_width,*pos_y,
+                ptr_csu_struct->player_names[i],table_width*3,ptr_csu_struct->rank[i],ptr_export_pdf);
+        HPDF_Page_EndText(page);
+
+        createPdfGrid(page,ptr_export_pdf->pref.margin,*pos_y +ptr_export_pdf->table_line_height*2/3,
+            ptr_export_pdf->pref.margin + table_width,*pos_y +ptr_export_pdf->table_line_height*2/3 - ptr_export_pdf->table_line_height,
+            ptr_export_pdf->table_line_height,table_width);
+
+        createPdfGrid(page,ptr_export_pdf->pref.margin + table_width,*pos_y +ptr_export_pdf->table_line_height*2/3,
+            width - ptr_export_pdf->pref.margin,*pos_y +ptr_export_pdf->table_line_height*2/3 - ptr_export_pdf->table_line_height,
+            ptr_export_pdf->table_line_height,3*table_width);
+    }
+    else if (ptr_export_pdf->pref.total_points_turn || ptr_export_pdf->pref.ranking_turn)
+    {
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            pdfTextOutTable(page,ptr_export_pdf->pref.margin + (2*i+1)*table_width,*pos_y,
+                ptr_csu_struct->player_names[i],table_width*2,ptr_csu_struct->rank[i],ptr_export_pdf);
+        HPDF_Page_EndText(page);
+
+        createPdfGrid(page,ptr_export_pdf->pref.margin,*pos_y +ptr_export_pdf->table_line_height*2/3,
+            ptr_export_pdf->pref.margin + table_width,*pos_y +ptr_export_pdf->table_line_height*2/3 - ptr_export_pdf->table_line_height,
+            ptr_export_pdf->table_line_height,table_width);
+
+        createPdfGrid(page,ptr_export_pdf->pref.margin + table_width,*pos_y +ptr_export_pdf->table_line_height*2/3,
+            width - ptr_export_pdf->pref.margin,*pos_y +ptr_export_pdf->table_line_height*2/3 - ptr_export_pdf->table_line_height,
+            ptr_export_pdf->table_line_height,2*table_width);
+    }
+    else
+    {
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,*pos_y,
+                ptr_csu_struct->player_names[i],table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+        HPDF_Page_EndText(page);
+
+        createPdfGrid(page,ptr_export_pdf->pref.margin,*pos_y +ptr_export_pdf->table_line_height*2/3,
+            width - ptr_export_pdf->pref.margin,*pos_y +ptr_export_pdf->table_line_height*2/3 - ptr_export_pdf->table_line_height,
+            ptr_export_pdf->table_line_height,table_width);
+    }
+    *pos_y = *pos_y - ptr_export_pdf->table_line_height;
+}
+
+/*!
+ * \fn void printLegendPdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,float *pos_y, float table_width, HPDF_Page page)
+ *  Print the legend on a pdf page if needed
+ * \param[in] page the page
+ * \param[in] pos_y a pointer to the first position on the y axis
+ * \param[in] table_width the width of a table
+ * \param[in] ptr_csu_struct a pointer on a csuStruct
+ * \param[in] ptr_export_pdf a pointer on a export_pdf
+ */
+void printLegendPdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,float *pos_y, float table_width, HPDF_Page page)
+{
+    int i;
+
+    //Test if it need a legend
+    if (ptr_export_pdf->pref.total_points_turn || ptr_export_pdf->pref.ranking_turn)
+    {
+        HPDF_Page_BeginText(page);
+        pdfTextOutTable(page,ptr_export_pdf->pref.margin,*pos_y,_("Legend"),table_width,0,ptr_export_pdf);
+
+        // If that need total points and ranking
+        if (ptr_export_pdf->pref.total_points_turn && ptr_export_pdf->pref.ranking_turn)
+        {
+            for (i=0 ; i< ptr_csu_struct->nb_player ; i++)
+            {
+                pdfTextOutTable(page,ptr_export_pdf->pref.margin + (3*i+1)*table_width,*pos_y,
+                    _("Points"),table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                pdfTextOutTable(page,ptr_export_pdf->pref.margin + (3*i+2)*table_width,*pos_y,
+                    _("Total"),table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                pdfTextOutTable(page,ptr_export_pdf->pref.margin + (3*i+3)*table_width,*pos_y,
+                    _("Ranking"),table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+            }
+        } else
+        // If it need only the total points
+        if (ptr_export_pdf->pref.total_points_turn)
+        {
+            for (i=0 ; i< ptr_csu_struct->nb_player ; i++)
+            {
+                pdfTextOutTable(page,ptr_export_pdf->pref.margin + (2*i+1)*table_width,*pos_y,
+                    _("Points"),table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                pdfTextOutTable(page,ptr_export_pdf->pref.margin + 2*(i+1)*table_width,*pos_y,
+                    _("Total"),table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+            }
+        }
+        else
+        // If it need only the ranking
+        {
+            for (i=0 ; i< ptr_csu_struct->nb_player ; i++)
+            {
+                pdfTextOutTable(page,ptr_export_pdf->pref.margin + (2*i+1)*table_width,*pos_y,
+                    _("Points"),table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+                pdfTextOutTable(page,ptr_export_pdf->pref.margin + 2*(i+1)*table_width,*pos_y,
+                    _("Ranking"),table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+            }
+        }
+
+        HPDF_Page_EndText(page);
+        *pos_y = *pos_y - ptr_export_pdf->table_line_height;
+    }
+}
 
 /*!
  * \fn bool createFirstPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct, char *filename)
@@ -336,7 +474,6 @@ bool createFirstPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct, c
     HPDF_Page first_page;
     char simple_filename[SIZE_MAX_FILE_NAME];
     char text_buffer[TEXT_BUFFER_SIZE]="";
-    int i;
     float table_width;
     float text_pos_y;
     bool create_another_page = true;
@@ -382,35 +519,61 @@ bool createFirstPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct, c
     HPDF_Page_MoveTextPos (first_page, 0, - ptr_export_pdf->line_height);
     sprintf(text_buffer,_("Name of the game configuration: %s"),ptr_csu_struct->config.name);
     pdfShowText (first_page, text_buffer,ptr_export_pdf);
+    HPDF_Page_EndText(first_page);
 
 
     // Calculate the table width
-    table_width = ((width - 2*ptr_export_pdf->pref.margin)/(ptr_csu_struct->nb_player+1));
+    table_width = tableWidthCalculatePdf(ptr_export_pdf,ptr_csu_struct,first_page);
+
+    // Calculate the text position
+    text_pos_y = height - ptr_export_pdf->pref.margin - 7* ptr_export_pdf->line_height;
 
     // Names
-    pdfTextOutTable(first_page,ptr_export_pdf->pref.margin,height - ptr_export_pdf->pref.margin - 7* ptr_export_pdf->line_height,_("Name"),table_width,0,ptr_export_pdf);
-    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-        pdfTextOutTable(first_page,ptr_export_pdf->pref.margin + (i+1)*table_width,height - ptr_export_pdf->pref.margin - 7* ptr_export_pdf->line_height,
-                        ptr_csu_struct->player_names[i],table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+    printNamesPdf(ptr_export_pdf,ptr_csu_struct,&text_pos_y,table_width,first_page);
+
+    // Print the legend if needed
+    printLegendPdf(ptr_export_pdf,ptr_csu_struct,&text_pos_y,table_width,first_page);
 
     // Points
-    text_pos_y = height - ptr_export_pdf->pref.margin - 7* ptr_export_pdf->line_height - ptr_export_pdf->table_line_height;
     printPointsPdf(first_page,&text_pos_y,ptr_csu_struct,ptr_export_pdf,table_width);
 
+    // Page number
+    HPDF_Page_BeginText(first_page);
     pdfTextOutTable(first_page,0,ptr_export_pdf->pref.margin*2/3,_("Page 1"),width,0,ptr_export_pdf);
-
     HPDF_Page_EndText (first_page);
 
-    createPdfGrid(first_page,ptr_export_pdf->pref.margin,height - ptr_export_pdf->pref.margin - 7* ptr_export_pdf->line_height + ptr_export_pdf->table_line_height*2/3,
+    createPdfGrid(first_page,ptr_export_pdf->pref.margin,height - ptr_export_pdf->pref.margin - 7* ptr_export_pdf->line_height - ptr_export_pdf->table_line_height*1/3,
                   width-ptr_export_pdf->pref.margin,text_pos_y+ptr_export_pdf->table_line_height*2/3,ptr_export_pdf->table_line_height,table_width);
 
     if (text_pos_y-3*ptr_export_pdf->table_line_height-ptr_export_pdf->pref.font_size > ptr_export_pdf->pref.margin)
     {
         addTotalPointsRankingPdf(first_page,ptr_csu_struct,text_pos_y-ptr_export_pdf->table_line_height,ptr_export_pdf);
+        ptr_export_pdf->total_points_ranking_print = true;
         create_another_page = addPodiumPdf(first_page,ptr_csu_struct,text_pos_y-3*ptr_export_pdf->table_line_height-ptr_export_pdf->pref.font_size,ptr_export_pdf);
     }
 
     return create_another_page;
+}
+
+
+/*!
+ * \fn float tableWidthCalculatePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,HPDF_Page page)
+ *  Calculate the table width
+ * \param[in] page the page
+ * \param[in] ptr_csu_struct a pointer on a csuStruct
+ * \param[in] ptr_export_pdf a pointer on a export_pdf
+ * \return the table width
+ */
+float tableWidthCalculatePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,HPDF_Page page)
+{
+    float width = HPDF_Page_GetWidth (page);
+
+    if (ptr_export_pdf->pref.total_points_turn && ptr_export_pdf->pref.ranking_turn)
+        return ((width - 2*ptr_export_pdf->pref.margin)/(3*(ptr_csu_struct->nb_player)+1));
+    else if (ptr_export_pdf->pref.total_points_turn || ptr_export_pdf->pref.ranking_turn)
+        return ((width - 2*ptr_export_pdf->pref.margin)/(2*(ptr_csu_struct->nb_player)+1));
+    else
+        return ((width - 2*ptr_export_pdf->pref.margin)/(ptr_csu_struct->nb_player+1));
 }
 
 
@@ -522,7 +685,6 @@ bool createOtherPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct)
     float width;
     HPDF_Page page;
     char text_buffer[TEXT_BUFFER_SIZE]="";
-    int i;
     float table_width;
     float text_pos_y;
     bool create_another_page = true;
@@ -538,24 +700,22 @@ bool createOtherPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct)
 
     // Prepare the page
     HPDF_Page_SetFontAndSize (page, ptr_export_pdf->font, ptr_export_pdf->pref.font_size);
-    HPDF_Page_BeginText (page);
 
     // Calculate the table width
-    table_width = ((width - 2*ptr_export_pdf->pref.margin)/(ptr_csu_struct->nb_player+1));
+    table_width = tableWidthCalculatePdf(ptr_export_pdf,ptr_csu_struct,page);
 
-    // Names
-    if (! ptr_export_pdf->total_points_ranking_print)
+    // Names and legend
+    if ((! ptr_export_pdf->total_points_ranking_print) && ptr_export_pdf->line < maxNbTurn(ptr_csu_struct))
     {
-        pdfTextOutTable(page,ptr_export_pdf->pref.margin,text_pos_y,_("Name"),table_width,0,ptr_export_pdf);
-        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-            pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,text_pos_y,ptr_csu_struct->player_names[i],table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
-        text_pos_y -=  ptr_export_pdf->table_line_height;
+        printNamesPdf(ptr_export_pdf,ptr_csu_struct,&text_pos_y,table_width,page);
+        printLegendPdf(ptr_export_pdf,ptr_csu_struct,&text_pos_y,table_width,page);
     }
 
     // Points
     printPointsPdf(page,&text_pos_y,ptr_csu_struct,ptr_export_pdf,table_width);
 
     // Print the page number
+    HPDF_Page_BeginText(page);
     sprintf(text_buffer,_("Page %d"),ptr_export_pdf->num_page);
     (ptr_export_pdf->num_page) +=1;
     pdfTextOutTable(page,0,ptr_export_pdf->pref.margin*2/3,text_buffer,width,0,ptr_export_pdf);
@@ -563,7 +723,7 @@ bool createOtherPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct)
     HPDF_Page_EndText(page);
 
     if (height - ptr_export_pdf->pref.margin != text_pos_y)
-        createPdfGrid(page,ptr_export_pdf->pref.margin,height - ptr_export_pdf->pref.margin + ptr_export_pdf->table_line_height*2/3,width-ptr_export_pdf->pref.margin,text_pos_y+ ptr_export_pdf->table_line_height*2/3, ptr_export_pdf->table_line_height,table_width);
+        createPdfGrid(page,ptr_export_pdf->pref.margin,height - ptr_export_pdf->pref.margin - ptr_export_pdf->table_line_height*1/3,width-ptr_export_pdf->pref.margin,text_pos_y+ ptr_export_pdf->table_line_height*2/3, ptr_export_pdf->table_line_height,table_width);
 
     if ((text_pos_y-3* ptr_export_pdf->table_line_height -ptr_export_pdf->pref.font_size  > ptr_export_pdf->pref.margin) && ptr_export_pdf->total_points_ranking_print == false)
     {
@@ -674,12 +834,12 @@ bool exportToCsv(csuStruct *ptr_csu_struct, char *filename)
     // Names
     fprintf(ptr_file,_("\nNames"));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-        fprintf(ptr_file,_(";%s;"),ptr_csu_struct->player_names[i]);
+        fprintf(ptr_file,_(";;%s;"),ptr_csu_struct->player_names[i]);
 
     //Legend
     fprintf(ptr_file,_("\nLegend;"));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-        fprintf(ptr_file,_("Points in the turn;Points;"));
+        fprintf(ptr_file,_("Points in the turn;Points;Ranking;"));
 
     // Points
     for (i=0 ; i<maxNbTurn(ptr_csu_struct) ; i++)
@@ -689,26 +849,26 @@ bool exportToCsv(csuStruct *ptr_csu_struct, char *filename)
         for (j=0 ; j<ptr_csu_struct->nb_player ; j++)
         {
             if (ptr_csu_struct->nb_turn[j] >= i+1)
-                fprintf(ptr_file,"%f;%f;",ptr_csu_struct->point[j][i],pointsAtTurn(ptr_csu_struct,j,i));
+                fprintf(ptr_file,"%f;%f;%d;",ptr_csu_struct->point[j][i],pointsAtTurn(ptr_csu_struct,j,i),rankAtTurn(ptr_csu_struct,j,i));
             else
-                fprintf(ptr_file,";;");
+                fprintf(ptr_file,";;;");
         }
     }
 
     // Names
     fprintf(ptr_file,_("\n\nNames;"));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-        fprintf(ptr_file,_(";%s;"),ptr_csu_struct->player_names[i]);
+        fprintf(ptr_file,_("%s;"),ptr_csu_struct->player_names[i]);
 
     // Total points
     fprintf(ptr_file,_("\nTotal points;"));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-        fprintf(ptr_file,_(";%f;"),ptr_csu_struct->total_points[i]);
+        fprintf(ptr_file,_("%f;"),ptr_csu_struct->total_points[i]);
 
     // Ranking
     fprintf(ptr_file,_("\nRanking;"));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
-        fprintf(ptr_file,_(";%.0f;"),ptr_csu_struct->rank[i]);
+        fprintf(ptr_file,_("%.0f;"),ptr_csu_struct->rank[i]);
 
     closeFile(ptr_file);
 

@@ -53,6 +53,8 @@ typedef struct
     HPDF_PageDirection direction;   /*!< The direction of the pdf document */
     CharacterSetPdf charset;        /*!< The character set of the pdf document */
     int margin;                     /*!< The margin of the pdf document */
+    bool total_points_turn;         /*!< Indicate if we show the total points in each turn */
+    bool ranking_turn;              /*!< Indicate if we show the ranking in each turn */
 } export_pdf_preferences;
 
 /*!
@@ -102,7 +104,10 @@ bool exportToPdf(csuStruct *ptr_csu_struct, char *filename);
 bool initializePdfExport(export_pdf *ptr_export_pdf,csuStruct *ptr_csu_struct);
 void closeExportPdf(export_pdf *ptr_export_pdf);
 void printPointsPdf(HPDF_Page page, float *pos_y, csuStruct *ptr_csu_struct,export_pdf *ptr_export_pdf,float table_width);
+void printNamesPdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,float *pos_y, float table_width, HPDF_Page page);
+void printLegendPdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,float *pos_y, float table_width, HPDF_Page page);
 bool createFirstPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct, char *filename);
+float tableWidthCalculatePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,HPDF_Page page);
 void createPdfGrid(HPDF_Page page,float top_x, float top_y, float bottom_x, float bottom_y, float length_row, float length_column);
 void addTotalPointsRankingPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *ptr_export_pdf);
 bool createOtherPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct);

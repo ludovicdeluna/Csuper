@@ -432,8 +432,9 @@ bool createFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
     if (ptr_file==NULL)
         return false;
 
-    fprintf(ptr_file,"%d %d %d %d %d",ptr_pref->charset,ptr_pref->font_size,
-            ptr_pref->direction,ptr_pref->size,ptr_pref->margin);
+    fprintf(ptr_file,"%d %d %d %d %d %d %d",ptr_pref->charset,ptr_pref->font_size,
+            ptr_pref->direction,ptr_pref->size,ptr_pref->margin,ptr_pref->total_points_turn,
+            ptr_pref->ranking_turn);
 
     closeFile(ptr_file);
 
@@ -458,6 +459,8 @@ bool readFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
     ptr_pref->size = HPDF_PAGE_SIZE_A4;
     ptr_pref->direction = HPDF_PAGE_PORTRAIT;
     ptr_pref->margin = DEFAULT_MARGIN;
+    ptr_pref->total_points_turn = false;
+    ptr_pref->ranking_turn = false;
 
     createPreferencesFolder(home_path);
 
@@ -468,8 +471,9 @@ bool readFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
     if (ptr_file==NULL)
         return createFilePdfPreferences(home_path,ptr_pref);
 
-    fscanf(ptr_file,"%d %d %d %d %d",(int*)&(ptr_pref->charset),(int*)&(ptr_pref->font_size)
-           ,(int*)&(ptr_pref->direction),(int*)&(ptr_pref->size),(int*)&(ptr_pref->margin));
+    fscanf(ptr_file,"%d %d %d %d %d %d %d",(int*)&(ptr_pref->charset),(int*)&(ptr_pref->font_size)
+           ,(int*)&(ptr_pref->direction),(int*)&(ptr_pref->size),(int*)&(ptr_pref->margin),
+           (int *)&(ptr_pref->total_points_turn),(int *)&(ptr_pref->ranking_turn));
 
     closeFile(ptr_file);
 
@@ -487,5 +491,69 @@ bool readFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
 bool differentsTExportPdfPreferencesStruct(export_pdf_preferences pdf_1, export_pdf_preferences pdf_2)
 {
     return (pdf_1.charset != pdf_2.charset || pdf_1.direction != pdf_2.direction
-            || pdf_1.font_size != pdf_2.font_size || pdf_1.margin != pdf_2.margin || pdf_1.size != pdf_2.size);
+            || pdf_1.font_size != pdf_2.font_size || pdf_1.margin != pdf_2.margin
+            || pdf_1.size != pdf_2.size || pdf_1.total_points_turn != pdf_2.total_points_turn
+            || pdf_1.ranking_turn != pdf_2.ranking_turn );
+}
+
+
+
+/*!
+ * \fn bool createFileScoreDisplay(char *home_path, score_display score)
+ *  Create the file which contain the data which explain that we display on the score grid
+ * \param[in] home_path the path to the home directory
+ * \param[in] score the score_display structure
+ * \return true if everything is OK, false otherwise
+ */
+bool createFileScoreDisplay(char *home_path, score_display score)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_SCORE_DISPLAY);
+
+    createPreferencesFolder(home_path);
+
+    ptr_file=openFile(file_name,"w+");
+
+    if (ptr_file==NULL)
+        return false;
+
+    fprintf(ptr_file,"%d %d",score.total_points,score.ranking);
+
+    closeFile(ptr_file);
+
+    return true;
+}
+
+
+/*!
+ * \fn bool readFileScoreDisplay(char *home_path, score_display *score)
+ *  Read the file which contain the data which explain that we display on the score grid
+ * \param[in] home_path the path to the home directory
+ * \param[in] score the score_display structure
+ * \return true if everything is OK, false otherwise
+ */
+bool readFileScoreDisplay(char *home_path, score_display *score)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    score->total_points=false;
+    score->ranking=false;
+
+    createPreferencesFolder(home_path);
+
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_SCORE_DISPLAY);
+
+    ptr_file=openFile(file_name,"r");
+
+    if (ptr_file==NULL)
+        return createFileScoreDisplay(home_path,*score);
+
+    fscanf(ptr_file,"%d %d",(int*)&(score->total_points),(int*)&(score->ranking));
+
+    closeFile(ptr_file);
+
+    return true;
 }

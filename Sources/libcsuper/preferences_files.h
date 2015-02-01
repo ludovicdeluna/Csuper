@@ -72,6 +72,12 @@
 #define FILENAME_PDF_PREFERENCES "pdf_preferences.txt"
 
 /*!
+ * \def FILENAME_SCORE_DISPLAY
+ * Define the filename of the file which contain score display preferences
+ */
+#define FILENAME_SCORE_DISPLAY "score_display_preferences.txt"
+
+/*!
  * \def PREFERENCES_FOLDER_NAME
  * Define the folder name of the csuper preferences
  */
@@ -131,6 +137,16 @@ typedef struct
 } difference_between_player;
 
 
+/*!
+ * \struct difference_between_player
+ * Indicate which difference between player will be displayed in the ranking
+ */
+typedef struct
+{
+    bool total_points;   /*!< Display the total points in each turn */
+    bool ranking;         /*!< Display the ranking in each turn */
+} score_display;
+
 void createPreferencesFolder(char *home_path);
 bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar);
 bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar);
@@ -146,5 +162,7 @@ bool readFileDifferenceBetweenPlayer(char *home_path, difference_between_player 
 bool createFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref);
 bool readFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref);
 bool differentsTExportPdfPreferencesStruct(export_pdf_preferences pdf_1, export_pdf_preferences pdf_2);
+bool createFileScoreDisplay(char *home_path, score_display score);
+bool readFileScoreDisplay(char *home_path, score_display *score);
 
 #endif

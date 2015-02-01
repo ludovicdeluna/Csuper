@@ -301,9 +301,8 @@ G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
         return;
 
     /* Create the file chooser dialog*/
-    GtkWidget *window_file_save = gtk_file_chooser_dialog_new (_("Export csu file"),GTK_WINDOW(user_data->ptr_main_window),
+    GtkWidget *window_file_export = gtk_file_chooser_dialog_new (_("Export csu file"),GTK_WINDOW(user_data->ptr_main_window),
                 GTK_FILE_CHOOSER_ACTION_SAVE,"gtk-cancel", GTK_RESPONSE_CANCEL,"gtk-save",GTK_RESPONSE_ACCEPT,NULL);
-    gtk_file_chooser_set_do_overwrite_confirmation(GTK_FILE_CHOOSER(window_file_save), true);
 
     /* Give filename to the old filename*/
     getSimpleFilenameFromFullFilename(user_data->csu_filename,export_filename);
@@ -311,54 +310,46 @@ G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
     getFolderFromFilename(folder);
     removeFileExtension(export_filename);
     #ifdef _WIN32
-    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_save),g_convert(export_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
-    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_save),g_convert(folder,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
+    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_export),g_convert(export_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
+    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_export),g_convert(folder,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
     #else
-    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_save),export_filename);
-    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_save),folder);
+    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_export),export_filename);
+    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_export),folder);
     #endif
 
      /*Add filters*/
     GtkFileFilter *pdf_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterpdf"));
     GtkFileFilter *csv_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltercsv"));
-    GtkFileFilter *all_filter = GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterall"));
     gtk_file_filter_set_name(pdf_filter,_("PDF files"));
     gtk_file_filter_set_name(csv_filter,_("CSV files"));
-    gtk_file_filter_set_name(all_filter,_("All"));
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),csv_filter);
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),pdf_filter);
-    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),all_filter);
-    gtk_file_chooser_set_filter(GTK_FILE_CHOOSER (window_file_save),pdf_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),csv_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),pdf_filter);
+    gtk_file_chooser_set_filter(GTK_FILE_CHOOSER (window_file_export),pdf_filter);
 
-	switch (gtk_dialog_run (GTK_DIALOG (window_file_save)))
+	switch (gtk_dialog_run (GTK_DIALOG (window_file_export)))
 	{
 		case GTK_RESPONSE_ACCEPT:
 		{
 		    char *filename;
 		    char true_filename[SIZE_MAX_FILE_NAME];
 			#ifdef _WIN32
-		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
+		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
 		    #else
-		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save));
+		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export));
 		    #endif
 		    strcpy(true_filename,filename);
 
             /* Export */
-			if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_save))==pdf_filter)
+			if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export))==pdf_filter)
             {
                 addFilePdfExtension(true_filename);
                 if (exportToPdf(user_data->ptr_csu_struct,true_filename) == false)
                     error=TRUE;
             }
-            else if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_save))==csv_filter)
+            else if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export))==csv_filter)
             {
                 addFileCsvExtension(true_filename);
                 if (exportToCsv(user_data->ptr_csu_struct,true_filename) == false)
-                    error=TRUE;
-            }
-            else
-            {
-                if (exportToPdf(user_data->ptr_csu_struct,true_filename) == false)
                     error=TRUE;
             }
 
@@ -368,7 +359,7 @@ G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
 		default:
 			break;
 	}
-	gtk_widget_destroy(window_file_save);
+	gtk_widget_destroy(window_file_export);
 	if (error)
         exportFileError(user_data);
 }
@@ -743,7 +734,7 @@ G_MODULE_EXPORT void displayPodium(GtkWidget *widget, gpointer data)
 
 /*!
  * \fn G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer data)
- *  Update the preference of the differences ont the points in the ranking
+ *  Update the preference of the differences of the points in the ranking
  * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
@@ -763,7 +754,7 @@ G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer d
 
     GtkWidget *first = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_first"));
     if (!first)
-        g_critical(_("Widget menu_display_consecutive is missing in file csuper-gui.glade."));
+        g_critical(_("Widget menu_display_first is missing in file csuper-gui.glade."));
 
     GtkWidget *last = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_last"));
     if (!last)
@@ -781,3 +772,38 @@ G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer d
         createRanking(user_data);
     }
 }
+
+
+/*!
+ * \fn G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer data)
+ *  Update the preference of the the main points grid
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void changeDisplayPointsGrid(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    score_display score;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+
+    GtkWidget *total_points = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_totalpoints"));
+    if (!total_points)
+        g_critical(_("Widget menu_display_totalpoints is missing in file csuper-gui.glade."));
+
+    GtkWidget *ranking = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_ranking"));
+    if (!ranking)
+        g_critical(_("Widget menu_display_ranking is missing in file csuper-gui.glade."));
+
+    score.ranking=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(ranking));
+    score.total_points=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(total_points));
+
+    createFileScoreDisplay(home_path,score);
+
+    if (user_data->ptr_csu_struct != NULL)
+        updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
+}
+

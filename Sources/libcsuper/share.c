@@ -2,8 +2,8 @@
  * \file    share.c
  * \brief   Essential function of libcsuper
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    25/01/15
+ * \version 4.1.0
  */
 
  /*
@@ -360,4 +360,31 @@ char *utf8ToLatin9(const char *const string)
     }
 
     return (char *)result;
+}
+
+/*!
+ * \fn void convertFloatString(char *output, float input,int decimal_place)
+ *  Convert a float into the output string with a specific number of decimal place
+ * \param[in] output the output sting
+ * \param[in] input the input float
+ * \param[in] decimal_place the number of decimal, must be between 0 and 3
+ * \return the ranking
+ */
+void convertFloatString(char *output, float input,int decimal_place)
+{
+    switch (decimal_place)
+    {
+    case 0 :
+        sprintf(output,"%.0f",input);
+        break;
+    case 1 :
+        sprintf(output,"%.1f",input);
+        break;
+    case 2 :
+        sprintf(output,"%.2f",input);
+        break;
+    case 3 :
+        sprintf(output,"%.3f",input);
+        break;
+    }
 }

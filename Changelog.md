@@ -30,6 +30,7 @@ Libcsuper
 * Add the possibility to choose which game configuration will be import/export
 * New function changeDistributor 
 * You can now change export to pdf and csv
+* New function : totalPointsAtTurn and rankingAtTurn
 
 4.0.1
 
@@ -69,7 +70,8 @@ Csuper-gui
 * Add a podium at the end of the game
 * Add the possibility to open recent file
 * Add the possibilty to display difference between players
-* You can now change export to pdf and csv
+* Add the possibility to export to pdf and csv
+* Add the possibility to display the ranking and the total points in each turn
 
 4.0.2
 

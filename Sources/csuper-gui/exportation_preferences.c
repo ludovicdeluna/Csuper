@@ -83,6 +83,17 @@ void updateExportationPreferences(globalData *data)
     // Font size
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,3)),pref.font_size);
 
+    // Total points by turn
+    if (pref.total_points_turn == true)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),TRUE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3)),FALSE);
+
+    // Ranking by turn
+    if (pref.ranking_turn == true)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),TRUE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),FALSE);
 }
 
 
@@ -104,7 +115,6 @@ void readExportationPreferences(globalData *data, export_pdf_preferences *pref)
     else
         pref->charset = ISO885915;
 
-
     // Direction
     if (gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid),3,1))) == 0)
         pref->direction = HPDF_PAGE_PORTRAIT;
@@ -124,6 +134,18 @@ void readExportationPreferences(globalData *data, export_pdf_preferences *pref)
 
     // Font size
     pref->font_size = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,3)));
+
+    // Total points by turn
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,3))))
+        pref->total_points_turn = true;
+    else
+        pref->total_points_turn = false;
+
+    // Ranking by turn
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4))))
+        pref->ranking_turn = true;
+    else
+        pref->ranking_turn = false;
 }
 
 

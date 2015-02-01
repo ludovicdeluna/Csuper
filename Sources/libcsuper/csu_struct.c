@@ -3,8 +3,8 @@
  * \file    csu_struct.c
  * \brief   Management of the csu files
  * \author  Remi BERTHO
- * \date    15/06/14
- * \version 4.0.0
+ * \date    25/01/15
+ * \version 4.1.0
  */
 
 /*
@@ -428,7 +428,7 @@ bool changeDistributor(csuStruct *ptr_csu_struct, int index)
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
  * \param[in] player_index the index of the player
  * \param[in] turn she turn
- * \return true if the distributor can be change, false otherwise
+ * \return the total number of points
  */
 float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
 {
@@ -450,4 +450,49 @@ float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
         points += ptr_csu_struct->point[player_index][i];
 
     return points;
+}
+
+
+/*!
+ * \fn float rankAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+ *  Return the ranking of a player at a specific turn
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \param[in] turn she turn
+ * \return the ranking or 0 if the game configuration is not turn based
+ */
+int rankAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+{
+    float *sort_points;
+    int i;
+    int ranking;
+
+    if (ptr_csu_struct->config.turn_based == 0)
+        return 0;
+
+    sort_points=(float *)myAlloc(sizeof(float)*ptr_csu_struct->nb_player);
+
+    for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        sort_points[i]=pointsAtTurn(ptr_csu_struct,i,turn);
+
+    /*Sort the points base on the first way*/
+    if(ptr_csu_struct->config.first_way == 1)
+        qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatDescending);
+    else
+        qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatAscending);
+
+
+    /*Loop on the sort points from the smallest*/
+    for(i=ptr_csu_struct->nb_player -1 ; i>=0 ; i--)
+    {
+        if (sort_points[i] == pointsAtTurn(ptr_csu_struct,player_index,turn))
+        {
+            ranking = i+1;
+            break;
+        }
+    }
+
+    free(sort_points);
+
+    return ranking;
 }
