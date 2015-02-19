@@ -39,6 +39,13 @@
 #include <string.h>
 #include <math.h>
 #include "main.h"
+
+/*!
+ * \def NB_CARACT_EXPRESSION
+ * Define the number of characters maximum that can contain a mathematical expression
+ */
+#define NB_CARACT_EXPRESSION 256
+
 /*!
  * \def NB_CARACT_INT
  * Define the number of characters that need an int.

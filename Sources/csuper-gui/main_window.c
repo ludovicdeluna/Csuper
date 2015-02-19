@@ -534,7 +534,7 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
         /* Save the scores in the structure */
         for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
         {
-            tmp_score = gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),2*(i+1),2*(max_nb_turn+1))));
+            tmp_score = gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),6*i+2,2*(max_nb_turn+1)+2)));
 
             if (tmp_score != 0)
             {
@@ -550,7 +550,7 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
         startNewTurn(user_data->ptr_csu_struct,-1);
         for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
             user_data->ptr_csu_struct->point[i][(int)user_data->ptr_csu_struct->nb_turn[i]] =
-                gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),2*(i+1),2*(max_nb_turn+1))));
+                gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),6*i+2,2*(max_nb_turn+1)+2)));
         endNewTurn(user_data->ptr_csu_struct,-1);
 
         has_changed = TRUE;
@@ -1032,4 +1032,35 @@ G_MODULE_EXPORT void changeDistributorButton(GtkWidget *widget, gpointer data)
 
 	gtk_widget_hide(dialog);
 	gtk_widget_destroy(grid);
+}
+
+
+/*!
+ * \fn G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data)
+ *  Update the result of the calculator of the main window
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    double res;
+    gchar string[SIZE_MAX_FILE_NAME];
+
+    GtkWidget *text = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_result"));
+    if (!text)
+        g_critical(_("Widget main_window_label_calculator_result is missing in file csuper-gui.glade."));
+
+    GtkWidget *entry = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_entry"));
+    if (!entry)
+        g_critical(_("Widget main_window_label_calculator_entry is missing in file csuper-gui.glade."));
+
+    strncpy(string,gtk_entry_get_text(GTK_ENTRY(entry)),SIZE_MAX_FILE_NAME);
+
+    res = calculateFromString(string);
+
+    if (fabs(res) < 1000000 && fabs(res) > 0.001)
+        gtk_label_set_text(GTK_LABEL(text),g_strdup_printf(_("Result : %.3lf"),res));
+    else
+        gtk_label_set_text(GTK_LABEL(text),g_strdup_printf(_("Result : %.3e"),res));
 }

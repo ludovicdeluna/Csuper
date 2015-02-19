@@ -82,11 +82,15 @@ char *stringKey(char *string, int nb_char_plus_one)
  */
 void intKey(int *nb)
 {
-    char string[NB_CARACT_INT];
+    char string[NB_CARACT_EXPRESSION];
+    double res;
 
-    stringKey(string,NB_CARACT_INT);
+    stringKey(string,NB_CARACT_EXPRESSION);
     *nb=0;
-    sscanf(string,"%d",nb);
+    //sscanf(string,"%d",nb);
+    res = calculateFromString(string);
+    if (!isnan(res))
+        *nb=(int)res;
 }
 
 /*!
@@ -96,10 +100,11 @@ void intKey(int *nb)
  */
 void floatKey(float *nb)
 {
-    char string[NB_CARACT_FLOAT];
+    char string[NB_CARACT_EXPRESSION];
     char *decimal;
+    double res;
 
-    stringKey(string,NB_CARACT_FLOAT);
+    stringKey(string,NB_CARACT_EXPRESSION);
 
     /*Change the decimal to a comma*/
     decimal = strchr(string, '.');
@@ -107,7 +112,10 @@ void floatKey(float *nb)
         *decimal = ',';
 
     *nb=0;
-    sscanf(string,"%f",nb);
+    //sscanf(string,"%f",nb);
+    res = calculateFromString(string);
+    if (!isnan(res))
+        *nb=res;
 }
 
 /*!
@@ -117,10 +125,11 @@ void floatKey(float *nb)
  */
 void floatKeyNoComma(float *nb)
 {
-    char string[NB_CARACT_FLOAT];
+    char string[NB_CARACT_EXPRESSION];
     char *p;
+    double res;
 
-    stringKey(string,NB_CARACT_FLOAT);
+    stringKey(string,NB_CARACT_EXPRESSION);
 
     /*Remove the comma*/
     p = strchr(string, ',');
@@ -130,7 +139,10 @@ void floatKeyNoComma(float *nb)
     }
 
     *nb=0;
-    sscanf(string,"%f",nb);
+    //sscanf(string,"%f",nb);
+    res = calculateFromString(string);
+    if (!isnan(res))
+        *nb=res;
 }
 
 /*!

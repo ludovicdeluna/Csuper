@@ -970,7 +970,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">7</property>
+                <property name="top_attach">11</property>
               </packing>
             </child>
             <child>
@@ -1007,7 +1007,7 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">8</property>
+                <property name="top_attach">12</property>
               </packing>
             </child>
             <child>
@@ -1019,51 +1019,45 @@
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">2</property>
+                <property name="top_attach">6</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="main_window_label_distributor">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_top">10</property>
-                <property name="margin_bottom">10</property>
                 <property name="label" translatable="yes">No csu file loaded</property>
                 <property name="justify">center</property>
                 <property name="wrap">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">4</property>
+                <property name="top_attach">8</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="main_window_label_total_points_in_turn">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_top">10</property>
-                <property name="margin_bottom">10</property>
                 <property name="label" translatable="yes">No csu file loaded</property>
                 <property name="wrap">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">6</property>
+                <property name="top_attach">10</property>
               </packing>
             </child>
             <child>
               <object class="GtkLabel" id="main_window_label_game_informations">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
-                <property name="margin_top">10</property>
-                <property name="margin_bottom">10</property>
                 <property name="label" translatable="yes">&lt;span size="x-large"&gt;Game informations&lt;/span&gt;</property>
                 <property name="use_markup">True</property>
                 <property name="single_line_mode">True</property>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">3</property>
+                <property name="top_attach">7</property>
               </packing>
             </child>
             <child>
@@ -1075,15 +1069,13 @@
                 <property name="tooltip_text" translatable="yes">Change the distributor</property>
                 <property name="halign">center</property>
                 <property name="valign">center</property>
-                <property name="margin_top">10</property>
-                <property name="margin_bottom">10</property>
                 <property name="focus_on_click">False</property>
                 <signal name="clicked" handler="changeDistributorButton" swapped="no"/>
                 <accelerator key="d" signal="clicked" modifiers="GDK_CONTROL_MASK"/>
               </object>
               <packing>
                 <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
+                <property name="top_attach">9</property>
               </packing>
             </child>
             <child>
@@ -1106,6 +1098,58 @@
               <packing>
                 <property name="left_attach">0</property>
                 <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSeparator" id="separator3">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">2</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="main_window_label_calculator">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">&lt;span size="x-large"&gt;Calculator&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+                <property name="single_line_mode">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">3</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkEntry" id="main_window_label_calculator_entry">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="xalign">0.5</property>
+                <property name="caps_lock_warning">False</property>
+                <property name="placeholder_text" translatable="yes">Insert here the calculation</property>
+                <signal name="changed" handler="updateCalculatorMainWindow" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="main_window_label_calculator_result">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="label" translatable="yes">No calculation</property>
+                <property name="justify">center</property>
+                <property name="wrap">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">5</property>
               </packing>
             </child>
           </object>

@@ -42,6 +42,10 @@
 			<Add option="-shared" />
 			<Add library="hpdf" />
 		</Linker>
+		<Unit filename="../Sources/libcsuper/calculator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/calculator.h" />
 		<Unit filename="../Sources/libcsuper/csu_files.c">
 			<Option compilerVar="CC" />
 		</Unit>

@@ -49,5 +49,6 @@
 #include "file.h"
 #include "filename.h"
 #include "export.h"
+#include "calculator.h"
 
 #endif

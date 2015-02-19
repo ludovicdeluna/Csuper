@@ -12,7 +12,7 @@ Csuper (Universal points counter allowing a dispense with reflection)
 This software allow you to count points easily with a computer.
 We can also save these games in a .csu file. (see documentation).
 
-If you have any remarks or question on the use of csuper or on the code, don't hesitate to report to me. Similarly if you want to contribute on the code.
+If you have any remarks or question on the use of csuper or on the code, don't hesitate to report to me.
 
 This software is a personnel exercise of a student. Thank you to be indulgent.
 
@@ -56,7 +56,7 @@ Csuper (Compteur de Score Permettant l'Exemption de Réflexion)
 Ce logiciel permet de compter des points facilement sur son ordinateur via la console.
 On peut aussi sauvegarder les parties dans des fichiers au format .csu (voir documentation).
 
-Si vous avez des remarques ou des questions sur l'utilisation du logiciel ou le code en lui-même, n'hésiter pas à me le faire remarquer. De même si vous voulez contribuer au logiciel d'une façon ou d'une autre.
+Si vous avez des remarques ou des questions sur l'utilisation du logiciel ou le code en lui-même, n'hésiter pas à me le faire remarquer.
 
 Ce logiciel a été fait en guise d'exercice personnel pendant des études donc soyez indulgent au niveau des remarques sur le code, merci.
 
