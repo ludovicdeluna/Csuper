@@ -146,6 +146,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
                 updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
                 deleteAllLastCsuStruct(user_data);
                 addLastCsuStruct(user_data);
+                fillCalculatorNames(user_data);
                 setButtonMainWindow(user_data);
             }
             g_free(filename);
@@ -195,6 +196,7 @@ G_MODULE_EXPORT void recentCsuFileOpen(GtkRecentChooser *chooser, gpointer data)
         updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
         deleteAllLastCsuStruct(user_data);
         addLastCsuStruct(user_data);
+        fillCalculatorNames(user_data);
         setButtonMainWindow(user_data);
     }
     g_free(uri);
@@ -807,3 +809,41 @@ G_MODULE_EXPORT void changeDisplayPointsGrid(GtkWidget *widget, gpointer data)
         updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
 }
 
+
+
+/*!
+ * \fn G_MODULE_EXPORT void changeDisplayMainWindowSide(GtkWidget *widget, gpointer data)
+ *  Update the preference of what will be display in the left side of the main window
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void changeDisplayMainWindowSide(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    main_window_side pref;
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+
+    GtkWidget *calculator = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_calculator"));
+    if (!calculator)
+        g_critical(_("Widget menu_display_calculator is missing in file csuper-gui.glade."));
+
+    GtkWidget *ranking_side = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_ranking_side"));
+    if (!ranking_side)
+        g_critical(_("Widget menu_display_ranking_side is missing in file csuper-gui.glade."));
+
+    GtkWidget *game_information = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_game_information"));
+    if (!game_information)
+        g_critical(_("Widget menu_display_game_information is missing in file csuper-gui.glade."));
+
+    pref.ranking=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(ranking_side));
+    pref.calculator=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(calculator));
+    pref.game_information=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(game_information));
+
+    createFileMainWindowSide(home_path,pref);
+
+    updateMainWindowSide(user_data);
+}

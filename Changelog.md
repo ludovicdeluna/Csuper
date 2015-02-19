@@ -6,6 +6,7 @@ Csuper-cli
 * Add the possibility to choose which game configuration will be import/export
 * You can now change the distributore during the game
 * You can now change export to pdf and csv
+* Add a calculator function
 
 4.0.1
 
@@ -31,6 +32,7 @@ Libcsuper
 * New function changeDistributor 
 * You can now change export to pdf and csv
 * New function : totalPointsAtTurn and rankingAtTurn
+* Add a calculator function
 
 4.0.1
 
@@ -72,6 +74,8 @@ Csuper-gui
 * Add the possibilty to display difference between players
 * Add the possibility to export to pdf and csv
 * Add the possibility to display the ranking and the total points in each turn
+* Add a calculator function
+* Add the possibility to display or not the elements on the left of the main window
 
 4.0.2
 

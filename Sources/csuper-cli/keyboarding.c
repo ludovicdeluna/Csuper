@@ -101,15 +101,19 @@ void intKey(int *nb)
 void floatKey(float *nb)
 {
     char string[NB_CARACT_EXPRESSION];
-    char *decimal;
+    char *comma;
     double res;
+    struct lconv *lc;
 
     stringKey(string,NB_CARACT_EXPRESSION);
 
-    /*Change the decimal to a comma*/
-    decimal = strchr(string, '.');
-    if (decimal)
-        *decimal = ',';
+    /*Change the decimals to a comma if needed*/
+    lc=localeconv();
+    if(*(lc->decimal_point) == ',')
+    {
+        while ((comma = strchr(string, '.')) != NULL)
+            *comma=',';
+    }
 
     *nb=0;
     //sscanf(string,"%f",nb);

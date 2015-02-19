@@ -65,5 +65,6 @@ G_MODULE_EXPORT void beginPrint(GtkPrintOperation *operation, GtkPrintContext *c
 G_MODULE_EXPORT void drawPrintPage(GtkPrintOperation *operation,GtkPrintContext *context,gint page_nr,gpointer user_data);
 G_MODULE_EXPORT void changeDisplayPointsGrid(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void changeDisplayMainWindowSide(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_MENU_H_INCLUDED

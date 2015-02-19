@@ -78,6 +78,12 @@
 #define FILENAME_SCORE_DISPLAY "score_display_preferences.txt"
 
 /*!
+ * \def FILENAME_MAIN_WINDOW_SIDE
+ * Define the filename of the file which contain the main window side preferences
+ */
+#define FILENAME_MAIN_WINDOW_SIDE "main_window_side_preferences.txt"
+
+/*!
  * \def PREFERENCES_FOLDER_NAME
  * Define the folder name of the csuper preferences
  */
@@ -138,8 +144,8 @@ typedef struct
 
 
 /*!
- * \struct difference_between_player
- * Indicate which difference between player will be displayed in the ranking
+ * \struct score_display
+ * Indicate if the total points and the ranking will be display in each turn
  */
 typedef struct
 {
@@ -147,22 +153,42 @@ typedef struct
     bool ranking;         /*!< Display the ranking in each turn */
 } score_display;
 
+/*!
+ * \struct main_window_side
+ * Indicate what will be display in the left side of the main window
+ */
+typedef struct
+{
+    bool ranking;   /*!< Display the ranking*/
+    bool calculator;         /*!< Display the calculator*/
+    bool game_information;         /*!< Display the game informations */
+} main_window_side;
+
 void createPreferencesFolder(char *home_path);
+
 bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar);
 bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct *toolbar);
 bool differentsToolbarButtonPreferencesStruct(toolbar_button_preferences_struct toolbar1, toolbar_button_preferences_struct toolbar2);
+
 bool createFileMainWidowSize(char *home_path, main_window_size size);
 bool readFileMainWidowSize(char *home_path, main_window_size *size);
+
 bool createFileSystemPath();
 bool readFileSystemPath(char *file_name);
 bool readSystemPath(char *file_name);
 bool changeSystemPath(char *new_path);
+
 bool createFileDifferenceBetweenPlayer(char *home_path, difference_between_player diff);
 bool readFileDifferenceBetweenPlayer(char *home_path, difference_between_player *diff);
+
 bool createFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref);
 bool readFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref);
 bool differentsTExportPdfPreferencesStruct(export_pdf_preferences pdf_1, export_pdf_preferences pdf_2);
+
 bool createFileScoreDisplay(char *home_path, score_display score);
 bool readFileScoreDisplay(char *home_path, score_display *score);
+
+bool createFileMainWindowSide(char *home_path, main_window_side pref);
+bool readFileMainWindowSide(char *home_path, main_window_side *pref);
 
 #endif

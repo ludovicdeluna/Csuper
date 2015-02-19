@@ -195,6 +195,7 @@ void updateMainWindow(globalData *data,bool editable)
     createPointsGrid(data,editable);
     updateTotalPointsInTurnLabel(data,editable);
     setButtonMainWindow(data);
+    updateCalculatorMainWindow(NULL,data);
 }
 
 /*!
@@ -648,6 +649,14 @@ void setButtonMainWindow(globalData *data)
     if (!button_end_of_turn)
         g_critical(_("Widget button_end_of_turn is missing in file csuper-gui.glade."));
 
+    GtkWidget *button_calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_calculator_validate"));
+    if (!button_calculator)
+        g_critical(_("Widget main_window_label_calculator_validate is missing in file csuper-gui.glade."));
+
+    GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_calculator_select_person"));
+    if (!combobox_calculator)
+        g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
+
     GtkWidget *button_change_distributor = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_button_change_distributor"));
     if (!button_change_distributor)
         g_critical(_("Widget main_window_button_change_distributor is missing in file csuper-gui.glade."));
@@ -724,7 +733,9 @@ void setButtonMainWindow(globalData *data)
         gtk_widget_set_sensitive(menu_export,FALSE);
         gtk_widget_set_sensitive(menu_podium,FALSE);
         gtk_widget_set_sensitive(button_end_of_turn,FALSE);
+        gtk_widget_set_sensitive(button_calculator,FALSE);
         gtk_widget_set_sensitive(button_change_distributor,FALSE);
+        gtk_widget_set_sensitive(combobox_calculator,FALSE);
     }
     else
     {
@@ -747,6 +758,7 @@ void setButtonMainWindow(globalData *data)
         gtk_widget_set_sensitive(menu_delete_file,TRUE);
         gtk_widget_set_sensitive(menu_export,TRUE);
         gtk_widget_set_sensitive(menu_podium,TRUE);
+        gtk_widget_set_sensitive(combobox_calculator,TRUE);
     }
 
 
@@ -791,6 +803,28 @@ void setButtonMainWindow(globalData *data)
 
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(ranking),score.ranking);
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(total_points),score.total_points);
+
+
+
+    // Set the toggle button of main window side
+    main_window_side pref;
+    readFileMainWindowSide(home_path,&pref);
+
+    GtkWidget *calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_calculator"));
+    if (!calculator)
+        g_critical(_("Widget menu_display_calculator is missing in file csuper-gui.glade."));
+
+    GtkWidget *ranking_side = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_ranking_side"));
+    if (!ranking_side)
+        g_critical(_("Widget menu_display_ranking_side is missing in file csuper-gui.glade."));
+
+    GtkWidget *game_information = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_game_information"));
+    if (!game_information)
+        g_critical(_("Widget menu_display_game_information is missing in file csuper-gui.glade."));
+
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(calculator),pref.calculator);
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(ranking_side),pref.ranking);
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(game_information),pref.game_information);
 
 
 
@@ -997,7 +1031,7 @@ G_MODULE_EXPORT void changeDistributorButton(GtkWidget *widget, gpointer data)
     gtk_widget_set_vexpand(grid,TRUE);
 
 
-    /* Set the rbdio button */
+    /* Set the radio button */
     gtk_grid_attach(GTK_GRID(grid),gtk_radio_button_new_with_label(NULL,user_data->ptr_csu_struct->player_names[0]),0,0,1,1);
 
     for (i=1 ; i<user_data->ptr_csu_struct->nb_player ; i++)
@@ -1046,6 +1080,8 @@ G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data
     globalData *user_data = (globalData*) data;
     double res;
     gchar string[SIZE_MAX_FILE_NAME];
+    struct lconv *lc;
+    char *comma;
 
     GtkWidget *text = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_result"));
     if (!text)
@@ -1055,12 +1091,162 @@ G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data
     if (!entry)
         g_critical(_("Widget main_window_label_calculator_entry is missing in file csuper-gui.glade."));
 
+    GtkWidget *calculator_button = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_validate"));
+    if (!calculator_button)
+        g_critical(_("Widget main_window_label_calculator_validate is missing in file csuper-gui.glade."));
+
+    GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_select_person"));
+    if (!combobox_calculator)
+        g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
+
+    // Get the string and convert the . to , if needed
     strncpy(string,gtk_entry_get_text(GTK_ENTRY(entry)),SIZE_MAX_FILE_NAME);
+    lc=localeconv();
+    if(*(lc->decimal_point) == ',')
+    {
+        while ((comma = strchr(string, '.')) != NULL)
+            *comma=',';
+    }
 
     res = calculateFromString(string);
 
+    // Print the result
     if (fabs(res) < 1000000 && fabs(res) > 0.001)
         gtk_label_set_text(GTK_LABEL(text),g_strdup_printf(_("Result : %.3lf"),res));
     else
         gtk_label_set_text(GTK_LABEL(text),g_strdup_printf(_("Result : %.3e"),res));
+
+    // Update the button validate
+    if (user_data->ptr_csu_struct != NULL)
+        gtk_widget_set_sensitive(calculator_button,!isnan(res));
+}
+
+
+/*!
+ * \fn G_MODULE_EXPORT void validateCalculatorPoints(GtkWidget *widget, gpointer data)
+ *  Change the points of the person selected to the result of the calculator.
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void validateCalculatorPoints(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    double res;
+    gchar string[SIZE_MAX_FILE_NAME];
+    struct lconv *lc;
+    char *comma;
+    int pos_player;
+    gint max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
+
+    GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_select_person"));
+    if (!combobox_calculator)
+        g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
+
+    GtkWidget *entry = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_entry"));
+    if (!entry)
+        g_critical(_("Widget main_window_label_calculator_entry is missing in file csuper-gui.glade."));
+
+    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_viewport"));
+    if (!viewport)
+        g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+
+    // Get the string and convert the . to , if needed
+    strncpy(string,gtk_entry_get_text(GTK_ENTRY(entry)),SIZE_MAX_FILE_NAME);
+    lc=localeconv();
+    if(*(lc->decimal_point) == ',')
+    {
+        while ((comma = strchr(string, '.')) != NULL)
+            *comma=',';
+    }
+
+    res = calculateFromString(string);
+
+    pos_player = gtk_combo_box_get_active(GTK_COMBO_BOX(combobox_calculator));
+
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),6*pos_player+2,2*(max_nb_turn+1)+2)),res);
+}
+
+
+/*!
+ * \fn void fillCalculatorNames(globalData *data)
+ *  Fill the combobox of the calculator with the names of the players
+ * \param[in] data the globalData
+ */
+void fillCalculatorNames(globalData *data)
+{
+    GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_calculator_select_person"));
+    if (!combobox_calculator)
+        g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
+
+    int i;
+    for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
+        gtk_combo_box_text_append(GTK_COMBO_BOX_TEXT(combobox_calculator),"",data->ptr_csu_struct->player_names[i]);
+
+    gtk_combo_box_set_active(GTK_COMBO_BOX(combobox_calculator),0);
+}
+
+
+/*!
+ * \fn void fillCalculatorNames(globalData *data)
+ *  Update the display of the main window left side
+ * \param[in] data the globalData
+ */
+void updateMainWindowSide(globalData *data)
+{
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    main_window_side pref;
+    readFileMainWindowSide(home_path,&pref);
+
+    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_grid_game_config"));
+    if (!grid)
+        g_critical(_("Widget main_window_grid_game_config is missing in file csuper-gui.glade."));
+
+    if (pref.ranking)
+    {
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,0)));
+        gtk_widget_show(GTK_WIDGET(gtk_bin_get_child(GTK_BIN(gtk_grid_get_child_at(GTK_GRID(grid),0,1)))));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,2)));
+    } else
+    {
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,0)));
+        gtk_widget_hide(GTK_WIDGET(gtk_bin_get_child(GTK_BIN(gtk_grid_get_child_at(GTK_GRID(grid),0,1)))));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,2)));
+    }
+
+    if (pref.calculator)
+    {
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,3)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,4)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,5)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,6)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,7)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,8)));
+    } else
+    {
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,3)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,4)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,5)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,6)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,7)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,8)));
+    }
+
+    if (pref.game_information)
+        {
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,9)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,10)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,11)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,12)));
+        gtk_widget_show(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,13)));
+    } else
+    {
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,9)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,10)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,11)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,12)));
+        gtk_widget_hide(GTK_WIDGET(gtk_grid_get_child_at(GTK_GRID(grid),0,13)));
+    }
 }

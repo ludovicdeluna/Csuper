@@ -104,6 +104,7 @@ int main (int argc, char *argv[])
         return EXIT_FAILURE;
 
     gtk_widget_show_all(data.ptr_main_window);
+    updateMainWindowSide(&data);
 
     g_timeout_add(50,&setButtonMainWindowClipboardSensitive,&data);
 

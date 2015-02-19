@@ -557,3 +557,65 @@ bool readFileScoreDisplay(char *home_path, score_display *score)
 
     return true;
 }
+
+
+/*!
+ * \fn bool createFileMainWindowSide(char *home_path, main_window_side pref)
+ *  Create the file which contain the data which explain what will be display in the left side of the main window
+ * \param[in] home_path the path to the home directory
+ * \param[in] pref the main_window_side structure
+ * \return true if everything is OK, false otherwise
+ */
+bool createFileMainWindowSide(char *home_path, main_window_side pref)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIDE);
+
+    createPreferencesFolder(home_path);
+
+    ptr_file=openFile(file_name,"w+");
+
+    if (ptr_file==NULL)
+        return false;
+
+    fprintf(ptr_file,"%d %d %d",pref.ranking,pref.calculator,pref.game_information);
+
+    closeFile(ptr_file);
+
+    return true;
+}
+
+
+/*!
+ * \fn bool readFileMainWindowSide(char *home_path, main_window_side *pref)
+ *  Read the file which contain the data which explain what will be display in the left side of the main window
+ * \param[in] home_path the path to the home directory
+ * \param[in] pref the main_window_side structure
+ * \return true if everything is OK, false otherwise
+ */
+bool readFileMainWindowSide(char *home_path, main_window_side *pref)
+{
+    char file_name[SIZE_MAX_FILE_NAME];
+    FILE *ptr_file;
+
+    pref->ranking=true;
+    pref->calculator=false;
+    pref->game_information=true;
+
+    createPreferencesFolder(home_path);
+
+    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIDE);
+
+    ptr_file=openFile(file_name,"r");
+
+    if (ptr_file==NULL)
+        return createFileMainWindowSide(home_path,*pref);
+
+    fscanf(ptr_file,"%d %d %d",(int*)&(pref->ranking),(int*)&(pref->calculator),(int*)&(pref->game_information));
+
+    closeFile(ptr_file);
+
+    return true;
+}
