@@ -5,5 +5,6 @@ sudo cp libcsuper.so /usr/lib
 sudo cp -R Fonts /usr/share/csuper
 sudo cp -R Locales /usr/share/csuper
 sudo cp Installation/csuper-cli /usr/local/bin/csuper-cli
+sudo cp Man/csuper-cli.1.gz /usr/share/man/man1
 sudo chmod -R a+rx /usr/share/csuper
 sudo ldconfig 

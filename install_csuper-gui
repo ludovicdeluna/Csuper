@@ -11,6 +11,7 @@ sudo chmod -R a+rx /usr/share/csuper
 sudo cp Installation/Mime/csuper.xml /usr/share/mime/packages/
 sudo cp Installation/Mime/application-csu.png /usr/share/icons/hicolor/48x48/mimetypes
 sudo cp Installation/csuper-gui.desktop /usr/share/applications/
+sudo cp Man/csuper-gui.1.gz /usr/share/man/man1
 update-mime-database usr/share/mime &> /dev/null
 [[ -x usr/bin/update-desktop-database ]] && update-desktop-database -q || true
 sudo ldconfig 
