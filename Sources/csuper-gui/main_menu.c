@@ -9,7 +9,7 @@
  /*
  * main_menu.c
  *
- * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -800,8 +800,13 @@ G_MODULE_EXPORT void changeDisplayPointsGrid(GtkWidget *widget, gpointer data)
     if (!ranking)
         g_critical(_("Widget menu_display_ranking is missing in file csuper-gui.glade."));
 
+    GtkWidget *edit_suppr = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_display_edit_suppr"));
+    if (!edit_suppr)
+        g_critical(_("Widget menu_display_edit_suppr is missing in file csuper-gui.glade."));
+
     score.ranking=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(ranking));
     score.total_points=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(total_points));
+    score.edit_suppr=gtk_check_menu_item_get_active(GTK_CHECK_MENU_ITEM(edit_suppr));
 
     createFileScoreDisplay(home_path,score);
 

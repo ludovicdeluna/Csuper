@@ -9,7 +9,7 @@
 /*
 * preferences_files.h
 *
-* Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+* Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
 *
 * This file is part of LibCsuper.
 *
@@ -151,6 +151,7 @@ typedef struct
 {
     bool total_points;   /*!< Display the total points in each turn */
     bool ranking;         /*!< Display the ranking in each turn */
+    bool edit_suppr;     /*!< Display the edit and delete turn in each turn */
 } score_display;
 
 /*!

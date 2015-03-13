@@ -10,7 +10,7 @@
 /*
 * csu_struct.c
 *
-* Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+* Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
 *
 * This file is part of LibCsuper.
 *
@@ -427,7 +427,7 @@ bool changeDistributor(csuStruct *ptr_csu_struct, int index)
  *  Return the number of points of a player at a specific turn
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
  * \param[in] player_index the index of the player
- * \param[in] turn she turn
+ * \param[in] turn the turn
  * \return the total number of points
  */
 float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
@@ -495,4 +495,59 @@ int rankAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
     free(sort_points);
 
     return ranking;
+}
+
+
+/*!
+ * \fn bool changeDeleteTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+ *  Delete a turn of a player or all of them
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \param[in] turn the turn
+ * \return the total number of points
+ */
+bool deleteTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+{
+    int i,j;
+
+    // Test the turn
+    if (ptr_csu_struct->nb_turn[player_index] < turn)
+    {
+        printf(_("\nError: %s only have %.0f turn but you ask the %d turn\n"),ptr_csu_struct->player_names[player_index],ptr_csu_struct->nb_turn[player_index],turn);
+        return 0;
+    }
+    if (turn < 0)
+    {
+        printf(_("\nError: negative turns doesn't exist\n"));
+        return 0;
+    }
+
+    // Turn based game
+    if (ptr_csu_struct->config.turn_based)
+    {
+        // For all player delete the points and the turn
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        {
+            (ptr_csu_struct->total_points[i]) -= ptr_csu_struct->point[i][turn];
+            for (j=turn+1 ; j<ptr_csu_struct->nb_turn[i] ; j++)
+            {
+                ptr_csu_struct->point[i][j-1] = ptr_csu_struct->point[i][j];
+            }
+            myRealloc((void**)&(ptr_csu_struct->point[i]),((ptr_csu_struct->nb_turn[i])-1)*sizeof(float));
+            (ptr_csu_struct->nb_turn[i]) -= 1;
+        }
+
+    }
+    else
+    {
+        (ptr_csu_struct->total_points[player_index]) -= ptr_csu_struct->point[player_index][turn];
+        for (j=turn+1 ; j<ptr_csu_struct->nb_turn[player_index] ; j++)
+            ptr_csu_struct->point[player_index][j-1] = ptr_csu_struct->point[player_index][j];
+        myRealloc((void**)&(ptr_csu_struct->point[player_index]),((ptr_csu_struct->nb_turn[player_index])-1)*sizeof(float));
+        (ptr_csu_struct->nb_turn[player_index]) -= 1;
+    }
+
+    rankCalculation(ptr_csu_struct);
+
+    return true;
 }

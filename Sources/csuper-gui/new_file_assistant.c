@@ -9,7 +9,7 @@
  /*
  * new_file_assistant.c
  *
- * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -524,6 +524,7 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
 
     deleteAssistantNewCsu(NULL,user_data);
     setButtonMainWindow(user_data);
+    fillCalculatorNames(user_data);
     g_free(folder);
 }
 

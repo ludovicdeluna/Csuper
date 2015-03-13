@@ -9,7 +9,7 @@
 /*
 * preferences_files.c
 *
-* Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+* Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
 *
 * This file is part of LibCsuper.
 *
@@ -519,7 +519,7 @@ bool createFileScoreDisplay(char *home_path, score_display score)
     if (ptr_file==NULL)
         return false;
 
-    fprintf(ptr_file,"%d %d",score.total_points,score.ranking);
+    fprintf(ptr_file,"%d %d %d",score.total_points,score.ranking,score.edit_suppr);
 
     closeFile(ptr_file);
 
@@ -541,6 +541,7 @@ bool readFileScoreDisplay(char *home_path, score_display *score)
 
     score->total_points=false;
     score->ranking=false;
+    score->edit_suppr=false;
 
     createPreferencesFolder(home_path);
 
@@ -551,7 +552,7 @@ bool readFileScoreDisplay(char *home_path, score_display *score)
     if (ptr_file==NULL)
         return createFileScoreDisplay(home_path,*score);
 
-    fscanf(ptr_file,"%d %d",(int*)&(score->total_points),(int*)&(score->ranking));
+    fscanf(ptr_file,"%d %d %d",(int*)&(score->total_points),(int*)&(score->ranking),(int*)&(score->edit_suppr));
 
     closeFile(ptr_file);
 

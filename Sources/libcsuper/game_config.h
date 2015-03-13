@@ -9,7 +9,7 @@
 /*
 * game_config.h
 *
-* Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+* Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
 *
 * This file is part of LibCsuper.
 *

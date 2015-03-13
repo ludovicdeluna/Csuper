@@ -9,7 +9,7 @@
  /*
  * main.c
  *
- * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -66,7 +66,6 @@ int main (int argc, char *argv[])
     GtkSettings *settings = gtk_settings_get_default();
     gtk_settings_set_string_property(settings,"gtk-font-name","Arial 10","");
     #endif // _WIN32
-
     /* Init the global data*/
     data.ptr_builder = gtk_builder_new();
     data.ptr_clipboard=gtk_clipboard_get(gdk_atom_intern("CLIPBOARD",TRUE));

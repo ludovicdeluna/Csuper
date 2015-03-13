@@ -9,7 +9,7 @@
  /*
  * main_window.c
  *
- * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -345,11 +345,23 @@ void createPointsGrid(globalData *data,bool spin_button)
     gtk_widget_set_margin_bottom(points_grid,10);
     gtk_widget_set_valign(GTK_WIDGET(points_grid),GTK_ALIGN_START);
 
+
     /* Add separator */
-    for (i=0 ; i<data->ptr_csu_struct->nb_player; i++)
-        gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+1,0,1,2*(max_nb_turn+8));
-    for (i=0 ; i< max_nb_turn + 5 ; i++)
-        gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,2*i+3,6*data->ptr_csu_struct->nb_player+1,1);
+    for (i=0 ; i<data->ptr_csu_struct->nb_player+3; i++)
+    {
+        if (i<=data->ptr_csu_struct->nb_player )
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+1,0,1,2*(max_nb_turn+7));
+        else if (score.edit_suppr)
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+1,5,1,2*(max_nb_turn-1)+1);
+    }
+    for (i=0 ; i< max_nb_turn + 6 ; i++)
+    {
+        if ( i < max_nb_turn + 1 && score.edit_suppr && i > 0 && max_nb_turn != 1)
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,2*i+3,6*(data->ptr_csu_struct->nb_player+2)+2,1);
+        else
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,2*i+3,6*data->ptr_csu_struct->nb_player+2,1);
+    }
+
 
     /* Write the names of the players and set the expand*/
     gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Name")),0,0,1,1);
@@ -362,7 +374,7 @@ void createPointsGrid(globalData *data,bool spin_button)
 
 
     // Set the legend
-    gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,1,6*data->ptr_csu_struct->nb_player+1,1);
+    gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,1,6*data->ptr_csu_struct->nb_player+2,1);
     gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Legend")),0,2,1,1);
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
     {
@@ -373,7 +385,7 @@ void createPointsGrid(globalData *data,bool spin_button)
     {
         for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
         {
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+3,2,1,2*(max_nb_turn+1));
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+3,1,1,2*(max_nb_turn+1)+1);
             gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Total")),6*i+4,2,1,1);
             gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(points_grid),6*i+4,2),TRUE);
         }
@@ -382,11 +394,22 @@ void createPointsGrid(globalData *data,bool spin_button)
     {
         for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
         {
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+5,2,1,2*(max_nb_turn+1));
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+5,1,1,2*(max_nb_turn+1)+1);
             gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(_("Ranking")),6*i+6,2,1,1);
             gtk_widget_set_hexpand(gtk_grid_get_child_at(GTK_GRID(points_grid),6*i+6,2),TRUE);
         }
+    }
+
+    // Set the button delete and edit
+    if (score.edit_suppr)
+    {
+        for (i=1 ; i< max_nb_turn ; i++)
+        {
+            gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(gtk_button_new_from_icon_name("gtk-edit",GTK_ICON_SIZE_BUTTON)),6*data->ptr_csu_struct->nb_player+2,2*(i+1)+2,5,1);
+            gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(gtk_button_new_from_icon_name("gtk-delete",GTK_ICON_SIZE_BUTTON)),6*(data->ptr_csu_struct->nb_player+1)+2,2*(i+1)+2,5,1);
+            g_signal_connect(gtk_grid_get_child_at(GTK_GRID(points_grid),6*(data->ptr_csu_struct->nb_player+1)+2,2*(i+1)+2),"clicked", G_CALLBACK(deleteTurnSignal),data);
         }
+    }
 
 
     /* Write all the points, the total point and the ranking of the players */
@@ -414,29 +437,29 @@ void createPointsGrid(globalData *data,bool spin_button)
                     gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.3f"),data->ptr_csu_struct->point[k][i])),6*k+2,2*(i+1)+2,points_grid_width,1);
                     break;
                 }
-            }
-            // Total points
-            if (score.total_points)
-            {
-                switch (data->ptr_csu_struct->config.decimal_place)
+                // Total points
+                if (score.total_points)
                 {
-                case 0 :
-                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.0f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
-                    break;
-                case 1 :
-                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.1f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
-                    break;
-                case 2 :
-                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.2f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
-                    break;
-                case 3 :
-                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.3f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
-                    break;
+                    switch (data->ptr_csu_struct->config.decimal_place)
+                    {
+                    case 0 :
+                        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.0f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
+                        break;
+                    case 1 :
+                        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.1f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
+                        break;
+                    case 2 :
+                        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.2f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
+                        break;
+                    case 3 :
+                        gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.3f"),pointsAtTurn(data->ptr_csu_struct,k,i))),6*k+4,2*(i+1)+2,1,1);
+                        break;
+                    }
                 }
+                // Ranking
+                if (score.ranking)
+                    gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%d"),rankAtTurn(data->ptr_csu_struct,k,i))),6*k+6,2*(i+1)+2,1,1);
             }
-            // Ranking
-            if (score.ranking)
-                gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%d"),rankAtTurn(data->ptr_csu_struct,k,i))),6*k+6,2*(i+1)+2,1,1);
         }
     }
 
@@ -500,6 +523,122 @@ void createPointsGrid(globalData *data,bool spin_button)
 
     gtk_widget_show_all(viewport);
 }
+
+
+/*!
+ * \fn G_MODULE_EXPORT deleteTurnSignal(GtkWidget *widget, gpointer data)
+ *  Delete a turn
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void deleteTurnSignal(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_viewport"));
+    if (!viewport)
+        g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+
+    gint turn;
+
+    // Get the turn
+    for (turn = 0 ; widget != gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),6*(user_data->ptr_csu_struct->nb_player+1)+2,2*(turn+1)+2) ; turn ++);
+
+    if (user_data->ptr_csu_struct->config.turn_based == 1)
+    {
+        deleteTurn(user_data->ptr_csu_struct,0,turn);
+
+        if (writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct) == false)
+            saveFileError(user_data);
+        addLastCsuStruct(user_data);
+        updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
+
+        /* Test if the game is over */
+        if (exceedMaxNumber(user_data->ptr_csu_struct) == true)
+            gameOver(user_data);
+    }
+    else
+    {
+        GtkWidget *viewport_dialog = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"delete_edit_turn_dialog_viewport"));
+        if (!viewport_dialog)
+            g_critical(_("Widget delete_edit_turn_dialog_viewport is missing in file csuper-gui.glade."));
+
+        // Set the grid
+        GtkWidget *grid = gtk_grid_new();
+        gtk_grid_set_column_spacing(GTK_GRID(grid),5);
+        gtk_grid_set_row_spacing(GTK_GRID(grid),5);
+        #if GTK_MINOR_VERSION >= 12
+        gtk_widget_set_margin_end(grid,10);
+        gtk_widget_set_margin_start(grid,10);
+        #else
+        gtk_widget_set_margin_right(grid,10);
+        gtk_widget_set_margin_left(grid,10);
+        #endif // GTK_MINOR_VERSION
+        gtk_widget_set_margin_top(grid,10);
+        gtk_widget_set_margin_bottom(grid,10);
+
+        int i,j;
+        bool first_attach = false;
+
+        // Set the radio button
+        for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+        {
+            if (user_data->ptr_csu_struct->nb_turn[i] > turn)
+            {
+                if (first_attach)
+                    gtk_grid_attach(GTK_GRID(grid),gtk_radio_button_new_with_label_from_widget(
+                        GTK_RADIO_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),0,0)),
+                        user_data->ptr_csu_struct->player_names[i]),0,i,1,1);
+                else
+                {
+                    first_attach = true;
+                    gtk_grid_attach(GTK_GRID(grid),gtk_radio_button_new_with_label(NULL,user_data->ptr_csu_struct->player_names[i]),0,0,1,1);
+                }
+            }
+        }
+
+        // Add the grid
+        gtk_container_add(GTK_CONTAINER(viewport_dialog),grid);
+        GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"delete_edit_turn_dialog"));
+        if (!dialog)
+            g_critical(_("Widget delete_edit_turn_dialog is missing in file csuper-gui.glade."));
+
+        gtk_widget_show_all(grid);
+        switch (gtk_dialog_run(GTK_DIALOG(dialog)))
+        {
+        case GTK_RESPONSE_CANCEL:
+            break;
+        case GTK_RESPONSE_APPLY:
+            // Search the player selected
+            for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+            {
+                if (gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),0,i))))
+                {
+                    for (j=0 ; j<user_data->ptr_csu_struct->nb_player ; j++ )
+                        if (g_utf8_collate(gtk_button_get_label(GTK_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),0,i))),user_data->ptr_csu_struct->player_names[j]) == 0)
+                            break;
+                    break;
+                }
+            }
+            // Delete the turn
+            deleteTurn(user_data->ptr_csu_struct,j,turn);
+            if (writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct) == false)
+                saveFileError(user_data);
+            addLastCsuStruct(user_data);
+            updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
+
+            /* Test if the game is over */
+            if (exceedMaxNumber(user_data->ptr_csu_struct) == true)
+                gameOver(user_data);
+            break;
+        default:
+            break;
+        }
+        gtk_widget_hide(dialog);
+        gtk_widget_destroy(grid);
+    }
+}
+
 
 
 /*!
@@ -795,14 +934,19 @@ void setButtonMainWindow(globalData *data)
 
     GtkWidget *total_points = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_totalpoints"));
     if (!total_points)
-        g_critical(_("Widget menu_display_totalpoints is missing in file csuper-gui.glade."));
+        g_critical(_("Widget %s is missing in file csuper-gui.glade."),"menu_display_totalpoints");
 
     GtkWidget *ranking = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_ranking"));
     if (!ranking)
-        g_critical(_("Widget menu_display_ranking is missing in file csuper-gui.glade."));
+        g_critical(_("Widget %s is missing in file csuper-gui.glade."),"menu_display_ranking");
+
+    GtkWidget *edit_suppr = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_edit_suppr"));
+    if (!edit_suppr)
+        g_critical(_("Widget %s is missing in file csuper-gui.glade."),"menu_display_edit_suppr");
 
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(ranking),score.ranking);
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(total_points),score.total_points);
+    gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(edit_suppr),score.edit_suppr);
 
 
 
@@ -1164,6 +1308,8 @@ G_MODULE_EXPORT void validateCalculatorPoints(GtkWidget *widget, gpointer data)
     pos_player = gtk_combo_box_get_active(GTK_COMBO_BOX(combobox_calculator));
 
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),6*pos_player+2,2*(max_nb_turn+1)+2)),res);
+    if (user_data->ptr_csu_struct->config.turn_based == 0)
+        endOfTurn(NULL,user_data);
 }
 
 
@@ -1177,6 +1323,8 @@ void fillCalculatorNames(globalData *data)
     GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_calculator_select_person"));
     if (!combobox_calculator)
         g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
+
+    gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(combobox_calculator));
 
     int i;
     for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)

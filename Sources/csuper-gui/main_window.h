@@ -9,7 +9,7 @@
  /*
  * main_window.h
  *
- * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -48,6 +48,7 @@ void updateTotalPointsInTurnLabel(globalData *data,bool updatable_points);
 void noCsuFilePoints(globalData *data);
 void deletePoints(globalData *data);
 void createPointsGrid(globalData *data,bool spin_button);
+G_MODULE_EXPORT void deleteTurnSignal(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data);
 void gameOver(globalData *data);
 void setButtonMainWindow(globalData *data);

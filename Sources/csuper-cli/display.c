@@ -9,7 +9,7 @@
  /*
  * display.c
  *
- * Copyright 2014-2015 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-cli.
  *
@@ -418,7 +418,7 @@ void printStringThreeTabs(char *string)
  */
 void printLicense()
 {
-    printf(_("\nCsuper Copyright (C) 2014-2015 Remi BERTHO <remi.bertho@gmail.com>\n"
+    printf(_("\nCsuper Copyright (C) 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>\n"
     "This program comes with ABSOLUTELY NO WARRANTY. \nThis is free software, and you are welcome to redistribute it"
     " under certain conditions. \nFore more details : http://www.gnu.org/licenses/gpl.html\n"));
 }
