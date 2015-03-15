@@ -16,6 +16,8 @@ If you have any remarks or question on the use of csuper or on the code, don't h
 
 This software is a personnel exercise of a student. Thank you to be indulgent.
 
+Please note that the Github repository is a mirror of the real repository which can be found [here](https://git.framasoft.org/Dalan94/Csuper).
+
 ###Documentation
 
 The documentation is made by Doxygen.
@@ -59,6 +61,8 @@ On peut aussi sauvegarder les parties dans des fichiers au format .csu (voir doc
 Si vous avez des remarques ou des questions sur l'utilisation du logiciel ou le code en lui-même, n'hésiter pas à me le faire remarquer.
 
 Ce logiciel a été fait en guise d'exercice personnel pendant des études donc soyez indulgent au niveau des remarques sur le code, merci.
+
+Veuillez prendre en compte que le dépot Github est un miroir du vrai dépot qui se trouve [ici](https://git.framasoft.org/Dalan94/Csuper).
 
 ###Documentation
 
