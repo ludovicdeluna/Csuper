@@ -49,9 +49,7 @@ void updateToolbarButtonPreferencesSwitch(globalData *data)
     #endif // PORTABLE
     readFileToolbarButtonPreferences(home_path,&toolbar);
 
-    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_toolbar_button_preferences"));
-    if (!grid)
-        g_critical(_("Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"grid_toolbar_button_preferences");
 
     gint i;
 
@@ -90,9 +88,7 @@ void updateToolbarButtonPreferencesSwitch(globalData *data)
  */
 void readToolbarButtonPreferencesSwitch(globalData *data, toolbar_button_preferences_struct *toolbar)
 {
-    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_toolbar_button_preferences"));
-    if (!grid)
-        g_critical(_("Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"grid_toolbar_button_preferences");
 
     gint i;
 
@@ -142,9 +138,7 @@ G_MODULE_EXPORT void checkToolbarButtonPreferencesChanged(GtkWidget *widget,gpoi
     readFileToolbarButtonPreferences(home_path,&toolbar_file);
     readToolbarButtonPreferencesSwitch(user_data,&toolbar_preferences);
 
-    GtkWidget *apply_button = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"apply_button_toolbar_preferences"));
-    if (!apply_button)
-        g_critical(_("Widget apply_button_toolbar_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *apply_button = getWidgetFromBuilder(user_data->ptr_builder,"apply_button_toolbar_preferences");
 
     gtk_widget_set_sensitive(apply_button,differentsToolbarButtonPreferencesStruct(toolbar_file,toolbar_preferences));
 }

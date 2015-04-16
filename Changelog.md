@@ -76,6 +76,7 @@ Csuper-gui
 * Add the possibility to display the ranking and the total points in each turn
 * Add a calculator function
 * Add the possibility to display or not the elements on the left of the main window
+* Add a delete and an edit turn button
 
 4.0.2
 

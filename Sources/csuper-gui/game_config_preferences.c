@@ -47,9 +47,7 @@ bool dialogMenuImportExportGameConfig(globalData *data,list_game_config *ptr_lis
     GtkWidget *grid,*scrolled_window,*viewport;
     GtkWidget *content_area;
 
-    GtkWidget *preferences_window = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"preferences_window"));
-    if (!preferences_window)
-        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+    GtkWidget *preferences_window = getWidgetFromBuilder(data->ptr_builder,"preferences_window");
 
     /* Create the dialog box which the user will choose the game configuration to export*/
     GtkWidget *window_choose_file_export = gtk_dialog_new_with_buttons(_("Import/export game configuration"),GTK_WINDOW(preferences_window),
@@ -191,9 +189,7 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
     list_game_config *ptr_list_config;
     int *id,nb_id=0;
 
-    GtkWidget *preferences_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
-    if (!preferences_window)
-        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+    GtkWidget *preferences_window = getWidgetFromBuilder(user_data->ptr_builder,"preferences_window");
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
@@ -250,9 +246,7 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
  */
 void exportGameConfigurationError(globalData *data)
 {
-    GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"game_configuration_not_exported"));
-    if (!window_error)
-        g_critical(_("Widget game_configuration_not_exported is missing in file csuper-gui.glade."));
+    GtkWidget *window_error = getWidgetFromBuilder(data->ptr_builder,"game_configuration_not_exported");
 
     gtk_dialog_run (GTK_DIALOG (window_error));
     gtk_widget_hide (window_error);
@@ -273,9 +267,7 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
     list_game_config *ptr_list_config;
     int *id,nb_id=0;
 
-    GtkWidget *preferences_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
-    if (!preferences_window)
-        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+    GtkWidget *preferences_window = getWidgetFromBuilder(user_data->ptr_builder,"preferences_window");
 
     /* Create the file chooser dialog*/
     GtkWidget *window_file_import = gtk_file_chooser_dialog_new (_("Import game configuration"),GTK_WINDOW(preferences_window),
@@ -334,9 +326,7 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
  */
 void importGameConfigurationError(globalData *data)
 {
-    GtkWidget *window_error = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"game_configuration_not_imported"));
-    if (!window_error)
-        g_critical(_("Widget game_configuration_not_imported is missing in file csuper-gui.glade."));
+    GtkWidget *window_error = getWidgetFromBuilder(data->ptr_builder,"game_configuration_not_imported");
 
     gtk_dialog_run(GTK_DIALOG(window_error));
     gtk_widget_hide(window_error);
@@ -352,9 +342,7 @@ void displayGameConfiguration(globalData *data)
     gint i;
 
     /* Get the windows scrolled*/
-    GtkWidget *window_scrolled = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"scrolled_window_game_configuration_preferences"));
-    if (!window_scrolled)
-        g_critical(_("Widget scrolled_window_game_configuration_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *window_scrolled = getWidgetFromBuilder(data->ptr_builder,"scrolled_window_game_configuration_preferences");
 
     /*Read the game configurations*/
     list_game_config *ptr_list_config;
@@ -429,9 +417,7 @@ void displayGameConfiguration(globalData *data)
  */
 void deleteDisplayGameConfiguration(globalData *data)
 {
-    GtkWidget *window_scrolled = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"scrolled_window_game_configuration_preferences"));
-    if (!window_scrolled)
-        g_critical(_("Widget scrolled_window_game_configuration_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *window_scrolled = getWidgetFromBuilder(data->ptr_builder,"scrolled_window_game_configuration_preferences");
 
     gtk_widget_destroy(gtk_bin_get_child(GTK_BIN(window_scrolled)));
 }
@@ -459,9 +445,8 @@ G_MODULE_EXPORT void deleteGameConfiguration(GtkWidget *widget, gpointer data)
     gint i=0;
 
     /* Get the button clicked*/
-    GtkWidget *window_scrolled = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"scrolled_window_game_configuration_preferences"));
-    if (!window_scrolled)
-        g_critical(_("Widget scrolled_window_game_configuration_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *window_scrolled = getWidgetFromBuilder(user_data->ptr_builder,"scrolled_window_game_configuration_preferences");
+
     GtkGrid *grid = GTK_GRID(gtk_bin_get_child(GTK_BIN(gtk_bin_get_child(GTK_BIN(window_scrolled)))));
     while (1)
     {
@@ -500,9 +485,8 @@ G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data)
     char home_path[SIZE_MAX_FILE_NAME]="";
 
     /* Get the button clicked*/
-    GtkWidget *window_scrolled = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"scrolled_window_game_configuration_preferences"));
-    if (!window_scrolled)
-        g_critical(_("Widget scrolled_window_game_configuration_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *window_scrolled = getWidgetFromBuilder(user_data->ptr_builder,"scrolled_window_game_configuration_preferences");
+
     GtkGrid *grid = GTK_GRID(gtk_bin_get_child(GTK_BIN(gtk_bin_get_child(GTK_BIN(window_scrolled)))));
     while (1)
     {
@@ -518,9 +502,7 @@ G_MODULE_EXPORT void editGameConfiguration(GtkWidget *widget, gpointer data)
     ptr_list_config = readConfigListFile(home_path);
     readConfigFile(i,ptr_list_config,&config,home_path);
 
-    GtkWidget *preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
-    if (!preferences)
-        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+    GtkWidget *preferences = getWidgetFromBuilder(user_data->ptr_builder,"preferences_window");
 
     changeNewGameConfigurationDialog(user_data,config);
     ptr_config = newGameConfiguration(user_data,GTK_WINDOW(preferences));
@@ -548,9 +530,8 @@ G_MODULE_EXPORT void viewGameConfiguration(GtkWidget *widget, gpointer data)
     gint i=0;
 
     /* Get the button clicked*/
-    GtkWidget *window_scrolled = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"scrolled_window_game_configuration_preferences"));
-    if (!window_scrolled)
-        g_critical(_("Widget scrolled_window_game_configuration_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *window_scrolled = getWidgetFromBuilder(user_data->ptr_builder,"scrolled_window_game_configuration_preferences");
+
     GtkGrid *grid = GTK_GRID(gtk_bin_get_child(GTK_BIN(gtk_bin_get_child(GTK_BIN(window_scrolled)))));
     while (1)
     {
@@ -588,12 +569,8 @@ void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboole
     }
 
     /* Get the labels */
-    GtkWidget *label_details = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences_label_details"));
-    if (!label_details)
-        g_critical(_("Widget game_configuration_preferences_label_details is missing in file csuper-gui.glade."));
-    GtkWidget *label_name = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"game_configuration_preferences_label_name"));
-    if (!label_name)
-        g_critical(_("Widget game_configuration_preferences_label_name is missing in file csuper-gui.glade."));
+    GtkWidget *label_details = getWidgetFromBuilder(user_data->ptr_builder,"game_configuration_preferences_label_details");
+    GtkWidget *label_name = getWidgetFromBuilder(user_data->ptr_builder,"game_configuration_preferences_label_name");
 
     if (index >= 0 && !clear)
     {
@@ -661,9 +638,7 @@ G_MODULE_EXPORT void addGameConfiguration(GtkWidget *widget, gpointer data)
     char home_path[SIZE_MAX_FILE_NAME]="";
     game_config config = {0,1,1,0,-1,-1,"",0};
 
-    GtkWidget *preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
-    if (!preferences)
-        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+    GtkWidget *preferences = getWidgetFromBuilder(user_data->ptr_builder,"preferences_window");
 
     changeNewGameConfigurationDialog(user_data,config);
     ptr_config=newGameConfiguration(user_data,GTK_WINDOW(preferences));
@@ -695,16 +670,12 @@ game_config *newGameConfiguration(globalData *data, GtkWindow *parent_window)
     gchar *buffer;
 
     /* Get the dialog box */
-    GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"new_game_configuration_dialog"));
-    if (!dialog)
-        g_critical(_("Widget new_game_configuration_dialog is missing in file csuper-gui.glade."));
+    GtkWidget *dialog = getWidgetFromBuilder(data->ptr_builder,"new_game_configuration_dialog");
 
     gtk_window_set_transient_for(GTK_WINDOW(dialog),parent_window);
 
     /* Get the grid */
-    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"new_game_configuration_dialog_grid"));
-    if (!grid)
-        g_critical(_("Widget new_game_configuration_dialog_grid is missing in file csuper-gui.glade."));
+    GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"new_game_configuration_dialog_grid");
 
     /* Define the size max of the game configuration name */
     gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),SIZE_MAX_NAME);
@@ -814,14 +785,10 @@ G_MODULE_EXPORT void checkGoodNewGameConfiguration(GtkWidget *widget, gpointer d
     gint index,index_2;
 
     /* Get the grid */
-    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"new_game_configuration_dialog_grid"));
-    if (!grid)
-        g_critical(_("Widget new_game_configuration_dialog_grid is missing in file csuper-gui.glade."));
+    GtkWidget *grid = getWidgetFromBuilder(user_data->ptr_builder,"new_game_configuration_dialog_grid");
 
     /* Get the button */
-    GtkWidget *validat_button = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"button_ok_new_game_configuration"));
-    if (!validat_button)
-        g_critical(_("Widget button_ok_new_game_configuration is missing in file csuper-gui.glade."));
+    GtkWidget *validat_button = getWidgetFromBuilder(user_data->ptr_builder,"button_ok_new_game_configuration");
 
     strcpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))));
     if (strcmp(name,"") == 0)
@@ -859,9 +826,7 @@ G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer da
     globalData *user_data = (globalData*) data;
     gchar *buffer;
 
-    GtkWidget *max = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"new_game_configuration_spin_nb_max"));
-    if (!max)
-        g_critical(_("Widget new_game_configuration_spin_nb_max is missing in file csuper-gui.glade."));
+    GtkWidget *max = getWidgetFromBuilder(user_data->ptr_builder,"new_game_configuration_spin_nb_max");
 
     buffer = gtk_combo_box_text_get_active_text(GTK_COMBO_BOX_TEXT(widget));
     if (buffer == NULL)
@@ -883,9 +848,7 @@ G_MODULE_EXPORT void noMaxMinNewGameConfiguration(GtkWidget *widget, gpointer da
  */
 void changeNewGameConfigurationDialog(globalData *data,game_config config)
 {
-    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"new_game_configuration_dialog_grid"));
-    if (!grid)
-        g_critical(_("Widget new_game_configuration_dialog_grid is missing in file csuper-gui.glade."));
+    GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"new_game_configuration_dialog_grid");
 
     gtk_entry_set_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0)),config.name);
 

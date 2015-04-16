@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
-		<Project filename="csuper-gui.cbp" />
-		<Project filename="libcsuper.cbp" />
-		<Project filename="csuper-cli.cbp" />
+		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper/CodeBlocks/csuper-gui.cbp">
+			<Depends filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper/CodeBlocks/libcsuper.cbp" />
+		</Project>
+		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper/CodeBlocks/libcsuper.cbp" />
+		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper/CodeBlocks/csuper-cli.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

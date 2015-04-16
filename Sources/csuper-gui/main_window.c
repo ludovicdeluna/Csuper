@@ -42,9 +42,7 @@
  */
 void noCsuFileRanking(globalData *data)
 {
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"viewport_ranking"));
-    if (!viewport)
-        g_critical(_("Widget viewport_ranking is missing in file csuper-gui.glade."));
+    GtkWidget *viewport = getWidgetFromBuilder(data->ptr_builder,"viewport_ranking");
 
     GtkWidget *label = gtk_label_new(_("No csu file loaded"));
 
@@ -60,9 +58,7 @@ void noCsuFileRanking(globalData *data)
  */
 void deleteRanking(globalData *data)
 {
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"viewport_ranking"));
-    if (!viewport)
-        g_critical(_("Widget viewport_ranking is missing in file csuper-gui.glade."));
+    GtkWidget *viewport = getWidgetFromBuilder(data->ptr_builder,"viewport_ranking");
 
     gtk_widget_destroy(gtk_bin_get_child(GTK_BIN(viewport)));
 }
@@ -79,9 +75,7 @@ void createRanking(globalData *data)
     gint nb;
     gfloat points,points_first,points_last,previous_points;;
 
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"viewport_ranking"));
-    if (!viewport)
-        g_critical(_("Widget viewport_ranking is missing in file csuper-gui.glade."));
+    GtkWidget *viewport = getWidgetFromBuilder(data->ptr_builder,"viewport_ranking");
 
     /* Set the grid*/
     GtkWidget *rank_grid = gtk_grid_new();
@@ -205,9 +199,7 @@ void updateMainWindow(globalData *data,bool editable)
  */
 void updateDistributorLabel(globalData *data)
 {
-    GtkWidget *label = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_distributor"));
-    if (!label)
-        g_critical(_("Widget main_window_label_distributor is missing in file csuper-gui.glade."));
+    GtkWidget *label = getWidgetFromBuilder(data->ptr_builder,"main_window_label_distributor");
 
     if (data->ptr_csu_struct->config.use_distributor == 1)
         gtk_label_set_text(GTK_LABEL(label),g_strdup_printf(_("%s is the distributor"),data->ptr_csu_struct->player_names[(gint)data->ptr_csu_struct->distributor]));
@@ -235,9 +227,7 @@ G_MODULE_EXPORT void updateTotalPointsInTurnLabelSignal(GtkWidget *widget, gpoin
  */
 void updateTotalPointsInTurnLabel(globalData *data,bool updatable_points)
 {
-    GtkWidget *label = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_total_points_in_turn"));
-    if (!label)
-        g_critical(_("Widget main_window_label_total_points_in_turn is missing in file csuper-gui.glade."));
+    GtkWidget *label = getWidgetFromBuilder(data->ptr_builder,"main_window_label_total_points_in_turn");
 
     if (updatable_points)
     {
@@ -245,9 +235,7 @@ void updateTotalPointsInTurnLabel(globalData *data,bool updatable_points)
         gfloat total_points=0;
         gint max_nb_turn = maxNbTurn(data->ptr_csu_struct);
 
-        GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_viewport"));
-        if (!viewport)
-            g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+        GtkWidget *viewport = getWidgetFromBuilder(data->ptr_builder,"main_window_viewport");
 
         for (i=0 ; i<data->ptr_csu_struct->nb_player ; i++)
             total_points += gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),6*i+2,2*(max_nb_turn+1)+2)));
@@ -279,9 +267,7 @@ void updateTotalPointsInTurnLabel(globalData *data,bool updatable_points)
  */
 void noCsuFilePoints(globalData *data)
 {
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_viewport"));
-    if (!viewport)
-        g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+    GtkWidget *viewport = getWidgetFromBuilder(data->ptr_builder,"main_window_viewport");
 
     GtkWidget *label = gtk_label_new(_("No csu file loaded"));
 
@@ -295,9 +281,7 @@ void noCsuFilePoints(globalData *data)
  */
 void deletePoints(globalData *data)
 {
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_viewport"));
-    if (!viewport)
-        g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+    GtkWidget *viewport = getWidgetFromBuilder(data->ptr_builder,"main_window_viewport");
 
     gtk_widget_destroy(gtk_bin_get_child(GTK_BIN(viewport)));
 }
@@ -314,9 +298,7 @@ void createPointsGrid(globalData *data,bool spin_button)
     gint max_nb_turn = maxNbTurn(data->ptr_csu_struct);
     gint points_grid_width;
 
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_viewport"));
-    if (!viewport)
-        g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+    GtkWidget *viewport = getWidgetFromBuilder(data->ptr_builder,"main_window_viewport");
 
     // Read the preferences
     score_display score;
@@ -408,6 +390,7 @@ void createPointsGrid(globalData *data,bool spin_button)
             gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(gtk_button_new_from_icon_name("gtk-edit",GTK_ICON_SIZE_BUTTON)),6*data->ptr_csu_struct->nb_player+2,2*(i+1)+2,5,1);
             gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(gtk_button_new_from_icon_name("gtk-delete",GTK_ICON_SIZE_BUTTON)),6*(data->ptr_csu_struct->nb_player+1)+2,2*(i+1)+2,5,1);
             g_signal_connect(gtk_grid_get_child_at(GTK_GRID(points_grid),6*(data->ptr_csu_struct->nb_player+1)+2,2*(i+1)+2),"clicked", G_CALLBACK(deleteTurnSignal),data);
+            g_signal_connect(gtk_grid_get_child_at(GTK_GRID(points_grid),6*data->ptr_csu_struct->nb_player+2,2*(i+1)+2),"clicked", G_CALLBACK(changeTurnSignal),data);
         }
     }
 
@@ -535,9 +518,7 @@ G_MODULE_EXPORT void deleteTurnSignal(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_viewport"));
-    if (!viewport)
-        g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+    GtkWidget *viewport = getWidgetFromBuilder(user_data->ptr_builder,"main_window_viewport");
 
     gint turn;
 
@@ -559,9 +540,7 @@ G_MODULE_EXPORT void deleteTurnSignal(GtkWidget *widget, gpointer data)
     }
     else
     {
-        GtkWidget *viewport_dialog = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"delete_edit_turn_dialog_viewport"));
-        if (!viewport_dialog)
-            g_critical(_("Widget delete_edit_turn_dialog_viewport is missing in file csuper-gui.glade."));
+        GtkWidget *viewport_dialog = getWidgetFromBuilder(user_data->ptr_builder,"delete_turn_dialog_viewport");
 
         // Set the grid
         GtkWidget *grid = gtk_grid_new();
@@ -599,9 +578,7 @@ G_MODULE_EXPORT void deleteTurnSignal(GtkWidget *widget, gpointer data)
 
         // Add the grid
         gtk_container_add(GTK_CONTAINER(viewport_dialog),grid);
-        GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"delete_edit_turn_dialog"));
-        if (!dialog)
-            g_critical(_("Widget delete_edit_turn_dialog is missing in file csuper-gui.glade."));
+        GtkWidget *dialog = getWidgetFromBuilder(user_data->ptr_builder,"delete_turn_dialog");
 
         gtk_widget_show_all(grid);
         switch (gtk_dialog_run(GTK_DIALOG(dialog)))
@@ -627,7 +604,7 @@ G_MODULE_EXPORT void deleteTurnSignal(GtkWidget *widget, gpointer data)
             addLastCsuStruct(user_data);
             updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
 
-            /* Test if the game is over */
+            // Test if the game is over
             if (exceedMaxNumber(user_data->ptr_csu_struct) == true)
                 gameOver(user_data);
             break;
@@ -638,6 +615,82 @@ G_MODULE_EXPORT void deleteTurnSignal(GtkWidget *widget, gpointer data)
         gtk_widget_destroy(grid);
     }
 }
+
+G_MODULE_EXPORT void changeTurnSignal(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+
+    GtkWidget *viewport = getWidgetFromBuilder(user_data->ptr_builder,"main_window_viewport");
+    GtkWidget *viewport_dialog = getWidgetFromBuilder(user_data->ptr_builder,"edit_turn_dialog_viewport");
+    GtkWidget *dialog = getWidgetFromBuilder(user_data->ptr_builder,"edit_turn_dialog");
+
+    gint turn,i;
+
+    // Set the grid
+    GtkWidget *grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(grid),5);
+    gtk_grid_set_row_spacing(GTK_GRID(grid),5);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(grid,10);
+    gtk_widget_set_margin_start(grid,10);
+    #else
+    gtk_widget_set_margin_right(grid,10);
+    gtk_widget_set_margin_left(grid,10);
+    #endif // GTK_MINOR_VERSION
+    gtk_widget_set_margin_top(grid,10);
+    gtk_widget_set_margin_bottom(grid,10);
+    gtk_widget_set_hexpand(grid,TRUE);
+
+    // Get the turn
+    for (turn = 0 ; widget != gtk_grid_get_child_at(GTK_GRID(gtk_bin_get_child(GTK_BIN(viewport))),6*(user_data->ptr_csu_struct->nb_player+1),2*(turn+1)+2) ; turn ++);
+
+    for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+    {
+        if (user_data->ptr_csu_struct->nb_turn[i] > turn)
+        {
+            GtkWidget *new_label = gtk_label_new(user_data->ptr_csu_struct->player_names[i]);
+            gtk_grid_attach(GTK_GRID(grid),new_label,i,0,1,1);
+            GtkAdjustment *adju = gtk_adjustment_new(0,-G_MAXDOUBLE,G_MAXDOUBLE,1,0,0);
+            GtkWidget *new_points_button = gtk_spin_button_new(adju,1,user_data->ptr_csu_struct->config.decimal_place);
+            gtk_entry_set_alignment (GTK_ENTRY(new_points_button),0.5);
+            gtk_entry_set_width_chars(GTK_ENTRY(new_points_button),3);
+            gtk_spin_button_set_value(GTK_SPIN_BUTTON(new_points_button),user_data->ptr_csu_struct->point[i][turn]);
+            gtk_grid_attach(GTK_GRID(grid),new_points_button,i,1,1,1);
+            gtk_widget_set_hexpand(new_points_button,TRUE);
+            gtk_widget_set_halign(new_points_button,GTK_ALIGN_CENTER);
+        }
+
+    }
+
+    gtk_container_add(GTK_CONTAINER(viewport_dialog),grid);
+    gtk_widget_show_all(grid);
+
+    switch (gtk_dialog_run(GTK_DIALOG(dialog)))
+    {
+    case GTK_RESPONSE_CANCEL:
+        break;
+    case GTK_RESPONSE_APPLY:
+        // Edit the turn
+        for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+        {
+            if (user_data->ptr_csu_struct->nb_turn[i] > turn)
+                user_data->ptr_csu_struct->point[i][turn]=gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),i,1)));
+        }
+        addLastCsuStruct(user_data);
+        updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
+
+        // Test if the game is over
+        if (exceedMaxNumber(user_data->ptr_csu_struct) == true)
+            gameOver(user_data);
+        break;
+    default:
+        break;
+    }
+
+    gtk_widget_hide(dialog);
+    gtk_widget_destroy(grid);
+}
+
 
 
 
@@ -654,13 +707,8 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
     float tmp_score;
     gboolean has_changed = FALSE;
 
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_viewport"));
-    if (!viewport)
-        g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
-
-    GtkWidget *scrolled_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_scrolled_window"));
-    if (!scrolled_window)
-        g_critical(_("Widget main_window_scrolled_window is missing in file csuper-gui.glade."));
+    GtkWidget *viewport = getWidgetFromBuilder(user_data->ptr_builder,"main_window_viewport");
+    GtkWidget *scrolled_window = getWidgetFromBuilder(user_data->ptr_builder,"main_window_scrolled_window");
 
     /* Test if there is a csu file opened or if the game is not finished */
     if (user_data->ptr_csu_struct == NULL)
@@ -728,13 +776,8 @@ G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data)
  */
 void gameOver(globalData *data)
 {
-    GtkWidget *window_game_over = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"dialog_game_over"));
-    if (!window_game_over)
-        g_critical(_("Widget dialog_game_over is missing in file csuper-gui.glade."));
-
-    GtkWidget *fixed = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"dialog_game_over_fixed"));
-    if (!fixed)
-        g_critical(_("Widget dialog_game_over_fixed is missing in file csuper-gui.glade."));
+    GtkWidget *window_game_over = getWidgetFromBuilder(data->ptr_builder,"dialog_game_over");
+    GtkWidget *fixed = getWidgetFromBuilder(data->ptr_builder,"dialog_game_over_fixed");
 
     GtkWidget *podium =gtk_image_new_from_file("Images/Podium.png");
     gtk_fixed_put(GTK_FIXED(fixed),podium,0,20);
@@ -784,52 +827,20 @@ void gameOver(globalData *data)
  */
 void setButtonMainWindow(globalData *data)
 {
-    GtkWidget *button_end_of_turn = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"button_end_of_turn"));
-    if (!button_end_of_turn)
-        g_critical(_("Widget button_end_of_turn is missing in file csuper-gui.glade."));
-
-    GtkWidget *button_calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_calculator_validate"));
-    if (!button_calculator)
-        g_critical(_("Widget main_window_label_calculator_validate is missing in file csuper-gui.glade."));
-
-    GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_calculator_select_person"));
-    if (!combobox_calculator)
-        g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
-
-    GtkWidget *button_change_distributor = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_button_change_distributor"));
-    if (!button_change_distributor)
-        g_critical(_("Widget main_window_button_change_distributor is missing in file csuper-gui.glade."));
-
-    GtkWidget *main_toolbar = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_toolbar"));
-    if (!main_toolbar)
-        g_critical(_("Widget main_toolbar is missing in file csuper-gui.glade."));
-
-    GtkWidget *menu_save_as = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_save_as"));
-    if (!menu_save_as)
-        g_critical(_("Widget menu_save_as is missing in file csuper-gui.glade."));
-
-    GtkWidget *menu_properties = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_properties"));
-    if (!menu_properties)
-        g_critical(_("Widget menu_properties is missing in file csuper-gui.glade."));
-
-    GtkWidget *menu_delete_file = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_delete_file"));
-    if (!menu_delete_file)
-        g_critical(_("Widget menu_delete_file is missing in file csuper-gui.glade."));
-
-    GtkWidget *menu_export = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_export"));
-    if (!menu_export)
-        g_critical(_("Widget menu_export is missing in file csuper-gui.glade."));
-
-    GtkWidget *menu_podium = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_podium"));
-    if (!menu_podium)
-        g_critical(_("Widget menu_display_podium is missing in file csuper-gui.glade."));
+    GtkWidget *button_end_of_turn = getWidgetFromBuilder(data->ptr_builder,"button_end_of_turn");
+    GtkWidget *button_calculator = getWidgetFromBuilder(data->ptr_builder,"main_window_label_calculator_validate");
+    GtkWidget *combobox_calculator = getWidgetFromBuilder(data->ptr_builder,"main_window_label_calculator_select_person");
+    GtkWidget *button_change_distributor = getWidgetFromBuilder(data->ptr_builder,"main_window_button_change_distributor");
+    GtkWidget *main_toolbar = getWidgetFromBuilder(data->ptr_builder,"main_toolbar");
+    GtkWidget *menu_save_as = getWidgetFromBuilder(data->ptr_builder,"menu_save_as");
+    GtkWidget *menu_properties = getWidgetFromBuilder(data->ptr_builder,"menu_properties");
+    GtkWidget *menu_delete_file = getWidgetFromBuilder(data->ptr_builder,"menu_delete_file");
+    GtkWidget *menu_export = getWidgetFromBuilder(data->ptr_builder,"menu_export");
+    GtkWidget *menu_podium = getWidgetFromBuilder(data->ptr_builder,"menu_display_podium");
 
 
     // Set the recent csu file open
     GtkRecentFilter *recent_filter_csu = GTK_RECENT_FILTER(gtk_builder_get_object(data->ptr_builder,"recent_filter_csu"));
-    if (!recent_filter_csu)
-        g_critical(_("Widget recent_filter_csu is missing in file csuper-gui.glade."));
-
     GtkWidget *recent_chooser = gtk_recent_chooser_menu_new();
     gtk_recent_chooser_set_filter(GTK_RECENT_CHOOSER(recent_chooser),recent_filter_csu);
     gtk_recent_chooser_set_show_not_found(GTK_RECENT_CHOOSER(recent_chooser),FALSE);
@@ -839,17 +850,9 @@ void setButtonMainWindow(globalData *data)
 
     // Set image menu
     #ifdef ENABLE_DEPRECIATE_FUNCTIONS
-    GtkWidget *menu_preferences_game = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_preference_game_config"));
-    if (!menu_preferences_game)
-        g_critical(_("Widget menu_preference_game_config is missing in file csuper-gui.glade."));
-
-    GtkWidget *menu_preferences_toolbar = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_preferences_toolbar_button"));
-    if (!menu_preferences_toolbar)
-        g_critical(_("Widget menu_preferences_toolbar_button is missing in file csuper-gui.glade."));
-
-    GtkWidget *menu_preferences_exportation = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_preferences_exportation"));
-    if (!menu_preferences_toolbar)
-        g_critical(_("Widget menu_preferences_exportation is missing in file csuper-gui.glade."));
+    GtkWidget *menu_preferences_game = getWidgetFromBuilder(data->ptr_builder,"menu_preference_game_config");
+    GtkWidget *menu_preferences_toolbar = getWidgetFromBuilder(data->ptr_builder,"menu_preferences_toolbar_button");
+    GtkWidget *menu_preferences_exportation = getWidgetFromBuilder(data->ptr_builder,"menu_preferences_exportation");
 
     // Set the image of the menu
     gtk_image_menu_item_set_image(GTK_IMAGE_MENU_ITEM(menu_podium),gtk_image_new_from_file("Images/Podium_icon.png"));
@@ -910,17 +913,9 @@ void setButtonMainWindow(globalData *data)
     #endif // PORTABLE
     readFileDifferenceBetweenPlayer(home_path,&diff);
 
-    GtkWidget *consecutive = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_consecutive"));
-    if (!consecutive)
-        g_critical(_("Widget menu_display_consecutive is missing in file csuper-gui.glade."));
-
-    GtkWidget *first = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_first"));
-    if (!first)
-        g_critical(_("Widget menu_display_first is missing in file csuper-gui.glade."));
-
-    GtkWidget *last = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_last"));
-    if (!last)
-        g_critical(_("Widget menu_display_last is missing in file csuper-gui.glade."));
+    GtkWidget *consecutive = getWidgetFromBuilder(data->ptr_builder,"menu_display_consecutive");
+    GtkWidget *first = getWidgetFromBuilder(data->ptr_builder,"menu_display_first");
+    GtkWidget *last = getWidgetFromBuilder(data->ptr_builder,"menu_display_last");
 
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(consecutive),diff.consecutive);
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(first),diff.first);
@@ -932,17 +927,9 @@ void setButtonMainWindow(globalData *data)
     score_display score;
     readFileScoreDisplay(home_path,&score);
 
-    GtkWidget *total_points = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_totalpoints"));
-    if (!total_points)
-        g_critical(_("Widget %s is missing in file csuper-gui.glade."),"menu_display_totalpoints");
-
-    GtkWidget *ranking = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_ranking"));
-    if (!ranking)
-        g_critical(_("Widget %s is missing in file csuper-gui.glade."),"menu_display_ranking");
-
-    GtkWidget *edit_suppr = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_edit_suppr"));
-    if (!edit_suppr)
-        g_critical(_("Widget %s is missing in file csuper-gui.glade."),"menu_display_edit_suppr");
+    GtkWidget *total_points = getWidgetFromBuilder(data->ptr_builder,"menu_display_totalpoints");
+    GtkWidget *ranking = getWidgetFromBuilder(data->ptr_builder,"menu_display_ranking");
+    GtkWidget *edit_suppr = getWidgetFromBuilder(data->ptr_builder,"menu_display_edit_suppr");
 
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(ranking),score.ranking);
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(total_points),score.total_points);
@@ -954,17 +941,9 @@ void setButtonMainWindow(globalData *data)
     main_window_side pref;
     readFileMainWindowSide(home_path,&pref);
 
-    GtkWidget *calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_calculator"));
-    if (!calculator)
-        g_critical(_("Widget menu_display_calculator is missing in file csuper-gui.glade."));
-
-    GtkWidget *ranking_side = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_ranking_side"));
-    if (!ranking_side)
-        g_critical(_("Widget menu_display_ranking_side is missing in file csuper-gui.glade."));
-
-    GtkWidget *game_information = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_display_game_information"));
-    if (!game_information)
-        g_critical(_("Widget menu_display_game_information is missing in file csuper-gui.glade."));
+    GtkWidget *calculator = getWidgetFromBuilder(data->ptr_builder,"menu_display_calculator");
+    GtkWidget *ranking_side = getWidgetFromBuilder(data->ptr_builder,"menu_display_ranking_side");
+    GtkWidget *game_information = getWidgetFromBuilder(data->ptr_builder,"menu_display_game_information");
 
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(calculator),pref.calculator);
     gtk_check_menu_item_set_active(GTK_CHECK_MENU_ITEM(ranking_side),pref.ranking);
@@ -974,9 +953,7 @@ void setButtonMainWindow(globalData *data)
 
 
     // The undo buttons
-    GtkWidget *menu_undo = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_undo"));
-    if (!menu_undo)
-        g_critical(_("Widget menu_undo is missing in file csuper-gui.glade."));
+    GtkWidget *menu_undo = getWidgetFromBuilder(data->ptr_builder,"menu_undo");
     if (data->indexLastCsuStruct < data->nbLastCsuStruct-1)
     {
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),7)),TRUE);
@@ -989,9 +966,7 @@ void setButtonMainWindow(globalData *data)
     }
 
     // The redo buttons
-    GtkWidget *menu_redo = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"menu_redo"));
-    if (!menu_redo)
-        g_critical(_("Widget menu_redo is missing in file csuper-gui.glade."));
+    GtkWidget *menu_redo = getWidgetFromBuilder(data->ptr_builder,"menu_redo");
     if (data->indexLastCsuStruct > 0)
     {
         gtk_widget_set_sensitive(GTK_WIDGET(gtk_toolbar_get_nth_item(GTK_TOOLBAR(main_toolbar),8)),TRUE);
@@ -1014,22 +989,12 @@ G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *main_toolbar = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_toolbar"));
-    if (!main_toolbar)
-        g_critical(_("Widget main_toolbar is missing in file csuper-gui.glade."));
+    GtkWidget *main_toolbar = getWidgetFromBuilder(user_data->ptr_builder,"main_toolbar");
 
-    GtkWidget *menu_cut = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_cut"));
-    if (!menu_cut)
-        g_critical(_("Widget menu_cut is missing in file csuper-gui.glade."));
-    GtkWidget *menu_copy = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_copy"));
-    if (!menu_copy)
-        g_critical(_("Widget menu_copy is missing in file csuper-gui.glade."));
-    GtkWidget *menu_paste = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_paste"));
-    if (!menu_paste)
-        g_critical(_("Widget menu_paste is missing in file csuper-gui.glade."));
-    GtkWidget *menu_delete = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"menu_delete"));
-    if (!menu_delete)
-        g_critical(_("Widget menu_delete is missing in file csuper-gui.glade."));
+    GtkWidget *menu_cut = getWidgetFromBuilder(user_data->ptr_builder,"menu_cut");
+    GtkWidget *menu_copy = getWidgetFromBuilder(user_data->ptr_builder,"menu_copy");
+    GtkWidget *menu_paste = getWidgetFromBuilder(user_data->ptr_builder,"menu_paste");
+    GtkWidget *menu_delete = getWidgetFromBuilder(user_data->ptr_builder,"menu_delete");
 
     if(GTK_IS_EDITABLE(gtk_window_get_focus(GTK_WINDOW(user_data->ptr_main_window))))
     {
@@ -1093,9 +1058,7 @@ void readMainWindowSize(globalData *data)
     #endif // PORTABLE
     readFileMainWidowSize(home_path,&size);
 
-    GtkWidget *main_window = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window"));
-    if (!main_window)
-        g_critical(_("Widget main_window is missing in file csuper-gui.glade."));
+    GtkWidget *main_window = getWidgetFromBuilder(data->ptr_builder,"main_window");
 
     gtk_window_resize(GTK_WINDOW(main_window),size.width,size.height);
 
@@ -1123,9 +1086,7 @@ G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gp
     readHomePathSlash(home_path);
     #endif // PORTABLE
 
-    GtkWidget *main_window = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window"));
-    if (!main_window)
-        g_critical(_("Widget main_window is missing in file csuper-gui.glade."));
+    GtkWidget *main_window = getWidgetFromBuilder(user_data->ptr_builder,"main_window");
 
     size.height = configure_event.height;
     size.width = configure_event.width;
@@ -1151,13 +1112,8 @@ G_MODULE_EXPORT void changeDistributorButton(GtkWidget *widget, gpointer data)
     globalData *user_data = (globalData*) data;
     gint i;
 
-    GtkWidget *dialog = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"change_distributor_dialog"));
-    if (!dialog)
-        g_critical(_("Widget change_distributor_dialog is missing in file csuper-gui.glade."));
-
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"change_distributor_dialog_viewport"));
-    if (!viewport)
-        g_critical(_("Widget change_distributor_dialog_viewport is missing in file csuper-gui.glade."));
+    GtkWidget *dialog = getWidgetFromBuilder(user_data->ptr_builder,"change_distributor_dialog");
+    GtkWidget *viewport = getWidgetFromBuilder(user_data->ptr_builder,"change_distributor_dialog_viewport");
 
 
     /* Set the grid */
@@ -1227,21 +1183,10 @@ G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data
     struct lconv *lc;
     char *comma;
 
-    GtkWidget *text = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_result"));
-    if (!text)
-        g_critical(_("Widget main_window_label_calculator_result is missing in file csuper-gui.glade."));
-
-    GtkWidget *entry = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_entry"));
-    if (!entry)
-        g_critical(_("Widget main_window_label_calculator_entry is missing in file csuper-gui.glade."));
-
-    GtkWidget *calculator_button = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_validate"));
-    if (!calculator_button)
-        g_critical(_("Widget main_window_label_calculator_validate is missing in file csuper-gui.glade."));
-
-    GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_select_person"));
-    if (!combobox_calculator)
-        g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
+    GtkWidget *text = getWidgetFromBuilder(user_data->ptr_builder,"main_window_label_calculator_result");
+    GtkWidget *entry = getWidgetFromBuilder(user_data->ptr_builder,"main_window_label_calculator_entry");
+    GtkWidget *calculator_button = getWidgetFromBuilder(user_data->ptr_builder,"main_window_label_calculator_validate");
+    //GtkWidget *combobox_calculator = getWidgetFromBuilder(user_data->ptr_builder,"main_window_label_calculator_select_person");
 
     // Get the string and convert the . to , if needed
     strncpy(string,gtk_entry_get_text(GTK_ENTRY(entry)),SIZE_MAX_FILE_NAME);
@@ -1282,17 +1227,9 @@ G_MODULE_EXPORT void validateCalculatorPoints(GtkWidget *widget, gpointer data)
     int pos_player;
     gint max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
 
-    GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_select_person"));
-    if (!combobox_calculator)
-        g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
-
-    GtkWidget *entry = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_label_calculator_entry"));
-    if (!entry)
-        g_critical(_("Widget main_window_label_calculator_entry is missing in file csuper-gui.glade."));
-
-    GtkWidget *viewport = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"main_window_viewport"));
-    if (!viewport)
-        g_critical(_("Widget main_window_viewport is missing in file csuper-gui.glade."));
+    GtkWidget *combobox_calculator = getWidgetFromBuilder(user_data->ptr_builder,"main_window_label_calculator_select_person");
+    GtkWidget *entry = getWidgetFromBuilder(user_data->ptr_builder,"main_window_label_calculator_entry");
+    GtkWidget *viewport = getWidgetFromBuilder(user_data->ptr_builder,"main_window_viewport");
 
     // Get the string and convert the . to , if needed
     strncpy(string,gtk_entry_get_text(GTK_ENTRY(entry)),SIZE_MAX_FILE_NAME);
@@ -1320,9 +1257,7 @@ G_MODULE_EXPORT void validateCalculatorPoints(GtkWidget *widget, gpointer data)
  */
 void fillCalculatorNames(globalData *data)
 {
-    GtkWidget *combobox_calculator = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_label_calculator_select_person"));
-    if (!combobox_calculator)
-        g_critical(_("Widget main_window_label_calculator_select_person is missing in file csuper-gui.glade."));
+    GtkWidget *combobox_calculator = getWidgetFromBuilder(data->ptr_builder,"main_window_label_calculator_select_person");
 
     gtk_combo_box_text_remove_all(GTK_COMBO_BOX_TEXT(combobox_calculator));
 
@@ -1348,9 +1283,7 @@ void updateMainWindowSide(globalData *data)
     main_window_side pref;
     readFileMainWindowSide(home_path,&pref);
 
-    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"main_window_grid_game_config"));
-    if (!grid)
-        g_critical(_("Widget main_window_grid_game_config is missing in file csuper-gui.glade."));
+    GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"main_window_grid_game_config");
 
     if (pref.ranking)
     {

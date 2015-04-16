@@ -49,9 +49,7 @@ void updateExportationPreferences(globalData *data)
     #endif // PORTABLE
     readFilePdfPreferences(home_path,&pref);
 
-    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_exportation_preferences"));
-    if (!grid)
-        g_critical(_("Widget grid_exportation_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"grid_exportation_preferences");
 
     // Charset
     if (canUseUtf8Pdf())
@@ -105,9 +103,7 @@ void updateExportationPreferences(globalData *data)
  */
 void readExportationPreferences(globalData *data, export_pdf_preferences *pref)
 {
-    GtkWidget *grid = GTK_WIDGET(gtk_builder_get_object(data->ptr_builder,"grid_exportation_preferences"));
-    if (!grid)
-        g_critical(_("Widget grid_exportation_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"grid_exportation_preferences");
 
     // Charset
     if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,1))))
@@ -168,9 +164,7 @@ G_MODULE_EXPORT void checkExportationPreferencesChanged(GtkWidget *widget,gpoint
     readFilePdfPreferences(home_path,&pref_file);
     readExportationPreferences(user_data,&pref_graph);
 
-    GtkWidget *apply_button = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"apply_button_exportation_preferences"));
-    if (!apply_button)
-        g_critical(_("Widget apply_button_exportation_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *apply_button = getWidgetFromBuilder(user_data->ptr_builder,"apply_button_exportation_preferences");
 
     gtk_widget_set_sensitive(apply_button,differentsTExportPdfPreferencesStruct(pref_file,pref_graph));
 }

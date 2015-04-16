@@ -58,6 +58,8 @@
  */
 #define NB_LAST_CSU_STRUCT 10
 
+#undef G_OS_UNIX
+
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>

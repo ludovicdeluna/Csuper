@@ -35,6 +35,7 @@
 #define EXPORTATION_PREFERENCES_H_INCLUDED
 
 #include "csuper-gui.h"
+#include "utils.h"
 
 void updateExportationPreferences(globalData *data);
 void readExportationPreferences(globalData *data, export_pdf_preferences *pref);

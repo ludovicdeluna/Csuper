@@ -90,7 +90,7 @@ int main (int argc, char *argv[])
 
     gtk_builder_connect_signals (data.ptr_builder, &data);
 
-    data.ptr_main_window = GTK_WIDGET(gtk_builder_get_object(data.ptr_builder,"main_window"));
+    data.ptr_main_window = getWidgetFromBuilder(data.ptr_builder,"main_window");
 
     /* Set csuper */
     noCsuFileRanking(&data);

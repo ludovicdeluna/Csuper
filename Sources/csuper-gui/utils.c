@@ -105,3 +105,19 @@ GtkLabel *createGtkLabelWithAttributes(gchar *text, int text_size, gboolean use_
     setGtkLabelAttributes(GTK_LABEL(label),text_size,use_foreground,foreground_red,foreground_green,foreground_blue,use_background,background_red,background_green,background_blue);
     return GTK_LABEL(label);
 }
+
+
+ /*!
+ * \fn GtkWidget *getWidgetFromBuilder(GtkBuilder *ptr_builder, gchar *widget_name)
+ *  Get the widget pointer from the builder
+ * \param[in] ptr_builder the GtkBuilder
+ * \param[in] widget_name the widget name
+ * \return the widget
+ */
+GtkWidget *getWidgetFromBuilder(GtkBuilder *ptr_builder, gchar *widget_name)
+{
+    GtkWidget *res = GTK_WIDGET(gtk_builder_get_object(ptr_builder,widget_name));
+    if (!res)
+        g_critical(g_strdup_printf(_("Widget %s is missing in file csuper-gui.glade."),widget_name));
+    return res;
+}

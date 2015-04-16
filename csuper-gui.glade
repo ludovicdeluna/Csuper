@@ -13,6 +13,121 @@
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
+  <object class="GtkDialog" id="edit_turn_dialog">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Edit turn</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="skip_pager_hint">True</property>
+    <property name="gravity">center</property>
+    <property name="transient_for">main_window</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox9">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area9">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="delete_edit_turn_dialog_button cancel1">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <property name="always_show_image">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="delete_edit_turn_dialog_button_validate1">
+                <property name="label">gtk-ok</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <property name="always_show_image">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="edit_turn_dialog_grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkScrolledWindow" id="edit_turn_dialog_scrolledwindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="min_content_width">800</property>
+                <property name="min_content_height">100</property>
+                <child>
+                  <object class="GtkViewport" id="edit_turn_dialog_viewport">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="edit_turn_dialog_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">start</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">&lt;span size="large"&gt;Please choose the new points&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-6">delete_edit_turn_dialog_button cancel1</action-widget>
+      <action-widget response="-10">delete_edit_turn_dialog_button_validate1</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkFileFilter" id="filefilterall">
     <patterns>
       <pattern>*</pattern>
@@ -2023,9 +2138,9 @@ Rémi BERTHO</property>
       <action-widget response="-3">button_validate_properties</action-widget>
     </action-widgets>
   </object>
-  <object class="GtkDialog" id="delete_edit_turn_dialog">
+  <object class="GtkDialog" id="delete_turn_dialog">
     <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Edit/Suppr turn</property>
+    <property name="title" translatable="yes">Delete turn</property>
     <property name="modal">True</property>
     <property name="window_position">center-on-parent</property>
     <property name="type_hint">dialog</property>
@@ -2080,11 +2195,11 @@ Rémi BERTHO</property>
           </packing>
         </child>
         <child>
-          <object class="GtkGrid" id="grid3">
+          <object class="GtkGrid" id="delete_turn_grid">
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkScrolledWindow" id="delete_edit_turn_dialog_scrolledwindow">
+              <object class="GtkScrolledWindow" id="delete_turn_dialog_scrolledwindow">
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="hexpand">True</property>
@@ -2092,7 +2207,7 @@ Rémi BERTHO</property>
                 <property name="min_content_width">300</property>
                 <property name="min_content_height">300</property>
                 <child>
-                  <object class="GtkViewport" id="delete_edit_turn_dialog_viewport">
+                  <object class="GtkViewport" id="delete_turn_dialog_viewport">
                     <property name="visible">True</property>
                     <property name="can_focus">False</property>
                     <property name="shadow_type">none</property>
@@ -2108,7 +2223,7 @@ Rémi BERTHO</property>
               </packing>
             </child>
             <child>
-              <object class="GtkLabel" id="change_distributor_dialog_label1">
+              <object class="GtkLabel" id="delete_turn_dialog_label">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
                 <property name="valign">start</property>
@@ -2509,6 +2624,7 @@ Congratulation to the winner!</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Add a game configuration</property>
                     <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
                     <signal name="clicked" handler="addGameConfiguration" swapped="no"/>
                   </object>
                   <packing>
@@ -3424,6 +3540,7 @@ Congratulation to the winner!</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Apply the new preferences for the new toolbar button displayed</property>
                     <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
                     <signal name="clicked" handler="validToolbarButtonPreferences" swapped="no"/>
                   </object>
                   <packing>
@@ -3440,6 +3557,7 @@ Congratulation to the winner!</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Close the game preferences window</property>
                     <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
                     <signal name="clicked" handler="closePreferences" swapped="no"/>
                   </object>
                   <packing>
@@ -3512,6 +3630,7 @@ Congratulation to the winner!</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Apply the new preferences for the new toolbar button displayed</property>
                     <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
                     <signal name="clicked" handler="validExportationPreferences" swapped="no"/>
                   </object>
                   <packing>
@@ -3528,6 +3647,7 @@ Congratulation to the winner!</property>
                     <property name="receives_default">True</property>
                     <property name="tooltip_text" translatable="yes">Close the game preferences window</property>
                     <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
                     <signal name="clicked" handler="closePreferences" swapped="no"/>
                   </object>
                   <packing>

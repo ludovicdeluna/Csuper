@@ -44,9 +44,7 @@ G_MODULE_EXPORT void openPreferences(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *window_game = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
-    if (!window_game)
-        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+    GtkWidget *window_game = getWidgetFromBuilder(user_data->ptr_builder,"preferences_window");
 
     displayGameConfiguration(user_data);
     updateToolbarButtonPreferencesSwitch(user_data);
@@ -67,9 +65,7 @@ G_MODULE_EXPORT void openGameConfigurationPreferences(GtkWidget *widget, gpointe
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *notebook_preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"notebook_preferences"));
-    if (!notebook_preferences)
-        g_critical(_("Widget notebook_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *notebook_preferences = getWidgetFromBuilder(user_data->ptr_builder,"notebook_preferences");
 
     gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_preferences),0);
 
@@ -86,9 +82,7 @@ G_MODULE_EXPORT void openToolbarButtonPreferences(GtkWidget *widget, gpointer da
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *notebook_preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"notebook_preferences"));
-    if (!notebook_preferences)
-        g_critical(_("Widget notebook_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *notebook_preferences = getWidgetFromBuilder(user_data->ptr_builder,"notebook_preferences");
 
     gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_preferences),1);
 
@@ -105,9 +99,7 @@ G_MODULE_EXPORT void openExporationPreferences(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *notebook_preferences = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"notebook_preferences"));
-    if (!notebook_preferences)
-        g_critical(_("Widget notebook_preferences is missing in file csuper-gui.glade."));
+    GtkWidget *notebook_preferences = getWidgetFromBuilder(user_data->ptr_builder,"notebook_preferences");
 
     gtk_notebook_set_current_page(GTK_NOTEBOOK(notebook_preferences),2);
 
@@ -124,9 +116,7 @@ G_MODULE_EXPORT void closePreferences(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
 
-    GtkWidget *window_game = GTK_WIDGET(gtk_builder_get_object(user_data->ptr_builder,"preferences_window"));
-    if (!window_game)
-        g_critical(_("Widget preferences_window is missing in file csuper-gui.glade."));
+    GtkWidget *window_game = getWidgetFromBuilder(user_data->ptr_builder,"preferences_window");
 
     deleteDisplayGameConfiguration(user_data);
 
