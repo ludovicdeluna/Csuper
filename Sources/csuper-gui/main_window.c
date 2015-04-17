@@ -331,7 +331,7 @@ void createPointsGrid(globalData *data,bool spin_button)
     /* Add separator */
     for (i=0 ; i<data->ptr_csu_struct->nb_player+3; i++)
     {
-        if (i<=data->ptr_csu_struct->nb_player )
+        if (i<=data->ptr_csu_struct->nb_player)
             gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+1,0,1,2*(max_nb_turn+7));
         else if (score.edit_suppr)
             gtk_grid_attach(GTK_GRID(points_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),6*i+1,5,1,2*(max_nb_turn-1)+1);
@@ -385,12 +385,29 @@ void createPointsGrid(globalData *data,bool spin_button)
     // Set the button delete and edit
     if (score.edit_suppr)
     {
+        GtkWidget *tmp_edit_button;
+        GtkWidget *tmp_delete_button;
+        #if GTK_MINOR_VERSION < 10
+        GtkWidget *tmp_image_edit;
+        GtkWidget *tmp_image_delete;
+        #endif // GTK_MINOR_VERSION
         for (i=1 ; i< max_nb_turn ; i++)
         {
-            gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(gtk_button_new_from_icon_name("gtk-edit",GTK_ICON_SIZE_BUTTON)),6*data->ptr_csu_struct->nb_player+2,2*(i+1)+2,5,1);
-            gtk_grid_attach(GTK_GRID(points_grid),GTK_WIDGET(gtk_button_new_from_icon_name("gtk-delete",GTK_ICON_SIZE_BUTTON)),6*(data->ptr_csu_struct->nb_player+1)+2,2*(i+1)+2,5,1);
-            g_signal_connect(gtk_grid_get_child_at(GTK_GRID(points_grid),6*(data->ptr_csu_struct->nb_player+1)+2,2*(i+1)+2),"clicked", G_CALLBACK(deleteTurnSignal),data);
-            g_signal_connect(gtk_grid_get_child_at(GTK_GRID(points_grid),6*data->ptr_csu_struct->nb_player+2,2*(i+1)+2),"clicked", G_CALLBACK(changeTurnSignal),data);
+            #if GTK_MINOR_VERSION >= 10
+            tmp_edit_button = GTK_WIDGET(gtk_button_new_from_icon_name("gtk-edit",GTK_ICON_SIZE_BUTTON));
+            tmp_delete_button = GTK_WIDGET(gtk_button_new_from_icon_name("gtk-delete",GTK_ICON_SIZE_BUTTON));
+            #else
+            tmp_image_edit = gtk_image_new_from_stock(GTK_STOCK_EDIT,GTK_ICON_SIZE_BUTTON);
+            tmp_edit_button = gtk_button_new();
+            gtk_button_set_image(GTK_BUTTON(tmp_edit_button),tmp_image_edit);
+            tmp_image_delete = gtk_image_new_from_stock(GTK_STOCK_DELETE,GTK_ICON_SIZE_BUTTON);
+            tmp_delete_button = gtk_button_new();
+            gtk_button_set_image(GTK_BUTTON(tmp_delete_button),tmp_image_delete);
+            #endif
+            gtk_grid_attach(GTK_GRID(points_grid),tmp_edit_button,6*data->ptr_csu_struct->nb_player+2,2*(i+1)+2,5,1);
+            gtk_grid_attach(GTK_GRID(points_grid),tmp_delete_button,6*(data->ptr_csu_struct->nb_player+1)+2,2*(i+1)+2,5,1);
+            g_signal_connect(tmp_delete_button,"clicked", G_CALLBACK(deleteTurnSignal),data);
+            g_signal_connect(tmp_edit_button,"clicked", G_CALLBACK(changeTurnSignal),data);
         }
     }
 
@@ -483,16 +500,16 @@ void createPointsGrid(globalData *data,bool spin_button)
         switch (data->ptr_csu_struct->config.decimal_place)
         {
         case 0 :
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%0.f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.0f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
             break;
         case 1 :
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%1.f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.1f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
             break;
         case 2 :
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%2.f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.2f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
             break;
         case 3 :
-            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%3.f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
+            gtk_grid_attach(GTK_GRID(points_grid),gtk_label_new(g_strdup_printf(_("%.3f"),data->ptr_csu_struct->total_points[i])),6*i+2,2*(max_nb_turn+4)+2,5,1);
             break;
         }
     }
@@ -674,9 +691,15 @@ G_MODULE_EXPORT void changeTurnSignal(GtkWidget *widget, gpointer data)
         for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
         {
             if (user_data->ptr_csu_struct->nb_turn[i] > turn)
+            {
+                (user_data->ptr_csu_struct->total_points[i]) -= user_data->ptr_csu_struct->point[i][turn];
                 user_data->ptr_csu_struct->point[i][turn]=gtk_spin_button_get_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),i,1)));
+                (user_data->ptr_csu_struct->total_points[i]) += user_data->ptr_csu_struct->point[i][turn];
+            }
         }
         addLastCsuStruct(user_data);
+        if (writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct) == false)
+            saveFileError(user_data);
         updateMainWindow(user_data,!exceedMaxNumber(user_data->ptr_csu_struct));
 
         // Test if the game is over
@@ -1086,11 +1109,11 @@ G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gp
     readHomePathSlash(home_path);
     #endif // PORTABLE
 
-    GtkWidget *main_window = getWidgetFromBuilder(user_data->ptr_builder,"main_window");
 
     size.height = configure_event.height;
     size.width = configure_event.width;
     #if GTK_MINOR_VERSION >= 12
+    GtkWidget *main_window = getWidgetFromBuilder(user_data->ptr_builder,"main_window");
     size.is_maximize=gtk_window_is_maximized(GTK_WINDOW(main_window));
     #else
     size.is_maximize=false;

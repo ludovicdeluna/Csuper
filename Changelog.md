@@ -33,6 +33,7 @@ Libcsuper
 * You can now change export to pdf and csv
 * New function : totalPointsAtTurn and rankingAtTurn
 * Add a calculator function
+* Change the file format to XML
 
 4.0.1
 

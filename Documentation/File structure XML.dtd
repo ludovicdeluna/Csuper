@@ -1,0 +1,27 @@
+﻿<!ELEMENT csu (version, size_max_name, date, nb_player, distributor, game_configuration, player+)>
+<!ELEMENT version (#PCDATA)>
+<!ELEMENT size_max_name (#PCDATA)>
+<!ELEMENT date (year, month, day)>
+<!ELEMENT year (#PCDATA)>
+<!ELEMENT month (#PCDATA)>
+<!ELEMENT day (#PCDATA)>
+<!ELEMENT nb_player (#PCDATA)>
+<!ELEMENT distributor (#PCDATA)>
+<!ELEMENT game_configuration (nb_max_min, max_winner, turn_by_turn, use_distributor, decimal_place, use_maximum, name, begin_score)>
+<!ELEMENT nb_max_min (#PCDATA)>
+<!ELEMENT max_winner (#PCDATA)>
+<!ELEMENT turn_by_turn (#PCDATA)>
+<!ELEMENT use_distributor (#PCDATA)>
+<!ELEMENT decimal_place (#PCDATA)>
+<!ELEMENT use_maximum (#PCDATA)>
+<!ELEMENT name (#PCDATA)>
+<!ELEMENT begin_score (#PCDATA)>
+<!ELEMENT player (player_name, total_points, rank, number_of_turn, points)>
+<!ELEMENT player_name (#PCDATA)>
+<!ELEMENT total_points (#PCDATA)>
+<!ELEMENT rank (#PCDATA)>
+<!ELEMENT number_of_turn (#PCDATA)>
+<!ELEMENT points (turn+)>
+<!ELEMENT turn (#PCDATA)>
+<!ATTLIST turn
+          num CDATA #REQUIRED>

@@ -45,6 +45,7 @@
 #include <stdbool.h>
 #include <hpdf.h>
 #include <math.h>
+#include <locale.h>
 
 
 /*!
@@ -71,5 +72,8 @@ void myRealloc(void **ptr,int size_alloue);
 char *integerToYesNo(int i, char *yes, char *no);
 char *utf8ToLatin9(const char *const string);
 void convertFloatString(char *output, float input,int decimal_place);
+float convertStringFloat(char *str);
+int convertStringInt(char *str);
+bool convertStringBool(char *str);
 
 #endif

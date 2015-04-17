@@ -4,6 +4,12 @@ project(Csuper C)
 
 
 #Libcsuper
+find_package(LibXml2 REQUIRED)
+
+message(STATUS LIBXML2_FOUND = ${LIBXML2_FOUND})
+
+include_directories(${LIBXML2_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
+
 file(
         GLOB
         source_files_libcsuper
@@ -21,6 +27,7 @@ if(WIN32)
 		csuper 
 		-lhpdf
 		-lintl
+		${LIBXML2_LIBRARIES}
 	)
 else (WIN32)
 	target_link_libraries(
@@ -44,6 +51,7 @@ add_executable(
 target_link_libraries(
 	csuper-cli 
 	csuper
+	${LIBXML2_LIBRARIES}
 )
 
 
@@ -92,5 +100,6 @@ add_executable(
 target_link_libraries(
 	csuper-gui 
 	${GTK3_LIBRARIES}
+	${LIBXML2_LIBRARIES}
 	csuper
 )

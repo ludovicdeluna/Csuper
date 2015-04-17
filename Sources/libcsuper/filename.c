@@ -41,7 +41,7 @@
 void addFileCsuExtension(char *file_name)
 {
     char ext[4]="abc";
-    int i;
+    unsigned int i;
 
     /*Read the extension of the file*/
     for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)
@@ -60,7 +60,7 @@ void addFileCsuExtension(char *file_name)
 void addFilePdfExtension(char *file_name)
 {
     char ext[4]="abc";
-    int i;
+    unsigned int i;
 
     /*Read the extension of the file*/
     for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)
@@ -80,7 +80,7 @@ void addFilePdfExtension(char *file_name)
 void addFileCsvExtension(char *file_name)
 {
     char ext[4]="abc";
-    int i;
+    unsigned int i;
 
     /*Read the extension of the file*/
     for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)

@@ -32,10 +32,10 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="`pkg-config --cflags gtk+-3.0`" />
+			<Add option="`pkg-config --cflags gtk+-3.0 libxml-2.0`" />
 		</Compiler>
 		<Linker>
-			<Add option="`pkg-config --libs gtk+-3.0 gmodule-export-2.0 gmodule-2.0`" />
+			<Add option="`pkg-config --libs gtk+-3.0 gmodule-export-2.0 gmodule-2.0 libxml-2.0`" />
 			<Add library="libcsuper" />
 			<Add directory="../" />
 		</Linker>

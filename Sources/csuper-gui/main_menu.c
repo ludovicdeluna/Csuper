@@ -308,8 +308,8 @@ G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
     getFolderFromFilename(folder);
     removeFileExtension(export_filename);
     #ifdef _WIN32
-    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_export),g_convert(export_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
     gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_export),g_convert(folder,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
+    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_export),g_convert(export_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
     #else
     gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_export),export_filename);
     gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_export),folder);

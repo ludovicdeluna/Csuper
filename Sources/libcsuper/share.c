@@ -388,3 +388,58 @@ void convertFloatString(char *output, float input,int decimal_place)
         break;
     }
 }
+
+
+/*!
+ * \fn float convertStringFloat(char *str)
+ *  Convert a string into a float
+ * \param[in] str the string
+ * \return the float
+ */
+float convertStringFloat(char *str)
+{
+    float ret;
+    struct lconv *lc;
+    char *comma;
+
+    /*Change the decimals to a comma if needed*/
+    lc=localeconv();
+    if(*(lc->decimal_point) == ',')
+    {
+        while ((comma = strchr(str, '.')) != NULL)
+            *comma=',';
+    }
+    else if(*(lc->decimal_point) == '.')
+    {
+        while ((comma = strchr(str, ',')) != NULL)
+            *comma='.';
+    }
+    sscanf(str,"%f",&ret);
+    return ret;
+}
+
+
+/*!
+ * \fn int convertStringInt(char *str)
+ *  Convert a string into a int
+ * \param[in] str the string
+ * \return the int
+ */
+int convertStringInt(char *str)
+{
+    int ret;
+    sscanf(str,"%d",&ret);
+    return ret;
+}
+
+
+/*!
+ * \fn bool convertStringBool(char *str)
+ *  Convert a string into a bool
+ * \param[in] str the string
+ * \return the bool
+ */
+bool convertStringBool(char *str)
+{
+    return strcmp("no",str);
+}

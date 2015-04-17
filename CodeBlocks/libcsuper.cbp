@@ -37,9 +37,11 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fpic" />
+			<Add option="`pkg-config --cflags libxml-2.0`" />
 		</Compiler>
 		<Linker>
 			<Add option="-shared" />
+			<Add option="`pkg-config --libs libxml-2.0`" />
 			<Add library="hpdf" />
 		</Linker>
 		<Unit filename="../Sources/libcsuper/calculator.c">

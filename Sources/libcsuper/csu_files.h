@@ -36,6 +36,7 @@
 
 #include "csu_struct.h"
 #include "filename.h"
+#include <libxml/tree.h>
 #include <unistd.h>
 
 
@@ -61,5 +62,13 @@ FILE *openFileCsuExtension(char file_name[], char mode[]);
 csuStruct *readCsuFile(char *file_name);
 bool writeCsuFile(char *file_name, csuStruct *ptr_csu_struct);
 bool writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct);
+
+bool writeCsuXmlFile(char *filename, csuStruct *ptr_csu_struct);
+void addXmlFloatNode(xmlNodePtr parent, char *name, float value, int decimal_place);
+void addXmlBoolNode(xmlNodePtr parent, char *name, int value);
+void addXmlStringNode(xmlNodePtr parent, char *name, char *value);
+void addXmlFloatNodeIntProp(xmlNodePtr parent, char *name, float value, int decimal_place,char *prop_name, int prop_value);
+
+csuStruct *readCsuXmlFile(char *filename);
 
 #endif

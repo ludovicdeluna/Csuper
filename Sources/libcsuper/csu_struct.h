@@ -49,7 +49,7 @@
  * \def VERSION
  * Define the version to 1.4
  */
-#define VERSION 1.4
+#define VERSION 1.5
 
 /*!
  * \struct game_config
