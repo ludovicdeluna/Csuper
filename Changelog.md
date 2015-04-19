@@ -34,6 +34,7 @@ Libcsuper
 * New function : totalPointsAtTurn and rankingAtTurn
 * Add a calculator function
 * Change the file format to XML
+* Change all the preferences file into one XML file
 
 4.0.1
 

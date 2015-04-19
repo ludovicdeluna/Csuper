@@ -54,11 +54,11 @@ void errorHandler (HPDF_STATUS error_no, HPDF_STATUS detail_no, void *user_data)
  */
 bool canUseUtf8Pdf(void)
 {
-#if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
+    #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
     return false;
-#else
+    #else
     return true;
-#endif // HPDF_MAJOR_VERSION
+    #endif // HPDF_MAJOR_VERSION
 }
 
 /*!
@@ -72,13 +72,13 @@ void pdfShowText(HPDF_Page page, char *text, export_pdf *ptr_export_pdf)
 {
     if (ptr_export_pdf->pref.charset == UTF8)
     {
-#if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
+        #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
         char *text_buffer = utf8ToLatin9(text);
         HPDF_Page_ShowText(page,text_buffer);
         free(text_buffer);
-#else
+        #else
         HPDF_Page_ShowText(page, text);
-#endif // HPDF_MAJOR_VERSION
+        #endif // HPDF_MAJOR_VERSION
     }
     else
     {
@@ -109,12 +109,12 @@ bool pdfTextOutTable(HPDF_Page page, float pos_min_x, float pos_y, const char *t
 
     if (ptr_export_pdf->pref.charset == UTF8)
     {
-#if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
+        #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
         text_buffer = utf8ToLatin9(text);
-#else
+        #else
         text_buffer = myAlloc(TEXT_BUFFER_SIZE*sizeof(char));
         strncpy(text_buffer,text,TEXT_BUFFER_SIZE);
-#endif // HPDF_MAJOR_VERSION
+        #endif // HPDF_MAJOR_VERSION
     }
     else
     {
@@ -225,9 +225,9 @@ bool initializePdfExport(export_pdf *ptr_export_pdf,csuStruct *ptr_csu_struct)
     // Initialize the font
     if (ptr_export_pdf->pref.charset == UTF8)
     {
-    #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
+        #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
         ptr_export_pdf->font = HPDF_GetFont(ptr_export_pdf->pdf,"Times-Roman", "ISO8859-15");
-    #else
+        #else
         char font_name[SIZE_MAX_FILE_NAME];
         HPDF_UseUTFEncodings(ptr_export_pdf->pdf);
         strncpy(font_name,HPDF_LoadTTFontFromFile(ptr_export_pdf->pdf,"Fonts/DejaVuSans.ttf", HPDF_TRUE),SIZE_MAX_FILE_NAME);
@@ -237,7 +237,7 @@ bool initializePdfExport(export_pdf *ptr_export_pdf,csuStruct *ptr_csu_struct)
             return false;
         }
         ptr_export_pdf->font = HPDF_GetFont(ptr_export_pdf->pdf,font_name, "UTF-8");
-    #endif // HPDF_MAJOR_VERSION
+        #endif // HPDF_MAJOR_VERSION
     }
     else
         ptr_export_pdf->font = HPDF_GetFont(ptr_export_pdf->pdf,"Times-Roman", "ISO8859-15");

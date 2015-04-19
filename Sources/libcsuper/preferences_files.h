@@ -89,6 +89,13 @@
  */
 #define PREFERENCES_FOLDER_NAME ".csuper"
 
+
+/*!
+ * \def FILENAME_PREFERENCES_XML
+ * Define the name of the xml preferences file
+ */
+#define FILENAME_PREFERENCES_XML "preferences.xml"
+
 /*!
  * \struct toolbar_button_preferences_struct
  * Represent the toolbar button preferences
@@ -165,6 +172,42 @@ typedef struct
     bool game_information;         /*!< Display the game informations */
 } main_window_side;
 
+
+/*!
+ * \struct preferences
+ * The preference structure
+ */
+typedef struct
+{
+    toolbar_button_preferences_struct toolbar;
+    main_window_size size;
+    difference_between_player diff;
+    score_display score;
+    main_window_side side;
+    export_pdf_preferences pdf;
+} preferences;
+
+typedef union
+{
+    toolbar_button_preferences_struct toolbar;
+    main_window_size size;
+    difference_between_player diff;
+    score_display score;
+    main_window_side side;
+    export_pdf_preferences pdf;
+} one_preferences;
+
+typedef enum
+{
+    toolbar_type,
+    size_type,
+    diff_type,
+    score_type,
+    side_type,
+    pdf_type
+} preferences_type;
+
+
 void createPreferencesFolder(char *home_path);
 
 bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferences_struct toolbar);
@@ -191,5 +234,10 @@ bool readFileScoreDisplay(char *home_path, score_display *score);
 
 bool createFileMainWindowSide(char *home_path, main_window_side pref);
 bool readFileMainWindowSide(char *home_path, main_window_side *pref);
+
+bool writeXmlPreferencesFile(preferences *pref, char *home_path);
+bool writeXmlPreferencesFileType(one_preferences *pref, char *home_path, preferences_type type);
+void readXmlPreferencesFile(preferences *pref, char *home_path);
+void readXmlPreferencesFileType(one_preferences *pref, char *home_path, preferences_type type);
 
 #endif

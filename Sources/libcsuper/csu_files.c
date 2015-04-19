@@ -355,6 +355,25 @@ void addXmlBoolNode(xmlNodePtr parent, char *name, int value)
 
 
 /*!
+ * \fn void addXmlIntNode(xmlNodePtr parent, char *name, int value)
+ *  Add a XML node to the parent with a integer value
+ * \param[in] parent the parent node
+ * \param[in] name the name of the new node
+ * \param[in] value the value of the new node
+ */
+void addXmlIntNode(xmlNodePtr parent, char *name, int value)
+{
+    xmlNodePtr tmp_node;
+    char char_buffer[40]="";
+    sprintf(char_buffer,"%d",value);
+
+    tmp_node = xmlNewNode(NULL, BAD_CAST name);
+    xmlNodeSetContent(tmp_node,BAD_CAST char_buffer);
+    xmlAddChild(parent, tmp_node);
+}
+
+
+/*!
  * \fn void addXmlStringNode(xmlNodePtr parent, char *name, char *value)
  *  Add a XML node to the parent with a string value
  * \param[in] parent the parent node
@@ -438,7 +457,7 @@ csuStruct *readCsuXmlFile(char *filename)
     if (ptr_csu_struct->version + 0.01 < VERSION && ptr_csu_struct->version - 0.01 > VERSION)
     {
         printf(_("\nError: the file's version is the %1.1f whereas the software only supports files "
-                 "with versions higher than the %1.1f.\n"),ptr_csu_struct->version,VERSION);
+                 "with versions %1.1f.\n"),ptr_csu_struct->version,VERSION);
         free(ptr_csu_struct);
         return NULL;
     }
@@ -537,6 +556,8 @@ csuStruct *readCsuXmlFile(char *filename)
             tmp_node_2 = xmlNextElementSibling(tmp_node_2);
         }
     }
+
+    xmlFreeDoc(doc);
 
     return ptr_csu_struct;
     //return NULL;

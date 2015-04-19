@@ -384,7 +384,7 @@ bool readConfigFile(int index_read, list_game_config *ptr_list_config, game_conf
  *  Export all config file into a file.
  * \param[in] file_name the filename of the exported file.
  * \param[in] home_path the path to the home directory
- * \param[in] id the id of the game configuration which will be exported
+ * \param[in] id the ids of the game configuration which will be exported
  * \param[in] nb_id the number of game configuration which will be exported
  * \return true if there is no problem, false otherwise
  */
@@ -415,14 +415,14 @@ bool exportConfigFile(char *home_path,char *file_name, int *id,int nb_id)
     for(i=0 ; i<nb_id ; i++)
     {
         readConfigFile(id[i],ptr_list_config,&config,home_path);
-#ifdef __unix__
+        #ifdef __unix__
         fprintf(ptr_file_export,"%f ",config.nb_max);
-#elif _WIN32
+        #elif _WIN32
         if (config.nb_max == INFINITY)
             fprintf(ptr_file_export,"inf ");
         else
             fprintf(ptr_file_export,"%f ",config.nb_max);
-#endif
+        #endif
         fprintf(ptr_file_export,"%f %s %d %d %d %d %d\n",config.begin_score,config.name,config.decimal_place,config.first_way,config.max,config.turn_based,config.use_distributor);
     }
 
@@ -449,9 +449,9 @@ bool importConfigFile(char *home_path,char *file_name, int *id,int nb_id)
     game_config config;
     FILE *ptr_file_import;
     char check_file[sizeof(STRING_CHECK_GAME_CONFIG)+1];
-#ifdef _WIN32
+    #ifdef _WIN32
     char buffer[5];
-#endif // _WIN32
+    #endif // _WIN32
 
     ptr_file_import=openFile(file_name,"r");
 
@@ -479,15 +479,15 @@ bool importConfigFile(char *home_path,char *file_name, int *id,int nb_id)
 
     for(i=0,j=0 ; i<nb_config && j<nb_id ; i++)
     {
-#ifdef __unix__
+        #ifdef __unix__
         fscanf(ptr_file_import,"%f",&(config.nb_max));
-#elif _WIN32
+        #elif _WIN32
         if (fscanf(ptr_file_import,"%f",&(config.nb_max))==0)
         {
             config.nb_max = INFINITY;
             fscanf(ptr_file_import,"%s",buffer);
         }
-#endif
+        #endif
         fscanf(ptr_file_import,"%f%s",&(config.begin_score),config.name);
         fscanf(ptr_file_import,"%d",&tmp);
         config.decimal_place=tmp;
@@ -526,9 +526,9 @@ list_game_config *newListGameConfigFromImport(char *filename)
     int nb_config;
     FILE *ptr_file_import;
     char check_file[sizeof(STRING_CHECK_GAME_CONFIG)+1];
-#ifdef _WIN32
+    #ifdef _WIN32
     char buffer[5];
-#endif // _WIN32
+    #endif // _WIN32
     char config_name[SIZE_MAX_FILE_NAME];
     list_game_config* list_config;
 
@@ -555,12 +555,12 @@ list_game_config *newListGameConfigFromImport(char *filename)
 
     for(i=0 ; i<nb_config ; i++)
     {
-#ifdef __unix__
+        #ifdef __unix__
         fscanf(ptr_file_import,"%f",&buf);
-#elif _WIN32
+        #elif _WIN32
         if (fscanf(ptr_file_import,"%f",&buf)==0)
             fscanf(ptr_file_import,"%s",buffer);
-#endif
+        #endif
         fscanf(ptr_file_import,"%f%s",&buf,config_name);
         fscanf(ptr_file_import,"%d",&tmp);
         fscanf(ptr_file_import,"%d",&tmp);

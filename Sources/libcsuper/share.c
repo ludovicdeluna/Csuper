@@ -372,6 +372,13 @@ char *utf8ToLatin9(const char *const string)
  */
 void convertFloatString(char *output, float input,int decimal_place)
 {
+    #ifdef _WIN32
+    if isinf(input)
+    {
+        strcpy(output,"inf");
+        return;
+    }
+    #endif // _WIN32
     switch (decimal_place)
     {
     case 0 :
@@ -414,6 +421,11 @@ float convertStringFloat(char *str)
         while ((comma = strchr(str, ',')) != NULL)
             *comma='.';
     }
+    #ifdef _WIN32
+    if (strncmp("inf",str,4) == 0)
+        ret = INFINITY;
+    else
+    #endif // _WIN32
     sscanf(str,"%f",&ret);
     return ret;
 }
