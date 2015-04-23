@@ -617,7 +617,7 @@ void updateDisplayCurrentGameConfiguration(globalData *data , gint index, gboole
     {
         if (index < 0)
         {
-            gtk_label_set_text(GTK_LABEL(label_details),g_strdup_printf(_("<span size=\"large\">You have no game configuration selected.</span>")));
+            gtk_label_set_markup(GTK_LABEL(label_details),g_strdup_printf(_("<span size=\"large\">You have no game configuration selected.</span>")));
             gtk_label_set_text(GTK_LABEL(label_name),"");
         }
     }

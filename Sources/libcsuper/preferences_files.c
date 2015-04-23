@@ -666,6 +666,13 @@ bool readFileMainWindowSide(char *home_path, main_window_side *pref)
 }
 
 
+/*!
+ * \fn bool writeXmlPreferencesFile(preferences *pref, char *home_path)
+ *  Write the preferences file
+ * \param[in] home_path the path to the home directory
+ * \param[in] pref the preferences structure
+ * \return true if everything is OK, false otherwise
+ */
 bool writeXmlPreferencesFile(preferences *pref, char *home_path)
 {
     bool res=true;
@@ -678,6 +685,9 @@ bool writeXmlPreferencesFile(preferences *pref, char *home_path)
     // Set root
     racine = xmlNewNode(NULL, BAD_CAST "csu_preferences");
     xmlDocSetRootElement(doc,racine);
+
+    // Version
+    addXmlFloatNode(racine,"version",PREFERENCES_FILE_XML_VERSION,1);
 
     //toolbar
     tmp_node = xmlNewNode(NULL, BAD_CAST "toolbar_button");
@@ -754,6 +764,14 @@ bool writeXmlPreferencesFile(preferences *pref, char *home_path)
 }
 
 
+/*!
+ * \fn bool writeXmlPreferencesFileType(one_preferences *pref, char *home_path, preferences_type type)
+ *  Write the preferences file withe the preferences selected
+ * \param[in] home_path the path to the home directory
+ * \param[in] pref a preferences
+ * \param[in] type the type of preferences
+ * \return true if everything is OK, false otherwise
+ */
 bool writeXmlPreferencesFileType(one_preferences *pref, char *home_path, preferences_type type)
 {
     preferences pref_glob;
@@ -785,11 +803,18 @@ bool writeXmlPreferencesFileType(one_preferences *pref, char *home_path, prefere
 }
 
 
+/*!
+ * \fn bool readXmlPreferencesFile(preferences *pref, char *home_path)
+ *  Read the preferences file
+ * \param[in] home_path the path to the home directory
+ * \param[in] pref the preferences structure
+ */
 void readXmlPreferencesFile(preferences *pref, char *home_path)
 {
     xmlDocPtr doc;
     xmlNodePtr root,tmp_node;
     char filename[SIZE_MAX_FILE_NAME];
+    float version;
 
     sprintf(filename,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_PREFERENCES_XML);
 
@@ -856,10 +881,22 @@ void readXmlPreferencesFile(preferences *pref, char *home_path)
     {
         printf(_("Not a csu preferences file\n"));
         xmlFreeDoc(doc);
+        return;
+    }
+
+    // Version
+    tmp_node = xmlFirstElementChild(root);
+    version = convertStringFloat((char *)xmlNodeGetContent(tmp_node));
+    if (version > PREFERENCES_FILE_XML_VERSION)
+    {
+        printf(_("This version of Csuper only support preferences file version of %.1f.\n")
+               ,PREFERENCES_FILE_XML_VERSION);
+        xmlFreeDoc(doc);
+        return;
     }
 
     // Toolbar button
-    tmp_node = xmlFirstElementChild(xmlFirstElementChild(root));
+    tmp_node = xmlFirstElementChild(xmlNextElementSibling(tmp_node));
     pref->toolbar.new=convertStringInt((char *)xmlNodeGetContent(tmp_node));
     tmp_node = xmlNextElementSibling(tmp_node);
     pref->toolbar.open=convertStringInt((char *)xmlNodeGetContent(tmp_node));
@@ -958,6 +995,15 @@ void readXmlPreferencesFile(preferences *pref, char *home_path)
     xmlFreeDoc(doc);
 }
 
+
+/*!
+ * \fn bool readXmlPreferencesFileType(one_preferences *pref, char *home_path, preferences_type type)
+ *  Read the preferences file withe the preferences selected
+ * \param[in] home_path the path to the home directory
+ * \param[in] pref a preferences
+ * \param[in] type the type of preferences
+ * \return true if everything is OK, false otherwise
+ */
 void readXmlPreferencesFileType(one_preferences *pref, char *home_path, preferences_type type)
 {
     preferences pref_glob;

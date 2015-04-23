@@ -96,6 +96,13 @@
  */
 #define FILENAME_PREFERENCES_XML "preferences.xml"
 
+
+/*!
+ * \def PREFERENCES_FILE_XML_VERSION
+ * Define the version of the XML preferences file
+ */
+#define PREFERENCES_FILE_XML_VERSION 1.0
+
 /*!
  * \struct toolbar_button_preferences_struct
  * Represent the toolbar button preferences

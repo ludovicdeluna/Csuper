@@ -47,6 +47,7 @@ list_game_config *newListGameConfig(int nb_config)
     config->name_game_config = (char **)myAlloc(nb_config*sizeof(char*));
     for (i=0 ; i< nb_config ; i++)
         config->name_game_config[i]=(char *)myAlloc(sizeof(char)*SIZE_MAX_FILE_NAME);
+    config->game_configs = (game_config *)myAlloc(nb_config*sizeof(game_config));
     return config;
 }
 
@@ -61,12 +62,72 @@ void closeListGameConfig(list_game_config *ptr_list_config)
     for (i=0 ; i<ptr_list_config->nb_config ; i++)
         free(ptr_list_config->name_game_config[i]);
     free(ptr_list_config->name_game_config);
+    free(ptr_list_config->game_configs);
     free(ptr_list_config);
+}
+
+
+/*!
+ * \fn void addConfigListGameConfig(list_game_config *ptr_list_config,game_config config)
+ *  Add a config to the config list
+ * \param[in] *ptr_list_config a pointer on a list of game configuration
+ * \param[in] config a game configuration
+ */
+void addConfigListGameConfig(list_game_config *ptr_list_config,game_config config)
+{
+    int i;
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+    {
+        if (strcmp(ptr_list_config->game_configs[i].name,config.name) == 0)
+        {
+            printf(_("\nThe game configuration %s already exists.\n"),config.name);
+            return;
+        }
+    }
+
+    (ptr_list_config->nb_config) += 1;
+
+    myRealloc((void **)&(ptr_list_config->name_game_config),ptr_list_config->nb_config*sizeof(char*));
+    ptr_list_config->name_game_config[ptr_list_config->nb_config-1]=(char *)myAlloc(sizeof(char)*SIZE_MAX_FILE_NAME);
+    strncpy(ptr_list_config->name_game_config[ptr_list_config->nb_config-1],config.name,SIZE_MAX_FILE_NAME);
+
+    myRealloc((void **)&(ptr_list_config->game_configs),ptr_list_config->nb_config*sizeof(game_config));
+    ptr_list_config->game_configs[ptr_list_config->nb_config-1] = config;
+}
+
+
+/*!
+ * \fn void removeConfigListGameConfig(list_game_config *ptr_list_config,game_config config)
+ *  Remove a config to the config list
+ * \param[in] *ptr_list_config a pointer on a list of game configuration
+ * \param[in] config a game configuration
+ */
+void removeConfigListGameConfig(list_game_config *ptr_list_config,game_config config)
+{
+    int i;
+    bool config_found = false;
+
+    for (i=0 ; i < ptr_list_config->nb_config ; i++)
+    {
+        if (config_found)
+        {
+            ptr_list_config->game_configs[i-1] = ptr_list_config->game_configs[i];
+            strncpy(ptr_list_config->name_game_config[i-1],ptr_list_config->name_game_config[i],SIZE_MAX_FILE_NAME);
+        }
+        if (!config_found && strcmp(ptr_list_config->game_configs[i].name,config.name) == 0)
+            config_found = true;
+    }
+
+    (ptr_list_config->nb_config) -= 1;
+
+    free(ptr_list_config->name_game_config[ptr_list_config->nb_config]);
+    myRealloc((void **)&(ptr_list_config->name_game_config),ptr_list_config->nb_config*sizeof(char*));
+    myRealloc((void **)&(ptr_list_config->game_configs),ptr_list_config->nb_config*sizeof(game_config));
 }
 
 /*!
 * \fn bool makeConfigListFile(char * home_path)
-*  Create the folder which contain the games configurations and the files which contain the list of games configurations
+*  Create the files which contain the list of games configurations
 * \param[in] *home_path the path to the home directory
 * \return true if everything is OK, false otherwise
 */
@@ -74,121 +135,56 @@ bool makeConfigListFile(char * home_path)
 {
     char folder[SIZE_MAX_FILE_NAME]="";
     char file_name[SIZE_MAX_FILE_NAME]="";
-    FILE *ptr_file;
+    //FILE *ptr_file;
+    list_game_config *list;
 
     sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
 
-#ifdef __unix__
+    #ifdef __unix__
     mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#elif _WIN32
+    #elif _WIN32
     mkdir(folder);
-#endif
+    #endif
 
-    sprintf(file_name,"%s/%s",folder,CONFIGURATION_FILE_NAME);
-
-    sprintf(folder,"%s/%s",folder,CONFIGURATION_FOLDER_NAME);
-#ifdef __unix__
-    mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#elif _WIN32
-    mkdir(folder);
-#endif
-
-
-    ptr_file=openFile(file_name,"w+");
-
-    if (ptr_file==NULL)
-        return false;
-
-    fprintf(ptr_file,"%d",0);
-
-    closeFile(ptr_file);
-
-    return true;
+    sprintf(file_name,"%s/%s",folder,CONFIGURATION_XML_FILENAME);
+    list = newListGameConfig(0);
+    return writeXmlListGameConfig(file_name,list);
 }
 
 /*!
  * \fn list_game_config *readConfigListFile(char * home_path)
- *  Read the file which contain the list of game configuration.
+ *  Read the file which contain the list of game configuration
  * \param[in] *home_path the path to the home directory
  * \return a list_game_config
  */
 list_game_config *readConfigListFile(char * home_path)
 {
     char file_name_config[SIZE_MAX_FILE_NAME]="";
-    FILE *ptr_file;
     list_game_config *ptr_config;
-    int nb_config;
-    int i;
 
-    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FILE_NAME);
+    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_XML_FILENAME);
 
-    ptr_file=openFile(file_name_config,"r");
-
-    if(ptr_file == NULL)
-    {
+    ptr_config = readXmlListGameConfig(file_name_config);
+    if (ptr_config->nb_config == 0)
         makeConfigListFile(home_path);
-        ptr_file=openFile(file_name_config,"r");
-    }
-
-    fscanf(ptr_file,"%d",&nb_config);
-
-    ptr_config=newListGameConfig(nb_config);
-
-    for (i=0 ; i< nb_config ; i++)
-        fscanf(ptr_file,"%s",ptr_config->name_game_config[i]);
-
-    closeFile(ptr_file);
-
     return ptr_config;
 }
 
 /*!
  * \fn bool addConfigListFile(char *new_config_name,char *home_path)
- *  Add a new game configuration into the file which contain the list of game configuration.
+ *  Depreciated, do nothing
  * \param[in] new_config_name the name of the new game configuration
  * \param[in] home_path the path to the home directory
- * \return true if everything is OK, false otherwise
+ * \return true
  */
 bool addConfigListFile(char *new_config_name,char *home_path)
 {
-    char file_name_config[SIZE_MAX_FILE_NAME]="";
-    FILE *ptr_file;
-    int i;
-    list_game_config *ptr_list_config =readConfigListFile(home_path);
-
-    for (i=0 ; i< ptr_list_config->nb_config ; i++)
-    {
-        if (strcmp(ptr_list_config->name_game_config[i],new_config_name) == 0)
-        {
-            printf(_("\nThe game configuration %s already exists.\n"),new_config_name);
-            return false;
-        }
-    }
-
-
-    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FILE_NAME);
-
-    ptr_file=openFile(file_name_config,"w");
-
-    if(ptr_file == NULL)
-        return false;
-
-    fprintf(ptr_file,"%d\n",ptr_list_config->nb_config+1);
-
-    for (i=0 ; i< ptr_list_config->nb_config ; i++)
-        fprintf(ptr_file,"%s\n",ptr_list_config->name_game_config[i]);
-
-    closeListGameConfig(ptr_list_config);
-
-
-    fprintf(ptr_file,"%s",new_config_name);
-    closeFile(ptr_file);
     return true;
 }
 
 /*!
  * \fn bool removeConfigListFile(int index_delete, list_game_config, *ptr_list_config,char *home_path)
- *  Remove a game configuration in the file which contain the list of game configuration and remove the game configuration.
+ *  Remove the game configuration.
  * \param[in] index_delete the index pf the file which will be deleted
  * \param[in] list_game_config the list of game configuration
  * \param[in] home_path the path to the home directory
@@ -197,131 +193,42 @@ bool addConfigListFile(char *new_config_name,char *home_path)
 bool removeConfigListFile(int index_delete, list_game_config *ptr_list_config,char *home_path)
 {
     char file_name_config[SIZE_MAX_FILE_NAME]="";
-    FILE *ptr_file;
-    int i;
 
     ptr_list_config=readConfigListFile(home_path);
 
-    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FILE_NAME);
-
-    ptr_file=openFile(file_name_config,"w+");
-
-    if(ptr_file == NULL)
-        return false;
-
-    fprintf(ptr_file,"%d\n",ptr_list_config->nb_config-1);
-
-    for (i=0 ; i< ptr_list_config->nb_config ; i++)
-    {
-        if (i!=index_delete)
-            fprintf(ptr_file,"%s\n",ptr_list_config->name_game_config[i]);
-        else
-            removeConfigFile(ptr_list_config->name_game_config[i],home_path);
-    }
-
-    closeFile(ptr_file);
-    closeListGameConfig(ptr_list_config);
-
-    return true;
+    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_XML_FILENAME);
+    removeConfigListGameConfig(ptr_list_config,ptr_list_config->game_configs[index_delete]);
+    return writeXmlListGameConfig(file_name_config,ptr_list_config);
 }
 
 /*!
 * \fn bool newConfigFile(game_config config,char * home_path)
-*  Create a game configuration file and put it into the game configuration file list.
+*  Save a new game configuration file
 * \param[in] config the gale configuration
 * \param[in] home_path the path to the home directory
 * \return true if everything is OK, false otherwise
 */
 bool newConfigFile(game_config config,char * home_path)
 {
-    char folder[SIZE_MAX_FILE_NAME]="";
-    char file_name[SIZE_MAX_FILE_NAME]="";
-    FILE *ptr_file;
+    char file_name_config[SIZE_MAX_FILE_NAME]="";
+    list_game_config *ptr_list_config=NULL;
 
-    if(addConfigListFile(config.name,home_path) == false)
-        return false;
+    ptr_list_config=readConfigListFile(home_path);
 
-    sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
-
-#ifdef __unix__
-    mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#elif _WIN32
-    mkdir(folder);
-#endif
-
-    sprintf(folder,"%s/%s",folder,CONFIGURATION_FOLDER_NAME);
-#ifdef __unix__
-    mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#elif _WIN32
-    mkdir(folder);
-#endif
-
-    sprintf(file_name,"%s/%s",folder,config.name);
-
-    ptr_file=openFile(file_name,"w+");
-
-    if (ptr_file==NULL)
-        return false;
-
-#ifdef __unix__
-    fprintf(ptr_file,"%f ",config.nb_max);
-#elif _WIN32
-    if (config.nb_max == INFINITY)
-        fprintf(ptr_file,"inf ");
-    else
-        fprintf(ptr_file,"%f ",config.nb_max);
-#endif
-
-    fprintf(ptr_file,"%f %d %d %d %d %d",config.begin_score,config.decimal_place,config.first_way,config.max,config.turn_based,config.use_distributor);
-
-    closeFile(ptr_file);
-
-    return true;
+    sprintf(file_name_config,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_XML_FILENAME);
+    addConfigListGameConfig(ptr_list_config,config);
+    return writeXmlListGameConfig(file_name_config,ptr_list_config);
 }
 
 /*!
 * \fn bool removeConfigFile(char *config_name,char * home_path)
-*  Delete a game configuration.
+*  Depreciated, do nothing
 * \param[in] config_name the name of the game configuration which will be deleted
 * \param[in] home_path the path to the home directory
-* \return true if everything is OK, false otherwise
+* \return true
 */
 bool removeConfigFile(char *config_name,char * home_path)
 {
-    char folder[SIZE_MAX_FILE_NAME]="";
-    char file_name[SIZE_MAX_FILE_NAME]="";
-
-    libcsuper_initialize();
-
-    sprintf(folder,"%s%s",home_path,PREFERENCES_FOLDER_NAME);
-
-#ifdef __unix__
-    mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#elif _WIN32
-    mkdir(folder);
-#endif
-
-    sprintf(folder,"%s/%s",folder,CONFIGURATION_FOLDER_NAME);
-#ifdef __unix__
-    mkdir(folder, S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
-#elif _WIN32
-    mkdir(folder);
-#endif
-
-    sprintf(file_name,"%s/%s",folder,config_name);
-
-    if(remove(file_name))
-    {
-        printf(_("\nThe file %s cannot be deleted.\n"),file_name);
-        perror("");
-        return false;
-    }
-    else
-    {
-        printf(_("\nThe file %s was well deleted.\n"),file_name);
-        return true;
-    }
-
     return true;
 }
 
@@ -336,45 +243,7 @@ bool removeConfigFile(char *config_name,char * home_path)
  */
 bool readConfigFile(int index_read, list_game_config *ptr_list_config, game_config *ptr_config,char * home_path)
 {
-    char file_name_config[SIZE_MAX_FILE_NAME]="";
-    FILE *ptr_file;
-    int tmp;
-#ifdef _WIN32
-    char buffer[5];
-#endif // _WIN32
-
-    sprintf(file_name_config,"%s%s/%s/%s",home_path,PREFERENCES_FOLDER_NAME,CONFIGURATION_FOLDER_NAME,ptr_list_config->name_game_config[index_read]);
-
-    ptr_file=openFile(file_name_config,"r");
-
-    if(ptr_file == NULL)
-        return false;
-
-    /*Lis les differentes config*/
-#ifdef __unix__
-    fscanf(ptr_file,"%f",&(ptr_config->nb_max));
-#elif _WIN32
-    if (fscanf(ptr_file,"%f",&(ptr_config->nb_max))==0)
-    {
-        ptr_config->nb_max = INFINITY;
-        fscanf(ptr_file,"%s",buffer);
-    }
-#endif
-    fscanf(ptr_file,"%f",&(ptr_config->begin_score));
-    fscanf(ptr_file,"%d",&tmp);
-    ptr_config->decimal_place=tmp;
-    fscanf(ptr_file,"%d",&tmp);
-    ptr_config->first_way=tmp;
-    fscanf(ptr_file,"%d",&tmp);
-    ptr_config->max=tmp;
-    fscanf(ptr_file,"%d",&tmp);
-    ptr_config->turn_based=tmp;
-    fscanf(ptr_file,"%d",&tmp);
-    ptr_config->use_distributor=tmp;
-
-    strcpy(ptr_config->name,ptr_list_config->name_game_config[index_read]);
-
-    closeFile(ptr_file);
+    *ptr_config = ptr_list_config->game_configs[index_read];
 
     return true;
 }
@@ -390,46 +259,13 @@ bool readConfigFile(int index_read, list_game_config *ptr_list_config, game_conf
  */
 bool exportConfigFile(char *home_path,char *file_name, int *id,int nb_id)
 {
-    int i;
+    bool res;
+
     list_game_config *ptr_list_config;
-    game_config config;
-    FILE *ptr_file_export;
-
     ptr_list_config = readConfigListFile(home_path);
-    if (nb_id > ptr_list_config->nb_config)
-    {
-        printf(_("\nError while exporting game configurations.\n"));
-        return false;
-    }
-
-    ptr_file_export=openFile(file_name,"w");
-
-    if(ptr_file_export == NULL)
-    {
-        printf(_("\nError while exporting game configurations.\n"));
-        return false;
-    }
-
-    fprintf(ptr_file_export,"%s\n%d\n",STRING_CHECK_GAME_CONFIG,nb_id);
-
-    for(i=0 ; i<nb_id ; i++)
-    {
-        readConfigFile(id[i],ptr_list_config,&config,home_path);
-        #ifdef __unix__
-        fprintf(ptr_file_export,"%f ",config.nb_max);
-        #elif _WIN32
-        if (config.nb_max == INFINITY)
-            fprintf(ptr_file_export,"inf ");
-        else
-            fprintf(ptr_file_export,"%f ",config.nb_max);
-        #endif
-        fprintf(ptr_file_export,"%f %s %d %d %d %d %d\n",config.begin_score,config.name,config.decimal_place,config.first_way,config.max,config.turn_based,config.use_distributor);
-    }
-
-    closeFile(ptr_file_export);
+    res=writeXmlListGameConfigWithId(file_name,ptr_list_config,id,nb_id);
     closeListGameConfig(ptr_list_config);
-
-    return true;
+    return res;
 }
 
 /*!
@@ -452,6 +288,19 @@ bool importConfigFile(char *home_path,char *file_name, int *id,int nb_id)
     #ifdef _WIN32
     char buffer[5];
     #endif // _WIN32
+    list_game_config* ptr_list_game_config;
+
+    // Test XML file
+    ptr_list_game_config=readXmlListGameConfigWithId(file_name,id,nb_id);
+    if(ptr_list_game_config->nb_config != 0)
+    {
+        for (i=0 ; i<ptr_list_game_config->nb_config ; i++)
+        {
+            newConfigFile(ptr_list_game_config->game_configs[i],home_path);
+        }
+        return true;
+    }
+    closeListGameConfig(ptr_list_game_config);
 
     ptr_file_import=openFile(file_name,"r");
 
@@ -532,6 +381,12 @@ list_game_config *newListGameConfigFromImport(char *filename)
     char config_name[SIZE_MAX_FILE_NAME];
     list_game_config* list_config;
 
+
+    // Test XML file
+    list_config = readXmlListGameConfig(filename);
+    if (list_config->nb_config != 0)
+        return list_config;
+
     ptr_file_import=openFile(filename,"r");
 
     if(ptr_file_import == NULL)
@@ -540,7 +395,7 @@ list_game_config *newListGameConfigFromImport(char *filename)
         return NULL;
     }
 
-    /* Check if there is a good file */
+    // Check if there is a good file
     fgets(check_file,strlen(STRING_CHECK_GAME_CONFIG)+1,ptr_file_import);
     if (strcmp(STRING_CHECK_GAME_CONFIG,check_file) != 0)
     {
@@ -572,6 +427,179 @@ list_game_config *newListGameConfigFromImport(char *filename)
     }
 
     closeFile(ptr_file_import);
+
+    return list_config;
+}
+
+
+bool writeXmlListGameConfig(char *filename,list_game_config *ptr_list_config)
+{
+    bool res=true;
+    xmlDocPtr doc = xmlNewDoc(BAD_CAST "1.0");
+    xmlNodePtr racine,tmp_node;
+    int i;
+
+    // Set root
+    racine = xmlNewNode(NULL, BAD_CAST "csu_game_configuration");
+    xmlDocSetRootElement(doc,racine);
+
+    // Version
+    addXmlFloatNode(racine,"version",GAME_CONFIG_FILE_XML_VERSION,1);
+
+    // Number of game configuration
+    addXmlIntNode(racine,"nb_game_config",ptr_list_config->nb_config);
+
+    // Games configurations
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+    {
+        tmp_node = xmlNewNode(NULL, BAD_CAST "game_configuration");
+        addXmlFloatNode(tmp_node,"nb_max_min",ptr_list_config->game_configs[i].nb_max,ptr_list_config->game_configs[i].decimal_place);
+        addXmlBoolNode(tmp_node,"max_winner",ptr_list_config->game_configs[i].first_way);
+        addXmlBoolNode(tmp_node,"turn_by_turn",ptr_list_config->game_configs[i].turn_based);
+        addXmlBoolNode(tmp_node,"use_distributor",ptr_list_config->game_configs[i].use_distributor);
+        addXmlFloatNode(tmp_node,"decimal_place",ptr_list_config->game_configs[i].decimal_place,0);
+        addXmlBoolNode(tmp_node,"use_maximum",ptr_list_config->game_configs[i].max);
+        addXmlStringNode(tmp_node,"name",ptr_list_config->game_configs[i].name);
+        addXmlFloatNode(tmp_node,"begin_score",ptr_list_config->game_configs[i].begin_score,ptr_list_config->game_configs[i].decimal_place);
+        xmlAddChild(racine, tmp_node);
+    }
+
+
+    if(xmlSaveFormatFileEnc(filename,doc,"UTF-8",1) == -1)
+        res = false;
+    xmlFreeDoc(doc);
+
+    return res;
+}
+
+
+list_game_config *readXmlListGameConfig(char *filename)
+{
+    list_game_config* list_config;
+    xmlDocPtr doc;
+    xmlNodePtr root,tmp_node;
+    int i,nb_game_config;
+    float version;
+
+    doc = xmlParseFile(filename);
+    if (doc == NULL)
+        return newListGameConfig(0);
+
+    // Check root
+    root = xmlDocGetRootElement(doc);
+    if (!xmlStrEqual(root->name,xmlCharStrdup("csu_game_configuration")))
+    {
+        printf(_("Not a csu game configuration file\n"));
+        xmlFreeDoc(doc);
+    }
+
+    // Version
+    tmp_node = xmlFirstElementChild(root);
+    version = convertStringFloat((char *)xmlNodeGetContent(tmp_node));
+    if (version > GAME_CONFIG_FILE_XML_VERSION)
+    {
+        printf(_("This version of Csuper only support game configuration file version of %.1f.\n")
+               ,GAME_CONFIG_FILE_XML_VERSION);
+        xmlFreeDoc(doc);
+        return newListGameConfig(0);
+    }
+
+    // Number of game configuration
+    tmp_node = xmlNextElementSibling(tmp_node);
+    nb_game_config = convertStringInt((char *)xmlNodeGetContent(tmp_node));
+    list_config = newListGameConfig(nb_game_config);
+
+    // Game configuration
+    for (i=0 ; i< nb_game_config ; i++)
+    {
+        // Nb max
+        tmp_node=xmlFirstElementChild(xmlNextElementSibling(tmp_node));
+        list_config->game_configs[i].nb_max = convertStringFloat((char *)xmlNodeGetContent(tmp_node));
+
+        // Nb max min
+        tmp_node = xmlNextElementSibling(tmp_node);
+        if (convertStringBool((char *)xmlNodeGetContent(tmp_node)))
+            list_config->game_configs[i].first_way=1;
+        else
+            list_config->game_configs[i].first_way=-1;
+
+        // Turn by turn
+        tmp_node = xmlNextElementSibling(tmp_node);
+        list_config->game_configs[i].turn_based=convertStringBool((char *)xmlNodeGetContent(tmp_node));
+
+        // Use distributor
+        tmp_node = xmlNextElementSibling(tmp_node);
+        list_config->game_configs[i].use_distributor=convertStringBool((char *)xmlNodeGetContent(tmp_node));
+
+        // Decimal place
+        tmp_node = xmlNextElementSibling(tmp_node);
+        list_config->game_configs[i].decimal_place = convertStringInt((char *)xmlNodeGetContent(tmp_node));
+
+        // Use maximum
+        tmp_node = xmlNextElementSibling(tmp_node);
+        list_config->game_configs[i].max=convertStringBool((char *)xmlNodeGetContent(tmp_node));
+
+        // Name
+        tmp_node = xmlNextElementSibling(tmp_node);
+        strncpy(list_config->game_configs[i].name,(char *)xmlNodeGetContent(tmp_node),SIZE_MAX_NAME+1);
+        strncpy(list_config->name_game_config[i],(char *)xmlNodeGetContent(tmp_node),SIZE_MAX_NAME+1);
+
+        // Begin score
+        tmp_node = xmlNextElementSibling(tmp_node);
+        list_config->game_configs[i].begin_score=convertStringFloat((char *)xmlNodeGetContent(tmp_node));
+
+        tmp_node = tmp_node->parent;
+    }
+
+    xmlFreeDoc(doc);
+
+    return list_config;
+}
+
+bool writeXmlListGameConfigWithId(char *filename,list_game_config *ptr_list_config,int *id,int nb_id)
+{
+    list_game_config* reduce_list_config = newListGameConfig(nb_id);
+    int i,j;
+    bool res;
+
+    for(i=0,j=0 ; i<ptr_list_config->nb_config && j<nb_id ; i++)
+    {
+        if (i == id[j])
+        {
+            strcpy(reduce_list_config->name_game_config[j],ptr_list_config->name_game_config[i]);
+            reduce_list_config->game_configs[j]=ptr_list_config->game_configs[i];
+            j++;
+        }
+    }
+
+    res = writeXmlListGameConfig(filename,reduce_list_config);
+
+    closeListGameConfig(reduce_list_config);
+    return res;
+}
+
+
+list_game_config *readXmlListGameConfigWithId(char *filename,int *id,int nb_id)
+{
+    list_game_config* full_list_config,*list_config;
+    int i,j;
+
+    full_list_config = readXmlListGameConfig(filename);
+    if (full_list_config->nb_config == 0)
+        return full_list_config;
+    list_config = newListGameConfig(nb_id);
+
+    for(i=0,j=0 ; i<full_list_config->nb_config && j<nb_id ; i++)
+    {
+        if (i == id[j])
+        {
+            strcpy(list_config->name_game_config[j],full_list_config->name_game_config[i]);
+            list_config->game_configs[j]=full_list_config->game_configs[i];
+            j++;
+        }
+    }
+
+    closeListGameConfig(full_list_config);
 
     return list_config;
 }

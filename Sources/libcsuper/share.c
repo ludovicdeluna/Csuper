@@ -179,6 +179,12 @@ void myRealloc(void **ptr,int size_alloue)
 {
     libcsuper_initialize();
 
+    if (size_alloue == 0)
+    {
+        free(*ptr);
+        return;
+    }
+
     if ((*ptr=realloc(*ptr,size_alloue)) == NULL)
     {
         printf(_("\nMemory allocation problem\n"));

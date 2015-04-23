@@ -41,13 +41,13 @@
 
 /*!
  * \def SIZE_MAX_NAME
- * Define size max of name to 30
+ * Define size max of name
  */
-#define SIZE_MAX_NAME 30
+#define SIZE_MAX_NAME 50
 
 /*!
  * \def VERSION
- * Define the version to 1.4
+ * Define the file's version
  */
 #define VERSION 1.5
 

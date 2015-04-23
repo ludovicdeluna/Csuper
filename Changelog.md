@@ -35,6 +35,7 @@ Libcsuper
 * Add a calculator function
 * Change the file format to XML
 * Change all the preferences file into one XML file
+* Change the game configuration files into one XML file
 
 4.0.1
 
