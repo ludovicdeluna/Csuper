@@ -860,6 +860,7 @@ void setButtonMainWindow(globalData *data)
     GtkWidget *menu_delete_file = getWidgetFromBuilder(data->ptr_builder,"menu_delete_file");
     GtkWidget *menu_export = getWidgetFromBuilder(data->ptr_builder,"menu_export");
     GtkWidget *menu_podium = getWidgetFromBuilder(data->ptr_builder,"menu_display_podium");
+    GtkWidget *menu_chart= getWidgetFromBuilder(data->ptr_builder,"menu_display_chart");
 
 
     // Set the recent csu file open
@@ -897,6 +898,7 @@ void setButtonMainWindow(globalData *data)
         gtk_widget_set_sensitive(menu_delete_file,FALSE);
         gtk_widget_set_sensitive(menu_export,FALSE);
         gtk_widget_set_sensitive(menu_podium,FALSE);
+        gtk_widget_set_sensitive(menu_chart,FALSE);
         gtk_widget_set_sensitive(button_end_of_turn,FALSE);
         gtk_widget_set_sensitive(button_calculator,FALSE);
         gtk_widget_set_sensitive(button_change_distributor,FALSE);
@@ -923,6 +925,7 @@ void setButtonMainWindow(globalData *data)
         gtk_widget_set_sensitive(menu_delete_file,TRUE);
         gtk_widget_set_sensitive(menu_export,TRUE);
         gtk_widget_set_sensitive(menu_podium,TRUE);
+        gtk_widget_set_sensitive(menu_chart,TRUE);
         gtk_widget_set_sensitive(combobox_calculator,TRUE);
     }
 

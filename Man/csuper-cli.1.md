@@ -1,6 +1,6 @@
 % CSUPER-CLI(1) Csuper-cli User Manuals
 % Rémi BERTHO
-% February 20, 2015
+% April 25, 2015
 
 # NAME
 
@@ -41,5 +41,5 @@ The software can only use csu file.
 
 `csuper-gui` (1)
 
-The source code of in available on <https://github.com/Dalan94/Csuper>.
+The source code of in available on <https://git.framasoft.org/Dalan94/Csuper>.
 The executable in available on <http://www.dalan.rd-h.fr/wordpress/>

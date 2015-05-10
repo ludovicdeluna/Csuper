@@ -1,0 +1,3 @@
+[submodule "Externals library/Slope"]
+	path = Externals library/Slope
+	url = git@github.com:elvismt/slope.git

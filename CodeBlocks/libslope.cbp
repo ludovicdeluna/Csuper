@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="libslope" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../slope" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../Compilation/obj/Debug/Sources" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option host_application="../csuper" />
+				<Option run_host_application_in_terminal="1" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="../csuper" prefix_auto="1" extension_auto="1" />
+				<Option object_output="../Compilation/obj/Release" />
+				<Option type="3" />
+				<Option compiler="gcc" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fpic" />
+			<Add option="`pkg-config --cflags gtk+-3.0 `" />
+			<Add directory="../Externals library/Slope" />
+		</Compiler>
+		<Linker>
+			<Add option="-shared" />
+			<Add option="`pkg-config --libs gtk+-3.0`" />
+		</Linker>
+		<Unit filename="../Externals library/Slope/config.h" />
+		<Unit filename="../Externals library/Slope/slope/data.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/data.h" />
+		<Unit filename="../Externals library/Slope/slope/data_p.h" />
+		<Unit filename="../Externals library/Slope/slope/global.h" />
+		<Unit filename="../Externals library/Slope/slope/gtk.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/gtk.h" />
+		<Unit filename="../Externals library/Slope/slope/legend.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/legend.h" />
+		<Unit filename="../Externals library/Slope/slope/legend_p.h" />
+		<Unit filename="../Externals library/Slope/slope/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/list.h" />
+		<Unit filename="../Externals library/Slope/slope/metrics.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/metrics.h" />
+		<Unit filename="../Externals library/Slope/slope/metrics_p.h" />
+		<Unit filename="../Externals library/Slope/slope/primitives.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/primitives.h" />
+		<Unit filename="../Externals library/Slope/slope/scene.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/scene.h" />
+		<Unit filename="../Externals library/Slope/slope/scene_p.h" />
+		<Unit filename="../Externals library/Slope/slope/slope.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/slope.h" />
+		<Unit filename="../Externals library/Slope/slope/xyaxis.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/xyaxis.h" />
+		<Unit filename="../Externals library/Slope/slope/xyaxis_p.h" />
+		<Unit filename="../Externals library/Slope/slope/xydata.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/xydata.h" />
+		<Unit filename="../Externals library/Slope/slope/xydata_p.h" />
+		<Unit filename="../Externals library/Slope/slope/xymetrics.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/xymetrics.h" />
+		<Unit filename="../Externals library/Slope/slope/xymetrics_p.h" />
+		<Extensions>
+			<envvars />
+			<code_completion />
+			<lib_finder disable_auto="1" />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -2,8 +2,10 @@ cmake_minimum_required(VERSION 2.6)
 
 project(Csuper C)
 
-
+#
 #Libcsuper
+#
+
 find_package(LibXml2 REQUIRED)
 
 message(STATUS LIBXML2_FOUND = ${LIBXML2_FOUND})
@@ -36,8 +38,10 @@ else (WIN32)
 	)
 endif (WIN32)
 
-
+#
 #csuper-cli
+#
+
 file(
         GLOB
         source_files_csuper-cli
@@ -54,11 +58,9 @@ target_link_libraries(
 	${LIBXML2_LIBRARIES}
 )
 
-
-
-#Csuper-gui
-
-# Use the package PkgConfig to detect GTK+ headers/library files
+#
+# Slope
+#
 find_package(
 	PkgConfig 
 	REQUIRED
@@ -68,19 +70,47 @@ pkg_check_modules(
 	REQUIRED gtk+-3.0>=3.6
 )
 
-# Setup CMake to use GTK+, tell the compiler where to look for headers
-# and to the linker where to look for libraries
 include_directories(
 	${GTK3_INCLUDE_DIRS}
+	"Externals library/Slope"
 )
 link_directories(
 	${GTK3_LIBRARY_DIRS}
 )
 
-# Add other flags to the compiler
 add_definitions(
 	${GTK3_CFLAGS_OTHER}
 )
+
+SET(SLOPE_GTK 1)
+
+file(
+        GLOB
+        source_files_slope
+        "Externals library/Slope/slope/*"
+)
+
+CONFIGURE_FILE (
+    "Externals library/Slope/config.h.in"
+    "Externals library/Slope/config.h"
+)
+
+ADD_LIBRARY(
+	slope
+	SHARED
+	${source_files_slope}
+)
+
+TARGET_LINK_LIBRARIES(
+	slope 
+	${GTK3_LIBRARIES}
+)
+
+
+#
+#Csuper-gui
+#
+
 
 file(
         GLOB
@@ -93,13 +123,10 @@ add_executable(
 	${source_files_csuper}
 )
 
-
-#Configuration de l'édition de liens
-
-# Link the target to the GTK+ and csuper libraries
 target_link_libraries(
 	csuper-gui 
 	${GTK3_LIBRARIES}
 	${LIBXML2_LIBRARIES}
 	csuper
+	slope
 )

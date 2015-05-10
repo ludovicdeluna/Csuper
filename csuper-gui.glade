@@ -1,7 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 -->
+<!-- Generated with glade 3.18.3 
+
+Copyright (C) 
+
+This file is part of .
+
+ is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+ is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with .  If not, see <http://www.gnu.org/licenses/>.
+
+-->
 <interface domain="csuper-gui">
   <requires lib="gtk+" version="3.6"/>
+  <!-- interface-license-type gplv3 -->
+  <object class="GtkAdjustment" id="adjustment_dialog_chart zoom_y">
+    <property name="lower">1</property>
+    <property name="upper">20</property>
+    <property name="value">1</property>
+    <property name="step_increment">0.5</property>
+    <property name="page_increment">0.5</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_dialog_chart_scrollbar_x">
+    <property name="lower">1</property>
+    <property name="upper">2</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">1</property>
+    <property name="page_size">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_dialog_chart_scrollbar_y">
+    <property name="lower">1</property>
+    <property name="upper">2</property>
+    <property name="value">1</property>
+    <property name="step_increment">1</property>
+    <property name="page_increment">1</property>
+    <property name="page_size">1</property>
+  </object>
+  <object class="GtkAdjustment" id="adjustment_dialog_chart_zoom_x">
+    <property name="lower">1</property>
+    <property name="upper">20</property>
+    <property name="value">1</property>
+    <property name="step_increment">0.5</property>
+    <property name="page_increment">0.5</property>
+  </object>
   <object class="GtkAdjustment" id="adjustment_exportation_pdf_preferences_fontsize">
     <property name="lower">4</property>
     <property name="upper">40</property>
@@ -12,121 +62,6 @@
     <property name="upper">200</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
-  </object>
-  <object class="GtkDialog" id="edit_turn_dialog">
-    <property name="can_focus">False</property>
-    <property name="title" translatable="yes">Edit turn</property>
-    <property name="modal">True</property>
-    <property name="window_position">center-on-parent</property>
-    <property name="type_hint">dialog</property>
-    <property name="skip_taskbar_hint">True</property>
-    <property name="skip_pager_hint">True</property>
-    <property name="gravity">center</property>
-    <property name="transient_for">main_window</property>
-    <child internal-child="vbox">
-      <object class="GtkBox" id="dialog-vbox9">
-        <property name="can_focus">False</property>
-        <property name="orientation">vertical</property>
-        <property name="spacing">2</property>
-        <child internal-child="action_area">
-          <object class="GtkButtonBox" id="dialog-action_area9">
-            <property name="can_focus">False</property>
-            <property name="layout_style">end</property>
-            <child>
-              <object class="GtkButton" id="delete_edit_turn_dialog_button cancel1">
-                <property name="label">gtk-cancel</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <property name="always_show_image">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">0</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkButton" id="delete_edit_turn_dialog_button_validate1">
-                <property name="label">gtk-ok</property>
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="receives_default">True</property>
-                <property name="use_stock">True</property>
-                <property name="always_show_image">True</property>
-              </object>
-              <packing>
-                <property name="expand">True</property>
-                <property name="fill">True</property>
-                <property name="position">1</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">False</property>
-            <property name="position">0</property>
-          </packing>
-        </child>
-        <child>
-          <object class="GtkGrid" id="edit_turn_dialog_grid">
-            <property name="visible">True</property>
-            <property name="can_focus">False</property>
-            <child>
-              <object class="GtkScrolledWindow" id="edit_turn_dialog_scrolledwindow">
-                <property name="visible">True</property>
-                <property name="can_focus">True</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="min_content_width">800</property>
-                <property name="min_content_height">100</property>
-                <child>
-                  <object class="GtkViewport" id="edit_turn_dialog_viewport">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="shadow_type">none</property>
-                    <child>
-                      <placeholder/>
-                    </child>
-                  </object>
-                </child>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">1</property>
-              </packing>
-            </child>
-            <child>
-              <object class="GtkLabel" id="edit_turn_dialog_label">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="valign">start</property>
-                <property name="margin_top">10</property>
-                <property name="margin_bottom">10</property>
-                <property name="hexpand">True</property>
-                <property name="label" translatable="yes">&lt;span size="large"&gt;Please choose the new points&lt;/span&gt;</property>
-                <property name="use_markup">True</property>
-                <property name="justify">center</property>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-              </packing>
-            </child>
-          </object>
-          <packing>
-            <property name="expand">False</property>
-            <property name="fill">True</property>
-            <property name="position">1</property>
-          </packing>
-        </child>
-      </object>
-    </child>
-    <action-widgets>
-      <action-widget response="-6">delete_edit_turn_dialog_button cancel1</action-widget>
-      <action-widget response="-10">delete_edit_turn_dialog_button_validate1</action-widget>
-    </action-widgets>
   </object>
   <object class="GtkFileFilter" id="filefilterall">
     <patterns>
@@ -911,6 +846,16 @@
                         <property name="always_show_image">True</property>
                         <signal name="activate" handler="displayPodium" swapped="no"/>
                         <accelerator key="p" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkMenuItem" id="menu_display_chart">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Display the chart</property>
+                        <property name="label" translatable="yes">Display chart</property>
+                        <signal name="activate" handler="displayChart" swapped="no"/>
+                        <accelerator key="w" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -2254,6 +2199,162 @@ you want to delete the turn&lt;/span&gt;</property>
       <action-widget response="-10">delete_edit_turn_dialog_button_validate</action-widget>
     </action-widgets>
   </object>
+  <object class="GtkDialog" id="dialog_chart">
+    <property name="width_request">500</property>
+    <property name="height_request">300</property>
+    <property name="can_focus">False</property>
+    <property name="modal">True</property>
+    <property name="default_width">900</property>
+    <property name="default_height">600</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="transient_for">main_window</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox10">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area10">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="dialog_chart_validate_button">
+                <property name="label">gtk-ok</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="tooltip_text" translatable="yes">Validate and return to the main window</property>
+                <property name="use_stock">True</property>
+                <property name="always_show_image">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="dialog_chart_main_grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkGrid" id="dialog_chart_grid">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_left">10</property>
+                <property name="margin_right">10</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="row_spacing">10</property>
+                <property name="column_spacing">10</property>
+                <child>
+                  <object class="GtkScale" id="dialog_chart_scale_y">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="orientation">vertical</property>
+                    <property name="adjustment">adjustment_dialog_chart zoom_y</property>
+                    <property name="inverted">True</property>
+                    <property name="round_digits">1</property>
+                    <signal name="value-changed" handler="changeChartZoom" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left_attach">2</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScale" id="dialog_chart_scale_x">
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="adjustment">adjustment_dialog_chart_zoom_x</property>
+                    <property name="round_digits">1</property>
+                    <signal name="value-changed" handler="changeChartZoom" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">2</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScrollbar" id="dialog_chart_scrollbar_y">
+                    <property name="can_focus">False</property>
+                    <property name="orientation">vertical</property>
+                    <property name="adjustment">adjustment_dialog_chart_scrollbar_y</property>
+                    <signal name="value-changed" handler="changeChartScrollbar" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left_attach">1</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkScrollbar" id="dialog_chart_scrollbar_x">
+                    <property name="can_focus">False</property>
+                    <property name="adjustment">adjustment_dialog_chart_scrollbar_x</property>
+                    <signal name="value-changed" handler="changeChartScrollbar" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkDrawingArea" id="dialog_chart_drawingarea">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="hexpand">True</property>
+                    <property name="vexpand">True</property>
+                    <signal name="draw" handler="drawChart" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="left_attach">0</property>
+                    <property name="top_attach">0</property>
+                  </packing>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+                <child>
+                  <placeholder/>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-3">dialog_chart_validate_button</action-widget>
+    </action-widgets>
+  </object>
   <object class="GtkDialog" id="dialog_game_over">
     <property name="can_focus">False</property>
     <property name="title" translatable="yes">Game over</property>
@@ -2325,6 +2426,121 @@ you want to delete the turn&lt;/span&gt;</property>
     </child>
     <action-widgets>
       <action-widget response="-3">dialog_game_over_button</action-widget>
+    </action-widgets>
+  </object>
+  <object class="GtkDialog" id="edit_turn_dialog">
+    <property name="can_focus">False</property>
+    <property name="title" translatable="yes">Edit turn</property>
+    <property name="modal">True</property>
+    <property name="window_position">center-on-parent</property>
+    <property name="type_hint">dialog</property>
+    <property name="skip_taskbar_hint">True</property>
+    <property name="skip_pager_hint">True</property>
+    <property name="gravity">center</property>
+    <property name="transient_for">main_window</property>
+    <child internal-child="vbox">
+      <object class="GtkBox" id="dialog-vbox9">
+        <property name="can_focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child internal-child="action_area">
+          <object class="GtkButtonBox" id="dialog-action_area9">
+            <property name="can_focus">False</property>
+            <property name="layout_style">end</property>
+            <child>
+              <object class="GtkButton" id="delete_edit_turn_dialog_button cancel1">
+                <property name="label">gtk-cancel</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <property name="always_show_image">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkButton" id="delete_edit_turn_dialog_button_validate1">
+                <property name="label">gtk-ok</property>
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="receives_default">True</property>
+                <property name="use_stock">True</property>
+                <property name="always_show_image">True</property>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">False</property>
+            <property name="position">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkGrid" id="edit_turn_dialog_grid">
+            <property name="visible">True</property>
+            <property name="can_focus">False</property>
+            <child>
+              <object class="GtkScrolledWindow" id="edit_turn_dialog_scrolledwindow">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="hexpand">True</property>
+                <property name="vexpand">True</property>
+                <property name="min_content_width">800</property>
+                <property name="min_content_height">100</property>
+                <child>
+                  <object class="GtkViewport" id="edit_turn_dialog_viewport">
+                    <property name="visible">True</property>
+                    <property name="can_focus">False</property>
+                    <property name="shadow_type">none</property>
+                    <child>
+                      <placeholder/>
+                    </child>
+                  </object>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="edit_turn_dialog_label">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">start</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">&lt;span size="large"&gt;Please choose the new points&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">0</property>
+              </packing>
+            </child>
+          </object>
+          <packing>
+            <property name="expand">False</property>
+            <property name="fill">True</property>
+            <property name="position">1</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <action-widgets>
+      <action-widget response="-6">delete_edit_turn_dialog_button cancel1</action-widget>
+      <action-widget response="-10">delete_edit_turn_dialog_button_validate1</action-widget>
     </action-widgets>
   </object>
   <object class="GtkMessageDialog" id="file_not_deleted">
@@ -2712,10 +2928,10 @@ Congratulation to the winner!</property>
                 <property name="margin_right">10</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="yalign">0</property>
                 <property name="label" translatable="yes">&lt;span size="large"&gt;You have no game configuration selected.&lt;/span&gt;</property>
                 <property name="use_markup">True</property>
                 <property name="justify">center</property>
+                <property name="yalign">0</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
@@ -2747,9 +2963,9 @@ Congratulation to the winner!</property>
                 <property name="margin_right">10</property>
                 <property name="margin_top">10</property>
                 <property name="margin_bottom">10</property>
-                <property name="yalign">0.80000001192092896</property>
                 <property name="use_markup">True</property>
                 <property name="ellipsize">start</property>
+                <property name="yalign">0.80000001192092896</property>
               </object>
               <packing>
                 <property name="left_attach">1</property>
