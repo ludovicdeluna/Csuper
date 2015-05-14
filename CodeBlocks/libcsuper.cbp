@@ -74,6 +74,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/libcsuper/game_config.h" />
+		<Unit filename="../Sources/libcsuper/gnuplot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/gnuplot.h" />
 		<Unit filename="../Sources/libcsuper/libcsuper.h" />
 		<Unit filename="../Sources/libcsuper/main_argument.c">
 			<Option compilerVar="CC" />

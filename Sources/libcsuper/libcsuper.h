@@ -50,5 +50,6 @@
 #include "filename.h"
 #include "export.h"
 #include "calculator.h"
+#include "gnuplot.h"
 
 #endif

@@ -1,6 +1,6 @@
 % CSUPER-CLI(1) Csuper-cli User Manuals
 % Rémi BERTHO
-% April 25, 2015
+% May 14, 2015
 
 # NAME
 
@@ -8,7 +8,7 @@ csuper-cli - Universal points counter allowing a dispense with reflection
 
 # SYNOPSIS
 
-csuper-cli [*options*] [*input-file*]
+csuper-cli [*options*] [*input-file*] [*output-file*]
 
 # DESCRIPTION
 
@@ -33,6 +33,9 @@ The software can only use csu file.
 
 -c *input-file* *output-file*, \--to-csv *input-file* *output-file*
 :   Convert the *input-file* into the csv file named *output-file*.
+
+-g *input-file* *output-file*, \--to-gnuplot *input-file* *output-file*
+:   Convert the *input-file* into the gnuplot files named *output-file*.plt and *output-file*.dat.
 
 -h, \--help
 :   Display the help of csuper-cli

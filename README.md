@@ -29,7 +29,7 @@ A file explain the .csu files.
 
 Executables are available on [my website](http://www.dalan.rd-h.fr/wordpress).
 
-To retrieve the source code use `git clone --recursive https://git.framasoft.org/Dalan94/Csuper.git`.
+To retrieve the source code use `git clone --recursive https://git.framasoft.org/Dalan94/Csuper.git` and then `git submodule update --init`.
 If you want to compile yourself, you can use the codeblocks project.
 You can also use cmake. On Linux type `cmake . -G"Unix Makefiles"` then `make`.
 To compile libcsuper and csuper-cli you have to have gettext, libxml2 and liphpdf/libharu installed.
@@ -75,7 +75,7 @@ Un fichier explique aussi comment sont ordonnées les données dans les fichiers
 
 Les exécutables sont disponibles sur [mon site](http://www.dalan.rd-h.fr/wordpress).
 
-Pour récupérer le code source, utiliser `git clone --recursive https://git.framasoft.org/Dalan94/Csuper.git`.
+Pour récupérer le code source, utiliser `git clone --recursive https://git.framasoft.org/Dalan94/Csuper.git` puis `git submodule update --init`.
 Si vous voulez compiler vous même le logiciel, vous pouvez utiliser les projets codeblocks.
 Vous pouvez aussi compiler en utilisant cmake. Sous Linux aller à la racine du projet avec votre terminal puis taper `cmake . -G"Unix Makefiles"` et enfin `make`.
 Pour pouvoir compiler libcsuper et csuper-cli il faut que vous ayez d'installé gettext, libxml2 et libhpdf/libharu.

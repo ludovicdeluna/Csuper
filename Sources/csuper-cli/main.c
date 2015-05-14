@@ -72,6 +72,8 @@ int main(int argc, char *argv[])
                                         break;
             case export_to_csv  :   exportToCsvLocale(argv[file_place],argv[file_place+1]);
                                         break;
+            case export_to_gnuplot  :   exportToGnuplotLocale(argv[file_place],argv[file_place+1]);
+                                        break;
             case help               :   systemPause();
                                         break;
         }

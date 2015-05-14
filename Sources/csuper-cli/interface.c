@@ -281,7 +281,7 @@ void mainMenu()
         printf(_("%s"),CSUPER_VERSION);
         printf(_("\n\nWhat do you want to do?\n "
             "(%d) Play a new game\n (%d) Load an existing game\n (%d) Display the results of an existing game"
-            "\n (%d) Delete a game\n (%d) Display all existing games\n (%d) Export into a pdf or csv file\n"
+            "\n (%d) Delete a game\n (%d) Display all existing games\n (%d) Export a file\n"
             " (%d) Display the preferences menu\n (%d) Quit the program\n\nYour choice : ")
             ,newMatch,loadMatch,printFile,deleteFiles,listFile,export_file,pref,quit);
 
@@ -733,6 +733,32 @@ void exportToCsvLocale(char *filename, char *export_filename)
     closeCsuStruct(ptr_csu_struct);
 }
 
+/*!
+ * \fn void exportToGnuplotLocale(char *filename, char *export_filename)
+ *  Export the csu file named filename into gnuplot files named export_filename
+ * \param[in] filename the csu filename
+ * \param[in] export_filename the filename
+ */
+void exportToGnuplotLocale(char *filename, char *export_filename)
+{
+    csuStruct *ptr_csu_struct;
+
+    ptr_csu_struct=readCsuFile(filename);
+
+    if (ptr_csu_struct == NULL)
+    {
+        systemPause();
+        return;
+    }
+
+    if (exportToGnuplotFile(ptr_csu_struct,export_filename))
+        printf(_("The file was well export to %s\n"),export_filename);
+    else
+        printf(_("There is an error when exporting the file %s into a csv file.\n"),filename);
+
+    closeCsuStruct(ptr_csu_struct);
+}
+
 
 /*!
  * \fn void exportCsu()
@@ -771,6 +797,13 @@ void exportCsu()
     {
         addFilePdfExtension(export_filename);
         if (exportToPdf(ptr_csu_struct,export_filename))
+            printf(_("The file was well export to %s\n"),export_filename);
+        else
+            printf(_("There is an error when exporting the file %s into a pdf file.\n"),filename);
+    }
+    else if (type == gnuplot_file)
+    {
+        if (exportToGnuplotFile(ptr_csu_struct,export_filename))
             printf(_("The file was well export to %s\n"),export_filename);
         else
             printf(_("There is an error when exporting the file %s into a pdf file.\n"),filename);

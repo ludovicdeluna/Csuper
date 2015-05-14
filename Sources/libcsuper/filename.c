@@ -33,12 +33,13 @@
 
  #include "filename.h"
 
-/*!
- * \fn void addFileCsuExtension(char *file_name)
- *  Add the csu file extension
+ /*!
+ * \fn void addFileExtension(char *file_name, char *extension)
+ *  Add the a file extension to a filename
  * \param[in] file_name the filename
+ * \param[in] extension the extension
  */
-void addFileCsuExtension(char *file_name)
+void addFileExtension(char *file_name, char *extension)
 {
     char ext[4]="abc";
     unsigned int i;
@@ -48,8 +49,18 @@ void addFileCsuExtension(char *file_name)
             ext[-strlen(file_name)+i+3]=file_name[i];
 
     /*Add the csu extension if it is not there*/
-    if (strcmp(FILE_EXTENSION_CSU,ext)!=0)
-        sprintf(file_name,"%s.%s",file_name,FILE_EXTENSION_CSU);
+    if (strcmp(extension,ext)!=0)
+        sprintf(file_name,"%s.%s",file_name,extension);
+}
+
+/*!
+ * \fn void addFileCsuExtension(char *file_name)
+ *  Add the csu file extension
+ * \param[in] file_name the filename
+ */
+void addFileCsuExtension(char *file_name)
+{
+    addFileExtension(file_name,FILE_EXTENSION_CSU);
 }
 
 /*!
@@ -59,16 +70,7 @@ void addFileCsuExtension(char *file_name)
  */
 void addFilePdfExtension(char *file_name)
 {
-    char ext[4]="abc";
-    unsigned int i;
-
-    /*Read the extension of the file*/
-    for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)
-            ext[-strlen(file_name)+i+3]=file_name[i];
-
-    /*Add the csu extension if it is not there*/
-    if (strcmp("pdf",ext)!=0)
-        sprintf(file_name,"%s.%s",file_name,"pdf");
+    addFileExtension(file_name,"pdf");
 }
 
 
@@ -79,17 +81,30 @@ void addFilePdfExtension(char *file_name)
  */
 void addFileCsvExtension(char *file_name)
 {
-    char ext[4]="abc";
-    unsigned int i;
-
-    /*Read the extension of the file*/
-    for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)
-            ext[-strlen(file_name)+i+3]=file_name[i];
-
-    /*Add the csu extension if it is not there*/
-    if (strcmp("csv",ext)!=0)
-        sprintf(file_name,"%s.%s",file_name,"csv");
+    addFileExtension(file_name,"csv");
 }
+
+/*!
+ * \fn void addFileGnuplotExtension(char *file_name)
+ *  Add the gnuplot file extension
+ * \param[in] file_name the filename
+ */
+void addFileGnuplotExtension(char *file_name)
+{
+    addFileExtension(file_name,"plt");
+}
+
+/*!
+ * \fn void addFileDatExtension(char *file_name)
+ *  Add the dat file extension
+ * \param[in] file_name the filename
+ */
+void addFileDatExtension(char *file_name)
+{
+    addFileExtension(file_name,"dat");
+}
+
+
 
 /*!
  * \fn void removeFileExtension(char *file_name)

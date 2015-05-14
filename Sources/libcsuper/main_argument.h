@@ -42,6 +42,7 @@ typedef enum
     open_file,
     help,
     export_to_pdf,
+    export_to_gnuplot,
     export_to_csv
 } main_argument_function;
 
@@ -105,6 +106,18 @@ typedef enum
  * Define the reduce argument which call to export to csv to "-c"
  */
 #define STRING_EXPORT_TO_CSV_RED "-c"
+
+/*!
+ * \def STRING_EXPORT_TO_GNUPLOT
+ * Define the argument which call to export to gnuplot
+ */
+#define STRING_EXPORT_TO_GNUPLOT "--to-gnuplot"
+
+/*!
+ * \def STRING_EXPORT_TO_GNUPLOT_RED
+ * Define the reduce argument which call to export to gnuplot
+ */
+#define STRING_EXPORT_TO_GNUPLOT_RED "-g"
 
 bool searchArgument(int argc, char *argv[], main_argument_function *function, int *file_place);
 void displayHelp();

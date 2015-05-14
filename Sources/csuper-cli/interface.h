@@ -80,6 +80,7 @@ typedef enum {
 typedef enum{
     csv_file,
     pdf_file,
+    gnuplot_file,
     csu_file
 } FileType;
 
@@ -107,9 +108,11 @@ void printListGameConfig();
 void printGameConfigFile();
 void exportListGameConfig();
 void importListGameConfig();
+
 void exportToPdfLocale(char *filename, char *export_filename);
 void changePdfPreferences();
 void exportToCsvLocale(char *filename, char *export_filename);
+void exportToGnuplotLocale(char *filename, char *export_filename);
 void exportCsu();
 
 #endif

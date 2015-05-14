@@ -36,9 +36,12 @@
 
 #include "preferences_files.h"
 
+void addFileExtension(char *file_name, char *extension);
 void addFileCsuExtension(char *file_name);
 void addFilePdfExtension(char *file_name);
 void addFileCsvExtension(char *file_name);
+void addFileGnuplotExtension(char *file_name);
+void addFileDatExtension(char *file_name);
 void removeFileExtension(char *file_name);
 bool getFolderFromFilename(char *file_name_to_folder);
 bool getSimpleFilenameFromFullFilename(char *full_filename,char *simple_filename);

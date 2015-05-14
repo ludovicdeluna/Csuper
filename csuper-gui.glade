@@ -78,6 +78,11 @@ along with .  If not, see <http://www.gnu.org/licenses/>.
       <mime-type>text/csv</mime-type>
     </mime-types>
   </object>
+  <object class="GtkFileFilter" id="filefiltergnuplot">
+    <mime-types>
+      <mime-type>application/x-gnuplot</mime-type>
+    </mime-types>
+  </object>
   <object class="GtkFileFilter" id="filefilterpdf">
     <mime-types>
       <mime-type>application/pdf</mime-type>
@@ -2338,9 +2343,6 @@ you want to delete the turn&lt;/span&gt;</property>
                 <property name="left_attach">0</property>
                 <property name="top_attach">0</property>
               </packing>
-            </child>
-            <child>
-              <placeholder/>
             </child>
           </object>
           <packing>
