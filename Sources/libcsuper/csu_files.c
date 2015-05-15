@@ -426,13 +426,17 @@ csuStruct *readCsuXmlFile(char *filename)
     xmlNodePtr root,tmp_node;
     csuStruct *ptr_csu_struct=NULL;
     int i,j;
+    char new_filename[SIZE_MAX_FILE_NAME];
+
+    strncpy(new_filename,filename,SIZE_MAX_FILE_NAME)
+,
 
     // Parse file
-    doc = xmlParseFile(filename);
+    doc = xmlParseFile(new_filename);
     if (doc == NULL)
     {
-        addFileCsuExtension(filename);
-        doc = xmlParseFile(filename);
+        addFileCsuExtension(new_filename);
+        doc = xmlParseFile(new_filename);
         if (doc == NULL)
         {
             printf(_("Invalid XML Document\n"));

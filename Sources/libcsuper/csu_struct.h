@@ -43,7 +43,7 @@
  * \def SIZE_MAX_NAME
  * Define size max of name
  */
-#define SIZE_MAX_NAME 50
+#define SIZE_MAX_NAME 30
 
 /*!
  * \def VERSION
