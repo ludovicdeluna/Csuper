@@ -578,12 +578,14 @@ FileType menuChooseExportFileType()
 
     printf(_("\nIn what file type would you like to export?\n "
              "(1) PDF file (default)\n (2) CSV file\n (3) Gnuplot files\n"
-             "Your choice: "));
+             " (4) m files (octave/matlab file)\nYour choice: "));
     charKey(&choice);
     if (choice=='2')
         return csv_file;
     else if (choice=='3')
         return gnuplot_file;
+    else if (choice=='4')
+        return m_file;
     else
         return pdf_file;
 }

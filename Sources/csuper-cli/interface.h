@@ -81,6 +81,7 @@ typedef enum{
     csv_file,
     pdf_file,
     gnuplot_file,
+    m_file,
     csu_file
 } FileType;
 
@@ -113,6 +114,7 @@ void exportToPdfLocale(char *filename, char *export_filename);
 void changePdfPreferences();
 void exportToCsvLocale(char *filename, char *export_filename);
 void exportToGnuplotLocale(char *filename, char *export_filename);
+void exportToMLocale(char *filename, char *export_filename);
 void exportCsu();
 
 #endif

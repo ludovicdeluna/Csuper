@@ -112,6 +112,8 @@ void createPdfGrid(HPDF_Page page,float top_x, float top_y, float bottom_x, floa
 void addTotalPointsRankingPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *ptr_export_pdf);
 bool createOtherPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct);
 bool addPodiumPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *ptr_export_pdf);
+
 bool exportToCsv(csuStruct *ptr_csu_struct, char *filename);
+bool exportToM(csuStruct *ptr_csu_struct, char *filename);
 
 #endif // EXPORT_H_INCLUDED

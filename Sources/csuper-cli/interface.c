@@ -761,6 +761,32 @@ void exportToGnuplotLocale(char *filename, char *export_filename)
 
 
 /*!
+ * \fn void exportToMLocale(char *filename, char *export_filename)
+ *  Export the csu file named filename into a m file (octave/matlab)
+ * \param[in] filename the csu filename
+ * \param[in] export_filename
+ */
+void exportToMLocale(char *filename, char *export_filename)
+{
+    csuStruct *ptr_csu_struct;
+
+    ptr_csu_struct=readCsuFile(filename);
+
+    if (ptr_csu_struct == NULL)
+    {
+        systemPause();
+        return;
+    }
+
+    if (exportToM(ptr_csu_struct,export_filename))
+        printf(_("The file was well export to %s\n"),export_filename);
+    else
+        printf(_("There is an error when exporting the file %s into a m file.\n"),filename);
+
+    closeCsuStruct(ptr_csu_struct);
+}
+
+/*!
  * \fn void exportCsu()
  *  Export a csu file into a csv or pdf file
  */
@@ -806,15 +832,23 @@ void exportCsu()
         if (exportToGnuplotFile(ptr_csu_struct,export_filename))
             printf(_("The file was well export to %s\n"),export_filename);
         else
-            printf(_("There is an error when exporting the file %s into a pdf file.\n"),filename);
+            printf(_("There is an error when exporting the file %s into gnuplot files.\n"),filename);
     }
-    else
+    else if (type == csv_file)
     {
         addFileCsvExtension(export_filename);
         if (exportToCsv(ptr_csu_struct,export_filename))
             printf(_("The file was well export to %s\n"),export_filename);
         else
         printf(_("There is an error when exporting the file %s into a csv file.\n"),filename);
+    }
+    else
+    {
+        addFileExtension(export_filename,"m");
+        if (exportToM(ptr_csu_struct,export_filename))
+            printf(_("The file was well export to %s\n"),export_filename);
+        else
+        printf(_("There is an error when exporting the file %s into a m file.\n"),filename);
     }
 
     closeCsuStruct(ptr_csu_struct);

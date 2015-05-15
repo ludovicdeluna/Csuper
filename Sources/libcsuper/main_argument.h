@@ -43,6 +43,7 @@ typedef enum
     help,
     export_to_pdf,
     export_to_gnuplot,
+    export_to_m,
     export_to_csv
 } main_argument_function;
 
@@ -118,6 +119,18 @@ typedef enum
  * Define the reduce argument which call to export to gnuplot
  */
 #define STRING_EXPORT_TO_GNUPLOT_RED "-g"
+
+/*!
+ * \def STRING_EXPORT_TO_M
+ * Define the argument which call to export to matlab/octave file
+ */
+#define STRING_EXPORT_TO_M "--to-matlab"
+
+/*!
+ * \def STRING_EXPORT_TO_M_RED
+ * Define the reduce argument which call to export to matlab/octave file
+ */
+#define STRING_EXPORT_TO_M_RED "-m"
 
 bool searchArgument(int argc, char *argv[], main_argument_function *function, int *file_place);
 void displayHelp();

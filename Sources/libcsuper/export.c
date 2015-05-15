@@ -795,7 +795,7 @@ bool addPodiumPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf 
  * \fn bool exportToCsv(csuStruct *ptr_csu_struct, char *filename)
  *  Export the csu structure to a csv file
  * \param[in] ptr_csu_struct a pointer on a csuStruct
- * \param[in] filename the filename of the pdf file
+ * \param[in] filename the filename
  * \return true if everything is OK, false otherwise
  */
 bool exportToCsv(csuStruct *ptr_csu_struct, char *filename)
@@ -869,6 +869,143 @@ bool exportToCsv(csuStruct *ptr_csu_struct, char *filename)
     fprintf(ptr_file,_("\nRanking;"));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
         fprintf(ptr_file,_("%.0f;"),ptr_csu_struct->rank[i]);
+
+    closeFile(ptr_file);
+
+    return true;
+}
+
+
+/*!
+ * \fn bool exportToM(csuStruct *ptr_csu_struct, char *filename)
+ *  Export the csu structure to a m file (octave/matlab file)
+ * \param[in] ptr_csu_struct a pointer on a csuStruct
+ * \param[in] filename the filename
+ * \return true if everything is OK, false otherwise
+ */
+bool exportToM(csuStruct *ptr_csu_struct, char *filename)
+{
+    FILE *ptr_file;
+    int i,j;
+    struct lconv *lc = localeconv();
+    char *comma;
+    char buffer[128];
+    char tabs_name = 'a';
+
+    ptr_file = openFile(filename,"w");
+    if (ptr_file == NULL)
+        return false;
+
+    fprintf(ptr_file,"clear all;\nclose all;\n");
+
+
+    // Tabs of total points
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        fprintf(ptr_file,"\n%c1=[",tabs_name);
+
+        for (j=0 ; j<maxNbTurn(ptr_csu_struct) ; j++)
+        {
+            if (ptr_csu_struct->nb_turn[i] >= j+1)
+            {
+                convertFloatString(buffer,pointsAtTurn(ptr_csu_struct,i,j),ptr_csu_struct->config.decimal_place);
+                if(*(lc->decimal_point) == ',')
+                {
+                    while ((comma = strchr(buffer, ',')) != NULL)
+                        *comma='.';
+                }
+                fprintf(ptr_file,"%s,",buffer);
+            }
+            else
+                break;
+        }
+        fprintf(ptr_file,"];");
+        //fprintf(ptr_file,_("\nfprintf('Mean score of %s : %%f\\n',mean(%c1));"),ptr_csu_struct->player_names[i],tabs_name);
+        tabs_name++;
+    }
+
+    // Plot total points
+    tabs_name = 'a';
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        fprintf(ptr_file,"\nturn%c=0:1:%d;",tabs_name,(int)ptr_csu_struct->nb_turn[i]-1);
+        tabs_name++;
+    }
+
+    tabs_name = 'a';
+    fprintf(ptr_file,"\nplot(");
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        fprintf(ptr_file,"turn%c,%c1",tabs_name,tabs_name);
+        tabs_name++;
+        if (i != ptr_csu_struct->nb_player-1)
+            fprintf(ptr_file,",");
+    }
+    fprintf(ptr_file,");\n");
+    fprintf(ptr_file,_("title('Total points');\n"));
+    fprintf(ptr_file,_("xlabel('Turn');\n"));
+    fprintf(ptr_file,_("ylabel('Points');\n"));
+
+    fprintf(ptr_file,"legend(");
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        fprintf(ptr_file,"'%s'",ptr_csu_struct->player_names[i]);
+        if (i != ptr_csu_struct->nb_player-1)
+            fprintf(ptr_file,",");
+    }
+    fprintf(ptr_file,");\n");
+
+
+    // Tabs of points points
+    tabs_name = 'a';
+    fprintf(ptr_file,"\nfigure;");
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        fprintf(ptr_file,"\n%c2=[",tabs_name);
+
+        for (j=0 ; j<maxNbTurn(ptr_csu_struct) ; j++)
+        {
+            if (ptr_csu_struct->nb_turn[i] >= j+1)
+            {
+                convertFloatString(buffer,ptr_csu_struct->point[i][j],ptr_csu_struct->config.decimal_place);
+                if(*(lc->decimal_point) == ',')
+                {
+                    while ((comma = strchr(buffer, ',')) != NULL)
+                        *comma='.';
+                }
+                fprintf(ptr_file,"%s,",buffer);
+            }
+            else
+                break;
+        }
+        fprintf(ptr_file,"];");
+        fprintf(ptr_file,_("\nfprintf('Mean score of %s : %%f\\n',mean(%c2));"),ptr_csu_struct->player_names[i],tabs_name);
+        tabs_name++;
+    }
+
+    // Plot points
+    tabs_name = 'a';
+    fprintf(ptr_file,"\nplot(");
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        fprintf(ptr_file,"turn%c,%c2",tabs_name,tabs_name);
+        tabs_name++;
+        if (i != ptr_csu_struct->nb_player-1)
+            fprintf(ptr_file,",");
+    }
+    fprintf(ptr_file,");\n");
+    fprintf(ptr_file,_("title('Points');\n"));
+    fprintf(ptr_file,_("xlabel('Turn');\n"));
+    fprintf(ptr_file,_("ylabel('Points');\n"));
+
+    fprintf(ptr_file,"legend(");
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        fprintf(ptr_file,"'%s'",ptr_csu_struct->player_names[i]);
+        if (i != ptr_csu_struct->nb_player-1)
+            fprintf(ptr_file,",");
+    }
+    fprintf(ptr_file,");\n");
 
     closeFile(ptr_file);
 

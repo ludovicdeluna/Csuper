@@ -43,10 +43,11 @@ void addFileExtension(char *file_name, char *extension)
 {
     char ext[4]="abc";
     unsigned int i;
+    unsigned int extension_length = strlen(extension);
 
     /*Read the extension of the file*/
-    for (i=strlen(file_name)-3 ; i<strlen(file_name) ; i++)
-            ext[-strlen(file_name)+i+3]=file_name[i];
+    for (i=strlen(file_name)-extension_length ; i<strlen(file_name) ; i++)
+            ext[-strlen(file_name)+i+extension_length]=file_name[i];
 
     /*Add the csu extension if it is not there*/
     if (strcmp(extension,ext)!=0)

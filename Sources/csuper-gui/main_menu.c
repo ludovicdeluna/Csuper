@@ -319,12 +319,15 @@ G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
     GtkFileFilter *pdf_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterpdf"));
     GtkFileFilter *csv_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltercsv"));
     GtkFileFilter *gnuplot_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltergnuplot"));
+    GtkFileFilter *octave_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilteroctave"));
     gtk_file_filter_set_name(pdf_filter,_("PDF files"));
     gtk_file_filter_set_name(csv_filter,_("CSV files"));
     gtk_file_filter_set_name(gnuplot_filter,_("Gnuplot files"));
+    gtk_file_filter_set_name(octave_filter,_("Octave/Matlab files"));
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),csv_filter);
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),pdf_filter);
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),gnuplot_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),octave_filter);
     gtk_file_chooser_set_filter(GTK_FILE_CHOOSER (window_file_export),pdf_filter);
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_export)))
@@ -356,6 +359,12 @@ G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
             else if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export))==gnuplot_filter)
             {
                 if (exportToGnuplotFile(user_data->ptr_csu_struct,true_filename) == false)
+                    error=TRUE;
+            }
+            else if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export))==octave_filter)
+            {
+                addFileExtension(true_filename,"m");
+                if (exportToM(user_data->ptr_csu_struct,true_filename) == false)
                     error=TRUE;
             }
 

@@ -78,6 +78,12 @@ bool searchArgument(int argc, char *argv[], main_argument_function *function, in
             *file_place = 1+i;
             break;
         }
+        if ((strcmp(argv[i],STRING_EXPORT_TO_M)==0 || strcmp(argv[i],STRING_EXPORT_TO_M_RED)==0) && argc >= i+3)
+        {
+            *function = export_to_m;
+            *file_place = 1+i;
+            break;
+        }
         if (strcmp(argv[i],STRING_HELP)==0 || strcmp(argv[i],STRING_HELP_RED)==0)
         {
             displayHelp();
@@ -115,4 +121,5 @@ void displayHelp()
     printf(_("\t- Use the argument '%s' or '%s' followed by the filename and the export filename to export the csu file into a pdf file.\n"),STRING_EXPORT_TO_PDF,STRING_EXPORT_TO_PDF_RED);
     printf(_("\t- Use the argument '%s' or '%s' followed by the filename and the export filename to export the csu file into a csv file.\n"),STRING_EXPORT_TO_CSV,STRING_EXPORT_TO_CSV_RED);
     printf(_("\t- Use the argument '%s' or '%s' followed by the filename and the export filename to export the csu file into gnuplot files.\n"),STRING_EXPORT_TO_GNUPLOT,STRING_EXPORT_TO_GNUPLOT_RED);
+    printf(_("\t- Use the argument '%s' or '%s' followed by the filename and the export filename to export the csu file into a m file (octave/matlab file).\n"),STRING_EXPORT_TO_M,STRING_EXPORT_TO_M_RED);
 }

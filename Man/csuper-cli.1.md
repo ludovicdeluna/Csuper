@@ -1,6 +1,6 @@
 % CSUPER-CLI(1) Csuper-cli User Manuals
 % Rémi BERTHO
-% May 14, 2015
+% May 15, 2015
 
 # NAME
 
@@ -36,6 +36,9 @@ The software can only use csu file.
 
 -g *input-file* *output-file*, \--to-gnuplot *input-file* *output-file*
 :   Convert the *input-file* into the gnuplot files named *output-file*.plt and *output-file*.dat.
+
+-m *input-file* *output-file*, \--to-matlab *input-file* *output-file*
+:   Convert the *input-file* into the m file (octave/matlab file) named *output-file*.
 
 -h, \--help
 :   Display the help of csuper-cli

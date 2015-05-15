@@ -57,6 +57,8 @@ bool exportToGnuplotData(csuStruct *ptr_csu_struct, char *filename)
     char dat_filename[SIZE_MAX_FILE_NAME];
     char buffer[128];
     int i,j;
+    struct lconv *lc = localeconv();
+    char *comma;
 
     strncpy(dat_filename,filename,SIZE_MAX_FILE_NAME);
     addFileDatExtension(dat_filename);
@@ -70,13 +72,18 @@ bool exportToGnuplotData(csuStruct *ptr_csu_struct, char *filename)
 
     for (i=0 ; i<maxNbTurn(ptr_csu_struct) ; i++)
     {
-        fprintf(ptr_file,_("\n%d"),i);
+        fprintf(ptr_file,"\n%d",i);
 
         for (j=0 ; j<ptr_csu_struct->nb_player ; j++)
         {
             if (ptr_csu_struct->nb_turn[j] >= i+1)
             {
                 convertFloatString(buffer,pointsAtTurn(ptr_csu_struct,j,i),ptr_csu_struct->config.decimal_place);
+                if(*(lc->decimal_point) == ',')
+                {
+                    while ((comma = strchr(buffer, ',')) != NULL)
+                        *comma='.';
+                }
                 fprintf(ptr_file,"\t%s",buffer);
             }
             else
