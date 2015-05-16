@@ -58,8 +58,8 @@
 typedef struct
 {
     float nb_max;               /*!< Number maximum or minimum that can reach a player. */
-    char first_way;             /*!< Is 1 if the first those has the maximum of points, -1 otherwise */
-    char turn_based;          /*!< Is 1 if this is a turn-based game, 0 otherwise */
+    char first_way;             /*!< Is 1 if the first is those has the maximum of points, -1 otherwise */
+    char turn_based;            /*!< Is 1 if this is a turn-based game, 0 otherwise */
     char use_distributor;       /*!< Is 1 if the game use a distributor, 0 otherwise */
     char decimal_place;         /*!< The number of decimal place which are display */
     char max;                   /*!< Is 1 if the game use a maximum, 0 if it's a minimum */
@@ -104,6 +104,12 @@ csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct);
 bool changeDistributor(csuStruct *ptr_csu_struct, int index);
 float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn);
 int rankAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn);
+int lastRankAtTurn(csuStruct *ptr_csu_struct,int turn);
 bool deleteTurn(csuStruct *ptr_csu_struct, int player_index, int turn);
+float meanPoints(csuStruct *ptr_csu_struct, int player_index);
+int nbTurnBest(csuStruct *ptr_csu_struct, int player_index);
+int nbTurnWorst(csuStruct *ptr_csu_struct, int player_index);
+int nbTurnFirst(csuStruct *ptr_csu_struct, int player_index);
+int nbTurnLast(csuStruct *ptr_csu_struct, int player_index);
 
 #endif

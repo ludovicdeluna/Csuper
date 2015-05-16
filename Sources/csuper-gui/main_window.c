@@ -697,6 +697,7 @@ G_MODULE_EXPORT void changeTurnSignal(GtkWidget *widget, gpointer data)
                 (user_data->ptr_csu_struct->total_points[i]) += user_data->ptr_csu_struct->point[i][turn];
             }
         }
+        rankCalculation(user_data->ptr_csu_struct);
         addLastCsuStruct(user_data);
         if (writeFileNewTurn(user_data->csu_filename,user_data->ptr_csu_struct) == false)
             saveFileError(user_data);
@@ -861,6 +862,7 @@ void setButtonMainWindow(globalData *data)
     GtkWidget *menu_export = getWidgetFromBuilder(data->ptr_builder,"menu_export");
     GtkWidget *menu_podium = getWidgetFromBuilder(data->ptr_builder,"menu_display_podium");
     GtkWidget *menu_chart= getWidgetFromBuilder(data->ptr_builder,"menu_display_chart");
+    GtkWidget *menu_statistics= getWidgetFromBuilder(data->ptr_builder,"menu_display_statistics");
 
 
     // Set the recent csu file open
@@ -899,6 +901,7 @@ void setButtonMainWindow(globalData *data)
         gtk_widget_set_sensitive(menu_export,FALSE);
         gtk_widget_set_sensitive(menu_podium,FALSE);
         gtk_widget_set_sensitive(menu_chart,FALSE);
+        gtk_widget_set_sensitive(menu_statistics,FALSE);
         gtk_widget_set_sensitive(button_end_of_turn,FALSE);
         gtk_widget_set_sensitive(button_calculator,FALSE);
         gtk_widget_set_sensitive(button_change_distributor,FALSE);
@@ -926,6 +929,7 @@ void setButtonMainWindow(globalData *data)
         gtk_widget_set_sensitive(menu_export,TRUE);
         gtk_widget_set_sensitive(menu_podium,TRUE);
         gtk_widget_set_sensitive(menu_chart,TRUE);
+        gtk_widget_set_sensitive(menu_statistics,TRUE);
         gtk_widget_set_sensitive(combobox_calculator,TRUE);
     }
 

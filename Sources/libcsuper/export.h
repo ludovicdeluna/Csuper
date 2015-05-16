@@ -71,6 +71,7 @@ typedef struct
     int table_line_height;          /*!< The line height of a table */
     export_pdf_preferences pref;    /*!< The user preferences */
     bool total_points_ranking_print;/*!< Indicate if the total points and the ranking is printed */
+    bool stat_print;                /*!< Indicate if the stats are printed */
 } export_pdf;
 
 
@@ -110,6 +111,7 @@ bool createFirstPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct, c
 float tableWidthCalculatePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct,HPDF_Page page);
 void createPdfGrid(HPDF_Page page,float top_x, float top_y, float bottom_x, float bottom_y, float length_row, float length_column);
 void addTotalPointsRankingPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *ptr_export_pdf);
+void addStatsPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *ptr_export_pdf);
 bool createOtherPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct);
 bool addPodiumPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *ptr_export_pdf);
 

@@ -829,3 +829,96 @@ G_MODULE_EXPORT void changeDisplayMainWindowSide(GtkWidget *widget, gpointer dat
 
     updateMainWindowSide(user_data);
 }
+
+
+/*!
+ * \fn G_MODULE_EXPORT void displayStatistics(GtkWidget *widget, gpointer data)
+ *  Display the statistics window
+ * \param[in] widget the widget which send the signal
+ * \param[in] data the globalData
+ */
+G_MODULE_EXPORT void displayStatistics(GtkWidget *widget, gpointer data)
+{
+    globalData *user_data = (globalData*) data;
+    GtkWidget *dialog = getWidgetFromBuilder(user_data->ptr_builder,"dialog_statistics");
+    GtkWidget *viewport = getWidgetFromBuilder(user_data->ptr_builder,"dialog_statistics_viewport");
+    int i;
+
+
+    GtkWidget *player_display_grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(player_display_grid),5);
+    gtk_grid_set_row_spacing(GTK_GRID(player_display_grid),5);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(player_display_grid,10);
+    gtk_widget_set_margin_start(player_display_grid,10);
+    #else
+    gtk_widget_set_margin_right(player_display_grid,10);
+    gtk_widget_set_margin_left(player_display_grid,10);
+    #endif // GTK_MINOR_VERSION
+    gtk_widget_set_margin_top(player_display_grid,10);
+    gtk_widget_set_margin_bottom(player_display_grid,10);
+    gtk_widget_set_hexpand(player_display_grid,TRUE);
+    gtk_widget_set_vexpand(player_display_grid,TRUE);
+
+    for (i=0 ; i<8 ; i++)
+        gtk_grid_attach(GTK_GRID(player_display_grid),gtk_separator_new(GTK_ORIENTATION_VERTICAL),2*i,0,1,2*user_data->ptr_csu_struct->nb_player+3);
+
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_label_new(_("Name")),1,1,1,1);
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_label_new(_("Mean points")),3,1,1,1);
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_label_new(_("Number of turn")),5,1,1,1);
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_label_new(_("Number of turn with the best score")),7,1,1,1);
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_label_new(_("Number of turn with the worst score")),9,1,1,1);
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_label_new(_("Number of turn first")),11,1,1,1);
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_label_new(_("Number of turn last")),13,1,1,1);
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,0,15,1);
+    gtk_grid_attach(GTK_GRID(player_display_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,2,15,1);
+
+    for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+    {
+        GtkWidget *tmp_label = gtk_label_new(user_data->ptr_csu_struct->player_names[i]);
+        gtk_widget_set_hexpand(tmp_label,TRUE);
+        gtk_widget_set_vexpand(tmp_label,TRUE);
+        gtk_grid_attach(GTK_GRID(player_display_grid),tmp_label,1,2*(1+i)+1,1,1);
+
+        tmp_label = gtk_label_new(g_strdup_printf("%f",meanPoints(user_data->ptr_csu_struct,i)));
+        gtk_widget_set_hexpand(tmp_label,TRUE);
+        gtk_widget_set_vexpand(tmp_label,TRUE);
+        gtk_grid_attach(GTK_GRID(player_display_grid),tmp_label,3,2*(1+i)+1,1,1);
+
+        tmp_label = gtk_label_new(g_strdup_printf("%.0f",user_data->ptr_csu_struct->nb_turn[i]-1));
+        gtk_widget_set_hexpand(tmp_label,TRUE);
+        gtk_widget_set_vexpand(tmp_label,TRUE);
+        gtk_grid_attach(GTK_GRID(player_display_grid),tmp_label,5,2*(1+i)+1,1,1);
+
+        tmp_label = gtk_label_new(g_strdup_printf("%d",nbTurnBest(user_data->ptr_csu_struct,i)));
+        gtk_widget_set_hexpand(tmp_label,TRUE);
+        gtk_widget_set_vexpand(tmp_label,TRUE);
+        gtk_grid_attach(GTK_GRID(player_display_grid),tmp_label,7,2*(1+i)+1,1,1);
+
+        tmp_label = gtk_label_new(g_strdup_printf("%d",nbTurnWorst(user_data->ptr_csu_struct,i)));
+        gtk_widget_set_hexpand(tmp_label,TRUE);
+        gtk_widget_set_vexpand(tmp_label,TRUE);
+        gtk_grid_attach(GTK_GRID(player_display_grid),tmp_label,9,2*(1+i)+1,1,1);
+
+        tmp_label = gtk_label_new(g_strdup_printf("%d",nbTurnFirst(user_data->ptr_csu_struct,i)));
+        gtk_widget_set_hexpand(tmp_label,TRUE);
+        gtk_widget_set_vexpand(tmp_label,TRUE);
+        gtk_grid_attach(GTK_GRID(player_display_grid),tmp_label,11,2*(1+i)+1,1,1);
+
+        tmp_label = gtk_label_new(g_strdup_printf("%d",nbTurnLast(user_data->ptr_csu_struct,i)));
+        gtk_widget_set_hexpand(tmp_label,TRUE);
+        gtk_widget_set_vexpand(tmp_label,TRUE);
+        gtk_grid_attach(GTK_GRID(player_display_grid),tmp_label,13,2*(1+i)+1,1,1);
+
+        gtk_grid_attach(GTK_GRID(player_display_grid),gtk_separator_new(GTK_ORIENTATION_HORIZONTAL),0,2*(2+i),15,1);
+    }
+
+    gtk_container_add(GTK_CONTAINER(viewport),player_display_grid);
+    gtk_widget_show_all(viewport);
+
+
+    gtk_dialog_run(GTK_DIALOG(dialog));
+
+    gtk_widget_hide(dialog);
+    gtk_widget_destroy(player_display_grid);
+}

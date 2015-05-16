@@ -220,6 +220,7 @@ bool initializePdfExport(export_pdf *ptr_export_pdf,csuStruct *ptr_csu_struct)
     ptr_export_pdf->line_height = ptr_export_pdf->pref.font_size;
     ptr_export_pdf->table_line_height = 1.8*ptr_export_pdf->pref.font_size;
     ptr_export_pdf->total_points_ranking_print = false;
+    ptr_export_pdf->stat_print = false;
 
 
     // Initialize the font
@@ -549,7 +550,14 @@ bool createFirstPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct, c
     {
         addTotalPointsRankingPdf(first_page,ptr_csu_struct,text_pos_y-ptr_export_pdf->table_line_height,ptr_export_pdf);
         ptr_export_pdf->total_points_ranking_print = true;
-        create_another_page = addPodiumPdf(first_page,ptr_csu_struct,text_pos_y-3*ptr_export_pdf->table_line_height-ptr_export_pdf->pref.font_size,ptr_export_pdf);
+        text_pos_y -= 4.5* ptr_export_pdf->table_line_height -ptr_export_pdf->pref.font_size;
+
+        if ((text_pos_y-7* ptr_export_pdf->table_line_height -ptr_export_pdf->pref.font_size  > ptr_export_pdf->pref.margin) && ptr_export_pdf->stat_print == false)
+        {
+            addStatsPdf(first_page,ptr_csu_struct,text_pos_y- ptr_export_pdf->table_line_height,ptr_export_pdf);
+            ptr_export_pdf->stat_print = true;
+            create_another_page = addPodiumPdf(first_page,ptr_csu_struct,text_pos_y-6*ptr_export_pdf->table_line_height-ptr_export_pdf->pref.font_size,ptr_export_pdf);
+        }
     }
 
     return create_another_page;
@@ -673,6 +681,90 @@ void addTotalPointsRankingPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y
 
 
 /*!
+ * \fn void addStatsPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *ptr_export_pdf)
+ *  Print the stats on a pdf page
+ * \param[in] ptr_csu_struct a pointer on a csuStruct
+ * \param[in] page the pdf page
+ * \param[in] y the top y coordinate
+ * \param[in] ptr_export_pdf a pointer on a export_pdf
+ */
+void addStatsPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *ptr_export_pdf)
+{
+    char text_buffer[TEXT_BUFFER_SIZE]="";
+    int i;
+    float width = HPDF_Page_GetWidth (page);
+
+    // Calculate the table width
+    float table_width = ((width - 2*ptr_export_pdf->pref.margin)/(ptr_csu_struct->nb_player+1));
+
+    HPDF_Page_BeginText(page);
+
+    // Names
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y,_("Name"),table_width,0,ptr_export_pdf);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,y,ptr_csu_struct->player_names[i],table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+
+    // Print Mean
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y- ptr_export_pdf->table_line_height,_("Nb Mean"),table_width,0,ptr_export_pdf);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        sprintf(text_buffer,"%f",meanPoints(ptr_csu_struct,i));
+        pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,y- ptr_export_pdf->table_line_height,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+    }
+
+    // Print the number of turn
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y-2* ptr_export_pdf->table_line_height,_("Nb turn"),table_width,0,ptr_export_pdf);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        sprintf(text_buffer,"%.0f",ptr_csu_struct->nb_turn[i]);
+        pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,y-2* ptr_export_pdf->table_line_height,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+    }
+
+    // Print the number of turn best
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y-3* ptr_export_pdf->table_line_height,_("Nb turn best"),table_width,0,ptr_export_pdf);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        sprintf(text_buffer,"%d",nbTurnBest(ptr_csu_struct,i));
+        pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,y-3* ptr_export_pdf->table_line_height,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+    }
+
+    // Print the number of turn worst
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y-4* ptr_export_pdf->table_line_height,_("Nb turn worst"),table_width,0,ptr_export_pdf);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        sprintf(text_buffer,"%d",nbTurnWorst(ptr_csu_struct,i));
+        pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,y-4* ptr_export_pdf->table_line_height,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+    }
+
+    // Print the number of turn first
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y-5* ptr_export_pdf->table_line_height,_("Nb turn first"),table_width,0,ptr_export_pdf);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        sprintf(text_buffer,"%d",nbTurnFirst(ptr_csu_struct,i));
+        pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,y-5* ptr_export_pdf->table_line_height,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+    }
+
+    // Print the number of turn last
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y-6* ptr_export_pdf->table_line_height,_("Nb turn last"),table_width,0,ptr_export_pdf);
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        sprintf(text_buffer,"%d",nbTurnLast(ptr_csu_struct,i));
+        pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,y-6* ptr_export_pdf->table_line_height,text_buffer,table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
+    }
+
+    HPDF_Page_EndText(page);
+
+    createPdfGrid(page,
+                  ptr_export_pdf->pref.margin,
+                  y+ ptr_export_pdf->table_line_height*2/3,
+                  width-ptr_export_pdf->pref.margin,
+                  y+ ptr_export_pdf->table_line_height*2/3-7* ptr_export_pdf->table_line_height,
+                  ptr_export_pdf->table_line_height,
+                  table_width);
+}
+
+
+/*!
  * \fn bool createOtherPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct)
  *  Create the other page of the pdf
  * \param[in] ptr_csu_struct a pointer on a csuStruct
@@ -729,7 +821,13 @@ bool createOtherPagePdf(export_pdf *ptr_export_pdf, csuStruct *ptr_csu_struct)
     {
         addTotalPointsRankingPdf(page,ptr_csu_struct,text_pos_y- ptr_export_pdf->table_line_height,ptr_export_pdf);
         ptr_export_pdf->total_points_ranking_print = true;
-        text_pos_y -= 3* ptr_export_pdf->table_line_height -ptr_export_pdf->pref.font_size;
+        text_pos_y -= 4.5* ptr_export_pdf->table_line_height -ptr_export_pdf->pref.font_size;
+    }
+    if ((text_pos_y-7* ptr_export_pdf->table_line_height -ptr_export_pdf->pref.font_size  > ptr_export_pdf->pref.margin) && ptr_export_pdf->stat_print == false)
+    {
+        addStatsPdf(page,ptr_csu_struct,text_pos_y- ptr_export_pdf->table_line_height,ptr_export_pdf);
+        ptr_export_pdf->stat_print = true;
+        text_pos_y -= 7* ptr_export_pdf->table_line_height -ptr_export_pdf->pref.font_size;
     }
     create_another_page = addPodiumPdf(page,ptr_csu_struct,text_pos_y,ptr_export_pdf);
 
@@ -832,7 +930,42 @@ bool exportToCsv(csuStruct *ptr_csu_struct, char *filename)
     #endif
 
     // Names
-    fprintf(ptr_file,_("\nNames"));
+    fprintf(ptr_file,_("\nNames;"));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fprintf(ptr_file,_("%s;"),ptr_csu_struct->player_names[i]);
+
+    // Mean points
+    fprintf(ptr_file,_("\nMean points;"));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fprintf(ptr_file,_("%f;"),meanPoints(ptr_csu_struct,i));
+
+    // Number of turn
+    fprintf(ptr_file,_("\nNumber of turn;"));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fprintf(ptr_file,_("%f;"),ptr_csu_struct->nb_turn[i]-1);
+
+    // Nb turn best
+    fprintf(ptr_file,_("\nNumber of turn with the best score;"));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fprintf(ptr_file,_("%d;"),nbTurnBest(ptr_csu_struct,i));
+
+    // Nb turn worst
+    fprintf(ptr_file,_("\nNumber of turn with the worst score;"));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fprintf(ptr_file,_("%d;"),nbTurnWorst(ptr_csu_struct,i));
+
+    // Nb turn first
+    fprintf(ptr_file,_("\nNumber of turn first;"));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fprintf(ptr_file,_("%d;"),nbTurnFirst(ptr_csu_struct,i));
+
+    // Nb turn last
+    fprintf(ptr_file,_("\nNumber of turn last;"));
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        fprintf(ptr_file,_("%d;"),nbTurnLast(ptr_csu_struct,i));
+
+    // Names
+    fprintf(ptr_file,_("\n\nNames"));
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
         fprintf(ptr_file,_(";;%s;"),ptr_csu_struct->player_names[i]);
 

@@ -35,7 +35,7 @@
 
 /*!
  * \fn G_MODULE_EXPORT void displayChart(GtkWidget *widget, gpointer data)
- *  Display the cahrt window
+ *  Display the chart window
  * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */

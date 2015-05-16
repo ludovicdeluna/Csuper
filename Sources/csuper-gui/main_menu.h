@@ -60,11 +60,9 @@ G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data);
 void deleteFileError(globalData *data);
 G_MODULE_EXPORT void displayPodium(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer data);
-G_MODULE_EXPORT void printDialog(GtkWidget *widget, gpointer data);
-G_MODULE_EXPORT void beginPrint(GtkPrintOperation *operation, GtkPrintContext *context,gpointer user_data);
-G_MODULE_EXPORT void drawPrintPage(GtkPrintOperation *operation,GtkPrintContext *context,gint page_nr,gpointer user_data);
 G_MODULE_EXPORT void changeDisplayPointsGrid(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void changeDisplayMainWindowSide(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void displayStatistics(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_MENU_H_INCLUDED
