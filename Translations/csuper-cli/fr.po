@@ -2,22 +2,22 @@
 # Traductions françaises du paquet PACKAGE.
 # Copyright (C) 2014 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# Rémi BERTHO <remi.bertho@gmail.com>, 2014.
+# Rémi BERTHO <remi.bertho@openmailbox.org>, 2014, 2015.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-16 17:39+0200\n"
-"PO-Revision-Date: 2014-10-16 17:39+0200\n"
-"Last-Translator: Rémi BERTHO <remi.bertho@gmail.com>\n"
-"Language-Team: français <wesnoth@ml.free.fr>>\n"
+"POT-Creation-Date: 2015-05-21 17:49+0200\n"
+"PO-Revision-Date: 2015-05-21 20:35+0200\n"
+"Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
+"Language-Team: français <>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Gtranslator 2.91.6\n"
+"X-Generator: Gtranslator 2.91.7\n"
 
 #. TRANSLATORS:The number of characters before the | must be eight
 #: Sources/csuper-cli/display.c:48
@@ -61,11 +61,11 @@ msgid ""
 msgstr ""
 "\n"
 "Fichier csu\n"
-"Créer le %02.0f/%02.0f/%4.0f\n"
+"Créé le %02.0f/%02.0f/%4.0f\n"
 "Version du fichier : %1.1f\n"
 "Taille maximum du nom : %.0f\n"
 "Nombre de joueurs : %.0f\n"
-"Nombre de tours maximums : %d"
+"Nombre de tours maximum : %d"
 
 #. TRANSLATORS:The number of characters before the | and without the %2.0f must be six
 #: Sources/csuper-cli/display.c:202
@@ -87,7 +87,7 @@ msgstr ""
 "\n"
 "Position|"
 
-#: Sources/csuper-cli/display.c:351
+#: Sources/csuper-cli/display.c:349
 #, c-format
 msgid ""
 "\n"
@@ -96,32 +96,32 @@ msgstr ""
 "\n"
 "La partie est terminée.\n"
 
-#: Sources/csuper-cli/display.c:439
+#: Sources/csuper-cli/display.c:421
 #, c-format
 msgid ""
 "\n"
-"Csuper Copyright (C) 2014 Remi BERTHO <remi.bertho@gmail.com>\n"
+"Csuper Copyright (C) 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>\n"
 "This program comes with ABSOLUTELY NO WARRANTY. \n"
 "This is free software, and you are welcome to redistribute it under certain "
 "conditions. \n"
 "Fore more details : http://www.gnu.org/licenses/gpl.html\n"
 msgstr ""
 "\n"
-"Csuper Copyright (C) 2014 Rémi BERTHO <remi.bertho@gmail.com>\n"
+"Csuper Copyright (C) 2014-2015 Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Ce programme vient SANS ABSOLUMENT AUCUNE GARANTIE. \n"
-"Ceci est un logiciel libre et vous etes invite à le redistribuer suivant "
+"Ceci est un logiciel libre et vous êtes invité à le redistribuer suivant "
 "certaines conditions. \n"
 "Pour plus de détails : http://www.gnu.org/licenses/gpl.html\n"
 
-#: Sources/csuper-cli/display.c:451
+#: Sources/csuper-cli/display.c:433
 msgid "yes"
 msgstr "oui"
 
-#: Sources/csuper-cli/display.c:452
+#: Sources/csuper-cli/display.c:434
 msgid "no"
 msgstr "non"
 
-#: Sources/csuper-cli/display.c:453
+#: Sources/csuper-cli/display.c:435
 #, c-format
 msgid ""
 "\n"
@@ -142,12 +142,12 @@ msgstr ""
 "Jeu en tour par tour : %s\n"
 "Utilise un distributeur tournant : %s\n"
 
-#: Sources/csuper-cli/display.c:459 Sources/csuper-cli/display.c:464
+#: Sources/csuper-cli/display.c:441 Sources/csuper-cli/display.c:446
 #, c-format
 msgid "Maximum/minimum number of points: %.3f\n"
 msgstr "Nombre de points maximum/minimum : %.3f\n"
 
-#: Sources/csuper-cli/display.c:462
+#: Sources/csuper-cli/display.c:444
 #, c-format
 msgid "Maximum/minimum number of points: inf\n"
 msgstr "Nombre de points maximum/minimum : inf\n"
@@ -179,6 +179,7 @@ msgid ""
 " (%d) Display the results of an existing game\n"
 " (%d) Delete a game\n"
 " (%d) Display all existing games\n"
+" (%d) Export a file\n"
 " (%d) Display the preferences menu\n"
 " (%d) Quit the program\n"
 "\n"
@@ -186,18 +187,19 @@ msgid ""
 msgstr ""
 "\n"
 "\n"
-"Que voulez vous faire ? \n"
+"Que voulez-vous faire ? \n"
 " (%d) Faire une nouvelle partie \n"
 " (%d) Charger une partie existante \n"
 " (%d) Afficher les résultats d'une partie existante \n"
 " (%d) Supprimer une partie \n"
 " (%d) Afficher toutes les parties existantes\n"
+" (%d) Exporter un fichier\n"
 " (%d) Afficher le menu des préférences \n"
 " (%d) Quitter le programme\n"
 "\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/interface.c:302
+#: Sources/csuper-cli/interface.c:305
 #, c-format
 msgid ""
 "\n"
@@ -206,7 +208,7 @@ msgstr ""
 "\n"
 "À bientôt.\n"
 
-#: Sources/csuper-cli/interface.c:306 Sources/csuper-cli/interface.c:361
+#: Sources/csuper-cli/interface.c:309 Sources/csuper-cli/interface.c:365
 #, c-format
 msgid ""
 "\n"
@@ -214,19 +216,19 @@ msgid ""
 "to do.\n"
 msgstr ""
 "\n"
-"Effectivement c'est la bonne réponse mais ça ne m'aide pas à savoir ce que "
+"Effectivement, c'est la bonne réponse, mais ça ne m'aide pas à savoir ce que "
 "vous voulez faire.\n"
 
-#: Sources/csuper-cli/interface.c:333
+#: Sources/csuper-cli/interface.c:336
 #, c-format
 msgid ""
 "\n"
 "What do you want to do?\n"
 msgstr ""
 "\n"
-"Que voulez vous faire ?\n"
+"Que voulez-vous faire ?\n"
 
-#: Sources/csuper-cli/interface.c:335
+#: Sources/csuper-cli/interface.c:338
 #, c-format
 msgid ""
 "\n"
@@ -237,7 +239,7 @@ msgstr ""
 " (%d) Changer le dossier d'enregistrement des fichiers\n"
 " (%d) Afficher le dossier d'enregistrement des fichiers"
 
-#: Sources/csuper-cli/interface.c:337
+#: Sources/csuper-cli/interface.c:340
 #, c-format
 msgid ""
 "\n"
@@ -247,6 +249,7 @@ msgid ""
 " (%d) Display a game configuration\n"
 " (%d) Export game configurations\n"
 " (%d) Import game configurations\n"
+" (%d) Change pdf export preferences\n"
 " (%d) Back to main menu\n"
 "\n"
 "Your choice : "
@@ -258,25 +261,26 @@ msgstr ""
 " (%d) Afficher une configuration de jeu\n"
 " (%d) Exporter vos configuration de jeu\n"
 " (%d) Importer vos configuration de jeu\n"
+" (%d) Changer les préférences de l'export en pdf\n"
 " (%d) Revenir au menu principal\n"
 "\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/interface.c:407
+#: Sources/csuper-cli/interface.c:413
 #, c-format
 msgid "Your files are saved in %s\n"
-msgstr "Vos fichiers sont sauvegardes dans %s\n"
+msgstr "Vos fichiers sont sauvegardés dans %s\n"
 
-#: Sources/csuper-cli/interface.c:509 Sources/csuper-cli/menu.c:86
+#: Sources/csuper-cli/interface.c:515 Sources/csuper-cli/menu.c:86
 #, c-format
 msgid ""
 "\n"
 "Which game configuration would you like to use?\n"
 msgstr ""
 "\n"
-"Quelle configuration de jeu voulez vous utilisez ?\n"
+"Quelle configuration de jeu voulez-vous utiliser ?\n"
 
-#: Sources/csuper-cli/interface.c:516 Sources/csuper-cli/interface.c:581
+#: Sources/csuper-cli/interface.c:522 Sources/csuper-cli/interface.c:587
 #: Sources/csuper-cli/menu.c:94
 #, c-format
 msgid ""
@@ -286,23 +290,23 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/interface.c:518 Sources/csuper-cli/interface.c:583
+#: Sources/csuper-cli/interface.c:524 Sources/csuper-cli/interface.c:589
 #: Sources/csuper-cli/menu.c:96 Sources/csuper-cli/menu.c:422
 #: Sources/csuper-cli/menu.c:476
 #, c-format
 msgid "You chose %d\n"
 msgstr "Vous avez choisi %d\n"
 
-#: Sources/csuper-cli/interface.c:525 Sources/csuper-cli/interface.c:592
+#: Sources/csuper-cli/interface.c:531 Sources/csuper-cli/interface.c:598
 #, c-format
 msgid ""
 "\n"
 "You do not have any game configuration file.\n"
 msgstr ""
 "\n"
-"Vous n'avez pas encore de fichiers de configurations de jeu.\n"
+"Vous n'avez pas encore de fichier de configuration de jeu.\n"
 
-#: Sources/csuper-cli/interface.c:546 Sources/csuper-cli/menu.c:403
+#: Sources/csuper-cli/interface.c:552 Sources/csuper-cli/menu.c:403
 #, c-format
 msgid ""
 "\n"
@@ -311,34 +315,70 @@ msgstr ""
 "\n"
 "Voici la liste de vos configurations de jeu :\n"
 
-#: Sources/csuper-cli/interface.c:574
+#: Sources/csuper-cli/interface.c:580
 #, c-format
 msgid ""
 "\n"
 "Which game configuration would you like to display?\n"
 msgstr ""
 "\n"
-"Quelle configuration de jeu voulez vous afficher ?\n"
+"Quelle configuration de jeu voulez-vous afficher ?\n"
 
-#: Sources/csuper-cli/interface.c:622
+#: Sources/csuper-cli/interface.c:628
 #, c-format
 msgid ""
 "\n"
 "Game configurations were exported successfully in %s\n"
 msgstr ""
 "\n"
-"Les configurations de jeu ont bien été exporté dans le fichier %s\n"
+"Les configurations de jeu ont bien été exportées dans le fichier %s\n"
 
-#: Sources/csuper-cli/interface.c:653
+#: Sources/csuper-cli/interface.c:659
 #, c-format
 msgid ""
 "\n"
 "Game configurations were successfully imported from %s\n"
 msgstr ""
 "\n"
-"Les configurations de jeu ont bien été importé depuis le fichier %s\n"
+"Les configurations de jeu ont bien été importées depuis le fichier %s\n"
 
-#: Sources/csuper-cli/keyboarding.c:164
+#: Sources/csuper-cli/interface.c:685 Sources/csuper-cli/interface.c:729
+#: Sources/csuper-cli/interface.c:755 Sources/csuper-cli/interface.c:782
+#: Sources/csuper-cli/interface.c:826 Sources/csuper-cli/interface.c:833
+#: Sources/csuper-cli/interface.c:841 Sources/csuper-cli/interface.c:849
+#, c-format
+msgid "The file was well export to %s\n"
+msgstr "Le fichier a bien été exporté dans %s.\n"
+
+#: Sources/csuper-cli/interface.c:687 Sources/csuper-cli/interface.c:828
+#, c-format
+msgid "There is an error when exporting the file %s into a pdf file.\n"
+msgstr ""
+"Il y a eut une erreur lors de l'exportation du fichier %s en un fichier "
+"pdf.\n"
+
+#: Sources/csuper-cli/interface.c:731 Sources/csuper-cli/interface.c:757
+#: Sources/csuper-cli/interface.c:843
+#, c-format
+msgid "There is an error when exporting the file %s into a csv file.\n"
+msgstr ""
+"Il y a eut une erreur lors de l'exportation du fichier %s en un fichier "
+"csv.\n"
+
+#: Sources/csuper-cli/interface.c:784 Sources/csuper-cli/interface.c:851
+#, c-format
+msgid "There is an error when exporting the file %s into a m file.\n"
+msgstr ""
+"Il y a eut une erreur lors de l'exportation du fichier %s en un fichier m.\n"
+
+#: Sources/csuper-cli/interface.c:835
+#, c-format
+msgid "There is an error when exporting the file %s into gnuplot files.\n"
+msgstr ""
+"Il y a eut une erreur lors de l'exportation du fichier %s en fichiers "
+"gnuplot.\n"
+
+#: Sources/csuper-cli/keyboarding.c:180
 #, c-format
 msgid ""
 "\n"
@@ -417,7 +457,7 @@ msgid ""
 "Your choice: "
 msgstr ""
 "\n"
-"Donnez le nombre maximal ou minimum pouvant être atteint par un joueur dans "
+"Donnez le nombre maximal ou minimal pouvant être atteint par un joueur dans "
 "votre jeu.\n"
 "Votre choix : "
 
@@ -445,7 +485,7 @@ msgid ""
 "The winner is the player who has the highest score (Y/n): "
 msgstr ""
 "\n"
-"Le premier est le joueur qui a le plus de points (O/n) : "
+"Le gagnant est le joueur qui a le plus de points (O/n) : "
 
 #: Sources/csuper-cli/menu.c:163
 #, c-format
@@ -491,8 +531,8 @@ msgid ""
 "Your choice: "
 msgstr ""
 "\n"
-"Donnez le nom (ou les premières lettres du nom) de la personne qui commence "
-"à distribuer.\n"
+"Donnez le nom (ou les premières lettres du nom) de la personne qui distribue "
+"en premier.\n"
 "Votre choix : "
 
 #: Sources/csuper-cli/menu.c:197 Sources/csuper-cli/menu.c:218
@@ -555,7 +595,7 @@ msgid ""
 "Do you confirm these scores (Y/n)? "
 msgstr ""
 "\n"
-"Validez vous ces scores (O/n) : "
+"Validez-vous ces scores (O/n) ? "
 
 #: Sources/csuper-cli/menu.c:289
 #, c-format
@@ -581,10 +621,10 @@ msgid ""
 "Your choice: "
 msgstr ""
 "\n"
-"Que voulez-vous faire ?\n"
-" (%d) Continuer la partie (réponse par défaut)\n"
-" (%d) Changer le distributeur et continuer la partie\n"
-" (%d) Arrêter la partie\n"
+"Que voulez vous faire ?\n"
+" (%d) Continuer le jeu (par défaut)\n"
+" (%d) Changer le distributeur et continuer le jeu\n"
+" (%d) Arrêter le jeu\n"
 "Votre choix : "
 
 #: Sources/csuper-cli/menu.c:331
@@ -592,7 +632,9 @@ msgstr ""
 msgid ""
 "\n"
 "Choose the new disributor\n"
-msgstr "\nVeuillez choisir le nouveau distributeur\n"
+msgstr ""
+"\n"
+"Choisissez le nouveau distributeur\n"
 
 #: Sources/csuper-cli/menu.c:334
 #, c-format
@@ -606,7 +648,7 @@ msgid ""
 "Would you like to delete the file (y/N)? "
 msgstr ""
 "\n"
-"Voulez-vous supprimer le fichier (o/N) : "
+"Voulez-vous supprimer le fichier (o/N) ?"
 
 #: Sources/csuper-cli/menu.c:370
 #, c-format
@@ -634,8 +676,8 @@ msgid ""
 "Your choice: "
 msgstr ""
 "\n"
-"Donner le nombre de configurations de jeu que vous voulez exporter, -1 si "
-"vous voulez toutes les exporter.\n"
+"Donnez le nombre de configuration de jeu que vous voulez exporter ou -1 si "
+"vous voulez tous les exporter.\n"
 "Votre choix : "
 
 #: Sources/csuper-cli/menu.c:420
@@ -646,7 +688,8 @@ msgid ""
 "Your choice: "
 msgstr ""
 "\n"
-"Donnez l'indice de la %dème configuration de jeu que vous voulez exporter.\n"
+"Donnez l'identifiant de la %dème configuration de jeu que vous voulez "
+"exporter.\n"
 "Votre choix : "
 
 #: Sources/csuper-cli/menu.c:457
@@ -656,7 +699,7 @@ msgid ""
 "Here are all the game configurations in this file:\n"
 msgstr ""
 "\n"
-"Voici la liste des configurations de jeu présentes dans ce fichier :\n"
+"Voici la liste des configurations de jeu du fichier :\n"
 
 #: Sources/csuper-cli/menu.c:463
 #, c-format
@@ -667,8 +710,8 @@ msgid ""
 "Your choice: "
 msgstr ""
 "\n"
-"Donner le nombre de configurations de jeu que vous voulez importer, -1 si "
-"vous voulez toutes les importer.\n"
+"Donnez le nombre de configuration de jeu que vous voulez importer ou -1 si "
+"vous voulez tous les exporter.\n"
 "Votre choix : "
 
 #: Sources/csuper-cli/menu.c:474
@@ -679,7 +722,120 @@ msgid ""
 "Your choice: "
 msgstr ""
 "\n"
-"Donnez l'indice de la %dème configuration de jeu que vous voulez importer.\n"
+"Donnez l'identifiant de la %dème configuration de jeu que vous voulez "
+"importer.\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:509
+#, c-format
+msgid ""
+"The UTF-8 character set permit to display all the character with the cost of "
+"bigger pdf file.\n"
+"\n"
+"Would you like to use the UTF-8 character set (y/N)? "
+msgstr ""
+"Le codage de caractères UTF-8 permet d'afficher tout les caractères "
+"possibles au prix d'un fichier pdf plus volumineux.\n"
+"\n"
+"Voulez-vous utilisez l'UTF-8 ?"
+
+#: Sources/csuper-cli/menu.c:518
+#, c-format
+msgid ""
+"\n"
+"\n"
+"What page direction of the page do you want?\n"
+" (1) Portrait (default)\n"
+" (2) Landscape\n"
+"Your choice: "
+msgstr ""
+"\n"
+"\n"
+"Quelle orientation de page voulez vous utiliser ?\n"
+" (1) Portrait (par défaut)\n"
+" (2) Paysage\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:526
+#, c-format
+msgid ""
+"\n"
+"\n"
+"What size of page do you want?\n"
+" (1) A3\n"
+" (2) A4 (default)\n"
+" (3) A5 \n"
+"Your choice: "
+msgstr ""
+"\n"
+"\n"
+"Quelle taille de page voulez-vous utiliser ?\n"
+" (1) A3\n"
+" (2) A4 (par défaut)\n"
+" (2) A5\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:538
+#, c-format
+msgid ""
+"\n"
+"Give the margin you want or -1 if want to keep the old one (%d). It will be "
+"between 0 and 200.\n"
+"Your choice: "
+msgstr ""
+"\n"
+"Donnez la marge que vous voulez utiliser ou -1 si vous voulez garder "
+"l'ancienne. Ce chiffre doit être compris entre 0 et 200.\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:547
+#, c-format
+msgid ""
+"\n"
+"Give the font size you want or -1 if want to keep the old one (%d). It will "
+"be between 4 and 40.\n"
+"Your choice: "
+msgstr ""
+"\n"
+"Donnez la taille de caractère que vous voulez utiliser ou -1 si vous voulez "
+"garder l'ancienne. Ce chiffre doit être compris entre 4 et 40.\n"
+"Votre choix : "
+
+#: Sources/csuper-cli/menu.c:554
+#, c-format
+msgid ""
+"\n"
+"Would you like to display the total points in each turn (y/N)? "
+msgstr ""
+"\n"
+"Voulez-vous afficher les points totaux à chaque tour (o/N) ?"
+
+#: Sources/csuper-cli/menu.c:562
+#, c-format
+msgid ""
+"\n"
+"Would you like to display the ranking in each turn (y/N)? "
+msgstr ""
+"\n"
+"Voulez-vous afficher le classement à chaque tour (o/N) ?"
+
+#: Sources/csuper-cli/menu.c:579
+#, c-format
+msgid ""
+"\n"
+"In what file type would you like to export?\n"
+" (1) PDF file (default)\n"
+" (2) CSV file\n"
+" (3) Gnuplot files\n"
+" (4) m files (octave/matlab file)\n"
+"Your choice: "
+msgstr ""
+"\n"
+"En quel type de fichier voulez-vous exporter ?\n"
+" (1) Fichier PDF (par défaut)\n"
+" (2) Fichier CSV\n"
+" (3) Fichiers Gnuplot\n"
+" (4) Fichier m (fichier octave/matlab)\n"
 "Votre choix : "
 
 #~ msgid ""
@@ -687,7 +843,7 @@ msgstr ""
 #~ "Would you like to continue the game (Y/n)? "
 #~ msgstr ""
 #~ "\n"
-#~ "Voulez-vous continuer la partie (O/n) : "
+#~ "Voulez-vous continuer la partie (O/n) ?"
 
 #~ msgid "Number of points maximum/minimum : %.3f\n"
 #~ msgstr "Nombre de points maximum/minimum : %.3f\n"

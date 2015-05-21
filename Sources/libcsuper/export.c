@@ -705,7 +705,7 @@ void addStatsPdf(HPDF_Page page, csuStruct *ptr_csu_struct, float y,export_pdf *
         pdfTextOutTable(page,ptr_export_pdf->pref.margin + (i+1)*table_width,y,ptr_csu_struct->player_names[i],table_width,ptr_csu_struct->rank[i],ptr_export_pdf);
 
     // Print Mean
-    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y- ptr_export_pdf->table_line_height,_("Nb Mean"),table_width,0,ptr_export_pdf);
+    pdfTextOutTable(page,ptr_export_pdf->pref.margin,y- ptr_export_pdf->table_line_height,_("Mean points"),table_width,0,ptr_export_pdf);
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
     {
         sprintf(text_buffer,"%f",meanPoints(ptr_csu_struct,i));

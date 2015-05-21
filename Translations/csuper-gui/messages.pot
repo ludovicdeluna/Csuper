@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-27 23:40+0100\n"
+"POT-Creation-Date: 2015-05-21 20:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,1186 +17,1206 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Sources/csuper-gui/main_menu.c:49 Sources/csuper-gui/main_menu.c:213
-msgid "Widget about_windows is missing in file csuper-gui.glade."
+#: Sources/csuper-gui/chart.c:94 csuper-gui.glade:2238
+msgid "Chart"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:79
-msgid "Open csu file"
+#: Sources/csuper-gui/chart.c:94 Sources/csuper-gui/main_window.c:106
+#: Sources/csuper-gui/main_window.c:363
+msgid "Points"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:85 Sources/csuper-gui/main_menu.c:241
-msgid "csu files"
+#: Sources/csuper-gui/chart.c:94
+msgid "Turn"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:86 Sources/csuper-gui/main_menu.c:242
-msgid "All"
+#: Sources/csuper-gui/game_config_preferences.c:53
+msgid "Import/export game configuration"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:234
-msgid "Save csu file"
+#: Sources/csuper-gui/game_config_preferences.c:82
+msgid "Select all"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:295
-msgid "Widget file_not_save is missing in file csuper-gui.glade."
+#: Sources/csuper-gui/game_config_preferences.c:86
+msgid "Deselect all"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:365 Sources/csuper-gui/preferences.c:664
+#: Sources/csuper-gui/game_config_preferences.c:209 csuper-gui.glade:3009
+msgid "Export game configuration"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:273 csuper-gui.glade:2994
+msgid "Import game configuration"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:386
+msgid "Edit"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:387 csuper-gui.glade:1574
+msgid "Properties"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:388 csuper-gui.glade:1545
+#: csuper-gui.glade:1547
+msgid "Delete"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:393
+msgid "View the details of the game configuration"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:394
+msgid "Delete the game configuration"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:395
+msgid "Edit the game configuration"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:557
+#: Sources/csuper-gui/main_menu.c:472
 msgid "yes"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:366 Sources/csuper-gui/preferences.c:665
+#: Sources/csuper-gui/game_config_preferences.c:558
+#: Sources/csuper-gui/main_menu.c:473
 msgid "no"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:371
+#: Sources/csuper-gui/game_config_preferences.c:591
+#: Sources/csuper-gui/game_config_preferences.c:606
+#, c-format
+msgid ""
+"<span size=\"large\">Use a maximum score: %s\n"
+"Maximum/minimum number of points: %.3f\n"
+"Initial score: %.3f\n"
+"Number of decimals displayed: %d\n"
+"The winner is the player with the most points: %s\n"
+"Turn-based game: %s\n"
+"Use of a distributor: %s</span>"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:599
+#, c-format
+msgid ""
+"<span size=\"large\">Use a maximum score: %s\n"
+"Maximum/minimum number of points: inf\n"
+"Initial score: %.3f\n"
+"Number of decimals displayed: %d\n"
+"The winner is the player with the most points: %s\n"
+"Turn-based game: %s\n"
+"Use of a distributor: %s</span>"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:612
+#, c-format
+msgid "<span size=\"large\">%s</span>"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:620 csuper-gui.glade:3067
+msgid "<span size=\"large\">You have no game configuration selected.</span>"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:702 csuper-gui.glade:530
+msgid "Maximum"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:704 csuper-gui.glade:531
+msgid "Minimum"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:706
+#: Sources/csuper-gui/game_config_preferences.c:835 csuper-gui.glade:532
+msgid "Neither"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:745 csuper-gui.glade:511
+msgid "0"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:747 csuper-gui.glade:512
+msgid "1"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:749 csuper-gui.glade:513
+msgid "2"
+msgstr ""
+
+#: Sources/csuper-gui/game_config_preferences.c:751 csuper-gui.glade:514
+msgid "3"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:77
+msgid "Open csu file"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:83 Sources/csuper-gui/main_menu.c:239
+msgid "csu files"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:84 Sources/csuper-gui/main_menu.c:240
+msgid "All"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:232
+msgid "Save csu file"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:302
+msgid "Export csu file"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:323
+msgid "PDF files"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:324
+msgid "CSV files"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:325
+msgid "Gnuplot files"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:326
+msgid "Octave/Matlab files"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:478
 #, c-format
 msgid "Filename: %s"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:374
+#: Sources/csuper-gui/main_menu.c:481
 #, c-format
 msgid "Created on the: %02.0f/%02.0f/%4.0f"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:377
+#: Sources/csuper-gui/main_menu.c:484
 #, c-format
 msgid "File's version: %1.1f"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:380
+#: Sources/csuper-gui/main_menu.c:487
 #, c-format
 msgid "Maximum size of the names: %.0f"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:383
+#: Sources/csuper-gui/main_menu.c:490
 #, c-format
 msgid "Number of players: %.0f"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:386
+#: Sources/csuper-gui/main_menu.c:493
 #, c-format
 msgid "Maximum number of turns: %d"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:389
+#: Sources/csuper-gui/main_menu.c:496
 #, c-format
 msgid "Name of the game configuration: %s"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:392
+#: Sources/csuper-gui/main_menu.c:499
 #, c-format
 msgid "Use a maximum score: %s"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:395
+#: Sources/csuper-gui/main_menu.c:502
 #, c-format
 msgid "Initial score: %.3f"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:398
+#: Sources/csuper-gui/main_menu.c:505
 #, c-format
 msgid "Number of decimals displayed: %d"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:401
+#: Sources/csuper-gui/main_menu.c:508
 #, c-format
 msgid "The winner is the player who has the highest score: %s"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:404
+#: Sources/csuper-gui/main_menu.c:511
 #, c-format
 msgid "Turn-based game: %s"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:407
+#: Sources/csuper-gui/main_menu.c:514
 #, c-format
 msgid "Use a distributor: %s"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:411 Sources/csuper-gui/main_menu.c:416
+#: Sources/csuper-gui/main_menu.c:518 Sources/csuper-gui/main_menu.c:523
 #, c-format
 msgid "Maximum/minimum number of points: %.3f"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:414
+#: Sources/csuper-gui/main_menu.c:521
 msgid "Maximum/minimum number of points: inf"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:420
+#: Sources/csuper-gui/main_menu.c:527
 #, c-format
 msgid "Distributor: %s"
 msgstr ""
 
-#: Sources/csuper-gui/main_menu.c:439
-msgid ""
-"Widget csu_file_properties_dialog_box is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_menu.c:555 Sources/csuper-gui/main_window.c:609
-#: Sources/csuper-gui/main_window.c:766
-msgid "Widget main_toolbar is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_menu.c:588
-msgid "Widget message_dialog_delete_file is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_menu.c:619
-msgid "Widget file_not_deleted is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_menu.c:657 Sources/csuper-gui/main_menu.c:661
-#: Sources/csuper-gui/main_window.c:670 Sources/csuper-gui/main_window.c:674
-msgid "Widget menu_display_consecutive is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_menu.c:665 Sources/csuper-gui/main_window.c:678
-msgid "Widget menu_display_last is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:47 Sources/csuper-gui/main_window.c:65
-#: Sources/csuper-gui/main_window.c:84
-msgid ""
-"Widget main_window_grid_game_config is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:49 Sources/csuper-gui/main_window.c:285
-#: csuper-gui.glade:1026 csuper-gui.glade:1044
-msgid "No csu file loaded"
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:110
-msgid "Position"
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:111 Sources/csuper-gui/main_window.c:340
-#: Sources/csuper-gui/main_window.c:403
+#: Sources/csuper-gui/main_menu.c:866 Sources/csuper-gui/main_window.c:105
+#: Sources/csuper-gui/main_window.c:349 Sources/csuper-gui/main_window.c:492
 msgid "Name"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:112
-msgid "Points"
+#: Sources/csuper-gui/main_menu.c:867
+msgid "Mean points"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:114
+#: Sources/csuper-gui/main_menu.c:868
+msgid "Number of turn"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:869
+msgid "Number of turn with the best score"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:870
+msgid "Number of turn with the worst score"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:871
+msgid "Number of turn first"
+msgstr ""
+
+#: Sources/csuper-gui/main_menu.c:872
+msgid "Number of turn last"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:47 Sources/csuper-gui/main_window.c:272
+#: csuper-gui.glade:1173 csuper-gui.glade:1186
+msgid "No csu file loaded"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:104
+msgid "Position"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:108
 msgid "Diff cons"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:116
+#: Sources/csuper-gui/main_window.c:110
 msgid "Diff first"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:118
+#: Sources/csuper-gui/main_window.c:112
 msgid "Diff last"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:131
+#: Sources/csuper-gui/main_window.c:125 Sources/csuper-gui/main_window.c:461
 #, c-format
 msgid "%d"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:133 Sources/csuper-gui/main_window.c:344
-#: Sources/csuper-gui/main_window.c:405 Sources/csuper-gui/preferences.c:723
+#: Sources/csuper-gui/main_window.c:127 Sources/csuper-gui/main_window.c:353
+#: Sources/csuper-gui/main_window.c:494
 #, c-format
 msgid "%s"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:138 Sources/csuper-gui/main_window.c:140
-#: Sources/csuper-gui/main_window.c:142 Sources/csuper-gui/main_window.c:144
-#: Sources/csuper-gui/main_window.c:361
+#: Sources/csuper-gui/main_window.c:132 Sources/csuper-gui/main_window.c:134
+#: Sources/csuper-gui/main_window.c:136 Sources/csuper-gui/main_window.c:138
+#: Sources/csuper-gui/main_window.c:428 Sources/csuper-gui/main_window.c:446
+#: Sources/csuper-gui/main_window.c:503
 #, c-format
 msgid "%.0f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:147 Sources/csuper-gui/main_window.c:149
-#: Sources/csuper-gui/main_window.c:151 Sources/csuper-gui/main_window.c:153
-#: Sources/csuper-gui/main_window.c:364
+#: Sources/csuper-gui/main_window.c:141 Sources/csuper-gui/main_window.c:143
+#: Sources/csuper-gui/main_window.c:145 Sources/csuper-gui/main_window.c:147
+#: Sources/csuper-gui/main_window.c:431 Sources/csuper-gui/main_window.c:449
+#: Sources/csuper-gui/main_window.c:506
 #, c-format
 msgid "%.1f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:156 Sources/csuper-gui/main_window.c:158
-#: Sources/csuper-gui/main_window.c:160 Sources/csuper-gui/main_window.c:162
-#: Sources/csuper-gui/main_window.c:367
+#: Sources/csuper-gui/main_window.c:150 Sources/csuper-gui/main_window.c:152
+#: Sources/csuper-gui/main_window.c:154 Sources/csuper-gui/main_window.c:156
+#: Sources/csuper-gui/main_window.c:434 Sources/csuper-gui/main_window.c:452
+#: Sources/csuper-gui/main_window.c:509
 #, c-format
 msgid "%.2f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:165 Sources/csuper-gui/main_window.c:167
-#: Sources/csuper-gui/main_window.c:169 Sources/csuper-gui/main_window.c:171
-#: Sources/csuper-gui/main_window.c:370
+#: Sources/csuper-gui/main_window.c:159 Sources/csuper-gui/main_window.c:161
+#: Sources/csuper-gui/main_window.c:163 Sources/csuper-gui/main_window.c:165
+#: Sources/csuper-gui/main_window.c:437 Sources/csuper-gui/main_window.c:455
+#: Sources/csuper-gui/main_window.c:512
 #, c-format
 msgid "%.3f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:209
-msgid ""
-"Widget main_window_label_distributor is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:212
+#: Sources/csuper-gui/main_window.c:205
 #, c-format
 msgid "%s is the distributor"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:214
+#: Sources/csuper-gui/main_window.c:207
 msgid "There is no distributor"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:239
-msgid ""
-"Widget main_window_label_total_points_in_turn is missing in file csuper-gui."
-"glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:249 Sources/csuper-gui/main_window.c:283
-#: Sources/csuper-gui/main_window.c:299 Sources/csuper-gui/main_window.c:317
-#: Sources/csuper-gui/main_window.c:454
-msgid "Widget main_window_viewport is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:257
+#: Sources/csuper-gui/main_window.c:246
 #, c-format
 msgid "There are %.0f points given in the turn"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:260
+#: Sources/csuper-gui/main_window.c:249
 #, c-format
 msgid "There are %.1f points given in the turn"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:263
+#: Sources/csuper-gui/main_window.c:252
 #, c-format
 msgid "There are %.2f points given in the turn"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:266
+#: Sources/csuper-gui/main_window.c:255
 #, c-format
 msgid "There are %.3f points given in the turn"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:271
+#: Sources/csuper-gui/main_window.c:260
 msgid "You cannot give points"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:352
+#: Sources/csuper-gui/main_window.c:360
+msgid "Legend"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:371
+msgid "Total"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:380 Sources/csuper-gui/main_window.c:518
+msgid "Ranking"
+msgstr ""
+
+#: Sources/csuper-gui/main_window.c:418
 #, c-format
 msgid "Turn %d"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:380
+#: Sources/csuper-gui/main_window.c:469
 msgid "New points"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:408
+#: Sources/csuper-gui/main_window.c:497
 msgid "Total number of points"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:414 Sources/csuper-gui/main_window.c:431
+#: Sources/csuper-gui/main_window.c:520
 #, c-format
 msgid "%0.f"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:417
+#: Sources/csuper-gui/main_window.c:1234
 #, c-format
-msgid "%1.f"
+msgid "Result : %.3lf"
 msgstr ""
 
-#: Sources/csuper-gui/main_window.c:420
+#: Sources/csuper-gui/main_window.c:1236
 #, c-format
-msgid "%2.f"
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:423
-#, c-format
-msgid "%3.f"
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:429 csuper-gui.glade:966
-msgid "Ranking"
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:458
-msgid "Widget main_window_scrolled_window is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:528
-msgid "Widget dialog_game_over is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:532
-msgid "Widget dialog_game_over_fixed is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:601
-msgid "Widget button_end_of_turn is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:605
-msgid ""
-"Widget main_window_button_change_distributor is missing in file csuper-gui."
-"glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:613
-msgid "Widget menu_save_as is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:617
-msgid "Widget menu_properties is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:621
-msgid "Widget menu_delete_file is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:625
-msgid "Widget menu_print is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:629
-msgid "Widget menu_display_podium is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:635
-msgid "Widget recent_filter_csu is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:646
-msgid "Widget menu_preference_game_config is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:650
-msgid ""
-"Widget menu_preferences_toolbar_button is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:726
-msgid "Widget menu_undo is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:741
-msgid "Widget menu_redo is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:770
-msgid "Widget menu_cut is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:773
-msgid "Widget menu_copy is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:776
-msgid "Widget menu_paste is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:779
-msgid "Widget menu_delete is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:845 Sources/csuper-gui/main_window.c:875
-msgid "Widget main_window is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:903
-msgid "Widget change_distributor_dialog is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/main_window.c:907
-msgid ""
-"Widget change_distributor_dialog_viewport is missing in file csuper-gui."
-"glade."
+msgid "Result : %.3e"
 msgstr ""
 
 #: Sources/csuper-gui/new_file_assistant.c:67
 msgid "New csu file assistant"
 msgstr ""
 
-#: Sources/csuper-gui/new_file_assistant.c:79
-#: Sources/csuper-gui/new_file_assistant.c:169
-#: Sources/csuper-gui/new_file_assistant.c:211
-#: Sources/csuper-gui/new_file_assistant.c:495
-#: Sources/csuper-gui/new_file_assistant.c:539
-msgid ""
-"Widget grid_new_csu_file_assistant_1 is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/new_file_assistant.c:82
+#: Sources/csuper-gui/new_file_assistant.c:80
 msgid "General informations"
 msgstr ""
 
-#: Sources/csuper-gui/new_file_assistant.c:97
+#: Sources/csuper-gui/new_file_assistant.c:95
 msgid "Add a new game configuration"
 msgstr ""
 
-#: Sources/csuper-gui/new_file_assistant.c:98
+#: Sources/csuper-gui/new_file_assistant.c:96
 msgid "Use an other game configuration"
 msgstr ""
 
-#: Sources/csuper-gui/new_file_assistant.c:106
-#: Sources/csuper-gui/new_file_assistant.c:175
-#: Sources/csuper-gui/new_file_assistant.c:407
-msgid ""
-"Widget scrolled_window_new_csu_file_assistant_2 is missing in file csuper-"
-"gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/new_file_assistant.c:109
+#: Sources/csuper-gui/new_file_assistant.c:105
 msgid "Player's names"
 msgstr ""
 
-#: Sources/csuper-gui/new_file_assistant.c:131
-#: Sources/csuper-gui/new_file_assistant.c:181
-#: Sources/csuper-gui/new_file_assistant.c:456
-msgid ""
-"Widget grid_new_csu_file_assistant_3 is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/new_file_assistant.c:134
+#: Sources/csuper-gui/new_file_assistant.c:128
 msgid "Distributor and validation"
 msgstr ""
 
-#: Sources/csuper-gui/new_file_assistant.c:343
+#: Sources/csuper-gui/new_file_assistant.c:329
 #, c-format
 msgid "Name of the %dth player"
 msgstr ""
 
-#: Sources/csuper-gui/new_file_assistant.c:346
+#: Sources/csuper-gui/new_file_assistant.c:332
 #, c-format
 msgid "Type here the name of the %dth player"
 msgstr ""
 
-#: Sources/csuper-gui/preferences.c:48 Sources/csuper-gui/preferences.c:107
-#: Sources/csuper-gui/preferences.c:143 Sources/csuper-gui/preferences.c:287
-#: Sources/csuper-gui/preferences.c:369 Sources/csuper-gui/preferences.c:611
-#: Sources/csuper-gui/preferences.c:754
-msgid "Widget preferences_window is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:69 Sources/csuper-gui/preferences.c:88
-msgid "Widget notebook_preferences is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:146
-msgid "Import/export game configuration"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:175
-msgid "Select all"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:179
-msgid "Deselect all"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:304 csuper-gui.glade:2272
-msgid "Export game configuration"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:346
-msgid ""
-"Widget game_configuration_not_exported is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:372 csuper-gui.glade:2257
-msgid "Import game configuration"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:430
-msgid ""
-"Widget game_configuration_not_imported is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:448 Sources/csuper-gui/preferences.c:522
-#: Sources/csuper-gui/preferences.c:552 Sources/csuper-gui/preferences.c:593
-#: Sources/csuper-gui/preferences.c:641
-msgid ""
-"Widget scrolled_window_game_configuration_preferences is missing in file "
-"csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:489
-msgid "Edit"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:490 csuper-gui.glade:1353
-msgid "Properties"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:491 csuper-gui.glade:1324
-#: csuper-gui.glade:1326
-msgid "Delete"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:493
-msgid "View the details of the game configuration"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:494
-msgid "Delete the game configuration"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:495
-msgid "Edit the game configuration"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:681
-msgid ""
-"Widget game_configuration_preferences_label_details is missing in file "
-"csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:684
-msgid ""
-"Widget game_configuration_preferences_label_name is missing in file csuper-"
-"gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:702 Sources/csuper-gui/preferences.c:717
+#: Sources/csuper-gui/utils.c:121
 #, c-format
-msgid ""
-"Use a maximum score: %s\n"
-"Maximum/minimum number of points: %.3f\n"
-"Initial score: %.3f\n"
-"Number of decimals displayed: %d\n"
-"The winner is the player with the most points: %s\n"
-"Turn-based game: %s\n"
-"Use of a distributor: %s"
+msgid "Widget %s is missing in file csuper-gui.glade."
 msgstr ""
 
-#: Sources/csuper-gui/preferences.c:710
-#, c-format
-msgid ""
-"Use a maximum score: %s\n"
-"Maximum/minimum number of points: inf\n"
-"Initial score: %.3f\n"
-"Number of decimals displayed: %d\n"
-"The winner is the player with the most points: %s\n"
-"Turn-based game: %s\n"
-"Use of a distributor: %s"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:731 csuper-gui.glade:2335
-msgid "You have no game configuration selected."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:788
-msgid ""
-"Widget new_game_configuration_dialog is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:795 Sources/csuper-gui/preferences.c:907
-#: Sources/csuper-gui/preferences.c:976
-msgid ""
-"Widget new_game_configuration_dialog_grid is missing in file csuper-gui."
-"glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:819 csuper-gui.glade:473
-msgid "Maximum"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:821 csuper-gui.glade:474
-msgid "Minimum"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:823 Sources/csuper-gui/preferences.c:958
-#: csuper-gui.glade:475
-msgid "Neither"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:862 csuper-gui.glade:452
-msgid "0"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:864 csuper-gui.glade:453
-msgid "1"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:866 csuper-gui.glade:454
-msgid "2"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:868 csuper-gui.glade:455
-msgid "3"
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:912
-msgid ""
-"Widget button_ok_new_game_configuration is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:952
-msgid ""
-"Widget new_game_configuration_spin_nb_max is missing in file csuper-gui."
-"glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:1052 Sources/csuper-gui/preferences.c:1093
-msgid ""
-"Widget grid_toolbar_button_preferences is missing in file csuper-gui.glade."
-msgstr ""
-
-#: Sources/csuper-gui/preferences.c:1145
-msgid ""
-"Widget apply_button_toolbar_preferences is missing in file csuper-gui.glade."
-msgstr ""
-
-#: csuper-gui.glade:17
+#: csuper-gui.glade:109
 msgid "Error while exporting the games configurations."
 msgstr ""
 
-#: csuper-gui.glade:24
+#: csuper-gui.glade:116
 msgid "Error while exporting the game configurations."
 msgstr ""
 
-#: csuper-gui.glade:58
+#: csuper-gui.glade:150
 msgid "Select the distributor"
 msgstr ""
 
-#: csuper-gui.glade:84
+#: csuper-gui.glade:179
 msgid "Folder where the new csu file will be saved"
 msgstr ""
 
-#: csuper-gui.glade:97
+#: csuper-gui.glade:190
 msgid "Number of players on the game"
 msgstr ""
 
-#: csuper-gui.glade:128
+#: csuper-gui.glade:217
 msgid "Your game configuration"
 msgstr ""
 
-#: csuper-gui.glade:156
+#: csuper-gui.glade:241
 msgid "Name of the new csu file"
 msgstr ""
 
-#: csuper-gui.glade:170
+#: csuper-gui.glade:253
 msgid "Type here the name of the new csu file"
 msgstr ""
 
-#: csuper-gui.glade:199
+#: csuper-gui.glade:280
 msgid "New game configuration"
 msgstr ""
 
-#: csuper-gui.glade:221
+#: csuper-gui.glade:302
 msgid "Cancel and go back to the game configuration preferences"
 msgstr ""
 
-#: csuper-gui.glade:236
+#: csuper-gui.glade:318
 msgid "Validate the new game configuration"
 msgstr ""
 
-#: csuper-gui.glade:268
+#: csuper-gui.glade:351
 msgid "Name of the game configuration"
 msgstr ""
 
-#: csuper-gui.glade:283
+#: csuper-gui.glade:364
 msgid "Use a maximum or minimum score or neither"
 msgstr ""
 
-#: csuper-gui.glade:298
+#: csuper-gui.glade:377
 msgid "Initial score"
 msgstr ""
 
-#: csuper-gui.glade:313
+#: csuper-gui.glade:390
 msgid "Number of decimals displayed"
 msgstr ""
 
-#: csuper-gui.glade:328
+#: csuper-gui.glade:403
 msgid "The winner is the player with the highest score"
 msgstr ""
 
-#: csuper-gui.glade:343
+#: csuper-gui.glade:416
 msgid "The points will be attributed in turn-based"
 msgstr ""
 
-#: csuper-gui.glade:358
+#: csuper-gui.glade:429
 msgid "Use of a distributor"
 msgstr ""
 
-#: csuper-gui.glade:373
+#: csuper-gui.glade:442
 msgid "Maximal or minimal score which a player can reach in the game"
 msgstr ""
 
-#: csuper-gui.glade:390
+#: csuper-gui.glade:457
 msgid "Type here the name of the game configuration"
 msgstr ""
 
-#: csuper-gui.glade:544
+#: csuper-gui.glade:595
 msgid "Csuper"
 msgstr ""
 
-#: csuper-gui.glade:566
+#: csuper-gui.glade:617
 msgid "_File"
 msgstr ""
 
-#: csuper-gui.glade:577 csuper-gui.glade:1132
+#: csuper-gui.glade:628 csuper-gui.glade:1352
 msgid "New csu file"
 msgstr ""
 
-#: csuper-gui.glade:590 csuper-gui.glade:1148
+#: csuper-gui.glade:641 csuper-gui.glade:1368
 msgid "Open a csu file"
 msgstr ""
 
-#: csuper-gui.glade:600
+#: csuper-gui.glade:651
 msgid "Recently open"
 msgstr ""
 
-#: csuper-gui.glade:603
+#: csuper-gui.glade:654
 msgid "Open a recent csu file"
 msgstr ""
 
-#: csuper-gui.glade:622 csuper-gui.glade:1164
+#: csuper-gui.glade:673 csuper-gui.glade:1384
 msgid "Save as a csu file"
 msgstr ""
 
-#: csuper-gui.glade:641
+#: csuper-gui.glade:686 csuper-gui.glade:1400
+msgid "Export the current game"
+msgstr ""
+
+#: csuper-gui.glade:705
 msgid "Properties of the file"
 msgstr ""
 
-#: csuper-gui.glade:660 csuper-gui.glade:1191
+#: csuper-gui.glade:724 csuper-gui.glade:1427
 msgid "Delete the current csu file"
 msgstr ""
 
-#: csuper-gui.glade:679 csuper-gui.glade:1207
-msgid "Print the current game"
-msgstr ""
-
-#: csuper-gui.glade:697
+#: csuper-gui.glade:743
 msgid "Quit csuper"
 msgstr ""
 
-#: csuper-gui.glade:714
+#: csuper-gui.glade:760
 msgid "_Edit"
 msgstr ""
 
-#: csuper-gui.glade:725 csuper-gui.glade:1233
+#: csuper-gui.glade:771 csuper-gui.glade:1454
 msgid "Undo the last \"End of turn\""
 msgstr ""
 
-#: csuper-gui.glade:738 csuper-gui.glade:1249
+#: csuper-gui.glade:784 csuper-gui.glade:1470
 msgid "Redo the last \"End of turn\""
 msgstr ""
 
-#: csuper-gui.glade:808
+#: csuper-gui.glade:854
 msgid "_Display"
 msgstr ""
 
-#: csuper-gui.glade:816
+#: csuper-gui.glade:862
 msgid "Display podium"
 msgstr ""
 
-#: csuper-gui.glade:819
+#: csuper-gui.glade:865
 msgid "Display the podium"
 msgstr ""
 
-#: csuper-gui.glade:830
+#: csuper-gui.glade:876
+msgid "Display the chart"
+msgstr ""
+
+#: csuper-gui.glade:877
+msgid "Display chart"
+msgstr ""
+
+#: csuper-gui.glade:886
+msgid "Display the statistics"
+msgstr ""
+
+#: csuper-gui.glade:887
+msgid "Display statistics"
+msgstr ""
+
+#: csuper-gui.glade:903
 msgid ""
 "Display the points differences between two consecutive player in the ranking"
 msgstr ""
 
-#: csuper-gui.glade:831
+#: csuper-gui.glade:904
 msgid "Display the difference between two player consecutive"
 msgstr ""
 
-#: csuper-gui.glade:841
+#: csuper-gui.glade:914
 msgid ""
 "Display the points differences between a player and the first one in the "
 "ranking"
 msgstr ""
 
-#: csuper-gui.glade:842
+#: csuper-gui.glade:915
 msgid "Display the difference with the first"
 msgstr ""
 
-#: csuper-gui.glade:852
+#: csuper-gui.glade:925
 msgid ""
 "Display the points differences between a player and the last one in the "
 "ranking"
 msgstr ""
 
-#: csuper-gui.glade:853
+#: csuper-gui.glade:926
 msgid "Display the difference with the last"
 msgstr ""
 
-#: csuper-gui.glade:867
+#: csuper-gui.glade:942
+msgid "Display the total points in each turn in the points grid"
+msgstr ""
+
+#: csuper-gui.glade:943
+msgid "Display the total points in each turn"
+msgstr ""
+
+#: csuper-gui.glade:953
+msgid "Display the ranking in each turn in the points grid"
+msgstr ""
+
+#: csuper-gui.glade:954
+msgid "Display the ranking in each turn"
+msgstr ""
+
+#: csuper-gui.glade:964
+msgid "Display the button which permit to edit and suppress a turn"
+msgstr ""
+
+#: csuper-gui.glade:965
+msgid "Display the edit and suppr button"
+msgstr ""
+
+#: csuper-gui.glade:981
+msgid "Display the ranking in the left side of the main window"
+msgstr ""
+
+#: csuper-gui.glade:982
+msgid "Display the ranking"
+msgstr ""
+
+#: csuper-gui.glade:992
+msgid "Display the calculator in the left side of the main window"
+msgstr ""
+
+#: csuper-gui.glade:993
+msgid "Display the calculator"
+msgstr ""
+
+#: csuper-gui.glade:1003
+msgid "Display the game infonrmations in the left side of the main window"
+msgstr ""
+
+#: csuper-gui.glade:1004
+msgid "Display the game infonrmations"
+msgstr ""
+
+#: csuper-gui.glade:1018
 msgid "_Preference"
 msgstr ""
 
-#: csuper-gui.glade:875 csuper-gui.glade:1396 csuper-gui.glade:2397
+#: csuper-gui.glade:1026 csuper-gui.glade:1617 csuper-gui.glade:3117
 msgid "Game configuration"
 msgstr ""
 
-#: csuper-gui.glade:878 csuper-gui.glade:1394
+#: csuper-gui.glade:1029 csuper-gui.glade:1615
 msgid "Open the game configuration preferences window"
 msgstr ""
 
-#: csuper-gui.glade:887 csuper-gui.glade:1412 csuper-gui.glade:3239
+#: csuper-gui.glade:1038 csuper-gui.glade:1633 csuper-gui.glade:3936
 msgid "Toolbar button"
 msgstr ""
 
-#: csuper-gui.glade:890 csuper-gui.glade:1410
+#: csuper-gui.glade:1041 csuper-gui.glade:1631
 msgid "Open the toolbar button preferences window"
 msgstr ""
 
-#: csuper-gui.glade:905
+#: csuper-gui.glade:1050 csuper-gui.glade:1648 csuper-gui.glade:4244
+msgid "Exportation"
+msgstr ""
+
+#: csuper-gui.glade:1053 csuper-gui.glade:1647
+msgid "Open the exportation preferences window"
+msgstr ""
+
+#: csuper-gui.glade:1068
 msgid "_Help"
 msgstr ""
 
-#: csuper-gui.glade:916 csuper-gui.glade:1437
+#: csuper-gui.glade:1079 csuper-gui.glade:1673
 msgid "About csuper"
 msgstr ""
 
-#: csuper-gui.glade:980
+#: csuper-gui.glade:1125
+msgid "<span size=\"x-large\">Ranking</span>"
+msgstr ""
+
+#: csuper-gui.glade:1135
 msgid "End of turn"
 msgstr ""
 
-#: csuper-gui.glade:988
+#: csuper-gui.glade:1143
 msgid "Save the new points"
 msgstr ""
 
-#: csuper-gui.glade:1061
-msgid "Game informations"
+#: csuper-gui.glade:1198
+msgid "<span size=\"x-large\">Game informations</span>"
 msgstr ""
 
-#: csuper-gui.glade:1076 csuper-gui.glade:1529
+#: csuper-gui.glade:1209 csuper-gui.glade:1763
 msgid "Change distributor"
 msgstr ""
 
-#: csuper-gui.glade:1080
+#: csuper-gui.glade:1213
 msgid "Change the distributor"
 msgstr ""
 
-#: csuper-gui.glade:1134
+#: csuper-gui.glade:1263
+msgid "<span size=\"x-large\">Calculator</span>"
+msgstr ""
+
+#: csuper-gui.glade:1278
+msgid "Insert here the calculation"
+msgstr ""
+
+#: csuper-gui.glade:1290
+msgid "No calculation"
+msgstr ""
+
+#: csuper-gui.glade:1301
+msgid "Validate the points"
+msgstr ""
+
+#: csuper-gui.glade:1305
+msgid ""
+"Change the points of the person selected to the result of the calculator."
+msgstr ""
+
+#: csuper-gui.glade:1354
 msgid "New"
 msgstr ""
 
-#: csuper-gui.glade:1150
+#: csuper-gui.glade:1370
 msgid "Open"
 msgstr ""
 
-#: csuper-gui.glade:1166
+#: csuper-gui.glade:1386
 msgid "Save as"
 msgstr ""
 
-#: csuper-gui.glade:1193 csuper-gui.glade:2105
+#: csuper-gui.glade:1402 csuper-gui.glade:3005
+msgid "Export"
+msgstr ""
+
+#: csuper-gui.glade:1429 csuper-gui.glade:2840
 msgid "Delete file"
 msgstr ""
 
-#: csuper-gui.glade:1209
-msgid "Print"
-msgstr ""
-
-#: csuper-gui.glade:1235
+#: csuper-gui.glade:1456
 msgid "Undo"
 msgstr ""
 
-#: csuper-gui.glade:1251
+#: csuper-gui.glade:1472
 msgid "Redo"
 msgstr ""
 
-#: csuper-gui.glade:1276 csuper-gui.glade:1278
+#: csuper-gui.glade:1497 csuper-gui.glade:1499
 msgid "Cut"
 msgstr ""
 
-#: csuper-gui.glade:1292 csuper-gui.glade:1294
+#: csuper-gui.glade:1513 csuper-gui.glade:1515
 msgid "Copy"
 msgstr ""
 
-#: csuper-gui.glade:1308 csuper-gui.glade:1310
+#: csuper-gui.glade:1529 csuper-gui.glade:1531
 msgid "Paste"
 msgstr ""
 
-#: csuper-gui.glade:1351
+#: csuper-gui.glade:1572
 msgid "See the properties of the file"
 msgstr ""
 
-#: csuper-gui.glade:1378
+#: csuper-gui.glade:1599
 msgid "Open the preferences window"
 msgstr ""
 
-#: csuper-gui.glade:1380 csuper-gui.glade:2185
+#: csuper-gui.glade:1601 csuper-gui.glade:2921
 msgid "Preferences"
 msgstr ""
 
-#: csuper-gui.glade:1439
+#: csuper-gui.glade:1675
 msgid "About"
 msgstr ""
 
-#: csuper-gui.glade:1486
+#: csuper-gui.glade:1720
 msgid "About Csuper"
 msgstr ""
 
-#: csuper-gui.glade:1495
-msgid "Copyright © 2014 Rémi BERTHO <remi.bertho@gmail.com>"
+#: csuper-gui.glade:1729
+msgid "Copyright © 2014-2015 Rémi BERTHO <remi.bertho@openmailbox.org>"
 msgstr ""
 
-#: csuper-gui.glade:1496
+#: csuper-gui.glade:1730
 msgid "Universal points counter allowing a dispense with reflection"
 msgstr ""
 
-#: csuper-gui.glade:1498
+#: csuper-gui.glade:1732
 msgid "Visit the website of Csuper"
 msgstr ""
 
-#: csuper-gui.glade:1501
+#: csuper-gui.glade:1735
 msgid ""
 "Rémi BERTHO\n"
 "Nicolas DANKAR"
 msgstr ""
 
-#: csuper-gui.glade:1549
+#: csuper-gui.glade:1783
 msgid "Cancel and return to the main window"
 msgstr ""
 
-#: csuper-gui.glade:1564 csuper-gui.glade:1679 csuper-gui.glade:1944
+#: csuper-gui.glade:1799 csuper-gui.glade:1909 csuper-gui.glade:2260
+#: csuper-gui.glade:2414 csuper-gui.glade:2487
 msgid "Validate and return to the main window"
 msgstr ""
 
-#: csuper-gui.glade:1627
-msgid "Please choose the new distributor"
+#: csuper-gui.glade:1861
+msgid "<span size=\"x-large\">Please choose the new distributor</span>"
 msgstr ""
 
-#: csuper-gui.glade:1655
+#: csuper-gui.glade:1885
 msgid "File's properties"
 msgstr ""
 
-#: csuper-gui.glade:1711
+#: csuper-gui.glade:1942
 msgid "Created on the: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1725
+#: csuper-gui.glade:1954
 msgid "File's version: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1738
+#: csuper-gui.glade:1965
 msgid "Maximum size of the names: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1751
+#: csuper-gui.glade:1976
 msgid "Number of players: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1764
+#: csuper-gui.glade:1987
 msgid "Maximum number of turns: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1777
+#: csuper-gui.glade:1998
 msgid "Name of the game configuration: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1790
+#: csuper-gui.glade:2009
 msgid "Use a maximum score: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1803
+#: csuper-gui.glade:2020
 msgid "Initial score: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1816
+#: csuper-gui.glade:2031
 msgid "Number of decimals displayed: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1829
+#: csuper-gui.glade:2042
 msgid "First way: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1842
+#: csuper-gui.glade:2053
 msgid "Turn-based game: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1855
+#: csuper-gui.glade:2064
 msgid "Use a distributor: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1868
+#: csuper-gui.glade:2075
 msgid "Maximum/minimum number of points: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1881
+#: csuper-gui.glade:2086
 msgid "Distributor: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1894
+#: csuper-gui.glade:2097
 msgid "Filename: no csu file loaded"
 msgstr ""
 
-#: csuper-gui.glade:1919
+#: csuper-gui.glade:2120
+msgid "Delete turn"
+msgstr ""
+
+#: csuper-gui.glade:2210
+msgid ""
+"<span size=\"large\">Please choose the player that \n"
+"you want to delete the turn</span>"
+msgstr ""
+
+#: csuper-gui.glade:2390
 msgid "Game over"
 msgstr ""
 
-#: csuper-gui.glade:1974
+#: csuper-gui.glade:2445
 msgid "The game is over, congratulation to the winner !"
 msgstr ""
 
-#: csuper-gui.glade:1994 csuper-gui.glade:2034 csuper-gui.glade:2042
+#: csuper-gui.glade:2465
+msgid "Statistics"
+msgstr ""
+
+#: csuper-gui.glade:2522
+msgid "<span font_weight=\"bold\" size=\"xx-large\">Statistics</span>"
+msgstr ""
+
+#: csuper-gui.glade:2569
+msgid "Edit turn"
+msgstr ""
+
+#: csuper-gui.glade:2659
+msgid "<span size=\"large\">Please choose the new points</span>"
+msgstr ""
+
+#: csuper-gui.glade:2686 csuper-gui.glade:2769 csuper-gui.glade:2777
 msgid "Error while loading the file."
 msgstr ""
 
-#: csuper-gui.glade:2002
+#: csuper-gui.glade:2694
 msgid "Error while deleting the file."
 msgstr ""
 
-#: csuper-gui.glade:2069
+#: csuper-gui.glade:2724
+msgid "Error while exporting the file."
+msgstr ""
+
+#: csuper-gui.glade:2732
+msgid ""
+"Error while exporting the file.\n"
+"Please try to use an other folder and/or filename."
+msgstr ""
+
+#: csuper-gui.glade:2804
 msgid "Error while saving the file."
 msgstr ""
 
-#: csuper-gui.glade:2077
+#: csuper-gui.glade:2812
 msgid ""
 "Error while saving the file.\n"
 "Please try to use an other folder and/or filename."
 msgstr ""
 
-#: csuper-gui.glade:2115
+#: csuper-gui.glade:2851
 msgid "Do you really want to delete this file?"
 msgstr ""
 
-#: csuper-gui.glade:2143
+#: csuper-gui.glade:2879
 msgid "The game is over"
 msgstr ""
 
-#: csuper-gui.glade:2151
+#: csuper-gui.glade:2887
 msgid ""
 "The game is over.\n"
 "Congratulation to the winner!"
 msgstr ""
 
-#: csuper-gui.glade:2241
+#: csuper-gui.glade:2977
 msgid "Add a game configuration"
 msgstr ""
 
-#: csuper-gui.glade:2253
+#: csuper-gui.glade:2990
 msgid "Import"
 msgstr ""
 
-#: csuper-gui.glade:2268
-msgid "Export"
-msgstr ""
-
-#: csuper-gui.glade:2287 csuper-gui.glade:2487
+#: csuper-gui.glade:3024 csuper-gui.glade:3910 csuper-gui.glade:4000
 msgid "Close the game preferences window"
 msgstr ""
 
-#: csuper-gui.glade:2314
-msgid "List of all your game configurations"
+#: csuper-gui.glade:3051
+msgid ""
+"<span font_weight=\"bold\" size=\"large\">List of all your game "
+"configurations</span>"
 msgstr ""
 
-#: csuper-gui.glade:2357
-msgid "The selected game configurations"
+#: csuper-gui.glade:3086
+msgid ""
+"<span font_weight=\"bold\" size=\"large\">The selected game configurations</"
+"span>"
 msgstr ""
 
-#: csuper-gui.glade:2419
+#: csuper-gui.glade:3158
 msgid "\"New\" button"
 msgstr ""
 
-#: csuper-gui.glade:2434
+#: csuper-gui.glade:3171
 msgid "\"Open\" button"
 msgstr ""
 
-#: csuper-gui.glade:2449
+#: csuper-gui.glade:3184
 msgid "\"Save as\" button"
 msgstr ""
 
-#: csuper-gui.glade:2471
-msgid "Apply the new preferences for the new toolbar button displayed"
-msgstr ""
-
-#: csuper-gui.glade:2511
+#: csuper-gui.glade:3197
 msgid "\"About\" button"
 msgstr ""
 
-#: csuper-gui.glade:2526 csuper-gui.glade:2586 csuper-gui.glade:2616
-#: csuper-gui.glade:2691 csuper-gui.glade:2751 csuper-gui.glade:2766
+#: csuper-gui.glade:3210 csuper-gui.glade:3437 csuper-gui.glade:3499
+#: csuper-gui.glade:3734 csuper-gui.glade:3827 csuper-gui.glade:3858
 msgid "Separator"
 msgstr ""
 
-#: csuper-gui.glade:2541
-msgid "\"Toolbar butoon preferences\" button"
-msgstr ""
-
-#: csuper-gui.glade:2556
-msgid "\"Game configuration preferences\" button"
-msgstr ""
-
-#: csuper-gui.glade:2571
-msgid "\"Preferences\" button"
-msgstr ""
-
-#: csuper-gui.glade:2601
-msgid "\"Properties\" button"
-msgstr ""
-
-#: csuper-gui.glade:2631
-msgid "\"Delete\" button"
-msgstr ""
-
-#: csuper-gui.glade:2646
-msgid "\"Paste\" button"
-msgstr ""
-
-#: csuper-gui.glade:2661
-msgid "\"Copy\" button"
-msgstr ""
-
-#: csuper-gui.glade:2676
-msgid "\"Cut\" button"
-msgstr ""
-
-#: csuper-gui.glade:2706
-msgid "\"Redo\" button"
-msgstr ""
-
-#: csuper-gui.glade:2721
-msgid "\"Undo\" button"
-msgstr ""
-
-#: csuper-gui.glade:2736
+#: csuper-gui.glade:3223
 msgid "\"Delete file\" button"
 msgstr ""
 
-#: csuper-gui.glade:2781
-msgid "\"Print\" button"
+#: csuper-gui.glade:3236
+msgid "\"Export\" button"
 msgstr ""
 
-#: csuper-gui.glade:2797 csuper-gui.glade:2817 csuper-gui.glade:2837
-#: csuper-gui.glade:2857 csuper-gui.glade:2877 csuper-gui.glade:2897
-#: csuper-gui.glade:2917 csuper-gui.glade:2937 csuper-gui.glade:2957
-#: csuper-gui.glade:2977 csuper-gui.glade:2997 csuper-gui.glade:3017
-#: csuper-gui.glade:3037 csuper-gui.glade:3057 csuper-gui.glade:3077
-#: csuper-gui.glade:3097 csuper-gui.glade:3117 csuper-gui.glade:3137
-#: csuper-gui.glade:3157 csuper-gui.glade:3177 csuper-gui.glade:3197
-#: csuper-gui.glade:3217
+#: csuper-gui.glade:3250 csuper-gui.glade:3268 csuper-gui.glade:3286
+#: csuper-gui.glade:3304 csuper-gui.glade:3322 csuper-gui.glade:3340
+#: csuper-gui.glade:3358 csuper-gui.glade:3389 csuper-gui.glade:3420
+#: csuper-gui.glade:3451 csuper-gui.glade:3482 csuper-gui.glade:3513
+#: csuper-gui.glade:3544 csuper-gui.glade:3575 csuper-gui.glade:3606
+#: csuper-gui.glade:3637 csuper-gui.glade:3655 csuper-gui.glade:3686
+#: csuper-gui.glade:3717 csuper-gui.glade:3748 csuper-gui.glade:3779
+#: csuper-gui.glade:3810 csuper-gui.glade:3841
 msgid "Do not display"
 msgstr ""
 
-#: csuper-gui.glade:2798 csuper-gui.glade:2818 csuper-gui.glade:2838
-#: csuper-gui.glade:2858 csuper-gui.glade:2878 csuper-gui.glade:2898
-#: csuper-gui.glade:2918 csuper-gui.glade:2938 csuper-gui.glade:2958
-#: csuper-gui.glade:2978 csuper-gui.glade:2998 csuper-gui.glade:3018
-#: csuper-gui.glade:3038 csuper-gui.glade:3058 csuper-gui.glade:3078
-#: csuper-gui.glade:3098 csuper-gui.glade:3118 csuper-gui.glade:3138
-#: csuper-gui.glade:3158 csuper-gui.glade:3178 csuper-gui.glade:3198
-#: csuper-gui.glade:3218
+#: csuper-gui.glade:3251 csuper-gui.glade:3269 csuper-gui.glade:3287
+#: csuper-gui.glade:3305 csuper-gui.glade:3323 csuper-gui.glade:3341
+#: csuper-gui.glade:3359 csuper-gui.glade:3390 csuper-gui.glade:3421
+#: csuper-gui.glade:3452 csuper-gui.glade:3483 csuper-gui.glade:3514
+#: csuper-gui.glade:3545 csuper-gui.glade:3576 csuper-gui.glade:3607
+#: csuper-gui.glade:3638 csuper-gui.glade:3656 csuper-gui.glade:3687
+#: csuper-gui.glade:3718 csuper-gui.glade:3749 csuper-gui.glade:3780
+#: csuper-gui.glade:3811 csuper-gui.glade:3842
 msgid "Display image"
 msgstr ""
 
-#: csuper-gui.glade:2799 csuper-gui.glade:2819 csuper-gui.glade:2839
-#: csuper-gui.glade:2859 csuper-gui.glade:2879 csuper-gui.glade:2899
-#: csuper-gui.glade:2919 csuper-gui.glade:2939 csuper-gui.glade:2959
-#: csuper-gui.glade:2979 csuper-gui.glade:2999 csuper-gui.glade:3019
-#: csuper-gui.glade:3039 csuper-gui.glade:3059 csuper-gui.glade:3079
-#: csuper-gui.glade:3099 csuper-gui.glade:3119 csuper-gui.glade:3139
-#: csuper-gui.glade:3159 csuper-gui.glade:3179 csuper-gui.glade:3199
-#: csuper-gui.glade:3219
+#: csuper-gui.glade:3252 csuper-gui.glade:3270 csuper-gui.glade:3288
+#: csuper-gui.glade:3306 csuper-gui.glade:3324 csuper-gui.glade:3342
+#: csuper-gui.glade:3360 csuper-gui.glade:3391 csuper-gui.glade:3422
+#: csuper-gui.glade:3453 csuper-gui.glade:3484 csuper-gui.glade:3515
+#: csuper-gui.glade:3546 csuper-gui.glade:3577 csuper-gui.glade:3608
+#: csuper-gui.glade:3639 csuper-gui.glade:3657 csuper-gui.glade:3688
+#: csuper-gui.glade:3719 csuper-gui.glade:3750 csuper-gui.glade:3781
+#: csuper-gui.glade:3812 csuper-gui.glade:3843
 msgid "Display text and image"
 msgstr ""
 
-#: csuper-gui.glade:3251
+#: csuper-gui.glade:3375
+msgid "\"Paste\" button"
+msgstr ""
+
+#: csuper-gui.glade:3406
+msgid "\"Delete\" button"
+msgstr ""
+
+#: csuper-gui.glade:3468
+msgid "\"Properties\" button"
+msgstr ""
+
+#: csuper-gui.glade:3530
+msgid "\"Preferences\" button"
+msgstr ""
+
+#: csuper-gui.glade:3561
+msgid "\"Game configuration preferences\" button"
+msgstr ""
+
+#: csuper-gui.glade:3592
+msgid "\"Toolbar butoon preferences\" button"
+msgstr ""
+
+#: csuper-gui.glade:3623
+msgid "\"Exportation preferences\" button"
+msgstr ""
+
+#: csuper-gui.glade:3672
+msgid "\"Copy\" button"
+msgstr ""
+
+#: csuper-gui.glade:3703
+msgid "\"Cut\" button"
+msgstr ""
+
+#: csuper-gui.glade:3765
+msgid "\"Redo\" button"
+msgstr ""
+
+#: csuper-gui.glade:3796
+msgid "\"Undo\" button"
+msgstr ""
+
+#: csuper-gui.glade:3893 csuper-gui.glade:3983
+msgid "Apply the new preferences for the new toolbar button displayed"
+msgstr ""
+
+#: csuper-gui.glade:3960
+msgid "<span font_weight=\"bold\" size=\"large\">PDF exportation</span>"
+msgstr ""
+
+#: csuper-gui.glade:4022
+msgid ""
+"The UTF-8 character set permit to display all the character with the cost of "
+"bigger pdf file."
+msgstr ""
+
+#: csuper-gui.glade:4024
+msgid "Use the UTF-8 character set"
+msgstr ""
+
+#: csuper-gui.glade:4051
+msgid "Direction of the pdf document"
+msgstr ""
+
+#: csuper-gui.glade:4066
+msgid "Portrait"
+msgstr ""
+
+#: csuper-gui.glade:4067
+msgid "Landscape"
+msgstr ""
+
+#: csuper-gui.glade:4081
+msgid "Size of the pdf document"
+msgstr ""
+
+#: csuper-gui.glade:4096
+msgid "A5"
+msgstr ""
+
+#: csuper-gui.glade:4097
+msgid "A4"
+msgstr ""
+
+#: csuper-gui.glade:4098
+msgid "A3"
+msgstr ""
+
+#: csuper-gui.glade:4112
+msgid "Margin of the pdf document"
+msgstr ""
+
+#: csuper-gui.glade:4146
+msgid "Font size of the pdf document"
+msgstr ""
+
+#: csuper-gui.glade:4180
+msgid "Show the total points in each turn"
+msgstr ""
+
+#: csuper-gui.glade:4208
+msgid "Show the ranking in each turn"
+msgstr ""
+
+#: csuper-gui.glade:4256
 msgid "Error while importing the games configurations."
 msgstr ""
 
-#: csuper-gui.glade:3259
+#: csuper-gui.glade:4264
 msgid "Error while importing the game configurations."
 msgstr ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-27 23:40+0100\n"
+"POT-Creation-Date: 2015-05-21 20:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -68,33 +68,33 @@ msgid ""
 "Ranking |"
 msgstr ""
 
-#: Sources/csuper-cli/display.c:351
+#: Sources/csuper-cli/display.c:349
 #, c-format
 msgid ""
 "\n"
 "The game is over.\n"
 msgstr ""
 
-#: Sources/csuper-cli/display.c:439
+#: Sources/csuper-cli/display.c:421
 #, c-format
 msgid ""
 "\n"
-"Csuper Copyright (C) 2014 Remi BERTHO <remi.bertho@gmail.com>\n"
+"Csuper Copyright (C) 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>\n"
 "This program comes with ABSOLUTELY NO WARRANTY. \n"
 "This is free software, and you are welcome to redistribute it under certain "
 "conditions. \n"
 "Fore more details : http://www.gnu.org/licenses/gpl.html\n"
 msgstr ""
 
-#: Sources/csuper-cli/display.c:451
+#: Sources/csuper-cli/display.c:433
 msgid "yes"
 msgstr ""
 
-#: Sources/csuper-cli/display.c:452
+#: Sources/csuper-cli/display.c:434
 msgid "no"
 msgstr ""
 
-#: Sources/csuper-cli/display.c:453
+#: Sources/csuper-cli/display.c:435
 #, c-format
 msgid ""
 "\n"
@@ -107,12 +107,12 @@ msgid ""
 "Use of a distributor: %s\n"
 msgstr ""
 
-#: Sources/csuper-cli/display.c:459 Sources/csuper-cli/display.c:464
+#: Sources/csuper-cli/display.c:441 Sources/csuper-cli/display.c:446
 #, c-format
 msgid "Maximum/minimum number of points: %.3f\n"
 msgstr ""
 
-#: Sources/csuper-cli/display.c:462
+#: Sources/csuper-cli/display.c:444
 #, c-format
 msgid "Maximum/minimum number of points: inf\n"
 msgstr ""
@@ -143,20 +143,21 @@ msgid ""
 " (%d) Display the results of an existing game\n"
 " (%d) Delete a game\n"
 " (%d) Display all existing games\n"
+" (%d) Export a file\n"
 " (%d) Display the preferences menu\n"
 " (%d) Quit the program\n"
 "\n"
 "Your choice : "
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:302
+#: Sources/csuper-cli/interface.c:305
 #, c-format
 msgid ""
 "\n"
 "See you.\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:306 Sources/csuper-cli/interface.c:361
+#: Sources/csuper-cli/interface.c:309 Sources/csuper-cli/interface.c:365
 #, c-format
 msgid ""
 "\n"
@@ -164,14 +165,14 @@ msgid ""
 "to do.\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:333
+#: Sources/csuper-cli/interface.c:336
 #, c-format
 msgid ""
 "\n"
 "What do you want to do?\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:335
+#: Sources/csuper-cli/interface.c:338
 #, c-format
 msgid ""
 "\n"
@@ -179,7 +180,7 @@ msgid ""
 " (%d) Display the folder where files will be saved"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:337
+#: Sources/csuper-cli/interface.c:340
 #, c-format
 msgid ""
 "\n"
@@ -189,24 +190,25 @@ msgid ""
 " (%d) Display a game configuration\n"
 " (%d) Export game configurations\n"
 " (%d) Import game configurations\n"
+" (%d) Change pdf export preferences\n"
 " (%d) Back to main menu\n"
 "\n"
 "Your choice : "
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:407
+#: Sources/csuper-cli/interface.c:413
 #, c-format
 msgid "Your files are saved in %s\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:509 Sources/csuper-cli/menu.c:86
+#: Sources/csuper-cli/interface.c:515 Sources/csuper-cli/menu.c:86
 #, c-format
 msgid ""
 "\n"
 "Which game configuration would you like to use?\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:516 Sources/csuper-cli/interface.c:581
+#: Sources/csuper-cli/interface.c:522 Sources/csuper-cli/interface.c:587
 #: Sources/csuper-cli/menu.c:94
 #, c-format
 msgid ""
@@ -214,49 +216,78 @@ msgid ""
 "Your choice: "
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:518 Sources/csuper-cli/interface.c:583
+#: Sources/csuper-cli/interface.c:524 Sources/csuper-cli/interface.c:589
 #: Sources/csuper-cli/menu.c:96 Sources/csuper-cli/menu.c:422
 #: Sources/csuper-cli/menu.c:476
 #, c-format
 msgid "You chose %d\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:525 Sources/csuper-cli/interface.c:592
+#: Sources/csuper-cli/interface.c:531 Sources/csuper-cli/interface.c:598
 #, c-format
 msgid ""
 "\n"
 "You do not have any game configuration file.\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:546 Sources/csuper-cli/menu.c:403
+#: Sources/csuper-cli/interface.c:552 Sources/csuper-cli/menu.c:403
 #, c-format
 msgid ""
 "\n"
 "Here are all your game configurations:\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:574
+#: Sources/csuper-cli/interface.c:580
 #, c-format
 msgid ""
 "\n"
 "Which game configuration would you like to display?\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:622
+#: Sources/csuper-cli/interface.c:628
 #, c-format
 msgid ""
 "\n"
 "Game configurations were exported successfully in %s\n"
 msgstr ""
 
-#: Sources/csuper-cli/interface.c:653
+#: Sources/csuper-cli/interface.c:659
 #, c-format
 msgid ""
 "\n"
 "Game configurations were successfully imported from %s\n"
 msgstr ""
 
-#: Sources/csuper-cli/keyboarding.c:164
+#: Sources/csuper-cli/interface.c:685 Sources/csuper-cli/interface.c:729
+#: Sources/csuper-cli/interface.c:755 Sources/csuper-cli/interface.c:782
+#: Sources/csuper-cli/interface.c:826 Sources/csuper-cli/interface.c:833
+#: Sources/csuper-cli/interface.c:841 Sources/csuper-cli/interface.c:849
+#, c-format
+msgid "The file was well export to %s\n"
+msgstr ""
+
+#: Sources/csuper-cli/interface.c:687 Sources/csuper-cli/interface.c:828
+#, c-format
+msgid "There is an error when exporting the file %s into a pdf file.\n"
+msgstr ""
+
+#: Sources/csuper-cli/interface.c:731 Sources/csuper-cli/interface.c:757
+#: Sources/csuper-cli/interface.c:843
+#, c-format
+msgid "There is an error when exporting the file %s into a csv file.\n"
+msgstr ""
+
+#: Sources/csuper-cli/interface.c:784 Sources/csuper-cli/interface.c:851
+#, c-format
+msgid "There is an error when exporting the file %s into a m file.\n"
+msgstr ""
+
+#: Sources/csuper-cli/interface.c:835
+#, c-format
+msgid "There is an error when exporting the file %s into gnuplot files.\n"
+msgstr ""
+
+#: Sources/csuper-cli/keyboarding.c:180
 #, c-format
 msgid ""
 "\n"
@@ -517,5 +548,81 @@ msgstr ""
 msgid ""
 "\n"
 "Give the id of the %dth configuration you want to import.\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:509
+#, c-format
+msgid ""
+"The UTF-8 character set permit to display all the character with the cost of "
+"bigger pdf file.\n"
+"\n"
+"Would you like to use the UTF-8 character set (y/N)? "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:518
+#, c-format
+msgid ""
+"\n"
+"\n"
+"What page direction of the page do you want?\n"
+" (1) Portrait (default)\n"
+" (2) Landscape\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:526
+#, c-format
+msgid ""
+"\n"
+"\n"
+"What size of page do you want?\n"
+" (1) A3\n"
+" (2) A4 (default)\n"
+" (3) A5 \n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:538
+#, c-format
+msgid ""
+"\n"
+"Give the margin you want or -1 if want to keep the old one (%d). It will be "
+"between 0 and 200.\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:547
+#, c-format
+msgid ""
+"\n"
+"Give the font size you want or -1 if want to keep the old one (%d). It will "
+"be between 4 and 40.\n"
+"Your choice: "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:554
+#, c-format
+msgid ""
+"\n"
+"Would you like to display the total points in each turn (y/N)? "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:562
+#, c-format
+msgid ""
+"\n"
+"Would you like to display the ranking in each turn (y/N)? "
+msgstr ""
+
+#: Sources/csuper-cli/menu.c:579
+#, c-format
+msgid ""
+"\n"
+"In what file type would you like to export?\n"
+" (1) PDF file (default)\n"
+" (2) CSV file\n"
+" (3) Gnuplot files\n"
+" (4) m files (octave/matlab file)\n"
 "Your choice: "
 msgstr ""

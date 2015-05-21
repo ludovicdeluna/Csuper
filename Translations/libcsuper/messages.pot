@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-10-27 23:40+0100\n"
+"POT-Creation-Date: 2015-05-21 20:35+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,22 +17,44 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Sources/libcsuper/csu_files.c:78
+#: Sources/libcsuper/calculator.c:268 Sources/libcsuper/calculator.c:303
+#: Sources/libcsuper/calculator.c:338
+#, c-format
+msgid ""
+"\n"
+"Cannot insert a node after a NULL node.\n"
+msgstr ""
+
+#: Sources/libcsuper/calculator.c:360
+#, c-format
+msgid ""
+"\n"
+"Cannot delete the current node : the node is NULL.\n"
+msgstr ""
+
+#: Sources/libcsuper/calculator.c:551
+#, c-format
+msgid ""
+"\n"
+"Erreur when converting the string into the list.\n"
+msgstr ""
+
+#: Sources/libcsuper/csu_files.c:81
 #, c-format
 msgid ""
 "\n"
 "Error: The file could not be read.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:89 Sources/libcsuper/game_config.c:468
-#: Sources/libcsuper/game_config.c:547
+#: Sources/libcsuper/csu_files.c:92 Sources/libcsuper/game_config.c:317
+#: Sources/libcsuper/game_config.c:402
 #, c-format
 msgid ""
 "\n"
 "Error: File not compatible.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:100
+#: Sources/libcsuper/csu_files.c:103
 #, c-format
 msgid ""
 "\n"
@@ -40,30 +62,352 @@ msgid ""
 "files with versions higher than the %1.1f.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:153
+#: Sources/libcsuper/csu_files.c:157
 #, c-format
 msgid ""
 "\n"
 "Error: corrupted file.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:178
+#: Sources/libcsuper/csu_files.c:442 Sources/libcsuper/preferences_files.c:825
+#, c-format
+msgid "Invalid XML Document\n"
+msgstr ""
+
+#: Sources/libcsuper/csu_files.c:451
+#, c-format
+msgid "Document non csu\n"
+msgstr ""
+
+#: Sources/libcsuper/csu_files.c:463
 #, c-format
 msgid ""
 "\n"
-"Error while writing the file.\n"
+"Error: the file's version is the %1.1f whereas the software only supports "
+"files with versions %1.1f.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_struct.c:265
+#: Sources/libcsuper/csu_struct.c:261
 #, c-format
 msgid "The distributor was initializes by default to %s.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_struct.c:332
+#: Sources/libcsuper/csu_struct.c:328
 #, c-format
 msgid ""
 "\n"
 "Error: this name doesn't exist.\n"
+msgstr ""
+
+#: Sources/libcsuper/csu_struct.c:413
+#, c-format
+msgid ""
+"\n"
+"Error: this index doesn't exist\n"
+msgstr ""
+
+#: Sources/libcsuper/csu_struct.c:435 Sources/libcsuper/csu_struct.c:568
+#, c-format
+msgid ""
+"\n"
+"Error: %s only have %.0f turn but you ask the %d turn\n"
+msgstr ""
+
+#: Sources/libcsuper/csu_struct.c:440 Sources/libcsuper/csu_struct.c:573
+#, c-format
+msgid ""
+"\n"
+"Error: negative turns doesn't exist\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:209
+#, c-format
+msgid "Error: cannot create PdfDoc object\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:237
+#, c-format
+msgid ""
+"\n"
+"Error:The font doesn't exsist\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:297
+#, c-format
+msgid "Turn %d"
+msgstr ""
+
+#: Sources/libcsuper/export.c:357 Sources/libcsuper/export.c:643
+#: Sources/libcsuper/export.c:703
+msgid "Name"
+msgstr ""
+
+#: Sources/libcsuper/export.c:420
+msgid "Legend"
+msgstr ""
+
+#: Sources/libcsuper/export.c:428 Sources/libcsuper/export.c:441
+#: Sources/libcsuper/export.c:452
+msgid "Points"
+msgstr ""
+
+#: Sources/libcsuper/export.c:430 Sources/libcsuper/export.c:443
+msgid "Total"
+msgstr ""
+
+#: Sources/libcsuper/export.c:432 Sources/libcsuper/export.c:454
+#: Sources/libcsuper/export.c:670
+msgid "Ranking"
+msgstr ""
+
+#: Sources/libcsuper/export.c:506
+#, c-format
+msgid "File created on the %02.0f/%02.0f/%4.0f"
+msgstr ""
+
+#: Sources/libcsuper/export.c:511
+#, c-format
+msgid "Number of players: %.0f"
+msgstr ""
+
+#: Sources/libcsuper/export.c:516
+#, c-format
+msgid "Maximum number of turns: %d"
+msgstr ""
+
+#: Sources/libcsuper/export.c:521
+#, c-format
+msgid "Name of the game configuration: %s"
+msgstr ""
+
+#: Sources/libcsuper/export.c:543
+msgid "Page 1"
+msgstr ""
+
+#: Sources/libcsuper/export.c:648
+msgid "Total points"
+msgstr ""
+
+#: Sources/libcsuper/export.c:708
+msgid "Mean points"
+msgstr ""
+
+#: Sources/libcsuper/export.c:716
+msgid "Nb turn"
+msgstr ""
+
+#: Sources/libcsuper/export.c:724
+msgid "Nb turn best"
+msgstr ""
+
+#: Sources/libcsuper/export.c:732
+msgid "Nb turn worst"
+msgstr ""
+
+#: Sources/libcsuper/export.c:740
+msgid "Nb turn first"
+msgstr ""
+
+#: Sources/libcsuper/export.c:748
+msgid "Nb turn last"
+msgstr ""
+
+#: Sources/libcsuper/export.c:811
+#, c-format
+msgid "Page %d"
+msgstr ""
+
+#: Sources/libcsuper/export.c:909
+#, c-format
+msgid ""
+"Csu file;\n"
+"Created on the;%02.0f/%02.0f/%4.0f;\n"
+"File's version;%1.1f;\n"
+"Maximum size of the names;%.0f;\n"
+"Number of players;%.0f;\n"
+"Maximum number of turns;%d;\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:915
+msgid "yes"
+msgstr ""
+
+#: Sources/libcsuper/export.c:916
+msgid "no"
+msgstr ""
+
+#: Sources/libcsuper/export.c:917
+#, c-format
+msgid ""
+"Name of the game configuration;%s;\n"
+"Use of a maximum score;%s;\n"
+"Initial score;%.3f;\n"
+"Number of decimals displayed;%d;\n"
+"The first has the highest score;%s;\n"
+"Turn-based game;%s;\n"
+"Use of a distributor;%s;\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:924 Sources/libcsuper/export.c:929
+#, c-format
+msgid "Maximum/minimum number of points;%.3f;\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:927
+#, c-format
+msgid "Maximum/minimum number of points;inf;\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:933
+#, c-format
+msgid ""
+"\n"
+"Names;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:935 Sources/libcsuper/export.c:994
+#, c-format
+msgid "%s;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:938
+#, c-format
+msgid ""
+"\n"
+"Mean points;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:940 Sources/libcsuper/export.c:945
+#: Sources/libcsuper/export.c:999
+#, c-format
+msgid "%f;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:943
+#, c-format
+msgid ""
+"\n"
+"Number of turn;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:948
+#, c-format
+msgid ""
+"\n"
+"Number of turn with the best score;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:950 Sources/libcsuper/export.c:955
+#: Sources/libcsuper/export.c:960 Sources/libcsuper/export.c:965
+#, c-format
+msgid "%d;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:953
+#, c-format
+msgid ""
+"\n"
+"Number of turn with the worst score;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:958
+#, c-format
+msgid ""
+"\n"
+"Number of turn first;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:963
+#, c-format
+msgid ""
+"\n"
+"Number of turn last;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:968
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Names"
+msgstr ""
+
+#: Sources/libcsuper/export.c:970
+#, c-format
+msgid ";;%s;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:973
+#, c-format
+msgid ""
+"\n"
+"Legend;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:975
+#, c-format
+msgid "Points in the turn;Points;Ranking;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:980
+#, c-format
+msgid ""
+"\n"
+"Turn %d;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:992
+#, c-format
+msgid ""
+"\n"
+"\n"
+"Names;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:997
+#, c-format
+msgid ""
+"\n"
+"Total points;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:1002
+#, c-format
+msgid ""
+"\n"
+"Ranking;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:1004
+#, c-format
+msgid "%.0f;"
+msgstr ""
+
+#: Sources/libcsuper/export.c:1078
+#, c-format
+msgid "title('Total points');\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:1079 Sources/libcsuper/export.c:1131
+#, c-format
+msgid "xlabel('Turn');\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:1080 Sources/libcsuper/export.c:1132
+#, c-format
+msgid "ylabel('Points');\n"
+msgstr ""
+
+#: Sources/libcsuper/export.c:1115
+#, c-format
+msgid ""
+"\n"
+"fprintf('Mean score of %s : %%f\\n',mean(%c2));"
+msgstr ""
+
+#: Sources/libcsuper/export.c:1130
+#, c-format
+msgid "title('Points');\n"
 msgstr ""
 
 #: Sources/libcsuper/file.c:50
@@ -78,7 +422,7 @@ msgstr ""
 msgid "Error while closing the file"
 msgstr ""
 
-#: Sources/libcsuper/file.c:108 Sources/libcsuper/game_config.c:315
+#: Sources/libcsuper/file.c:108
 #, c-format
 msgid ""
 "\n"
@@ -106,50 +450,63 @@ msgid ""
 "The file %s was well renamed in %s.\n"
 msgstr ""
 
-#: Sources/libcsuper/filename.c:138
+#: Sources/libcsuper/filename.c:212
 #, c-format
 msgid ""
 "\n"
 "Error: this folder is not valid.\n"
 msgstr ""
 
-#: Sources/libcsuper/filename.c:173
+#: Sources/libcsuper/filename.c:247
 #, c-format
 msgid ""
 "\n"
 "Error : this filename is not valid.\n"
 msgstr ""
 
-#: Sources/libcsuper/game_config.c:163
+#: Sources/libcsuper/game_config.c:83
 #, c-format
 msgid ""
 "\n"
 "The game configuration %s already exists.\n"
 msgstr ""
 
-#: Sources/libcsuper/game_config.c:321
-#, c-format
-msgid ""
-"\n"
-"The file %s was well deleted.\n"
-msgstr ""
-
-#: Sources/libcsuper/game_config.c:401 Sources/libcsuper/game_config.c:409
-#, c-format
-msgid ""
-"\n"
-"Error while exporting game configurations.\n"
-msgstr ""
-
-#: Sources/libcsuper/game_config.c:460 Sources/libcsuper/game_config.c:476
-#: Sources/libcsuper/game_config.c:539
+#: Sources/libcsuper/game_config.c:309 Sources/libcsuper/game_config.c:325
+#: Sources/libcsuper/game_config.c:394
 #, c-format
 msgid ""
 "\n"
 "Error while importing game configurations.\n"
 msgstr ""
 
-#: Sources/libcsuper/main_argument.c:87
+#: Sources/libcsuper/game_config.c:492
+#, c-format
+msgid "Not a csu game configuration file\n"
+msgstr ""
+
+#: Sources/libcsuper/game_config.c:501
+#, c-format
+msgid ""
+"This version of Csuper only support game configuration file version of "
+"%.1f.\n"
+msgstr ""
+
+#: Sources/libcsuper/gnuplot.c:69
+#, c-format
+msgid "\"Players\""
+msgstr ""
+
+#: Sources/libcsuper/gnuplot.c:126
+#, c-format
+msgid ""
+"set datafile missing '-'\n"
+"set style data linespoints\n"
+"set xlabel \"Number of turns\"\n"
+"set ylabel \"Points\"\n"
+"set title \"Points on %s\"\n"
+msgstr ""
+
+#: Sources/libcsuper/main_argument.c:117
 #, c-format
 msgid ""
 "\n"
@@ -157,31 +514,69 @@ msgid ""
 "Here is the syntax to use it.\n"
 msgstr ""
 
-#: Sources/libcsuper/main_argument.c:88
+#: Sources/libcsuper/main_argument.c:118
 #, c-format
 msgid "\t- Do not use argument to launch the main menu.\n"
 msgstr ""
 
-#: Sources/libcsuper/main_argument.c:89
+#: Sources/libcsuper/main_argument.c:119
 #, c-format
 msgid ""
-"\t- Use the argument '%s' or '%s' followed by the file name to launch "
+"\t- Use the argument '%s' or '%s' followed by the filename to launch "
 "directly the program on this file.\n"
 msgstr ""
 
-#: Sources/libcsuper/main_argument.c:90
+#: Sources/libcsuper/main_argument.c:120
 #, c-format
 msgid ""
-"\t- Use the argument '%s' or '%s' followed by the file name to display "
+"\t- Use the argument '%s' or '%s' followed by the filename to display "
 "directly the content of the file.\n"
 msgstr ""
 
-#: Sources/libcsuper/preferences_files.c:306
-#: Sources/libcsuper/preferences_files.c:311
+#: Sources/libcsuper/main_argument.c:121
+#, c-format
+msgid ""
+"\t- Use the argument '%s' or '%s' followed by the filename and the export "
+"filename to export the csu file into a pdf file.\n"
+msgstr ""
+
+#: Sources/libcsuper/main_argument.c:122
+#, c-format
+msgid ""
+"\t- Use the argument '%s' or '%s' followed by the filename and the export "
+"filename to export the csu file into a csv file.\n"
+msgstr ""
+
+#: Sources/libcsuper/main_argument.c:123
+#, c-format
+msgid ""
+"\t- Use the argument '%s' or '%s' followed by the filename and the export "
+"filename to export the csu file into gnuplot files.\n"
+msgstr ""
+
+#: Sources/libcsuper/main_argument.c:124
+#, c-format
+msgid ""
+"\t- Use the argument '%s' or '%s' followed by the filename and the export "
+"filename to export the csu file into a m file (octave/matlab file).\n"
+msgstr ""
+
+#: Sources/libcsuper/preferences_files.c:323
+#: Sources/libcsuper/preferences_files.c:328
 #, c-format
 msgid ""
 "\n"
 "Error while reading the file containing the system path.\n"
+msgstr ""
+
+#: Sources/libcsuper/preferences_files.c:882
+#, c-format
+msgid "Not a csu preferences file\n"
+msgstr ""
+
+#: Sources/libcsuper/preferences_files.c:892
+#, c-format
+msgid "This version of Csuper only support preferences file version of %.1f.\n"
 msgstr ""
 
 #: Sources/libcsuper/share.c:58
@@ -198,7 +593,7 @@ msgid ""
 "Error while clearing the screen.\n"
 msgstr ""
 
-#: Sources/libcsuper/share.c:165 Sources/libcsuper/share.c:184
+#: Sources/libcsuper/share.c:165 Sources/libcsuper/share.c:190
 #, c-format
 msgid ""
 "\n"

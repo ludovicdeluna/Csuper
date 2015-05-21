@@ -344,8 +344,8 @@ void addXmlFloatNode(xmlNodePtr parent, char *name, float value, int decimal_pla
  */
 void addXmlBoolNode(xmlNodePtr parent, char *name, int value)
 {
-    char *yes=_("yes");
-    char *no=_("no");
+    char *yes="yes";
+    char *no="no";
     xmlNodePtr tmp_node;
 
     tmp_node = xmlNewNode(NULL, BAD_CAST name);
