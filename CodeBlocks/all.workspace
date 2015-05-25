@@ -1,14 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
-		<Project filename="csuper-gui.cbp">
-			<Depends filename="libcsuper.cbp" />
-			<Depends filename="libslope.cbp" />
-		</Project>
 		<Project filename="libcsuper.cbp" />
 		<Project filename="csuper-cli.cbp">
 			<Depends filename="libcsuper.cbp" />
 		</Project>
-		<Project filename="libslope.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

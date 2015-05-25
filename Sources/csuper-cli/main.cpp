@@ -1,13 +1,13 @@
 /*!
- * \file    csuper.h
- * \brief   Include of csuper
+ * \file    main.cpp
+ * \brief   Begin csuper
  * \author  Remi BERTHO
- * \date    17/04/14
- * \version 2.2.0
+ * \date    25/05/15
+ * \version 4.3.0
  */
 
- /*
- * csuper.h
+/*
+ * main.cpp
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
@@ -24,37 +24,36 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
+ * aint with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
  *
  */
 
-
-#ifndef CSUPER_H_INCLUDED
-#define CSUPER_H_INCLUDED
-
-/*!
- * \def CSUPER
- * Define that we compile csuper.
- */
-#define CSUPER
-
 #include "../libcsuper/libcsuper.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <locale.h>
-#include <libintl.h>
+#include <clocale>
+#include <iostream>
 
+using namespace csuper;
+using namespace std;
 
 /*!
- * \def _(String)
- * Define the _ for gettext.
+ * \fn int main(int argc, char *argv[])
+ *  Begin csuper.
+ * \param[in] argc the number of argument.
+ * \param[in] argv the array of argument.
+ * \return EXIT_SUCCESS if everything is OK
  */
-#define _(STRING) gettext(STRING)
+int main(int argc, char *argv[])
+{
+    setlocale(LC_ALL,"");
+    bindtextdomain("csuper-cli","Locales");
+    textdomain("csuper-cli");
 
+    GameConfiguration game_config(500,false,true,true,0,true,"Uno",0);
+    cout << game_config.name() << endl;
 
+    return 0;
+}
 
-#endif // CSUPER_H_INCLUDED

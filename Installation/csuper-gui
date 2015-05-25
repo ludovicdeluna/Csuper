@@ -1,3 +1,0 @@
-#!/bin/bash
-cd /usr/share/csuper
-/usr/share/csuper/csuper-gui "$1"

@@ -1,6 +1,4 @@
 #!/bin/bash
 cd Man
-pandoc -s -t man csuper-gui.1.md -o csuper-gui.1
-gzip -f csuper-gui.1
 pandoc -s -t man csuper-cli.1.md -o csuper-cli.1
 gzip -f csuper-cli.1

@@ -2,8 +2,8 @@
  * \file    share.h
  * \brief   Header for the essential function of libcsuper
  * \author  Remi BERTHO
- * \date    25/01/15
- * \version 4.1.0
+ * \date    25/05/15
+ * \version 4.3.0
  */
 
 /*
@@ -32,48 +32,23 @@
 *
 */
 
-#ifndef FONCTION_H_INCLUDED
-#define FONCTION_H_INCLUDED
+#ifndef SHARE_H_INCLUDED
+#define SHARE_H_INCLUDED
 
-#include <sys/stat.h>
-#include <sys/types.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <string.h>
-#include <libintl.h>
-#include <stdbool.h>
-#include <hpdf.h>
-#include <math.h>
-#include <locale.h>
+#include <glibmm/i18n.h>
 
+namespace csuper
+{
 
-/*!
- * \def _(String)
- * Define the _ for gettext.
- */
-#ifndef NOT_LIBCSUPER
-#define _(String) dgettext ("libcsuper", String)
-#endif // _
+    /*!
+     * \def CSUPER_VERSION
+     * Define the version of csuper
+     */
+    #define CSUPER_VERSION "4.3.0"
 
-/*!
- * \def CSUPER_VERSION
- * Define the version of csuper
- */
-#define CSUPER_VERSION "4.1.0"
+    void libcsuper_initialize();
+    void clearScreen();
 
-void libcsuper_initialize();
-void wrongChoice();
-void clearScreen();
-int compareFloatDescending(void const *a, void const *b);
-int compareFloatAscending(void const *a, void const *b);
-void *myAlloc(int size_alloue);
-void myRealloc(void **ptr,int size_alloue);
-char *integerToYesNo(int i, char *yes, char *no);
-char *utf8ToLatin9(const char *const string);
-void convertFloatString(char *output, float input,int decimal_place);
-float convertStringFloat(char *str);
-int convertStringInt(char *str);
-bool convertStringBool(char *str);
+}
 
 #endif

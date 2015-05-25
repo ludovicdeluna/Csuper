@@ -1,16 +1,35 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(Csuper C)
+project(Csuper)
+
+#
+#Glibmm
+#
+
+find_package(
+	PkgConfig 
+	REQUIRED
+)
+pkg_check_modules(
+	GLIBMM
+	REQUIRED glibmm-2.4
+)
+
+include_directories(
+	${GLIBMM_INCLUDE_DIRS}
+)
+link_directories(
+	${GLIBMM_LIBRARY_DIRS}
+)
+
+add_definitions(
+	${GLIBMM_CFLAGS_OTHER}
+)
 
 #
 #Libcsuper
 #
 
-find_package(LibXml2 REQUIRED)
-
-message(STATUS LIBXML2_FOUND = ${LIBXML2_FOUND})
-
-include_directories(${LIBXML2_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_SOURCE_DIR} ${CMAKE_BINARY_DIR})
 
 file(
         GLOB
@@ -24,19 +43,11 @@ add_library(
 	${source_files_libcsuper}
 )
 
-if(WIN32)
-	target_link_libraries(
-		csuper 
-		-lhpdf
-		-lintl
-		${LIBXML2_LIBRARIES}
-	)
-else (WIN32)
-	target_link_libraries(
-		csuper 
-		-lhpdf
-	)
-endif (WIN32)
+
+target_link_libraries(
+	csuper
+	${GLIBMM_LIBRARIES}
+)
 
 #
 #csuper-cli
@@ -55,78 +66,5 @@ add_executable(
 target_link_libraries(
 	csuper-cli 
 	csuper
-	${LIBXML2_LIBRARIES}
-)
-
-#
-# Slope
-#
-find_package(
-	PkgConfig 
-	REQUIRED
-)
-pkg_check_modules(
-	GTK3
-	REQUIRED gtk+-3.0>=3.6
-)
-
-include_directories(
-	${GTK3_INCLUDE_DIRS}
-	"Externals library/Slope"
-)
-link_directories(
-	${GTK3_LIBRARY_DIRS}
-)
-
-add_definitions(
-	${GTK3_CFLAGS_OTHER}
-)
-
-SET(SLOPE_GTK 1)
-
-file(
-        GLOB
-        source_files_slope
-        "Externals library/Slope/slope/*"
-)
-
-CONFIGURE_FILE (
-    "Externals library/Slope/config.h.in"
-    "Externals library/Slope/config.h"
-)
-
-ADD_LIBRARY(
-	slope
-	SHARED
-	${source_files_slope}
-)
-
-TARGET_LINK_LIBRARIES(
-	slope 
-	${GTK3_LIBRARIES}
-)
-
-
-#
-#Csuper-gui
-#
-
-
-file(
-        GLOB
-        source_files_csuper
-        Sources/csuper-gui/*
-)
-
-add_executable(
-	csuper-gui
-	${source_files_csuper}
-)
-
-target_link_libraries(
-	csuper-gui 
-	${GTK3_LIBRARIES}
-	${LIBXML2_LIBRARIES}
-	csuper
-	slope
+	${GLIBMM_LIBRARIES}
 )

@@ -2,8 +2,8 @@
  * \file    libcsuper.h
  * \brief   Inclusion of all header files of libcsuper
  * \author  Remi BERTHO
- * \date    25/08/14
- * \version 4.0.2
+ * \date    25/05/14
+ * \version 4.3.0
  */
 
 /*
@@ -40,16 +40,7 @@
  */
 #define NOT_LIBCSUPER
 
-#include "csu_struct.h"
 #include "share.h"
-#include "csu_files.h"
-#include "preferences_files.h"
-#include "main_argument.h"
-#include "game_config.h"
-#include "file.h"
-#include "filename.h"
-#include "export.h"
-#include "calculator.h"
-#include "gnuplot.h"
+#include "game_configuration.h"
 
 #endif

@@ -32,38 +32,18 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="`pkg-config --cflags libxml-2.0`" />
+			<Add option="`pkg-config --cflags glibmm-2.4`" />
 			<Add directory="../" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="../" />
 		</ResourceCompiler>
 		<Linker>
-			<Add option="`pkg-config --libs libxml-2.0`" />
+			<Add option="`pkg-config --libs glibmm-2.4`" />
 			<Add library="libcsuper" />
 			<Add directory="../" />
 		</Linker>
-		<Unit filename="../Sources/csuper-cli/csuper.h" />
-		<Unit filename="../Sources/csuper-cli/display.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/csuper-cli/display.h" />
-		<Unit filename="../Sources/csuper-cli/interface.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/csuper-cli/interface.h" />
-		<Unit filename="../Sources/csuper-cli/keyboarding.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/csuper-cli/keyboarding.h" />
-		<Unit filename="../Sources/csuper-cli/main.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/csuper-cli/main.h" />
-		<Unit filename="../Sources/csuper-cli/menu.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Sources/csuper-cli/menu.h" />
+		<Unit filename="../Sources/csuper-cli/main.cpp" />
 		<Unit filename="../Sources/csuper-cli/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
