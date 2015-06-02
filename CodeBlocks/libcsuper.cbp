@@ -35,20 +35,25 @@
 			</Target>
 		</Build>
 		<Compiler>
+			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fpic" />
-			<Add option="`pkg-config --cflags glibmm-2.4`" />
+			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 `" />
 		</Compiler>
 		<Linker>
 			<Add option="-shared" />
-			<Add option="`pkg-config --libs glibmm-2.4`" />
+			<Add option="`pkg-config --libs glibmm-2.4 libxml++-2.6 `" />
 			<Add library="hpdf" />
 		</Linker>
+		<Unit filename="../Sources/libcsuper/exceptions.cpp" />
+		<Unit filename="../Sources/libcsuper/exceptions.h" />
 		<Unit filename="../Sources/libcsuper/game_configuration.cpp" />
 		<Unit filename="../Sources/libcsuper/game_configuration.h" />
 		<Unit filename="../Sources/libcsuper/libcsuper.h" />
+		<Unit filename="../Sources/libcsuper/list_game_configuration.cpp" />
+		<Unit filename="../Sources/libcsuper/list_game_configuration.h" />
 		<Unit filename="../Sources/libcsuper/ressources_windows.rc">
-			<Option link="0" />
+			<Option compilerVar="WINDRES" />
 		</Unit>
 		<Unit filename="../Sources/libcsuper/share.cpp" />
 		<Unit filename="../Sources/libcsuper/share.h" />

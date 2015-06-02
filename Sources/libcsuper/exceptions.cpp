@@ -1,13 +1,13 @@
 /*!
- * \file    libcsuper.h
- * \brief   Inclusion of all header files of libcsuper
+ * \file    exceptions.h
+ * \brief   Exceptions of Csuper
  * \author  Remi BERTHO
  * \date    25/05/14
  * \version 4.3.0
  */
 
 /*
-* libcsuper.h
+* exceptions.h
 *
 * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
 *
@@ -31,18 +31,27 @@
 *
 */
 
-#ifndef LIBCSUPER_H_INCLUDED
-#define LIBCSUPER_H_INCLUDED
-
-/*!
- * \def NOT_LIBCSUPER
- * Define that we don't compile libcsuper
- */
-#define NOT_LIBCSUPER
-
-#include "share.h"
-#include "game_configuration.h"
-#include "list_game_configuration.h"
 #include "exceptions.h"
+#include <glibmm/i18n.h>
 
-#endif
+using namespace std;
+
+namespace csuper
+{
+    xmlError::xmlError(const string& what_arg) : runtime_error(_("XML Error: ")+what_arg)
+    {
+
+    }
+
+
+    alreadyExist::alreadyExist(const string& what_arg) : runtime_error(_("Already exist: ")+what_arg)
+    {
+
+    }
+
+
+    notFound::notFound(const string& what_arg) : runtime_error(_("Not found: ")+what_arg)
+    {
+
+    }
+}

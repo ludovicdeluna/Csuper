@@ -13,12 +13,12 @@
  *
  * This file is part of Csuper-cli.
  *
- * Csuper is free software; you can redistribute it and/or modify
+ * Csuper-cli is free software; you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation; either version 3 of the License, or
  * (at your option) any later version.
  *
- * Csuper is distributed in the hope that it will be useful,
+ * Csuper-cli is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
@@ -37,13 +37,15 @@
 
 using namespace csuper;
 using namespace std;
+using namespace xmlpp;
+using namespace Glib;
 
 /*!
  * \fn int main(int argc, char *argv[])
  *  Begin csuper.
  * \param[in] argc the number of argument.
  * \param[in] argv the array of argument.
- * \return EXIT_SUCCESS if everything is OK
+ * \return 0 if everything is OK
  */
 int main(int argc, char *argv[])
 {
@@ -51,8 +53,16 @@ int main(int argc, char *argv[])
     bindtextdomain("csuper-cli","Locales");
     textdomain("csuper-cli");
 
-    GameConfiguration game_config(500,false,true,true,0,true,"Uno",0);
-    cout << game_config.name() << endl;
+    #ifdef PORTABLE
+    libcsuper_initialize(true);
+    #else
+    libcsuper_initialize(false);
+    #endif // PORTABLE
+
+    ListGameConfiguration* liste = ListGameConfiguration::getMainList();
+    cout << *liste;
+
+    delete liste;
 
     return 0;
 }
