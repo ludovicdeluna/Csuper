@@ -44,5 +44,6 @@
 #include "game_configuration.h"
 #include "list_game_configuration.h"
 #include "exceptions.h"
+#include "player.h"
 
 #endif

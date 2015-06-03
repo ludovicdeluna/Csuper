@@ -59,11 +59,6 @@ int main(int argc, char *argv[])
     libcsuper_initialize(false);
     #endif // PORTABLE
 
-    ListGameConfiguration* liste = ListGameConfiguration::getMainList();
-    cout << *liste;
-
-    delete liste;
-
     return 0;
 }
 
