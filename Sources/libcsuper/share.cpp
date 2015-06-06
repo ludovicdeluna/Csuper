@@ -40,6 +40,7 @@
 #include <clocale>
 #include <cmath>
 #include <sys/stat.h>
+#include <glib/gstdio.h>
 
 namespace csuper{
 
@@ -67,9 +68,9 @@ namespace csuper{
             else
                 folder = build_filename(home,CSUPER_DIRECTORY_NAME);
             #ifdef __unix__
-            mkdir(folder.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
+            g_mkdir(folder.c_str(), S_IRWXU | S_IRWXG | S_IROTH | S_IXOTH);
             #elif _WIN32
-            mkdir(folder.c_str());
+            g_mkdir(folder.c_str(),0);
             #endif
 
             string pref = build_filename(folder,CSUPER_PREFERENCES_FILENAME);
@@ -127,14 +128,17 @@ namespace csuper{
         return str == "yes";
     }
 
-    ustring doubleToUstring(const double d, const int decimals)
+    ustring doubleToUstring(const double d, const unsigned int decimals, const unsigned int width)
     {
-        return ustring::format(fixed,setprecision(decimals), d);
+        if (width == 0)
+            return ustring::format(fixed,setprecision(decimals), d);
+        else
+            return ustring::format(fixed,setprecision(decimals),setw(width), d);
     }
 
-    ustring intToUstring(const double i)
+    ustring intToUstring(const double i, const unsigned int width)
     {
-        return Glib::ustring::format(i);
+        return Glib::ustring::format(setw(width),i);
     }
 
     double ustringToDouble(const ustring& str)

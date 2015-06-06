@@ -77,14 +77,14 @@ namespace csuper
          *  \param total_points
          *  \param initial_points
          */
-        Player(const Glib::ustring& name, const double initial_points);
+        Player(const double initial_points, const Glib::ustring& name = "");
 
         /*!
          *  \brief Constructor with a name and the initial points
          *  \param total_points
          *  \param game_config a game configuration for the decimal places
          */
-        Player(const Glib::ustring& name, const GameConfiguration& game_config);
+        Player(const GameConfiguration& game_config, const Glib::ustring& name = "");
 
         /*!
          *  \brief Constructor with a xmlpp node
@@ -104,6 +104,12 @@ namespace csuper
          *  \param player another Player
          */
         bool operator==(const Player& player) const;
+
+        /*!
+         *  \brief Operator == with a name
+         *  \param name the name
+         */
+        bool operator==(const Glib::ustring& name) const;
 
         /*!
          *  \brief Operator <<
@@ -143,6 +149,12 @@ namespace csuper
          *  \exception xmlpp::internal_error if bad xmlpp node
          */
         void createXmlNode(xmlpp::Element *parent_node, const GameConfiguration& game_config) const;
+
+        /*!
+         *  \brief Indicate if the player has a specific turn
+         *  \param turn the turn
+         */
+        bool hasTurn(const unsigned int turn) const;
 
 
 
@@ -214,38 +226,25 @@ namespace csuper
         }
 
         /*!
-         *  \brief return the last total points
-         *  \return the total points
-         */
-        inline double totalPoints() const
-        {
-            return total_points_;
-        }
-
-        /*!
          *  \brief return the total points at a specific turn
+         *  \param turn the turn, if not set the turn is set to the last turn
          *  \return the total points
          *  \exception std::length_error if turn is greater than the number of turn
          */
-        double totalPoints(const unsigned int turn) const;
-
-        /*!
-         *  \brief return the last points
-         *  \return the points
-         */
-        inline double points() const
-        {
-            return points_.back();
-        }
+        double totalPoints(const int turn=-1) const;
 
         /*!
          *  \brief return the points at a specific turn
+         *  \param turn the turn, if not set the turn is set to the last turn
          *  \return the points
          *  \exception std::length_error if turn is greater than the number of turn
          */
-        inline double points(const unsigned int turn) const
+        inline double points(const int turn=-1) const
         {
-            return points_[turn];
+            if (turn == -1)
+                return points_.back();
+            else
+                return points_[turn];
         }
 
         /*!
@@ -283,89 +282,62 @@ namespace csuper
         }
 
         /*!
-         *  \brief return the last total points in a ustring
+         *  \brief return the total points at a specific turn in a ustring
+         *  \param turn the turn, if not set the turn is set to the last turn
          *  \return the ustring
+         *  \exception std::length_error if turn is greater than the number of turn
          */
-        inline Glib::ustring totalPointsUstring() const
+        inline Glib::ustring totalPointsUstring(const int turn = -1) const
         {
-            return doubleToUstring(total_points_);
-        }
-
-        /*!
-         *  \brief return the last total points in a ustring
-         *  \param game_config a game configuration for the decimal places
-         *  \return the ustring
-         */
-        inline Glib::ustring totalPointsUstring(const GameConfiguration& game_config) const
-        {
-            return doubleToUstring(total_points_,game_config.decimalPlace());
+            return doubleToUstring(totalPoints(turn));
         }
 
         /*!
          *  \brief return the total points at a specific turn in a ustring
-         *  \param turn the turn
+         *  \param turn the turn, if not set the turn is set to the last turn
+         *  \param game_config a game configuration for the decimal places
+         *  \param width the width in character of the result ustring
          *  \return the ustring
          *  \exception std::length_error if turn is greater than the number of turn
          */
-        Glib::ustring totalPointsUstring(const unsigned int turn) const;
-
-        /*!
-         *  \brief return the total points at a specific turn in a ustring
-         *  \param turn the turn
-         *  \param game_config a game configuration for the decimal places
-         *  \return the ustring
-         *  \exception std::length_error if turn is greater than the number of turn
-         */
-        Glib::ustring totalPointsUstring(const unsigned int turn,const GameConfiguration& game_config) const;
-
-        /*!
-         *  \brief return the last points in a ustring
-         *  \return the ustring
-         */
-        inline Glib::ustring pointsUstring() const
+        inline Glib::ustring totalPointsUstring(const GameConfiguration& game_config, const int turn=-1, const unsigned int width=0) const
         {
-            return doubleToUstring(points_.back());
+            return doubleToUstring(totalPoints(turn),game_config.decimalPlace(),width);
         }
 
-        /*!
-         *  \brief return the last points in a ustring
-         *  \param game_config a game configuration for the decimal places
-         *  \return the ustring
-         */
-        inline Glib::ustring pointsUstring(const GameConfiguration& game_config) const
-        {
-            return doubleToUstring(points_.back(),game_config.decimalPlace());
-        }
 
         /*!
          *  \brief return the points at a specific turn in a ustring
+         *  \param turn the turn, if not set the turn is set to the last turn
          *  \return the ustring
          *  \exception std::length_error if turn is greater than the number of turn
          */
-        inline Glib::ustring pointsUstring(const unsigned int turn) const
+        inline Glib::ustring pointsUstring(const int turn=-1) const
         {
-            return doubleToUstring(points_[turn]);
+            return doubleToUstring(points(turn));
         }
 
         /*!
          *  \brief return the points at a specific turn in a ustring
          *  \param turn the turn
          *  \param game_config a game configuration for the decimal places
+         *  \param width the width in character of the result ustring
          *  \return the ustring
          *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception std::length_error if turn is greater than the number of turn
          */
-        inline Glib::ustring pointsUstring(const unsigned int turn,const GameConfiguration& game_config) const
+        inline Glib::ustring pointsUstring(const GameConfiguration& game_config,const int turn=-1, const unsigned int width=0) const
         {
-            return doubleToUstring(points_[turn],game_config.decimalPlace());
+            return doubleToUstring(points(turn),game_config.decimalPlace(),width);
         }
 
         /*!
          *  \brief return the ranking in a ustring
          *  \return the ustring
          */
-        inline Glib::ustring rankingUstring() const
+        inline Glib::ustring rankingUstring(const unsigned int width=0) const
         {
-            return doubleToUstring(ranking_);
+            return intToUstring(ranking_,width);
         }
 
     };

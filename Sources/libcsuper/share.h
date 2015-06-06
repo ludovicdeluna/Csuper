@@ -125,7 +125,7 @@ namespace csuper
      *  \param decimals the number of decimals
      *  \return the ustring
      */
-    Glib::ustring doubleToUstring(const double d, const int decimals=0);
+    Glib::ustring doubleToUstring(const double d, const unsigned int decimals=0, const unsigned int width =0);
 
     /*!
      *  Convert a ustring into a double
@@ -144,17 +144,17 @@ namespace csuper
         return atoi(str.c_str());
     }
 
-
-    //
-    // XML
-    //
-
     /*!
      *  Convert an int into a ustring
      *  \param i the int
      *  \return the ustring
      */
-     Glib::ustring intToUstring(const double i);
+     Glib::ustring intToUstring(const double i, const unsigned int width =0);
+
+
+    //
+    // XML
+    //
 
     // xmlpp
     /*!
@@ -207,6 +207,32 @@ namespace csuper
             return portable_;
         }
     };
+
+
+    //
+    // Sort
+    //
+    /*!
+     *  Compare 2 double
+     * \param[in] a a double
+     * \param[in] b a double
+     * \return the comparison
+     */
+    inline bool compareDoubleAscending(const int a, const int b)
+    {
+       return a<b;
+    }
+
+    /*!
+     *  Compare 2 double
+     * \param[in] a a double
+     * \param[in] b a double
+     * \return the comparison
+     */
+    inline bool compareDoubleDescending(const int a, const int b)
+    {
+       return a>b;
+    }
 }
 
 #endif

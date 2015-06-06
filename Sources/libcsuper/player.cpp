@@ -60,14 +60,14 @@ namespace csuper
     }
 
 
-    Player::Player(const Glib::ustring& name, const double initial_points) : name_(name), nb_turn_(0)
+    Player::Player(const double initial_points, const Glib::ustring& name) : name_(name), nb_turn_(0)
     {
         points_.push_back(initial_points);
         total_points_ = initial_points;
         ranking_ = 1;
     }
 
-    Player::Player(const Glib::ustring& name, const GameConfiguration& game_config) : name_(name), nb_turn_(0)
+    Player::Player(const GameConfiguration& game_config, const Glib::ustring& name) : name_(name), nb_turn_(0)
     {
         points_.push_back(game_config.initialScore());
         total_points_ = game_config.initialScore();
@@ -106,6 +106,11 @@ namespace csuper
     bool Player::operator==(const Player& player) const
     {
         return (name_ == player.name_);
+    }
+
+    bool Player::operator==(const ustring& name) const
+    {
+        return (name_ == name);
     }
 
 
@@ -147,8 +152,8 @@ namespace csuper
         for (unsigned int i=0 ; i<nbTurn()+1 ; i++)
         {
             res += _("\nTurn ") + intToUstring(i)
-                + "\t" + pointsUstring(i,game_config)
-                + "\t" + totalPointsUstring(i,game_config);
+                + "\t" + pointsUstring(game_config,i)
+                + "\t" + totalPointsUstring(game_config,i);
         }
 
         return res;
@@ -180,10 +185,15 @@ namespace csuper
         for (unsigned int i=0 ; i<nbTurn()+1 ; i++)
         {
             Element *node_tmp_points = node_points->add_child("turn");
-            node_tmp_points->add_child_text(pointsUstring(i,game_config));
+            node_tmp_points->add_child_text(pointsUstring(game_config,i));
             node_tmp_points->set_attribute("num",intToUstring(i));
         }
 
+    }
+
+    bool Player::hasTurn(const unsigned int turn) const
+    {
+        return (turn <= nb_turn_);
     }
 
 
@@ -204,7 +214,7 @@ namespace csuper
         if (turn > nb_turn_)
             throw length_error(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,nbTurn()));
 
-        double points_diff = points(turn) - turn;
+        double points_diff = points(turn) - point;
         points_[turn] = point;
 
         total_points_ -= points_diff;
@@ -224,21 +234,14 @@ namespace csuper
     //
     // Getter
     //
-    double Player::totalPoints(const unsigned int turn) const
+    double Player::totalPoints(const int turn) const
     {
+        if (turn ==-1)
+            return total_points_;
+
         double total=0;
-        for (unsigned int i=0 ; i<turn+1 ; i++)
+        for (int i=0 ; i<turn+1 ; i++)
             total += points(i);
         return total;
-    }
-
-    ustring Player::totalPointsUstring(const unsigned int turn) const
-    {
-        return doubleToUstring(totalPoints(turn));
-    }
-
-    ustring Player::totalPointsUstring(const unsigned int turn,const GameConfiguration& game_config) const
-    {
-        return doubleToUstring(totalPoints(turn),game_config.decimalPlace());
     }
 }

@@ -54,4 +54,16 @@ namespace csuper
     {
 
     }
+
+
+    fileError::fileError(const string& what_arg) : runtime_error(_("File error: ")+what_arg)
+    {
+
+    }
+
+
+    wrongUse::wrongUse(const string& what_arg) : logic_error(_("Wrong use: ")+what_arg)
+    {
+
+    }
 }

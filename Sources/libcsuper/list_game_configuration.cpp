@@ -81,10 +81,10 @@ namespace csuper
     }
 
 
-    ListGameConfiguration::ListGameConfiguration(ListGameConfiguration &list_game_config)
+    ListGameConfiguration::ListGameConfiguration(const ListGameConfiguration &list_game_config)
     {
-        vector<GameConfiguration*>::iterator it;
-        for (it = list_game_config.game_configuration_list_.begin() ; it != list_game_config.game_configuration_list_.end() ; it++)
+        vector<GameConfiguration*>::const_iterator it;
+        for (it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
             game_configuration_list_.push_back(new GameConfiguration(**it));
     }
 
@@ -94,17 +94,23 @@ namespace csuper
         vector<GameConfiguration*>::iterator it;
         for (it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
             delete *it;
+
+        game_configuration_list_.clear();
     }
 
 
 
     const GameConfiguration &ListGameConfiguration::operator[](int i) const
     {
+        if (i >= size())
+            throw length_error(ustring::compose(_("Cannot access to the %1th element, there is only %2 elements"),i+1,size()));
         return *game_configuration_list_[i];
     }
 
     GameConfiguration &ListGameConfiguration::operator[](int i)
     {
+        if (i >= size())
+            throw length_error(ustring::compose(_("Cannot access to the %1th element, there is only %2 elements"),i+1,size()));
         return *game_configuration_list_[i];
     }
 
@@ -123,6 +129,7 @@ namespace csuper
         vector<GameConfiguration*>::const_iterator it;
         for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
             delete *it;
+        game_configuration_list_.clear();
 
 
         for (it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)

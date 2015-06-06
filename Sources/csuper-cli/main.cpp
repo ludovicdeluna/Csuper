@@ -59,6 +59,7 @@ int main(int argc, char *argv[])
     libcsuper_initialize(false);
     #endif // PORTABLE
 
-    return 0;
+
+    return EXIT_SUCCESS;
 }
 

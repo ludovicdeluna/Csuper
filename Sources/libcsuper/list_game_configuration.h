@@ -39,7 +39,7 @@
 namespace csuper
 {
     /*! \class ListGameConfiguration
-    * \brief This class represent a list of game configuration
+    *   \brief This class represent a list of game configuration
     */
     class ListGameConfiguration
     {
@@ -59,7 +59,7 @@ namespace csuper
         /*!
          *  \brief Copy constructor
          */
-        ListGameConfiguration(ListGameConfiguration &list_game_config);
+        ListGameConfiguration(const ListGameConfiguration &list_game_config);
 
         /*!
          *  \brief Constructor from a filename

@@ -79,6 +79,32 @@ namespace csuper
          */
         notFound(const std::string& what_arg);
     };
+
+    /*! \class fileError
+    *   \brief This class represent a not file error
+    */
+    class fileError : public std::runtime_error
+    {
+    public:
+        /*!
+         *  \brief Constructor with the string parameter
+         *  \param what_arg the string of the error
+         */
+        fileError(const std::string& what_arg);
+    };
+
+    /*! \class wrongUse
+    *   \brief This class represent a error when a function is called when it would'n be
+    */
+    class wrongUse : public std::logic_error
+    {
+    public:
+        /*!
+         *  \brief Constructor with the string parameter
+         *  \param what_arg the string of the error
+         */
+        wrongUse(const std::string& what_arg);
+    };
 }
 
 
