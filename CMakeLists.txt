@@ -50,7 +50,7 @@ add_definitions(
 file(
         GLOB
         source_files_libcsuper
-        Sources/libcsuper/*
+        Sources/libcsuper/*.cpp
 )
 
 add_library(
@@ -64,6 +64,7 @@ target_link_libraries(
 	csuper
 	${GLIBMM_LIBRARIES}
 	${XMLPP_LIBRARIES}
+	muparser
 )
 
 target_compile_features(
@@ -78,7 +79,7 @@ target_compile_features(
 file(
         GLOB
         source_files_csuper-cli
-        Sources/csuper-cli/*
+        Sources/csuper-cli/*.cpp
 )
 
 add_executable(
@@ -90,6 +91,7 @@ target_link_libraries(
 	csuper
 	${GLIBMM_LIBRARIES}
 	${XMLPP_LIBRARIES}
+	muparser
 )
 
 target_compile_features(

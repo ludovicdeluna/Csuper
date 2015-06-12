@@ -36,6 +36,8 @@
 #include <algorithm>
 #include <iomanip>
 #include <glib/gstdio.h>
+#include <fstream>
+#include "config.h"
 
 namespace csuper
 {
@@ -43,7 +45,7 @@ namespace csuper
     using namespace Glib;
     using namespace xmlpp;
 
-    double Game::version_(1.5);
+    double Game::version_(1.4);
 
     //
     // Constructor
@@ -191,7 +193,7 @@ namespace csuper
             return player(player_index).ranking();
 
         if (!(config().turnBased()))
-            throw wrongUse(_("This new turn function should only be used in a turn based game when a specific turn is specify"));
+            throw wrongUse(_("The ranking function should only be used in a turn based game when a specific turn is specify"));
 
         if (!(player(player_index).hasTurn(turn)))
             throw length_error(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(player_index).nbTurn()));
@@ -217,6 +219,22 @@ namespace csuper
         }
         return 0;
     }
+
+    Player &Game::player(const unsigned int index)
+    {
+        if (index >= nbPlayer())
+            throw std::length_error(Glib::ustring::compose(_("Cannot access to the %1th player, there is only %2 player"),index+1,nbPlayer()));
+        return *players_[index];
+    }
+
+
+    const Player &Game::player(const unsigned int index) const
+    {
+        if (index >= nbPlayer())
+            throw std::length_error(Glib::ustring::compose(_("Cannot access to the %1th player, there is only %2 player"),index+1,nbPlayer()));
+        return *players_[index];
+    }
+
 
 
 
@@ -532,7 +550,7 @@ namespace csuper
     unsigned int Game::lastRanking(const unsigned int turn) const
     {
         if (!(config().turnBased()))
-            throw wrongUse(_("The new turn function should only be used in a turn based game when a specific turn is specified"));
+            throw wrongUse(_("The last ranking function should only be used in a turn based game when a specific turn is specified"));
 
         if (!(player(0).hasTurn(turn)))
             throw length_error(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(0).nbTurn()));
@@ -673,11 +691,11 @@ namespace csuper
 
         // Version
         Element* node_version = root->add_child("version");
-        node_version->add_child_text(doubleToUstring(version_,1));
+        node_version->add_child_text(Ascii::dtostr(version_));
 
         // Size max of a name
         Element* node_size_max_name = root->add_child("size_max_name");
-        node_size_max_name->add_child_text(sizeMaxNameUstring());
+        node_size_max_name->add_child_text(Ascii::dtostr(sizeMaxName()));
 
         // Date
         Element *node_date = root->add_child("date");
@@ -690,11 +708,11 @@ namespace csuper
 
         // Nb player
         Element* node_nb_player = root->add_child("nb_player");
-        node_nb_player->add_child_text(nbPlayerUstring());
+        node_nb_player->add_child_text(Ascii::dtostr(nbPlayer()));
 
-        // Nb player
+        // Distributor
         Element* node_distributor = root->add_child("distributor");
-        node_distributor->add_child_text(distributorUstring());
+        node_distributor->add_child_text(Ascii::dtostr(distributor()));
 
         // Game config
         config().createXmlNode(root);
@@ -780,6 +798,302 @@ namespace csuper
         }
 
         return nb;
+    }
+
+
+
+    //
+    // Export
+    //
+    void Game::exportToCsv(const Glib::ustring& filename) const
+    {
+        ofstream file;
+        file.exceptions(ofstream::failbit | ofstream::badbit );
+        try
+        {
+            file.open(filename,ofstream::out);
+        }
+        catch (ios_base::failure& e)
+        {
+            throw fileError(_("Error while exporting the game into a csv file, bad filename: ") + filename);
+        }
+
+        vector<Player*>::const_iterator it;
+        unsigned int i,j;
+
+        // Header
+        file << _("Csu file;") << endl
+            << _("Created on the;") << dateUstring().raw() << ";" << endl
+            << _("File's version;") << version() << ";" << endl
+            << _("Maximum size of the names;") << sizeMaxName() << ";" << endl
+            << _("Number of players;") << nbPlayer() << ";" << endl
+            << _("Maximum number of turns;") << maxNbTurn() << ";" << endl;
+
+        // Game configuration
+        file << _("Name of the game configuration;") << config().name().raw() << ";" << endl
+            << _("Use of a maximum score;") << config().useMaximumUstring().raw() << ";" << endl
+            << _("Initial score;") << config().initialScore() << ";" << endl
+            << _("Number of decimals displayed;") << config().decimalPlace() << ";" << endl
+            << _("The first has the highest score;") << config().maxWinnerUstring().raw() << ";" << endl
+            << _("Turn-based game;") << config().turnBasedUstring().raw() << ";" << endl
+            << _("Use of a distributor;") << config().useDistributorUstring().raw() << ";" << endl
+            << _("Maximum/minimum number of points;") << config().nbMaxMin() << ";" << endl << endl;
+
+
+        // Statistics
+
+        file << _("Names;");
+        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+            file << (*it)->name().raw() << ";";
+
+        file << endl << _("Mean points;");
+        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+            file << (*it)->meanPoints() << ";";
+
+        file << endl << _("Number of turn;");
+        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+            file << (*it)->nbTurn() << ";";
+        if (config().turnBased())
+        {
+            file << endl << _("Number of turn with the best score;");
+            for (i=0 ; i < nbPlayer() ; i++)
+                file << nbTurnBest(i) << ";";
+
+            file << endl << _("Number of turn with the worst score;");
+            for (i=0 ; i < nbPlayer() ; i++)
+                file << nbTurnWorst(i) << ";";
+
+            file << endl << _("Number of turn first;");
+            for (i=0 ; i < nbPlayer() ; i++)
+                file << nbTurnFirst(i) << ";";
+
+            file << endl << _("Number of turn last;");
+            for (i=0 ; i < nbPlayer() ; i++)
+                file << nbTurnLast(i) << ";";
+        }
+
+        // Points
+        file << endl << endl << _("Names");
+        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+            file << ";;" << (*it)->name().raw() << ";";
+
+        file << endl << _("Legend;");
+        for (i=0 ; i < nbPlayer() ; i++)
+            file << _("Points in the turn;Points;Ranking;");
+
+        for (i=0 ; i <= maxNbTurn() ; i++)
+        {
+            file << endl << _("Turn ") << i << ";";
+            for (j=0 ; j<nbPlayer() ; j++)
+            {
+                if (player(j).hasTurn(i))
+                {
+                    file << points(j,i) << ";" << totalPoints(j,i) << ";";
+                    if (config().turnBased())
+                        file << ranking(j,i);
+                    file << ";";
+                }
+                else
+                    file << ";;;";
+            }
+        }
+
+
+        // Conclusion
+
+
+        file << endl << endl << _("Names;");
+        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+            file << (*it)->name().raw() << ";";
+
+        file << endl << _("Total points;");
+        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+            file << (*it)->totalPoints() << ";";
+
+        file << endl << _("Ranking;");
+        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+            file << (*it)->ranking() << ";";
+
+
+        file.close();
+    }
+
+    void Game::exportToM(const Glib::ustring& filename) const
+    {
+        ofstream file;
+        file.exceptions(ofstream::failbit | ofstream::badbit );
+        try
+        {
+            file.open(filename,ofstream::out);
+        }
+        catch (ios_base::failure& e)
+        {
+            throw fileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
+        }
+
+        vector<Player*>::const_iterator it;
+        unsigned int i, tabs_name;
+
+        file << "clear all;" << endl << "close all;" << endl ;
+
+
+        // x for players
+        for (it = players_.cbegin(), tabs_name=0 ; it != players_.cend() ; it++, tabs_name++)
+            file << endl << "turn_" << tabs_name << "=0:1:" << (*it)->nbTurn() << ";";
+        file << endl;
+
+
+        // Tabs of total points
+        for (it = players_.cbegin(), tabs_name=0 ; it != players_.cend() ; it++, tabs_name++)
+        {
+            file << endl << "total_points_" << tabs_name << "=[";
+            for (i=0 ; i<=maxNbTurn() ; i++)
+            {
+                if ((*it)->hasTurn(i))
+                    file << replaceCharacterInUstring((*it)->totalPointsUstring(config(),i),',','.').raw() << ",";
+                else
+                    break;
+            }
+            file << "];";
+        }
+
+
+        // Plot total points
+        file << endl << "plot(";
+        for (tabs_name=0 ; tabs_name<nbPlayer() ; tabs_name++)
+        {
+            file << "turn_" << tabs_name << ",total_points_" << tabs_name;
+            if (tabs_name != nbPlayer()-1)
+                file << ",";
+        }
+        file << ");" << endl
+            << "title('" << _("Total points") << "');" << endl
+            << "xlabel('" << _("Turn") << "');" << endl
+            << "ylabel('" << _("Points") << "');" << endl;
+
+
+        file << "legend(";
+        for (it=players_.cbegin(), tabs_name=0 ; tabs_name<nbPlayer() ; tabs_name++, it++)
+        {
+            file << "'" << (*it)->nameUstring().raw() << "'";
+            if (tabs_name != nbPlayer()-1)
+                file << ",";
+        }
+        file << ");" << endl;
+
+
+        // Tabs of points and mean points
+        for (it = players_.cbegin(), tabs_name=0 ; it != players_.cend() ; it++, tabs_name++)
+        {
+            file << endl << "points_" << tabs_name << "=[";
+            for (i=0 ; i<=maxNbTurn() ; i++)
+            {
+                if ((*it)->hasTurn(i))
+                    file << replaceCharacterInUstring((*it)->pointsUstring(config(),i),',','.').raw() << ",";
+                else
+                    break;
+            }
+            file << "];" << endl
+                << "fprintf('" << ustring::compose(_("Mean score of %1: "),(*it)->name()).raw()
+                << "%f\\n',mean(points_" << tabs_name << "));";
+
+        }
+
+
+        // Plot points
+        file << endl << endl << "figure;" << endl << "plot(";
+        for (tabs_name=0 ; tabs_name<nbPlayer() ; tabs_name++)
+        {
+            file << "turn_" << tabs_name << ",points_" << tabs_name;
+            if (tabs_name != nbPlayer()-1)
+                file << ",";
+        }
+        file << ");" << endl
+            << "title('" << _("Points") << "');" << endl
+            << "xlabel('" << _("Turn") << "');" << endl
+            << "ylabel('" << _("Points") << "');" << endl;
+
+
+        file << "legend(";
+        for (it=players_.cbegin(), tabs_name=0 ; tabs_name<nbPlayer() ; tabs_name++, it++)
+        {
+            file << "'" << (*it)->nameUstring().raw() << "'";
+            if (tabs_name != nbPlayer()-1)
+                file << ",";
+        }
+        file << ");" << endl;
+
+
+        file.close();
+    }
+
+    void Game::exportToGnuplotData(const Glib::ustring& filename) const
+    {
+        ofstream file;
+        file.exceptions(ofstream::failbit | ofstream::badbit );
+        try
+        {
+            file.open(filename + ".dat",ofstream::out);
+        }
+        catch (ios_base::failure& e)
+        {
+            throw fileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
+        }
+
+        vector<Player*>::const_iterator it;
+        unsigned int i;
+
+        file << "\"" << _("Players") << "\"";
+        for (it=players_.cbegin() ; it != players_.cend() ; it++)
+            file << "\t\"" << (*it)->name().raw() << "\"";
+
+        for (i=0; i<= maxNbTurn() ; i++)
+        {
+            file << endl << i;
+            for (it=players_.cbegin() ; it != players_.cend() ; it++)
+            {
+                if ((*it)->hasTurn(i))
+                    file << "\t" << replaceCharacterInUstring((*it)->totalPointsUstring(config(),i),',','.').raw();
+                else
+                    file << "\t-";
+            }
+        }
+
+
+        file.close();
+    }
+
+    void Game::exportToGnuplotScript(const Glib::ustring& filename) const
+    {
+        ofstream file;
+        file.exceptions(ofstream::failbit | ofstream::badbit );
+        try
+        {
+            file.open(filename + ".plt",ofstream::out);
+        }
+        catch (ios_base::failure& e)
+        {
+            throw fileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
+        }
+
+        file << "set datafile missing '-'" << endl
+            << "set style data linespoints" << endl
+            << "set xlabel \"" << _("Number of turns") << "\"" << endl
+            << "set ylabel \"" << _("Points") << "\"" << endl
+            << "set title \"" << _("Points on ") << Glib::path_get_basename(filename) << "\"" << endl;
+
+        file << "plot '" << Glib::path_get_basename(filename) << ".dat" << "' using 2:xtic(1) title columnheader(2),"
+            << " for [i=3:" << (nbPlayer() + 1)
+            << "] '' using i title columnheader(i)" << endl << "pause -1";
+
+
+        file.close();
+    }
+
+    void Game::exportToGnuplot(const Glib::ustring& filename) const
+    {
+        exportToGnuplotData(filename);
+        exportToGnuplotScript(filename);
     }
 
 }

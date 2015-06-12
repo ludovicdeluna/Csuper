@@ -34,6 +34,7 @@
 #include "list_game_configuration.h"
 #include "exceptions.h"
 #include <iostream>
+#include "config.h"
 
 using namespace std;
 using namespace Glib;
@@ -48,7 +49,7 @@ namespace csuper
 
     }
 
-    ListGameConfiguration::ListGameConfiguration(const ustring filename)
+    ListGameConfiguration::ListGameConfiguration(const ustring& filename)
     {
         DomParser parser;
         try
@@ -66,11 +67,11 @@ namespace csuper
         // Version
         double file_version = ustringToDouble(static_cast<Element*>(node)->get_child_text()->get_content());
         if (file_version > version_)
-            throw xmlError(ustring::compose(_("This version of Csuper only support game configuration file version of %1"),version_));
+            throw xmlError(ustring::compose(_("This version of Csuper only support game configuration file version less than or equal to %1"),version_));
 
         // Number of game configurations
         nextXmlElement(node);
-        int nb_game_config = ustringToInt(static_cast<Element*>(node)->get_child_text()->get_content());
+        int nb_game_config = ustringToDouble(static_cast<Element*>(node)->get_child_text()->get_content());
 
         // Get all game configuration
         for (int i=0 ; i< nb_game_config ; i++)
@@ -255,11 +256,11 @@ namespace csuper
 
         // Version
         Element* node_version = root->add_child("version");
-        node_version->add_child_text(doubleToUstring(version_,1));
+        node_version->add_child_text(Ascii::dtostr(version_));
 
         // Number of game configuration
         Element* node_nb = root->add_child("nb_game_config");
-        node_nb->add_child_text(intToUstring(size()));
+        node_nb->add_child_text(Ascii::dtostr(size()));
 
         vector<GameConfiguration*>::const_iterator it;
         for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
@@ -276,11 +277,11 @@ namespace csuper
 
         // Version
         Element* node_version = root->add_child("version");
-        node_version->add_child_text(doubleToUstring(version_,1));
+        node_version->add_child_text(Ascii::dtostr(version_));
 
         // Number of game configuration
         Element* node_nb = root->add_child("nb_game_config");
-        node_nb->add_child_text(intToUstring(indexes.size()));
+        node_nb->add_child_text(Ascii::dtostr(indexes.size()));
 
         vector<GameConfiguration*>::const_iterator it;
         vector<int>::const_iterator it_index;

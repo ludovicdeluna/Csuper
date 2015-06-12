@@ -37,6 +37,7 @@
 #include "game_configuration.h"
 #include "player.h"
 
+
 namespace csuper
 {
     /*! \class Game
@@ -63,12 +64,7 @@ namespace csuper
          *  \return the player
          *  \exception std::length_error if index is greater the the number of player
          */
-        Player &player(const unsigned int index)
-        {
-            if (index >= nbPlayer())
-                throw std::length_error(Glib::ustring::compose(_("Cannot access to the %1th player, there is only %2 player"),index+1,nbPlayer()));
-            return *players_[index];
-        }
+        Player &player(const unsigned int index);
 
         /*!
          *  \brief return the game configuration
@@ -76,12 +72,7 @@ namespace csuper
          *  \return the player
          *  \exception std::length_error if index is greater the the number of player
          */
-        const Player &player(const unsigned int index) const
-        {
-            if (index >= nbPlayer())
-                throw std::length_error(Glib::ustring::compose(_("Cannot access to the %1th player, there is only %2 player"),index+1,nbPlayer()));
-            return *players_[index];
-        }
+        const Player &player(const unsigned int index) const;
 
         /*!
          *  \brief return the game configuration
@@ -178,6 +169,26 @@ namespace csuper
          *  \exception csuper::wrongUse if function is used in a non turn based game
          */
         unsigned int nbTurnFirstLast(const unsigned int player_index, const bool first) const;
+
+
+        //
+        // Export
+        //
+        /*!
+         *  \brief Export to a gnuplot data file (octave/matlab)
+         *  \param filename the filename
+         *  \exception std::ios_base::failure if intern error
+         *  \exception csuper::fileError if bad filename
+         */
+        void exportToGnuplotData(const Glib::ustring& filename) const;
+
+        /*!
+         *  \brief Export to a gnuplot script file (octave/matlab)
+         *  \param filename the filename
+         *  \exception std::ios_base::failure if intern error
+         *  \exception csuper::fileError if bad filename
+         */
+        void exportToGnuplotScript(const Glib::ustring& filename) const;
 
 
 
@@ -544,6 +555,38 @@ namespace csuper
             return nbTurnLast(getPlayerIndex(player_name));
         }
 
+
+
+
+
+
+
+        //
+        // Export
+        //
+        /*!
+         *  \brief Export to a csv file
+         *  \param filename the filename
+         *  \exception std::ios_base::failure if intern error
+         *  \exception csuper::fileError if bad filename
+         */
+        void exportToCsv(const Glib::ustring& filename) const;
+
+        /*!
+         *  \brief Export to a m file (octave/matlab)
+         *  \param filename the filename
+         *  \exception std::ios_base::failure if intern error
+         *  \exception csuper::fileError if bad filename
+         */
+        void exportToM(const Glib::ustring& filename) const;
+
+        /*!
+         *  \brief Export to a gnuplot file (octave/matlab)
+         *  \param filename the filename
+         *  \exception std::ios_base::failure if intern error
+         *  \exception csuper::fileError if bad filename
+         */
+        void exportToGnuplot(const Glib::ustring& filename) const;
 
 
 

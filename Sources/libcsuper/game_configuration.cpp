@@ -33,6 +33,7 @@
 
 #include "game_configuration.h"
 #include <iostream>
+#include "config.h"
 
 using namespace std;
 using namespace Glib;
@@ -86,7 +87,7 @@ namespace csuper
         Element *node = parent_node->add_child("game_configuration");
 
         Element *node_nb_max = node->add_child("nb_max_min");
-        node_nb_max->add_child_text(nbMaxMinUstring());
+        node_nb_max->add_child_text(Ascii::dtostr(nbMaxMin()));
 
         Element *node_max_winner = node->add_child("max_winner");
         node_max_winner->add_child_text(boolToUstring(max_winner_));
@@ -107,7 +108,7 @@ namespace csuper
         node_name->add_child_text(name_);
 
         Element *node_begin_score = node->add_child("begin_score");
-        node_begin_score->add_child_text(initialScoreUstring());
+        node_begin_score->add_child_text(Ascii::dtostr(initialScore()));
     }
 
 

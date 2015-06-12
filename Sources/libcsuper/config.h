@@ -1,15 +1,15 @@
 /*!
- * \file    exceptions.h
- * \brief   Exceptions of Csuper
+ * \file    config.h
  * \author  Remi BERTHO
- * \date    25/05/14
+ * \date    07/06/15
  * \version 4.3.0
  */
 
 /*
-* exceptions.h
+* config.h
 *
-* Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
+* Copyright 2014-2015
+ Remi BERTHO <remi.bertho@openmailbox.org>
 *
 * This file is part of LibCsuper.
 *
@@ -31,38 +31,11 @@
 *
 */
 
-#include "exceptions.h"
-#include "config.h"
-using namespace std;
+#ifndef CONFIG_H_INCLUDED
+#define CONFIG_H_INCLUDED
 
-namespace csuper
-{
-    xmlError::xmlError(const string& what_arg) : runtime_error(_("XML Error: ")+what_arg)
-    {
-
-    }
+#define GETTEXT_PACKAGE "libcsuper"
+#include <glibmm/i18n-lib.h>
 
 
-    alreadyExist::alreadyExist(const string& what_arg) : runtime_error(_("Already exist: ")+what_arg)
-    {
-
-    }
-
-
-    notFound::notFound(const string& what_arg) : runtime_error(_("Not found: ")+what_arg)
-    {
-
-    }
-
-
-    fileError::fileError(const string& what_arg) : runtime_error(_("File error: ")+what_arg)
-    {
-
-    }
-
-
-    wrongUse::wrongUse(const string& what_arg) : logic_error(_("Wrong use: ")+what_arg)
-    {
-
-    }
-}
+#endif // CONFIG_H_INCLUDED

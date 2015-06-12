@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-25 15:45+0200\n"
-"PO-Revision-Date: 2015-05-25 15:45+0200\n"
+"POT-Creation-Date: 2015-06-12 15:16+0200\n"
+"PO-Revision-Date: 2015-06-12 15:22+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -19,557 +19,502 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: Sources/libcsuper/share.cpp:75
+#: Sources/libcsuper/exceptions.cpp:40
+msgid "XML Error: "
+msgstr "Erreur XML : "
+
+#: Sources/libcsuper/exceptions.cpp:46
+msgid "Already exist: "
+msgstr "Existe déja : "
+
+#: Sources/libcsuper/exceptions.cpp:52
+msgid "Not found: "
+msgstr "Non trouvé : "
+
+#: Sources/libcsuper/exceptions.cpp:58
+msgid "File error: "
+msgstr "Erreur de fichier : "
+
+#: Sources/libcsuper/exceptions.cpp:64
+msgid "Wrong use: "
+msgstr "Mauvaise utilisation : "
+
+#: Sources/libcsuper/game.cpp:89
+#: Sources/libcsuper/list_game_configuration.cpp:61
+#: Sources/libcsuper/preferences.cpp:80
+msgid "Cannot open the file %1"
+msgstr "Ne peut ouvrir le fichier %1"
+
+#: Sources/libcsuper/game.cpp:98
+msgid ""
+"This version of Csuper only support game configuration file version of %1"
+msgstr ""
+"Cette version de Csuper ne supporte que des configurations de jeu ayant une "
+"version de %1"
+
+#: Sources/libcsuper/game.cpp:196
+msgid ""
+"The ranking function should only be used in a turn based game when a "
+"specific turn is specify"
+msgstr ""
+"La fonction classement ne doit être utilisé que dans un jeu en tour par tour "
+"quand un tour est spécifié"
+
+#: Sources/libcsuper/game.cpp:199 Sources/libcsuper/game.cpp:556
+#: Sources/libcsuper/game.cpp:597 Sources/libcsuper/game.cpp:616
+#: Sources/libcsuper/player.cpp:216
+msgid "Cannot access to the %1th turn, there is only %2 turn"
+msgstr "Ne peut accéder au tour %1 car il n'y a que %2 tour"
+
+#: Sources/libcsuper/game.cpp:226 Sources/libcsuper/game.cpp:234
+msgid "Cannot access to the %1th player, there is only %2 player"
+msgstr "Ne peut accéder au %1ème joueur car il n'y a que %2"
+
+#: Sources/libcsuper/game.cpp:287
+msgid ""
+"Csu file\n"
+"Created on the "
+msgstr ""
+"Fichier CSU\n"
+"Créé le "
+
+#: Sources/libcsuper/game.cpp:288
+msgid ""
+"\n"
+"File's version: "
+msgstr ""
+"\n"
+"Version du fichier : "
+
+#: Sources/libcsuper/game.cpp:289
+msgid ""
+"\n"
+"Maximum size of the names: "
+msgstr ""
+"\n"
+"Taille maximum des noms : "
+
+#: Sources/libcsuper/game.cpp:290
+msgid ""
+"\n"
+"Number of players: "
+msgstr ""
+"\n"
+"Nombre de joueurs : "
+
+#: Sources/libcsuper/game.cpp:291
+msgid ""
+"\n"
+"Maximum number of turns: "
+msgstr ""
+"\n"
+"Nombre maximum de tour : "
+
+#: Sources/libcsuper/game.cpp:299
+msgid " is the distributor\n"
+msgstr " est le distributeur\n"
+
+#. TRANSLATORS:The number of characters before the | must be eight
+#: Sources/libcsuper/game.cpp:310
+msgid "Names   | "
+msgstr "Nom     | "
+
+#. TRANSLATORS:The number of characters before the | and without the %1 must be six
+#: Sources/libcsuper/game.cpp:353
+msgid "Turn %1 |"
+msgstr "Tour %1 |"
+
+#. TRANSLATORS:The number of characters before the | must be eight
+#: Sources/libcsuper/game.cpp:381
+msgid "Total   |"
+msgstr "Total   |"
+
+#. TRANSLATORS:The number of characters before the | must be eight
+#: Sources/libcsuper/game.cpp:404
+msgid "Ranking |"
+msgstr "Classmt |"
+
+#: Sources/libcsuper/game.cpp:442 Sources/libcsuper/game.cpp:452
+msgid "Player %1 is not found in the game"
+msgstr "Le joueur %1 n'a pas été trouvé dans le jeu"
+
+#: Sources/libcsuper/game.cpp:505
+msgid "This new turn function should only be used in a non turn based game"
+msgstr ""
+"Cette fonction nouveau tour ne doit être utilisé que dans un jeu pas en tour "
+"par tour"
+
+#: Sources/libcsuper/game.cpp:518
+msgid ""
+"The new turn function should only be used in a turn based game when a vector "
+"of points is given"
+msgstr ""
+"Cette fonction nouveau tour ne doit être utilisé que dans un jeu en tour par "
+"tour quand un vecteur de point est donné"
+
+#: Sources/libcsuper/game.cpp:521 Sources/libcsuper/game.cpp:628
+msgid "There is %1 points and %2 player in the game"
+msgstr "Il y a %1 points et %2 joueurs dans le jeu"
+
+#: Sources/libcsuper/game.cpp:553
+msgid ""
+"The last ranking function should only be used in a turn based game when a "
+"specific turn is specified"
+msgstr ""
+"La fonction dernière place ne doit être utilisé que dans un jeu en tour par "
+"tour quand un tour est spécifié"
+
+#: Sources/libcsuper/game.cpp:594
+msgid ""
+"The delete turn function should only be used in a turn based game when a "
+"player is specified"
+msgstr ""
+"La fonction supprimer tour ne doit être utilisé que dans un jeu en tour par "
+"tour quand un tour est spécifié"
+
+#: Sources/libcsuper/game.cpp:613
+msgid ""
+"The delete turn function should only be used in a non turn based game when a "
+"player is specified"
+msgstr ""
+"La fonction supprimer tour ne doit être utilisé que dans un jeu pas en tour "
+"par tour quand un joueur est spécifié"
+
+#: Sources/libcsuper/game.cpp:742
+msgid "Error while rewriting the file "
+msgstr "Erreur lors de la réécriture du fichier."
+
+#: Sources/libcsuper/game.cpp:753
+msgid "The nbTurnBestWorst function should only be used in a turn based game"
+msgstr ""
+"La fonction nbTurnBestWorst ne doit être utilisé que dans un jeu en tour par "
+"tour"
+
+#: Sources/libcsuper/game.cpp:784
+msgid "The nbTurnFirstLast function should only be used in a turn based game"
+msgstr ""
+"La fonction nbTurnFirstLast ne doit être utilisé que dans un jeu en tour par "
+"tour"
+
+#: Sources/libcsuper/game.cpp:818
+msgid "Error while exporting the game into a csv file, bad filename: "
+msgstr ""
+"Erreur lors de l'exportation du jeu en un fichier csv, mauvais nom de "
+"fichier : "
+
+#: Sources/libcsuper/game.cpp:825
+msgid "Csu file;"
+msgstr "Fichier Csu;"
+
+#: Sources/libcsuper/game.cpp:826
+msgid "Created on the;"
+msgstr "Créé le;"
+
+#: Sources/libcsuper/game.cpp:827
+msgid "File's version;"
+msgstr "Version du fichier;"
+
+#: Sources/libcsuper/game.cpp:828
+msgid "Maximum size of the names;"
+msgstr "Taille maximum des noms;"
+
+#: Sources/libcsuper/game.cpp:829
+msgid "Number of players;"
+msgstr "Nombre de joueurs;"
+
+#: Sources/libcsuper/game.cpp:830
+msgid "Maximum number of turns;"
+msgstr "Nombre maximum de tour;"
+
+#: Sources/libcsuper/game.cpp:833
+msgid "Name of the game configuration;"
+msgstr "Nom de la configuration de jeu;"
+
+#: Sources/libcsuper/game.cpp:834
+msgid "Use of a maximum score;"
+msgstr "Utilise un score maximum;"
+
+#: Sources/libcsuper/game.cpp:835
+msgid "Initial score;"
+msgstr "Score initial;"
+
+#: Sources/libcsuper/game.cpp:836
+msgid "Number of decimals displayed;"
+msgstr "Nombre de chiffres après la virgule affiché;"
+
+#: Sources/libcsuper/game.cpp:837
+msgid "The first has the highest score;"
+msgstr "Le premier est celui qui a le plus grand score;"
+
+#: Sources/libcsuper/game.cpp:838
+msgid "Turn-based game;"
+msgstr "Jeu en tour par tour;"
+
+#: Sources/libcsuper/game.cpp:839
+msgid "Use of a distributor;"
+msgstr "Utilise un distributeur;"
+
+#: Sources/libcsuper/game.cpp:840
+msgid "Maximum/minimum number of points;"
+msgstr "Nombre maximum/minimum de points;"
+
+#: Sources/libcsuper/game.cpp:845 Sources/libcsuper/game.cpp:905
+msgid "Names;"
+msgstr "Noms;"
+
+#: Sources/libcsuper/game.cpp:849
+msgid "Mean points;"
+msgstr "Points moyens;"
+
+#: Sources/libcsuper/game.cpp:853
+msgid "Number of turn;"
+msgstr "Nombre de tours;"
+
+#: Sources/libcsuper/game.cpp:858
+msgid "Number of turn with the best score;"
+msgstr "Nombre de tours avec le meilleur score;"
+
+#: Sources/libcsuper/game.cpp:862
+msgid "Number of turn with the worst score;"
+msgstr "Nombre de tours avec le pire score;"
+
+#: Sources/libcsuper/game.cpp:866
+msgid "Number of turn first;"
+msgstr "Nombre de tours fini premier;"
+
+#: Sources/libcsuper/game.cpp:870
+msgid "Number of turn last;"
+msgstr "Nombre de tours fini dernier;"
+
+#: Sources/libcsuper/game.cpp:876
+msgid "Names"
+msgstr "Noms"
+
+#: Sources/libcsuper/game.cpp:880
+msgid "Legend;"
+msgstr "Légende;"
+
+#: Sources/libcsuper/game.cpp:882
+msgid "Points in the turn;Points;Ranking;"
+msgstr "Points dans le tour;Points;Classement;"
+
+#: Sources/libcsuper/game.cpp:886 Sources/libcsuper/player.cpp:138
+msgid "Turn "
+msgstr "Tour "
+
+#: Sources/libcsuper/game.cpp:909
+msgid "Total points;"
+msgstr "Points totaux;"
+
+#: Sources/libcsuper/game.cpp:913
+msgid "Ranking;"
+msgstr "Classement;"
+
+#: Sources/libcsuper/game.cpp:931 Sources/libcsuper/game.cpp:1040
+#: Sources/libcsuper/game.cpp:1076
+msgid "Error while exporting the game into a m file, bad filename: "
+msgstr ""
+"Erreur lors de l'exportation du jeu en un fichier m, mauvais nom de "
+"fichier : "
+
+#: Sources/libcsuper/game.cpp:970
+msgid "Total points"
+msgstr "Points totaux"
+
+#: Sources/libcsuper/game.cpp:971 Sources/libcsuper/game.cpp:1013
+msgid "Turn"
+msgstr "Tour"
+
+#: Sources/libcsuper/game.cpp:972 Sources/libcsuper/game.cpp:1012
+#: Sources/libcsuper/game.cpp:1014 Sources/libcsuper/game.cpp:1082
+msgid "Points"
+msgstr "Points"
+
+#: Sources/libcsuper/game.cpp:997
+msgid "Mean score of %1: "
+msgstr "Score moyen de %1 : "
+
+#: Sources/libcsuper/game.cpp:1046
+msgid "Players"
+msgstr "Joueurs"
+
+#: Sources/libcsuper/game.cpp:1081
+msgid "Number of turns"
+msgstr "Nombre de tours"
+
+#: Sources/libcsuper/game.cpp:1083
+msgid "Points on "
+msgstr "Points sur "
+
+#: Sources/libcsuper/game_configuration.cpp:129
+msgid "Name of the game configuration: "
+msgstr "Nom de la configuration de jeu : "
+
+#: Sources/libcsuper/game_configuration.cpp:130
+msgid "The first has the highest score: "
+msgstr "Le premier est celui qui a le plus grand score : "
+
+#: Sources/libcsuper/game_configuration.cpp:131
+msgid "Initial score: "
+msgstr "Score initial: "
+
+#: Sources/libcsuper/game_configuration.cpp:132
+msgid "Number of decimals displayed: "
+msgstr "Nombre de chiffres après la virgule affiché : "
+
+#: Sources/libcsuper/game_configuration.cpp:133
+msgid "Turn-based game: "
+msgstr "Jeu en tour par tour : "
+
+#: Sources/libcsuper/game_configuration.cpp:134
+msgid "Use of a distributor: "
+msgstr "Utilise un distributeur : "
+
+#: Sources/libcsuper/game_configuration.cpp:135
+msgid "Use of a maximum score: "
+msgstr "Utilise un score maximum : "
+
+#: Sources/libcsuper/game_configuration.cpp:136
+msgid "Maximum/minimum number of points: "
+msgstr "Nombre maximum/minimum de points : "
+
+#: Sources/libcsuper/list_game_configuration.cpp:70
+msgid ""
+"This version of Csuper only support game configuration file version less "
+"than or equal to %1"
+msgstr ""
+"Cette version de Csuper ne supporte que des configurations de jeu ayant une "
+"version inférieur ou égale à %1"
+
+#: Sources/libcsuper/list_game_configuration.cpp:107
+#: Sources/libcsuper/list_game_configuration.cpp:114
+msgid "Cannot access to the %1th element, there is only %2 elements"
+msgstr "Ne peut accéder au %1ème élément, il n'y en a que %2"
+
+#: Sources/libcsuper/list_game_configuration.cpp:213
+msgid "Cannot remove the %1th element, there is only %2 elements"
+msgstr "Ne peut enlever le %1ème élément, il n'y en a que %2"
+
+#: Sources/libcsuper/player.cpp:131 Sources/libcsuper/player.cpp:148
+msgid "Name of the player: "
+msgstr "Nom du joueur : "
+
+#: Sources/libcsuper/player.cpp:132 Sources/libcsuper/player.cpp:149
+msgid "Number of turn: "
+msgstr "Nombre de tour : "
+
+#: Sources/libcsuper/player.cpp:133 Sources/libcsuper/player.cpp:150
+msgid "Ranking: "
+msgstr "Classement : "
+
+#: Sources/libcsuper/player.cpp:134 Sources/libcsuper/player.cpp:151
+msgid "\tPoints\tTotal points"
+msgstr "\tPoints\tPoints totaux"
+
+#: Sources/libcsuper/player.cpp:155
+msgid ""
+"\n"
+"Turn "
+msgstr ""
+"\n"
+"Tour "
+
+#: Sources/libcsuper/player.cpp:227
+msgid "Cannot delete the %1th turn, there is only %2 turn"
+msgstr "Ne peut supprimer le %1ème tour, il n'y en a que %2"
+
+#: Sources/libcsuper/preferences.cpp:89
+msgid ""
+"This version of Csuper only support preferences file version less than or "
+"equal to %1"
+msgstr ""
+"Cette version de Csuper ne supporte que des configurations de jeu ayant une "
+"version inférieur ou égal à %1"
+
+#: Sources/libcsuper/preferences_difference_between_player.cpp:81
+msgid ""
+"Difference between player preferences:\n"
+" - Consecutive: %1\n"
+" - First: %2\n"
+" - Last: %3"
+msgstr ""
+"Préférences des différences entre les joueurs :\n"
+" - Consécutif : %1\n"
+" - Premier : %2\n"
+" - Dernier : %3"
+
+#: Sources/libcsuper/preferences_directory.cpp:78
+msgid ""
+"Directory preferences:\n"
+" - Open: %1"
+msgstr ""
+"Préférences des répertoires:\n"
+" - Ouverture : %1"
+
+#: Sources/libcsuper/preferences_export_pdf.cpp:98
+msgid ""
+"Export pdf preferences preferences:\n"
+" - Font size: %1\n"
+" - Page size: %2\n"
+" - Page direction: %3\n"
+" - Character set: %4\n"
+" - Margin: %5\n"
+" - Total points: %6\n"
+" - Ranking: %7"
+msgstr ""
+"Préférences de l'exportation en PDF :\n"
+" - Taille de la police : %1\n"
+" - Taille de la page : %2\n"
+" - Orientation de la page : %3\n"
+" - Jeu de caractère : %4\n"
+" - Marge : %5\n"
+" - Points totaux : %6\n"
+" - Classement : %7"
+
+#: Sources/libcsuper/preferences_main_window_display.cpp:81
+msgid ""
+"Main window display preferences:\n"
+" - Ranking: %1\n"
+" - Calculator: %2\n"
+" - Game information: %3"
+msgstr ""
+"Préférences de l'affichage de la fenêtre principal :\n"
+" - Classement : %1\n"
+" - Calculatrice : %2\n"
+" - Informations de jeu : %3"
+
+#: Sources/libcsuper/preferences_main_window_size.cpp:81
+msgid ""
+"Main window size preferences:\n"
+" - Width: %1\n"
+" - Height: %2\n"
+" - Is maximize: %3"
+msgstr ""
+"Préférences de la taille de la fenêtre principal :\n"
+" - Largeur : %1\n"
+" - Hauteur : %2\n"
+" - Est maximisé : %3"
+
+#: Sources/libcsuper/preferences_score_display.cpp:81
+msgid ""
+"Score display preferences:\n"
+" - Total points: %1\n"
+" - Ranking: %2\n"
+" - Edit/suppr: %3"
+msgstr ""
+"Préférences de l'affichage du score:\n"
+" - Points totaux : %1\n"
+" - Classement : %2\n"
+" - Édition/Surpression : %3"
+
+#: Sources/libcsuper/share.cpp:111
 msgid "Error while clearing the screen."
 msgstr "Erreur lors de l'effaçage de la console."
 
-#~ msgid ""
-#~ "\n"
-#~ "Cannot insert a node after a NULL node.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Impossible d'insérer un nœud après un nœud NULL.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Cannot delete the current node : the node is NULL.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Impossible de supprimer le nœud courant : le nœud est NULL.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Erreur when converting the string into the list.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur lors de la conversion de la chaîne de caractère en liste\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: The file could not be read.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : Le fichier n'a pas pu être lu.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: File not compatible.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : Fichier non compatible.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: the file's version is the %1.1f whereas the software only supports "
-#~ "files with versions higher than the %1.1f.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : la version du fichier est la %1.1f alors que le logiciel "
-#~ "supporte uniquement les fichiers avec des versions supérieures à la "
-#~ "%1.1f.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: corrupted file.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : Fichier corrompu.\n"
-
-#~ msgid "Invalid XML Document\n"
-#~ msgstr "Document XML invalide\n"
-
-#~ msgid "Document non csu\n"
-#~ msgstr "Document non csu\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: the file's version is the %1.1f whereas the software only supports "
-#~ "files with versions %1.1f.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : la version du fichier est la %1.1f alors que le logiciel "
-#~ "supporte uniquement les fichiers avec la version %1.1f.\n"
-
-#~ msgid "The distributor was initializes by default to %s.\n"
-#~ msgstr "La personne qui distribue a été initialisée par défaut à %s.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: this name doesn't exist.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : ce nom n'existe pas.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: this index doesn't exist\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : cet index n'existe pas.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: %s only have %.0f turn but you ask the %d turn\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : %s n'a que %.0f tours alors que vous demandez le tour %d.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: negative turns doesn't exist\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : les tours négatifs n'existent pas\n"
-
-#~ msgid "Error: cannot create PdfDoc object\n"
-#~ msgstr "Erreur : ne peut créer d'objet PdfDoc\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error:The font doesn't exsist\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : cet police n'existe pas.\n"
-
-#~ msgid "Turn %d"
-#~ msgstr "Tour %d"
-
-#~ msgid "Name"
-#~ msgstr "Nom"
-
-#~ msgid "Legend"
-#~ msgstr "Légende"
-
-#~ msgid "Points"
-#~ msgstr "Points"
-
-#~ msgid "Total"
-#~ msgstr "Total"
-
-#~ msgid "Ranking"
-#~ msgstr "Classement"
-
-#~ msgid "File created on the %02.0f/%02.0f/%4.0f"
-#~ msgstr "Fichier créé le %02.0f/%02.0f/%4.0f"
-
-#~ msgid "Number of players: %.0f"
-#~ msgstr "Nombre de joueurs : %.0f"
-
-#~ msgid "Maximum number of turns: %d"
-#~ msgstr "Nombre maximum de tour : %d"
-
-#~ msgid "Name of the game configuration: %s"
-#~ msgstr "Nom de la configuration de jeu %s"
-
-#~ msgid "Page 1"
-#~ msgstr "Page 1"
-
-#~ msgid "Total points"
-#~ msgstr "Points totaux"
-
-#~ msgid "Mean points"
-#~ msgstr "Points moyens"
-
-#~ msgid "Nb turn"
-#~ msgstr "Nb tour"
-
-#~ msgid "Nb turn best"
-#~ msgstr "Nb meilleur tour"
-
-#~ msgid "Nb turn worst"
-#~ msgstr "Nb pire tour"
-
-#~ msgid "Nb turn first"
-#~ msgstr "Nb tour premier"
-
-#~ msgid "Nb turn last"
-#~ msgstr "Nb tour dernier"
-
-#~ msgid "Page %d"
-#~ msgstr "Page %d"
-
-#~ msgid ""
-#~ "Csu file;\n"
-#~ "Created on the;%02.0f/%02.0f/%4.0f;\n"
-#~ "File's version;%1.1f;\n"
-#~ "Maximum size of the names;%.0f;\n"
-#~ "Number of players;%.0f;\n"
-#~ "Maximum number of turns;%d;\n"
-#~ msgstr ""
-#~ "Fichier csu;\n"
-#~ "Créé le;%02.0f/%02.0f/%4.0f;\n"
-#~ "Version du fichier;%1.1f;\n"
-#~ "Taille maximum des noms;%.0f;\n"
-#~ "Nombre de joueurs;%.0f;\n"
-#~ "Nombre maximum de tour;%d;\n"
-
-#~ msgid "yes"
-#~ msgstr "oui"
-
-#~ msgid "no"
-#~ msgstr "non"
-
-#~ msgid ""
-#~ "Name of the game configuration;%s;\n"
-#~ "Use of a maximum score;%s;\n"
-#~ "Initial score;%.3f;\n"
-#~ "Number of decimals displayed;%d;\n"
-#~ "The first has the highest score;%s;\n"
-#~ "Turn-based game;%s;\n"
-#~ "Use of a distributor;%s;\n"
-#~ msgstr ""
-#~ "Nom de la configuration de jeu;%s;\n"
-#~ "Utilise un score maximum;%s;\n"
-#~ "Score initial;%.3f;\n"
-#~ "Nombre de chiffre après la virgule affiché;%d;\n"
-#~ "Le premier est celui qui a le plus de points;%s;\n"
-#~ "Jeu en tour par tour;%s;\n"
-#~ "Utilise un distributeur;%s;\n"
-
-#~ msgid "Maximum/minimum number of points;%.3f;\n"
-#~ msgstr "Nombre maximum/minimum de points;%.3f;\n"
-
-#~ msgid "Maximum/minimum number of points;inf;\n"
-#~ msgstr "Nombre maximum/minimum de points;inf;\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Names;"
-#~ msgstr ""
-#~ "\n"
-#~ "Noms;"
-
-#~ msgid "%s;"
-#~ msgstr "%s;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Mean points;"
-#~ msgstr ""
-#~ "\n"
-#~ "Points moyens;"
-
-#~ msgid "%f;"
-#~ msgstr "%f;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Number of turn;"
-#~ msgstr ""
-#~ "\n"
-#~ "Nombre de tour;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Number of turn with the best score;"
-#~ msgstr ""
-#~ "\n"
-#~ "Nombre de tours avec le meilleur score;"
-
-#~ msgid "%d;"
-#~ msgstr "%d;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Number of turn with the worst score;"
-#~ msgstr ""
-#~ "\n"
-#~ "Nombre de tours avec le pire score;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Number of turn first;"
-#~ msgstr ""
-#~ "\n"
-#~ "Nombre de tours fini premier;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Number of turn last;"
-#~ msgstr ""
-#~ "\n"
-#~ "Nombre de tours fini dernier;"
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Names"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "Noms"
-
-#~ msgid ";;%s;"
-#~ msgstr ";;%s;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Legend;"
-#~ msgstr ""
-#~ "\n"
-#~ "Légende;"
-
-#~ msgid "Points in the turn;Points;Ranking;"
-#~ msgstr "Points dans le tour;Points;Classement;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Turn %d;"
-#~ msgstr ""
-#~ "\n"
-#~ "Tour %d;"
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Names;"
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "Noms;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Total points;"
-#~ msgstr ""
-#~ "\n"
-#~ "Points totaux;"
-
-#~ msgid ""
-#~ "\n"
-#~ "Ranking;"
-#~ msgstr ""
-#~ "\n"
-#~ "Classement;"
-
-#~ msgid "%.0f;"
-#~ msgstr "%.0f;"
-
-#~ msgid "title('Total points');\n"
-#~ msgstr "title('Points totaux');\n"
-
-#~ msgid "xlabel('Turn');\n"
-#~ msgstr "xlabel('Tour');\n"
-
-#~ msgid "ylabel('Points');\n"
-#~ msgstr "ylabel('Points');\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "fprintf('Mean score of %s : %%f\\n',mean(%c2));"
-#~ msgstr ""
-#~ "\n"
-#~ "fprintf('Score moyen de %s : %%f\\n',mean(%c2));"
-
-#~ msgid "title('Points');\n"
-#~ msgstr "title('Points');\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error while opening %s\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur lors de l'ouverture du fichier %s\n"
-
-#~ msgid "Error while closing the file"
-#~ msgstr "Erreur lors de la fermeture du fichier"
-
-#~ msgid ""
-#~ "\n"
-#~ "The file %s cannot be deleted.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Le fichier %s n'a pas pu être supprimé.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "The file %s was deleted successfully.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Le fichier %s a bien été supprimé.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "The file %s cannot be renamed.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Le fichier %s n'a pas pu être renommé.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "The file %s was well renamed in %s.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Le fichier %s a bien été renommé en %s.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: this folder is not valid.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : Le dossier n'est pas valide.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error : this filename is not valid.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : Le nom de fichier n'est pas valide.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "The game configuration %s already exists.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "La configuration de jeu %s existe déjà.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error while importing game configurations.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur lors de l’importation des configurations de jeu.\n"
-
-#~ msgid "Not a csu game configuration file\n"
-#~ msgstr "Pas une configuration de jeu csu\n"
-
-#~ msgid ""
-#~ "This version of Csuper only support game configuration file version of "
-#~ "%.1f.\n"
-#~ msgstr ""
-#~ "Cette version de Csuper ne supporte que des fichiers ayant une version de "
-#~ "%.1f.\n"
-
-#~ msgid "\"Players\""
-#~ msgstr "\"Joueurs\""
-
-#~ msgid ""
-#~ "set datafile missing '-'\n"
-#~ "set style data linespoints\n"
-#~ "set xlabel \"Number of turns\"\n"
-#~ "set ylabel \"Points\"\n"
-#~ "set title \"Points on %s\"\n"
-#~ msgstr ""
-#~ "set datafile missing '-'\n"
-#~ "set style data linespoints\n"
-#~ "set xlabel \"Nombre de tours\"\n"
-#~ "set ylabel \"Points\"\n"
-#~ "set title \"Points sur %s\"\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Csuper - Universal points counter allowing reflection exemption\n"
-#~ "Here is the syntax to use it.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Csuper - Compteur de Score Universel Permettant l'Exemption de Réflexion\n"
-#~ "Voici la syntaxe pour l'utiliser.\n"
-
-#~ msgid "\t- Do not use argument to launch the main menu.\n"
-#~ msgstr ""
-#~ "\t- N'utilisez pas d'argument pour lancer le programme sur le menu.\n"
-
-#~ msgid ""
-#~ "\t- Use the argument '%s' or '%s' followed by the filename to launch "
-#~ "directly the program on this file.\n"
-#~ msgstr ""
-#~ "\t- Utilisez l'option '%s' ou '%s' suivi du nom de fichier pour lancer le "
-#~ "jeu directement sur ce fichier.\n"
-
-#~ msgid ""
-#~ "\t- Use the argument '%s' or '%s' followed by the filename to display "
-#~ "directly the content of the file.\n"
-#~ msgstr ""
-#~ "\t- Utilisez l'option '%s' ou '%s' suivi du nom de fichier pour afficher "
-#~ "directement le contenu du fichier.\n"
-
-#~ msgid ""
-#~ "\t- Use the argument '%s' or '%s' followed by the filename and the export "
-#~ "filename to export the csu file into a pdf file.\n"
-#~ msgstr ""
-#~ "\t- Utilisez l'option '%s' ou '%s' suivi du nom de fichier et du nom de "
-#~ "fichier exporté pour exporter le fichier csu dans un fichier pdf.\n"
-
-#~ msgid ""
-#~ "\t- Use the argument '%s' or '%s' followed by the filename and the export "
-#~ "filename to export the csu file into a csv file.\n"
-#~ msgstr ""
-#~ "\t- Utilisez l'option '%s' ou '%s' suivi du nom de fichier et du nom de "
-#~ "fichier exporté pour exporter le fichier csu dans un fichier csv.\n"
-
-#~ msgid ""
-#~ "\t- Use the argument '%s' or '%s' followed by the filename and the export "
-#~ "filename to export the csu file into gnuplot files.\n"
-#~ msgstr ""
-#~ "\t- Utilisez l'option '%s' ou '%s' suivi du nom de fichier et du nom de "
-#~ "fichier exporté pour exporter le fichier csu en fichiers gnuplot.\n"
-
-#~ msgid ""
-#~ "\t- Use the argument '%s' or '%s' followed by the filename and the export "
-#~ "filename to export the csu file into a m file (octave/matlab file).\n"
-#~ msgstr ""
-#~ "\t- Utilisez l'option '%s' ou '%s' suivi du nom de fichier et du nom de "
-#~ "fichier exporté pour exporter le fichier csu dans un fichier m (fichier "
-#~ "octave/matlab).\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error while reading the file containing the system path.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur lors de la lecture du fichier contenant le répertoire des "
-#~ "fichiers.\n"
-
-#~ msgid "Not a csu preferences file\n"
-#~ msgstr "Pas un fichier de préférence csu\n"
-
-#~ msgid ""
-#~ "This version of Csuper only support preferences file version of %.1f.\n"
-#~ msgstr ""
-#~ "Cette version de Csuper ne supporte que des fichiers de préférence de "
-#~ "version %.1f.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error: you didn't enter a good value.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur : vous n'avez pas entré une bonne valeur.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Memory allocation problem\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Problème d'allocation mémoire\n"
-
-#~ msgid "Nb Mean"
-#~ msgstr "Nb moyen"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error while writing the file.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur lors de l’écriture du fichier.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "The file %s was well deleted.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Le fichier %s a bien été supprimé.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Error while exporting game configurations.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Erreur lors de l'exportation des configurations de jeu.\n"
-
-#~ msgid ""
-#~ "\n"
-#~ "Memory allocation problem.\n"
-#~ msgstr ""
-#~ "\n"
-#~ "Problème allocation mémoire\n"
+#: Sources/libcsuper/share.cpp:117
+msgid "yes"
+msgstr "oui"
+
+#: Sources/libcsuper/share.cpp:119
+msgid "no"
+msgstr "non"

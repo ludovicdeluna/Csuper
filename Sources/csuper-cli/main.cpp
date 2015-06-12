@@ -34,6 +34,7 @@
 #include "../libcsuper/libcsuper.h"
 #include <clocale>
 #include <iostream>
+#include <glibmm/i18n.h>
 
 using namespace csuper;
 using namespace std;
@@ -49,14 +50,20 @@ using namespace Glib;
  */
 int main(int argc, char *argv[])
 {
+    // Set locals
+    locale::global(locale(""));
     setlocale(LC_ALL,"");
+    cout.imbue(locale(""));
+    cerr.imbue(locale(""));
+    cin.imbue(locale(""));
     bindtextdomain("csuper-cli","Locales");
+    bind_textdomain_codeset("csuper-cli","UTF-8");
     textdomain("csuper-cli");
 
     #ifdef PORTABLE
-    libcsuper_initialize(true);
+    csuperInitialize(true);
     #else
-    libcsuper_initialize(false);
+    csuperInitialize(false);
     #endif // PORTABLE
 
 

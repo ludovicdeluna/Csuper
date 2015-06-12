@@ -34,6 +34,7 @@
 #include "share.h"
 #include "exceptions.h"
 #include "list_game_configuration.h"
+#include "preferences.h"
 #include <iostream>
 #include <cstdlib>
 #include <iomanip>
@@ -41,6 +42,7 @@
 #include <cmath>
 #include <sys/stat.h>
 #include <glib/gstdio.h>
+#include "config.h"
 
 namespace csuper{
 
@@ -50,12 +52,13 @@ namespace csuper{
 
     bool Portable::portable_(false);
 
-    void libcsuper_initialize(const bool portable)
+    void csuperInitialize(const bool portable)
     {
         static bool initialized=false;
         if (initialized == false)
         {
-            bindtextdomain("libcsuper","./Locales");
+            bindtextdomain("libcsuper","Locales");
+            bind_textdomain_codeset("libcsuper","UTF-8");
             initialized = true;
 
             Portable::setPortable(portable);
@@ -75,9 +78,13 @@ namespace csuper{
 
             string pref = build_filename(folder,CSUPER_PREFERENCES_FILENAME);
             string game_config = build_filename(folder,CSUPER_GAME_CONFIGURATIONS_FILENAME);
-            string path = build_filename(folder,CSUPER_SYSTEM_PATH_FILENAME);
 
             if (!file_test(pref,FILE_TEST_EXISTS))
+            {
+                Preferences* pref = Preferences::get();
+                pref->writeToFile();
+                delete pref;
+            }
                 ; // To be completed
 
             if (!file_test(game_config,FILE_TEST_EXISTS))
@@ -85,9 +92,6 @@ namespace csuper{
                 ListGameConfiguration list_config;
                 list_config.writeToFile(game_config);
             }
-
-            if (!file_test(path,FILE_TEST_EXISTS))
-                ; // To be completed
         }
     }
 
@@ -102,7 +106,7 @@ namespace csuper{
         successful=system("cls");
         #endif
 
-        /*Verifie si l'ecran s'est bien efface*/
+        //Verifie si l'ecran s'est bien efface
         if (successful != 0)
             cout << _("Error while clearing the screen.") << endl;
     }
@@ -128,6 +132,19 @@ namespace csuper{
         return str == "yes";
     }
 
+    ustring intToUstring(const double i, const unsigned int width)
+    {
+        return Glib::ustring::format(setw(width),i);
+    }
+
+    int ustringToInt(const ustring& str)
+    {
+        lconv *lc = localeconv();
+        removeCharacterInUstring(str,*(lc->thousands_sep));
+        return atoi(str.c_str());
+    }
+
+
     ustring doubleToUstring(const double d, const unsigned int decimals, const unsigned int width)
     {
         if (width == 0)
@@ -136,28 +153,16 @@ namespace csuper{
             return ustring::format(fixed,setprecision(decimals),setw(width), d);
     }
 
-    ustring intToUstring(const double i, const unsigned int width)
-    {
-        return Glib::ustring::format(setw(width),i);
-    }
 
     double ustringToDouble(const ustring& str)
     {
+        // Must be replace to Ascii::strtod in the version 4.5
         ustring copy_str(str);
         lconv *lc = localeconv();
-        ustring::size_type pos;
 
-        /*Change the decimals to a comma if needed*/
-        if(*(lc->decimal_point) == ',')
-        {
-            if ((pos = copy_str.find('.')) != ustring::npos)
-                copy_str.replace(pos,1,",");
-        }
-        else if(*(lc->decimal_point) == '.')
-        {
-            if ((pos = copy_str.find(',')) != ustring::npos)
-                copy_str.replace(pos,1,".");
-        }
+        // Remove the thousands separator
+        removeCharacterInUstring(copy_str,*(lc->thousands_sep));
+        replaceCharacterInUstring(copy_str,*(lc->decimal_point),'.');
 
         #ifdef _WIN32
         if (copy_str == "inf")
@@ -165,7 +170,41 @@ namespace csuper{
         else
         #endif // _WIN32
 
-        return atof(copy_str.c_str());
+        return Ascii::strtod(copy_str);
+    }
+
+    Glib::ustring replaceCharacterInUstring(const Glib::ustring& str, const char old_character, const char new_character)
+    {
+        ustring::size_type pos;
+        ustring ret(str);
+        while ((pos = ret.find(old_character)) != ustring::npos)
+            ret.replace(pos,1,ustring(1,new_character));
+        return ret;
+    }
+
+    Glib::ustring &replaceCharacterInUstring(Glib::ustring& str, const char old_character, const char new_character)
+    {
+        ustring::size_type pos;
+        while ((pos = str.find(old_character)) != ustring::npos)
+            str.replace(pos,1,ustring(1,new_character));
+        return str;
+    }
+
+    Glib::ustring removeCharacterInUstring(const Glib::ustring& str, const char character)
+    {
+        ustring::size_type pos;
+        ustring ret(str);
+        while ((pos = ret.find(character)) != ustring::npos)
+            ret.erase(pos,1);
+        return ret;
+    }
+
+    Glib::ustring &removeCharacterInUstring(Glib::ustring& str, const char character)
+    {
+        ustring::size_type pos;
+        while ((pos = str.find(character)) != ustring::npos)
+            str.erase(pos,1);
+        return str;
     }
 
 

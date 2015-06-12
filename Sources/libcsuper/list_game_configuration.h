@@ -45,7 +45,7 @@ namespace csuper
     {
     private:
         std::vector<GameConfiguration*> game_configuration_list_; /*!< Tab of game configuration */
-        static double version_;
+        static double version_; /*!< The version */
 
     public:
         //
@@ -65,7 +65,7 @@ namespace csuper
          *  \brief Constructor from a filename
          *  \exception csuper::xmlError if bad file
          */
-        ListGameConfiguration(const Glib::ustring filename);
+        ListGameConfiguration(const Glib::ustring& filename);
 
 
 

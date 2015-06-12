@@ -46,5 +46,13 @@
 #include "exceptions.h"
 #include "player.h"
 #include "game.h"
+#include "calculator.h"
+#include "preferences_difference_between_player.h"
+#include "preferences_main_window_size.h"
+#include "preferences_score_display.h"
+#include "preferences_main_window_display.h"
+#include "preferences_export_pdf.h"
+#include "preferences_directory.h"
+#include "preferences.h"
 
 #endif

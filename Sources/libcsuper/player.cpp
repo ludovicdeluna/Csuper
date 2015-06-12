@@ -33,6 +33,7 @@
 
 
 #include "player.h"
+#include "config.h"
 
 namespace csuper
 {
@@ -173,20 +174,20 @@ namespace csuper
         node_player_name->add_child_text(nameUstring());
 
         Element *node_total_points = node->add_child("total_points");
-        node_total_points->add_child_text(totalPointsUstring(game_config));
+        node_total_points->add_child_text(Ascii::dtostr(totalPoints()));
 
         Element *node_rank = node->add_child("rank");
-        node_rank->add_child_text(rankingUstring());
+        node_rank->add_child_text(Ascii::dtostr(ranking()));
 
         Element *node_number_of_turn = node->add_child("number_of_turn");
-        node_number_of_turn->add_child_text(intToUstring(nb_turn_+1));
+        node_number_of_turn->add_child_text(Ascii::dtostr(nb_turn_+1));
 
         Element *node_points = node->add_child("points");
         for (unsigned int i=0 ; i<nbTurn()+1 ; i++)
         {
             Element *node_tmp_points = node_points->add_child("turn");
-            node_tmp_points->add_child_text(pointsUstring(game_config,i));
-            node_tmp_points->set_attribute("num",intToUstring(i));
+            node_tmp_points->add_child_text(Ascii::dtostr(points(i)));
+            node_tmp_points->set_attribute("num",Ascii::dtostr(i));
         }
 
     }

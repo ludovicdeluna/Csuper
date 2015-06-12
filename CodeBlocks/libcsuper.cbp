@@ -44,7 +44,11 @@
 			<Add option="-shared" />
 			<Add option="`pkg-config --libs glibmm-2.4 libxml++-2.6 `" />
 			<Add library="hpdf" />
+			<Add library="muparser" />
 		</Linker>
+		<Unit filename="../Sources/libcsuper/calculator.cpp" />
+		<Unit filename="../Sources/libcsuper/calculator.h" />
+		<Unit filename="../Sources/libcsuper/config.h" />
 		<Unit filename="../Sources/libcsuper/exceptions.cpp" />
 		<Unit filename="../Sources/libcsuper/exceptions.h" />
 		<Unit filename="../Sources/libcsuper/game.cpp" />
@@ -56,6 +60,20 @@
 		<Unit filename="../Sources/libcsuper/list_game_configuration.h" />
 		<Unit filename="../Sources/libcsuper/player.cpp" />
 		<Unit filename="../Sources/libcsuper/player.h" />
+		<Unit filename="../Sources/libcsuper/preferences.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences.h" />
+		<Unit filename="../Sources/libcsuper/preferences_difference_between_player.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences_difference_between_player.h" />
+		<Unit filename="../Sources/libcsuper/preferences_directory.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences_directory.h" />
+		<Unit filename="../Sources/libcsuper/preferences_export_pdf.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences_export_pdf.h" />
+		<Unit filename="../Sources/libcsuper/preferences_main_window_display.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences_main_window_display.h" />
+		<Unit filename="../Sources/libcsuper/preferences_main_window_size.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences_main_window_size.h" />
+		<Unit filename="../Sources/libcsuper/preferences_score_display.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences_score_display.h" />
 		<Unit filename="../Sources/libcsuper/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>

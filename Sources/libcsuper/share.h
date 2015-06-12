@@ -35,7 +35,6 @@
 #ifndef SHARE_H_INCLUDED
 #define SHARE_H_INCLUDED
 
-#include <glibmm/i18n.h>
 #include <glibmm.h>
 #include <libxml++/libxml++.h>
 
@@ -74,12 +73,6 @@ namespace csuper
      */
     #define CSUPER_GAME_CONFIGURATIONS_FILENAME "game_configuration.xml"
 
-    /*!
-     * \def CSUPER_SYSTEM_PATH_FILENAME
-     * Define the filename of the system path file of csuper
-     */
-    #define CSUPER_SYSTEM_PATH_FILENAME "system_path.txt"
-
 
     //
     // General
@@ -88,7 +81,7 @@ namespace csuper
     /*!
      *  Initialize libcsuper with gettext.
      */
-    void libcsuper_initialize(const bool portable);
+    void csuperInitialize(const bool portable);
 
     /*!
      *  Clear the terminal.
@@ -139,10 +132,7 @@ namespace csuper
      *  \param str the ustring
      *  \return the int
      */
-    inline int ustringToInt(const Glib::ustring& str)
-    {
-        return atoi(str.c_str());
-    }
+    int ustringToInt(const Glib::ustring& str);
 
     /*!
      *  Convert an int into a ustring
@@ -151,12 +141,45 @@ namespace csuper
      */
      Glib::ustring intToUstring(const double i, const unsigned int width =0);
 
+    /*!
+     *  Change the decimal place of a double in a ustring
+     *  \param str the ustring
+     *  \param old_character the old character
+     *  \param new_character the new character
+     *  \return the ustring
+     */
+     Glib::ustring replaceCharacterInUstring(const Glib::ustring& str, const char old_character, const char new_character);
+
+    /*!
+     *  Change the decimal place of a double in a ustring
+     *  \param str the ustring
+     *  \param old_character the character
+     *  \param new_character the character
+     *  \return the ustring
+     */
+     Glib::ustring &replaceCharacterInUstring(Glib::ustring& str, const char old_character, const char new_character);
+
+    /*!
+     *  Remove a character in a ustring
+     *  \param str the ustring
+     *  \param character
+     *  \return the ustring
+     */
+     Glib::ustring removeCharacterInUstring(const Glib::ustring& str, const char character);
+
+    /*!
+     *  Remove a character in a ustring
+     *  \param str the ustring
+     *  \param character
+     *  \return the ustring
+     */
+     Glib::ustring &removeCharacterInUstring(Glib::ustring& str, const char character);
+
+
 
     //
     // XML
     //
-
-    // xmlpp
     /*!
      *  Change the node to the next element
      *  \param node the xmlpp node
