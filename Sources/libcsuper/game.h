@@ -34,8 +34,10 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
 
+
 #include "game_configuration.h"
 #include "player.h"
+#include "preferences_export_pdf.h"
 
 
 namespace csuper
@@ -494,7 +496,6 @@ namespace csuper
             return nbTurnBestWorst(player_index,false);
         }
 
-
         /*!
          *  \brief Calculate the number of time where the player got the worst score in a turn
          *  \param player_name the player name
@@ -555,6 +556,153 @@ namespace csuper
             return nbTurnLast(getPlayerIndex(player_name));
         }
 
+        /*!
+         *  \brief Calculate the mean points of a player
+         *  \param player_index the player index
+         *  \return the mean points
+         *  \exception std::length_error if index is greater than the number of player
+         */
+        inline double meanPoints(const unsigned int player_index) const
+        {
+            return player(player_index).meanPoints();
+        }
+
+        /*!
+         *  \brief Calculate the mean points of a player
+         *  \param player_name the player name
+         *  \return the mean points
+         *  \exception csuper::notFound if the player name doesn't exist
+         */
+        inline double meanPoints(const Glib::ustring& player_name) const
+        {
+            return player(player_name).meanPoints();
+        }
+
+
+
+
+
+        //
+        // Statistics ustring
+        //
+        /*!
+         *  \brief Calculate the number of time where the player got the best score in a turn in a ustring
+         *  \param player_index the player index
+         *  \return the ustring
+         *  \exception std::length_error if index is greater than the number of player
+         *  \exception csuper::wrongUse if function is used in a non turn based game
+         */
+        inline Glib::ustring nbTurnBestUstring(const unsigned int player_index) const
+        {
+            return intToUstring(nbTurnBestWorst(player_index,true));
+        }
+
+        /*!
+         *  \brief Calculate the number of time where the player got the best score in a turn in a ustring
+         *  \param player_name the player name
+         *  \return the ustring
+         *  \exception csuper::notFound if the player name doesn't exist
+         *  \exception csuper::wrongUse if function is used in a non turn based game
+         */
+        inline Glib::ustring nbTurnBestUstring(const Glib::ustring& player_name) const
+        {
+            return intToUstring(nbTurnBest(getPlayerIndex(player_name)));
+        }
+
+        /*!
+         *  \brief Calculate the number of time where the player got the worst score in a turn in a ustring
+         *  \param player_index the player index
+         *  \return the ustring
+         *  \exception std::length_error if index is greater than the number of player
+         *  \exception csuper::wrongUse if function is used in a non turn based game
+         */
+        inline Glib::ustring nbTurnWorstUstring(const unsigned int player_index) const
+        {
+            return intToUstring(nbTurnBestWorst(player_index,false));
+        }
+
+        /*!
+         *  \brief Calculate the number of time where the player got the worst score in a turn in a ustring
+         *  \param player_name the player name
+         *  \return the ustring
+         *  \exception csuper::notFound if the player name doesn't exist
+         *  \exception csuper::wrongUse if function is used in a non turn based game
+         */
+        inline Glib::ustring nbTurnWorstUstring(const Glib::ustring& player_name) const
+        {
+            return intToUstring(nbTurnWorst(getPlayerIndex(player_name)));
+        }
+
+        /*!
+         *  \brief Calculate the number of time where the player was in the first place in a ustring
+         *  \param player_index the player index
+         *  \return the ustring
+         *  \exception std::length_error if index is greater than the number of player
+         *  \exception csuper::wrongUse if function is used in a non turn based game
+         */
+        inline Glib::ustring nbTurnFirstUstring(const unsigned int player_index) const
+        {
+            return intToUstring(nbTurnFirstLast(player_index,true));
+        }
+
+        /*!
+         *  \brief Calculate the number of time where the player was in the first place in a ustring
+         *  \param player_name the player name
+         *  \return the ustring
+         *  \exception csuper::notFound if the player name doesn't exist
+         *  \exception csuper::wrongUse if function is used in a non turn based game
+         */
+        inline Glib::ustring nbTurnFirstUstring(const Glib::ustring& player_name) const
+        {
+            return intToUstring(nbTurnFirst(getPlayerIndex(player_name)));
+        }
+
+        /*!
+         *  \brief Calculate the number of time where the player was in the first place in a ustring
+         *  \param player_index the player index
+         *  \return the ustring
+         *  \exception std::length_error if index is greater than the number of player
+         *  \exception csuper::wrongUse if function is used in a non turn based game
+         */
+        inline Glib::ustring nbTurnLastUstring(const unsigned int player_index) const
+        {
+            return intToUstring(nbTurnFirstLast(player_index,false));
+        }
+
+        /*!
+         *  \brief Calculate the number of time where the player was in the last place in a ustring
+         *  \param player_name the player name
+         *  \return the ustring
+         *  \exception csuper::notFound if the player name doesn't exist
+         *  \exception csuper::wrongUse if function is used in a non turn based game
+         */
+        inline Glib::ustring nbTurnLastUstring(const Glib::ustring& player_name) const
+        {
+            return intToUstring(nbTurnLast(getPlayerIndex(player_name)));
+        }
+
+        /*!
+         *  \brief Calculate the mean points of a player in a ustring
+         *  \param player_index the player index
+         *  \return the ustring
+         *  \exception std::length_error if index is greater than the number of player
+         */
+        inline Glib::ustring meanPointsUstring(const unsigned int player_index) const
+        {
+            return doubleToUstring(player(player_index).meanPoints());
+        }
+
+        /*!
+         *  \brief Calculate the mean points of a player in a ustring
+         *  \param player_name the player name
+         *  \return the ustring
+         *  \exception csuper::notFound if the player name doesn't exist
+         */
+        inline Glib::ustring meanPointsUstring(const Glib::ustring& player_name) const
+        {
+            return doubleToUstring(player(player_name).meanPoints());
+        }
+
 
 
 
@@ -588,6 +736,13 @@ namespace csuper
          */
         void exportToGnuplot(const Glib::ustring& filename) const;
 
+        /*!
+         *  Export to a pdf file
+         * \param[in] pref the preferences
+         * \param[in] filename the filename of the pdf file
+         * \exception csuper::pdfError
+         */
+        void exportToPdf(const ExportPdfPreferences& pref, const Glib::ustring& filename) const;
 
 
 
@@ -712,6 +867,17 @@ namespace csuper
             return distributor_;
         }
 
+
+        /*!
+         *  \brief return the player name
+         *  \param player_index the player index
+         *  \return the player name
+         */
+        inline Glib::ustring playerName(const unsigned int player_index) const
+        {
+            return player(player_index).name();
+        }
+
         /*!
          *  \brief return the distributor name
          *  \return the distributor name
@@ -820,6 +986,30 @@ namespace csuper
             return ranking(getPlayerIndex(player_name),turn);
         }
 
+        /*!
+         *  \brief Return true if the player has points on the turn, false otherwise
+         *  \param player_index the player index
+         *  \param turn the turn, if not set the turn is set to the last turn
+         *  \return true if the player has points on the turn, false otherwise
+         *  \exception std::length_error if index is greater than the number of player
+         */
+        inline bool hasTurn(const unsigned int player_index, const int turn) const
+        {
+            return player(player_index).hasTurn(turn);
+        }
+
+        /*!
+         *  \brief Return true if the player has points on the turn, false otherwise
+         *  \param player_name the player name
+         *  \param turn the turn, if not set the turn is set to the last turn
+         *  \return true if the player has points on the turn, false otherwise
+         *  \exception csuper::notFound if the player name doesn't exist
+         */
+        inline bool hasTurn(const Glib::ustring& player_name, const int turn) const
+        {
+            return player(player_name).hasTurn(turn);
+        }
+
 
 
 
@@ -892,7 +1082,7 @@ namespace csuper
         }
 
         /*!
-         *  \brief return the game configuration in a ustring
+         *  \brief return the player in a ustring
          *  \param index the index of the player
          *  \return the ustring
          *  \exception std::length_error if index is greater the the number of player
@@ -900,6 +1090,17 @@ namespace csuper
         inline Glib::ustring playerUstring(unsigned int index) const
         {
             return players_[index]->toUstring();
+        }
+
+
+        /*!
+         *  \brief return the player name in a ustring
+         *  \param player_index the player index
+         *  \return the ustring
+         */
+        inline Glib::ustring playerNameUstring(const unsigned int player_index) const
+        {
+            return player(player_index).name();
         }
 
         /*!

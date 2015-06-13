@@ -38,6 +38,8 @@
 #include <glib/gstdio.h>
 #include <fstream>
 #include "config.h"
+#include "pdf_exportation.h"
+
 
 namespace csuper
 {
@@ -1094,6 +1096,11 @@ namespace csuper
     {
         exportToGnuplotData(filename);
         exportToGnuplotScript(filename);
+    }
+
+    void Game::exportToPdf(const ExportPdfPreferences& pref, const Glib::ustring& filename) const
+    {
+        PdfExportation::exportToPdf(this,pref,filename);
     }
 
 }

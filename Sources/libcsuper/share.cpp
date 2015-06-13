@@ -81,9 +81,8 @@ namespace csuper{
 
             if (!file_test(pref,FILE_TEST_EXISTS))
             {
-                Preferences* pref = Preferences::get();
-                pref->writeToFile();
-                delete pref;
+                Preferences pref;
+                pref.writeToFile();
             }
                 ; // To be completed
 
@@ -145,12 +144,22 @@ namespace csuper{
     }
 
 
-    ustring doubleToUstring(const double d, const unsigned int decimals, const unsigned int width)
+    ustring doubleToUstring(const double d, const int decimals, const unsigned int width)
     {
-        if (width == 0)
-            return ustring::format(fixed,setprecision(decimals), d);
+        if (decimals < 0)
+        {
+            if (width == 0)
+                return ustring::format(d);
+            else
+                return ustring::format(fixed,setw(width), d);
+        }
         else
-            return ustring::format(fixed,setprecision(decimals),setw(width), d);
+        {
+            if (width == 0)
+                return ustring::format(fixed,setprecision(decimals), d);
+            else
+                return ustring::format(fixed,setprecision(decimals),setw(width), d);
+        }
     }
 
 
@@ -236,6 +245,20 @@ namespace csuper{
                 throw xmlError("No child element");
         }
         return static_cast<Element*>(node) ;
+    }
+
+
+
+    void removeFileExtension(Glib::ustring& filename)
+    {
+        for (int i=filename.size()-2 ; i>0 ; i--)
+        {
+            if (filename[i] == '.')
+            {
+                filename.resize(i);
+                break;
+            }
+        }
     }
 
 }

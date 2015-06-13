@@ -88,6 +88,12 @@ namespace csuper
      */
     void clearScreen();
 
+    /*!
+     *  Remove the file extension from a filename
+     * \param[in] filename the filename
+     */
+    void removeFileExtension(Glib::ustring& filename);
+
 
 
     // Conversion
@@ -118,7 +124,7 @@ namespace csuper
      *  \param decimals the number of decimals
      *  \return the ustring
      */
-    Glib::ustring doubleToUstring(const double d, const unsigned int decimals=0, const unsigned int width =0);
+    Glib::ustring doubleToUstring(const double d, const int decimals=-1, const unsigned int width = 0);
 
     /*!
      *  Convert a ustring into a double

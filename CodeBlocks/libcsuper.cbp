@@ -58,6 +58,8 @@
 		<Unit filename="../Sources/libcsuper/libcsuper.h" />
 		<Unit filename="../Sources/libcsuper/list_game_configuration.cpp" />
 		<Unit filename="../Sources/libcsuper/list_game_configuration.h" />
+		<Unit filename="../Sources/libcsuper/pdf_exportation.cpp" />
+		<Unit filename="../Sources/libcsuper/pdf_exportation.h" />
 		<Unit filename="../Sources/libcsuper/player.cpp" />
 		<Unit filename="../Sources/libcsuper/player.h" />
 		<Unit filename="../Sources/libcsuper/preferences.cpp" />

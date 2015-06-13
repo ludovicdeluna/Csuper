@@ -61,6 +61,12 @@ namespace csuper
     }
 
 
+    pdfError::pdfError(const string& what_arg) : runtime_error(_("PDF error: ")+what_arg)
+    {
+
+    }
+
+
     wrongUse::wrongUse(const string& what_arg) : logic_error(_("Wrong use: ")+what_arg)
     {
 

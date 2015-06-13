@@ -93,6 +93,19 @@ namespace csuper
         fileError(const std::string& what_arg);
     };
 
+    /*! \class pdfError
+    *   \brief This class represent a pdf error
+    */
+    class pdfError : public std::runtime_error
+    {
+    public:
+        /*!
+         *  \brief Constructor with the string parameter
+         *  \param what_arg the string of the error
+         */
+        pdfError(const std::string& what_arg);
+    };
+
     /*! \class wrongUse
     *   \brief This class represent a error when a function is called when it would'n be
     */
