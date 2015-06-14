@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 14:20+0200\n"
-"PO-Revision-Date: 2015-06-07 14:20+0200\n"
+"POT-Creation-Date: 2015-06-14 22:15+0200\n"
+"PO-Revision-Date: 2015-06-14 22:32+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -19,6 +19,97 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: Sources/csuper-cli/main.cpp:65
-msgid "Test"
-msgstr "Teste"
+#: Sources/csuper-cli/command_line_option.cpp:42
+msgid "The input and output filename"
+msgstr "Le fichier d'entré et de sortie"
+
+#: Sources/csuper-cli/command_line_option.cpp:43
+msgid "The instruction"
+msgstr "L'instruction"
+
+#: Sources/csuper-cli/command_line_option.cpp:50
+msgid "Open the input file"
+msgstr "Ouvre le fichier d'entré"
+
+#: Sources/csuper-cli/command_line_option.cpp:55
+msgid "Read the input file"
+msgstr "Lis le fichier d'entré"
+
+#: Sources/csuper-cli/command_line_option.cpp:60
+msgid "Export the input file into into a PDF output file"
+msgstr "Exporte le fichier d'entré dans le fichier PDF de sortie"
+
+#: Sources/csuper-cli/command_line_option.cpp:65
+msgid "Export the input file into into a CSV output file"
+msgstr "Exporte le fichier d'entré dans le fichier CSV de sortie"
+
+#: Sources/csuper-cli/command_line_option.cpp:70
+msgid "Export the input file into into a m (Octave/Matlab) output file"
+msgstr "Exporte le fichier d'entré dans le fichier m (Octave/Matlab) de sortie"
+
+#: Sources/csuper-cli/command_line_option.cpp:75
+msgid "Export the input file into into Gnuplot output files"
+msgstr "Exporte le fichier d'entré dans le fichier Gnuplot de sortie"
+
+#: Sources/csuper-cli/command_line_option.cpp:90
+msgid "The input filename"
+msgstr "Le fichier d'entré"
+
+#: Sources/csuper-cli/command_line_option.cpp:91
+#: Sources/csuper-cli/command_line_option.cpp:97
+msgid "filename"
+msgstr "nom_de_fichier"
+
+#: Sources/csuper-cli/command_line_option.cpp:96
+msgid "The output filename"
+msgstr "Le fichier de sortie"
+
+#: Sources/csuper-cli/command_line_option.cpp:105
+msgid ""
+"If an instruction is set, a input filename is needed.\n"
+"If a \"to\" instruction is set, an output filename is needed.\n"
+"You can use only one instruction at once."
+msgstr ""
+"Si une instruction est mise, un fichier d'entré est requis.\n"
+"Si une instruction d'export, un fichier de sortie est requis.\n"
+"Vous ne pouvez utiliser qu'une seule instruction à la fois."
+
+#: Sources/csuper-cli/command_line_option.cpp:123
+#: Sources/csuper-cli/command_line_option.cpp:184
+msgid "Use -h or --help for help."
+msgstr "Utiliser -h ou --help pour avoir de l'aide."
+
+#: Sources/csuper-cli/command_line_option.cpp:130
+msgid "You need an instruction.\n"
+msgstr "Vous devez utiliser une instruction.\n"
+
+#: Sources/csuper-cli/command_line_option.cpp:141
+msgid "You have to use only one instruction.\n"
+msgstr "Vous devez utiliser une seule instruction.\n"
+
+#: Sources/csuper-cli/command_line_option.cpp:146
+msgid "You need an input file to open or read a file.\n"
+msgstr ""
+"Vous devez mettre un fichier d'entré lors de la lecture ou l'ouverture.\n"
+
+#: Sources/csuper-cli/command_line_option.cpp:156
+msgid "You don't need an output file to open or read a file.\n"
+msgstr ""
+"Vous ne devez pas mettre un fichier de sortie lors de la lecture ou "
+"l'ouverture.\n"
+
+#: Sources/csuper-cli/command_line_option.cpp:161
+msgid "You need an input file to export a file.\n"
+msgstr "Vous devez mettre un fichier d'entré lors de l'exportation.\n"
+
+#: Sources/csuper-cli/command_line_option.cpp:163
+msgid "You need an output file to export a file.\n"
+msgstr "Vous devez mettre un fichier de sortie lors de l'exportation.\n"
+
+#: Sources/csuper-cli/main.cpp:96 Sources/csuper-cli/main.cpp:112
+#: Sources/csuper-cli/main.cpp:127 Sources/csuper-cli/main.cpp:142
+msgid "The file %1 was well exported to %2"
+msgstr "Le fichier %1 a bien été exporté en %2"
+
+#~ msgid "Test"
+#~ msgstr "Teste"

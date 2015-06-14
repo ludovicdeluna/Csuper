@@ -48,13 +48,13 @@ namespace csuper
     class Game
     {
     private:
-        static double version_;
-        unsigned int size_max_name_;
-        Glib::Date date_;
-        unsigned int nb_player_;
-        GameConfiguration *config_;
-        std::vector<Player*> players_;
-        unsigned int distributor_;
+        static double version_;         /*!< The version */
+        unsigned int size_max_name_;    /*!< The maximal size of a player name */
+        Glib::Date date_;               /*!< The date of creation */
+        unsigned int nb_player_;        /*!< The number of player */
+        GameConfiguration *config_;     /*!< The game configuration */
+        std::vector<Player*> players_;  /*!< The players */
+        unsigned int distributor_;      /*!< The distributor */
 
 
         //

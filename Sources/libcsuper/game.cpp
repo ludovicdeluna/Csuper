@@ -813,7 +813,7 @@ namespace csuper
         file.exceptions(ofstream::failbit | ofstream::badbit );
         try
         {
-            file.open(filename,ofstream::out);
+            file.open(locale_from_utf8(filename),ofstream::out);
         }
         catch (ios_base::failure& e)
         {
@@ -926,7 +926,7 @@ namespace csuper
         file.exceptions(ofstream::failbit | ofstream::badbit );
         try
         {
-            file.open(filename,ofstream::out);
+            file.open(locale_from_utf8(filename),ofstream::out);
         }
         catch (ios_base::failure& e)
         {
@@ -1035,7 +1035,7 @@ namespace csuper
         file.exceptions(ofstream::failbit | ofstream::badbit );
         try
         {
-            file.open(filename + ".dat",ofstream::out);
+            file.open(locale_from_utf8(filename+".dat"),ofstream::out);
         }
         catch (ios_base::failure& e)
         {
@@ -1071,7 +1071,7 @@ namespace csuper
         file.exceptions(ofstream::failbit | ofstream::badbit );
         try
         {
-            file.open(filename + ".plt",ofstream::out);
+            file.open(locale_from_utf8(filename+".plt"),ofstream::out);
         }
         catch (ios_base::failure& e)
         {

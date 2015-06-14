@@ -35,10 +35,10 @@
 #include <clocale>
 #include <iostream>
 #include <glibmm/i18n.h>
+#include "command_line_option.h"
 
 using namespace csuper;
 using namespace std;
-using namespace xmlpp;
 using namespace Glib;
 
 /*!
@@ -66,8 +66,93 @@ int main(int argc, char *argv[])
     csuperInitialize(false);
     #endif // PORTABLE
 
+    CommandLineOption clo;
+    switch (clo.parse(argc,argv))
+    {
+    case CommandLineOption::READ_FILE:
+        try
+        {
+            Game* game = new Game(clo.input());
+            cout << *game;
+            delete game;
+        }
+        catch (std::exception& e)
+        {
+            cout << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        break;
 
+    case CommandLineOption::OPEN_FILE:
+        cout << "Open" << endl;
+        break;
 
+    case CommandLineOption::EXPORT_TO_PDF:
+        try
+        {
+            Preferences* pref = Preferences::get();
+            Game* game = new Game(clo.input());
+            game->exportToPdf(pref->exportPdf(),clo.output());
+            cout << ustring::compose(_("The file %1 was well exported to %2"),clo.input(),clo.output()) << endl;
+            delete game;
+            delete pref;
+        }
+        catch (std::exception& e)
+        {
+            cout << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        break;
+
+    case CommandLineOption::EXPORT_TO_M:
+        try
+        {
+            Game* game = new Game(clo.input());
+            game->exportToM(clo.output());
+            cout << ustring::compose(_("The file %1 was well exported to %2"),clo.input(),clo.output()) << endl;
+            delete game;
+        }
+        catch (std::exception& e)
+        {
+            cout << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        break;
+
+    case CommandLineOption::EXPORT_TO_CSV:
+        try
+        {
+            Game* game = new Game(clo.input());
+            game->exportToCsv(clo.output());
+            cout << ustring::compose(_("The file %1 was well exported to %2"),clo.input(),clo.output()) << endl;
+            delete game;
+        }
+        catch (std::exception& e)
+        {
+            cout << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        break;
+
+    case CommandLineOption::EXPORT_TO_GNUPLOT:
+        try
+        {
+            Game* game = new Game(clo.input());
+            game->exportToGnuplot(clo.output());
+            cout << ustring::compose(_("The file %1 was well exported to %2"),clo.input(),clo.output()) << endl;
+            delete game;
+        }
+        catch (std::exception& e)
+        {
+            cout << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        break;
+
+    case CommandLineOption::RUN:
+        cout << "Run" << endl;
+        break;
+    }
 
     return EXIT_SUCCESS;
 }

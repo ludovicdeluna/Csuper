@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-13 16:59+0200\n"
+"POT-Creation-Date: 2015-06-14 22:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -287,7 +287,7 @@ msgstr ""
 msgid "Error while exporting the game into a m file, bad filename: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:972 Sources/libcsuper/pdf_exportation.cpp:427
+#: Sources/libcsuper/game.cpp:972 Sources/libcsuper/pdf_exportation.cpp:431
 msgid "Total points"
 msgstr ""
 
@@ -297,9 +297,9 @@ msgstr ""
 
 #: Sources/libcsuper/game.cpp:974 Sources/libcsuper/game.cpp:1014
 #: Sources/libcsuper/game.cpp:1016 Sources/libcsuper/game.cpp:1084
-#: Sources/libcsuper/pdf_exportation.cpp:321
-#: Sources/libcsuper/pdf_exportation.cpp:334
-#: Sources/libcsuper/pdf_exportation.cpp:345
+#: Sources/libcsuper/pdf_exportation.cpp:326
+#: Sources/libcsuper/pdf_exportation.cpp:339
+#: Sources/libcsuper/pdf_exportation.cpp:350
 msgid "Points"
 msgstr ""
 
@@ -366,95 +366,95 @@ msgstr ""
 msgid "Cannot remove the %1th element, there is only %2 elements"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:75
+#: Sources/libcsuper/pdf_exportation.cpp:76
 msgid "The font doesn't exist"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:143
+#: Sources/libcsuper/pdf_exportation.cpp:144
 msgid "File created on the %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:148
+#: Sources/libcsuper/pdf_exportation.cpp:149
 msgid "Number of players: %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:153
+#: Sources/libcsuper/pdf_exportation.cpp:154
 msgid "Maximum number of turns: %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:158
+#: Sources/libcsuper/pdf_exportation.cpp:159
 msgid "Name of the game configuration: %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:177
+#: Sources/libcsuper/pdf_exportation.cpp:178
 msgid "Page 1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:234
+#: Sources/libcsuper/pdf_exportation.cpp:237
 msgid "Page %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:277
-#: Sources/libcsuper/pdf_exportation.cpp:422
-#: Sources/libcsuper/pdf_exportation.cpp:462
+#: Sources/libcsuper/pdf_exportation.cpp:282
+#: Sources/libcsuper/pdf_exportation.cpp:426
+#: Sources/libcsuper/pdf_exportation.cpp:465
 msgid "Name"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:313
+#: Sources/libcsuper/pdf_exportation.cpp:318
 msgid "Legend"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:323
-#: Sources/libcsuper/pdf_exportation.cpp:336
+#: Sources/libcsuper/pdf_exportation.cpp:328
+#: Sources/libcsuper/pdf_exportation.cpp:341
 msgid "Total"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:325
-#: Sources/libcsuper/pdf_exportation.cpp:347
-#: Sources/libcsuper/pdf_exportation.cpp:435
+#: Sources/libcsuper/pdf_exportation.cpp:330
+#: Sources/libcsuper/pdf_exportation.cpp:352
+#: Sources/libcsuper/pdf_exportation.cpp:439
 msgid "Ranking"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:366
+#: Sources/libcsuper/pdf_exportation.cpp:371
 msgid "Turn %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:471
+#: Sources/libcsuper/pdf_exportation.cpp:474
 msgid "Nb turn"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:480
+#: Sources/libcsuper/pdf_exportation.cpp:483
 msgid "Mean points"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:491
+#: Sources/libcsuper/pdf_exportation.cpp:494
 msgid "Nb turn best"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:500
+#: Sources/libcsuper/pdf_exportation.cpp:503
 msgid "Nb turn worst"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:509
+#: Sources/libcsuper/pdf_exportation.cpp:512
 msgid "Nb turn first"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:518
+#: Sources/libcsuper/pdf_exportation.cpp:521
 msgid "Nb turn last"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:615
-#: Sources/libcsuper/pdf_exportation.cpp:630
-#: Sources/libcsuper/pdf_exportation.cpp:651
-#: Sources/libcsuper/pdf_exportation.cpp:664
+#: Sources/libcsuper/pdf_exportation.cpp:618
+#: Sources/libcsuper/pdf_exportation.cpp:633
+#: Sources/libcsuper/pdf_exportation.cpp:654
+#: Sources/libcsuper/pdf_exportation.cpp:667
 msgid "Conversion from UTF-8 to ISO8859-15 failed"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:778
+#: Sources/libcsuper/pdf_exportation.cpp:788
 msgid "The file cannot be created"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:789
+#: Sources/libcsuper/pdf_exportation.cpp:799
 msgid "The file cannot be save"
 msgstr ""
 

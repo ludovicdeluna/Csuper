@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-07 15:03+0200\n"
+"POT-Creation-Date: 2015-06-14 22:15+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,6 +17,88 @@ msgstr ""
 "Content-Type: text/plain; charset=CHARSET\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Sources/csuper-cli/main.cpp:65
-msgid "Test"
+#: Sources/csuper-cli/command_line_option.cpp:42
+msgid "The input and output filename"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:43
+msgid "The instruction"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:50
+msgid "Open the input file"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:55
+msgid "Read the input file"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:60
+msgid "Export the input file into into a PDF output file"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:65
+msgid "Export the input file into into a CSV output file"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:70
+msgid "Export the input file into into a m (Octave/Matlab) output file"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:75
+msgid "Export the input file into into Gnuplot output files"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:90
+msgid "The input filename"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:91
+#: Sources/csuper-cli/command_line_option.cpp:97
+msgid "filename"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:96
+msgid "The output filename"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:105
+msgid ""
+"If an instruction is set, a input filename is needed.\n"
+"If a \"to\" instruction is set, an output filename is needed.\n"
+"You can use only one instruction at once."
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:123
+#: Sources/csuper-cli/command_line_option.cpp:184
+msgid "Use -h or --help for help."
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:130
+msgid "You need an instruction.\n"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:141
+msgid "You have to use only one instruction.\n"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:146
+msgid "You need an input file to open or read a file.\n"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:156
+msgid "You don't need an output file to open or read a file.\n"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:161
+msgid "You need an input file to export a file.\n"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:163
+msgid "You need an output file to export a file.\n"
+msgstr ""
+
+#: Sources/csuper-cli/main.cpp:96 Sources/csuper-cli/main.cpp:112
+#: Sources/csuper-cli/main.cpp:127 Sources/csuper-cli/main.cpp:142
+msgid "The file %1 was well exported to %2"
 msgstr ""

@@ -790,7 +790,7 @@ namespace csuper
 
         try
         {
-            HPDF_SaveToFile(pdf->pdf_,filename.c_str());
+            HPDF_SaveToFile(pdf->pdf_,locale_from_utf8(filename).c_str());
         }
         catch (pdfError& e)
         {

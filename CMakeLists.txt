@@ -65,6 +65,7 @@ target_link_libraries(
 	${GLIBMM_LIBRARIES}
 	${XMLPP_LIBRARIES}
 	muparser
+	hpdf
 )
 
 target_compile_features(
@@ -92,6 +93,7 @@ target_link_libraries(
 	${GLIBMM_LIBRARIES}
 	${XMLPP_LIBRARIES}
 	muparser
+	hpdf
 )
 
 target_compile_features(
