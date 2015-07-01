@@ -81,11 +81,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
 
     /* Configure the file chooser */
     gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0)),SIZE_MAX_FILE_NAME/8);
-    #ifdef _WIN32
-    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(g_convert(system_path,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL)),NULL);
-    #else
-    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(system_path),NULL);
-    #endif
+    gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)),g_file_new_for_path(g_locale_to_utf8(system_path,-1,NULL,NULL,NULL)),NULL);
 
     /* Set the combo  box of the game configuration */
     GtkWidget *combo_config = gtk_combo_box_text_new();
@@ -199,11 +195,7 @@ G_MODULE_EXPORT void validAssistantNewCsuOne(GtkWidget *widget, gpointer data)
     /* Get the filename, the index of the game configuration and the folder */
     g_utf8_strncpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0))),SIZE_MAX_FILE_NAME/8);
     index = gtk_combo_box_get_active(GTK_COMBO_BOX(gtk_grid_get_child_at(GTK_GRID(grid_1),1,3)));
-    #ifdef _WIN32
-    folder = g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
-    #else
-    folder = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1)));
-    #endif // _WIN32
+    folder = g_locale_from_utf8(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid_1),1,1))),-1,NULL,NULL,NULL);
     #ifndef PORTABLE
     folder_ok = changeSystemPath(folder);
     #else
@@ -474,14 +466,8 @@ G_MODULE_EXPORT void endAssistantNewCsu(GtkWidget *widget, gpointer data)
     /* Get the filename */
     GtkWidget *grid = getWidgetFromBuilder(user_data->ptr_builder,"grid_new_csu_file_assistant_1");
 
-    #ifdef _WIN32
-    folder = g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid),1,1))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
-    strncpy(name,g_convert(gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL),SIZE_MAX_NAME-1);
-    #else
-    folder = gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid),1,1)));
-    g_utf8_strncpy(name,gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),SIZE_MAX_FILE_NAME/8);
-    #endif // _WIN32
-
+    folder = g_locale_from_utf8(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(gtk_grid_get_child_at(GTK_GRID(grid),1,1))),-1,NULL,NULL,NULL);
+    strncpy(name,g_locale_from_utf8(gtk_entry_get_text(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid),1,0))),-1,NULL,NULL,NULL),SIZE_MAX_NAME-1);
 
     sprintf(user_data->csu_filename,"%s/%s",folder,name);
     addFileCsuExtension(user_data->csu_filename);

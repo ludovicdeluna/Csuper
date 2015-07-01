@@ -32,6 +32,7 @@
  */
 
  #include "main_menu.h"
+ #include "chart.h"
 
 /*!
  * \fn G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data)
@@ -95,20 +96,12 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
         #else
         gchar system_path[SIZE_MAX_FILE_NAME]="";
         readSystemPath(system_path);
-        #ifndef _WIN32
-        gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_open),g_file_new_for_path(system_path),NULL);
-        #else
-        gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_open),g_file_new_for_path(g_convert(system_path,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL)),NULL);
-        #endif // _WIN32
+        gtk_file_chooser_set_current_folder_file(GTK_FILE_CHOOSER(window_file_open),g_file_new_for_path(g_locale_to_utf8(system_path,-1,NULL,NULL,NULL)),NULL);
         #endif
     }
     else
     {
-        #ifdef _WIN32
-        gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_open),g_convert(user_data->csu_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
-        #else
-        gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_open),user_data->csu_filename);
-        #endif
+        gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_open),g_locale_to_utf8(user_data->csu_filename,-1,NULL,NULL,NULL));
     }
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_open)))
@@ -117,11 +110,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 		{
 		    /* Get the filename*/
 		    gchar *filename;
-		    #ifdef _WIN32
-		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_open)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
-		    #else
-		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER(window_file_open));
-		    #endif
+		    filename=g_locale_from_utf8(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_open)),-1,NULL,NULL,NULL);
 
 			if (user_data->ptr_csu_struct != NULL)
                 closeCsuStruct(user_data->ptr_csu_struct);
@@ -242,11 +231,8 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_save),all_filter);
 
     /* Give filename to the old filename*/
-    #ifdef _WIN32
-    gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_save),g_convert(user_data->csu_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
-    #else
-    gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_save),user_data->csu_filename);
-    #endif
+    gtk_file_chooser_set_filename(GTK_FILE_CHOOSER(window_file_save),g_locale_to_utf8(user_data->csu_filename,-1,NULL,NULL,NULL));
+
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_save)))
 	{
@@ -254,11 +240,8 @@ G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data)
 		{
 		    char *filename;
 		    char true_filename[SIZE_MAX_FILE_NAME];
-			#ifdef _WIN32
-		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
-		    #else
-		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save));
-		    #endif
+		    filename=g_locale_from_utf8(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_save)),-1,NULL,NULL,NULL);
+
 		    strcpy(true_filename,filename);
 
             /* Add the csu extension if the filter is csu */
@@ -307,27 +290,32 @@ G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
     strcpy(folder,user_data->csu_filename);
     getFolderFromFilename(folder);
     removeFileExtension(export_filename);
-    #ifdef _WIN32
-    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_export),g_convert(folder,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
-    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_export),g_convert(export_filename,-1,"UTF-8","ISO-8859-1",NULL,NULL,NULL));
-    #else
-    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_export),export_filename);
-    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_export),folder);
-    #endif
+    gtk_file_chooser_set_current_folder(GTK_FILE_CHOOSER(window_file_export),g_locale_to_utf8(folder,-1,NULL,NULL,NULL));
+    gtk_file_chooser_set_current_name(GTK_FILE_CHOOSER(window_file_export),g_locale_to_utf8(export_filename,-1,NULL,NULL,NULL));
+
 
      /*Add filters*/
     GtkFileFilter *pdf_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterpdf"));
     GtkFileFilter *csv_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltercsv"));
     GtkFileFilter *gnuplot_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltergnuplot"));
     GtkFileFilter *octave_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilteroctave"));
+    GtkFileFilter *svg_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefiltersvg"));
+    GtkFileFilter *png_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterpng"));
+    GtkFileFilter *pdf_chart_filter= GTK_FILE_FILTER(gtk_builder_get_object(user_data->ptr_builder,"filefilterpdfchart"));
     gtk_file_filter_set_name(pdf_filter,_("PDF files"));
     gtk_file_filter_set_name(csv_filter,_("CSV files"));
     gtk_file_filter_set_name(gnuplot_filter,_("Gnuplot files"));
     gtk_file_filter_set_name(octave_filter,_("Octave/Matlab files"));
+    gtk_file_filter_set_name(svg_filter,_("SVG files"));
+    gtk_file_filter_set_name(png_filter,_("PNG files"));
+    gtk_file_filter_set_name(pdf_chart_filter,_("PDF chart files"));
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),csv_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),svg_filter);
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),pdf_filter);
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),gnuplot_filter);
     gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),octave_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),png_filter);
+    gtk_file_chooser_add_filter(GTK_FILE_CHOOSER (window_file_export),pdf_chart_filter);
     gtk_file_chooser_set_filter(GTK_FILE_CHOOSER (window_file_export),pdf_filter);
 
 	switch (gtk_dialog_run (GTK_DIALOG (window_file_export)))
@@ -336,35 +324,51 @@ G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data)
 		{
 		    char *filename;
 		    char true_filename[SIZE_MAX_FILE_NAME];
-			#ifdef _WIN32
-		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
-		    #else
-		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export));
-		    #endif
+		    filename=g_locale_from_utf8(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export)),-1,NULL,NULL,NULL);
+
 		    strcpy(true_filename,filename);
 
             /* Export */
-			if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export))==pdf_filter)
+            GtkFileFilter* filter = gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export));
+			if(filter == pdf_filter)
             {
                 addFilePdfExtension(true_filename);
                 if (exportToPdf(user_data->ptr_csu_struct,true_filename) == false)
                     error=TRUE;
             }
-            else if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export))==csv_filter)
+            else if(filter == csv_filter)
             {
                 addFileCsvExtension(true_filename);
                 if (exportToCsv(user_data->ptr_csu_struct,true_filename) == false)
                     error=TRUE;
             }
-            else if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export))==gnuplot_filter)
+            else if(filter == gnuplot_filter)
             {
                 if (exportToGnuplotFile(user_data->ptr_csu_struct,true_filename) == false)
                     error=TRUE;
             }
-            else if(gtk_file_chooser_get_filter(GTK_FILE_CHOOSER(window_file_export))==octave_filter)
+            else if(filter == octave_filter)
             {
                 addFileExtension(true_filename,"m");
                 if (exportToM(user_data->ptr_csu_struct,true_filename) == false)
+                    error=TRUE;
+            }
+            else if(filter == svg_filter)
+            {
+                addFileExtension(true_filename,"svg");
+                if (exportToSvg(user_data->ptr_csu_struct,true_filename) == false)
+                    error=TRUE;
+            }
+            else if(filter == png_filter)
+            {
+                addFileExtension(true_filename,"png");
+                if (exportToPng(user_data->ptr_csu_struct,true_filename) == false)
+                    error=TRUE;
+            }
+            else if(filter == pdf_chart_filter)
+            {
+                addFileExtension(true_filename,"pdf");
+                if (exportToPdfChart(user_data->ptr_csu_struct,true_filename) == false)
                     error=TRUE;
             }
 

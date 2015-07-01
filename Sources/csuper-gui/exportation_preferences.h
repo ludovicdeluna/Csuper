@@ -38,7 +38,7 @@
 #include "utils.h"
 
 void updateExportationPreferences(globalData *data);
-void readExportationPreferences(globalData *data, export_pdf_preferences *pref);
+void readExportationPreferences(globalData *data, export_pdf_preferences *pref, chart_exportation* chart_pref);
 G_MODULE_EXPORT void checkExportationPreferencesChanged(GtkWidget *widget,gpointer data);
 G_MODULE_EXPORT void checkExportationPreferencesChangedSwitchButton(GObject *gobject,GParamSpec *pspec,gpointer user_data);
 G_MODULE_EXPORT void validExportationPreferences(GtkWidget *widget, gpointer data);

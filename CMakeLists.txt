@@ -15,7 +15,7 @@ include_directories(${LIBXML2_INCLUDE_DIR} ${CMAKE_CURRENT_BINARY_DIR} ${CMAKE_C
 file(
         GLOB
         source_files_libcsuper
-        Sources/libcsuper/*
+        Sources/libcsuper/*.c
 )
 
 add_library(
@@ -42,91 +42,105 @@ endif (WIN32)
 #csuper-cli
 #
 
-file(
-        GLOB
-        source_files_csuper-cli
-        Sources/csuper-cli/*
-)
+IF(CLI MATCHES "TRUE")
 
-add_executable(
-	csuper-cli
-	${source_files_csuper-cli}
-)
-target_link_libraries(
-	csuper-cli 
-	csuper
-	${LIBXML2_LIBRARIES}
-)
+	file(
+		    GLOB
+		    source_files_csuper-cli
+		    Sources/csuper-cli/*.c
+	)
+
+	add_executable(
+		csuper-cli
+		${source_files_csuper-cli}
+	)
+	target_link_libraries(
+		csuper-cli 
+		csuper
+		${LIBXML2_LIBRARIES}
+	)
+
+ENDIF()
 
 #
 # Slope
 #
-find_package(
-	PkgConfig 
-	REQUIRED
-)
-pkg_check_modules(
-	GTK3
-	REQUIRED gtk+-3.0>=3.6
-)
 
-include_directories(
-	${GTK3_INCLUDE_DIRS}
-	"Externals library/Slope"
-)
-link_directories(
-	${GTK3_LIBRARY_DIRS}
-)
+IF(GUI MATCHES "TRUE")
 
-add_definitions(
-	${GTK3_CFLAGS_OTHER}
-)
+	set(SLOPE_HAVE_GTK 1)
+    set(SLOPE_HAVE_PANGO 0)
 
-SET(SLOPE_GTK 1)
+	find_package(
+		PkgConfig 
+		REQUIRED
+	)
+	pkg_check_modules(
+		GTK3
+		REQUIRED gtk+-3.0>=3.6
+	)
 
-file(
-        GLOB
-        source_files_slope
-        "Externals library/Slope/slope/*"
-)
+	include_directories(
+		${GTK3_INCLUDE_DIRS}
+		"Externals library/Slope"
+	)
+	link_directories(
+		${GTK3_LIBRARY_DIRS}
+	)
 
-CONFIGURE_FILE (
-    "Externals library/Slope/config.h.in"
-    "Externals library/Slope/config.h"
-)
+	add_definitions(
+		${GTK3_CFLAGS_OTHER}
+	)
 
-ADD_LIBRARY(
-	slope
-	SHARED
-	${source_files_slope}
-)
+	CONFIGURE_FILE (
+		"Externals library/Slope/slope-config.h.in"
+		"Externals library/Slope/slope-config.h"
+	)
 
-TARGET_LINK_LIBRARIES(
-	slope 
-	${GTK3_LIBRARIES}
-)
+	file(
+		    GLOB
+		    source_files_slope
+		    "Externals library/Slope/slope/*"
+		    "Externals library/Slope/slope-config.h"
+	)
+
+	ADD_LIBRARY(
+		slope
+		STATIC
+		${source_files_slope}
+	)
+
+	TARGET_LINK_LIBRARIES(
+		slope 
+		${GTK3_LIBRARIES}
+	)
+
+ENDIF()
 
 
 #
 #Csuper-gui
 #
 
+IF(GUI MATCHES "TRUE")
 
-file(
-        GLOB
-        source_files_csuper
-        Sources/csuper-gui/*
-)
+	file(
+		    GLOB
+		    source_files_csuper
+		    Sources/csuper-gui/*.c
+	)
 
-add_executable(
-	csuper-gui
-	${source_files_csuper}
-)
+	add_executable(
+		csuper-gui
+		${source_files_csuper}
+	)
 
-target_link_libraries(
-	csuper-gui 
-	${GTK3_LIBRARIES}
-	${LIBXML2_LIBRARIES}
-	csuper
-	slope
-)
+	target_link_libraries(
+		csuper-gui 
+		${GTK3_LIBRARIES}
+		${LIBXML2_LIBRARIES}
+		csuper
+		slope
+	)
+
+ENDIF()

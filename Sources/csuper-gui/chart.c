@@ -33,20 +33,22 @@
 
  #include "chart.h"
 
+ static void increaseFmt(char* fmt);
+
 /*!
- * \fn G_MODULE_EXPORT void displayChart(GtkWidget *widget, gpointer data)
+ * \fn G_MODULE_EXPORT void displayTotalPointsChart(GtkWidget *widget, gpointer data)
  *  Display the chart window
  * \param[in] widget the widget which send the signal
  * \param[in] data the globalData
  */
-G_MODULE_EXPORT void displayChart(GtkWidget *widget, gpointer data)
+G_MODULE_EXPORT void displayTotalPointsChart(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
     GtkWidget *dialog = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart");
     GtkWidget *main_grid = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_main_grid");
-    int i;
+    int i,j;
 
-
+    // Grid
     GtkWidget *player_display_grid = gtk_grid_new();
     gtk_grid_set_column_spacing(GTK_GRID(player_display_grid),5);
     gtk_grid_set_row_spacing(GTK_GRID(player_display_grid),5);
@@ -60,6 +62,43 @@ G_MODULE_EXPORT void displayChart(GtkWidget *widget, gpointer data)
     gtk_widget_set_margin_top(player_display_grid,10);
     gtk_widget_set_margin_bottom(player_display_grid,10);
 
+
+    // Slope
+    user_data->slope_chart = slope_chart_create(_("Total points chart"), _("Turn"), _("Total points"));
+    int max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
+    int nb_player = user_data->ptr_csu_struct->nb_player;
+    char fmt[3] = "b-";
+
+    user_data->slope_turn = myAlloc(max_nb_turn*sizeof(double));
+    user_data->slope_points = myAlloc(sizeof(double*)*nb_player);
+    user_data->slope_items = myAlloc(sizeof(slope_item_t*)*nb_player);
+
+    for (i=0 ; i<max_nb_turn ; i++)
+        user_data->slope_turn[i]=i;
+
+    for (i=0 ; i<nb_player ; i++)
+    {
+        user_data->slope_points[i] = myAlloc(user_data->ptr_csu_struct->nb_turn[i]*sizeof(double));
+        for (j=0 ; j<user_data->ptr_csu_struct->nb_turn[i] ; j++)
+            user_data->slope_points[i][j]= pointsAtTurn(user_data->ptr_csu_struct,i,j);
+        user_data->slope_items[i] = slope_chart_add_plot(user_data->slope_chart,
+                                                         user_data->slope_turn,
+                                                         user_data->slope_points[i],
+                                                         user_data->ptr_csu_struct->nb_turn[i],
+                                                         user_data->ptr_csu_struct->player_names[i],
+                                                         fmt);
+        increaseFmt(fmt);
+    }
+
+    GtkWidget *slope_view = slope_view_new_for_figure(user_data->slope_chart);
+    gtk_widget_set_vexpand(slope_view,TRUE);
+    slope_view_toggle_mouse_zoom(slope_view,TRUE);
+
+
+    gtk_grid_attach(GTK_GRID(main_grid),slope_view,0,0,1,1);
+
+
+
     for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
     {
         GtkWidget *tmp_button = gtk_check_button_new_with_label(user_data->ptr_csu_struct->player_names[i]);
@@ -71,125 +110,117 @@ G_MODULE_EXPORT void displayChart(GtkWidget *widget, gpointer data)
     }
 
     gtk_grid_attach(GTK_GRID(main_grid),player_display_grid,0,1,1,1);
-    gtk_widget_show_all(player_display_grid);
 
 
+    gtk_widget_show_all(main_grid);
     gtk_dialog_run(GTK_DIALOG(dialog));
-
     gtk_widget_hide(dialog);
+
+    free(user_data->slope_turn);
+    for (i=0 ; i<nb_player ; i++)
+        free(user_data->slope_points[i]);
+    free(user_data->slope_points);
+    free(user_data->slope_items);
+    slope_chart_destroy(user_data->slope_chart);
+
+    gtk_widget_destroy(slope_view);
     gtk_widget_destroy(player_display_grid);
 }
 
+
 /*!
- * \fn G_MODULE_EXPORT void drawChart(GtkWidget *widget, cairo_t *cr, gpointer *data)
- *  Draw the cahrt in the GtkDrawing
+ * \fn G_MODULE_EXPORT void displayPointsChart(GtkWidget *widget, gpointer data)
+ *  Display the chart window
  * \param[in] widget the widget which send the signal
- * \param[in] cr the cairo_t surface
  * \param[in] data the globalData
  */
-G_MODULE_EXPORT void drawChart(GtkWidget *widget, cairo_t *cr, gpointer *data)
+G_MODULE_EXPORT void displayPointsChart(GtkWidget *widget, gpointer data)
 {
-    slope_rect_t rect;
     globalData *user_data = (globalData*) data;
-    slope_scene_t *chart = slope_chart_create(_("Chart"), _("Turn"), _("Points"));
+    GtkWidget *dialog = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart");
+    GtkWidget *main_grid = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_main_grid");
     int i,j;
+
+    // Grid
+    GtkWidget *player_display_grid = gtk_grid_new();
+    gtk_grid_set_column_spacing(GTK_GRID(player_display_grid),5);
+    gtk_grid_set_row_spacing(GTK_GRID(player_display_grid),5);
+    #if GTK_MINOR_VERSION >= 12
+    gtk_widget_set_margin_end(player_display_grid,10);
+    gtk_widget_set_margin_start(player_display_grid,10);
+    #else
+    gtk_widget_set_margin_right(player_display_grid,10);
+    gtk_widget_set_margin_left(player_display_grid,10);
+    #endif // GTK_MINOR_VERSION
+    gtk_widget_set_margin_top(player_display_grid,10);
+    gtk_widget_set_margin_bottom(player_display_grid,10);
+
+
+    // Slope
+    user_data->slope_chart = slope_chart_create(_("Points chart"), _("Turn"), _("Points"));
     int max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
     int nb_player = user_data->ptr_csu_struct->nb_player;
-    double *turn = myAlloc(max_nb_turn*sizeof(double));
-    double **tmp_points = myAlloc(sizeof(double)*nb_player);
-    double x_scroll, y_scroll,x_zoom,y_zoom,chart_width,chart_height;
+    char fmt[3] = "b-";
 
-    GtkWidget *chart_drawing = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_drawingarea");
-    GtkWidget *chart_scale_x = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_scale_x");
-    GtkWidget *chart_scale_y = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_scale_y");
-    GtkWidget *chart_scrollbar_x = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_scrollbar_x");
-    GtkWidget *chart_scrollbar_y = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_scrollbar_y");
-    GtkWidget *main_grid = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_main_grid");
-
-    x_scroll = gtk_range_get_value(GTK_RANGE(chart_scrollbar_x));
-    y_scroll = gtk_range_get_value(GTK_RANGE(chart_scrollbar_y));
-    x_zoom = gtk_range_get_value(GTK_RANGE(chart_scale_x));
-    y_zoom = gtk_range_get_value(GTK_RANGE(chart_scale_y));
-    chart_width = (double) gtk_widget_get_allocated_width(chart_drawing);
-    chart_height = (double) gtk_widget_get_allocated_height(chart_drawing);
-
-    rect.x = -(x_scroll-1)*chart_width;
-    rect.y = -(y_scroll-1)*chart_height;
-    rect.width = chart_width * x_zoom;
-    rect.height = chart_height * y_zoom;
+    user_data->slope_turn = myAlloc(max_nb_turn*sizeof(double));
+    user_data->slope_points = myAlloc(sizeof(double*)*nb_player);
+    user_data->slope_items = myAlloc(sizeof(slope_item_t*)*nb_player);
 
     for (i=0 ; i<max_nb_turn ; i++)
-        turn[i]=i;
+        user_data->slope_turn[i]=i;
 
     for (i=0 ; i<nb_player ; i++)
     {
-        tmp_points[i] = myAlloc(user_data->ptr_csu_struct->nb_turn[i]*sizeof(double));
-        GtkWidget *tmp_button = gtk_grid_get_child_at(GTK_GRID(gtk_grid_get_child_at(GTK_GRID(main_grid),0,1)),i%5,i/5);
-        if(gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(tmp_button)))
-        {
-            for (j=0 ; j<user_data->ptr_csu_struct->nb_turn[i] ; j++)
-                tmp_points[i][j]= pointsAtTurn(user_data->ptr_csu_struct,i,j);
-            slope_chart_add_plot(chart, turn, tmp_points[i], user_data->ptr_csu_struct->nb_turn[i], user_data->ptr_csu_struct->player_names[i], "r-");
-        }
+        user_data->slope_points[i] = myAlloc(user_data->ptr_csu_struct->nb_turn[i]*sizeof(double));
+        for (j=0 ; j<user_data->ptr_csu_struct->nb_turn[i] ; j++)
+            user_data->slope_points[i][j]= user_data->ptr_csu_struct->point[i][j];
+        user_data->slope_items[i] = slope_chart_add_plot(user_data->slope_chart,
+                                                         user_data->slope_turn,
+                                                         user_data->slope_points[i],
+                                                         user_data->ptr_csu_struct->nb_turn[i],
+                                                         user_data->ptr_csu_struct->player_names[i],
+                                                         fmt);
+        increaseFmt(fmt);
     }
 
-    slope_scene_draw(chart, cr, &rect);
+    GtkWidget *slope_view = slope_view_new_for_figure(user_data->slope_chart);
+    gtk_widget_set_vexpand(slope_view,TRUE);
+    slope_view_toggle_mouse_zoom(slope_view,TRUE);
 
-    free(turn);
+
+    gtk_grid_attach(GTK_GRID(main_grid),slope_view,0,0,1,1);
+
+
+
+    for (i=0 ; i<user_data->ptr_csu_struct->nb_player ; i++)
+    {
+        GtkWidget *tmp_button = gtk_check_button_new_with_label(user_data->ptr_csu_struct->player_names[i]);
+        gtk_toggle_button_set_active(GTK_TOGGLE_BUTTON(tmp_button),TRUE);
+        gtk_widget_set_hexpand(tmp_button,TRUE);
+        gtk_widget_set_halign(tmp_button,GTK_ALIGN_CENTER);
+        g_signal_connect (tmp_button,"toggled", G_CALLBACK(changeChartPlayersDisplay),data);
+        gtk_grid_attach(GTK_GRID(player_display_grid),tmp_button,i%5,i/5,1,1);
+    }
+
+    gtk_grid_attach(GTK_GRID(main_grid),player_display_grid,0,1,1,1);
+
+
+    gtk_widget_show_all(main_grid);
+    gtk_dialog_run(GTK_DIALOG(dialog));
+    gtk_widget_hide(dialog);
+
+    free(user_data->slope_turn);
     for (i=0 ; i<nb_player ; i++)
-        free(tmp_points[i]);
-    free(tmp_points);
+        free(user_data->slope_points[i]);
+    free(user_data->slope_points);
+    free(user_data->slope_items);
+    slope_chart_destroy(user_data->slope_chart);
+
+    gtk_widget_destroy(slope_view);
+    gtk_widget_destroy(player_display_grid);
 }
 
 
-/*!
- * \fn G_MODULE_EXPORT void changeChartZoom(GtkWidget *widget, gpointer data)
- *  Call the change chart scrollbar
- * \param[in] widget the widget which send the signal
- * \param[in] data the globalData
- */
-G_MODULE_EXPORT void changeChartZoom(GtkWidget *widget, gpointer data)
-{
-    globalData *user_data = (globalData*) data;
-    changeChartScrollbar(NULL,user_data);
-}
-
-
-/*!
- * \fn G_MODULE_EXPORT void changeChartScrollbar(GtkWidget *widget, gpointer data)
- *  Change the zoom and scrollbar
- * \param[in] widget the widget which send the signal
- * \param[in] data the globalData
- */
-G_MODULE_EXPORT void changeChartScrollbar(GtkWidget *widget, gpointer data)
-{
-    globalData *user_data = (globalData*) data;
-    GtkWidget *chart_drawing = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_drawingarea");
-    GtkWidget *chart_scale_x = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_scale_x");
-    GtkWidget *chart_scale_y = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_scale_y");
-    GtkWidget *chart_scrollbar_x = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_scrollbar_x");
-    GtkWidget *chart_scrollbar_y = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_scrollbar_y");
-
-    double zoom_x = gtk_range_get_value(GTK_RANGE(chart_scale_x));
-    double zoom_y = gtk_range_get_value(GTK_RANGE(chart_scale_y));
-
-    if (zoom_x == 1)
-        gtk_widget_hide(chart_scrollbar_x);
-    else
-        gtk_widget_show(chart_scrollbar_x);
-
-    gtk_range_set_range(GTK_RANGE(chart_scrollbar_x),1,zoom_x+1);
-
-    if (zoom_y == 1)
-        gtk_widget_hide(chart_scrollbar_y);
-    else
-        gtk_widget_show(chart_scrollbar_y);
-
-    gtk_range_set_range(GTK_RANGE(chart_scrollbar_y),1,zoom_y+1);
-
-
-    gtk_widget_queue_draw(chart_drawing);
-}
 
 /*!
  * \fn G_MODULE_EXPORT void changeChartPlayersDisplay(GtkWidget *widget, gpointer data)
@@ -200,6 +231,191 @@ G_MODULE_EXPORT void changeChartScrollbar(GtkWidget *widget, gpointer data)
 G_MODULE_EXPORT void changeChartPlayersDisplay(GtkWidget *widget, gpointer data)
 {
     globalData *user_data = (globalData*) data;
-    GtkWidget *chart_drawing = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_drawingarea");
-    gtk_widget_queue_draw(chart_drawing);
+    int nb_player = user_data->ptr_csu_struct->nb_player;
+    int i;
+
+    GtkWidget *main_grid = getWidgetFromBuilder(user_data->ptr_builder,"dialog_chart_main_grid");
+
+    for (i=0 ; i<nb_player ; i++)
+    {
+        GtkWidget *tmp_button = gtk_grid_get_child_at(GTK_GRID(gtk_grid_get_child_at(GTK_GRID(main_grid),0,1)),i%5,i/5);
+        slope_item_toggle_visible(user_data->slope_items[i],gtk_toggle_button_get_active(GTK_TOGGLE_BUTTON(tmp_button)));
+    }
+
+    gtk_widget_queue_draw(gtk_grid_get_child_at(GTK_GRID(main_grid),0,0));
+}
+
+
+/*!
+ * \fn  void increaseFmt(char* fmt)
+ *  Increase fmt color
+ * \param[in] fmt
+ */
+ void increaseFmt(char* fmt)
+ {
+    switch(fmt[0])
+    {
+    case 'b':
+        fmt[0] = 'r';
+        break;
+    case 'r':
+        fmt[0] = 'o';
+        break;
+    case 'o':
+        fmt[0] = 'l';
+        break;
+    case 'l':
+        fmt[0] = 'm';
+        break;
+    case 'm':
+        fmt[0] = 'p';
+        break;
+    case 'p':
+        fmt[0] = 'y';
+        break;
+    case 'y':
+        fmt[0] = 'e';
+        break;
+    case 'e':
+        fmt[0] = 'g';
+        break;
+    case 'g':
+        fmt[0] = 'a';
+        break;
+    case 'a':
+        fmt[0] = 't';
+        break;
+    case 't':
+        fmt[0] = 'b';
+        break;
+    }
+ }
+
+
+bool exportToChart(csuStruct *ptr_csu_struct, char *filename, ChartExportationType type)
+{
+    int i,j;
+    double** slope_points;
+    double* slope_turn;
+    slope_figure_t* slope_chart;
+
+    // Preferences
+    gchar home_path[SIZE_MAX_FILE_NAME]="";
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    chart_exportation chart_pref;
+    export_pdf_preferences pdf_pref;
+    readFileChartExportation(home_path,&chart_pref);
+    readFilePdfPreferences(home_path,&pdf_pref);
+
+
+    // Title
+    char simple_filename[SIZE_MAX_FILE_NAME];
+    getSimpleFilenameFromFullFilename(filename,simple_filename);
+    removeFileExtension(simple_filename);
+    char title[SIZE_MAX_FILE_NAME];
+    if (chart_pref.total_points)
+        sprintf(title,_("Total points on %s"),simple_filename);
+    else
+        sprintf(title,_("Points on %s"),simple_filename);
+
+
+    // Slope
+    slope_chart = slope_chart_create(title, _("Turn"), _("Points"));
+    int max_nb_turn = maxNbTurn(ptr_csu_struct);
+    int nb_player = ptr_csu_struct->nb_player;
+    char fmt[3] = "b-";
+
+    slope_turn = myAlloc(max_nb_turn*sizeof(double));
+    slope_points = myAlloc(sizeof(double*)*nb_player);
+
+    for (i=0 ; i<max_nb_turn ; i++)
+        slope_turn[i]=i;
+
+    for (i=0 ; i<nb_player ; i++)
+    {
+        slope_points[i] = myAlloc(ptr_csu_struct->nb_turn[i]*sizeof(double));
+        for (j=0 ; j<ptr_csu_struct->nb_turn[i] ; j++)
+        {
+            if (chart_pref.total_points)
+                slope_points[i][j]= pointsAtTurn(ptr_csu_struct,i,j);
+            else
+                slope_points[i][j]= ptr_csu_struct->point[i][j];
+        }
+        slope_chart_add_plot(slope_chart,
+                             slope_turn,
+                             slope_points[i],
+                             ptr_csu_struct->nb_turn[i],
+                             ptr_csu_struct->player_names[i],
+                             fmt);
+        increaseFmt(fmt);
+    }
+
+    int res = SLOPE_SUCCESS;
+    int width;
+    int height;
+    switch (type)
+    {
+    case svg:
+        res = slope_figure_write_to_svg(slope_chart,filename,chart_pref.width,chart_pref.height);
+        break;
+    case png:
+        slope_figure_write_to_png(slope_chart,filename,chart_pref.width,chart_pref.height);
+        break;
+    case pdf:
+        switch (pdf_pref.size)
+        {
+        case HPDF_PAGE_SIZE_A3:
+            width = 842;
+            height = 1190;
+            break;
+        case HPDF_PAGE_SIZE_A4:
+            width = 595;
+            height = 842;
+            break;
+        case HPDF_PAGE_SIZE_A5:
+            width = 420;
+            height = 595;
+            break;
+        default:
+            break;
+        }
+        if (pdf_pref.direction == HPDF_PAGE_LANDSCAPE)
+        {
+            int tmp = width;
+            width = height;
+            height = tmp;
+        }
+        res = slope_figure_write_to_pdf(slope_chart,filename,width,height);
+        break;
+    }
+
+
+    free(slope_turn);
+    for (i=0 ; i<nb_player ; i++)
+        free(slope_points[i]);
+    free(slope_points);
+    slope_chart_destroy(slope_chart);
+
+    if (res == SLOPE_SUCCESS)
+        return true;
+    else
+        return false;
+}
+
+
+bool exportToSvg(csuStruct *ptr_csu_struct, char *filename)
+{
+    return exportToChart(ptr_csu_struct,filename,svg);
+}
+
+bool exportToPng(csuStruct *ptr_csu_struct, char *filename)
+{
+    return exportToChart(ptr_csu_struct,filename,png);
+}
+
+bool exportToPdfChart(csuStruct *ptr_csu_struct, char *filename)
+{
+    return exportToChart(ptr_csu_struct,filename,pdf);
 }

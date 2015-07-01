@@ -65,6 +65,7 @@
 #include <glib/gi18n.h>
 #include <locale.h>
 #include "../libcsuper/libcsuper.h"
+#include "slope/slope.h"
 
 /*!
  * \struct globalData
@@ -85,6 +86,11 @@ typedef struct
     gint indexLastCsuStruct;                /*!< A index on the lastCsuStruct array */
     gint nbLastCsuStruct;                   /*!< The number of last csu structure */
     gboolean save_new_game_config;          /*!< Indicate if we would save the new game configuration */
+
+    double** slope_points;
+    double* slope_turn;
+    slope_item_t** slope_items;
+    slope_figure_t* slope_chart;
 }globalData;
 
 

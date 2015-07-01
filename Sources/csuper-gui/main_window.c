@@ -861,7 +861,8 @@ void setButtonMainWindow(globalData *data)
     GtkWidget *menu_delete_file = getWidgetFromBuilder(data->ptr_builder,"menu_delete_file");
     GtkWidget *menu_export = getWidgetFromBuilder(data->ptr_builder,"menu_export");
     GtkWidget *menu_podium = getWidgetFromBuilder(data->ptr_builder,"menu_display_podium");
-    GtkWidget *menu_chart= getWidgetFromBuilder(data->ptr_builder,"menu_display_chart");
+    GtkWidget *menu_chart_total_points= getWidgetFromBuilder(data->ptr_builder,"menu_display_chart_total_points");
+    GtkWidget *menu_chart_points= getWidgetFromBuilder(data->ptr_builder,"menu_display_chart_points");
     GtkWidget *menu_statistics= getWidgetFromBuilder(data->ptr_builder,"menu_display_statistics");
 
 
@@ -900,7 +901,8 @@ void setButtonMainWindow(globalData *data)
         gtk_widget_set_sensitive(menu_delete_file,FALSE);
         gtk_widget_set_sensitive(menu_export,FALSE);
         gtk_widget_set_sensitive(menu_podium,FALSE);
-        gtk_widget_set_sensitive(menu_chart,FALSE);
+        gtk_widget_set_sensitive(menu_chart_total_points,FALSE);
+        gtk_widget_set_sensitive(menu_chart_points,FALSE);
         gtk_widget_set_sensitive(menu_statistics,FALSE);
         gtk_widget_set_sensitive(button_end_of_turn,FALSE);
         gtk_widget_set_sensitive(button_calculator,FALSE);
@@ -910,9 +912,17 @@ void setButtonMainWindow(globalData *data)
     else
     {
         if (exceedMaxNumber(data->ptr_csu_struct) == true)
+        {
+            gtk_widget_set_sensitive(button_calculator,FALSE);
             gtk_widget_set_sensitive(button_end_of_turn,FALSE);
+            gtk_widget_set_sensitive(combobox_calculator,FALSE);
+        }
         else
+        {
+            gtk_widget_set_sensitive(button_calculator,TRUE);
             gtk_widget_set_sensitive(button_end_of_turn,TRUE);
+            gtk_widget_set_sensitive(combobox_calculator,TRUE);
+        }
 
         if (data->ptr_csu_struct->config.use_distributor == 0)
             gtk_widget_set_sensitive(button_change_distributor,FALSE);
@@ -928,9 +938,9 @@ void setButtonMainWindow(globalData *data)
         gtk_widget_set_sensitive(menu_delete_file,TRUE);
         gtk_widget_set_sensitive(menu_export,TRUE);
         gtk_widget_set_sensitive(menu_podium,TRUE);
-        gtk_widget_set_sensitive(menu_chart,TRUE);
+        gtk_widget_set_sensitive(menu_chart_total_points,TRUE);
+        gtk_widget_set_sensitive(menu_chart_points,TRUE);
         gtk_widget_set_sensitive(menu_statistics,TRUE);
-        gtk_widget_set_sensitive(combobox_calculator,TRUE);
     }
 
 

@@ -132,11 +132,7 @@ bool openFileWithMainArgument(globalData *data,int argc, char *argv[])
 
     gchar filename[SIZE_MAX_FILE_NAME];
 
-    #ifdef _WIN32
-    strncpy(filename,g_convert(argv[1],-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL),SIZE_MAX_FILE_NAME-1);
-    #else
-    strncpy(filename,argv[1],SIZE_MAX_FILE_NAME-1);
-    #endif // _WIN32
+    strncpy(filename,g_locale_from_utf8(argv[1],-1,NULL,NULL,NULL),SIZE_MAX_FILE_NAME-1);
 
     (data->ptr_csu_struct) = readCsuFile(filename);
     if((data->ptr_csu_struct) != NULL)

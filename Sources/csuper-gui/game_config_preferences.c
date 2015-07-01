@@ -219,11 +219,7 @@ G_MODULE_EXPORT void chooseExportedFile(GtkWidget *widget, gpointer data)
 		{
 		    char *filename;
 
-			#ifdef _WIN32
-		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
-		    #else
-		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export));
-		    #endif
+		    filename=g_locale_from_utf8(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_export)),-1,NULL,NULL,NULL);
 
             if(exportConfigFile(home_path,filename,id,nb_id) == false)
                 error=true;
@@ -286,11 +282,7 @@ G_MODULE_EXPORT void chooseImportedFile(GtkWidget *widget, gpointer data)
 		{
 		    char *filename;
 
-			#ifdef _WIN32
-		    filename=g_convert(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_import)),-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL);
-		    #else
-		    filename=gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_import));
-		    #endif
+		    filename=g_locale_from_utf8(gtk_file_chooser_get_filename(GTK_FILE_CHOOSER (window_file_import)),-1,NULL,NULL,NULL);
 
 		    gtk_widget_hide(window_file_import);
 

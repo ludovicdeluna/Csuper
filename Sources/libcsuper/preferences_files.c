@@ -65,28 +65,6 @@ bool createFileToolbarButtonPreferences(char *home_path, toolbar_button_preferen
     one_preferences one;
     one.toolbar = toolbar;
     return writeXmlPreferencesFileType(&one,home_path,toolbar_type);
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_TOOLBAR_BUTTON_PREFERENCES);
-
-    createPreferencesFolder(home_path);
-
-    ptr_file=openFile(file_name,"w+");
-
-    if (ptr_file==NULL)
-        return false;
-
-    fprintf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d\n",toolbar.new,toolbar.open,
-            toolbar.save_as,toolbar.export,toolbar.separator_6,toolbar.delete_file,
-            toolbar.separator_1,toolbar.undo,toolbar.redo,toolbar.separator_2,toolbar.cut,
-            toolbar.copy,toolbar.paste,toolbar.delete,toolbar.separator_3,toolbar.properties,
-            toolbar.separator_4,toolbar.preferences,toolbar.game_configuration_preferences,
-            toolbar.toolbar_button_preferences,toolbar.exportation_preferences,toolbar.separator_5,toolbar.about);
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 /*!
@@ -102,52 +80,6 @@ bool readFileToolbarButtonPreferences(char *home_path, toolbar_button_preference
     readXmlPreferencesFileType(&one,home_path,toolbar_type);
     *toolbar=one.toolbar;
     return true;
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-    toolbar->open=2;
-    toolbar->new=2;
-    toolbar->save_as=2;
-    toolbar->export=1;
-    toolbar->separator_6=2;
-    toolbar->delete_file=1;
-    toolbar->separator_1=2;
-    toolbar->undo=2;
-    toolbar->redo=2;
-    toolbar->separator_2=2;
-    toolbar->cut=1;
-    toolbar->copy=1;
-    toolbar->paste=1;
-    toolbar->delete=1;
-    toolbar->separator_3=2;
-    toolbar->properties=1;
-    toolbar->separator_4=2;
-    toolbar->preferences=2;
-    toolbar->game_configuration_preferences=0;
-    toolbar->toolbar_button_preferences=0;
-    toolbar->exportation_preferences=0;
-    toolbar->separator_5=2;
-    toolbar->about=1;
-
-    createPreferencesFolder(home_path);
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_TOOLBAR_BUTTON_PREFERENCES);
-
-    ptr_file=openFile(file_name,"r");
-
-    if (ptr_file==NULL)
-        return createFileToolbarButtonPreferences(home_path,*toolbar);
-
-    fscanf(ptr_file,"%d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d %d",&(toolbar->new),&(toolbar->open),
-           &(toolbar->save_as),&(toolbar->export),&(toolbar->separator_6),&(toolbar->delete_file),
-           &(toolbar->separator_1),&(toolbar->undo),&(toolbar->redo),&(toolbar->separator_2),
-           &(toolbar->cut),&(toolbar->copy),&(toolbar->paste),&(toolbar->delete),
-           &(toolbar->separator_3),&(toolbar->properties),&(toolbar->separator_4),&(toolbar->preferences),
-           &(toolbar->game_configuration_preferences),&(toolbar->toolbar_button_preferences),
-           &(toolbar->exportation_preferences),&(toolbar->separator_5),&(toolbar->about));
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 /*!
@@ -181,23 +113,6 @@ bool createFileMainWidowSize(char *home_path, main_window_size size)
     one_preferences one;
     one.size = size;
     return writeXmlPreferencesFileType(&one,home_path,size_type);
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIZE);
-
-    createPreferencesFolder(home_path);
-
-    ptr_file=openFile(file_name,"w+");
-
-    if (ptr_file==NULL)
-        return false;
-
-    fprintf(ptr_file,"%d %d %d",size.width,size.height,size.is_maximize);
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 /*!
@@ -213,32 +128,6 @@ bool readFileMainWidowSize(char *home_path, main_window_size *size)
     readXmlPreferencesFileType(&one,home_path,size_type);
     *size=one.size;
     return true;
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    size->height=422;
-    size->width=851;
-    size->is_maximize = false;
-
-    createPreferencesFolder(home_path);
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIZE);
-
-    ptr_file=openFile(file_name,"r");
-
-    if (ptr_file==NULL)
-    {
-        if (createFileMainWidowSize(home_path,*size) == false)
-            return false;
-        else
-            return true;
-    }
-
-    fscanf(ptr_file,"%d %d %d",&(size->width),&(size->height),&(size->is_maximize));
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 /*!
@@ -377,23 +266,6 @@ bool createFileDifferenceBetweenPlayer(char *home_path, difference_between_playe
     one_preferences one;
     one.diff = diff;
     return writeXmlPreferencesFileType(&one,home_path,diff_type);
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_DIFFERENCE_BETWEEN_PLAYER);
-
-    createPreferencesFolder(home_path);
-
-    ptr_file=openFile(file_name,"w+");
-
-    if (ptr_file==NULL)
-        return false;
-
-    fprintf(ptr_file,"%d %d %d",diff.consecutive,diff.first,diff.last);
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 
@@ -410,27 +282,6 @@ bool readFileDifferenceBetweenPlayer(char *home_path, difference_between_player 
     readXmlPreferencesFileType(&one,home_path,diff_type);
     *diff=one.diff;
     return true;
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    diff->consecutive=false;
-    diff->first=false;
-    diff->last=false;
-
-    createPreferencesFolder(home_path);
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_DIFFERENCE_BETWEEN_PLAYER);
-
-    ptr_file=openFile(file_name,"r");
-
-    if (ptr_file==NULL)
-        return createFileDifferenceBetweenPlayer(home_path,*diff);
-
-    fscanf(ptr_file,"%d %d %d",(int*)&(diff->consecutive),(int*)&(diff->first),(int*)&(diff->last));
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 
@@ -446,25 +297,6 @@ bool createFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
     one_preferences one;
     one.pdf = *ptr_pref;
     return writeXmlPreferencesFileType(&one,home_path,pdf_type);
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_PDF_PREFERENCES);
-
-    createPreferencesFolder(home_path);
-
-    ptr_file=openFile(file_name,"w+");
-
-    if (ptr_file==NULL)
-        return false;
-
-    fprintf(ptr_file,"%d %d %d %d %d %d %d",ptr_pref->charset,ptr_pref->font_size,
-            ptr_pref->direction,ptr_pref->size,ptr_pref->margin,ptr_pref->total_points_turn,
-            ptr_pref->ranking_turn);
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 
@@ -481,33 +313,6 @@ bool readFilePdfPreferences(char *home_path, export_pdf_preferences *ptr_pref)
     readXmlPreferencesFileType(&one,home_path,pdf_type);
     *ptr_pref=one.pdf;
     return true;
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    ptr_pref->font_size = DEFAULT_FONT_SIZE;
-    ptr_pref->charset = ISO885915;
-    ptr_pref->size = HPDF_PAGE_SIZE_A4;
-    ptr_pref->direction = HPDF_PAGE_PORTRAIT;
-    ptr_pref->margin = DEFAULT_MARGIN;
-    ptr_pref->total_points_turn = false;
-    ptr_pref->ranking_turn = false;
-
-    createPreferencesFolder(home_path);
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_PDF_PREFERENCES);
-
-    ptr_file=openFile(file_name,"r");
-
-    if (ptr_file==NULL)
-        return createFilePdfPreferences(home_path,ptr_pref);
-
-    fscanf(ptr_file,"%d %d %d %d %d %d %d",(int*)&(ptr_pref->charset),(int*)&(ptr_pref->font_size)
-           ,(int*)&(ptr_pref->direction),(int*)&(ptr_pref->size),(int*)&(ptr_pref->margin),
-           (int *)&(ptr_pref->total_points_turn),(int *)&(ptr_pref->ranking_turn));
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 
@@ -540,23 +345,6 @@ bool createFileScoreDisplay(char *home_path, score_display score)
     one_preferences one;
     one.score = score;
     return writeXmlPreferencesFileType(&one,home_path,score_type);
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_SCORE_DISPLAY);
-
-    createPreferencesFolder(home_path);
-
-    ptr_file=openFile(file_name,"w+");
-
-    if (ptr_file==NULL)
-        return false;
-
-    fprintf(ptr_file,"%d %d %d",score.total_points,score.ranking,score.edit_suppr);
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 
@@ -573,27 +361,6 @@ bool readFileScoreDisplay(char *home_path, score_display *score)
     readXmlPreferencesFileType(&one,home_path,score_type);
     *score=one.score;
     return true;
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    score->total_points=false;
-    score->ranking=false;
-    score->edit_suppr=false;
-
-    createPreferencesFolder(home_path);
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_SCORE_DISPLAY);
-
-    ptr_file=openFile(file_name,"r");
-
-    if (ptr_file==NULL)
-        return createFileScoreDisplay(home_path,*score);
-
-    fscanf(ptr_file,"%d %d %d",(int*)&(score->total_points),(int*)&(score->ranking),(int*)&(score->edit_suppr));
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 
@@ -609,23 +376,6 @@ bool createFileMainWindowSide(char *home_path, main_window_side pref)
     one_preferences one;
     one.side = pref;
     return writeXmlPreferencesFileType(&one,home_path,side_type);
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
-
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIDE);
-
-    createPreferencesFolder(home_path);
-
-    ptr_file=openFile(file_name,"w+");
-
-    if (ptr_file==NULL)
-        return false;
-
-    fprintf(ptr_file,"%d %d %d",pref.ranking,pref.calculator,pref.game_information);
-
-    closeFile(ptr_file);
-
-    return true;*/
 }
 
 
@@ -642,27 +392,49 @@ bool readFileMainWindowSide(char *home_path, main_window_side *pref)
     readXmlPreferencesFileType(&one,home_path,side_type);
     *pref=one.side;
     return true;
-    /*char file_name[SIZE_MAX_FILE_NAME];
-    FILE *ptr_file;
+}
 
-    pref->ranking=true;
-    pref->calculator=false;
-    pref->game_information=true;
+/*!
+ * \fn bool createFileChartExportation(char *home_path, chart_exportation pref)
+ *  Create the file which contain the chart exportation preferences
+ * \param[in] home_path the path to the home directory
+ * \param[in] pref the chart_exportation structure
+ * \return true if everything is OK, false otherwise
+ */
+bool createFileChartExportation(char *home_path, chart_exportation pref)
+{
+    one_preferences one;
+    one.chart = pref;
+    return writeXmlPreferencesFileType(&one,home_path,chart_type);
+}
 
-    createPreferencesFolder(home_path);
 
-    sprintf(file_name,"%s%s/%s",home_path,PREFERENCES_FOLDER_NAME,FILENAME_MAIN_WINDOW_SIDE);
+/*!
+ * \fn bool readFileChartExportation(char *home_path, chart_exportation *pref);
+ *  Read the file which contain the chart exportation preferences
+ * \param[in] home_path the path to the home directory
+ * \param[in] pref the chart_exportation structure
+ * \return true if everything is OK, false otherwise
+ */
+bool readFileChartExportation(char *home_path, chart_exportation *pref)
+{
+    one_preferences one;
+    readXmlPreferencesFileType(&one,home_path,chart_type);
+    *pref=one.chart;
+    return true;
+}
 
-    ptr_file=openFile(file_name,"r");
-
-    if (ptr_file==NULL)
-        return createFileMainWindowSide(home_path,*pref);
-
-    fscanf(ptr_file,"%d %d %d",(int*)&(pref->ranking),(int*)&(pref->calculator),(int*)&(pref->game_information));
-
-    closeFile(ptr_file);
-
-    return true;*/
+/*!
+ * \fn bool differentsChartExportationStruct(chart_exportation pref_1, chart_exportation pref_2)
+ *  Test if the two chart exportation structure
+ * \param[in] pref_1 the first chart_exportation
+ * \param[in] pref_2 the second chart_exportation
+ * \return true if everything is OK, false otherwise
+ */
+bool differentsChartExportationStruct(chart_exportation pref_1, chart_exportation pref_2)
+{
+    return (pref_1.width != pref_2.width || pref_1.height != pref_2.height
+            || pref_1.total_points != pref_2.total_points);
 }
 
 
@@ -755,6 +527,13 @@ bool writeXmlPreferencesFile(preferences *pref, char *home_path)
     addXmlBoolNode(tmp_node,"ranking_turn",pref->pdf.ranking_turn);
     xmlAddChild(racine, tmp_node);
 
+    // PDF export preferences
+    tmp_node = xmlNewNode(NULL, BAD_CAST "chart_export_preferences");
+    addXmlIntNode(tmp_node,"width",pref->chart.width);
+    addXmlIntNode(tmp_node,"height",pref->chart.height);
+    addXmlBoolNode(tmp_node,"total_points",pref->chart.total_points);
+    xmlAddChild(racine, tmp_node);
+
 
     if(xmlSaveFormatFileEnc(filename,doc,"UTF-8",1) == -1)
         res = false;
@@ -796,6 +575,9 @@ bool writeXmlPreferencesFileType(one_preferences *pref, char *home_path, prefere
         break;
     case pdf_type:
         pref_glob.pdf = pref->pdf;
+        break;
+    case chart_type:
+        pref_glob.chart = pref->chart;
         break;
     }
 
@@ -871,6 +653,10 @@ void readXmlPreferencesFile(preferences *pref, char *home_path)
         pref->pdf.margin = DEFAULT_MARGIN;
         pref->pdf.total_points_turn = false;
         pref->pdf.ranking_turn = false;
+
+        pref->chart.height = 500;
+        pref->chart.width = 800;
+        pref->chart.total_points = true;
 
         return;
     }
@@ -992,6 +778,15 @@ void readXmlPreferencesFile(preferences *pref, char *home_path)
     pref->pdf.ranking_turn = convertStringBool((char *)xmlNodeGetContent(tmp_node));
 
 
+    // Chart export preferences
+    tmp_node = xmlFirstElementChild(xmlNextElementSibling(tmp_node->parent));
+    pref->chart.width = convertStringInt((char *)xmlNodeGetContent(tmp_node));
+    tmp_node = xmlNextElementSibling(tmp_node);
+    pref->chart.height = convertStringInt((char *)xmlNodeGetContent(tmp_node));
+    tmp_node = xmlNextElementSibling(tmp_node);
+    pref->chart.total_points = convertStringBool((char *)xmlNodeGetContent(tmp_node));
+
+
     xmlFreeDoc(doc);
 }
 
@@ -1029,6 +824,9 @@ void readXmlPreferencesFileType(one_preferences *pref, char *home_path, preferen
         break;
     case pdf_type:
         pref->pdf = pref_glob.pdf;
+        break;
+    case chart_type:
+        pref->chart = pref_glob.chart;
         break;
     }
 }

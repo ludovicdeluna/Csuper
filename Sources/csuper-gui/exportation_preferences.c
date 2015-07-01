@@ -42,12 +42,14 @@
 void updateExportationPreferences(globalData *data)
 {
     export_pdf_preferences pref;
+    chart_exportation chart_pref;
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE
     readFilePdfPreferences(home_path,&pref);
+    readFileChartExportation(home_path,&chart_pref);
 
     GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"grid_exportation_preferences");
 
@@ -92,6 +94,18 @@ void updateExportationPreferences(globalData *data)
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),TRUE);
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),FALSE);
+
+    // Chart width
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),chart_pref.width);
+
+    // Chart width
+    gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),3,6)),chart_pref.height);
+
+    // Chart total points
+    if (chart_pref.total_points == true)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),TRUE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7)),FALSE);
 }
 
 
@@ -100,8 +114,9 @@ void updateExportationPreferences(globalData *data)
  *  Read the export_pdf_preferences with the exportation preferences window
  * \param[in] data the globalData
  * \param[in] pref the exportation preferences
+ * \param[in] chart_pref the chart preferences
  */
-void readExportationPreferences(globalData *data, export_pdf_preferences *pref)
+void readExportationPreferences(globalData *data, export_pdf_preferences *pref, chart_exportation* chart_pref)
 {
     GtkWidget *grid = getWidgetFromBuilder(data->ptr_builder,"grid_exportation_preferences");
 
@@ -142,6 +157,18 @@ void readExportationPreferences(globalData *data, export_pdf_preferences *pref)
         pref->ranking_turn = true;
     else
         pref->ranking_turn = false;
+
+    // Chart width
+    chart_pref->width = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,6)));
+
+    // Chart height
+    chart_pref->height = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),3,6)));
+
+    // Chart total points
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,7))))
+        chart_pref->total_points = true;
+    else
+        chart_pref->total_points = false;
 }
 
 
@@ -156,17 +183,21 @@ G_MODULE_EXPORT void checkExportationPreferencesChanged(GtkWidget *widget,gpoint
     globalData *user_data = (globalData*) data;
     export_pdf_preferences pref_file;
     export_pdf_preferences pref_graph;
+    chart_exportation chart_pref_file;
+    chart_exportation chart_pref_graph;
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE
     readFilePdfPreferences(home_path,&pref_file);
-    readExportationPreferences(user_data,&pref_graph);
+    readFileChartExportation(home_path,&chart_pref_file);
+    readExportationPreferences(user_data,&pref_graph,&chart_pref_graph);
 
     GtkWidget *apply_button = getWidgetFromBuilder(user_data->ptr_builder,"apply_button_exportation_preferences");
 
-    gtk_widget_set_sensitive(apply_button,differentsTExportPdfPreferencesStruct(pref_file,pref_graph));
+    gtk_widget_set_sensitive(apply_button,differentsTExportPdfPreferencesStruct(pref_file,pref_graph)
+                             || differentsChartExportationStruct(chart_pref_file,chart_pref_graph));
 }
 
 
@@ -194,14 +225,16 @@ G_MODULE_EXPORT void validExportationPreferences(GtkWidget *widget, gpointer dat
 {
     globalData *user_data = (globalData*) data;
     export_pdf_preferences pref;
+    chart_exportation chart_pref;
     gchar home_path[SIZE_MAX_FILE_NAME]="";
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
     #endif // PORTABLE
-    readExportationPreferences(user_data,&pref);
+    readExportationPreferences(user_data,&pref,&chart_pref);
 
     createFilePdfPreferences(home_path,&pref);
+    createFileChartExportation(home_path,chart_pref);
     updateExportationPreferences(user_data);
     checkExportationPreferencesChanged(NULL,user_data);
 }

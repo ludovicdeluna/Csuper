@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Generated with glade 3.18.3 
+<!-- Generated with glade 3.19.0 
 
 Copyright (C) 
 
@@ -22,35 +22,17 @@ along with .  If not, see <http://www.gnu.org/licenses/>.
 <interface domain="csuper-gui">
   <requires lib="gtk+" version="3.6"/>
   <!-- interface-license-type gplv3 -->
-  <object class="GtkAdjustment" id="adjustment_dialog_chart zoom_y">
-    <property name="lower">1</property>
-    <property name="upper">20</property>
-    <property name="value">1</property>
-    <property name="step_increment">0.5</property>
-    <property name="page_increment">0.5</property>
+  <object class="GtkAdjustment" id="adjustment_chart_height">
+    <property name="lower">300</property>
+    <property name="upper">100000</property>
+    <property name="step_increment">25</property>
+    <property name="page_increment">10</property>
   </object>
-  <object class="GtkAdjustment" id="adjustment_dialog_chart_scrollbar_x">
-    <property name="lower">1</property>
-    <property name="upper">2</property>
-    <property name="value">1</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">1</property>
-    <property name="page_size">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_dialog_chart_scrollbar_y">
-    <property name="lower">1</property>
-    <property name="upper">2</property>
-    <property name="value">1</property>
-    <property name="step_increment">1</property>
-    <property name="page_increment">1</property>
-    <property name="page_size">1</property>
-  </object>
-  <object class="GtkAdjustment" id="adjustment_dialog_chart_zoom_x">
-    <property name="lower">1</property>
-    <property name="upper">20</property>
-    <property name="value">1</property>
-    <property name="step_increment">0.5</property>
-    <property name="page_increment">0.5</property>
+  <object class="GtkAdjustment" id="adjustment_chart_width">
+    <property name="lower">300</property>
+    <property name="upper">100000</property>
+    <property name="step_increment">25</property>
+    <property name="page_increment">10</property>
   </object>
   <object class="GtkAdjustment" id="adjustment_exportation_pdf_preferences_fontsize">
     <property name="lower">4</property>
@@ -102,6 +84,21 @@ along with .  If not, see <http://www.gnu.org/licenses/>.
   <object class="GtkFileFilter" id="filefilterpdf">
     <mime-types>
       <mime-type>application/pdf</mime-type>
+    </mime-types>
+  </object>
+  <object class="GtkFileFilter" id="filefilterpdfchart">
+    <mime-types>
+      <mime-type>application/pdf</mime-type>
+    </mime-types>
+  </object>
+  <object class="GtkFileFilter" id="filefilterpng">
+    <mime-types>
+      <mime-type>image/png</mime-type>
+    </mime-types>
+  </object>
+  <object class="GtkFileFilter" id="filefiltersvg">
+    <mime-types>
+      <mime-type>image/svg+xml</mime-type>
     </mime-types>
   </object>
   <object class="GtkMessageDialog" id="game_configuration_not_exported">
@@ -870,13 +867,24 @@ along with .  If not, see <http://www.gnu.org/licenses/>.
                       </object>
                     </child>
                     <child>
-                      <object class="GtkMenuItem" id="menu_display_chart">
+                      <object class="GtkMenuItem" id="menu_display_chart_total_points">
                         <property name="visible">True</property>
                         <property name="can_focus">False</property>
-                        <property name="tooltip_text" translatable="yes">Display the chart</property>
-                        <property name="label" translatable="yes">Display chart</property>
-                        <signal name="activate" handler="displayChart" swapped="no"/>
+                        <property name="tooltip_text" translatable="yes">Display the chart of the total points</property>
+                        <property name="label" translatable="yes">Display the total points chart</property>
+                        <signal name="activate" handler="displayTotalPointsChart" swapped="no"/>
                         <accelerator key="w" signal="activate" modifiers="GDK_CONTROL_MASK"/>
+                      </object>
+                    </child>
+                    <child>
+                      <object class="GtkMenuItem" id="menu_display_chart_points">
+                        <property name="visible">True</property>
+                        <property name="can_focus">False</property>
+                        <property name="tooltip_text" translatable="yes">Display the chart of the points</property>
+                        <property name="label" translatable="yes">Display the points chart</property>
+                        <property name="use_underline">True</property>
+                        <signal name="activate" handler="displayPointsChart" swapped="no"/>
+                        <accelerator key="d" signal="activate" modifiers="GDK_CONTROL_MASK"/>
                       </object>
                     </child>
                     <child>
@@ -2279,98 +2287,31 @@ you want to delete the turn&lt;/span&gt;</property>
             <property name="visible">True</property>
             <property name="can_focus">False</property>
             <child>
-              <object class="GtkGrid" id="dialog_chart_grid">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="margin_left">10</property>
-                <property name="margin_right">10</property>
-                <property name="margin_top">10</property>
-                <property name="margin_bottom">10</property>
-                <property name="hexpand">True</property>
-                <property name="vexpand">True</property>
-                <property name="row_spacing">10</property>
-                <property name="column_spacing">10</property>
-                <child>
-                  <object class="GtkScale" id="dialog_chart_scale_y">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="orientation">vertical</property>
-                    <property name="adjustment">adjustment_dialog_chart zoom_y</property>
-                    <property name="inverted">True</property>
-                    <property name="round_digits">1</property>
-                    <signal name="value-changed" handler="changeChartZoom" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="left_attach">2</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkScale" id="dialog_chart_scale_x">
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="adjustment">adjustment_dialog_chart_zoom_x</property>
-                    <property name="round_digits">1</property>
-                    <signal name="value-changed" handler="changeChartZoom" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">2</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkScrollbar" id="dialog_chart_scrollbar_y">
-                    <property name="can_focus">False</property>
-                    <property name="orientation">vertical</property>
-                    <property name="adjustment">adjustment_dialog_chart_scrollbar_y</property>
-                    <signal name="value-changed" handler="changeChartScrollbar" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="left_attach">1</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkScrollbar" id="dialog_chart_scrollbar_x">
-                    <property name="can_focus">False</property>
-                    <property name="adjustment">adjustment_dialog_chart_scrollbar_x</property>
-                    <signal name="value-changed" handler="changeChartScrollbar" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkDrawingArea" id="dialog_chart_drawingarea">
-                    <property name="visible">True</property>
-                    <property name="can_focus">False</property>
-                    <property name="hexpand">True</property>
-                    <property name="vexpand">True</property>
-                    <signal name="draw" handler="drawChart" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="left_attach">0</property>
-                    <property name="top_attach">0</property>
-                  </packing>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-                <child>
-                  <placeholder/>
-                </child>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">0</property>
-              </packing>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
             </child>
           </object>
           <packing>
@@ -3967,55 +3908,6 @@ Congratulation to the winner!</property>
               </packing>
             </child>
             <child>
-              <object class="GtkButtonBox" id="buttonbox2">
-                <property name="visible">True</property>
-                <property name="can_focus">False</property>
-                <property name="valign">end</property>
-                <property name="vexpand">True</property>
-                <property name="spacing">10</property>
-                <property name="layout_style">spread</property>
-                <child>
-                  <object class="GtkButton" id="apply_button_exportation_preferences">
-                    <property name="label">gtk-apply</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Apply the new preferences for the new toolbar button displayed</property>
-                    <property name="use_stock">True</property>
-                    <property name="always_show_image">True</property>
-                    <signal name="clicked" handler="validExportationPreferences" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">1</property>
-                  </packing>
-                </child>
-                <child>
-                  <object class="GtkButton" id="close_button_exportation_preferences">
-                    <property name="label">gtk-close</property>
-                    <property name="visible">True</property>
-                    <property name="can_focus">True</property>
-                    <property name="receives_default">True</property>
-                    <property name="tooltip_text" translatable="yes">Close the game preferences window</property>
-                    <property name="use_stock">True</property>
-                    <property name="always_show_image">True</property>
-                    <signal name="clicked" handler="closePreferences" swapped="no"/>
-                  </object>
-                  <packing>
-                    <property name="expand">False</property>
-                    <property name="fill">True</property>
-                    <property name="position">2</property>
-                  </packing>
-                </child>
-              </object>
-              <packing>
-                <property name="left_attach">0</property>
-                <property name="top_attach">5</property>
-                <property name="width">4</property>
-              </packing>
-            </child>
-            <child>
               <object class="GtkLabel" id="label_exportation_pdf_utf8">
                 <property name="visible">True</property>
                 <property name="can_focus">False</property>
@@ -4225,6 +4117,168 @@ Congratulation to the winner!</property>
                 <property name="left_attach">1</property>
                 <property name="top_attach">4</property>
               </packing>
+            </child>
+            <child>
+              <object class="GtkButtonBox" id="buttonbox2">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="valign">end</property>
+                <property name="vexpand">True</property>
+                <property name="spacing">10</property>
+                <property name="layout_style">spread</property>
+                <child>
+                  <object class="GtkButton" id="apply_button_exportation_preferences">
+                    <property name="label">gtk-apply</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Apply the new preferences for the new toolbar button displayed</property>
+                    <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
+                    <signal name="clicked" handler="validExportationPreferences" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkButton" id="close_button_exportation_preferences">
+                    <property name="label">gtk-close</property>
+                    <property name="visible">True</property>
+                    <property name="can_focus">True</property>
+                    <property name="receives_default">True</property>
+                    <property name="tooltip_text" translatable="yes">Close the game preferences window</property>
+                    <property name="use_stock">True</property>
+                    <property name="always_show_image">True</property>
+                    <signal name="clicked" handler="closePreferences" swapped="no"/>
+                  </object>
+                  <packing>
+                    <property name="expand">False</property>
+                    <property name="fill">True</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">8</property>
+                <property name="width">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="exportation_preferences_label_chart">
+                <property name="width_request">400</property>
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="margin_top">10</property>
+                <property name="margin_bottom">10</property>
+                <property name="label" translatable="yes">&lt;span font_weight="bold" size="large"&gt;Chart exportation&lt;/span&gt;</property>
+                <property name="use_markup">True</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">5</property>
+                <property name="width">4</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_exportation_chart_width">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Width of the chart</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_exportation_chart_height">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Height of the chart</property>
+              </object>
+              <packing>
+                <property name="left_attach">2</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_exportation_chart_total_points">
+                <property name="visible">True</property>
+                <property name="can_focus">False</property>
+                <property name="tooltip_text" translatable="yes">Show the total points in the chart. If it is turn off, it will show the points.</property>
+                <property name="hexpand">True</property>
+                <property name="label" translatable="yes">Show the total points</property>
+              </object>
+              <packing>
+                <property name="left_attach">0</property>
+                <property name="top_attach">7</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton_exportation_chart_width">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <property name="xalign">0.5</property>
+                <property name="input_purpose">number</property>
+                <property name="adjustment">adjustment_chart_width</property>
+                <property name="climb_rate">2</property>
+                <property name="numeric">True</property>
+                <property name="value">4</property>
+                <signal name="value-changed" handler="checkExportationPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSpinButton" id="spinbutton_exportation_chart_height">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <property name="xalign">0.5</property>
+                <property name="input_purpose">number</property>
+                <property name="adjustment">adjustment_chart_height</property>
+                <property name="climb_rate">2</property>
+                <property name="numeric">True</property>
+                <property name="value">300</property>
+                <signal name="value-changed" handler="checkExportationPreferencesChanged" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">3</property>
+                <property name="top_attach">6</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkSwitch" id="switch_exportation_chart_total_points">
+                <property name="visible">True</property>
+                <property name="can_focus">True</property>
+                <property name="halign">center</property>
+                <property name="valign">center</property>
+                <property name="hexpand">True</property>
+                <signal name="notify::active" handler="checkExportationPreferencesChangedSwitchButton" swapped="no"/>
+              </object>
+              <packing>
+                <property name="left_attach">1</property>
+                <property name="top_attach">7</property>
+              </packing>
+            </child>
+            <child>
+              <placeholder/>
+            </child>
+            <child>
+              <placeholder/>
             </child>
             <child>
               <placeholder/>

@@ -1053,7 +1053,6 @@ bool exportToM(csuStruct *ptr_csu_struct, char *filename)
                 break;
         }
         fprintf(ptr_file,"];");
-        //fprintf(ptr_file,_("\nfprintf('Mean score of %s : %%f\\n',mean(%c1));"),ptr_csu_struct->player_names[i],tabs_name);
         tabs_name++;
     }
 
@@ -1089,7 +1088,7 @@ bool exportToM(csuStruct *ptr_csu_struct, char *filename)
     fprintf(ptr_file,");\n");
 
 
-    // Tabs of points points
+    // Tabs of points
     tabs_name = 'a';
     fprintf(ptr_file,"\nfigure;");
     for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
@@ -1112,7 +1111,7 @@ bool exportToM(csuStruct *ptr_csu_struct, char *filename)
                 break;
         }
         fprintf(ptr_file,"];");
-        fprintf(ptr_file,_("\nfprintf('Mean score of %s : %%f\\n',mean(%c2));"),ptr_csu_struct->player_names[i],tabs_name);
+        fprintf(ptr_file,_("\nfprintf('Mean score of %s: %%f\\n',mean(%c2));"),ptr_csu_struct->player_names[i],tabs_name);
         tabs_name++;
     }
 

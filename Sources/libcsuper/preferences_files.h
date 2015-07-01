@@ -176,8 +176,21 @@ typedef struct
 {
     bool ranking;   /*!< Display the ranking*/
     bool calculator;         /*!< Display the calculator*/
-    bool game_information;         /*!< Display the game informations */
+    bool game_information;         /*!< Display the game information */
 } main_window_side;
+
+
+/*!
+ * \struct chart_exportation
+ * Indicate what will be display in the left side of the main window
+ */
+typedef struct
+{
+    int width;   /*!< The width of the chart */
+    int height;         /*!< The height of the chart */
+    bool total_points;         /*!< Total points or points */
+} chart_exportation;
+
 
 
 /*!
@@ -192,6 +205,7 @@ typedef struct
     score_display score;
     main_window_side side;
     export_pdf_preferences pdf;
+    chart_exportation chart;
 } preferences;
 
 typedef union
@@ -202,6 +216,7 @@ typedef union
     score_display score;
     main_window_side side;
     export_pdf_preferences pdf;
+    chart_exportation chart;
 } one_preferences;
 
 typedef enum
@@ -211,7 +226,8 @@ typedef enum
     diff_type,
     score_type,
     side_type,
-    pdf_type
+    pdf_type,
+    chart_type
 } preferences_type;
 
 
@@ -241,6 +257,10 @@ bool readFileScoreDisplay(char *home_path, score_display *score);
 
 bool createFileMainWindowSide(char *home_path, main_window_side pref);
 bool readFileMainWindowSide(char *home_path, main_window_side *pref);
+
+bool createFileChartExportation(char *home_path, chart_exportation pref);
+bool readFileChartExportation(char *home_path, chart_exportation *pref);
+bool differentsChartExportationStruct(chart_exportation pref_1, chart_exportation pref_2);
 
 bool writeXmlPreferencesFile(preferences *pref, char *home_path);
 bool writeXmlPreferencesFileType(one_preferences *pref, char *home_path, preferences_type type);

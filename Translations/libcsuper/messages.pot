@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-21 20:35+0200\n"
+"POT-Creation-Date: 2015-06-24 21:33+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -69,7 +69,7 @@ msgid ""
 "Error: corrupted file.\n"
 msgstr ""
 
-#: Sources/libcsuper/csu_files.c:442 Sources/libcsuper/preferences_files.c:825
+#: Sources/libcsuper/csu_files.c:442 Sources/libcsuper/preferences_files.c:607
 #, c-format
 msgid "Invalid XML Document\n"
 msgstr ""
@@ -383,29 +383,29 @@ msgstr ""
 msgid "%.0f;"
 msgstr ""
 
-#: Sources/libcsuper/export.c:1078
+#: Sources/libcsuper/export.c:1077
 #, c-format
 msgid "title('Total points');\n"
 msgstr ""
 
-#: Sources/libcsuper/export.c:1079 Sources/libcsuper/export.c:1131
+#: Sources/libcsuper/export.c:1078 Sources/libcsuper/export.c:1130
 #, c-format
 msgid "xlabel('Turn');\n"
 msgstr ""
 
-#: Sources/libcsuper/export.c:1080 Sources/libcsuper/export.c:1132
+#: Sources/libcsuper/export.c:1079 Sources/libcsuper/export.c:1131
 #, c-format
 msgid "ylabel('Points');\n"
 msgstr ""
 
-#: Sources/libcsuper/export.c:1115
+#: Sources/libcsuper/export.c:1114
 #, c-format
 msgid ""
 "\n"
-"fprintf('Mean score of %s : %%f\\n',mean(%c2));"
+"fprintf('Mean score of %s: %%f\\n',mean(%c2));"
 msgstr ""
 
-#: Sources/libcsuper/export.c:1130
+#: Sources/libcsuper/export.c:1129
 #, c-format
 msgid "title('Points');\n"
 msgstr ""
@@ -561,20 +561,20 @@ msgid ""
 "filename to export the csu file into a m file (octave/matlab file).\n"
 msgstr ""
 
-#: Sources/libcsuper/preferences_files.c:323
-#: Sources/libcsuper/preferences_files.c:328
+#: Sources/libcsuper/preferences_files.c:212
+#: Sources/libcsuper/preferences_files.c:217
 #, c-format
 msgid ""
 "\n"
 "Error while reading the file containing the system path.\n"
 msgstr ""
 
-#: Sources/libcsuper/preferences_files.c:882
+#: Sources/libcsuper/preferences_files.c:668
 #, c-format
 msgid "Not a csu preferences file\n"
 msgstr ""
 
-#: Sources/libcsuper/preferences_files.c:892
+#: Sources/libcsuper/preferences_files.c:678
 #, c-format
 msgid "This version of Csuper only support preferences file version of %.1f.\n"
 msgstr ""
