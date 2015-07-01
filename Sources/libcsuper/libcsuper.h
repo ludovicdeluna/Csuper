@@ -53,6 +53,7 @@
 #include "preferences_main_window_display.h"
 #include "preferences_export_pdf.h"
 #include "preferences_directory.h"
+#include "preferences_chart_exportation.h"
 #include "preferences.h"
 
 #endif

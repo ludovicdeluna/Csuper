@@ -47,6 +47,8 @@ namespace csuper
     class Player
     {
     private:
+        friend class Game;
+
         Glib::ustring name_;                /*!< Name of the player */
         double total_points_;               /*!< Total points of the player*/
         std::vector<double> points_;        /*!< Points of the player */
@@ -89,7 +91,7 @@ namespace csuper
         /*!
          *  \brief Constructor with a xmlpp node
          *  \param xml_node the xml node
-         *  \exception csuper::xmlError if bad xmlpp node
+         *  \exception csuper::XmlError if bad xmlpp node
          */
         Player(xmlpp::Node* xml_node);
 
@@ -190,14 +192,14 @@ namespace csuper
          *  \brief Set the points at a specific turn
          *  \param turn the turn
          *  \param points the points
-         *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception csuper::OutOfRange if turn is greater than the number of turn
          */
         void setPoints(const unsigned int turn, const double point);
 
         /*!
          *  \brief Delete a turn
          *  \param turn the turn
-         *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception csuper::OutOfRange if turn is greater than the number of turn
          */
         void deleteTurn(const unsigned int turn);
 
@@ -229,7 +231,7 @@ namespace csuper
          *  \brief return the total points at a specific turn
          *  \param turn the turn, if not set the turn is set to the last turn
          *  \return the total points
-         *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception csuper::OutOfRange if turn is greater than the number of turn
          */
         double totalPoints(const int turn=-1) const;
 
@@ -237,7 +239,7 @@ namespace csuper
          *  \brief return the points at a specific turn
          *  \param turn the turn, if not set the turn is set to the last turn
          *  \return the points
-         *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception csuper::OutOfRange if turn is greater than the number of turn
          */
         inline double points(const int turn=-1) const
         {
@@ -285,7 +287,7 @@ namespace csuper
          *  \brief return the total points at a specific turn in a ustring
          *  \param turn the turn, if not set the turn is set to the last turn
          *  \return the ustring
-         *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception csuper::OutOfRange if turn is greater than the number of turn
          */
         inline Glib::ustring totalPointsUstring(const int turn = -1) const
         {
@@ -298,7 +300,7 @@ namespace csuper
          *  \param game_config a game configuration for the decimal places
          *  \param width the width in character of the result ustring
          *  \return the ustring
-         *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception csuper::OutOfRange if turn is greater than the number of turn
          */
         inline Glib::ustring totalPointsUstring(const GameConfiguration& game_config, const int turn=-1, const unsigned int width=0) const
         {
@@ -310,7 +312,7 @@ namespace csuper
          *  \brief return the points at a specific turn in a ustring
          *  \param turn the turn, if not set the turn is set to the last turn
          *  \return the ustring
-         *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception csuper::OutOfRange if turn is greater than the number of turn
          */
         inline Glib::ustring pointsUstring(const int turn=-1) const
         {
@@ -323,8 +325,7 @@ namespace csuper
          *  \param game_config a game configuration for the decimal places
          *  \param width the width in character of the result ustring
          *  \return the ustring
-         *  \exception std::length_error if turn is greater than the number of turn
-         *  \exception std::length_error if turn is greater than the number of turn
+         *  \exception csuper::OutOfRange if turn is greater than the number of turn
          */
         inline Glib::ustring pointsUstring(const GameConfiguration& game_config,const int turn=-1, const unsigned int width=0) const
         {

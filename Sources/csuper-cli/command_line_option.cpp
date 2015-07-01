@@ -42,7 +42,8 @@ CommandLineOption::CommandLineOption() : context_(""),
     filename_group_("filename",_("The input and output filename")),
     instruction_group_("instruction",_("The instruction")),
     open_(false), read_(false), pdf_(false), csv_(false),
-     m_(false), gnuplot_(false), input_(""), output_("")
+     m_(false), png_(false), svg_(false), gnuplot_(false)
+     , input_(""), output_("")
 {
     open_entry_.set_long_name("open");
     open_entry_.set_short_name('e');
@@ -74,12 +75,24 @@ CommandLineOption::CommandLineOption() : context_(""),
     gnuplot_entry_.set_flags(OptionEntry::FLAG_IN_MAIN);
     gnuplot_entry_.set_description(_("Export the input file into into Gnuplot output files"));
 
+    png_entry_.set_long_name("to-png");
+    png_entry_.set_short_name('n');
+    png_entry_.set_flags(OptionEntry::FLAG_IN_MAIN);
+    png_entry_.set_description(_("Export the input file into into a PNG output file"));
+
+    svg_entry_.set_long_name("to-svg");
+    svg_entry_.set_short_name('s');
+    svg_entry_.set_flags(OptionEntry::FLAG_IN_MAIN);
+    svg_entry_.set_description(_("Export the input file into into a SVG output file"));
+
     instruction_group_.add_entry(open_entry_,open_);
     instruction_group_.add_entry(read_entry_,read_);
     instruction_group_.add_entry(pdf_entry_,pdf_);
     instruction_group_.add_entry(csv_entry_,csv_);
     instruction_group_.add_entry(m_entry_,m_);
     instruction_group_.add_entry(gnuplot_entry_,gnuplot_);
+    instruction_group_.add_entry(png_entry_,png_);
+    instruction_group_.add_entry(svg_entry_,svg_);
 
     context_.add_group(instruction_group_);
 
@@ -110,7 +123,7 @@ CommandLineOption::CommandLineOption() : context_(""),
 
 CommandLineOption::Instruction CommandLineOption::parse(int& argc, char**& argv)
 {
-    Instruction ins;
+    Instruction ins = RUN;
     ustring error_msg;
 
     try
@@ -119,12 +132,12 @@ CommandLineOption::Instruction CommandLineOption::parse(int& argc, char**& argv)
     }
     catch (Glib::OptionError& e)
     {
-        cout << e.what() << endl;
-        cout << _("Use -h or --help for help.") << endl;
+        cerr << e.what() << endl;
+        cerr << _("Use -h or --help for help.") << endl;
         exit(EXIT_FAILURE);
     }
 
-    if (!open_ && !read_ && !pdf_ && !csv_ && !m_ && !gnuplot_)
+    if (!open_ && !read_ && !pdf_ && !csv_ && !m_ && !gnuplot_ && !png_ && !svg_)
     {
         if (!(input_.empty()) || !(output_.empty()))
             error_msg += _("You need an instruction.\n");
@@ -137,7 +150,11 @@ CommandLineOption::Instruction CommandLineOption::parse(int& argc, char**& argv)
             || (open_ && gnuplot_) || (read_ && pdf_) || (read_ && csv_)
             || (read_ && m_) || (read_ && gnuplot_) || (pdf_ && csv_)
             || (pdf_ && m_) || (pdf_ && gnuplot_) || (csv_ && m_)
-            || (csv_ && gnuplot_) || (m_ && gnuplot_))
+            || (csv_ && gnuplot_) || (m_ && gnuplot_) || (png_ && open_)
+            || (png_ && read_) || (png_ && pdf_) || (png_ && csv_)
+            || (png_ && m_) || (png_ && gnuplot_) || (png_ && svg_)
+            || (svg_ && open_) || (svg_ && read_) || (svg_ && pdf_)
+            || (svg_ && csv_) || (svg_ && m_) || (svg_ && gnuplot_))
             error_msg += _("You have to use only one instruction.\n");
 
         if (open_ || read_)
@@ -170,6 +187,10 @@ CommandLineOption::Instruction CommandLineOption::parse(int& argc, char**& argv)
                     ins = EXPORT_TO_CSV;
                 else if (gnuplot_)
                     ins = EXPORT_TO_GNUPLOT;
+                else if (png_)
+                    ins = EXPORT_TO_PNG;
+                else if (svg_)
+                    ins = EXPORT_TO_SVG;
                 else
                     ins = EXPORT_TO_M;
             }
@@ -180,8 +201,8 @@ CommandLineOption::Instruction CommandLineOption::parse(int& argc, char**& argv)
 
     if (!(error_msg.empty()))
     {
-        cout << error_msg;
-        cout << _("Use -h or --help for help.") << endl;
+        cerr << error_msg;
+        cerr << _("Use -h or --help for help.") << endl;
         exit(EXIT_FAILURE);
     }
 

@@ -34,6 +34,7 @@
 #include "preferences.h"
 #include "config.h"
 #include "exceptions.h"
+#include <iostream>
 
 using namespace std;
 using namespace Glib;
@@ -54,6 +55,7 @@ namespace csuper
         display_ = new MainWindowDisplayPreferences();
         size_ = new MainWindowSizePreferences();
         score_ = new ScoreDisplayPreferences();
+        chart_ = new ChartExportationPreferences();
     }
 
 
@@ -65,6 +67,7 @@ namespace csuper
         display_ = new MainWindowDisplayPreferences(*(pref.display_));
         size_ = new MainWindowSizePreferences(*(pref.size_));
         score_ = new ScoreDisplayPreferences(*(pref.score_));
+        chart_ = new ChartExportationPreferences(*(pref.chart_));
     }
 
 
@@ -75,9 +78,10 @@ namespace csuper
         {
             parser.parse_file(filename);
         }
-        catch (internal_error &e)
+        catch (xmlpp::exception &e)
         {
-            throw xmlError(ustring::compose(_("Cannot open the file %1"),filename));
+        	cerr << e.what() << endl;
+            throw XmlError(ustring::compose(_("Cannot open the file %1"),filename));
         }
 
         Node *node = parser.get_document()->get_root_node();
@@ -86,7 +90,7 @@ namespace csuper
         // Version
         double file_version = ustringToDouble(static_cast<Element*>(node)->get_child_text()->get_content());
         if (file_version > version_)
-            throw xmlError(ustring::compose(_("This version of Csuper only support preferences file version less than or equal to %1"),version_));
+            throw XmlError(ustring::compose(_("This version of Csuper only support preferences file version less than or equal to %1"),version_));
 
         // toolbar_button
         if (file_version == 1)
@@ -112,6 +116,10 @@ namespace csuper
         nextXmlElement(node);
         pdf_ = new ExportPdfPreferences(node);
 
+        // chart
+        nextXmlElement(node);
+        chart_ = new ChartExportationPreferences(node);
+
         // directory
         if (file_version > 1)
         {
@@ -134,6 +142,7 @@ namespace csuper
         delete display_;
         delete size_;
         delete score_;
+        delete chart_;
     }
 
     //
@@ -150,6 +159,7 @@ namespace csuper
         delete display_;
         delete size_;
         delete score_;
+        delete chart_;
 
         diff_ = new DifferenceBetweenPlayerPreferences(*(pref.diff_));
         dir_ = new DirectoryPreferences(*(pref.dir_));
@@ -157,6 +167,7 @@ namespace csuper
         display_ = new MainWindowDisplayPreferences(*(pref.display_));
         size_ = new MainWindowSizePreferences(*(pref.size_));
         score_ = new ScoreDisplayPreferences(*(pref.score_));
+        chart_ = new ChartExportationPreferences(*(pref.chart_));
 
         return *this;
     }
@@ -168,6 +179,7 @@ namespace csuper
             + scoreDisplay().toUstring() + "\n"
             + mainWindowDisplay().toUstring() + "\n"
             + exportPdf().toUstring() + "\n"
+            + chartExportation().toUstring() + "\n"
             + directory().toUstring();
     }
 
@@ -209,8 +221,18 @@ namespace csuper
         scoreDisplay().createXmlNode(root);
         mainWindowDisplay().createXmlNode(root);
         exportPdf().createXmlNode(root);
+        chartExportation().createXmlNode(root);
         directory().createXmlNode(root);
 
-        doc.write_to_file_formatted(filename,"UTF-8");
+
+        try
+        {
+            doc.write_to_file_formatted(filename,"UTF-8");
+        }
+        catch (xmlpp::exception& e)
+        {
+            cerr << e.what() << endl;
+            throw FileError(ustring::compose(_("Error while writing the CSU preferences file %1"),filename));
+        }
     }
 }

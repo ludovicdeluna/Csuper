@@ -68,7 +68,7 @@ namespace csuper
         /*!
          *  \brief Constructor
          *  \param game the game
-         *  \exception csuper::pdfError if bad file
+         *  \exception csuper::PdfError if bad file
          */
         PdfExportation(const Game* game,  const ExportPdfPreferences& pref);
 
@@ -92,14 +92,14 @@ namespace csuper
          *  Create the first page of the pdf
          * \param[in] filename the filename of the pdf file
          * \return true if it need another page, false otherwise
-         * \exception csuper::pdfError
+         * \exception csuper::PdfError
          */
         bool createFirstPage(const Glib::ustring& filename);
 
         /*!
          *  Create the the others page
          * \return true if it need another page, false otherwise
-         * \exception csuper::pdfError
+         * \exception csuper::PdfError
          */
         bool createOtherPage();
 
@@ -114,7 +114,7 @@ namespace csuper
          * \param[in] page the page
          * \param[in] pos_y the first position on the y axis
          * \param[in] table_width the width of a table
-         * \exception csuper::pdfError
+         * \exception csuper::PdfError
          */
         void printNames(float& pos_y, const float table_width, HPDF_Page& page);
 
@@ -123,7 +123,7 @@ namespace csuper
          * \param[in] page the page
          * \param[in] pos_y the first position on the y axis
          * \param[in] table_width the width of a table
-         * \exception csuper::pdfError
+         * \exception csuper::PdfError
          */
         void printLegend(float& pos_y, const float table_width, HPDF_Page& page);
 
@@ -132,7 +132,7 @@ namespace csuper
          * \param[in] page the page
          * \param[in] pos_y the first position on the y axis
          * \param[in] table_width the width of a table
-         * \exception csuper::pdfError
+         * \exception csuper::PdfError
          */
         void printPoints(float& pos_y, const float table_width, HPDF_Page& page);
 
@@ -168,7 +168,7 @@ namespace csuper
          *  Print the text in the page
          * \param[in] page the page
          * \param[in] text the text to print
-         * \exception csuper::pdfError if conversion failed
+         * \exception csuper::PdfError if conversion failed
          */
         void showText(HPDF_Page& page, const Glib::ustring& text);
 
@@ -225,13 +225,16 @@ namespace csuper
          */
         static bool canUseUtf8();
 
+        static std::string convertCharsetPdf(const Glib::ustring& str, const ExportPdfPreferences::CharacterSet charset);
+
+
     public:
         /*!
          *  Export a csu structure to a pdf file
          * \param[in] game the game to be exported
          * \param[in] pref the preferences
          * \param[in] filename the filename of the pdf file
-         * \exception csuper::pdfError
+         * \exception csuper::PdfError
          */
         static void exportToPdf(const Game* game, const ExportPdfPreferences& pref, const Glib::ustring& filename);
     };

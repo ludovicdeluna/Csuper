@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-14 22:15+0200\n"
+"POT-Creation-Date: 2015-06-27 22:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,80 +25,103 @@ msgstr ""
 msgid "The instruction"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:50
+#: Sources/csuper-cli/command_line_option.cpp:51
 msgid "Open the input file"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:55
+#: Sources/csuper-cli/command_line_option.cpp:56
 msgid "Read the input file"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:60
+#: Sources/csuper-cli/command_line_option.cpp:61
 msgid "Export the input file into into a PDF output file"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:65
+#: Sources/csuper-cli/command_line_option.cpp:66
 msgid "Export the input file into into a CSV output file"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:70
+#: Sources/csuper-cli/command_line_option.cpp:71
 msgid "Export the input file into into a m (Octave/Matlab) output file"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:75
+#: Sources/csuper-cli/command_line_option.cpp:76
 msgid "Export the input file into into Gnuplot output files"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:90
+#: Sources/csuper-cli/command_line_option.cpp:81
+msgid "Export the input file into into a PNG output file"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:86
+msgid "Export the input file into into a SVG output file"
+msgstr ""
+
+#: Sources/csuper-cli/command_line_option.cpp:103
 msgid "The input filename"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:91
-#: Sources/csuper-cli/command_line_option.cpp:97
+#: Sources/csuper-cli/command_line_option.cpp:104
+#: Sources/csuper-cli/command_line_option.cpp:110
 msgid "filename"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:96
+#: Sources/csuper-cli/command_line_option.cpp:109
 msgid "The output filename"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:105
+#: Sources/csuper-cli/command_line_option.cpp:118
 msgid ""
 "If an instruction is set, a input filename is needed.\n"
 "If a \"to\" instruction is set, an output filename is needed.\n"
 "You can use only one instruction at once."
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:123
-#: Sources/csuper-cli/command_line_option.cpp:184
+#: Sources/csuper-cli/command_line_option.cpp:136
+#: Sources/csuper-cli/command_line_option.cpp:205
 msgid "Use -h or --help for help."
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:130
+#: Sources/csuper-cli/command_line_option.cpp:143
 msgid "You need an instruction.\n"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:141
+#: Sources/csuper-cli/command_line_option.cpp:158
 msgid "You have to use only one instruction.\n"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:146
+#: Sources/csuper-cli/command_line_option.cpp:163
 msgid "You need an input file to open or read a file.\n"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:156
+#: Sources/csuper-cli/command_line_option.cpp:173
 msgid "You don't need an output file to open or read a file.\n"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:161
+#: Sources/csuper-cli/command_line_option.cpp:178
 msgid "You need an input file to export a file.\n"
 msgstr ""
 
-#: Sources/csuper-cli/command_line_option.cpp:163
+#: Sources/csuper-cli/command_line_option.cpp:180
 msgid "You need an output file to export a file.\n"
 msgstr ""
 
-#: Sources/csuper-cli/main.cpp:96 Sources/csuper-cli/main.cpp:112
-#: Sources/csuper-cli/main.cpp:127 Sources/csuper-cli/main.cpp:142
+#: Sources/csuper-cli/main.cpp:49
+msgid ""
+"Please report the bug to my git repository (https://git.framasoft.org/"
+"Dalan94/Csuper)."
+msgstr ""
+
+#: Sources/csuper-cli/main.cpp:74
+msgid "Csuper-cli"
+msgstr ""
+
+#: Sources/csuper-cli/main.cpp:88 Sources/csuper-cli/main.cpp:94
+msgid "Error when initializing csuper"
+msgstr ""
+
+#: Sources/csuper-cli/main.cpp:130 Sources/csuper-cli/main.cpp:152
+#: Sources/csuper-cli/main.cpp:174 Sources/csuper-cli/main.cpp:195
+#: Sources/csuper-cli/main.cpp:215 Sources/csuper-cli/main.cpp:235
 msgid "The file %1 was well exported to %2"
 msgstr ""

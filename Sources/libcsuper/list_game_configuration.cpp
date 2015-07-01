@@ -56,9 +56,10 @@ namespace csuper
         {
             parser.parse_file(filename);
         }
-        catch (internal_error &e)
+        catch (xmlpp::exception &e)
         {
-            throw xmlError(ustring::compose(_("Cannot open the file %1"),filename));
+        	cerr << e.what() << endl;
+            throw XmlError(ustring::compose(_("Cannot open the file %1"),filename));
         }
 
         Node *node = parser.get_document()->get_root_node();
@@ -67,7 +68,7 @@ namespace csuper
         // Version
         double file_version = ustringToDouble(static_cast<Element*>(node)->get_child_text()->get_content());
         if (file_version > version_)
-            throw xmlError(ustring::compose(_("This version of Csuper only support game configuration file version less than or equal to %1"),version_));
+            throw XmlError(ustring::compose(_("This version of Csuper only support game configuration file version less than or equal to %1"),version_));
 
         // Number of game configurations
         nextXmlElement(node);
@@ -104,14 +105,14 @@ namespace csuper
     const GameConfiguration &ListGameConfiguration::operator[](int i) const
     {
         if (i >= size())
-            throw length_error(ustring::compose(_("Cannot access to the %1th element, there is only %2 elements"),i+1,size()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th element, there is only %2 elements"),i+1,size()));
         return *game_configuration_list_[i];
     }
 
     GameConfiguration &ListGameConfiguration::operator[](int i)
     {
         if (i >= size())
-            throw length_error(ustring::compose(_("Cannot access to the %1th element, there is only %2 elements"),i+1,size()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th element, there is only %2 elements"),i+1,size()));
         return *game_configuration_list_[i];
     }
 
@@ -146,7 +147,7 @@ namespace csuper
         for (it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
         {
             if (*game_config == **it)
-                throw alreadyExist(game_config->name());
+                throw AlreadyExist(game_config->name());
         }
         game_configuration_list_.push_back(game_config);
     }
@@ -161,7 +162,7 @@ namespace csuper
             {
                 add(tmp_game_config);
             }
-            catch(alreadyExist& e)
+            catch(AlreadyExist& e)
             {
                 cerr << e.what() << endl;
                 delete tmp_game_config;
@@ -195,7 +196,7 @@ namespace csuper
                 {
                     add(tmp_game_config);
                 }
-                catch(alreadyExist& e)
+                catch(AlreadyExist& e)
                 {
                     cerr << e.what() << endl;
                     delete tmp_game_config;
@@ -210,7 +211,7 @@ namespace csuper
     void ListGameConfiguration::remove(const int i)
     {
         if (i >= size())
-            throw length_error(ustring::compose(_("Cannot remove the %1th element, there is only %2 elements"),i+1,size()));
+            throw OutOfRange(ustring::compose(_("Cannot remove the %1th element, there is only %2 elements"),i+1,size()));
 
         delete game_configuration_list_[i];
         game_configuration_list_.erase(game_configuration_list_.begin()+i);
@@ -228,7 +229,7 @@ namespace csuper
                 return;
             }
         }
-        throw notFound(game_config.name());
+        throw NotFound(ustring::compose(_("The game configuration %1 was not found in the list of game configuration"),game_config.name()));
     }
 
     ustring ListGameConfiguration::toUstring() const
@@ -266,7 +267,15 @@ namespace csuper
         for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
             (*it)->createXmlNode(root);
 
-        doc.write_to_file_formatted(filename,"UTF-8");
+        try
+        {
+            doc.write_to_file_formatted(filename,"UTF-8");
+        }
+        catch (xmlpp::exception& e)
+        {
+            cerr << e.what() << endl;
+            throw FileError(ustring::compose(_("Error while writing the list of game configuration file %1"),filename));
+        }
     }
 
     void ListGameConfiguration::writeToFile(const ustring filename, const std::vector<int>& indexes) const
@@ -299,16 +308,24 @@ namespace csuper
             i++;
         }
 
-        doc.write_to_file_formatted(filename,"UTF-8");
+        try
+        {
+            doc.write_to_file_formatted(filename,"UTF-8");
+        }
+        catch (xmlpp::exception& e)
+        {
+            cerr << e.what() << endl;
+            throw FileError(ustring::compose(_("Error while writing the list of game configuration file %1"),filename));
+        }
     }
 
     void ListGameConfiguration::writeToFile() const
     {
-        string filename;
+        ustring filename;
         if (Portable::getPortable())
             filename = build_filename(CSUPER_DIRECTORY_NAME,CSUPER_GAME_CONFIGURATIONS_FILENAME);
         else
-            filename = build_filename(get_home_dir(),CSUPER_DIRECTORY_NAME,CSUPER_GAME_CONFIGURATIONS_FILENAME);
+            filename = build_filename(locale_to_utf8(get_home_dir()),CSUPER_DIRECTORY_NAME,CSUPER_GAME_CONFIGURATIONS_FILENAME);
 
         writeToFile(filename);
     }

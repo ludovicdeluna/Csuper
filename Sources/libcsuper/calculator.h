@@ -50,12 +50,9 @@ namespace csuper
         /*!
          *  \brief Calculate the expression
          *  \return the result of the expression
-         *  \exception mu::Parser::exception_type if bad expression
+         *  \exception csuper::CalculatorError if bad expression
          */
-        inline double calculate() const
-        {
-            return parser_.Eval();
-        }
+        double calculate() const;
 
         //
         // Operator
@@ -75,7 +72,7 @@ namespace csuper
          *  \brief Calculate an expression
          *  \param s the expression
          *  \return the result of the expression
-         *  \exception mu::Parser::exception_type if bad expression
+         *  \exception csuper::CalculatorError if bad expression
          */
         static double calculate(const std::string& s);
     };

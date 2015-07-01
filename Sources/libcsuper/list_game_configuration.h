@@ -63,7 +63,7 @@ namespace csuper
 
         /*!
          *  \brief Constructor from a filename
-         *  \exception csuper::xmlError if bad file
+         *  \exception csuper::XmlError if bad file
          */
         ListGameConfiguration(const Glib::ustring& filename);
 
@@ -86,7 +86,7 @@ namespace csuper
          *  \brief Access to the reference of the game configuration at position i
          *  \param i the index of the game configuration
          *  \return the game configuration
-         *  \exception std::length_error if i is greater the the number of game configuration
+         *  \exception csuper::OutOfRange if i is greater the the number of game configuration
          */
         const GameConfiguration &operator[](const int i) const;
 
@@ -94,7 +94,7 @@ namespace csuper
          *  \brief Access to the reference of the game configuration at position i
          *  \param i the index of the game configuration
          *  \return the game configuration
-         *  \exception std::length_error if i is greater the the number of game configuration
+         *  \exception csuper::OutOfRange if i is greater the the number of game configuration
          */
         GameConfiguration &operator[](const int i);
 
@@ -107,7 +107,7 @@ namespace csuper
         /*!
          *  \brief Add a game configuration to the object
          *  \param game_config the game configuration
-         *  \exception csuper::alreadyExist if the game configuration already exist in the object
+         *  \exception csuper::AlreadyExist if the game configuration already exist in the object
          */
         void add(GameConfiguration* game_config);
 
@@ -127,14 +127,14 @@ namespace csuper
         /*!
          *  \brief remove a game configuration from the object
          *  \param i the index of the game configuration
-         *  \exception std::length_error if i is greater the the number of game configuration
+         *  \exception csuper::OutOfRange if i is greater the the number of game configuration
          */
         void remove(const int i);
 
         /*!
          *  \brief remove a game configuration from the object and delete it
          *  \param game_config the game configuration which will be deleted if found
-         *  \exception csuper::notFound if the game configuration is not in the list
+         *  \exception csuper::NotFound if the game configuration is not in the list
          */
         void remove(const GameConfiguration& game_config);
 
@@ -167,7 +167,7 @@ namespace csuper
         /*!
          *  \brief Write the list of game configuration to a file
          *  \param filename the filename
-         *  \exception xmlpp::internal_error if bad filename
+         *  \exception csuper::FileError if bad filename
          */
         void writeToFile(const Glib::ustring filename) const;
 
@@ -175,7 +175,7 @@ namespace csuper
          *  \brief Write the list of game configuration to a file with specific indexes
          *  \param filename the filename
          *  \param indexes of the games configuration that will be write to the file
-         *  \exception xmlpp::internal_error if bad filename
+         *  \exception csuper::FileError if bad filename
          */
         void writeToFile(const Glib::ustring filename, const std::vector<int>& indexes) const;
 

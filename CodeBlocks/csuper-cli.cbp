@@ -65,9 +65,8 @@
 			<Add directory="../" />
 		</ResourceCompiler>
 		<Linker>
-			<Add option="`pkg-config --libs glibmm-2.4`" />
+			<Add option="`pkg-config --libs glibmm-2.4 cairo`" />
 			<Add library="libcsuper" />
-			<Add library="muparser" />
 			<Add directory="../" />
 		</Linker>
 		<Unit filename="../Sources/csuper-cli/command_line_option.cpp" />

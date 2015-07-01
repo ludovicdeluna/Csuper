@@ -63,8 +63,8 @@ namespace csuper{
 
             Portable::setPortable(portable);
 
-            string folder;
-            string home = get_home_dir();
+            ustring folder;
+            ustring home = locale_to_utf8(get_home_dir());
 
             if (portable)
                 folder = CSUPER_DIRECTORY_NAME;
@@ -83,31 +83,16 @@ namespace csuper{
             {
                 Preferences pref;
                 pref.writeToFile();
+                cerr << _("Creation of the preferences file.") << endl;
             }
-                ; // To be completed
 
             if (!file_test(game_config,FILE_TEST_EXISTS))
             {
                 ListGameConfiguration list_config;
                 list_config.writeToFile(game_config);
+                cerr << _("Creation of the game configuration file.") << endl;
             }
         }
-    }
-
-    void clearScreen()
-    {
-        int successful;
-
-        // Lancement de la fonction d'effacage de l'ecran
-        #ifdef __unix__
-        successful=system("clear");
-        #elif _WIN32
-        successful=system("cls");
-        #endif
-
-        //Verifie si l'ecran s'est bien efface
-        if (successful != 0)
-            cout << _("Error while clearing the screen.") << endl;
     }
 
     ustring boolToYesNo(bool b)
@@ -225,7 +210,7 @@ namespace csuper{
             if (node != nullptr)
                 node = node->get_next_sibling();
             else
-                throw xmlError("No next element");
+                throw XmlError("No next element");
         }
         return static_cast<Element*>(node) ;
     }
@@ -242,7 +227,7 @@ namespace csuper{
             if (node != nullptr)
                 node = node->get_next_sibling();
             else
-                throw xmlError("No child element");
+                throw XmlError("No child element");
         }
         return static_cast<Element*>(node) ;
     }

@@ -67,7 +67,7 @@ namespace csuper
         /*!
          *  \brief Constructor with a xmlpp node
          *  \param xml_node the xml node
-         *  \exception csuper::xmlError if bad xmlpp node
+         *  \exception csuper::XmlError if bad xmlpp node
          */
         GameConfiguration(xmlpp::Node* xml_node);
 

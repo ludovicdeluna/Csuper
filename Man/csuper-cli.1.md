@@ -29,16 +29,22 @@ The software can only use csu file.
 :   Read directly a file in csuper-cli.
 
 -p *input-file* *output-file*, \--to-pdf *input-file* *output-file*
-:   Convert the *input-file* into the pdf file named *output-file*.
+:   Convert the *input-file* into the PDF file named *output-file*.
 
 -c *input-file* *output-file*, \--to-csv *input-file* *output-file*
-:   Convert the *input-file* into the csv file named *output-file*.
+:   Convert the *input-file* into the CSV file named *output-file*.
 
 -g *input-file* *output-file*, \--to-gnuplot *input-file* *output-file*
 :   Convert the *input-file* into the gnuplot files named *output-file*.plt and *output-file*.dat.
 
 -m *input-file* *output-file*, \--to-matlab *input-file* *output-file*
 :   Convert the *input-file* into the m file (octave/matlab file) named *output-file*.
+
+-n *input-file* *output-file*, \--to-png *input-file* *output-file*
+:   Convert the *input-file* into the PNG file named *output-file*.
+
+-s *input-file* *output-file*, \--to-svg *input-file* *output-file*
+:   Convert the *input-file* into the SVG file named *output-file*.
 
 -h, \--help
 :   Display the help of csuper-cli

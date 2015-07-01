@@ -35,10 +35,13 @@
 #include "exceptions.h"
 #include <algorithm>
 #include <iomanip>
-#include <glib/gstdio.h>
 #include <fstream>
+#include <iostream>
+#include <unistd.h>
 #include "config.h"
 #include "pdf_exportation.h"
+#include "slope/slope.h"
+
 
 
 namespace csuper
@@ -86,9 +89,10 @@ namespace csuper
         {
             parser.parse_file(filename);
         }
-        catch (internal_error &e)
+        catch (xmlpp::exception &e)
         {
-            throw xmlError(ustring::compose(_("Cannot open the file %1"),filename));
+        	cerr << e.what() << endl;
+            throw XmlError(ustring::compose(_("Cannot open the file %1"),filename));
         }
 
         Node *node = parser.get_document()->get_root_node();
@@ -97,7 +101,7 @@ namespace csuper
         // Version
         double file_version = ustringToDouble(static_cast<Element*>(node)->get_child_text()->get_content());
         if (file_version > version_)
-            throw xmlError(ustring::compose(_("This version of Csuper only support game configuration file version of %1"),version_));
+            throw XmlError(ustring::compose(_("This version of Csuper only support game configuration file version of %1"),version_));
 
         // Size max of a name
         nextXmlElement(node);
@@ -195,10 +199,10 @@ namespace csuper
             return player(player_index).ranking();
 
         if (!(config().turnBased()))
-            throw wrongUse(_("The ranking function should only be used in a turn based game when a specific turn is specify"));
+            throw WrongUse(_("The ranking function should only be used in a turn based game when a specific turn is specify"));
 
         if (!(player(player_index).hasTurn(turn)))
-            throw length_error(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(player_index).nbTurn()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(player_index).nbTurn()));
 
         vector<double> sort_points;
         vector<Player*>::const_iterator it_player;
@@ -225,7 +229,7 @@ namespace csuper
     Player &Game::player(const unsigned int index)
     {
         if (index >= nbPlayer())
-            throw std::length_error(Glib::ustring::compose(_("Cannot access to the %1th player, there is only %2 player"),index+1,nbPlayer()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th player, there is only %2 player"),index+1,nbPlayer()));
         return *players_[index];
     }
 
@@ -233,7 +237,7 @@ namespace csuper
     const Player &Game::player(const unsigned int index) const
     {
         if (index >= nbPlayer())
-            throw std::length_error(Glib::ustring::compose(_("Cannot access to the %1th player, there is only %2 player"),index+1,nbPlayer()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th player, there is only %2 player"),index+1,nbPlayer()));
         return *players_[index];
     }
 
@@ -441,7 +445,7 @@ namespace csuper
             if (*players_[i] == player_name)
                 return i;
         }
-        throw notFound(ustring::compose(_("Player %1 is not found in the game"),player_name));
+        throw NotFound(ustring::compose(_("Player %1 is not found in the game"),player_name));
     }
 
     unsigned int Game::getPlayerIndex(const Player& player) const
@@ -451,7 +455,7 @@ namespace csuper
             if (*players_[i] == player)
                 return i;
         }
-        throw notFound(ustring::compose(_("Player %1 is not found in the game"),player.name()));
+        throw NotFound(ustring::compose(_("Player %1 is not found in the game"),player.name()));
     }
 
     void Game::rankingCalculation()
@@ -504,7 +508,7 @@ namespace csuper
     bool Game::newTurn(const unsigned int player_index, const double points)
     {
         if (config().turnBased())
-            throw wrongUse(_("This new turn function should only be used in a non turn based game"));
+            throw WrongUse(_("This new turn function should only be used in a non turn based game"));
 
         player(player_index).addPoints(points);
 
@@ -517,10 +521,10 @@ namespace csuper
     bool Game::newTurn(const vector<double>& points)
     {
         if (!(config().turnBased()))
-            throw wrongUse(_("The new turn function should only be used in a turn based game when a vector of points is given"));
+            throw WrongUse(_("The new turn function should only be used in a turn based game when a vector of points is given"));
 
         if (points.size() != nbPlayer())
-            throw length_error(ustring::compose(_("There is %1 points and %2 player in the game"),intToUstring(points.size()),nbPlayer()));
+            throw OutOfRange(ustring::compose(_("There is %1 points and %2 player in the game"),intToUstring(points.size()),nbPlayer()));
 
         vector<double>::const_iterator it_points = points.cbegin();
         vector<Player*>::iterator it_player = players_.begin();
@@ -552,10 +556,10 @@ namespace csuper
     unsigned int Game::lastRanking(const unsigned int turn) const
     {
         if (!(config().turnBased()))
-            throw wrongUse(_("The last ranking function should only be used in a turn based game when a specific turn is specified"));
+            throw WrongUse(_("The last ranking function should only be used in a turn based game when a specific turn is specified"));
 
         if (!(player(0).hasTurn(turn)))
-            throw length_error(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(0).nbTurn()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(0).nbTurn()));
 
 
         vector<double> sort_points;
@@ -593,10 +597,10 @@ namespace csuper
     bool Game::deleteTurn(const unsigned int turn)
     {
         if (!(config().turnBased()))
-            throw wrongUse(_("The delete turn function should only be used in a turn based game when a player is specified"));
+            throw WrongUse(_("The delete turn function should only be used in a turn based game when a player is specified"));
 
         if (!(player(0).hasTurn(turn)))
-            throw length_error(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(0).nbTurn()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(0).nbTurn()));
 
         vector<Player*>::iterator it;
         for (it=players_.begin() ; it != players_.end() ; it++)
@@ -612,10 +616,10 @@ namespace csuper
     bool Game::deleteTurn(const unsigned int turn, const unsigned int player_index)
     {
         if (config().turnBased())
-            throw wrongUse(_("The delete turn function should only be used in a non turn based game when a player is specified"));
+            throw WrongUse(_("The delete turn function should only be used in a non turn based game when a player is specified"));
 
         if (!(player(player_index).hasTurn(turn)))
-            throw length_error(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(player_index).nbTurn()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(player_index).nbTurn()));
 
         player(player_index).deleteTurn(turn);
 
@@ -627,7 +631,7 @@ namespace csuper
     bool Game::editTurn(const unsigned int turn, const std::vector<double>& points)
     {
         if (points.size() != nbPlayer())
-            throw length_error(ustring::compose(_("There is %1 points and %2 player in the game"),intToUstring(points.size()),nbPlayer()));
+            throw OutOfRange(ustring::compose(_("There is %1 points and %2 player in the game"),intToUstring(points.size()),nbPlayer()));
 
         vector<double>::const_iterator it_points = points.cbegin();
         vector<Player*>::iterator it_player = players_.begin();
@@ -724,24 +728,34 @@ namespace csuper
         for (it = players_.cbegin() ; it != players_.cend() ; it++)
             (*it)->createXmlNode(root,config());
 
-
-        doc.write_to_file_formatted(filename,"UTF-8");
+        try
+        {
+            doc.write_to_file_formatted(filename,"UTF-8");
+        }
+        catch (xmlpp::exception& e)
+        {
+            cerr << e.what() << endl;
+            throw FileError(ustring::compose(_("Error while writing the CSU file %1"),filename));
+        }
     }
 
     void Game::reWriteToFile(const Glib::ustring& filename) const
     {
         ustring tmp_filename = filename + ".tmp";
-        writeToFile(tmp_filename);
+        string locale_filename = locale_from_utf8(filename);
+        string tmp_locale_filename = locale_from_utf8(tmp_filename);
 
-        if (g_remove(filename.c_str()) == -1)
-            perror(filename.c_str());
+        writeToFile(tmp_locale_filename);
 
-        if (g_rename(tmp_filename.c_str(),filename.c_str()) == -1)
+        if (remove(locale_filename.c_str()) == -1)
+            perror(locale_filename.c_str());
+
+        if (rename(tmp_locale_filename.c_str(),locale_filename.c_str()) == -1)
         {
-            if (g_remove(tmp_filename.c_str()) == -1)
+            if (remove(tmp_locale_filename.c_str()) == -1)
                 perror("");
 
-            throw fileError(_("Error while rewriting the file ") + filename);
+            throw FileError(_("Error while rewriting the file ") + locale_filename);
         }
     }
 
@@ -752,7 +766,7 @@ namespace csuper
     unsigned int Game::nbTurnBestWorst(const unsigned int player_index, const bool best) const
     {
         if (!(config().turnBased()))
-            throw wrongUse(_("The nbTurnBestWorst function should only be used in a turn based game"));
+            throw WrongUse(_("The nbTurnBestWorst function should only be used in a turn based game"));
 
         unsigned int nb=0;
         double points;
@@ -783,7 +797,7 @@ namespace csuper
     unsigned int Game::nbTurnFirstLast(const unsigned int player_index, const bool first) const
     {
         if (!(config().turnBased()))
-            throw wrongUse(_("The nbTurnFirstLast function should only be used in a turn based game"));
+            throw WrongUse(_("The nbTurnFirstLast function should only be used in a turn based game"));
 
         unsigned int nb=0,i;
 
@@ -817,7 +831,7 @@ namespace csuper
         }
         catch (ios_base::failure& e)
         {
-            throw fileError(_("Error while exporting the game into a csv file, bad filename: ") + filename);
+            throw FileError(_("Error while exporting the game into a csv file, bad filename: ") + filename);
         }
 
         vector<Player*>::const_iterator it;
@@ -930,7 +944,7 @@ namespace csuper
         }
         catch (ios_base::failure& e)
         {
-            throw fileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
+            throw FileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
         }
 
         vector<Player*>::const_iterator it;
@@ -1039,7 +1053,7 @@ namespace csuper
         }
         catch (ios_base::failure& e)
         {
-            throw fileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
+            throw FileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
         }
 
         vector<Player*>::const_iterator it;
@@ -1075,7 +1089,7 @@ namespace csuper
         }
         catch (ios_base::failure& e)
         {
-            throw fileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
+            throw FileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
         }
 
         file << "set datafile missing '-'" << endl
@@ -1098,9 +1112,156 @@ namespace csuper
         exportToGnuplotScript(filename);
     }
 
-    void Game::exportToPdf(const ExportPdfPreferences& pref, const Glib::ustring& filename) const
+    void Game::exportToPdf(const Glib::ustring& filename, const ExportPdfPreferences& pref) const
     {
-        PdfExportation::exportToPdf(this,pref,filename);
+        // Save the temporary file
+        try
+        {
+            PdfExportation::exportToPdf(this,pref,filename);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
+
+            throw PdfError(ustring::compose(_("The file %1 cannot be created"),filename));
+        }
+    }
+
+    void Game::exportToChart(const Glib::ustring& filename, const ChartExportationPreferences& chart_pref, const ExportPdfPreferences pdf_pref, const ChartExportationType type)  const
+    {
+        ustring title = path_get_basename(filename);
+        removeFileExtension(title);
+        if (chart_pref.totalPoints())
+            title = _("Total points on ") + title;
+        else
+            title = _("Points on ") + title;
+
+        char fmt[3] = "b-";
+        unsigned int i,j;
+
+        slope_figure_t* slope_chart = slope_chart_create(title.c_str(), _("Turn"), _("Points"));
+
+        double* slope_turn = new double[maxNbTurn()];
+        double** slope_points = new double*[nbPlayer()];
+
+        for (i=0 ; i<maxNbTurn() ; i++)
+            slope_turn[i]=i;
+
+        // Create the slope chart
+        vector<Player*>::const_iterator it;
+        for (i=0, it = players_.cbegin(); it != players_.cend() ; it++, i++)
+        {
+            if (!(chart_pref.totalPoints()))
+            {
+                slope_points[i] = (*it)->points_.data();
+            }
+            else
+            {
+                slope_points[i] = new double[(*it)->nbTurn()+1];
+                for (j=0 ; j != nbTurn(i); j++)
+                    slope_points[i][j] = (*it)->totalPoints(j);
+            }
+            slope_chart_add_plot(slope_chart,
+                                 slope_turn,
+                                 slope_points[i],
+                                 (*it)->nbTurn(),
+                                 (*it)->name().c_str(),
+                                 fmt);
+            // Change the color
+            switch(fmt[0])
+            {
+            case 'b':
+                fmt[0] = 'r';
+                break;
+            case 'r':
+                fmt[0] = 'o';
+                break;
+            case 'o':
+                fmt[0] = 'l';
+                break;
+            case 'l':
+                fmt[0] = 'm';
+                break;
+            case 'm':
+                fmt[0] = 'p';
+                break;
+            case 'p':
+                fmt[0] = 'y';
+                break;
+            case 'y':
+                fmt[0] = 'e';
+                break;
+            case 'e':
+                fmt[0] = 'g';
+                break;
+            case 'g':
+                fmt[0] = 'a';
+                break;
+            case 'a':
+                fmt[0] = 't';
+                break;
+            case 't':
+                fmt[0] = 'b';
+                break;
+            }
+        }
+
+
+        // Save the chart
+        int res = SLOPE_SUCCESS;
+        int width;
+        int height;
+        string locale_filename = locale_from_utf8(filename);
+        switch (static_cast<int>(type))
+        {
+        case SVG:
+            res = slope_figure_write_to_svg(slope_chart,locale_filename.c_str(),chart_pref.width(),chart_pref.height());
+            break;
+        case PNG:
+            slope_figure_write_to_png(slope_chart,locale_filename.c_str(),chart_pref.width(),chart_pref.height());
+            break;
+        case PDF:
+            switch (static_cast<int>(pdf_pref.size()))
+            {
+            case ExportPdfPreferences::A3:
+                width = 842;
+                height = 1190;
+                break;
+            case ExportPdfPreferences::A4:
+                width = 595;
+                height = 842;
+                break;
+            case ExportPdfPreferences::A5:
+                width = 420;
+                height = 595;
+                break;
+            default:
+                width = 0;
+                height = 0;
+                break;
+            }
+            if (pdf_pref.direction() == ExportPdfPreferences::LANDSCAPE)
+            {
+                int tmp = width;
+                width = height;
+                height = tmp;
+            }
+            res = slope_figure_write_to_pdf(slope_chart,locale_filename.c_str(),width,height);
+            break;
+        }
+
+        // Delete
+        delete[] slope_turn;
+        if (chart_pref.totalPoints())
+        {
+            for (i=0 ; i<nbPlayer(); i++)
+                delete[] slope_points[i];
+        }
+        delete[] slope_points;
+        slope_chart_destroy(slope_chart);
+
+        if (res != SLOPE_SUCCESS)
+            throw PdfError(_("Error while exporting the game into chart file, bad filename"));
     }
 
 }

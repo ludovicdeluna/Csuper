@@ -69,11 +69,11 @@ namespace csuper
             {
                 font_name = HPDF_LoadTTFontFromFile(pdf_,"Fonts/DejaVuSans.ttf", HPDF_TRUE);
             }
-            catch (pdfError& e)
+            catch (PdfError& e)
             {
                 HPDF_Free(pdf_);
-                cout << e.what() << endl;
-                throw pdfError(_("The font doesn't exist"));
+                cerr << e.what() << endl;
+                throw PdfError(_("The font doesn't exist"));
             }
             font_ = HPDF_GetFont(pdf_,font_name.c_str(), "UTF-8");
             #endif // HPDF_MAJOR_VERSION
@@ -132,7 +132,7 @@ namespace csuper
         HPDF_Page_BeginText(first_page);
         textOutTable(first_page,0,height - pref_.margin()*2/3 - line_height_,simple_filename,width,0);
         HPDF_Page_EndText(first_page);
-        HPDF_SetInfoAttr(pdf_,HPDF_INFO_TITLE,simple_filename.c_str());
+        HPDF_SetInfoAttr(pdf_,HPDF_INFO_TITLE,convertCharsetPdf(simple_filename,pref_.charset()).c_str());
 
 
         // Print the header
@@ -605,68 +605,16 @@ namespace csuper
     //
     void PdfExportation::showText(HPDF_Page& page, const Glib::ustring& text)
     {
-        if (pref_.charset() == ExportPdfPreferences::UTF8)
-        {
-            #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
-            try
-            {
-                HPDF_Page_ShowText(page,convert(text,"ISO8859-15","UTF-8").c_str());
-            }
-            catch (ConvertError& e)
-            {
-                cout << e.what() << endl;
-                throw pdfError(_("Conversion from UTF-8 to ISO8859-15 failed"));
-            }
-            #else
-            HPDF_Page_ShowText(page, text.c_str());
-            #endif // HPDF_MAJOR_VERSION
-        }
-        else
-        {
-            try
-            {
-                HPDF_Page_ShowText(page,convert(text,"ISO8859-15","UTF-8").c_str());
-            }
-            catch (ConvertError& e)
-            {
-                cout << e.what() << endl;
-                throw pdfError(_("Conversion from UTF-8 to ISO8859-15 failed"));
-            }
-        }
+        HPDF_Page_ShowText(page,convertCharsetPdf(text,pref_.charset()).c_str());
     }
 
     void PdfExportation::textOutTable(HPDF_Page& page, const float pos_min_x, const float pos_y, const Glib::ustring& text, const float max_width, const int ranking)
     {
         float text_width;
         unsigned int nb_char;
-        ustring text_buffer(text);
+        ustring text_buffer;
 
-        if (pref_.charset() == ExportPdfPreferences::UTF8)
-        {
-            #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
-            try
-            {
-                text_buffer = convert(text,"ISO8859-15","UTF-8");
-            }
-            catch (ConvertError& e)
-            {
-                cout << e.what() << endl;
-                throw pdfError(_("Conversion from UTF-8 to ISO8859-15 failed"));
-            }
-            #endif // HPDF_MAJOR_VERSION
-        }
-        else
-        {
-            try
-            {
-                text_buffer = convert(text,"ISO8859-15","UTF-8");
-            }
-            catch (ConvertError& e)
-            {
-                cout << e.what() << endl;
-                throw pdfError(_("Conversion from UTF-8 to ISO8859-15 failed"));
-            }
-        }
+        text_buffer = convertCharsetPdf(text,pref_.charset());
 
         text_width = HPDF_Page_TextWidth(page, text_buffer.c_str());
         if (text_buffer.validate())
@@ -760,7 +708,7 @@ namespace csuper
     void PdfExportation::errorHandler(HPDF_STATUS error_no, HPDF_STATUS detail_no, void *user_data)
     {
         //printf ("ERROR: error_no=%04X, detail_no=%d\n",(unsigned int) error_no, (int) detail_no);
-        throw pdfError(ustring::compose("error_no=%1, detail_no=%2",ustring::format(hex,(unsigned int) error_no), (int) detail_no)); /* throw exception on error */
+        throw PdfError(ustring::compose("libharu: error_no=%1, detail_no=%2",ustring::format(hex,(unsigned int) error_no), (int) detail_no));
     }
 
     bool PdfExportation::canUseUtf8()
@@ -772,6 +720,40 @@ namespace csuper
         #endif // HPDF_MAJOR_VERSION
     }
 
+
+
+    string PdfExportation::convertCharsetPdf(const Glib::ustring& str, const ExportPdfPreferences::CharacterSet charset)
+    {
+        if (charset == ExportPdfPreferences::UTF8)
+        {
+            #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
+            try
+            {
+                return convert(str,"ISO8859-15","UTF-8");
+            }
+            catch (ConvertError& e)
+            {
+                cerr << e.what() << endl;
+                throw PdfError(_("Conversion from UTF-8 to ISO8859-15 failed"));
+            }
+            #else
+            return str;
+            #endif // HPDF_MAJOR_VERSION
+        }
+        else
+        {
+            try
+            {
+                return convert(str,"ISO8859-15","UTF-8");
+            }
+            catch (ConvertError& e)
+            {
+                cerr << e.what() << endl;
+                throw PdfError(_("Conversion from UTF-8 to ISO8859-15 failed"));
+            }
+        }
+    }
+
     void PdfExportation::exportToPdf(const Game* game, const ExportPdfPreferences& pref, const Glib::ustring& filename)
     {
         PdfExportation* pdf = new PdfExportation(game,pref);
@@ -781,22 +763,22 @@ namespace csuper
             if(pdf->createFirstPage(filename))
                 while(pdf->createOtherPage());
         }
-        catch (pdfError& e)
+        catch (PdfError& e)
         {
             delete pdf;
-            cout << e.what() << endl;
-            throw pdfError(_("The file cannot be created"));
+            cerr << e.what() << endl;
+            throw PdfError(_("The PDF table cannot be created"));
         }
 
         try
         {
             HPDF_SaveToFile(pdf->pdf_,locale_from_utf8(filename).c_str());
         }
-        catch (pdfError& e)
+        catch (PdfError& e)
         {
             delete pdf;
-            cout << e.what() << endl;
-            throw pdfError(_("The file cannot be save"));
+            cerr << e.what() << endl;
+            throw PdfError(_("The PDF table cannot be save"));
         }
         delete pdf;
     }

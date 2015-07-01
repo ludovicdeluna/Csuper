@@ -80,13 +80,9 @@ namespace csuper
 
     /*!
      *  Initialize libcsuper with gettext.
+     *  \exception Glib::exception
      */
     void csuperInitialize(const bool portable);
-
-    /*!
-     *  Clear the terminal.
-     */
-    void clearScreen();
 
     /*!
      *  Remove the file extension from a filename
@@ -190,7 +186,7 @@ namespace csuper
      *  Change the node to the next element
      *  \param node the xmlpp node
      *  \return the node
-     *  \exception csuper::xmlError if no next element
+     *  \exception csuper::XmlError if no next element
      */
     xmlpp::Element *nextXmlElement(xmlpp::Node*& node);
 
@@ -198,7 +194,7 @@ namespace csuper
      *  Change the node to the next child element
      *  \param node the xmlpp node
      *  \return the node
-     *  \exception csuper::xmlError if no child element
+     *  \exception csuper::XmlError if no child element
      */
     xmlpp::Element *firstChildXmlElement(xmlpp::Node*& node);
 
@@ -262,6 +258,7 @@ namespace csuper
     {
        return a>b;
     }
+
 }
 
 #endif

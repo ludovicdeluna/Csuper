@@ -38,13 +38,16 @@
 			<Add option="-std=c++11" />
 			<Add option="-Wall" />
 			<Add option="-fpic" />
-			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 `" />
+			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 cairo `" />
+			<Add directory="../Externals library/Slope" />
 		</Compiler>
 		<Linker>
 			<Add option="-shared" />
-			<Add option="`pkg-config --libs glibmm-2.4 libxml++-2.6 `" />
+			<Add option="-Wl,-Bstatic -lslope -Wl,-Bdynamic" />
+			<Add option="`pkg-config --libs glibmm-2.4 libxml++-2.6 cairo `" />
 			<Add library="hpdf" />
 			<Add library="muparser" />
+			<Add directory=".." />
 		</Linker>
 		<Unit filename="../Sources/libcsuper/calculator.cpp" />
 		<Unit filename="../Sources/libcsuper/calculator.h" />
@@ -64,6 +67,8 @@
 		<Unit filename="../Sources/libcsuper/player.h" />
 		<Unit filename="../Sources/libcsuper/preferences.cpp" />
 		<Unit filename="../Sources/libcsuper/preferences.h" />
+		<Unit filename="../Sources/libcsuper/preferences_chart_exportation.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences_chart_exportation.h" />
 		<Unit filename="../Sources/libcsuper/preferences_difference_between_player.cpp" />
 		<Unit filename="../Sources/libcsuper/preferences_difference_between_player.h" />
 		<Unit filename="../Sources/libcsuper/preferences_directory.cpp" />

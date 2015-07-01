@@ -34,6 +34,7 @@
 
 #include "player.h"
 #include "config.h"
+#include "exceptions.h"
 
 namespace csuper
 {
@@ -213,7 +214,7 @@ namespace csuper
     void Player::setPoints(const unsigned int turn, const double point)
     {
         if (turn > nb_turn_)
-            throw length_error(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,nbTurn()));
+            throw OutOfRange(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,nbTurn()));
 
         double points_diff = points(turn) - point;
         points_[turn] = point;
@@ -224,7 +225,7 @@ namespace csuper
     void Player::deleteTurn(const unsigned int turn)
     {
         if (turn > nb_turn_)
-            throw length_error(ustring::compose(_("Cannot delete the %1th turn, there is only %2 turn"),turn,nbTurn()));
+            throw OutOfRange(ustring::compose(_("Cannot delete the %1th turn, there is only %2 turn"),turn,nbTurn()));
 
         total_points_ -= points(turn);
         points_.erase(points_.begin()+turn);

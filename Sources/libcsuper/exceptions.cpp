@@ -33,41 +33,74 @@
 
 #include "exceptions.h"
 #include "config.h"
+
 using namespace std;
+using namespace Glib;
 
 namespace csuper
 {
-    xmlError::xmlError(const string& what_arg) : runtime_error(_("XML Error: ")+what_arg)
+    Exception::Exception(const ustring msg) : Glib::Exception(), msg_(msg)
+    {
+
+    }
+
+    ustring Exception::what() const
+    {
+        return msg_;
+    }
+
+
+
+    XmlError::XmlError(const ustring& msg) : Exception(_("XML Error: ") + msg)
     {
 
     }
 
 
-    alreadyExist::alreadyExist(const string& what_arg) : runtime_error(_("Already exist: ")+what_arg)
+
+    AlreadyExist::AlreadyExist(const ustring& msg) : Exception(_("Already exist: ") + msg)
     {
 
     }
 
 
-    notFound::notFound(const string& what_arg) : runtime_error(_("Not found: ")+what_arg)
+
+    NotFound::NotFound(const ustring& msg) : Exception(_("Not found: ") + msg)
     {
 
     }
 
 
-    fileError::fileError(const string& what_arg) : runtime_error(_("File error: ")+what_arg)
+
+    FileError::FileError(const ustring& msg) : Exception(_("File error: ") + msg)
     {
 
     }
 
 
-    pdfError::pdfError(const string& what_arg) : runtime_error(_("PDF error: ")+what_arg)
+
+    PdfError::PdfError(const ustring& msg) : Exception(_("PDF error: ") + msg)
     {
 
     }
 
 
-    wrongUse::wrongUse(const string& what_arg) : logic_error(_("Wrong use: ")+what_arg)
+
+    WrongUse::WrongUse(const ustring& msg) : Exception(_("Wrong use: ") + msg)
+    {
+
+    }
+
+
+
+    CalculatorError::CalculatorError(const ustring& msg) : Exception(_("Calculator error: ") + msg)
+    {
+
+    }
+
+
+
+    OutOfRange::OutOfRange(const ustring& msg) : Exception(_("Out of range: ") + msg)
     {
 
     }

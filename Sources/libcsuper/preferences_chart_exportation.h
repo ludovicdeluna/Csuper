@@ -1,12 +1,12 @@
 /*!
- * \file    preferences_main_window_size.h
+ * \file    preferences_chart_exportation.h
  * \author  Remi BERTHO
- * \date    09/06/15
+ * \date    25/06/15
  * \version 4.3.0
  */
 
 /*
-* preferences_main_window_size.h
+* preferences_chart_exportation.h
 *
 * Copyright 2014-2015
  Remi BERTHO <remi.bertho@openmailbox.org>
@@ -31,22 +31,22 @@
 *
 */
 
-#ifndef MAIN_WINDOW_SIZE_H_INCLUDED
-#define MAIN_WINDOW_SIZE_H_INCLUDED
+#ifndef CHART_EXPORTATION_H_INCLUDED
+#define CHART_EXPORTATION_H_INCLUDED
 
 #include "share.h"
 
 namespace csuper
 {
-    /*! \class MainWindowSizePreferences
-    *   \brief This class represent a the preferences for the size of_the main window
+    /*! \class ChartExportationPreferences
+    *   \brief This class indicate the chart exportation preferences
     */
-    class MainWindowSizePreferences
+    class ChartExportationPreferences
     {
     private:
-        unsigned int width_;     /*!< The width of the main window */
-        unsigned int height_;    /*!< The height of the main window */
-        bool is_maximize_;       /*!< Said if the main window is maximize or not */
+        int width_;         /*!< The width of the chart */
+        int height_;        /*!< The height of the chart */
+        bool total_points_; /*!< Total points or points */
 
     public:
         //
@@ -55,22 +55,22 @@ namespace csuper
         /*!
          *  \brief Default constructor
          */
-        MainWindowSizePreferences();
+        ChartExportationPreferences();
 
         /*!
          *  \brief Constructor with all intern component
          *  \param width
          *  \param height
-         *  \param is_maximize
+         *  \param total_points
          */
-        MainWindowSizePreferences(const unsigned int width, const unsigned int height, const bool is_maximize);
+        ChartExportationPreferences(const int width, const int height, const bool total_points);
 
         /*!
          *  \brief Constructor with a xmlpp node
          *  \param xml_node the xml node
          *  \exception csuper::XmlError if bad xmlpp node
          */
-        MainWindowSizePreferences(xmlpp::Node* xml_node);
+        ChartExportationPreferences(xmlpp::Node* xml_node);
 
 
 
@@ -80,12 +80,12 @@ namespace csuper
         //
         /*!
          *  \brief Operator ==
-         *  \param size another MainWindowSizePreferences
+         *  \param pref another ChartExportationPreferences
          */
-        bool operator==(const MainWindowSizePreferences& size) const;
+        bool operator==(const ChartExportationPreferences& pref) const;
 
         /*!
-         *  \brief Convert the main window size to a ustring
+         *  \brief Convert to a ustring
          *  \return the ustring
          */
         Glib::ustring toUstring() const;
@@ -93,13 +93,13 @@ namespace csuper
         /*!
          *  \brief Operator <<
          *  \param os the ostream
-         *  \param size the MainWindowSizePreferences
+         *  \param pref the ChartExportationPreferences
          *  \return the ostream
          */
-        friend std::ostream& operator<<(std::ostream& os, const MainWindowSizePreferences& size);
+        friend std::ostream& operator<<(std::ostream& os, const ChartExportationPreferences& pref);
 
         /*!
-         *  \brief Add the MainWindowSizePreferences into a xmlpp element
+         *  \brief Add the ChartExportationPreferences into a xmlpp element
          *  \param parent_node the parent node
          *  \exception xmlpp::internal_error if bad xmlpp node
          */
@@ -116,7 +116,7 @@ namespace csuper
          *  \brief Set the width
          *  \param the width
          */
-         inline void setWidth(const unsigned int width)
+         inline void setWidth(const int width)
          {
              width_ = width;
          }
@@ -125,18 +125,18 @@ namespace csuper
          *  \brief Set the height
          *  \param the height
          */
-         inline void setHeight(const unsigned int height)
+         inline void setHeight(const int height)
          {
              height_ = height;
          }
 
         /*!
-         *  \brief Set the is_maximize
-         *  \param the is_maximize
+         *  \brief Set the total_points
+         *  \param the total_points
          */
-         inline void setIsMaximize(const bool is_maximize)
+         inline void setTotalPoints(const bool total_points)
          {
-             is_maximize_ = is_maximize;
+             total_points_ = total_points;
          }
 
 
@@ -147,30 +147,30 @@ namespace csuper
         // Getter
         //
         /*!
-         *  \brief return the width
+         *  \brief Return the width
          *  \return the width
          */
-         inline unsigned int width() const
+         inline int width() const
          {
              return width_;
          }
 
         /*!
-         *  \brief return the height
+         *  \brief Return the height
          *  \return the height
          */
-         inline unsigned int height() const
+         inline int height() const
          {
              return height_;
          }
 
         /*!
-         *  \brief return the width
-         *  \return the width
+         *  \brief Return the total_points
+         *  \return the total_points
          */
-         inline bool isMaximize() const
+         inline bool totalPoints() const
          {
-             return is_maximize_;
+             return total_points_;
          }
 
 
@@ -179,7 +179,7 @@ namespace csuper
         // Getter ustring
         //
         /*!
-         *  \brief return the width in a ustring
+         *  \brief Return the width in a ustring
          *  \return the ustring
          */
          inline Glib::ustring widthUstring() const
@@ -188,7 +188,7 @@ namespace csuper
          }
 
         /*!
-         *  \brief return the height in a ustring
+         *  \brief Return the height in a ustring
          *  \return the ustring
          */
          inline Glib::ustring heightUstring() const
@@ -197,15 +197,15 @@ namespace csuper
          }
 
         /*!
-         *  \brief return the width in a ustring
+         *  \brief Return the total_points in a ustring
          *  \return the ustring
          */
-         inline Glib::ustring isMaximizeUstring() const
+         inline Glib::ustring totalPointsUstring() const
          {
-             return boolToUstring(is_maximize_);
+             return boolToUstring(total_points_);
          }
     };
 }
 
 
-#endif // MAIN_WINDOW_SIZE_H_INCLUDED
+#endif // CHART_EXPORTATION_H_INCLUDED

@@ -37,86 +37,166 @@
 #include <exception>
 #include <stdexcept>
 #include <string>
+#include <glibmm.h>
 
 namespace csuper
 {
-    /*! \class xmlError
+    /*! \class Exception
+    *   \brief This class represent a csuper Exception
+    */
+    class Exception : public Glib::Exception
+    {
+    private:
+        Glib::ustring msg_;
+
+    public:
+        /*!
+         *  \brief Constructor with the ustring parameter
+         *  \param msg the message
+         */
+        Exception(const Glib::ustring msg);
+
+        /*!
+         *  \brief Return the message
+         *  \return msg the message
+         */
+        virtual Glib::ustring what() const;
+    };
+
+
+
+
+
+    /*! \class XmlError
     *   \brief This class represent a xml error
     */
-    class xmlError : public std::runtime_error
+    class XmlError : public Exception
     {
     public:
         /*!
          *  \brief Constructor with the string parameter
-         *  \param what_arg the string of the error
+         *  \param msg the string of the error
          */
-        xmlError(const std::string& what_arg);
+        XmlError(const Glib::ustring& msg);
     };
 
 
-    /*! \class alreadyExist
+
+
+
+    /*! \class AlreadyExist
     *   \brief This class represent an already exist error
     */
-    class alreadyExist : public std::runtime_error
+    class AlreadyExist : public Exception
     {
     public:
         /*!
          *  \brief Constructor with the string parameter
-         *  \param what_arg the string of the error
+         *  \param msg the string of the error
          */
-        alreadyExist(const std::string& what_arg);
+        AlreadyExist(const Glib::ustring& msg);
     };
 
-    /*! \class notFound
+
+
+
+
+    /*! \class NotFound
     *   \brief This class represent a not found error
     */
-    class notFound : public std::runtime_error
+    class NotFound : public Exception
     {
     public:
         /*!
          *  \brief Constructor with the string parameter
-         *  \param what_arg the string of the error
+         *  \param msg the string of the error
          */
-        notFound(const std::string& what_arg);
+        NotFound(const Glib::ustring& msg);
     };
 
-    /*! \class fileError
+
+
+
+
+    /*! \class FileError
     *   \brief This class represent a not file error
     */
-    class fileError : public std::runtime_error
+    class FileError : public Exception
     {
     public:
         /*!
          *  \brief Constructor with the string parameter
-         *  \param what_arg the string of the error
+         *  \param msg the string of the error
          */
-        fileError(const std::string& what_arg);
+        FileError(const Glib::ustring& msg);
     };
 
-    /*! \class pdfError
+
+
+
+
+    /*! \class PdfError
     *   \brief This class represent a pdf error
     */
-    class pdfError : public std::runtime_error
+    class PdfError : public Exception
     {
     public:
         /*!
          *  \brief Constructor with the string parameter
-         *  \param what_arg the string of the error
+         *  \param msg the string of the error
          */
-        pdfError(const std::string& what_arg);
+        PdfError(const Glib::ustring& msg);
     };
 
-    /*! \class wrongUse
+
+
+
+
+    /*! \class WrongUse
     *   \brief This class represent a error when a function is called when it would'n be
     */
-    class wrongUse : public std::logic_error
+    class WrongUse : public Exception
     {
     public:
         /*!
          *  \brief Constructor with the string parameter
-         *  \param what_arg the string of the error
+         *  \param msg the string of the error
          */
-        wrongUse(const std::string& what_arg);
+        WrongUse(const Glib::ustring& msg);
+    };
+
+
+
+
+
+    /*! \class WrongUse
+    *   \brief This class represent a error when calculating
+    */
+    class CalculatorError : public Exception
+    {
+    public:
+        /*!
+         *  \brief Constructor with the string parameter
+         *  \param msg the string of the error
+         */
+        CalculatorError(const Glib::ustring& msg);
+    };
+
+
+
+
+
+    /*! \class OutOfRange
+    *   \brief This class represent a error when the is an out of range
+    */
+    class OutOfRange : public Exception
+    {
+    public:
+        /*!
+         *  \brief Constructor with the string parameter
+         *  \param msg the string of the error
+         */
+        OutOfRange(const Glib::ustring& msg);
     };
 }
 

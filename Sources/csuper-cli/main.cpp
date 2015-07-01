@@ -42,6 +42,15 @@ using namespace std;
 using namespace Glib;
 
 /*!
+ *  Print an error message on error terminate
+ */
+void terminateFunction()
+{
+    cerr << _("Please report the bug to my git repository (https://git.framasoft.org/Dalan94/Csuper).") << endl;
+    abort();
+}
+
+/*!
  * \fn int main(int argc, char *argv[])
  *  Begin csuper.
  * \param[in] argc the number of argument.
@@ -60,11 +69,31 @@ int main(int argc, char *argv[])
     bind_textdomain_codeset("csuper-cli","UTF-8");
     textdomain("csuper-cli");
 
-    #ifdef PORTABLE
-    csuperInitialize(true);
-    #else
-    csuperInitialize(false);
-    #endif // PORTABLE
+    set_terminate(terminateFunction);
+    set_prgname("csuper-cli");
+    set_application_name(_("Csuper-cli"));
+
+    // Initialization of csuper
+    try
+    {
+        #ifdef PORTABLE
+        csuperInitialize(true);
+        #else
+        csuperInitialize(false);
+        #endif // PORTABLE
+    }
+    catch (std::exception& e)
+    {
+        cerr << e.what() << endl;
+        cerr << _("Error when initializing csuper") << endl;
+        exit(EXIT_FAILURE);
+    }
+    catch (Glib::Exception& e)
+    {
+        cerr << e.what() << endl;
+        cerr << _("Error when initializing csuper") << endl;
+        exit(EXIT_FAILURE);
+    }
 
     CommandLineOption clo;
     switch (clo.parse(argc,argv))
@@ -78,7 +107,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cout << e.what() << endl;
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -92,14 +126,63 @@ int main(int argc, char *argv[])
         {
             Preferences* pref = Preferences::get();
             Game* game = new Game(clo.input());
-            game->exportToPdf(pref->exportPdf(),clo.output());
+            game->exportToPdf(clo.output(),pref->exportPdf());
             cout << ustring::compose(_("The file %1 was well exported to %2"),clo.input(),clo.output()) << endl;
             delete game;
             delete pref;
         }
         catch (std::exception& e)
         {
-            cout << e.what() << endl;
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        break;
+
+    case CommandLineOption::EXPORT_TO_PNG:
+        try
+        {
+            Preferences* pref = Preferences::get();
+            Game* game = new Game(clo.input());
+            game->exportToPng(clo.output(),pref->chartExportation());
+            cout << ustring::compose(_("The file %1 was well exported to %2"),clo.input(),clo.output()) << endl;
+            delete game;
+            delete pref;
+        }
+        catch (std::exception& e)
+        {
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        break;
+
+    case CommandLineOption::EXPORT_TO_SVG:
+        try
+        {
+            Preferences* pref = Preferences::get();
+            Game* game = new Game(clo.input());
+            game->exportToSvg(clo.output(),pref->chartExportation());
+            cout << ustring::compose(_("The file %1 was well exported to %2"),clo.input(),clo.output()) << endl;
+            delete game;
+            delete pref;
+        }
+        catch (std::exception& e)
+        {
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -114,7 +197,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cout << e.what() << endl;
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -129,7 +217,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cout << e.what() << endl;
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -144,7 +237,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cout << e.what() << endl;
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -153,6 +251,7 @@ int main(int argc, char *argv[])
         cout << "Run" << endl;
         break;
     }
+
 
     return EXIT_SUCCESS;
 }

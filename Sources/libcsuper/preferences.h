@@ -40,6 +40,7 @@
 #include "preferences_main_window_display.h"
 #include "preferences_export_pdf.h"
 #include "preferences_directory.h"
+#include "preferences_chart_exportation.h"
 
 namespace csuper
 {
@@ -49,12 +50,13 @@ namespace csuper
     class Preferences
     {
     private:
-        DifferenceBetweenPlayerPreferences* diff_;
-        DirectoryPreferences* dir_;
-        ExportPdfPreferences* pdf_;
-        MainWindowDisplayPreferences* display_;
-        MainWindowSizePreferences* size_;
-        ScoreDisplayPreferences* score_;
+        DifferenceBetweenPlayerPreferences* diff_;      /*!< The differences between player preferences */
+        DirectoryPreferences* dir_;                     /*!< The directory preferences */
+        ExportPdfPreferences* pdf_;                     /*!< The pdf exportation preferences */
+        MainWindowDisplayPreferences* display_;         /*!< The main window display preferences */
+        MainWindowSizePreferences* size_;               /*!< The main window size preferences */
+        ScoreDisplayPreferences* score_;                /*!< The score display preferences */
+        ChartExportationPreferences* chart_;            /*!< The chart exportation preferences */
         static double version_;                         /*!< The version */
 
 
@@ -64,7 +66,7 @@ namespace csuper
         //
         /*!
          *  \brief Constructor from a filename
-         *  \exception csuper::xmlError if bad file
+         *  \exception csuper::XmlError if bad file
          */
         Preferences(const Glib::ustring& filename);
 
@@ -125,6 +127,7 @@ namespace csuper
 
         /*!
          *  \brief Write to the file
+         *  \exception csuper::FileError
          */
         void writeToFile() const;
 
@@ -241,6 +244,25 @@ namespace csuper
         ScoreDisplayPreferences &scoreDisplay()
         {
             return *score_;
+        }
+
+
+        /*!
+         *  \brief return the ChartExportationPreferences
+         *  \return the ChartExportationPreferences
+         */
+        const ChartExportationPreferences &chartExportation() const
+        {
+            return *chart_;
+        }
+
+        /*!
+         *  \brief return the ChartExportationPreferences
+         *  \return the ChartExportationPreferences
+         */
+        ChartExportationPreferences &chartExportation()
+        {
+            return *chart_;
         }
 
     };

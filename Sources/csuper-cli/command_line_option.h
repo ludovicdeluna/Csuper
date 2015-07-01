@@ -53,6 +53,8 @@ private:
     Glib::OptionEntry csv_entry_;           /*!< The export to csv entry */
     Glib::OptionEntry m_entry_;             /*!< The export to m entry */
     Glib::OptionEntry gnuplot_entry_;       /*!< The export to gnuplot entry */
+    Glib::OptionEntry png_entry_;           /*!< The export to png entry */
+    Glib::OptionEntry svg_entry_;           /*!< The export to svg entry */
 
     Glib::OptionEntry input_entry_;         /*!< The input filename entry */
     Glib::OptionEntry output_entry_;        /*!< The output filename entry */
@@ -62,6 +64,8 @@ private:
     bool pdf_;                              /*!< Check if the pdf option is used */
     bool csv_;                              /*!< Check if the csv option is used */
     bool m_;                                /*!< Check if the m option is used */
+    bool png_;                              /*!< Check if the png option is used */
+    bool svg_;                              /*!< Check if the svg option is used */
     bool gnuplot_;                          /*!< Check if the gnuplot option is used */
     std::string input_;                     /*!< The input filename */
     std::string output_;                    /*!< The output filename */
@@ -81,6 +85,8 @@ public:
         EXPORT_TO_M,
         EXPORT_TO_CSV,
         EXPORT_TO_GNUPLOT,
+        EXPORT_TO_PNG,
+        EXPORT_TO_SVG,
         RUN
     };
 
@@ -102,7 +108,7 @@ public:
      */
     inline Glib::ustring input() const
     {
-        return input_;
+        return Glib::filename_to_utf8(input_);
     }
 
     /*!
@@ -111,7 +117,7 @@ public:
      */
     inline Glib::ustring output() const
     {
-        return output_;
+        return Glib::filename_to_utf8(output_);
     }
 };
 
