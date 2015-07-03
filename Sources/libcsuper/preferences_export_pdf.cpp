@@ -44,20 +44,23 @@ namespace csuper
     // Constructor
     //
     ExportPdfPreferences::ExportPdfPreferences() : font_size_(12), size_(A4), direction_(PORTRAIT),
-        charset_(ISO885915), margin_(40), total_points_(false), ranking_(false)
+        charset_(WINDOWS1252), margin_(40), total_points_(false), ranking_(false), embedded_font_(true),
+        font_name_("Times-Roman")
     {
 
     }
 
     ExportPdfPreferences::ExportPdfPreferences(const unsigned int font_size, const PageSize size, const PageDirection direction,
                                                const CharacterSet charset, const unsigned int margin, const bool total_points,
-                                               const bool ranking) : font_size_(font_size), size_(size), direction_(direction),
-                                               charset_(charset), margin_(margin), total_points_(total_points), ranking_(ranking)
+                                               const bool ranking, const bool embedded_font, const ustring& font_name) :
+                                               font_size_(font_size), size_(size), direction_(direction), charset_(charset),
+                                               margin_(margin), total_points_(total_points), ranking_(ranking),
+                                               embedded_font_(embedded_font), font_name_(font_name)
    {
 
    }
 
-    ExportPdfPreferences::ExportPdfPreferences(Node* xml_node)
+    ExportPdfPreferences::ExportPdfPreferences(Node* xml_node, const double version)
     {
         Node* tmp_node = firstChildXmlElement(xml_node);
         font_size_ = ustringToDouble(static_cast<Element*>(tmp_node)->get_child_text()->get_content());
@@ -80,6 +83,15 @@ namespace csuper
         nextXmlElement(tmp_node);
         ranking_ = ustringToBool(static_cast<Element*>(tmp_node)->get_child_text()->get_content());
 
+        if (version > 1)
+        {
+            nextXmlElement(tmp_node);
+            embedded_font_ = ustringToBool(static_cast<Element*>(tmp_node)->get_child_text()->get_content());
+
+            nextXmlElement(tmp_node);
+            font_name_ = static_cast<Element*>(tmp_node)->get_child_text()->get_content();
+        }
+
     }
 
 
@@ -90,15 +102,17 @@ namespace csuper
     {
         return (fontSize() == pdf.fontSize() && size() == pdf.size() && direction() == pdf.direction()
                 && charset() == pdf.charset() && margin() == pdf.margin()
-                && totalPoints() == pdf.totalPoints() && ranking() == pdf.ranking());
+                && totalPoints() == pdf.totalPoints() && ranking() == pdf.ranking()
+                && embeddedFont() == pdf.embeddedFont() && fontName() == pdf.fontName());
     }
 
     ustring ExportPdfPreferences::toUstring() const
     {
         return ustring::compose(_("Export pdf preferences preferences:\n - Font size: %1\n - Page size: %2\n - Page direction: %3"
-                                  "\n - Character set: %4\n - Margin: %5\n - Total points: %6\n - Ranking: %7"),
+                                  "\n - Character set: %4\n - Margin: %5\n - Total points: %6\n - Ranking: %7"
+                                  "\n - Embedded font: %8\n - Font name: %9"),
                                 fontSizeUstring(),sizeUstring(),directionUstring(),charsetUstring(),marginUstring(),
-                                totalPointsUstring(),rankingUstring());
+                                totalPointsUstring(),rankingUstring(),embeddedFontUstring(),fontNameUstring());
     }
 
     ostream& operator<<(ostream& os, const ExportPdfPreferences& pdf)
@@ -131,5 +145,11 @@ namespace csuper
 
         Element *node_ranking = node->add_child("ranking");
         node_ranking->add_child_text(rankingUstring());
+
+        Element *node_embedded_font = node->add_child("embedded_font");
+        node_embedded_font->add_child_text(embeddedFontUstring());
+
+        Element *node_font_name = node->add_child("font_name");
+        node_font_name->add_child_text(fontNameUstring());
     }
 }

@@ -39,6 +39,8 @@
 #include "game.h"
 #include "preferences_export_pdf.h"
 
+#include <podofo/podofo.h>
+
 namespace csuper
 {
     /*! \class Game
@@ -47,8 +49,9 @@ namespace csuper
     class PdfExportation
     {
     private:
-        HPDF_Doc pdf_;                   /*!< The pdf document */
-        HPDF_Font font_;                 /*!< The font */
+        PoDoFo::PdfMemDocument* pdf_;                   /*!< The pdf document */
+        PoDoFo::PdfFont* font_;                 /*!< The font */
+        PoDoFo::PdfPainter* painter_;
         unsigned int line_;                       /*!< The number of the line to be display */
         int num_page_;                   /*!< The number of the page to be display */
         int line_height_;                /*!< The line height */
@@ -57,6 +60,9 @@ namespace csuper
         bool total_points_ranking_print_;/*!< Indicate if the total points and the ranking is printed */
         bool stat_print_;                /*!< Indicate if the stats are printed */
         const Game* game_;               /*!< The game */
+        double height_;
+        double width_;
+        double table_width_;
 
 
 
@@ -92,14 +98,14 @@ namespace csuper
          *  Create the first page of the pdf
          * \param[in] filename the filename of the pdf file
          * \return true if it need another page, false otherwise
-         * \exception csuper::PdfError
+         * \exception PoDoFo::PdfError
          */
         bool createFirstPage(const Glib::ustring& filename);
 
         /*!
          *  Create the the others page
          * \return true if it need another page, false otherwise
-         * \exception csuper::PdfError
+         * \exception PoDoFo::PdfError
          */
         bool createOtherPage();
 
@@ -111,52 +117,43 @@ namespace csuper
         //
         /*!
          *  Print the names on a pdf page
-         * \param[in] page the page
          * \param[in] pos_y the first position on the y axis
-         * \param[in] table_width the width of a table
-         * \exception csuper::PdfError
+         * \exception PoDoFo::PdfError
          */
-        void printNames(float& pos_y, const float table_width, HPDF_Page& page);
+        void printNames(double& pos_y);
 
         /*!
          *  Print the legend on a pdf page if needed
-         * \param[in] page the page
          * \param[in] pos_y the first position on the y axis
-         * \param[in] table_width the width of a table
-         * \exception csuper::PdfError
+         * \exception PoDoFo::PdfError
          */
-        void printLegend(float& pos_y, const float table_width, HPDF_Page& page);
+        void printLegend(double& pos_y);
 
         /*!
          *  Print the points on a pdf page
-         * \param[in] page the page
          * \param[in] pos_y the first position on the y axis
-         * \param[in] table_width the width of a table
-         * \exception csuper::PdfError
+         * \exception PoDoFo::PdfError
          */
-        void printPoints(float& pos_y, const float table_width, HPDF_Page& page);
+        void printPoints(double& pos_y);
 
         /*!
          *  Print the total points and the ranking
-         * \param[in] page the pdf page
          * \param[in] y the top y coordinate
          */
-        void addTotalPointsRanking(HPDF_Page& page, float& y);
+        void addTotalPointsRanking(double& y);
 
         /*!
          *  Print the statistics
-         * \param[in] page the pdf page
          * \param[in] y the top y coordinate
          */
-        void addStats(HPDF_Page& page, float& y);
+        void addStats(double& y);
 
         /*!
          *  Print the podium
-         * \param[in] page the pdf page
          * \param[in] y the top y coordinate
          * \return true if it need another page, false otherwise
          */
-        bool addPodium(HPDF_Page& page, const float y);
+        bool addPodium(const double y);
 
 
 
@@ -165,16 +162,14 @@ namespace csuper
         // Print function
         //
         /*!
-         *  Print the text in the page
-         * \param[in] page the page
+         *  Print the text
          * \param[in] text the text to print
-         * \exception csuper::PdfError if conversion failed
+         * \exception PoDoFo::PdfError if conversion failed
          */
-        void showText(HPDF_Page& page, const Glib::ustring& text);
+        void showText(const Glib::ustring& text);
 
         /*!
          *  Print the text in the page center with a maximum width
-         * \param[in] page the page
          * \param[in] pos_min_x the minimum position on the x axis
          * \param[in] pos_y the position on the y axis
          * \param[in] text the text to print
@@ -182,19 +177,17 @@ namespace csuper
          * \param[in] ranking the ranking of the player to determine the color of the text, put 0 to print in black
          * \return true if everything is OK, false otherwise
          */
-        void textOutTable(HPDF_Page& page, const float pos_min_x, const float pos_y, const Glib::ustring& text,
-                             const float max_width, const int ranking=0);
+        void textOutTable(const double pos_min_x, const double pos_y, const Glib::ustring& text,
+                             const double max_width, const int ranking=0);
 
         /*!
          *  Calculate the table width
-         * \param[in] page the page
          * \return the table width
          */
-        float tableWidthCalculate(HPDF_Page& page);
+        void tableWidthCalculate();
 
         /*!
          *  Print a grid to a pdf page
-         * \param[in] page the pdf page
          * \param[in] top_x the x coordinate of the top left corn
          * \param[in] top_y the y coordinate of the top left corn
          * \param[in] bottom_x the x coordinate of the bottom right corn
@@ -202,30 +195,30 @@ namespace csuper
          * \param[in] length_row the length of the row
          * \param[in] length_column the length of the column
          */
-        void createGrid(HPDF_Page& page,const float top_x, const float top_y, const float bottom_x, const float bottom_y,
-                           const float length_row, const float length_column);
+        void createGrid(const double top_x, const double top_y, const double bottom_x, const double bottom_y,
+                           const double length_row, const double length_column);
+
+
+
+        //
+        // Fusion function
+        //
+
+        /*!
+         *  Delete the temporary files
+         * \param[in] filename the filenames
+         */
+        static void deleteTemporaryFiles(std::string& filename);
 
 
 
         //
         // Static function
         //
-        /*!
-         *  Throw an exception when an error occured on libhpdf
-         * \param[in] error_no the error number
-         * \param[in] detail_no the detail number
-         * \param[in] user_data user data
-         */
-        static void errorHandler(HPDF_STATUS error_no, HPDF_STATUS detail_no, void *user_data);
-
-        /*!
-         * \fn bool canUseUtf8Pdf(void)
-         *  Say if you can use UTF-8 in a pdf file or not
-         * \return true if you can use UF-8, false otherwise
-         */
-        static bool canUseUtf8();
-
         static std::string convertCharsetPdf(const Glib::ustring& str, const ExportPdfPreferences::CharacterSet charset);
+
+
+        static PoDoFo::PdfString ustringToPdfstring(const Glib::ustring& str);
 
 
     public:

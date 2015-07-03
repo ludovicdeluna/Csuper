@@ -83,14 +83,14 @@ namespace csuper{
             {
                 Preferences pref;
                 pref.writeToFile();
-                cerr << _("Creation of the preferences file.") << endl;
+                cerr << ustring(_("Creation of the preferences file.")) << endl;
             }
 
             if (!file_test(game_config,FILE_TEST_EXISTS))
             {
                 ListGameConfiguration list_config;
                 list_config.writeToFile(game_config);
-                cerr << _("Creation of the game configuration file.") << endl;
+                cerr << ustring(_("Creation of the game configuration file.")) << endl;
             }
         }
     }

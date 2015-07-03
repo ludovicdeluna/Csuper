@@ -114,7 +114,7 @@ namespace csuper
 
         // export_pdf
         nextXmlElement(node);
-        pdf_ = new ExportPdfPreferences(node);
+        pdf_ = new ExportPdfPreferences(node,file_version);
 
         // chart
         nextXmlElement(node);

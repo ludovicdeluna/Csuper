@@ -41,6 +41,7 @@
 
 using namespace Glib;
 using namespace std;
+using namespace PoDoFo;
 
 namespace csuper
 {
@@ -52,44 +53,28 @@ namespace csuper
         table_line_height_(1.8*pref.fontSize()), pref_(pref),
         total_points_ranking_print_(false), stat_print_(false), game_(game)
     {
-        pdf_ = HPDF_New(errorHandler,NULL);
+        pdf_ = new PdfMemDocument();
+        painter_ = new PdfPainter();
 
         if (!(game->config().turnBased()))
             pref_.setRanking(false);
 
-        // Initialize the font
-        if (pref_.charset() == ExportPdfPreferences::UTF8)
-        {
-            #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
-            font_ = HPDF_GetFont(pdf_,"Times-Roman", "ISO8859-15");
-            #else
-            HPDF_UseUTFEncodings(pdf_);
-            ustring font_name;
-            try
-            {
-                font_name = HPDF_LoadTTFontFromFile(pdf_,"Fonts/DejaVuSans.ttf", HPDF_TRUE);
-            }
-            catch (PdfError& e)
-            {
-                HPDF_Free(pdf_);
-                cerr << e.what() << endl;
-                throw PdfError(_("The font doesn't exist"));
-            }
-            font_ = HPDF_GetFont(pdf_,font_name.c_str(), "UTF-8");
-            #endif // HPDF_MAJOR_VERSION
-        }
+        const PdfEncoding* encoding;
+        if (pref.charset() == ExportPdfPreferences::UTF8)
+            encoding = PdfEncodingFactory::GlobalIdentityEncodingInstance();
         else
-            font_ = HPDF_GetFont(pdf_,"Times-Roman", "ISO8859-15");
+            encoding = PdfEncodingFactory::GlobalWinAnsiEncodingInstance();
+        font_ = pdf_->CreateFont(pref.fontName().c_str(),false,encoding,PdfFontCache::eFontCreationFlags_AutoSelectBase14 ,pref.embeddedFont());
+        if( !font_ )
+		{
+			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
+		}
 
-        // Set the attribute of the pdf
-        HPDF_SetInfoAttr(pdf_,HPDF_INFO_AUTHOR,get_user_name().c_str());
-        HPDF_SetInfoAttr(pdf_,HPDF_INFO_CREATOR,"Csuper");
-        HPDF_SetCompressionMode(pdf_,HPDF_COMP_ALL);
-        DateTime gdate = DateTime::create_now_local();
-        HPDF_Date date = {gdate.get_year(),gdate.get_month(),gdate.get_day_of_month(),
-            gdate.get_hour(),gdate.get_minute(),gdate.get_second(),'+',0,0};
-        HPDF_SetInfoDateAttr(pdf_,HPDF_INFO_CREATION_DATE,date);
-        HPDF_SetInfoDateAttr(pdf_,HPDF_INFO_MOD_DATE,date);
+        PdfInfo* info = pdf_->GetInfo();
+
+        info->SetAuthor(get_user_name());
+        info->SetCreator("Csuper");
+        info->SetProducer("PoDoFo");
     }
 
 
@@ -98,7 +83,8 @@ namespace csuper
     //
     PdfExportation::~PdfExportation()
     {
-        HPDF_Free(pdf_);
+        delete pdf_;
+        delete painter_;
     }
 
 
@@ -108,91 +94,102 @@ namespace csuper
     //
     bool PdfExportation::createFirstPage(const Glib::ustring& filename)
     {
-        float height;
-        float width;
-        HPDF_Page first_page;
+        PdfPage* first_page;
         ustring simple_filename;
         ustring text_buffer;
-        float table_width;
-        float text_pos_y;
+        double text_pos_y;
         bool create_another_page = true;
 
         // Add a new page object.
-        first_page = HPDF_AddPage(pdf_);
-        HPDF_Page_SetSize(first_page,static_cast<HPDF_PageSizes>(pref_.size()),static_cast<HPDF_PageDirection>(pref_.direction()));
+        EPdfPageSize page_size;
+        switch(pref_.size())
+        {
+        case ExportPdfPreferences::A3:
+            page_size = ePdfPageSize_A3;
+            break;
+        case ExportPdfPreferences::A4:
+            page_size = ePdfPageSize_A4;
+            break;
+        case ExportPdfPreferences::A5:
+            page_size = ePdfPageSize_A5;
+            break;
+        }
+        bool landscape=false;
+        if (pref_.direction() == ExportPdfPreferences::LANDSCAPE)
+            landscape = true;
+        first_page = pdf_->CreatePage(PdfPage::CreateStandardPageSize(page_size,landscape));
+        painter_->SetPage(first_page);
+        painter_->SetFont(font_);
 
-        // Get the heoght and the width
-        height = HPDF_Page_GetHeight(first_page);
-        width = HPDF_Page_GetWidth(first_page);
+        // Get the height and the width
+        height_ = first_page->GetPageSize().GetHeight();
+        width_ = first_page->GetPageSize().GetWidth();
 
         // Print the filename
-        HPDF_Page_SetFontAndSize (first_page,font_, 2*pref_.fontSize());
+        font_->SetFontSize(2*pref_.fontSize());
         simple_filename = path_get_basename(filename);
         removeFileExtension(simple_filename);
-        HPDF_Page_BeginText(first_page);
-        textOutTable(first_page,0,height - pref_.margin()*2/3 - line_height_,simple_filename,width,0);
-        HPDF_Page_EndText(first_page);
-        HPDF_SetInfoAttr(pdf_,HPDF_INFO_TITLE,convertCharsetPdf(simple_filename,pref_.charset()).c_str());
+        textOutTable(0,height_ - pref_.margin()*2/3 - line_height_,simple_filename,width_);
+        pdf_->GetInfo()->SetTitle(ustringToPdfstring(simple_filename));
 
 
         // Print the header
-        HPDF_Page_SetFontAndSize(first_page,font_, pref_.fontSize());
-        HPDF_Page_BeginText(first_page);
-        HPDF_Page_MoveTextPos(first_page, pref_.margin(), height - pref_.margin() - pref_.fontSize()*2);
+        font_->SetFontSize(pref_.fontSize());
+        painter_->BeginText(pref_.margin(), height_ - pref_.margin() - pref_.fontSize()*2);
 
         // File creation
         text_buffer = ustring::compose(_("File created on the %1"),game_->dateUstring());
-        showText (first_page, text_buffer);
+        showText(text_buffer);
 
         // Number of player
-        HPDF_Page_MoveTextPos(first_page, 0, -line_height_);
+        painter_->MoveTextPos(0, -line_height_);
         text_buffer = ustring::compose(_("Number of players: %1"),game_->nbPlayerUstring());
-        showText(first_page, text_buffer);
+        showText(text_buffer);
 
         // Maximum number of turn
-        HPDF_Page_MoveTextPos (first_page, 0, -line_height_);
+        painter_->MoveTextPos(0, -line_height_);
         text_buffer = ustring::compose(_("Maximum number of turns: %1"),game_->maxNbTurn());
-        showText (first_page, text_buffer);
+        showText(text_buffer);
 
         // Name of the game configuration
-        HPDF_Page_MoveTextPos (first_page, 0, -line_height_);
+        painter_->MoveTextPos(0, -line_height_);
         text_buffer = ustring::compose(_("Name of the game configuration: %1"),game_->config().nameUstring());
-        showText(first_page, text_buffer);
-        HPDF_Page_EndText(first_page);
+        showText(text_buffer);
+        painter_->EndText();
 
 
         // Calculate the table width and the text position
-        table_width = tableWidthCalculate(first_page);
-        text_pos_y = height - pref_.margin() - 7*line_height_;
+        tableWidthCalculate();
+        text_pos_y = height_ - pref_.margin() - 7*line_height_;
 
 
         // Names, legend, ponts
-        printNames(text_pos_y,table_width,first_page);
-        printLegend(text_pos_y,table_width,first_page);
-        printPoints(text_pos_y,table_width,first_page);
-        createGrid(first_page,pref_.margin(),height - pref_.margin() - 7*line_height_ - table_line_height_*1/3,
-                  width-pref_.margin(),text_pos_y+table_line_height_*2/3,table_line_height_,table_width);
+        printNames(text_pos_y);
+        printLegend(text_pos_y);
+        printPoints(text_pos_y);
+        createGrid(pref_.margin(),height_ - pref_.margin() - 7*line_height_ - table_line_height_*1/3,
+                  width_-pref_.margin(),text_pos_y+table_line_height_*2/3,table_line_height_,table_width_);
 
         // Page number
-        HPDF_Page_BeginText(first_page);
-        textOutTable(first_page,0,pref_.margin()*2/3,_("Page 1"),width);
-        HPDF_Page_EndText (first_page);
+        textOutTable(0,pref_.margin()*2/3,_("Page 1"),width_);
 
 
         if ((text_pos_y - 3*table_line_height_ - pref_.fontSize()) > pref_.margin())
         {
             text_pos_y -= table_line_height_;
-            addTotalPointsRanking(first_page,text_pos_y);
+            addTotalPointsRanking(text_pos_y);
             total_points_ranking_print_ = true;
 
             if ((text_pos_y - 7* table_line_height_ - pref_.fontSize())  > pref_.margin())
             {
                 text_pos_y -= table_line_height_;
-                addStats(first_page,text_pos_y);
+                addStats(text_pos_y);
                 stat_print_ = true;
-                create_another_page = addPodium(first_page,text_pos_y);
+                create_another_page = addPodium(text_pos_y);
             }
         }
+
+        painter_->FinishPage();
 
         return create_another_page;
     }
@@ -200,59 +197,63 @@ namespace csuper
 
     bool PdfExportation::createOtherPage()
     {
-        float height;
-        float width;
-        HPDF_Page page;
+        PdfPage* page;
         ustring text_buffer;
-        float table_width;
-        float text_pos_y;
+        double text_pos_y;
+        bool create_another_page;
 
         // Add a new page object.
-        page = HPDF_AddPage(pdf_);
-        HPDF_Page_SetSize(page,static_cast<HPDF_PageSizes>(pref_.size()),static_cast<HPDF_PageDirection>(pref_.direction()));
+        EPdfPageSize page_size;
+        switch(pref_.size())
+        {
+        case ExportPdfPreferences::A3:
+            page_size = ePdfPageSize_A3;
+            break;
+        case ExportPdfPreferences::A4:
+            page_size = ePdfPageSize_A4;
+            break;
+        case ExportPdfPreferences::A5:
+            page_size = ePdfPageSize_A5;
+            break;
+        }
+        bool landscape=false;
+        if (pref_.direction() == ExportPdfPreferences::LANDSCAPE)
+            landscape = true;
+        page = pdf_->CreatePage(PdfPage::CreateStandardPageSize(page_size,landscape));
+        painter_->SetPage(page);
+        painter_->SetFont(font_);
 
-        // Get the height and the width
-        height = HPDF_Page_GetHeight (page);
-        width = HPDF_Page_GetWidth (page);
-        text_pos_y = height - pref_.margin() - line_height_*2/3;
-
-        // Prepare the page
-        HPDF_Page_SetFontAndSize(page, font_, pref_.fontSize());
-
-        // Calculate the table width
-        table_width = tableWidthCalculate(page);
+        text_pos_y = height_ - pref_.margin() - line_height_*2/3;
+        font_->SetFontSize(pref_.fontSize());
 
         // Names and legend
         if ((! total_points_ranking_print_) && (line_ < game_->maxNbTurn()))
         {
-            printNames(text_pos_y,table_width,page);
-            printLegend(text_pos_y,table_width,page);
+            printNames(text_pos_y);
+            printLegend(text_pos_y);
         }
 
         // Points
-        printPoints(text_pos_y,table_width,page);
+        printPoints(text_pos_y);
 
         // Print the page number
-        HPDF_Page_BeginText(page);
         text_buffer = ustring::compose(_("Page %1"),num_page_);
         num_page_++;
-        textOutTable(page,0,pref_.margin()*2/3,text_buffer,width);
-
-        HPDF_Page_EndText(page);
+        textOutTable(0,pref_.margin()*2/3,text_buffer,width_);
 
         // Grid
-        if (height - pref_.margin() - line_height_*2/3 != text_pos_y)
+        if (height_ - pref_.margin() - line_height_*2/3 != text_pos_y)
         {
-            createGrid(page,pref_.margin(),height - pref_.margin() - table_line_height_*0.7,
-                       width - pref_.margin(),text_pos_y + table_line_height_*2/3,
-                       table_line_height_,table_width);
+            createGrid(pref_.margin(),height_ - pref_.margin() - table_line_height_*0.7,
+                       width_ - pref_.margin(),text_pos_y + table_line_height_*2/3,
+                       table_line_height_,table_width_);
             text_pos_y -= table_line_height_;
         }
 
         // Total points ranking
         if (((text_pos_y - 3* table_line_height_ - pref_.fontSize()) > pref_.margin()) && total_points_ranking_print_ == false)
         {
-            addTotalPointsRanking(page,text_pos_y);
+            addTotalPointsRanking(text_pos_y);
             total_points_ranking_print_ = true;
             text_pos_y -= table_line_height_;
         }
@@ -260,11 +261,15 @@ namespace csuper
         // Stats
         if (((text_pos_y - 7* table_line_height_ - pref_.fontSize())  > pref_.margin()) && stat_print_ == false)
         {
-            addStats(page,text_pos_y);
+            addStats(text_pos_y);
             stat_print_ = true;
         }
 
-        return addPodium(page,text_pos_y);
+        create_another_page = addPodium(text_pos_y);
+
+        painter_->FinishPage();
+
+        return create_another_page;
     }
 
 
@@ -272,14 +277,12 @@ namespace csuper
     //
     // Print elements
     //
-    void PdfExportation::printNames(float& pos_y, const float table_width, HPDF_Page& page)
+    void PdfExportation::printNames(double& pos_y)
     {
         unsigned int i;
-        float width = HPDF_Page_GetWidth(page);
         unsigned int nb_column_per_player;
 
-        HPDF_Page_BeginText(page);
-        textOutTable(page,pref_.margin(),pos_y,_("Name"),table_width);
+        textOutTable(pref_.margin(),pos_y,_("Name"),table_width_);
 
         if (pref_.totalPoints() && pref_.ranking())
             nb_column_per_player = 3;
@@ -290,44 +293,42 @@ namespace csuper
 
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(page,pref_.margin() + (nb_column_per_player*i+1)*table_width,pos_y,
-                game_->playerName(i),table_width*nb_column_per_player,game_->ranking(i));
+            textOutTable(pref_.margin() + (nb_column_per_player*i+1)*table_width_,pos_y,
+                game_->playerName(i),table_width_*nb_column_per_player,game_->ranking(i));
         }
-        HPDF_Page_EndText(page);
 
-        createGrid(page,pref_.margin(),pos_y + table_line_height_*2/3,
-            pref_.margin() + table_width,pos_y - table_line_height_*1/3,
-            table_line_height_,table_width);
+        createGrid(pref_.margin(),pos_y + table_line_height_*2/3,
+            pref_.margin() + table_width_,pos_y - table_line_height_*1/3,
+            table_line_height_,table_width_);
 
-        createGrid(page,pref_.margin() + table_width,pos_y + table_line_height_*2/3,
-            width - pref_.margin(),pos_y - table_line_height_*1/3,
-            table_line_height_,nb_column_per_player*table_width);
+        createGrid(pref_.margin() + table_width_,pos_y + table_line_height_*2/3,
+            width_ - pref_.margin(),pos_y - table_line_height_*1/3,
+            table_line_height_,nb_column_per_player*table_width_);
 
 
         pos_y = pos_y - table_line_height_;
     }
 
-    void PdfExportation::printLegend(float& pos_y, const float table_width, HPDF_Page& page)
+    void PdfExportation::printLegend(double& pos_y)
     {
         unsigned int i;
 
         //Test if it need a legend
         if (pref_.totalPoints() || pref_.ranking())
         {
-            HPDF_Page_BeginText(page);
-            textOutTable(page,pref_.margin(),pos_y,_("Legend"),table_width);
+            textOutTable(pref_.margin(),pos_y,_("Legend"),table_width_);
 
             // If that need total points and ranking
             if (pref_.totalPoints() && pref_.ranking())
             {
                 for (i=0 ; i<game_->nbPlayer() ; i++)
                 {
-                    textOutTable(page,pref_.margin() + (3*i+1)*table_width,pos_y,
-                        _("Points"),table_width,game_->ranking(i));
-                    textOutTable(page,pref_.margin() + (3*i+2)*table_width,pos_y,
-                        _("Total"),table_width,game_->ranking(i));
-                    textOutTable(page,pref_.margin() + (3*i+3)*table_width,pos_y,
-                        _("Ranking"),table_width,game_->ranking(i));
+                    textOutTable(pref_.margin() + (3*i+1)*table_width_,pos_y,
+                        _("Points"),table_width_,game_->ranking(i));
+                    textOutTable(pref_.margin() + (3*i+2)*table_width_,pos_y,
+                        _("Total"),table_width_,game_->ranking(i));
+                    textOutTable(pref_.margin() + (3*i+3)*table_width_,pos_y,
+                        _("Ranking"),table_width_,game_->ranking(i));
                 }
             } else
             // If it need only the total points
@@ -335,10 +336,10 @@ namespace csuper
             {
                 for (i=0 ; i<game_->nbPlayer() ; i++)
                 {
-                    textOutTable(page,pref_.margin() + (2*i+1)*table_width,pos_y,
-                        _("Points"),table_width,game_->ranking(i));
-                    textOutTable(page,pref_.margin() + 2*(i+1)*table_width,pos_y,
-                        _("Total"),table_width,game_->ranking(i));
+                    textOutTable(pref_.margin() + (2*i+1)*table_width_,pos_y,
+                        _("Points"),table_width_,game_->ranking(i));
+                    textOutTable(pref_.margin() + 2*(i+1)*table_width_,pos_y,
+                        _("Total"),table_width_,game_->ranking(i));
                 }
             }
             else
@@ -346,30 +347,27 @@ namespace csuper
             {
                 for (i=0 ; i<game_->nbPlayer() ; i++)
                 {
-                    textOutTable(page,pref_.margin() + (2*i+1)*table_width,pos_y,
-                        _("Points"),table_width,game_->ranking(i));
-                    textOutTable(page,pref_.margin() + 2*(i+1)*table_width,pos_y,
-                        _("Ranking"),table_width,game_->ranking(i));
+                    textOutTable(pref_.margin() + (2*i+1)*table_width_,pos_y,
+                        _("Points"),table_width_,game_->ranking(i));
+                    textOutTable(pref_.margin() + 2*(i+1)*table_width_,pos_y,
+                        _("Ranking"),table_width_,game_->ranking(i));
                 }
             }
 
-            HPDF_Page_EndText(page);
             pos_y = pos_y - table_line_height_;
         }
     }
 
 
-    void PdfExportation::printPoints(float& pos_y, const float table_width, HPDF_Page& page)
+    void PdfExportation::printPoints(double& pos_y)
     {
         ustring text_buffer;
         unsigned int i;
 
-        HPDF_Page_BeginText(page);
-
-        while ((pos_y > pref_.margin() + pref_.fontSize() ) && (line_ < game_->maxNbTurn()))
+        while ((pos_y > pref_.margin() + pref_.fontSize() ) && (line_ < game_->maxNbTurn()+1))
         {
             text_buffer = ustring::compose(_("Turn %1"),line_);
-            textOutTable(page,pref_.margin(),pos_y,text_buffer,table_width,0);
+            textOutTable(pref_.margin(),pos_y,text_buffer,table_width_,0);
 
             // For each turn
             for (i=0 ; i<game_->nbPlayer() ; i++)
@@ -381,109 +379,100 @@ namespace csuper
                     // If the total points and the ranking needs to be display
                     if (pref_.totalPoints() && pref_.ranking())
                     {
-                        textOutTable(page,pref_.margin() + (3*i+1)*table_width,pos_y,text_buffer,table_width,game_->ranking(i));
+                        textOutTable(pref_.margin() + (3*i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
                         text_buffer = game_->totalPointsUstring(i,line_);
-                        textOutTable(page,pref_.margin() + (3*i+2)*table_width,pos_y,text_buffer,table_width,game_->ranking(i));
+                        textOutTable(pref_.margin() + (3*i+2)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
                         text_buffer = game_->rankingUstring(i,line_);
-                        textOutTable(page,pref_.margin() + (3*i+3)*table_width,pos_y,text_buffer,table_width,game_->ranking(i));
+                        textOutTable(pref_.margin() + (3*i+3)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
                     } else
                     // If the total points needs to be display
                     if (pref_.totalPoints())
                     {
-                        textOutTable(page,pref_.margin() + (2*i+1)*table_width,pos_y,text_buffer,table_width,game_->ranking(i));
+                        textOutTable(pref_.margin() + (2*i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
                         text_buffer = game_->totalPointsUstring(i,line_);
-                        textOutTable(page,pref_.margin() + 2*(i+1)*table_width,pos_y,text_buffer,table_width,game_->ranking(i));
+                        textOutTable(pref_.margin() + 2*(i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
                     }else
                     // If the ranking needs to be display
                     if (pref_.ranking())
                     {
-                        textOutTable(page,pref_.margin() + (2*i+1)*table_width,pos_y,text_buffer,table_width,game_->ranking(i));
+                        textOutTable(pref_.margin() + (2*i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
                         text_buffer = game_->rankingUstring(i,line_);
-                        textOutTable(page,pref_.margin() + 2*(i+1)*table_width,pos_y,text_buffer,table_width,game_->ranking(i));
+                        textOutTable(pref_.margin() + 2*(i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
                     }
                     else
-                        textOutTable(page,pref_.margin() + (i+1)*table_width,pos_y,text_buffer,table_width,game_->ranking(i));
+                        textOutTable(pref_.margin() + (i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
                 }
             }
 
             line_ ++;
             pos_y -= table_line_height_;
         }
-        HPDF_Page_EndText(page);
     }
 
-    void PdfExportation::addTotalPointsRanking(HPDF_Page& page, float& y)
+    void PdfExportation::addTotalPointsRanking(double& y)
     {
         ustring text_buffer;
         unsigned int i;
-        float width = HPDF_Page_GetWidth(page);
 
-        float table_width = ((width - 2*pref_.margin())/(game_->nbPlayer()+1));
-
-        HPDF_Page_BeginText(page);
+        double table_width = ((width_- 2*pref_.margin())/(game_->nbPlayer()+1));
 
         // Names
-        textOutTable(page,pref_.margin(),y,_("Name"),table_width);
+        textOutTable(pref_.margin(),y,_("Name"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
-            textOutTable(page,pref_.margin() + (i+1)*table_width,y,game_->playerNameUstring(i),table_width,game_->ranking(i));
+            textOutTable(pref_.margin() + (i+1)*table_width,y,game_->playerNameUstring(i),table_width,game_->ranking(i));
 
         // Print the finals points
-        textOutTable(page,pref_.margin(),y- table_line_height_,_("Total points"),table_width);
+        textOutTable(pref_.margin(),y- table_line_height_,_("Total points"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(page,pref_.margin() + (i+1)*table_width,y- table_line_height_,
+            textOutTable(pref_.margin() + (i+1)*table_width,y- table_line_height_,
                          game_->totalPointsUstring(i),table_width,game_->ranking(i));
         }
 
         // Print the ranking
-        textOutTable(page,pref_.margin(),y-2* table_line_height_,_("Ranking"),table_width);
+        textOutTable(pref_.margin(),y-2* table_line_height_,_("Ranking"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(page,pref_.margin() + (i+1)*table_width,y- 2*table_line_height_,
+            textOutTable(pref_.margin() + (i+1)*table_width,y- 2*table_line_height_,
                          game_->rankingUstring(i),table_width,game_->ranking(i));
         }
 
-        HPDF_Page_EndText(page);
-
-        createGrid(page,pref_.margin(),y+ table_line_height_*2/3,width-pref_.margin(),
+        createGrid(pref_.margin(),y+ table_line_height_*2/3,width_-pref_.margin(),
                    y - table_line_height_*7/3, table_line_height_,table_width);
 
         y = y - 3*table_line_height_;
     }
 
-    void PdfExportation::addStats(HPDF_Page& page, float& y)
+    void PdfExportation::addStats(double& y)
     {
         ustring text_buffer;
         unsigned int i;
-        float width = HPDF_Page_GetWidth(page);
 
-        float table_width = ((width - 2*pref_.margin())/(game_->nbPlayer()+1));
-
-        HPDF_Page_BeginText(page);
+        double table_width = ((width_ - 2*pref_.margin())/(game_->nbPlayer()+1));
 
         // Names
-        textOutTable(page,pref_.margin(),y,_("Name"),table_width);
+        textOutTable(pref_.margin(),y,_("Name"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(page,pref_.margin() + (i+1)*table_width,y,
+            textOutTable(pref_.margin() + (i+1)*table_width,y,
                          game_->playerNameUstring(i),table_width,game_->ranking(i));
         }
 
         // Nb turn
         y -= table_line_height_;
-        textOutTable(page,pref_.margin(),y,_("Nb turn"),table_width);
+        textOutTable(pref_.margin(),y,_("Nb turn"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(page,pref_.margin() + (i+1)*table_width,y,
+            textOutTable(pref_.margin() + (i+1)*table_width,y,
                             game_->nbTurnUstring(i),table_width,game_->ranking(i));
         }
 
         // Mean
         y -= table_line_height_;
-        textOutTable(page,pref_.margin(),y,_("Mean points"),table_width);
+        textOutTable(pref_.margin(),y,_("Mean points"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(page,pref_.margin() + (i+1)*table_width,y,
+            textOutTable(pref_.margin() + (i+1)*table_width,y,
                             game_->meanPointsUstring(i),table_width,game_->ranking(i));
         }
 
@@ -491,108 +480,105 @@ namespace csuper
         {
             // Nb turn best
             y -= table_line_height_;
-            textOutTable(page,pref_.margin(),y,_("Nb turn best"),table_width);
+            textOutTable(pref_.margin(),y,_("Nb turn best"),table_width);
             for (i=0 ; i<game_->nbPlayer() ; i++)
             {
-                textOutTable(page,pref_.margin() + (i+1)*table_width,y,
+                textOutTable(pref_.margin() + (i+1)*table_width,y,
                                 game_->nbTurnBestUstring(i),table_width,game_->ranking(i));
             }
 
             // Nb turn worst
             y -= table_line_height_;
-            textOutTable(page,pref_.margin(),y,_("Nb turn worst"),table_width);
+            textOutTable(pref_.margin(),y,_("Nb turn worst"),table_width);
             for (i=0 ; i<game_->nbPlayer() ; i++)
             {
-                textOutTable(page,pref_.margin() + (i+1)*table_width,y,
+                textOutTable(pref_.margin() + (i+1)*table_width,y,
                                 game_->nbTurnWorstUstring(i),table_width,game_->ranking(i));
             }
 
             // Nb turn first
             y -= table_line_height_;
-            textOutTable(page,pref_.margin(),y,_("Nb turn first"),table_width);
+            textOutTable(pref_.margin(),y,_("Nb turn first"),table_width);
             for (i=0 ; i<game_->nbPlayer() ; i++)
             {
-                textOutTable(page,pref_.margin() + (i+1)*table_width,y,
+                textOutTable(pref_.margin() + (i+1)*table_width,y,
                                 game_->nbTurnFirstUstring(i),table_width,game_->ranking(i));
             }
 
             // Nb turn last
             y -= table_line_height_;
-            textOutTable(page,pref_.margin(),y,_("Nb turn last"),table_width);
+            textOutTable(pref_.margin(),y,_("Nb turn last"),table_width);
             for (i=0 ; i<game_->nbPlayer() ; i++)
             {
-                textOutTable(page,pref_.margin() + (i+1)*table_width,y,
+                textOutTable(pref_.margin() + (i+1)*table_width,y,
                                 game_->nbTurnLastUstring(i),table_width,game_->ranking(i));
             }
 
-            HPDF_Page_EndText(page);
-
-            createGrid(page,
-                      pref_.margin(),
+            createGrid(pref_.margin(),
                       y + table_line_height_*20/3,
-                      width - pref_.margin(),
+                      width_ - pref_.margin(),
                       y - table_line_height_*1/3,
                       table_line_height_,
                       table_width);
         }
         else
         {
-            HPDF_Page_EndText(page);
-
-            createGrid(page,
-                      pref_.margin(),
+            createGrid(pref_.margin(),
                       y + table_line_height_*8/3,
-                      width - pref_.margin(),
+                      width_ - pref_.margin(),
                       y - table_line_height_*1/3,
                       table_line_height_,
                       table_width);
         }
     }
 
-    bool PdfExportation::addPodium(HPDF_Page& page, const float y)
+    bool PdfExportation::addPodium(const double y)
     {
-        HPDF_Image podium = HPDF_LoadJpegImageFromFile(pdf_,"Images/Podium.jpg");
-        int podium_width = HPDF_Image_GetWidth(podium);
-        int podium_height = HPDF_Image_GetHeight(podium);
-        float page_width = HPDF_Page_GetWidth(page);
-
-        if (podium_width > page_width - 2*pref_.margin())
+        PdfImage podium(pdf_);
+        try
         {
-            float ratio = (page_width - 2 * pref_.margin()) / podium_width;
-            podium_height *= ratio;
-            podium_width *= ratio;
+            podium.LoadFromFile("Images/Podium.png");
         }
-
-
-        if (y - podium_height - table_line_height_ > pref_.margin())
+        catch (PoDoFo::PdfError& e)
         {
-            HPDF_Page_DrawImage(page,podium,(page_width - podium_width) / 2,
-                                y - podium_height - table_line_height_,podium_width,podium_height);
+            painter_->FinishPage();
+            throw e;
+        }
+        double podium_width = podium.GetWidth();
+        double podium_height = podium.GetHeight();
+        double ratio=1;
+
+        if (podium_width > width_ - 2*pref_.margin())
+            ratio = (width_ - 2 * pref_.margin()) / podium_width;
+
+
+        if (y - podium_height*ratio - table_line_height_ > pref_.margin())
+        {
+            painter_->DrawImage((width_ - podium_width*ratio ) / 2 ,y - podium_height*ratio - table_line_height_,
+                                &podium,ratio,ratio);
 
             vector<unsigned int> index = game_->playerIndexFromPosition();
 
-            HPDF_Page_SetFontAndSize(page, font_, pref_.fontSize() * 2);
-            HPDF_Page_BeginText(page);
+            font_->SetFontSize(2*pref_.fontSize());
 
             // First
-            textOutTable(page,pref_.margin(),y-podium_height/4,game_->playerNameUstring(index[0]),
-                            page_width-2*pref_.margin(),1);
+            textOutTable(pref_.margin(),y-podium_height*ratio /4,game_->playerNameUstring(index[0]),
+                            width_-2*pref_.margin(),1);
 
             // Second
             if (game_->nbPlayer() >= 2)
             {
-                textOutTable(page,(page_width-podium_width)/2,y-podium_height/2,
-                             game_->playerNameUstring(index[1]),podium_width/3,2);
+                textOutTable((width_-podium_width*ratio )/2,y-podium_height*ratio /2,
+                             game_->playerNameUstring(index[1]),podium_width*ratio /3,2);
             }
 
             // Third
             if (game_->nbPlayer() >= 3)
             {
-                textOutTable(page,(page_width-podium_width)/2 +2*podium_width/3,
-                             y-13*podium_height/20,game_->playerNameUstring(index[2]),podium_width/3,3);
+                textOutTable((width_-podium_width*ratio )/2 +2*podium_width*ratio /3,
+                             y-13*podium_height*ratio /20,game_->playerNameUstring(index[2]),podium_width*ratio /3,3);
             }
 
-            HPDF_Page_EndText(page);
             return false;
         }
         else
@@ -603,101 +589,101 @@ namespace csuper
     //
     // Print function
     //
-    void PdfExportation::showText(HPDF_Page& page, const Glib::ustring& text)
+    void PdfExportation::showText(const Glib::ustring& text)
     {
-        HPDF_Page_ShowText(page,convertCharsetPdf(text,pref_.charset()).c_str());
+        painter_->AddText(ustringToPdfstring(text));
     }
 
-    void PdfExportation::textOutTable(HPDF_Page& page, const float pos_min_x, const float pos_y, const Glib::ustring& text, const float max_width, const int ranking)
+    void PdfExportation::textOutTable(const double pos_min_x, const double pos_y, const Glib::ustring& text, const double max_width, const int ranking)
     {
-        float text_width;
+        double text_width;
         unsigned int nb_char;
-        ustring text_buffer;
+        PdfString text_buffer = ustringToPdfstring(text);
+        const PdfFontMetrics* font_metric = font_->GetFontMetrics();
 
-        text_buffer = convertCharsetPdf(text,pref_.charset());
-
-        text_width = HPDF_Page_TextWidth(page, text_buffer.c_str());
-        if (text_buffer.validate())
-            nb_char = text_buffer.length();
-        else
-            nb_char = strlen(text_buffer.c_str());
+        text_width = font_metric->StringWidth(text_buffer);
+        nb_char = text_buffer.GetCharacterLength();
 
         // Reduce the length of the text if needed
         while (text_width > max_width && nb_char > 1)
         {
             nb_char--;
-            if (text_buffer.validate())
-                text_buffer.resize(nb_char);
-            else
-            {
-                string tmp_str = string(text_buffer);
-                tmp_str.resize(nb_char);
-                text_buffer = tmp_str;
-            }
-            text_width = HPDF_Page_TextWidth(page, text_buffer.c_str());
+            text_width = font_metric->StringWidth(text_buffer.GetUnicode(),nb_char);
+        }
+        if (nb_char != text.length())
+        {
+            ustring tmp_str = text_buffer.GetStringUtf8();
+            tmp_str.resize(nb_char);
+            text_buffer = ustringToPdfstring(tmp_str);
         }
 
         // Set the color
         switch (ranking)
         {
         case 0:
-            HPDF_Page_SetRGBFill(page,0,0,0);
+            painter_->SetColor(0,0,0);
             break;
         case 1:
-            HPDF_Page_SetRGBFill(page,0,0.4,0);
+            painter_->SetColor(0,0.4,0);
             break;
         case 2:
-            HPDF_Page_SetRGBFill(page,0,0,0.25);
+            painter_->SetColor(0,0,0.25);
             break;
         case 3:
-            HPDF_Page_SetRGBFill(page,0.75,0,0);
+            painter_->SetColor(0.75,0,0);
             break;
         default:
-            HPDF_Page_SetRGBFill(page,0.35,0.2,0);
+            painter_->SetColor(0.35,0.2,0);
         }
 
         // Display the text center in the table
-        HPDF_Page_TextOut (page, (max_width - text_width) / 2 + pos_min_x,pos_y, text_buffer.c_str());
+        painter_->DrawText((max_width - text_width) / 2 + pos_min_x,pos_y,text_buffer,nb_char);
+
 
         // Reset the color
-        HPDF_Page_SetRGBFill(page,0,0,0);
+        painter_->SetColor(0,0,0);
     }
 
 
-    float PdfExportation::tableWidthCalculate(HPDF_Page& page)
+    void PdfExportation::tableWidthCalculate()
     {
-        float width = HPDF_Page_GetWidth (page);
-
         if (pref_.totalPoints() && pref_.ranking())
-            return ((width - 2*pref_.margin())/(3*(game_->nbPlayer())+1));
+            table_width_ = ((width_ - 2*pref_.margin())/(3*(game_->nbPlayer())+1));
         else if (pref_.totalPoints() || pref_.ranking())
-            return ((width - 2*pref_.margin())/(2*(game_->nbPlayer())+1));
+            table_width_ = ((width_ - 2*pref_.margin())/(2*(game_->nbPlayer())+1));
         else
-            return ((width - 2*pref_.margin())/(game_->nbPlayer()+1));
+            table_width_ = ((width_ - 2*pref_.margin())/(game_->nbPlayer()+1));
     }
 
-    void PdfExportation::createGrid(HPDF_Page& page,const float top_x, const float top_y, const float bottom_x, const float bottom_y,
-                           const float length_row, const float length_column)
+    void PdfExportation::createGrid(const double top_x, const double top_y, const double bottom_x, const double bottom_y,
+                           const double length_row, const double length_column)
     {
-        float x,y;
+        double x,y;
 
-        HPDF_Page_SetLineWidth(page, 1);
+        painter_->SetStrokeWidth(1);
 
         // Vertical grid;
         for (y = top_y ; y >= bottom_y - 1 ; y -= length_row)
         {
-            HPDF_Page_MoveTo(page,top_x,y);
-            HPDF_Page_LineTo(page,bottom_x,y);
-            HPDF_Page_Stroke(page);
+            painter_->DrawLine(top_x,y,bottom_x,y);
         }
 
         // Horizontal grid;
         for (x = top_x ; x <= bottom_x + 1; x += length_column)
         {
-            HPDF_Page_MoveTo(page,x,top_y);
-            HPDF_Page_LineTo(page,x,bottom_y);
-            HPDF_Page_Stroke(page);
+            painter_->DrawLine(x,top_y,x,bottom_y);
         }
+    }
+
+    //
+    // Fusion function
+    //
+    void PdfExportation::deleteTemporaryFiles(string& filename)
+    {
+        if (remove((filename + "1").c_str()) != 0)
+            perror(ustring::compose(_("Error when deleting %1: "),filename + "1").c_str());
+        if (remove((filename + "2").c_str()) != 0)
+            perror(ustring::compose(_("Error when deleting %1: "),filename + "2").c_str());
     }
 
 
@@ -705,82 +691,91 @@ namespace csuper
     //
     // Static function
     //
-    void PdfExportation::errorHandler(HPDF_STATUS error_no, HPDF_STATUS detail_no, void *user_data)
+
+
+    PdfString PdfExportation::ustringToPdfstring(const ustring& str)
     {
-        //printf ("ERROR: error_no=%04X, detail_no=%d\n",(unsigned int) error_no, (int) detail_no);
-        throw PdfError(ustring::compose("libharu: error_no=%1, detail_no=%2",ustring::format(hex,(unsigned int) error_no), (int) detail_no));
-    }
-
-    bool PdfExportation::canUseUtf8()
-    {
-        #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
-        return false;
-        #else
-        return true;
-        #endif // HPDF_MAJOR_VERSION
-    }
-
-
-
-    string PdfExportation::convertCharsetPdf(const Glib::ustring& str, const ExportPdfPreferences::CharacterSet charset)
-    {
-        if (charset == ExportPdfPreferences::UTF8)
-        {
-            #if HPDF_MAJOR_VERSION == 2 && HPDF_MINOR_VERSION < 3
-            try
-            {
-                return convert(str,"ISO8859-15","UTF-8");
-            }
-            catch (ConvertError& e)
-            {
-                cerr << e.what() << endl;
-                throw PdfError(_("Conversion from UTF-8 to ISO8859-15 failed"));
-            }
-            #else
-            return str;
-            #endif // HPDF_MAJOR_VERSION
-        }
-        else
-        {
-            try
-            {
-                return convert(str,"ISO8859-15","UTF-8");
-            }
-            catch (ConvertError& e)
-            {
-                cerr << e.what() << endl;
-                throw PdfError(_("Conversion from UTF-8 to ISO8859-15 failed"));
-            }
-        }
+        return PdfString((pdf_utf8*)(str.c_str()));
     }
 
     void PdfExportation::exportToPdf(const Game* game, const ExportPdfPreferences& pref, const Glib::ustring& filename)
     {
-        PdfExportation* pdf = new PdfExportation(game,pref);
+        PoDoFo::PdfError::EnableLogging(false);
+        PoDoFo::PdfError::EnableDebug(false);
+
+        string locale_filename = locale_from_utf8(filename);
+
+        PdfExportation* pdf_table;
+        try
+        {
+            pdf_table = new PdfExportation(game,pref);
+        }
+        catch (PoDoFo::PdfError& e)
+        {
+            cerr << e.what() << endl;
+            throw PdfError(_("The PDF document cannot be created"));
+        }
 
         try
         {
-            if(pdf->createFirstPage(filename))
-                while(pdf->createOtherPage());
+            if(pdf_table->createFirstPage(filename))
+                while(pdf_table->createOtherPage());
         }
-        catch (PdfError& e)
+        catch (PoDoFo::PdfError& e)
         {
-            delete pdf;
+            delete pdf_table;
             cerr << e.what() << endl;
             throw PdfError(_("The PDF table cannot be created"));
         }
 
+        ChartExportationPreferences chart_pref(0,0,true);
+        ExportPdfPreferences chart_pdf_pref(pref);
+        chart_pdf_pref.setDirection(ExportPdfPreferences::LANDSCAPE);
+
         try
         {
-            HPDF_SaveToFile(pdf->pdf_,locale_from_utf8(filename).c_str());
+            game->exportToChart(filename + "1",chart_pref,chart_pdf_pref,Game::PDF);
+            chart_pref.setTotalPoints(false);
+            game->exportToChart(filename + "2",chart_pref,chart_pdf_pref,Game::PDF);
         }
-        catch (PdfError& e)
+        catch(csuper::PdfError& e)
         {
-            delete pdf;
+            cerr << e.what() << endl;
+            delete pdf_table;
+            deleteTemporaryFiles(locale_filename);
+            throw PdfError(_("The PDF charts cannot be save"));
+        }
+
+        try
+        {
+            PdfMemDocument pdf_chart_1((locale_filename+"1").c_str());
+            PdfMemDocument pdf_chart_2((locale_filename+"2").c_str());
+            pdf_table->pdf_->Append(pdf_chart_1);
+            pdf_table->pdf_->Append(pdf_chart_2);
+        }
+        catch(PoDoFo::PdfError& e)
+        {
+            cerr << e.what() << endl;
+            delete pdf_table;
+            deleteTemporaryFiles(locale_filename);
+            throw PdfError(_("The PDF charts cannot be merge to the table"));
+        }
+
+
+        try
+        {
+            pdf_table->pdf_->Write((locale_filename).c_str());
+        }
+        catch (PoDoFo::PdfError& e)
+        {
+            delete pdf_table;
             cerr << e.what() << endl;
             throw PdfError(_("The PDF table cannot be save"));
         }
-        delete pdf;
+
+        deleteTemporaryFiles(locale_filename);
+
+        delete pdf_table;
     }
 
 }

@@ -57,6 +57,9 @@ namespace csuper
         std::vector<Player*> players_;  /*!< The players */
         unsigned int distributor_;      /*!< The distributor */
 
+        friend class PdfExportation;
+
+
         enum ChartExportationType
         {
             PNG,

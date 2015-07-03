@@ -45,8 +45,8 @@
 			<Add option="-shared" />
 			<Add option="-Wl,-Bstatic -lslope -Wl,-Bdynamic" />
 			<Add option="`pkg-config --libs glibmm-2.4 libxml++-2.6 cairo `" />
-			<Add library="hpdf" />
 			<Add library="muparser" />
+			<Add library="podofo" />
 			<Add directory=".." />
 		</Linker>
 		<Unit filename="../Sources/libcsuper/calculator.cpp" />

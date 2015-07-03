@@ -126,7 +126,7 @@ target_link_libraries(
 	${GLIBMM_LIBRARIES}
 	${XMLPP_LIBRARIES}
 	muparser
-	hpdf
+	podofo
 	slope
 )
 

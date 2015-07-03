@@ -50,7 +50,7 @@ namespace csuper
         enum CharacterSet
         {
             UTF8=0,
-            ISO885915=1
+            WINDOWS1252=1
         };
 
         enum PageSize
@@ -74,6 +74,8 @@ namespace csuper
         unsigned int margin_;      /*!< The margin of the pdf document */
         bool total_points_;        /*!< Indicate if we show the total points in each turn */
         bool ranking_;             /*!< Indicate if we show the ranking in each turn */
+        bool embedded_font_;       /*!< Indicate if the font will be embedded */
+        Glib::ustring font_name_;  /*!< The font name*/
 
     public:
         //
@@ -86,9 +88,15 @@ namespace csuper
 
         /*!
          *  \brief Constructor with all intern component
-         *  \param calculator_
+         *  \param font_size
+         *  \param size
+         *  \param direction
+         *  \param charset
+         *  \param margin
+         *  \param total_points
          *  \param ranking
-         *  \param game_information
+         *  \param embedded_font
+         *  \param font_name
          */
         ExportPdfPreferences(const unsigned int font_size,
                              const PageSize size,
@@ -96,7 +104,17 @@ namespace csuper
                              const CharacterSet charset,
                              const unsigned int margin,
                              const bool total_points,
-                             const bool ranking);
+                             const bool ranking,
+                             const bool embedded_font,
+                             const Glib::ustring& font_name);
+
+        /*!
+         *  \brief Constructor with a xmlpp node
+         *  \param xml_node the xml node
+         *  \param version the version of the preferences
+         *  \exception csuper::XmlError if bad xmlpp node
+         */
+        ExportPdfPreferences(xmlpp::Node* xml_node, const double version);
 
 
 
@@ -130,13 +148,6 @@ namespace csuper
          *  \exception xmlpp::internal_error if bad xmlpp node
          */
         void createXmlNode(xmlpp::Element *parent_node) const;
-
-        /*!
-         *  \brief Constructor with a xmlpp node
-         *  \param xml_node the xml node
-         *  \exception csuper::XmlError if bad xmlpp node
-         */
-        ExportPdfPreferences(xmlpp::Node* xml_node);
 
 
 
@@ -208,6 +219,24 @@ namespace csuper
              ranking_ = ranking;
          }
 
+        /*!
+         *  \brief Set the font name
+         *  \param the font name
+         */
+         inline void setFontName(const Glib::ustring& font_name)
+         {
+             font_name_ = font_name;
+         }
+
+        /*!
+         *  \brief Set the embedded_font
+         *  \param the embedded_font
+         */
+         inline void setEmbeddedFont(const bool embedded_font)
+         {
+             embedded_font_ = embedded_font;
+         }
+
 
         //
         // Getter
@@ -273,6 +302,24 @@ namespace csuper
          inline bool ranking() const
          {
              return ranking_;
+         }
+
+        /*!
+         *  \brief Return the font name
+         *  \return the font name
+         */
+         inline Glib::ustring fontName() const
+         {
+             return font_name_;
+         }
+
+        /*!
+         *  \brief Return the embedded_font
+         *  \return the embedded_font
+         */
+         inline bool embeddedFont() const
+         {
+             return embedded_font_ ;
          }
 
 
@@ -345,6 +392,26 @@ namespace csuper
          {
              return boolToUstring(ranking_);
          }
+
+        /*!
+         *  \brief Return the embedded_font in a ustring
+         *  \return the ustring
+         */
+         inline Glib::ustring embeddedFontUstring() const
+         {
+             return boolToUstring(embedded_font_);
+         }
+
+
+        /*!
+         *  \brief Return the font name in a ustring
+         *  \return the ustring
+         */
+         inline Glib::ustring fontNameUstring() const
+         {
+             return font_name_;
+         }
+
 
 
 
