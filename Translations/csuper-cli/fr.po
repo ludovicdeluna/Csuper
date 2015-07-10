@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-06-27 22:18+0200\n"
-"PO-Revision-Date: 2015-06-14 22:32+0200\n"
+"PO-Revision-Date: 2015-07-09 16:53+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: Sources/csuper-cli/command_line_option.cpp:42
 msgid "The input and output filename"
-msgstr "Le fichier d'entré et de sortie"
+msgstr "Le fichier d'entrée et de sortie"
 
 #: Sources/csuper-cli/command_line_option.cpp:43
 msgid "The instruction"
@@ -29,41 +29,40 @@ msgstr "L'instruction"
 
 #: Sources/csuper-cli/command_line_option.cpp:51
 msgid "Open the input file"
-msgstr "Ouvre le fichier d'entré"
+msgstr "Ouvre le fichier d'entrée"
 
 #: Sources/csuper-cli/command_line_option.cpp:56
 msgid "Read the input file"
-msgstr "Lis le fichier d'entré"
+msgstr "Lis le fichier d'entrée"
 
 #: Sources/csuper-cli/command_line_option.cpp:61
 msgid "Export the input file into into a PDF output file"
-msgstr "Exporte le fichier d'entré dans le fichier PDF de sortie"
+msgstr "Exporte le fichier d'entrée dans le fichier PDF de sortie"
 
 #: Sources/csuper-cli/command_line_option.cpp:66
 msgid "Export the input file into into a CSV output file"
-msgstr "Exporte le fichier d'entré dans le fichier CSV de sortie"
+msgstr "Exporte le fichier d'entrée dans le fichier CSV de sortie"
 
 #: Sources/csuper-cli/command_line_option.cpp:71
 msgid "Export the input file into into a m (Octave/Matlab) output file"
-msgstr "Exporte le fichier d'entré dans le fichier m (Octave/Matlab) de sortie"
+msgstr ""
+"Exporte le fichier d'entrée dans le fichier m (Octave/Matlab) de sortie"
 
 #: Sources/csuper-cli/command_line_option.cpp:76
 msgid "Export the input file into into Gnuplot output files"
-msgstr "Exporte le fichier d'entré dans le fichier Gnuplot de sortie"
+msgstr "Exporte le fichier d'entrée dans le fichier Gnuplot de sortie"
 
 #: Sources/csuper-cli/command_line_option.cpp:81
-#, fuzzy
 msgid "Export the input file into into a PNG output file"
-msgstr "Exporte le fichier d'entré dans le fichier PDF de sortie"
+msgstr "Exporte le fichier d'entrée dans le fichier PNG de sortie"
 
 #: Sources/csuper-cli/command_line_option.cpp:86
-#, fuzzy
 msgid "Export the input file into into a SVG output file"
-msgstr "Exporte le fichier d'entré dans le fichier CSV de sortie"
+msgstr "Exporte le fichier d'entrée dans le fichier SVG de sortie"
 
 #: Sources/csuper-cli/command_line_option.cpp:103
 msgid "The input filename"
-msgstr "Le fichier d'entré"
+msgstr "Le fichier d'entrée"
 
 #: Sources/csuper-cli/command_line_option.cpp:104
 #: Sources/csuper-cli/command_line_option.cpp:110
@@ -80,7 +79,7 @@ msgid ""
 "If a \"to\" instruction is set, an output filename is needed.\n"
 "You can use only one instruction at once."
 msgstr ""
-"Si une instruction est mise, un fichier d'entré est requis.\n"
+"Si une instruction est mise, un fichier d'entrée est requis.\n"
 "Si une instruction d'export, un fichier de sortie est requis.\n"
 "Vous ne pouvez utiliser qu'une seule instruction à la fois."
 
@@ -100,7 +99,7 @@ msgstr "Vous devez utiliser une seule instruction.\n"
 #: Sources/csuper-cli/command_line_option.cpp:163
 msgid "You need an input file to open or read a file.\n"
 msgstr ""
-"Vous devez mettre un fichier d'entré lors de la lecture ou l'ouverture.\n"
+"Vous devez mettre un fichier d'entrée lors de la lecture ou l'ouverture.\n"
 
 #: Sources/csuper-cli/command_line_option.cpp:173
 msgid "You don't need an output file to open or read a file.\n"
@@ -110,7 +109,7 @@ msgstr ""
 
 #: Sources/csuper-cli/command_line_option.cpp:178
 msgid "You need an input file to export a file.\n"
-msgstr "Vous devez mettre un fichier d'entré lors de l'exportation.\n"
+msgstr "Vous devez mettre un fichier d'entrée lors de l'exportation.\n"
 
 #: Sources/csuper-cli/command_line_option.cpp:180
 msgid "You need an output file to export a file.\n"
@@ -121,14 +120,16 @@ msgid ""
 "Please report the bug to my git repository (https://git.framasoft.org/"
 "Dalan94/Csuper)."
 msgstr ""
+"Merci de rapporter le bug sur mon dépôt git (https://git.framasoft.org/"
+"Dalan94/Csuper)."
 
 #: Sources/csuper-cli/main.cpp:74
 msgid "Csuper-cli"
-msgstr ""
+msgstr "Csuper-cli"
 
 #: Sources/csuper-cli/main.cpp:88 Sources/csuper-cli/main.cpp:94
 msgid "Error when initializing csuper"
-msgstr ""
+msgstr "Erreur lors de l'initialisation de Csuper"
 
 #: Sources/csuper-cli/main.cpp:130 Sources/csuper-cli/main.cpp:152
 #: Sources/csuper-cli/main.cpp:174 Sources/csuper-cli/main.cpp:195

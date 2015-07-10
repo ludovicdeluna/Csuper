@@ -1,12 +1,2 @@
 #!/bin/bash
-
-if [ "$2" != "" ];
-	then nom=$(pwd)/$2
-fi
-
-if [ "$3" != "" ];
-	then nom2=$(pwd)/$3
-fi
-
-cd /usr/share/csuper
-./csuper-cli $1 "$nom" "$nom2"
+/usr/share/csuper/csuper-cli $1 $2 $3 $4 $5

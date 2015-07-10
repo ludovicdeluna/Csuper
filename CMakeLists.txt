@@ -84,10 +84,11 @@ file(
     "Externals library/Slope/slope/metrics.c"
     "Externals library/Slope/slope/item.c"
     "Externals library/Slope/slope/xymetrics.c"
-    "Externals library/Slope/slope/xyitem.c"
+    "Externals library/Slope/slope/funcplot.c"
     "Externals library/Slope/slope/xyaxis.c"
     "Externals library/Slope/slope/legend.c"
     "Externals library/Slope/slope/slope.c"
+    "Externals library/Slope/slope/custom-item.c"
     "Externals library/Slope/slope-config.h"
 )
 

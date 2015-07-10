@@ -1112,12 +1112,12 @@ namespace csuper
         exportToGnuplotScript(filename);
     }
 
-    void Game::exportToPdf(const Glib::ustring& filename, const ExportPdfPreferences& pref) const
+    void Game::exportToPdf(const Glib::ustring& filename, const ExportPdfPreferences& pdf_pref, const ChartExportationPreferences& chart_pref) const
     {
         // Save the temporary file
         try
         {
-            PdfExportation::exportToPdf(this,pref,filename);
+            PdfExportation::exportToPdf(this,pdf_pref,chart_pref,filename);
         }
         catch (Glib::Exception& e)
         {
@@ -1136,7 +1136,7 @@ namespace csuper
         else
             title = _("Points on ") + title;
 
-        char fmt[3] = "b-";
+        char fmt[4] = "b+-";
         unsigned int i,j;
 
         slope_figure_t* slope_chart = slope_chart_create(title.c_str(), _("Turn"), _("Points"));
@@ -1221,30 +1221,38 @@ namespace csuper
             slope_figure_write_to_png(slope_chart,locale_filename.c_str(),chart_pref.width(),chart_pref.height());
             break;
         case PDF:
-            switch (static_cast<int>(pdf_pref.size()))
+            if (pdf_pref.pdfSizeForChart())
             {
-            case ExportPdfPreferences::A3:
-                width = 842;
-                height = 1190;
-                break;
-            case ExportPdfPreferences::A4:
-                width = 595;
-                height = 842;
-                break;
-            case ExportPdfPreferences::A5:
-                width = 420;
-                height = 595;
-                break;
-            default:
-                width = 0;
-                height = 0;
-                break;
+                switch (static_cast<int>(pdf_pref.size()))
+                {
+                case ExportPdfPreferences::A3:
+                    width = 842;
+                    height = 1190;
+                    break;
+                case ExportPdfPreferences::A4:
+                    width = 595;
+                    height = 842;
+                    break;
+                case ExportPdfPreferences::A5:
+                    width = 420;
+                    height = 595;
+                    break;
+                default:
+                    width = 0;
+                    height = 0;
+                    break;
+                }
+                if (pdf_pref.direction() == ExportPdfPreferences::LANDSCAPE)
+                {
+                    int tmp = width;
+                    width = height;
+                    height = tmp;
+                }
             }
-            if (pdf_pref.direction() == ExportPdfPreferences::LANDSCAPE)
+            else
             {
-                int tmp = width;
-                width = height;
-                height = tmp;
+                width = chart_pref.width();
+                height = chart_pref.height();
             }
             res = slope_figure_write_to_pdf(slope_chart,locale_filename.c_str(),width,height);
             break;

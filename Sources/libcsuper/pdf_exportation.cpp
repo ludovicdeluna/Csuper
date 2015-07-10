@@ -698,7 +698,7 @@ namespace csuper
         return PdfString((pdf_utf8*)(str.c_str()));
     }
 
-    void PdfExportation::exportToPdf(const Game* game, const ExportPdfPreferences& pref, const Glib::ustring& filename)
+    void PdfExportation::exportToPdf(const Game* game, const ExportPdfPreferences& pdf_pref, const ChartExportationPreferences& chart_pref, const Glib::ustring& filename)
     {
         PoDoFo::PdfError::EnableLogging(false);
         PoDoFo::PdfError::EnableDebug(false);
@@ -708,7 +708,7 @@ namespace csuper
         PdfExportation* pdf_table;
         try
         {
-            pdf_table = new PdfExportation(game,pref);
+            pdf_table = new PdfExportation(game,pdf_pref);
         }
         catch (PoDoFo::PdfError& e)
         {
@@ -728,15 +728,16 @@ namespace csuper
             throw PdfError(_("The PDF table cannot be created"));
         }
 
-        ChartExportationPreferences chart_pref(0,0,true);
-        ExportPdfPreferences chart_pdf_pref(pref);
-        chart_pdf_pref.setDirection(ExportPdfPreferences::LANDSCAPE);
 
         try
         {
-            game->exportToChart(filename + "1",chart_pref,chart_pdf_pref,Game::PDF);
-            chart_pref.setTotalPoints(false);
-            game->exportToChart(filename + "2",chart_pref,chart_pdf_pref,Game::PDF);
+            ExportPdfPreferences chart_pdf_pref(pdf_pref);
+            chart_pdf_pref.setDirection(ExportPdfPreferences::LANDSCAPE);
+            ChartExportationPreferences tmp_chart_pref(chart_pref);
+
+            game->exportToChart(filename + "1",tmp_chart_pref,chart_pdf_pref,Game::PDF);
+            tmp_chart_pref.setTotalPoints(false);
+            game->exportToChart(filename + "2",tmp_chart_pref,chart_pdf_pref,Game::PDF);
         }
         catch(csuper::PdfError& e)
         {

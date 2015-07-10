@@ -74,6 +74,7 @@ namespace csuper
         unsigned int margin_;      /*!< The margin of the pdf document */
         bool total_points_;        /*!< Indicate if we show the total points in each turn */
         bool ranking_;             /*!< Indicate if we show the ranking in each turn */
+        bool pdf_size_for_chart_;   /*!< Indicate if we use the pdf size for the chart*/
         bool embedded_font_;       /*!< Indicate if the font will be embedded */
         Glib::ustring font_name_;  /*!< The font name*/
 
@@ -105,6 +106,7 @@ namespace csuper
                              const unsigned int margin,
                              const bool total_points,
                              const bool ranking,
+                             const bool pdf_size_for_chart,
                              const bool embedded_font,
                              const Glib::ustring& font_name);
 
@@ -220,6 +222,15 @@ namespace csuper
          }
 
         /*!
+         *  \brief Set the pdf_size_for_chart_
+         *  \param the pdf_size_for_chart_
+         */
+         inline void setPdfSizeForChart(const bool pdf_size_for_chart)
+         {
+             pdf_size_for_chart_ = pdf_size_for_chart;
+         }
+
+        /*!
          *  \brief Set the font name
          *  \param the font name
          */
@@ -302,6 +313,15 @@ namespace csuper
          inline bool ranking() const
          {
              return ranking_;
+         }
+
+        /*!
+         *  \brief Return the pdf_size_for_chart
+         *  \return the pdf_size_for_chart
+         */
+         inline bool pdfSizeForChart() const
+         {
+             return pdf_size_for_chart_;
          }
 
         /*!
@@ -391,6 +411,15 @@ namespace csuper
          inline Glib::ustring rankingUstring() const
          {
              return boolToUstring(ranking_);
+         }
+
+        /*!
+         *  \brief Return the pdf_size_for_chart in a ustring
+         *  \return the ustring
+         */
+         inline Glib::ustring pdfSizeForChartUstring() const
+         {
+             return boolToUstring(pdf_size_for_chart_);
          }
 
         /*!

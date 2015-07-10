@@ -45,11 +45,20 @@
 			<Add option="`pkg-config --libs cairo`" />
 		</Linker>
 		<Unit filename="../Externals library/Slope/slope-config.h" />
+		<Unit filename="../Externals library/Slope/slope/custom-item.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/custom-item.h" />
 		<Unit filename="../Externals library/Slope/slope/figure.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Externals library/Slope/slope/figure.h" />
 		<Unit filename="../Externals library/Slope/slope/figure_p.h" />
+		<Unit filename="../Externals library/Slope/slope/funcplot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Externals library/Slope/slope/funcplot.h" />
+		<Unit filename="../Externals library/Slope/slope/funcplot_p.h" />
 		<Unit filename="../Externals library/Slope/slope/global.h" />
 		<Unit filename="../Externals library/Slope/slope/item.c">
 			<Option compilerVar="CC" />
@@ -89,11 +98,6 @@
 		</Unit>
 		<Unit filename="../Externals library/Slope/slope/xyaxis.h" />
 		<Unit filename="../Externals library/Slope/slope/xyaxis_p.h" />
-		<Unit filename="../Externals library/Slope/slope/xyitem.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="../Externals library/Slope/slope/xyitem.h" />
-		<Unit filename="../Externals library/Slope/slope/xyitem_p.h" />
 		<Unit filename="../Externals library/Slope/slope/xymetrics.c">
 			<Option compilerVar="CC" />
 		</Unit>

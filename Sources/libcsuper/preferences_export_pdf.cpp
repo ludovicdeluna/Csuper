@@ -44,18 +44,19 @@ namespace csuper
     // Constructor
     //
     ExportPdfPreferences::ExportPdfPreferences() : font_size_(12), size_(A4), direction_(PORTRAIT),
-        charset_(WINDOWS1252), margin_(40), total_points_(false), ranking_(false), embedded_font_(true),
-        font_name_("Times-Roman")
+        charset_(WINDOWS1252), margin_(40), total_points_(false), ranking_(false),
+        pdf_size_for_chart_(true), embedded_font_(true), font_name_("Times-Roman")
     {
 
     }
 
     ExportPdfPreferences::ExportPdfPreferences(const unsigned int font_size, const PageSize size, const PageDirection direction,
                                                const CharacterSet charset, const unsigned int margin, const bool total_points,
-                                               const bool ranking, const bool embedded_font, const ustring& font_name) :
-                                               font_size_(font_size), size_(size), direction_(direction), charset_(charset),
-                                               margin_(margin), total_points_(total_points), ranking_(ranking),
-                                               embedded_font_(embedded_font), font_name_(font_name)
+                                               const bool ranking,const bool pdf_size_for_chart, const bool embedded_font,
+                                               const ustring& font_name) : font_size_(font_size), size_(size), direction_(direction),
+                                               charset_(charset), margin_(margin), total_points_(total_points), ranking_(ranking),
+                                               pdf_size_for_chart_(pdf_size_for_chart) ,embedded_font_(embedded_font),
+                                               font_name_(font_name)
    {
 
    }
@@ -83,6 +84,9 @@ namespace csuper
         nextXmlElement(tmp_node);
         ranking_ = ustringToBool(static_cast<Element*>(tmp_node)->get_child_text()->get_content());
 
+        nextXmlElement(tmp_node);
+        pdf_size_for_chart_ = ustringToBool(static_cast<Element*>(tmp_node)->get_child_text()->get_content());
+
         if (version > 1)
         {
             nextXmlElement(tmp_node);
@@ -90,6 +94,11 @@ namespace csuper
 
             nextXmlElement(tmp_node);
             font_name_ = static_cast<Element*>(tmp_node)->get_child_text()->get_content();
+        }
+        else
+        {
+            embedded_font_ = true;
+            font_name_ = "Times-Roman";
         }
 
     }
@@ -103,7 +112,8 @@ namespace csuper
         return (fontSize() == pdf.fontSize() && size() == pdf.size() && direction() == pdf.direction()
                 && charset() == pdf.charset() && margin() == pdf.margin()
                 && totalPoints() == pdf.totalPoints() && ranking() == pdf.ranking()
-                && embeddedFont() == pdf.embeddedFont() && fontName() == pdf.fontName());
+                && embeddedFont() == pdf.embeddedFont() && fontName() == pdf.fontName()
+                && pdfSizeForChart() == pdf.pdfSizeForChart());
     }
 
     ustring ExportPdfPreferences::toUstring() const
@@ -112,7 +122,8 @@ namespace csuper
                                   "\n - Character set: %4\n - Margin: %5\n - Total points: %6\n - Ranking: %7"
                                   "\n - Embedded font: %8\n - Font name: %9"),
                                 fontSizeUstring(),sizeUstring(),directionUstring(),charsetUstring(),marginUstring(),
-                                totalPointsUstring(),rankingUstring(),embeddedFontUstring(),fontNameUstring());
+                                totalPointsUstring(),rankingUstring(),embeddedFontUstring(),fontNameUstring())
+            + ustring::compose(_("\n - PDF size for chart: %10"),pdfSizeForChartUstring());
     }
 
     ostream& operator<<(ostream& os, const ExportPdfPreferences& pdf)
@@ -145,6 +156,9 @@ namespace csuper
 
         Element *node_ranking = node->add_child("ranking");
         node_ranking->add_child_text(rankingUstring());
+
+        Element *node_pdf_size_for_chart = node->add_child("pdf_size_for_chart");
+        node_pdf_size_for_chart->add_child_text(pdfSizeForChartUstring());
 
         Element *node_embedded_font = node->add_child("embedded_font");
         node_embedded_font->add_child_text(embeddedFontUstring());

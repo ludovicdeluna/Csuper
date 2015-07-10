@@ -56,8 +56,8 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 `" />
 			<Add directory="../" />
 		</Compiler>
@@ -71,10 +71,14 @@
 		</Linker>
 		<Unit filename="../Sources/csuper-cli/command_line_option.cpp" />
 		<Unit filename="../Sources/csuper-cli/command_line_option.h" />
+		<Unit filename="../Sources/csuper-cli/game_cli.cpp" />
+		<Unit filename="../Sources/csuper-cli/game_cli.h" />
 		<Unit filename="../Sources/csuper-cli/main.cpp" />
 		<Unit filename="../Sources/csuper-cli/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="../Sources/csuper-cli/text_style.cpp" />
+		<Unit filename="../Sources/csuper-cli/text_style.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

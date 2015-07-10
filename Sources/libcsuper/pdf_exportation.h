@@ -225,11 +225,12 @@ namespace csuper
         /*!
          *  Export a csu structure to a pdf file
          * \param[in] game the game to be exported
-         * \param[in] pref the preferences
+         * \param[in] pdf_pref the pdf preferences
+         * \param[in] chart_pref the chart preferences
          * \param[in] filename the filename of the pdf file
          * \exception csuper::PdfError
          */
-        static void exportToPdf(const Game* game, const ExportPdfPreferences& pref, const Glib::ustring& filename);
+        static void exportToPdf(const Game* game, const ExportPdfPreferences& pdf_pref, const ChartExportationPreferences& chart_pref, const Glib::ustring& filename);
     };
 }
 

@@ -31,7 +31,7 @@
  *
  */
 
-#include "../libcsuper/libcsuper.h"
+#include "game_cli.h"
 #include <clocale>
 #include <iostream>
 #include <glibmm/i18n.h>
@@ -101,7 +101,7 @@ int main(int argc, char *argv[])
     case CommandLineOption::READ_FILE:
         try
         {
-            Game* game = new Game(clo.input());
+            GameCli* game = new GameCli(clo.input());
             cout << *game;
             delete game;
         }
@@ -126,7 +126,7 @@ int main(int argc, char *argv[])
         {
             Preferences* pref = Preferences::get();
             Game* game = new Game(clo.input());
-            game->exportToPdf(clo.output(),pref->exportPdf());
+            game->exportToPdf(clo.output(),pref->exportPdf(),pref->chartExportation());
             cout << ustring::compose(_("The file %1 was well exported to %2"),clo.input(),clo.output()) << endl;
             delete game;
             delete pref;

@@ -35,8 +35,8 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="-fpic" />
 			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 cairo `" />
 			<Add directory="../Externals library/Slope" />

@@ -48,7 +48,7 @@ namespace csuper
     */
     class Game
     {
-    private:
+    protected:
         static double version_;         /*!< The version */
         unsigned int size_max_name_;    /*!< The maximal size of a player name */
         Glib::Date date_;               /*!< The date of creation */
@@ -60,54 +60,14 @@ namespace csuper
         friend class PdfExportation;
 
 
+
+    private:
         enum ChartExportationType
         {
             PNG,
             SVG,
             PDF
         };
-
-
-        //
-        // Getter
-        //
-        /*!
-         *  \brief return the game configuration
-         *  \param index the index of the player
-         *  \return the player
-         *  \exception csuper::OutOfRange if index is greater the the number of player
-         */
-        Player &player(const unsigned int index);
-
-        /*!
-         *  \brief return the game configuration
-         *  \param index the index of the player
-         *  \return the player
-         *  \exception csuper::OutOfRange if index is greater the the number of player
-         */
-        const Player &player(const unsigned int index) const;
-
-        /*!
-         *  \brief return the game configuration
-         *  \param index the index of the player
-         *  \return the player
-         *  \exception csuper::NotFound if the plyer name doesn't exist
-         */
-        Player &player(const Glib::ustring& player_name)
-        {
-            return player(getPlayerIndex(player_name));
-        }
-
-        /*!
-         *  \brief return the game configuration
-         *  \param index the index of the player
-         *  \return the player
-         *  \exception csuper::NotFound if the plyer name doesn't exist
-         */
-        Player const &player(const Glib::ustring& player_name) const
-        {
-            return player(getPlayerIndex(player_name));
-        }
 
 
 
@@ -184,6 +144,9 @@ namespace csuper
         unsigned int nbTurnFirstLast(const unsigned int player_index, const bool first) const;
 
 
+
+
+
         //
         // Export
         //
@@ -214,6 +177,50 @@ namespace csuper
 
 
     protected:
+        //
+        // Getter
+        //
+        /*!
+         *  \brief return the player
+         *  \param index the index of the player
+         *  \return the player
+         *  \exception csuper::OutOfRange if index is greater the the number of player
+         */
+        Player &player(const unsigned int index);
+
+        /*!
+         *  \brief return the player
+         *  \param index the index of the player
+         *  \return the player
+         *  \exception csuper::OutOfRange if index is greater the the number of player
+         */
+        const Player &player(const unsigned int index) const;
+
+        /*!
+         *  \brief return the player
+         *  \param index the index of the player
+         *  \return the player
+         *  \exception csuper::NotFound if the player name doesn't exist
+         */
+        Player &player(const Glib::ustring& player_name)
+        {
+            return player(getPlayerIndex(player_name));
+        }
+
+        /*!
+         *  \brief return the player
+         *  \param index the index of the player
+         *  \return the player
+         *  \exception csuper::NotFound if the player name doesn't exist
+         */
+        Player const &player(const Glib::ustring& player_name) const
+        {
+            return player(getPlayerIndex(player_name));
+        }
+
+
+
+
         //
         // To Ustring
         //
@@ -753,11 +760,12 @@ namespace csuper
 
         /*!
          *  Export to a pdf file
-         * \param[in] pref the preferences
+         * \param[in] pdf_pref the pdf preferences
+         * \param[in] chart_pref the chart preferences
          * \param[in] filename the filename of the pdf file
          * \exception csuper::PdfError
          */
-        void exportToPdf(const Glib::ustring& filename, const ExportPdfPreferences& pref) const;
+        void exportToPdf(const Glib::ustring& filename, const ExportPdfPreferences& pdf_pref, const ChartExportationPreferences& chart_pref) const;
 
         /*!
          *  Export to a SVG file
