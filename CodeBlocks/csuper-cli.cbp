@@ -6,20 +6,76 @@
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
-			<Target title="Debug">
+			<Target title="Debug Unix">
 				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
-				<Option object_output="../Compilation/obj/Debug" />
+				<Option object_output="../Compilation/obj/Debug_Unix" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="curses" />
+				</Linker>
+			</Target>
+			<Target title="Release Unix">
+				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Release_Unix" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="curses" />
+				</Linker>
+			</Target>
+			<Target title="Debug Portable Unix">
+				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Debug_Portable_Unix" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DPORTABLE" />
+				</Compiler>
+				<Linker>
+					<Add library="curses" />
+				</Linker>
+			</Target>
+			<Target title="Release Portable Unix">
+				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Release_Portable_Unix" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DPORTABLE" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add library="curses" />
+				</Linker>
+			</Target>
+			<Target title="Debug Windows">
+				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Debug_Windows" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-g" />
 				</Compiler>
 			</Target>
-			<Target title="Release">
+			<Target title="Release Windows">
 				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
-				<Option object_output="../Compilation/obj/Release" />
+				<Option object_output="../Compilation/obj/Release_Windows" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -29,10 +85,10 @@
 					<Add option="-s" />
 				</Linker>
 			</Target>
-			<Target title="Debug portable">
+			<Target title="Debug Portable Windows">
 				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
-				<Option object_output="../Compilation/obj/Debug" />
+				<Option object_output="../Compilation/obj/Debug_Portable_Windows" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -40,10 +96,10 @@
 					<Add option="-DPORTABLE" />
 				</Compiler>
 			</Target>
-			<Target title="Release portable">
+			<Target title="Release Portable Windows">
 				<Option output="../csuper-cli" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
-				<Option object_output="../Compilation/obj/Release" />
+				<Option object_output="../Compilation/obj/Release_Portable_Windows" />
 				<Option type="1" />
 				<Option compiler="gcc" />
 				<Compiler>
@@ -74,9 +130,17 @@
 		<Unit filename="../Sources/csuper-cli/game_cli.cpp" />
 		<Unit filename="../Sources/csuper-cli/game_cli.h" />
 		<Unit filename="../Sources/csuper-cli/main.cpp" />
+		<Unit filename="../Sources/csuper-cli/menu.cpp" />
+		<Unit filename="../Sources/csuper-cli/menu.h" />
 		<Unit filename="../Sources/csuper-cli/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
+			<Option target="Debug Windows" />
+			<Option target="Release Windows" />
+			<Option target="Debug Portable Windows" />
+			<Option target="Release Portable Windows" />
 		</Unit>
+		<Unit filename="../Sources/csuper-cli/share.cpp" />
+		<Unit filename="../Sources/csuper-cli/share.h" />
 		<Unit filename="../Sources/csuper-cli/text_style.cpp" />
 		<Unit filename="../Sources/csuper-cli/text_style.h" />
 		<Extensions>

@@ -48,12 +48,30 @@ namespace csuper
     //
     // Macro
     //
+    /*!
+     * \def CSUPER_MAJOR_VERSION
+     * Define the major version of csuper
+     */
+    #define CSUPER_MAJOR_VERSION 4
+
+    /*!
+     * \def CSUPER_MINOR_VERSION
+     * Define the minor version of csuper
+     */
+    #define CSUPER_MINOR_VERSION 3
+
+    /*!
+     * \def CSUPER_MICRO_VERSION
+     * Define the micro version of csuper
+     */
+    #define CSUPER_MICRO_VERSION 0
 
     /*!
      * \def CSUPER_VERSION
      * Define the version of csuper
      */
     #define CSUPER_VERSION "4.3.0"
+
 
     /*!
      * \def CSUPER_DIRECTORY_NAME

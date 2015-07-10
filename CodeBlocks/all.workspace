@@ -5,7 +5,7 @@
 			<Depends filename="libslope.cbp" />
 		</Project>
 		<Project filename="csuper-cli.cbp">
-			<Depends filename="libcsuper.cbp" />
+			<Depends filename="/libcsuper.cbp" />
 		</Project>
 		<Project filename="libslope.cbp" />
 	</Workspace>

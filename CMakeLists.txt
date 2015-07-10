@@ -11,7 +11,16 @@ IF(PORTABLE MATCHES "TRUE")
 ENDIF()
 
 #
-# Glibmm, LibXML++
+# Delete depreciated warning on GCC because of Glibmm
+#
+if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 5.1)
+    	set(CMAKE_CXX_FLAGS "-Wno-deprecated-declarations")
+    endif()
+endif()
+
+#
+# Glibmm, LibXML++, Cairo
 #
 
 find_package(
@@ -28,19 +37,27 @@ pkg_check_modules(
 	REQUIRED libxml++-2.6
 )
 
+pkg_check_modules(
+	CAIRO
+	REQUIRED cairo
+)
+
 include_directories(
 	${XMLPP_INCLUDE_DIRS}
 	${GLIBMM_INCLUDE_DIRS}
+	${CAIRO_INCLUDE_DIRS}
 )
 link_directories(
 	${XMLPP_LIBRARY_DIRS}
 	${GLIBMM_LIBRARY_DIRS}
+	${CAIRO_LIBRARY_DIRS}
 	${PROJECT_BINARY_DIR}
 )
 
 add_definitions(
 	${XMLPP_CFLAGS_OTHER}
 	${GLIBMM_CFLAGS_OTHER}
+	${CAIRO_CFLAGS_OTHER}
 )
 
 #
@@ -52,21 +69,9 @@ set(SLOPE_HAVE_PANGO 0)
 
 set(CMAKE_POSITION_INDEPENDENT_CODE ON) 
 
-pkg_check_modules(
-	CAIRO
-	REQUIRED cairo
-)
 
 include_directories(
-	${CAIRO_INCLUDE_DIRS}
 	"Externals library/Slope"
-)
-link_directories(
-	${CAIRO_LIBRARY_DIRS}
-)
-
-add_definitions(
-	${CAIRO_CFLAGS_OTHER}
 )
 
 CONFIGURE_FILE (
@@ -160,10 +165,17 @@ IF(CLI MATCHES "TRUE")
 		muparser
 		hpdf
 	)
+	
+	IF(UNIX)
+		target_link_libraries(
+			csuper-cli 
+			curses
+		)
+	ENDIF() # UNIX
 
 	target_compile_features(
 		csuper-cli
 		PRIVATE cxx_range_for
 	)
 
-ENDIF()
+ENDIF() # CLI

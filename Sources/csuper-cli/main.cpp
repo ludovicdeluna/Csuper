@@ -31,11 +31,14 @@
  *
  */
 
-#include "game_cli.h"
 #include <clocale>
 #include <iostream>
 #include <glibmm/i18n.h>
+
 #include "command_line_option.h"
+#include "game_cli.h"
+#include "menu.h"
+
 
 using namespace csuper;
 using namespace std;
@@ -46,7 +49,7 @@ using namespace Glib;
  */
 void terminateFunction()
 {
-    cerr << _("Please report the bug to my git repository (https://git.framasoft.org/Dalan94/Csuper).") << endl;
+    cerr << ustring(_("Please report the bug to my git repository (https://git.framasoft.org/Dalan94/Csuper).")) << endl;
     abort();
 }
 
@@ -248,10 +251,23 @@ int main(int argc, char *argv[])
         break;
 
     case CommandLineOption::RUN:
-        cout << "Run" << endl;
+        try
+        {
+            Menu menu;
+            menu.main();
+        }
+        catch (std::exception& e)
+        {
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
         break;
     }
-
 
     return EXIT_SUCCESS;
 }
