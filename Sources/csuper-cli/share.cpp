@@ -36,6 +36,7 @@
 #include <iostream>
 #include <glibmm.h>
 #include <glibmm/i18n.h>
+#include "cin.h"
 
 #ifdef __unix__
 #include <unistd.h>
@@ -53,18 +54,7 @@ using namespace Glib;
 void systemPause()
 {
     cout << ustring(_("Press ENTER to continue"));
-    cleanStdin();
-}
-
-
-void cleanStdin()
-{
-    int c;
-
-    do
-    {
-        c = getchar();
-    } while (c != '\n' && c != EOF);
+    Cin::getChar();
 }
 
 
@@ -106,6 +96,7 @@ void clearScreen()
     // Move the cursor home
     SetConsoleCursorPosition( hStdOut, homeCoords );
     #else
-    cerr << ustring(_("Your environment cannot permit to clear the screen")) << endl;
+    cerr << ustring(_("Your environment cannot permit to clear the screen.")) << endl;
+    cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
     #endif // __unix__
 }

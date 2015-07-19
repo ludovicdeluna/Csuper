@@ -125,6 +125,8 @@
 			<Add library="libcsuper" />
 			<Add directory="../" />
 		</Linker>
+		<Unit filename="../Sources/csuper-cli/cin.cpp" />
+		<Unit filename="../Sources/csuper-cli/cin.h" />
 		<Unit filename="../Sources/csuper-cli/command_line_option.cpp" />
 		<Unit filename="../Sources/csuper-cli/command_line_option.h" />
 		<Unit filename="../Sources/csuper-cli/game_cli.cpp" />

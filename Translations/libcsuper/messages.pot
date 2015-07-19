@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-27 22:18+0200\n"
+"POT-Creation-Date: 2015-07-19 19:05+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,306 +53,298 @@ msgstr ""
 msgid "Out of range: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:97
+#: Sources/libcsuper/game.cpp:95
 #: Sources/libcsuper/list_game_configuration.cpp:62
 #: Sources/libcsuper/preferences.cpp:84
 msgid "Cannot open the file %1"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:106
+#: Sources/libcsuper/game.cpp:104
 msgid ""
 "This version of Csuper only support game configuration file version of %1"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:204
+#: Sources/libcsuper/game.cpp:202
 msgid ""
 "The ranking function should only be used in a turn based game when a "
 "specific turn is specify"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:207 Sources/libcsuper/game.cpp:564
-#: Sources/libcsuper/game.cpp:605 Sources/libcsuper/game.cpp:624
+#: Sources/libcsuper/game.cpp:205 Sources/libcsuper/game.cpp:562
+#: Sources/libcsuper/game.cpp:603 Sources/libcsuper/game.cpp:622
 #: Sources/libcsuper/player.cpp:217
 msgid "Cannot access to the %1th turn, there is only %2 turn"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:234 Sources/libcsuper/game.cpp:242
+#: Sources/libcsuper/game.cpp:232 Sources/libcsuper/game.cpp:240
 msgid "Cannot access to the %1th player, there is only %2 player"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:295
+#: Sources/libcsuper/game.cpp:293
 msgid ""
 "Csu file\n"
 "Created on the "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:296
+#: Sources/libcsuper/game.cpp:294
 msgid ""
 "\n"
 "File's version: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:297
+#: Sources/libcsuper/game.cpp:295
 msgid ""
 "\n"
 "Maximum size of the names: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:298
+#: Sources/libcsuper/game.cpp:296
 msgid ""
 "\n"
 "Number of players: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:299
+#: Sources/libcsuper/game.cpp:297
 msgid ""
 "\n"
 "Maximum number of turns: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:307
+#: Sources/libcsuper/game.cpp:305
 msgid " is the distributor\n"
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/libcsuper/game.cpp:318
+#: Sources/libcsuper/game.cpp:316
 msgid "Names   | "
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | and without the %1 must be six
-#: Sources/libcsuper/game.cpp:361
+#: Sources/libcsuper/game.cpp:359
 msgid "Turn %1 |"
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/libcsuper/game.cpp:389
+#: Sources/libcsuper/game.cpp:387
 msgid "Total   |"
 msgstr ""
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/libcsuper/game.cpp:412
+#: Sources/libcsuper/game.cpp:410
 msgid "Ranking |"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:450 Sources/libcsuper/game.cpp:460
+#: Sources/libcsuper/game.cpp:448 Sources/libcsuper/game.cpp:458
 msgid "Player %1 is not found in the game"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:513
+#: Sources/libcsuper/game.cpp:511
 msgid "This new turn function should only be used in a non turn based game"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:526
+#: Sources/libcsuper/game.cpp:524
 msgid ""
 "The new turn function should only be used in a turn based game when a vector "
 "of points is given"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:529 Sources/libcsuper/game.cpp:636
+#: Sources/libcsuper/game.cpp:527 Sources/libcsuper/game.cpp:634
 msgid "There is %1 points and %2 player in the game"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:561
+#: Sources/libcsuper/game.cpp:559
 msgid ""
 "The last ranking function should only be used in a turn based game when a "
 "specific turn is specified"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:602
+#: Sources/libcsuper/game.cpp:600
 msgid ""
 "The delete turn function should only be used in a turn based game when a "
 "player is specified"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:621
+#: Sources/libcsuper/game.cpp:619
 msgid ""
 "The delete turn function should only be used in a non turn based game when a "
 "player is specified"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:740
+#: Sources/libcsuper/game.cpp:738
 msgid "Error while writing the CSU file %1"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:760
+#: Sources/libcsuper/game.cpp:758
 msgid "Error while rewriting the file "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:771
+#: Sources/libcsuper/game.cpp:769
 msgid "The nbTurnBestWorst function should only be used in a turn based game"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:802
+#: Sources/libcsuper/game.cpp:800
 msgid "The nbTurnFirstLast function should only be used in a turn based game"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:836
+#: Sources/libcsuper/game.cpp:834
 msgid "Error while exporting the game into a csv file, bad filename: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:843
+#: Sources/libcsuper/game.cpp:841
 msgid "Csu file;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:844
+#: Sources/libcsuper/game.cpp:842
 msgid "Created on the;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:845
+#: Sources/libcsuper/game.cpp:843
 msgid "File's version;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:846
+#: Sources/libcsuper/game.cpp:844
 msgid "Maximum size of the names;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:847
+#: Sources/libcsuper/game.cpp:845
 msgid "Number of players;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:848
+#: Sources/libcsuper/game.cpp:846
 msgid "Maximum number of turns;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:851
+#: Sources/libcsuper/game.cpp:849
 msgid "Name of the game configuration;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:852
+#: Sources/libcsuper/game.cpp:850
 msgid "Use of a maximum score;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:853
+#: Sources/libcsuper/game.cpp:851
 msgid "Initial score;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:854
+#: Sources/libcsuper/game.cpp:852
 msgid "Number of decimals displayed;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:855
+#: Sources/libcsuper/game.cpp:853
 msgid "The first has the highest score;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:856
+#: Sources/libcsuper/game.cpp:854
 msgid "Turn-based game;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:857
+#: Sources/libcsuper/game.cpp:855
 msgid "Use of a distributor;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:858
+#: Sources/libcsuper/game.cpp:856
 msgid "Maximum/minimum number of points;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:863 Sources/libcsuper/game.cpp:923
+#: Sources/libcsuper/game.cpp:861 Sources/libcsuper/game.cpp:921
 msgid "Names;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:867
+#: Sources/libcsuper/game.cpp:865
 msgid "Mean points;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:871
+#: Sources/libcsuper/game.cpp:869
 msgid "Number of turn;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:876
+#: Sources/libcsuper/game.cpp:874
 msgid "Number of turn with the best score;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:880
+#: Sources/libcsuper/game.cpp:878
 msgid "Number of turn with the worst score;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:884
+#: Sources/libcsuper/game.cpp:882
 msgid "Number of turn first;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:888
+#: Sources/libcsuper/game.cpp:886
 msgid "Number of turn last;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:894
+#: Sources/libcsuper/game.cpp:892
 msgid "Names"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:898
+#: Sources/libcsuper/game.cpp:896
 msgid "Legend;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:900
+#: Sources/libcsuper/game.cpp:898
 msgid "Points in the turn;Points;Ranking;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:904 Sources/libcsuper/player.cpp:139
+#: Sources/libcsuper/game.cpp:902 Sources/libcsuper/player.cpp:139
 msgid "Turn "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:927
+#: Sources/libcsuper/game.cpp:925
 msgid "Total points;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:931
+#: Sources/libcsuper/game.cpp:929
 msgid "Ranking;"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:949 Sources/libcsuper/game.cpp:1058
-#: Sources/libcsuper/game.cpp:1094
+#: Sources/libcsuper/game.cpp:947 Sources/libcsuper/game.cpp:1056
+#: Sources/libcsuper/game.cpp:1092
 msgid "Error while exporting the game into a m file, bad filename: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:988 Sources/libcsuper/pdf_exportation.cpp:431
+#: Sources/libcsuper/game.cpp:986 Sources/libcsuper/pdf_exportation.cpp:425
 msgid "Total points"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:989 Sources/libcsuper/game.cpp:1031
-#: Sources/libcsuper/game.cpp:1209
+#: Sources/libcsuper/game.cpp:987 Sources/libcsuper/game.cpp:1029
+#: Sources/libcsuper/game.cpp:1142
 msgid "Turn"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:990 Sources/libcsuper/game.cpp:1030
-#: Sources/libcsuper/game.cpp:1032 Sources/libcsuper/game.cpp:1100
-#: Sources/libcsuper/game.cpp:1209 Sources/libcsuper/pdf_exportation.cpp:326
-#: Sources/libcsuper/pdf_exportation.cpp:339
-#: Sources/libcsuper/pdf_exportation.cpp:350
+#: Sources/libcsuper/game.cpp:988 Sources/libcsuper/game.cpp:1028
+#: Sources/libcsuper/game.cpp:1030 Sources/libcsuper/game.cpp:1098
+#: Sources/libcsuper/game.cpp:1142 Sources/libcsuper/pdf_exportation.cpp:327
+#: Sources/libcsuper/pdf_exportation.cpp:340
+#: Sources/libcsuper/pdf_exportation.cpp:351
 msgid "Points"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:1015
+#: Sources/libcsuper/game.cpp:1013
 msgid "Mean score of %1: "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:1064
+#: Sources/libcsuper/game.cpp:1062
 msgid "Players"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:1099
+#: Sources/libcsuper/game.cpp:1097
 msgid "Number of turns"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:1101 Sources/libcsuper/game.cpp:1204
+#: Sources/libcsuper/game.cpp:1099 Sources/libcsuper/game.cpp:1137
 msgid "Points on "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:1136 Sources/libcsuper/game.cpp:1138
-#: Sources/libcsuper/game.cpp:1140 Sources/libcsuper/game.cpp:1174
-#: Sources/libcsuper/game.cpp:1176 Sources/libcsuper/game.cpp:1178
-#: Sources/libcsuper/game.cpp:1190 Sources/libcsuper/game.cpp:1192
-#: Sources/libcsuper/game.cpp:1194
-msgid "The temporary file %1 cannot be deleted"
-msgstr ""
-
-#: Sources/libcsuper/game.cpp:1142 Sources/libcsuper/game.cpp:1180
+#: Sources/libcsuper/game.cpp:1126
 msgid "The file %1 cannot be created"
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:1202
+#: Sources/libcsuper/game.cpp:1135
 msgid "Total points on "
 msgstr ""
 
-#: Sources/libcsuper/game.cpp:1329
+#: Sources/libcsuper/game.cpp:1272
 msgid "Error while exporting the game into chart file, bad filename"
 msgstr ""
 
@@ -408,100 +400,106 @@ msgid ""
 "The game configuration %1 was not found in the list of game configuration"
 msgstr ""
 
-#: Sources/libcsuper/list_game_configuration.cpp:277
-#: Sources/libcsuper/list_game_configuration.cpp:318
+#: Sources/libcsuper/list_game_configuration.cpp:289
+#: Sources/libcsuper/list_game_configuration.cpp:329
 msgid "Error while writing the list of game configuration file %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:76
-msgid "The font doesn't exist"
-msgstr ""
-
-#: Sources/libcsuper/pdf_exportation.cpp:144
+#: Sources/libcsuper/pdf_exportation.cpp:141
 msgid "File created on the %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:149
+#: Sources/libcsuper/pdf_exportation.cpp:146
 msgid "Number of players: %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:154
+#: Sources/libcsuper/pdf_exportation.cpp:151
 msgid "Maximum number of turns: %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:159
+#: Sources/libcsuper/pdf_exportation.cpp:156
 msgid "Name of the game configuration: %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:178
+#: Sources/libcsuper/pdf_exportation.cpp:174
 msgid "Page 1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:237
+#: Sources/libcsuper/pdf_exportation.cpp:240
 msgid "Page %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:282
-#: Sources/libcsuper/pdf_exportation.cpp:426
-#: Sources/libcsuper/pdf_exportation.cpp:465
+#: Sources/libcsuper/pdf_exportation.cpp:285
+#: Sources/libcsuper/pdf_exportation.cpp:420
+#: Sources/libcsuper/pdf_exportation.cpp:454
 msgid "Name"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:318
+#: Sources/libcsuper/pdf_exportation.cpp:319
 msgid "Legend"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:328
-#: Sources/libcsuper/pdf_exportation.cpp:341
+#: Sources/libcsuper/pdf_exportation.cpp:329
+#: Sources/libcsuper/pdf_exportation.cpp:342
 msgid "Total"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:330
-#: Sources/libcsuper/pdf_exportation.cpp:352
-#: Sources/libcsuper/pdf_exportation.cpp:439
+#: Sources/libcsuper/pdf_exportation.cpp:331
+#: Sources/libcsuper/pdf_exportation.cpp:353
+#: Sources/libcsuper/pdf_exportation.cpp:433
 msgid "Ranking"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:371
+#: Sources/libcsuper/pdf_exportation.cpp:369
 msgid "Turn %1"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:474
+#: Sources/libcsuper/pdf_exportation.cpp:463
 msgid "Nb turn"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:483
+#: Sources/libcsuper/pdf_exportation.cpp:472
 msgid "Mean points"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:494
+#: Sources/libcsuper/pdf_exportation.cpp:483
 msgid "Nb turn best"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:503
+#: Sources/libcsuper/pdf_exportation.cpp:492
 msgid "Nb turn worst"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:512
+#: Sources/libcsuper/pdf_exportation.cpp:501
 msgid "Nb turn first"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:521
+#: Sources/libcsuper/pdf_exportation.cpp:510
 msgid "Nb turn last"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:618
-#: Sources/libcsuper/pdf_exportation.cpp:633
-#: Sources/libcsuper/pdf_exportation.cpp:654
-#: Sources/libcsuper/pdf_exportation.cpp:667
-msgid "Conversion from UTF-8 to ISO8859-15 failed"
+#: Sources/libcsuper/pdf_exportation.cpp:684
+#: Sources/libcsuper/pdf_exportation.cpp:686
+msgid "Error when deleting %1: "
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:788
+#: Sources/libcsuper/pdf_exportation.cpp:716
+msgid "The PDF document cannot be created"
+msgstr ""
+
+#: Sources/libcsuper/pdf_exportation.cpp:728
 msgid "The PDF table cannot be created"
 msgstr ""
 
-#: Sources/libcsuper/pdf_exportation.cpp:799
+#: Sources/libcsuper/pdf_exportation.cpp:747
+msgid "The PDF charts cannot be save"
+msgstr ""
+
+#: Sources/libcsuper/pdf_exportation.cpp:762
+msgid "The PDF charts cannot be merge to the table"
+msgstr ""
+
+#: Sources/libcsuper/pdf_exportation.cpp:774
 msgid "The PDF table cannot be save"
 msgstr ""
 
@@ -563,7 +561,7 @@ msgid ""
 " - Open: %1"
 msgstr ""
 
-#: Sources/libcsuper/preferences_export_pdf.cpp:98
+#: Sources/libcsuper/preferences_export_pdf.cpp:121
 msgid ""
 "Export pdf preferences preferences:\n"
 " - Font size: %1\n"
@@ -572,7 +570,15 @@ msgid ""
 " - Character set: %4\n"
 " - Margin: %5\n"
 " - Total points: %6\n"
-" - Ranking: %7"
+" - Ranking: %7\n"
+" - Embedded font: %8\n"
+" - Font name: %9"
+msgstr ""
+
+#: Sources/libcsuper/preferences_export_pdf.cpp:126
+msgid ""
+"\n"
+" - PDF size for chart: %1"
 msgstr ""
 
 #: Sources/libcsuper/preferences_main_window_display.cpp:81
@@ -607,14 +613,10 @@ msgstr ""
 msgid "Creation of the game configuration file."
 msgstr ""
 
-#: Sources/libcsuper/share.cpp:111
-msgid "Error while clearing the screen."
-msgstr ""
-
-#: Sources/libcsuper/share.cpp:117
+#: Sources/libcsuper/share.cpp:101
 msgid "yes"
 msgstr ""
 
-#: Sources/libcsuper/share.cpp:119
+#: Sources/libcsuper/share.cpp:103
 msgid "no"
 msgstr ""

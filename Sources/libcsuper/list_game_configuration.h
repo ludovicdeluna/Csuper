@@ -88,7 +88,7 @@ namespace csuper
          *  \return the game configuration
          *  \exception csuper::OutOfRange if i is greater the the number of game configuration
          */
-        const GameConfiguration &operator[](const int i) const;
+        const GameConfiguration &operator[](const unsigned int i) const;
 
         /*!
          *  \brief Access to the reference of the game configuration at position i
@@ -96,13 +96,13 @@ namespace csuper
          *  \return the game configuration
          *  \exception csuper::OutOfRange if i is greater the the number of game configuration
          */
-        GameConfiguration &operator[](const int i);
+        GameConfiguration &operator[](const unsigned int i);
 
         /*!
          *  \brief Get the number of game configuration the contain the object
          *  \return the number of game configuration the contain the object
          */
-        int size() const;
+        unsigned int size() const;
 
         /*!
          *  \brief Add a game configuration to the object
@@ -122,14 +122,14 @@ namespace csuper
          *  \param list_game_config the game configuration
          *  \param indexes of the games configuration that will be add
          */
-        void add(const ListGameConfiguration& list_game_config,const std::vector<int>& indexes);
+        void add(const ListGameConfiguration& list_game_config,const std::vector<unsigned int>& indexes);
 
         /*!
          *  \brief remove a game configuration from the object
          *  \param i the index of the game configuration
          *  \exception csuper::OutOfRange if i is greater the the number of game configuration
          */
-        void remove(const int i);
+        void remove(unsigned const int i);
 
         /*!
          *  \brief remove a game configuration from the object and delete it
@@ -157,6 +157,11 @@ namespace csuper
         Glib::ustring toUstring() const;
 
         /*!
+         *  \brief Convert the list of game configuration to a ustring
+         */
+        Glib::ustring toUstringName() const;
+
+        /*!
          *  \brief Operator <<
          *  \param os the ostream
          *  \param list_game_config the list of game configuration
@@ -177,7 +182,7 @@ namespace csuper
          *  \param indexes of the games configuration that will be write to the file
          *  \exception csuper::FileError if bad filename
          */
-        void writeToFile(const Glib::ustring filename, const std::vector<int>& indexes) const;
+        void writeToFile(const Glib::ustring filename, const std::vector<unsigned int>& indexes) const;
 
         /*!
          *  \brief Write the list of game configuration to the file which contain the main list

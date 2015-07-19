@@ -47,7 +47,7 @@ namespace csuper
     DirectoryPreferences::DirectoryPreferences()
     {
         if (Portable::getPortable())
-            open_ = "";
+            open_ = ".";
         else
             open_ = get_home_dir();
     }

@@ -35,7 +35,9 @@
 
 #include "../libcsuper/libcsuper.h"
 
-
+/*! \class Menu
+*   \brief This class is used for the main menu
+*/
 class Menu
 {
 private:
@@ -43,14 +45,28 @@ private:
     csuper::ListGameConfiguration* list_game_config_;   /*!< The list of game configuration */
 
     enum Main{
-        NEW=1,
-        LOAD=2,
-        PRINT=3,
-        DELETE=4,
-        LIST=5,
-        EXPORT=6,
-        PREF=7,
-        QUIT=8
+        NEW = 1,
+        LOAD = 2,
+        PRINT = 3,
+        DELETE = 4,
+        LIST = 5,
+        EXPORT = 6,
+        PREF = 7,
+        ABOUT = 8,
+        QUIT = 9
+    };
+
+    enum Preferences{
+        NEW_GAME_CONF = 1,
+        REMOVE_GAME_CONF = 2,
+        PRINT_LIST_GAME_CONF = 3,
+        PRINT_GAME_CONF = 4,
+        EXPORT_GAME_CONF = 5,
+        IMPORT_GAME_CONF = 6,
+        PDF_PREFERENCES = 7,
+        CHANGE_OPEN_PATH = 8,
+        READ_OPEN_PATH = 9,
+        BACK_MAIN_MENU = 10
     };
 
     /*!
@@ -66,6 +82,86 @@ private:
      *  \brief List all files in the directory
      */
     void listFile() const;
+
+    /*!
+     *  \brief About
+     */
+    void about() const;
+
+    /*!
+     *  \brief Delete a CSU file
+     */
+    void deleteCsuFile() const;
+
+    /*!
+     *  Ask a filename and display it.
+     */
+    void displayFile() const;
+
+    /*!
+     *  Export a csu file
+     */
+    void exportCsu() const;
+
+    /*!
+     *  Preferences menu of csuper.
+     */
+    void preferencesMenu() const;
+
+    /*!
+     *  Change the open path
+     */
+    void changeOpenPath() const;
+
+    /*!
+     *  Read the open path and display it.
+     */
+    void readOpenPath() const;
+
+    /*!
+     *  Print the list of game configuration
+     */
+    void printListGameConfig() const;
+
+    /*!
+     *  Ask and print a game configuration
+     */
+    void printGameConfig() const;
+
+    /*!
+     *  Add a new game configuration
+     */
+    void newGameConfig() const;
+
+    /*!
+     *  Ask and remove a game configuration
+     */
+    void removeGameConfig() const;
+
+    /*!
+     *  Export game configuration in one file.
+     */
+    void exportListGameConfig() const;
+
+    /*!
+     *  Import game configuration in one file.
+     */
+    void importListGameConfig() const;
+
+    /*!
+     *  Change the export to pdf preferences
+     */
+    void changePdfPreferences() const;
+
+
+    //
+    // Ask function
+    //
+    /*!
+     *  \brief Ask and save the filename
+     *  \return filename the filename
+     */
+    Glib::ustring askFilename() const;
 
 public:
     //

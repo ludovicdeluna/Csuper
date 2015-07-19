@@ -55,6 +55,13 @@ private:
      */
     Glib::ustring resetTextStyle() const;
 
+    /*!
+     *  Print a string center into a space of three tabulations.
+     * \param str a ustring
+     * \return a ustring
+     */
+    Glib::ustring printUstringThreeTabs(const Glib::ustring& str) const;
+
 protected:
     /*!
      *  \brief Convert the names to a ustring and calculate the line size
@@ -103,6 +110,30 @@ public:
      *  \brief Destructor
      */
     virtual ~GameCli();
+
+
+
+    //
+    // Operator
+    //
+    /*!
+     *  \brief Operator <<
+     *  \param os the ostream
+     *  \param game_cli the game_cli
+     *  \return the ostream
+     */
+    friend std::ostream& operator<<(std::ostream& os, const GameCli& game_cli);
+
+
+
+    //
+    // Function
+    //
+    /*!
+     *  \brief Convert to a game over ustring
+     *  \return the ustring
+     */
+    Glib::ustring toUstringGameOver() const;
 };
 
 #endif // GAMECLI_H

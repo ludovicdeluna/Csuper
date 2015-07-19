@@ -87,14 +87,14 @@ int main(int argc, char *argv[])
     }
     catch (std::exception& e)
     {
-        cerr << e.what() << endl;
-        cerr << _("Error when initializing csuper") << endl;
+        cout << e.what() << endl;
+        cout << _("Error when initializing csuper") << endl;
         exit(EXIT_FAILURE);
     }
     catch (Glib::Exception& e)
     {
-        cerr << e.what() << endl;
-        cerr << _("Error when initializing csuper") << endl;
+        cout << e.what() << endl;
+        cout << _("Error when initializing csuper") << endl;
         exit(EXIT_FAILURE);
     }
 
@@ -110,12 +110,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         catch (Glib::Exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -136,12 +136,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         catch (Glib::Exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -158,12 +158,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         catch (Glib::Exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -180,12 +180,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         catch (Glib::Exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -200,12 +200,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         catch (Glib::Exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -220,12 +220,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         catch (Glib::Exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -240,12 +240,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         catch (Glib::Exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;
@@ -258,12 +258,12 @@ int main(int argc, char *argv[])
         }
         catch (std::exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         catch (Glib::Exception& e)
         {
-            cerr << e.what() << endl;
+            cout << e.what() << endl;
             exit(EXIT_FAILURE);
         }
         break;

@@ -74,7 +74,7 @@ namespace csuper
         unsigned int margin_;      /*!< The margin of the pdf document */
         bool total_points_;        /*!< Indicate if we show the total points in each turn */
         bool ranking_;             /*!< Indicate if we show the ranking in each turn */
-        bool pdf_size_for_chart_;   /*!< Indicate if we use the pdf size for the chart*/
+        bool pdf_size_for_chart_;  /*!< Indicate if we use the pdf size for the chart*/
         bool embedded_font_;       /*!< Indicate if the font will be embedded */
         Glib::ustring font_name_;  /*!< The font name*/
 

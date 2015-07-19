@@ -12,6 +12,7 @@
 *.app
 CMakeFiles
 Compilation
+.csuper
 Locales
 *.layout
 *.depend

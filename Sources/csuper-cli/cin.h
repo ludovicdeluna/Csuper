@@ -1,12 +1,12 @@
 /*!
- * \file    share.h
+ * \file    Cin.h
  * \author  Remi BERTHO
- * \date    10/07/15
+ * \date    18/07/15
  * \version 4.3.0
  */
 
 /*
- * share.h
+ * Cin.h
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
@@ -30,21 +30,55 @@
  *
  */
 
-#ifndef CLI_SHARE_H_INCLUDED
-#define CLI_SHARE_H_INCLUDED
+#ifndef CIN_H_INCLUDED
+#define CIN_H_INCLUDED
+
+#include "share.h"
+#include <glibmm.h>
+
+/*! \class Cin
+*   \brief This class is for Cin
+*/
+class Cin
+{
+public:
+    /*!
+     *  Do a keyboarding of a string
+     * \return the ustring
+     */
+    static Glib::ustring getUstring();
+
+    /*!
+     *  Do a keyboarding of a int
+     * \return the int
+     */
+    static int getInt();
+
+    /*!
+     *  Do a keyboarding of a unsigned int
+     * \return the unsigned int
+     */
+    static unsigned int getUnsignedInt();
+
+    /*!
+     *  Do a keyboarding of a double
+     * \return the double
+     */
+    static double getDouble();
+
+    /*!
+     *  Do a keyboarding of a char
+     * \return the char
+     */
+    static char getChar();
+
+private:
+    /*!
+     *  Clean the buffer of stdin.
+     */
+    static void clean();
+};
 
 
-/*!
- *  Ask the user do press enter to continue.
- */
-void systemPause();
 
-
-/*!
- *  Clear the screen.
- */
-void clearScreen();
-
-
-
-#endif // CLI_SHARE_H_INCLUDED
+#endif // CIN_H_INCLUDED

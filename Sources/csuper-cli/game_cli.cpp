@@ -216,3 +216,91 @@ ustring GameCli::toUstringRanking() const
 
     return str + "\n";
 }
+
+
+ustring GameCli::toUstringGameOver() const
+{
+    ustring res;
+
+    res += _("The game is over.\n");
+
+    std::vector<unsigned int> player_index = playerIndexFromPosition();
+
+    // Print the first line
+    res += "\n\t\t\t";
+    res += TextStyle::Ustring(TextStyle::FOREGROUND_GREEN);
+    res += printUstringThreeTabs(player(player_index[0]).name());
+    res += resetTextStyle();
+    res += "\n";
+
+    // Print the second line
+    if(nbPlayer() >=2)
+    {
+        res += TextStyle::Ustring(TextStyle::FOREGROUND_CYAN);
+        res += printUstringThreeTabs(player(player_index[1]).name());
+    }
+    else
+        res += "\t\t\t";
+    res += TextStyle::Ustring(TextStyle::FOREGROUND_GREEN);
+    res += "------------------------\n";
+    res += resetTextStyle();
+
+    // Print the bottom of the second podium
+    if(nbPlayer() >=2)
+    {
+        res += TextStyle::Ustring(TextStyle::FOREGROUND_CYAN);
+        res += "------------------------";
+        res += resetTextStyle();
+    }
+
+    // Print the third podium
+    if (nbPlayer() >= 3)
+    {
+        res += "\t\t\t";
+        res += TextStyle::Ustring(TextStyle::FOREGROUND_RED);
+        res += printUstringThreeTabs(player(player_index[2]).name());
+        res += "\n\t\t\t\t\t\t";
+        res += "------------------------";
+        res += resetTextStyle();
+    }
+
+    return res;
+}
+
+
+//
+// Others
+//
+ustring GameCli::printUstringThreeTabs(const ustring& str) const
+{
+    ustring res;
+
+    unsigned int i;
+    unsigned int length = str.length();
+
+    for (i=0 ; i<(24-length)/2 ; i++)
+    {
+        res += " ";
+    }
+
+    res += str;
+
+    for (i=0 ; i<(24-length)/2 ; i++)
+    {
+        res += " ";
+    }
+
+    return res;
+}
+
+
+//
+// Operator
+//
+ostream& operator<<(ostream& os, const GameCli& game_cli)
+{
+    os << game_cli.toUstring();
+    if (game_cli.exceedMaxNumber())
+        os << endl << game_cli.toUstringGameOver();
+    return os;
+}

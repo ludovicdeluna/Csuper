@@ -102,21 +102,21 @@ namespace csuper
 
 
 
-    const GameConfiguration &ListGameConfiguration::operator[](int i) const
+    const GameConfiguration &ListGameConfiguration::operator[](unsigned int i) const
     {
         if (i >= size())
             throw OutOfRange(ustring::compose(_("Cannot access to the %1th element, there is only %2 elements"),i+1,size()));
         return *game_configuration_list_[i];
     }
 
-    GameConfiguration &ListGameConfiguration::operator[](int i)
+    GameConfiguration &ListGameConfiguration::operator[](unsigned int i)
     {
         if (i >= size())
             throw OutOfRange(ustring::compose(_("Cannot access to the %1th element, there is only %2 elements"),i+1,size()));
         return *game_configuration_list_[i];
     }
 
-    int ListGameConfiguration::size() const
+    unsigned int ListGameConfiguration::size() const
     {
         return game_configuration_list_.size();
     }
@@ -170,11 +170,11 @@ namespace csuper
         }
     }
 
-    void ListGameConfiguration::add(const ListGameConfiguration& list_game_config,const vector<int>& indexes)
+    void ListGameConfiguration::add(const ListGameConfiguration& list_game_config,const vector<unsigned int>& indexes)
     {
         vector<GameConfiguration*>::const_iterator it;
-        vector<int>::const_iterator it_index;
-        int i=0;
+        vector<unsigned int>::const_iterator it_index;
+        unsigned int i=0;
         bool found;
 
         for (it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
@@ -208,7 +208,7 @@ namespace csuper
     }
 
 
-    void ListGameConfiguration::remove(const int i)
+    void ListGameConfiguration::remove(const unsigned int i)
     {
         if (i >= size())
             throw OutOfRange(ustring::compose(_("Cannot remove the %1th element, there is only %2 elements"),i+1,size()));
@@ -239,6 +239,18 @@ namespace csuper
         vector<GameConfiguration*>::const_iterator it;
         for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
             str += ((*it)->toUstring() + "\n\n");
+
+        return str;
+    }
+
+    ustring ListGameConfiguration::toUstringName() const
+    {
+        ustring str("");
+        unsigned int i=1;
+
+        vector<GameConfiguration*>::const_iterator it;
+        for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++, i++)
+            str += ustring::compose(" (%1) %2\n",i,(*it)->nameUstring()); //(" - " + (*it)->nameUstring() + "\n");
 
         return str;
     }
@@ -278,9 +290,8 @@ namespace csuper
         }
     }
 
-    void ListGameConfiguration::writeToFile(const ustring filename, const std::vector<int>& indexes) const
+    void ListGameConfiguration::writeToFile(const ustring filename, const std::vector<unsigned int>& indexes) const
     {
-
         Document doc;
         Element* root = doc.create_root_node("csu_game_configuration");
 
@@ -293,8 +304,8 @@ namespace csuper
         node_nb->add_child_text(Ascii::dtostr(indexes.size()));
 
         vector<GameConfiguration*>::const_iterator it;
-        vector<int>::const_iterator it_index;
-        int i=0;
+        vector<unsigned int>::const_iterator it_index;
+        unsigned int i=0;
         for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
         {
             for (it_index=indexes.cbegin() ; it_index != indexes.cend() ; it_index++)

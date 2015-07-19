@@ -94,12 +94,6 @@ namespace csuper
         void rankingCalculation();
 
         /*!
-         *  \brief Check if someone exceed the maximum number
-         *  \return true if someone exceed, false otherwise
-         */
-        bool exceedMaxNumber() const;
-
-        /*!
          *  \brief Return the last ranking in a turn
          *  \param turn thu turn
          *  \return the last ranking in a turn
@@ -319,7 +313,7 @@ namespace csuper
         /*!
          *  \brief Operator <<
          *  \param os the ostream
-         *  \param Game the game
+         *  \param game the Game
          *  \return the ostream
          */
         friend std::ostream& operator<<(std::ostream& os, const Game& game);
@@ -475,6 +469,12 @@ namespace csuper
          *  \exception csuper::XmlError if bad filename
          */
         void reWriteToFile(const Glib::ustring& filename) const;
+
+        /*!
+         *  \brief Check if someone exceed the maximum number
+         *  \return true if someone exceed, false otherwise
+         */
+        bool exceedMaxNumber() const;
 
 
 

@@ -1,12 +1,12 @@
 /*!
- * \file    share.h
+ * \file    Cin.cpp
  * \author  Remi BERTHO
- * \date    10/07/15
+ * \date    18/07/15
  * \version 4.3.0
  */
 
 /*
- * share.h
+ * Cin.cpp
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
@@ -30,21 +30,63 @@
  *
  */
 
-#ifndef CLI_SHARE_H_INCLUDED
-#define CLI_SHARE_H_INCLUDED
+ #include "cin.h"
+ #include <iostream>
 
+ using namespace std;
+ using namespace Glib;
 
-/*!
- *  Ask the user do press enter to continue.
- */
-void systemPause();
+ustring Cin::getUstring()
+{
+    Glib::ustring res;
+    cin >> res;
+    clean();
+    return res;
+}
 
+int Cin::getInt()
+{
+    int res;
+    cin >> res;
+    clean();
+    return res;
+}
 
-/*!
- *  Clear the screen.
- */
-void clearScreen();
+unsigned int Cin::getUnsignedInt()
+{
+    unsigned int res;
+    cin >> res;
+    clean();
+    return res;
+}
 
+double Cin::getDouble()
+{
+    double res;
+    cin >> res;
+    clean();
+    return res;
+}
 
+char Cin::getChar()
+{
+    char res;
+    res = getchar();
+    if (res != '\n')
+        clean();
+    return res;
+}
 
-#endif // CLI_SHARE_H_INCLUDED
+void Cin::clean()
+{
+    char c;
+    do
+    {
+        c = getchar();
+    } while (c != '\n' && c != EOF);
+    if (cin.fail())
+    {
+        cin.ignore(numeric_limits<streamsize>::max());
+        cin.clear();
+    }
+}

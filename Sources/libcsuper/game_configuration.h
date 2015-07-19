@@ -295,7 +295,7 @@ namespace csuper
          *  \brief change the use maximum
          *  \param use_maximum the new use maximum
          */
-        inline void setUseMaximum_(const bool use_maximum)
+        inline void setUseMaximum(const bool use_maximum)
         {
             use_maximum_ = use_maximum;
         }

@@ -123,7 +123,7 @@ namespace csuper
                                   "\n - Embedded font: %8\n - Font name: %9"),
                                 fontSizeUstring(),sizeUstring(),directionUstring(),charsetUstring(),marginUstring(),
                                 totalPointsUstring(),rankingUstring(),embeddedFontUstring(),fontNameUstring())
-            + ustring::compose(_("\n - PDF size for chart: %10"),pdfSizeForChartUstring());
+            + ustring::compose(_("\n - PDF size for chart: %1"),pdfSizeForChartUstring());
     }
 
     ostream& operator<<(ostream& os, const ExportPdfPreferences& pdf)
