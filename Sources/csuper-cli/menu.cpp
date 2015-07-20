@@ -30,40 +30,41 @@
  *
  */
 
- #include "menu.h"
- #include "share.h"
- #include "game_cli.h"
- #include "cin.h"
- #include <glibmm/i18n.h>
+#include "menu.h"
+#include "share.h"
+#include "game_cli.h"
+#include "cin.h"
+#include "play_game.h"
+#include <glibmm/i18n.h>
 
 
- using namespace csuper;
- using namespace Glib;
- using namespace std;
+using namespace csuper;
+using namespace Glib;
+using namespace std;
 
 
 
 //
 // Constructor and destructor
 //
- Menu::Menu()
- {
-     pref_ = csuper::Preferences::get();
-     list_game_config_ = ListGameConfiguration::getMainList();
- }
+Menu::Menu()
+{
+    pref_ = csuper::Preferences::get();
+    list_game_config_ = ListGameConfiguration::getMainList();
+}
 
 
- Menu::~Menu()
- {
-     delete pref_;
-     delete list_game_config_;
- }
+Menu::~Menu()
+{
+    delete pref_;
+    delete list_game_config_;
+}
 
 
 
- //
- // Menu function
- //
+//
+// Menu function
+//
 
 void Menu::main()
 {
@@ -96,10 +97,10 @@ void Menu::main()
         switch (choice)
         {
         case NEW:
-            //newGame();
+            newGame();
             break;
         case LOAD:
-            //loadGame();
+            loadGame();
             break;
         case PRINT:
             displayFile();
@@ -201,6 +202,126 @@ void Menu::preferencesMenu() const
 
         clearScreen();
     } while (!stop);
+}
+
+void Menu::newGame() const
+{
+    GameCli* game;
+    ustring filename;
+    unsigned int nb_player;
+    ustring tmp_name;
+    GameConfiguration config;
+    unsigned int i;
+    unsigned int game_config_choice;
+
+    clearScreen();
+
+    filename = build_filename(pref_->directory().open(),askFilename());
+
+
+    // Number of player
+    do
+    {
+        cout << endl << ustring(_("Give the number of players in the game (>0)."
+                                  "\nYour choice: "));
+        nb_player = Cin::getUnsignedInt();
+        cout << ustring::compose(_("You chose %1"),nb_player) << endl;
+    } while (nb_player <= 0);
+
+
+    // Game configurations
+    cout << endl << ustring(_("Which game configuration would you like to use?")) << endl;
+    for (i=0 ; i<list_game_config_->size() ; i++)
+        cout << ustring::compose(" (%1) %2",i+1,(*list_game_config_)[i].name()) << endl;
+    cout << ustring::compose(_(" (%1) Create a new game configuration"),i+1) << endl;
+
+    do
+    {
+        cout << endl << ustring(_("Your choice: "));
+        game_config_choice = Cin::getUnsignedInt();
+        cout << ustring::compose(_("You chose %1"),game_config_choice) << endl;
+    } while (game_config_choice <1 || game_config_choice >i+1);
+
+    if (game_config_choice == i+1)
+        newGameConfig();
+
+    config = (*list_game_config_)[game_config_choice-1];
+
+    game = new GameCli(nb_player,config);
+
+
+    // Player name
+    cout << endl << ustring::compose(_("The players' names must have between 2 and %1 characters.")
+                                     ,game->sizeMaxName()) << endl;
+    for (i=0 ; i < nb_player; i++)
+    {
+        do
+        {
+            cout << endl << ustring::compose(_("Give the name of the %1th person: "),i+1);
+            tmp_name = Cin::getUstring();
+            cout << ustring::compose(_("You chose %1"),tmp_name) << endl;
+        } while (tmp_name.length() < 2 || tmp_name.length() > game->sizeMaxName());
+
+        game->setPlayerName(i,tmp_name);
+    }
+
+
+    // Distributor
+    if (config.useDistributor())
+    {
+        cout << endl << ustring(_("Give the name (or the first letters of the name) of the person who will distribute first."
+                                  "\nYour choice: "));
+        tmp_name = Cin::getUstring();
+        cout << ustring::compose(_("You chose %1"),tmp_name) << endl;
+        game->setDistributor(tmp_name);
+    }
+
+    try
+    {
+        game->writeToFile(filename);
+    }
+    catch (Glib::Exception& e)
+    {
+        cout << e.what() << endl;
+        delete game;
+        systemPause();
+        return;
+    }
+
+    PlayGame play_game(game,filename);
+    play_game.play();
+
+    delete game;
+}
+
+void Menu::loadGame() const
+{
+    clearScreen();
+
+    ustring filename = build_filename(pref_->directory().open(),askFilename());
+
+    GameCli* game;
+    try
+    {
+        game = new GameCli(filename);
+    }
+    catch (Glib::Exception& e)
+    {
+        cout << e.what() << endl;
+        systemPause();
+        return;
+    }
+
+    cout << *game << endl;
+    systemPause();
+
+    if (!(game->exceedMaxNumber()))
+    {
+        PlayGame play_game(game,filename);
+        play_game.play();
+    }
+
+    delete game;
 }
 
 void Menu::listFile() const
@@ -440,8 +561,7 @@ void Menu::changePdfPreferences() const
     // Charset
     cout << ustring(_("The UTF-8 character set permit to display all character but can have problem with some fonts."
                       "\n\nWould you use the UTF-8 character set (y/N)? "));
-    choice = Cin::getChar();
-    if (choice == 'Y' || choice == 'y')
+    if (Cin::getYes())
         pref_->exportPdf().setCharset(ExportPdfPreferences::UTF8);
     else
         pref_->exportPdf().setCharset(ExportPdfPreferences::WINDOWS1252);
@@ -459,8 +579,7 @@ void Menu::changePdfPreferences() const
     cout << ustring(_("If the font is embedded in the PDF file, any user will can read the file "
                       "even if he has not the font installed. But the file will be bigger."
                       "\n\nWould you embed the font in the PDF file (Y/n)? "));
-    choice = Cin::getChar();
-    if (choice == 'N' || choice == 'n')
+    if (Cin::getNo())
         pref_->exportPdf().setEmbeddedFont(false);
     else
         pref_->exportPdf().setEmbeddedFont(true);
@@ -482,6 +601,7 @@ void Menu::changePdfPreferences() const
     cout << ustring(_("What size of page do you want?"
                       "\n (1) A3"
                       "\n (2) A4 (default)"
+                      "\n (3) A5"
                       "\nYour choice: "));
     choice = Cin::getChar();
     if (choice == '1')
@@ -520,8 +640,7 @@ void Menu::changePdfPreferences() const
     // Total points by turn
     cout << endl << endl;
     cout << ustring(_("Would you like to display the total points in each turn (y/N)? "));
-    choice = Cin::getChar();
-    if (choice == 'Y' || choice == 'y')
+    if (Cin::getYes())
         pref_->exportPdf().setTotalPoints(true);
     else
         pref_->exportPdf().setTotalPoints(false);
@@ -529,8 +648,7 @@ void Menu::changePdfPreferences() const
     // Ranking by turn
     cout << endl << endl;
     cout << ustring(_("Would you like to display the ranking in each turn (y/N)? "));
-    choice = Cin::getChar();
-    if (choice == 'Y' || choice == 'y')
+    if (Cin::getYes())
         pref_->exportPdf().setRanking(true);
     else
         pref_->exportPdf().setRanking(false);
@@ -538,8 +656,7 @@ void Menu::changePdfPreferences() const
     // Pdf size for chart
     cout << endl << endl;
     cout << ustring(_("Would you like to use the pdf size for the pdf chart (y/N)? "));
-    choice = Cin::getChar();
-    if (choice == 'Y' || choice == 'y')
+    if (Cin::getYes())
         pref_->exportPdf().setPdfSizeForChart(true);
     else
         pref_->exportPdf().setPdfSizeForChart(false);
@@ -554,8 +671,6 @@ void Menu::changePdfPreferences() const
 
 void Menu::newGameConfig() const
 {
-    char tmp_char;
-
     clearScreen();
     GameConfiguration* game_config = new GameConfiguration();
 
@@ -566,8 +681,7 @@ void Menu::newGameConfig() const
 
     // Maximum number
     cout << endl << ustring(_("Would you like to use a maximum or a minimum score (Y/n): "));
-    tmp_char = Cin::getChar();
-    if (tmp_char == 'n' || tmp_char=='N')
+    if (Cin::getNo())
     {
         game_config->setNbMaxMin(INFINITY);
         game_config->setUseMaximum(true);
@@ -575,8 +689,7 @@ void Menu::newGameConfig() const
     {
         // Maximum or minimum
         cout << endl << ustring(_("Would you like to use a maximum score (Y/n): "));
-        tmp_char = Cin::getChar();
-        if (tmp_char == 'n' || tmp_char == 'N')
+        if (Cin::getNo())
             game_config->setUseMaximum(false);
         else
             game_config->setUseMaximum(true);
@@ -598,8 +711,7 @@ void Menu::newGameConfig() const
     // First way
     cout << endl;
     cout << ustring(_("The winner is the player who has the highest score (Y/n): "));
-    tmp_char = Cin::getChar();
-    if (tmp_char == 'n' || tmp_char == 'N')
+    if (Cin::getNo())
         game_config->setMaxWinner(false);
     else
         game_config->setMaxWinner(true);
@@ -607,8 +719,7 @@ void Menu::newGameConfig() const
     // Turn by turn
     cout << endl;
     cout << ustring(_("This is a turn-based game (Y/n): "));
-    tmp_char = Cin::getChar();
-    if (tmp_char == 'n' || tmp_char == 'N')
+    if (Cin::getNo())
         game_config->setTurnBased(false);
     else
         game_config->setTurnBased(true);
@@ -616,8 +727,7 @@ void Menu::newGameConfig() const
     // Distributor
     cout << endl;
     cout << ustring(_("A distributor is used (Y/n): "));
-    tmp_char = Cin::getChar();
-    if (tmp_char == 'n' || tmp_char == 'N')
+    if (Cin::getNo())
         game_config->setUseDistributor(false);
     else
         game_config->setUseDistributor(true);
@@ -658,12 +768,10 @@ void Menu::exportListGameConfig() const
         cout << list_game_config_->toUstringName() << endl;
 
 
-        char tmp_char;
         cout << ustring(_("Export all your game configuration (Y/n): "));
-        tmp_char = Cin::getChar();
 
         // Chose the export game configuration
-        if (tmp_char == 'n' || tmp_char == 'N')
+        if (Cin::getNo())
         {
             unsigned int choice;
             while (true)
@@ -728,12 +836,10 @@ void Menu::importListGameConfig() const
     cout << ustring(_("Here are all the game configurations in the file:")) << endl;
     cout << import_game_config->toUstringName() << endl;
 
-    char tmp_char;
     cout << ustring(_("Import all the game configuration (Y/n): "));
-    tmp_char = Cin::getChar();
 
     // Chose the import game configuration
-    if (tmp_char == 'n' || tmp_char == 'N')
+    if (Cin::getNo())
     {
         unsigned int choice;
         while (true)

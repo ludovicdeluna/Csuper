@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-19 19:05+0200\n"
+"POT-Creation-Date: 2015-07-20 23:50+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -60,8 +60,7 @@ msgid "Cannot open the file %1"
 msgstr ""
 
 #: Sources/libcsuper/game.cpp:104
-msgid ""
-"This version of Csuper only support game configuration file version of %1"
+msgid "This version of Csuper only support game file version of %1"
 msgstr ""
 
 #: Sources/libcsuper/game.cpp:202
@@ -135,7 +134,7 @@ msgid "Ranking |"
 msgstr ""
 
 #: Sources/libcsuper/game.cpp:448 Sources/libcsuper/game.cpp:458
-msgid "Player %1 is not found in the game"
+msgid "Player %1 is not found in the game."
 msgstr ""
 
 #: Sources/libcsuper/game.cpp:511

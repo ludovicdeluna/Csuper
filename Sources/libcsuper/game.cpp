@@ -101,7 +101,7 @@ namespace csuper
         // Version
         double file_version = ustringToDouble(static_cast<Element*>(node)->get_child_text()->get_content());
         if (file_version > version_)
-            throw XmlError(ustring::compose(_("This version of Csuper only support game configuration file version of %1"),version_));
+            throw XmlError(ustring::compose(_("This version of Csuper only support game file version of %1"),version_));
 
         // Size max of a name
         nextXmlElement(node);
@@ -438,14 +438,14 @@ namespace csuper
         return max_turn;
     }
 
-    unsigned int Game::getPlayerIndex(const Glib::ustring& player_name) const
+    unsigned int Game::getPlayerIndex(const ustring& player_name) const
     {
         for (unsigned int i=0 ; i<nb_player_ ; i++)
         {
-            if (*players_[i] == player_name)
+            if (players_[i]->name().compare(0,player_name.size(),player_name) == 0)
                 return i;
         }
-        throw NotFound(ustring::compose(_("Player %1 is not found in the game"),player_name));
+        throw NotFound(ustring::compose(_("Player %1 is not found in the game."),player_name));
     }
 
     unsigned int Game::getPlayerIndex(const Player& player) const
@@ -455,7 +455,7 @@ namespace csuper
             if (*players_[i] == player)
                 return i;
         }
-        throw NotFound(ustring::compose(_("Player %1 is not found in the game"),player.name()));
+        throw NotFound(ustring::compose(_("Player %1 is not found in the game."),player.name()));
     }
 
     void Game::rankingCalculation()

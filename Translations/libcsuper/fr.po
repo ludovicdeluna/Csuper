@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-19 18:02+0200\n"
-"PO-Revision-Date: 2015-07-19 18:03+0200\n"
+"POT-Creation-Date: 2015-07-20 23:50+0200\n"
+"PO-Revision-Date: 2015-07-20 23:50+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -62,11 +62,9 @@ msgid "Cannot open the file %1"
 msgstr "Ne peut ouvrir le fichier %1"
 
 #: Sources/libcsuper/game.cpp:104
-msgid ""
-"This version of Csuper only support game configuration file version of %1"
+msgid "This version of Csuper only support game file version of %1"
 msgstr ""
-"Cette version de Csuper ne supporte que des configurations de jeu ayant une "
-"version de %1"
+"Cette version de Csuper ne supporte que des jeus ayant une version de %1"
 
 #: Sources/libcsuper/game.cpp:202
 msgid ""
@@ -151,8 +149,8 @@ msgid "Ranking |"
 msgstr "Classmt |"
 
 #: Sources/libcsuper/game.cpp:448 Sources/libcsuper/game.cpp:458
-msgid "Player %1 is not found in the game"
-msgstr "Le joueur %1 n'a pas été trouvé dans le jeu"
+msgid "Player %1 is not found in the game."
+msgstr "Le joueur %1 n'a pas été trouvé dans le jeu."
 
 #: Sources/libcsuper/game.cpp:511
 msgid "This new turn function should only be used in a non turn based game"

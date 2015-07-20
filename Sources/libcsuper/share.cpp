@@ -150,7 +150,6 @@ namespace csuper{
 
     double ustringToDouble(const ustring& str)
     {
-        // Must be replace to Ascii::strtod in the version 4.5
         ustring copy_str(str);
         lconv *lc = localeconv();
 

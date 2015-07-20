@@ -153,6 +153,16 @@ private:
      */
     void changePdfPreferences() const;
 
+    /*!
+     *  Load a game from a file and run the play function.
+     */
+    void loadGame() const;
+
+    /*!
+     *  Initialize a new game and run the play function.
+     */
+    void newGame() const;
+
 
     //
     // Ask function

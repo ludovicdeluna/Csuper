@@ -134,6 +134,8 @@
 		<Unit filename="../Sources/csuper-cli/main.cpp" />
 		<Unit filename="../Sources/csuper-cli/menu.cpp" />
 		<Unit filename="../Sources/csuper-cli/menu.h" />
+		<Unit filename="../Sources/csuper-cli/play_game.cpp" />
+		<Unit filename="../Sources/csuper-cli/play_game.h" />
 		<Unit filename="../Sources/csuper-cli/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 			<Option target="Debug Windows" />

@@ -1,12 +1,12 @@
 /*!
- * \file    Cin.h
+ * \file    cin.h
  * \author  Remi BERTHO
  * \date    18/07/15
  * \version 4.3.0
  */
 
 /*
- * Cin.h
+ * cin.h
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
@@ -71,6 +71,18 @@ public:
      * \return the char
      */
     static char getChar();
+
+    /*!
+     *  Do a keyboarding to see if the user type yes
+     * \return true if the type 'Y' or 'y', false otherwise
+     */
+    static bool getYes();
+
+    /*!
+     *  Do a keyboarding to see if the user type no
+     * \return true if the type 'N' or 'n', false otherwise
+     */
+    static bool getNo();
 
 private:
     /*!

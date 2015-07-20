@@ -1,12 +1,12 @@
 /*!
- * \file    Cin.cpp
+ * \file    cin.cpp
  * \author  Remi BERTHO
  * \date    18/07/15
  * \version 4.3.0
  */
 
 /*
- * Cin.cpp
+ * cin.cpp
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
@@ -32,13 +32,16 @@
 
  #include "cin.h"
  #include <iostream>
+ #include <glibmm/i18n.h>
+ #include "../libcsuper/libcsuper.h"
 
  using namespace std;
  using namespace Glib;
+ using namespace csuper;
 
 ustring Cin::getUstring()
 {
-    Glib::ustring res;
+    ustring res;
     cin >> res;
     clean();
     return res;
@@ -62,10 +65,10 @@ unsigned int Cin::getUnsignedInt()
 
 double Cin::getDouble()
 {
-    double res;
-    cin >> res;
+    ustring tmp;
+    cin >> tmp;
     clean();
-    return res;
+    return ustringToDouble(tmp);
 }
 
 char Cin::getChar()
@@ -75,6 +78,26 @@ char Cin::getChar()
     if (res != '\n')
         clean();
     return res;
+}
+
+bool Cin::getYes()
+{
+    char tmp = getChar();
+    //TRANSLATORS:First letter of YES
+    ustring yes_upper(_("Y"));
+    //TRANSLATORS:First letter of yes
+    ustring yes_lower(_("y"));
+    return ((ustring(1,tmp) == yes_upper) || (ustring(1,tmp) == yes_lower));
+}
+
+bool Cin::getNo()
+{
+    char tmp = getChar();
+    //TRANSLATORS:First letter of NO
+    ustring yes_upper(_("N"));
+    //TRANSLATORS:First letter of no
+    ustring yes_lower(_("n"));
+    return ((ustring(1,tmp) == yes_upper) || (ustring(1,tmp) == yes_lower));
 }
 
 void Cin::clean()

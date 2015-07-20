@@ -60,7 +60,7 @@ void systemPause()
 
 void clearScreen()
 {
-    #ifdef __unix__
+    #ifdef G_OS_UNIX
     if (!cur_term)
     {
         int result;
@@ -69,7 +69,8 @@ void clearScreen()
             return;
     }
     putp(tigetstr((char*)"clear"));
-    #elif _WIN32
+    #else
+    #ifdef G_OS_WIN32
     HANDLE                     hStdOut;
     CONSOLE_SCREEN_BUFFER_INFO csbi;
     DWORD                      count;
@@ -98,5 +99,6 @@ void clearScreen()
     #else
     cerr << ustring(_("Your environment cannot permit to clear the screen.")) << endl;
     cout << endl << endl << endl << endl << endl << endl << endl << endl << endl << endl;
-    #endif // __unix__
+    #endif // G_OS_WIN32
+    #endif // G_OS_UNIX
 }

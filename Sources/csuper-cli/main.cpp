@@ -38,6 +38,8 @@
 #include "command_line_option.h"
 #include "game_cli.h"
 #include "menu.h"
+#include "play_game.h"
+#include "share.h"
 
 
 using namespace csuper;
@@ -121,7 +123,28 @@ int main(int argc, char *argv[])
         break;
 
     case CommandLineOption::OPEN_FILE:
-        cout << "Open" << endl;
+        try
+        {
+            GameCli* game = new GameCli(clo.input());
+            cout << *game << endl;
+            systemPause();
+            if (!(game->exceedMaxNumber()))
+            {
+                PlayGame play_game(game,clo.input());
+                play_game.play();
+            }
+            delete game;
+        }
+        catch (std::exception& e)
+        {
+            cout << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
+        catch (Glib::Exception& e)
+        {
+            cout << e.what() << endl;
+            exit(EXIT_FAILURE);
+        }
         break;
 
     case CommandLineOption::EXPORT_TO_PDF:
