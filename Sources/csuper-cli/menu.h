@@ -45,28 +45,28 @@ private:
     csuper::ListGameConfiguration* list_game_config_;   /*!< The list of game configuration */
 
     enum Main{
-        NEW = 1,
-        LOAD = 2,
-        PRINT = 3,
-        DELETE = 4,
-        LIST = 5,
-        EXPORT = 6,
-        PREF = 7,
-        ABOUT = 8,
-        QUIT = 9
+        MENU_NEW = 1,
+        MENU_LOAD = 2,
+        MENU_PRINT = 3,
+        MENU_DELETE = 4,
+        MENU_LIST = 5,
+        MENU_EXPORT = 6,
+        MENU_PREF = 7,
+        MENU_ABOUT = 8,
+        MENU_QUIT = 9
     };
 
     enum Preferences{
-        NEW_GAME_CONF = 1,
-        REMOVE_GAME_CONF = 2,
-        PRINT_LIST_GAME_CONF = 3,
-        PRINT_GAME_CONF = 4,
-        EXPORT_GAME_CONF = 5,
-        IMPORT_GAME_CONF = 6,
-        PDF_PREFERENCES = 7,
-        CHANGE_OPEN_PATH = 8,
-        READ_OPEN_PATH = 9,
-        BACK_MAIN_MENU = 10
+        MENU_NEW_GAME_CONF = 1,
+        MENU_REMOVE_GAME_CONF = 2,
+        MENU_PRINT_LIST_GAME_CONF = 3,
+        MENU_PRINT_GAME_CONF = 4,
+        MENU_EXPORT_GAME_CONF = 5,
+        MENU_IMPORT_GAME_CONF = 6,
+        MENU_PDF_PREFERENCES = 7,
+        MENU_CHANGE_OPEN_PATH = 8,
+        MENU_READ_OPEN_PATH = 9,
+        MENU_BACK_MAIN_MENU = 10
     };
 
     /*!

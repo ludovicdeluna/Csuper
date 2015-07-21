@@ -90,37 +90,38 @@ void Menu::main()
                                    "\n (%8) About"
                                    "\n (%9) Quit the program"
                                    "\n\nYour choice : ")
-                                 ,NEW,LOAD,PRINT,DELETE,LIST,EXPORT,PREF,ABOUT,QUIT);
+                                 ,MENU_NEW,MENU_LOAD,MENU_PRINT,MENU_DELETE,MENU_LIST,MENU_EXPORT,
+                                 MENU_PREF,MENU_ABOUT,MENU_QUIT);
 
         choice = Cin::getInt();
 
         switch (choice)
         {
-        case NEW:
+        case MENU_NEW:
             newGame();
             break;
-        case LOAD:
+        case MENU_LOAD:
             loadGame();
             break;
-        case PRINT:
+        case MENU_PRINT:
             displayFile();
             break;
-        case DELETE:
+        case MENU_DELETE:
             deleteCsuFile();
             break;
-        case LIST:
+        case MENU_LIST:
             listFile();
             break;
-        case EXPORT:
+        case MENU_EXPORT:
             exportCsu();
             break;
-        case PREF:
+        case MENU_PREF:
             preferencesMenu();
             break;
-        case ABOUT:
+        case MENU_ABOUT:
             about();
             break;
-        case QUIT:
+        case MENU_QUIT:
             cout << ustring(_("\nSee you.")) << endl;
             systemPause();
             stop=true;
@@ -154,45 +155,45 @@ void Menu::preferencesMenu() const
                                    "\n (%7) Change PDF export preferences"
                                    "\n (%8) Change the folder where files will be read and saved"
                                    "\n (%9) Display the folder where files will be read and saved")
-                                 ,NEW_GAME_CONF,REMOVE_GAME_CONF,PRINT_LIST_GAME_CONF,
-                                 PRINT_GAME_CONF,EXPORT_GAME_CONF,IMPORT_GAME_CONF,
-                                 PDF_PREFERENCES,CHANGE_OPEN_PATH,READ_OPEN_PATH);
+                                 ,MENU_NEW_GAME_CONF,MENU_REMOVE_GAME_CONF,MENU_PRINT_LIST_GAME_CONF,
+                                 MENU_PRINT_GAME_CONF,MENU_EXPORT_GAME_CONF,MENU_IMPORT_GAME_CONF,
+                                 MENU_PDF_PREFERENCES,MENU_CHANGE_OPEN_PATH,MENU_READ_OPEN_PATH);
 
         cout << ustring::compose(_("\n (%1) Back to main menu"
-                                   "\n\nYour choice: "), BACK_MAIN_MENU);
+                                   "\n\nYour choice: "), MENU_BACK_MAIN_MENU);
 
         choice = Cin::getInt();
 
         switch (choice)
         {
-        case CHANGE_OPEN_PATH :
+        case MENU_CHANGE_OPEN_PATH :
             changeOpenPath();
             break;
-        case READ_OPEN_PATH :
+        case MENU_READ_OPEN_PATH :
             readOpenPath();
             break;
-        case BACK_MAIN_MENU :
+        case MENU_BACK_MAIN_MENU :
             stop=true;
             break;
-        case NEW_GAME_CONF :
+        case MENU_NEW_GAME_CONF :
             newGameConfig();
             break;
-        case REMOVE_GAME_CONF :
+        case MENU_REMOVE_GAME_CONF :
             removeGameConfig();
             break;
-        case PRINT_LIST_GAME_CONF :
+        case MENU_PRINT_LIST_GAME_CONF :
             printListGameConfig();
             break;
-        case PRINT_GAME_CONF :
+        case MENU_PRINT_GAME_CONF :
             printGameConfig();
             break;
-        case EXPORT_GAME_CONF :
+        case MENU_EXPORT_GAME_CONF :
             exportListGameConfig();
             break;
-        case IMPORT_GAME_CONF :
+        case MENU_IMPORT_GAME_CONF :
             importListGameConfig();
             break;
-        case PDF_PREFERENCES :
+        case MENU_PDF_PREFERENCES :
             changePdfPreferences();
             break;
         default :
@@ -559,15 +560,21 @@ void Menu::changePdfPreferences() const
     int nb;
 
     // Charset
-    cout << ustring(_("The UTF-8 character set permit to display all character but can have problem with some fonts."
-                      "\n\nWould you use the UTF-8 character set (y/N)? "));
-    if (Cin::getYes())
-        pref_->exportPdf().setCharset(ExportPdfPreferences::UTF8);
+    if (PdfExportation::canUseUtf8())
+    {
+        cout << ustring(_("The UTF-8 character set permit to display all character but can have problem with some fonts."
+                          "\n\nWould you use the UTF-8 character set (y/N)? "));
+        if (Cin::getYes())
+            pref_->exportPdf().setCharset(ExportPdfPreferences::UTF8);
+        else
+            pref_->exportPdf().setCharset(ExportPdfPreferences::WINDOWS1252);
+        cout << endl << endl;
+    }
     else
         pref_->exportPdf().setCharset(ExportPdfPreferences::WINDOWS1252);
 
+
     // Font
-    cout << endl << endl;
     cout << ustring(_("Please type the font name which will be use in the PDF\n"
                       "Be careful, if the font does'nt exist the PDF file will be unreadable."
                       "\nYour choice: ")) << endl;

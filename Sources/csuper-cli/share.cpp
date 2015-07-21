@@ -38,14 +38,14 @@
 #include <glibmm/i18n.h>
 #include "cin.h"
 
-#ifdef __unix__
+#ifdef G_OS_UNIX
 #include <unistd.h>
 #include <term.h>
-#endif // __unix__
+#endif // G_OS_UNIX
 
-#ifdef _WIN32
+#ifdef G_OS_WIN32
 #include <windows.h>
-#endif // _WIN32
+#endif // G_OS_WIN32
 
 using namespace std;
 using namespace Glib;

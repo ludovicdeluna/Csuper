@@ -48,37 +48,37 @@ public:
     //
     enum ForegroundColor
     {
-        FOREGROUND_BLACK=30,
-        FOREGROUND_RED=31,
-        FOREGROUND_GREEN=32,
-        FOREGROUND_BROWN=33,
-        FOREGROUND_BLUE=34,
-        FOREGROUND_MAGENTA=35,
-        FOREGROUND_CYAN=36,
-        FOREGROUND_WHITE=37,
-        FOREGROUND_DEFAULT=39,
-        FOREGROUND_NO_CHANGE
+        TEXT_FOREGROUND_BLACK=30,
+        TEXT_FOREGROUND_RED=31,
+        TEXT_FOREGROUND_GREEN=32,
+        TEXT_FOREGROUND_BROWN=33,
+        TEXT_FOREGROUND_BLUE=34,
+        TEXT_FOREGROUND_MAGENTA=35,
+        TEXT_FOREGROUND_CYAN=36,
+        TEXT_FOREGROUND_WHITE=37,
+        TEXT_FOREGROUND_DEFAULT=39,
+        TEXT_FOREGROUND_NO_CHANGE
     };
 
     enum BackgroundColor
     {
-        BACKGROUND_BLACK=40,
-        BACKGROUND_RED=41,
-        BACKGROUND_GREEN=42,
-        BACKGROUND_BROWN=43,
-        BACKGROUND_BLUE=44,
-        BACKGROUND_MAGENTA=45,
-        BACKGROUND_CYAN=46,
-        BACKGROUND_WHITE=47,
-        BACKGROUND_DEFAULT=49,
-        BACKGROUND_NO_CHANGE
+        TEXT_BACKGROUND_BLACK=40,
+        TEXT_BACKGROUND_RED=41,
+        TEXT_BACKGROUND_GREEN=42,
+        TEXT_BACKGROUND_BROWN=43,
+        TEXT_BACKGROUND_BLUE=44,
+        TEXT_BACKGROUND_MAGENTA=45,
+        TEXT_BACKGROUND_CYAN=46,
+        TEXT_BACKGROUND_WHITE=47,
+        TEXT_BACKGROUND_DEFAULT=49,
+        TEXT_BACKGROUND_NO_CHANGE
     };
 
     enum Style
     {
-        BOLD=1,
-        UNDERLINE=4,
-        STYLE_NO_CHANGE
+        TEXT_BOLD=1,
+        TEXT_UNDERLINE=4,
+        TEXT_STYLE_NO_CHANGE
     };
 
 private:
@@ -94,7 +94,7 @@ public:
      *  \param background the background color
      *  \param style the style
      */
-    TextStyle(const ForegroundColor foreground, const BackgroundColor background=BACKGROUND_NO_CHANGE, const Style style=STYLE_NO_CHANGE);
+    TextStyle(const ForegroundColor foreground, const BackgroundColor background=TEXT_BACKGROUND_NO_CHANGE, const Style style=TEXT_STYLE_NO_CHANGE);
 
     /*!
      *  \brief Reset constructor
@@ -115,7 +115,7 @@ public:
      *  \param style the style
      *  \return the text style code
      */
-    static Glib::ustring Ustring(const ForegroundColor foreground, const BackgroundColor background=BACKGROUND_NO_CHANGE, const Style style=STYLE_NO_CHANGE);
+    static Glib::ustring Ustring(const ForegroundColor foreground, const BackgroundColor background=TEXT_BACKGROUND_NO_CHANGE, const Style style=TEXT_STYLE_NO_CHANGE);
 
     /*!
      *  \brief Create a ustring with the reset code

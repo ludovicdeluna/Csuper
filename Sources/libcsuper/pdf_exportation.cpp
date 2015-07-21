@@ -60,11 +60,17 @@ namespace csuper
             pref_.setRanking(false);
 
         const PdfEncoding* encoding;
+        #if canUseUtf8
         if (pref.charset() == ExportPdfPreferences::UTF8)
             encoding = PdfEncodingFactory::GlobalIdentityEncodingInstance();
         else
+        #endif
             encoding = PdfEncodingFactory::GlobalWinAnsiEncodingInstance();
+        #if canUseUtf8
         font_ = pdf_->CreateFont(pref.fontName().c_str(),false,encoding,PdfFontCache::eFontCreationFlags_AutoSelectBase14 ,pref.embeddedFont());
+        #else
+        font_ = pdf_->CreateFont(pref.fontName().c_str(),encoding,PdfFontCache::eFontCreationFlags_AutoSelectBase14 ,pref.embeddedFont());
+        #endif
         if( !font_ )
 		{
 			PODOFO_RAISE_ERROR(ePdfError_InvalidHandle);
@@ -696,6 +702,15 @@ namespace csuper
     PdfString PdfExportation::ustringToPdfstring(const ustring& str)
     {
         return PdfString((pdf_utf8*)(str.c_str()));
+    }
+
+    bool PdfExportation::canUseUtf8()
+    {
+        #if PODOFO_VERSION > 0x000900
+        return true;
+        #else
+        return false;
+        #endif // PODOFO_VERSION
     }
 
     void PdfExportation::exportToPdf(const Game* game, const ExportPdfPreferences& pdf_pref, const ChartExportationPreferences& chart_pref, const Glib::ustring& filename)

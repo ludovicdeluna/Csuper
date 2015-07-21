@@ -55,5 +55,6 @@
 #include "preferences_directory.h"
 #include "preferences_chart_exportation.h"
 #include "preferences.h"
+#include "pdf_exportation.h"
 
 #endif

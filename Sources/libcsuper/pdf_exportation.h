@@ -231,6 +231,13 @@ namespace csuper
          * \exception csuper::PdfError
          */
         static void exportToPdf(const Game* game, const ExportPdfPreferences& pdf_pref, const ChartExportationPreferences& chart_pref, const Glib::ustring& filename);
+
+
+        /*!
+         *  Check if it can use UTF-8
+         * \return true if it can use UTF-8, false otherwise
+         */
+        static bool canUseUtf8();
     };
 }
 

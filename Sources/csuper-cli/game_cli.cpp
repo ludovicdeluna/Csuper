@@ -66,26 +66,26 @@ GameCli::~GameCli()
 //
 ustring GameCli::setTextStyle(const Player& player, const bool use_distributor) const
 {
-    TextStyle::ForegroundColor foreground_color = TextStyle::FOREGROUND_NO_CHANGE;
-    TextStyle::BackgroundColor background_color = TextStyle::BACKGROUND_NO_CHANGE;
-    TextStyle::Style style = TextStyle::STYLE_NO_CHANGE;
+    TextStyle::ForegroundColor foreground_color = TextStyle::TEXT_FOREGROUND_NO_CHANGE;
+    TextStyle::BackgroundColor background_color = TextStyle::TEXT_BACKGROUND_NO_CHANGE;
+    TextStyle::Style style = TextStyle::TEXT_STYLE_NO_CHANGE;
 
     if (use_distributor && config().useDistributor() && player == this->player(distributor()))
-        style = TextStyle::UNDERLINE;
+        style = TextStyle::TEXT_UNDERLINE;
 
     switch (player.ranking())
     {
     case 1:
-        foreground_color = TextStyle::FOREGROUND_GREEN;
+        foreground_color = TextStyle::TEXT_FOREGROUND_GREEN;
         break;
     case 2:
-        foreground_color = TextStyle::FOREGROUND_CYAN;
+        foreground_color = TextStyle::TEXT_FOREGROUND_CYAN;
         break;
     case 3:
-        foreground_color = TextStyle::FOREGROUND_RED;
+        foreground_color = TextStyle::TEXT_FOREGROUND_RED;
         break;
     default:
-        foreground_color = TextStyle::FOREGROUND_BROWN;
+        foreground_color = TextStyle::TEXT_FOREGROUND_BROWN;
     }
 
     return TextStyle::Ustring(foreground_color,background_color,style);
@@ -228,7 +228,7 @@ ustring GameCli::toUstringGameOver() const
 
     // Print the first line
     res += "\n\t\t\t";
-    res += TextStyle::Ustring(TextStyle::FOREGROUND_GREEN);
+    res += TextStyle::Ustring(TextStyle::TEXT_FOREGROUND_GREEN);
     res += printUstringThreeTabs(player(player_index[0]).name());
     res += resetTextStyle();
     res += "\n";
@@ -236,19 +236,19 @@ ustring GameCli::toUstringGameOver() const
     // Print the second line
     if(nbPlayer() >=2)
     {
-        res += TextStyle::Ustring(TextStyle::FOREGROUND_CYAN);
+        res += TextStyle::Ustring(TextStyle::TEXT_FOREGROUND_CYAN);
         res += printUstringThreeTabs(player(player_index[1]).name());
     }
     else
         res += "\t\t\t";
-    res += TextStyle::Ustring(TextStyle::FOREGROUND_GREEN);
+    res += TextStyle::Ustring(TextStyle::TEXT_FOREGROUND_GREEN);
     res += "------------------------\n";
     res += resetTextStyle();
 
     // Print the bottom of the second podium
     if(nbPlayer() >=2)
     {
-        res += TextStyle::Ustring(TextStyle::FOREGROUND_CYAN);
+        res += TextStyle::Ustring(TextStyle::TEXT_FOREGROUND_CYAN);
         res += "------------------------";
         res += resetTextStyle();
     }
@@ -257,7 +257,7 @@ ustring GameCli::toUstringGameOver() const
     if (nbPlayer() >= 3)
     {
         res += "\t\t\t";
-        res += TextStyle::Ustring(TextStyle::FOREGROUND_RED);
+        res += TextStyle::Ustring(TextStyle::TEXT_FOREGROUND_RED);
         res += printUstringThreeTabs(player(player_index[2]).name());
         res += "\n\t\t\t\t\t\t";
         res += "------------------------";

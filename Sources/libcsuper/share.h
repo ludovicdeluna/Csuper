@@ -256,7 +256,7 @@ namespace csuper
     // Sort
     //
     /*!
-     *  Compare 2 double
+     *  Compare two double
      * \param[in] a a double
      * \param[in] b a double
      * \return the comparison
@@ -267,7 +267,7 @@ namespace csuper
     }
 
     /*!
-     *  Compare 2 double
+     *  Compare two double
      * \param[in] a a double
      * \param[in] b a double
      * \return the comparison

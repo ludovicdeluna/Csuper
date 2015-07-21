@@ -112,8 +112,8 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-Wall" />
 			<Add option="-std=c++11" />
+			<Add option="-Wall" />
 			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 `" />
 			<Add directory="../" />
 		</Compiler>
@@ -123,6 +123,7 @@
 		<Linker>
 			<Add option="`pkg-config --libs glibmm-2.4 cairo`" />
 			<Add library="libcsuper" />
+			<Add library="podofo" />
 			<Add directory="../" />
 		</Linker>
 		<Unit filename="../Sources/csuper-cli/cin.cpp" />

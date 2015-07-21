@@ -44,7 +44,7 @@ namespace csuper
         }
         catch (Parser::exception_type& e)
         {
-            cerr << e.GetMsg();
+            cerr << e.GetMsg() << endl;
             throw CalculatorError(ustring::compose(_("Error when calculating %1"),e.GetExpr()));
         }
     }

@@ -66,9 +66,18 @@ unsigned int Cin::getUnsignedInt()
 double Cin::getDouble()
 {
     ustring tmp;
+    double res = 0.0;
     cin >> tmp;
     clean();
-    return ustringToDouble(tmp);
+    try
+    {
+        res = Calculator::calculate(tmp);
+    }
+    catch (Glib::Exception& e)
+    {
+        cout << e.what() << endl;
+    }
+    return res;
 }
 
 char Cin::getChar()
@@ -84,9 +93,9 @@ bool Cin::getYes()
 {
     char tmp = getChar();
     //TRANSLATORS:First letter of YES
-    ustring yes_upper(_("Y"));
+    const ustring yes_upper(_("Y"));
     //TRANSLATORS:First letter of yes
-    ustring yes_lower(_("y"));
+    const ustring yes_lower(_("y"));
     return ((ustring(1,tmp) == yes_upper) || (ustring(1,tmp) == yes_lower));
 }
 
@@ -94,10 +103,10 @@ bool Cin::getNo()
 {
     char tmp = getChar();
     //TRANSLATORS:First letter of NO
-    ustring yes_upper(_("N"));
+    const ustring no_upper(_("N"));
     //TRANSLATORS:First letter of no
-    ustring yes_lower(_("n"));
-    return ((ustring(1,tmp) == yes_upper) || (ustring(1,tmp) == yes_lower));
+    const ustring no_lower(_("n"));
+    return ((ustring(1,tmp) == no_upper) || (ustring(1,tmp) == no_lower));
 }
 
 void Cin::clean()

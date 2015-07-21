@@ -41,8 +41,8 @@
 
  }
 
- TextStyle::TextStyle() : foreground_(FOREGROUND_NO_CHANGE), background_(BACKGROUND_NO_CHANGE),
-    style_(STYLE_NO_CHANGE), reset_(true)
+ TextStyle::TextStyle() : foreground_(TEXT_FOREGROUND_NO_CHANGE), background_(TEXT_BACKGROUND_NO_CHANGE),
+    style_(TEXT_STYLE_NO_CHANGE), reset_(true)
 {
 
 }
@@ -50,19 +50,19 @@
 ustring TextStyle::toUstring() const
 {
     ustring res;
-    #ifdef __unix__
+    #ifdef G_OS_UNIX
     if (reset_)
         res = "\033[0m";
     else
     {
-        if (foreground_ != FOREGROUND_NO_CHANGE)
+        if (foreground_ != TEXT_FOREGROUND_NO_CHANGE)
             res += ustring::compose("\033[%1m",foreground_);
-        if (background_ != BACKGROUND_NO_CHANGE)
+        if (background_ != TEXT_BACKGROUND_NO_CHANGE)
             res += ustring::compose("\033[%1m",background_);
-        if (style_ != STYLE_NO_CHANGE)
+        if (style_ != TEXT_STYLE_NO_CHANGE)
             res += ustring::compose("\033[%1m",style_);
     }
-    #endif // __unix__
+    #endif // G_OS_UNIX
     return res;
 }
 

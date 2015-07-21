@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-20 23:50+0200\n"
-"PO-Revision-Date: 2015-07-20 23:50+0200\n"
+"PO-Revision-Date: 2015-07-21 21:33+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -21,7 +21,7 @@ msgstr ""
 
 #: Sources/libcsuper/calculator.cpp:48
 msgid "Error when calculating %1"
-msgstr "Erreur lors di calcul de %1"
+msgstr "Erreur lors du calcul de %1"
 
 #: Sources/libcsuper/exceptions.cpp:54
 msgid "XML Error: "
