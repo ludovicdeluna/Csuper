@@ -95,6 +95,12 @@ void updateExportationPreferences(globalData *data)
     else
         gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),1,4)),FALSE);
 
+    // Chart size
+    if (pref.pdf_size_for_chart == true)
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),TRUE);
+    else
+        gtk_switch_set_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4)),FALSE);
+
     // Chart width
     gtk_spin_button_set_value(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,6)),chart_pref.width);
 
@@ -157,6 +163,12 @@ void readExportationPreferences(globalData *data, export_pdf_preferences *pref, 
         pref->ranking_turn = true;
     else
         pref->ranking_turn = false;
+
+    // Cahrt size
+    if (gtk_switch_get_active(GTK_SWITCH(gtk_grid_get_child_at(GTK_GRID(grid),3,4))))
+        pref->pdf_size_for_chart = true;
+    else
+        pref->pdf_size_for_chart = false;
 
     // Chart width
     chart_pref->width = gtk_spin_button_get_value_as_int(GTK_SPIN_BUTTON(gtk_grid_get_child_at(GTK_GRID(grid),1,6)));

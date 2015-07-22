@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-21 17:49+0200\n"
-"PO-Revision-Date: 2015-05-21 20:35+0200\n"
+"POT-Creation-Date: 2015-07-09 15:29+0200\n"
+"PO-Revision-Date: 2015-07-19 18:30+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -651,7 +651,7 @@ msgstr ""
 "Voulez-vous supprimer le fichier (o/N) ?"
 
 #: Sources/csuper-cli/menu.c:370
-#, c-format
+#, fuzzy, c-format
 msgid ""
 "\n"
 "Give the new folder in which you would like to save your files\n"
@@ -737,7 +737,7 @@ msgstr ""
 "Le codage de caractères UTF-8 permet d'afficher tout les caractères "
 "possibles au prix d'un fichier pdf plus volumineux.\n"
 "\n"
-"Voulez-vous utilisez l'UTF-8 ?"
+"Voulez-vous utilisez l'UTF-8 (o/N) ? "
 
 #: Sources/csuper-cli/menu.c:518
 #, c-format
@@ -819,7 +819,17 @@ msgstr ""
 "\n"
 "Voulez-vous afficher le classement à chaque tour (o/N) ?"
 
-#: Sources/csuper-cli/menu.c:579
+#: Sources/csuper-cli/menu.c:570
+#, c-format
+msgid ""
+"\n"
+"Would you like to use the pdf size for the pdf chart (y/N)? "
+msgstr ""
+"\n"
+"Voulez-vous utiliser la taille des pdf pour l'export en pdf du graphique (o/"
+"N) ?"
+
+#: Sources/csuper-cli/menu.c:587
 #, c-format
 msgid ""
 "\n"

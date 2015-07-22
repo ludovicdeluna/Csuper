@@ -67,7 +67,7 @@ G_MODULE_EXPORT void displayTotalPointsChart(GtkWidget *widget, gpointer data)
     user_data->slope_chart = slope_chart_create(_("Total points chart"), _("Turn"), _("Total points"));
     int max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
     int nb_player = user_data->ptr_csu_struct->nb_player;
-    char fmt[3] = "b-";
+    char fmt[4] = "b+-";
 
     user_data->slope_turn = myAlloc(max_nb_turn*sizeof(double));
     user_data->slope_points = myAlloc(sizeof(double*)*nb_player);
@@ -160,7 +160,7 @@ G_MODULE_EXPORT void displayPointsChart(GtkWidget *widget, gpointer data)
     user_data->slope_chart = slope_chart_create(_("Points chart"), _("Turn"), _("Points"));
     int max_nb_turn = maxNbTurn(user_data->ptr_csu_struct);
     int nb_player = user_data->ptr_csu_struct->nb_player;
-    char fmt[3] = "b-";
+    char fmt[4] = "b+-";
 
     user_data->slope_turn = myAlloc(max_nb_turn*sizeof(double));
     user_data->slope_points = myAlloc(sizeof(double*)*nb_player);
@@ -325,7 +325,7 @@ bool exportToChart(csuStruct *ptr_csu_struct, char *filename, ChartExportationTy
     slope_chart = slope_chart_create(title, _("Turn"), _("Points"));
     int max_nb_turn = maxNbTurn(ptr_csu_struct);
     int nb_player = ptr_csu_struct->nb_player;
-    char fmt[3] = "b-";
+    char fmt[4] = "b+-";
 
     slope_turn = myAlloc(max_nb_turn*sizeof(double));
     slope_points = myAlloc(sizeof(double*)*nb_player);
@@ -364,28 +364,36 @@ bool exportToChart(csuStruct *ptr_csu_struct, char *filename, ChartExportationTy
         slope_figure_write_to_png(slope_chart,filename,chart_pref.width,chart_pref.height);
         break;
     case pdf:
-        switch (pdf_pref.size)
+        if (pdf_pref.pdf_size_for_chart)
         {
-        case HPDF_PAGE_SIZE_A3:
-            width = 842;
-            height = 1190;
-            break;
-        case HPDF_PAGE_SIZE_A4:
-            width = 595;
-            height = 842;
-            break;
-        case HPDF_PAGE_SIZE_A5:
-            width = 420;
-            height = 595;
-            break;
-        default:
-            break;
+            switch (pdf_pref.size)
+            {
+            case HPDF_PAGE_SIZE_A3:
+                width = 842;
+                height = 1190;
+                break;
+            case HPDF_PAGE_SIZE_A4:
+                width = 595;
+                height = 842;
+                break;
+            case HPDF_PAGE_SIZE_A5:
+                width = 420;
+                height = 595;
+                break;
+            default:
+                break;
+            }
+            if (pdf_pref.direction == HPDF_PAGE_LANDSCAPE)
+            {
+                int tmp = width;
+                width = height;
+                height = tmp;
+            }
         }
-        if (pdf_pref.direction == HPDF_PAGE_LANDSCAPE)
+        else
         {
-            int tmp = width;
-            width = height;
-            height = tmp;
+            width = chart_pref.width;
+            height = chart_pref.height;
         }
         res = slope_figure_write_to_pdf(slope_chart,filename,width,height);
         break;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-24 21:26+0200\n"
+"POT-Creation-Date: 2015-07-09 15:29+0200\n"
 "PO-Revision-Date: 2015-05-21 18:28+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
@@ -86,7 +86,7 @@ msgstr ""
 "\n"
 "Erreur : Fichier corrompu.\n"
 
-#: Sources/libcsuper/csu_files.c:442 Sources/libcsuper/preferences_files.c:607
+#: Sources/libcsuper/csu_files.c:442 Sources/libcsuper/preferences_files.c:608
 #, c-format
 msgid "Invalid XML Document\n"
 msgstr "Document XML invalide\n"
@@ -685,12 +685,12 @@ msgstr ""
 "\n"
 "Erreur lors de la lecture du fichier contenant le répertoire des fichiers.\n"
 
-#: Sources/libcsuper/preferences_files.c:668
+#: Sources/libcsuper/preferences_files.c:670
 #, c-format
 msgid "Not a csu preferences file\n"
 msgstr "Pas un fichier de préférence csu\n"
 
-#: Sources/libcsuper/preferences_files.c:678
+#: Sources/libcsuper/preferences_files.c:680
 #, c-format
 msgid "This version of Csuper only support preferences file version of %.1f.\n"
 msgstr ""

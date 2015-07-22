@@ -55,6 +55,7 @@ typedef struct
     int margin;                     /*!< The margin of the pdf document */
     bool total_points_turn;         /*!< Indicate if we show the total points in each turn */
     bool ranking_turn;              /*!< Indicate if we show the ranking in each turn */
+    bool pdf_size_for_chart;        /*!< Indicate if we use the pdf size for the chart*/
 } export_pdf_preferences;
 
 /*!

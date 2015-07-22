@@ -328,7 +328,7 @@ bool differentsTExportPdfPreferencesStruct(export_pdf_preferences pdf_1, export_
     return (pdf_1.charset != pdf_2.charset || pdf_1.direction != pdf_2.direction
             || pdf_1.font_size != pdf_2.font_size || pdf_1.margin != pdf_2.margin
             || pdf_1.size != pdf_2.size || pdf_1.total_points_turn != pdf_2.total_points_turn
-            || pdf_1.ranking_turn != pdf_2.ranking_turn );
+            || pdf_1.ranking_turn != pdf_2.ranking_turn || pdf_1.pdf_size_for_chart != pdf_2.pdf_size_for_chart );
 }
 
 
@@ -525,6 +525,7 @@ bool writeXmlPreferencesFile(preferences *pref, char *home_path)
     addXmlIntNode(tmp_node,"margin",pref->pdf.margin);
     addXmlBoolNode(tmp_node,"total_points_turn",pref->pdf.total_points_turn);
     addXmlBoolNode(tmp_node,"ranking_turn",pref->pdf.ranking_turn);
+    addXmlBoolNode(tmp_node,"pdf_size_for_chart",pref->pdf.pdf_size_for_chart);
     xmlAddChild(racine, tmp_node);
 
     // PDF export preferences
@@ -653,6 +654,7 @@ void readXmlPreferencesFile(preferences *pref, char *home_path)
         pref->pdf.margin = DEFAULT_MARGIN;
         pref->pdf.total_points_turn = false;
         pref->pdf.ranking_turn = false;
+        pref->pdf.pdf_size_for_chart = true;
 
         pref->chart.height = 500;
         pref->chart.width = 800;
@@ -776,6 +778,8 @@ void readXmlPreferencesFile(preferences *pref, char *home_path)
     pref->pdf.total_points_turn = convertStringBool((char *)xmlNodeGetContent(tmp_node));
     tmp_node = xmlNextElementSibling(tmp_node);
     pref->pdf.ranking_turn = convertStringBool((char *)xmlNodeGetContent(tmp_node));
+    tmp_node = xmlNextElementSibling(tmp_node);
+    pref->pdf.pdf_size_for_chart = convertStringBool((char *)xmlNodeGetContent(tmp_node));
 
 
     // Chart export preferences

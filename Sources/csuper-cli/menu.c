@@ -565,6 +565,14 @@ void menuPdfPreferences(export_pdf_preferences *pref)
         pref->ranking_turn = true;
     else
         pref->ranking_turn = false;
+
+    // Pdf size for chart
+    printf(_("\nWould you like to use the pdf size for the pdf chart (y/N)? "));
+    charKey(&choice);
+    if (choice=='Y' || choice == 'y')
+        pref->pdf_size_for_chart = true;
+    else
+        pref->pdf_size_for_chart = false;
 }
 
 

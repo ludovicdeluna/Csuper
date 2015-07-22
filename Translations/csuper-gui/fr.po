@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-24 21:33+0200\n"
-"PO-Revision-Date: 2015-06-24 21:39+0200\n"
+"POT-Creation-Date: 2015-07-09 15:32+0200\n"
+"PO-Revision-Date: 2015-07-09 15:33+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -792,7 +792,7 @@ msgstr "Boutons de la barre d'outils"
 msgid "Open the toolbar button preferences window"
 msgstr "Ouvrir la fenêtre des préférences des boutons de la barre d'outils"
 
-#: csuper-gui.glade:1058 csuper-gui.glade:1656 csuper-gui.glade:4298
+#: csuper-gui.glade:1058 csuper-gui.glade:1656 csuper-gui.glade:4321
 msgid "Exportation"
 msgstr "Exportation"
 
@@ -1326,11 +1326,23 @@ msgstr ""
 msgid "Show the total points"
 msgstr "Afficher les points totaux"
 
-#: csuper-gui.glade:4310
+#: csuper-gui.glade:4281
+msgid ""
+"If it's not set, the size of the chart on the pdf will be those of the chart "
+"exportation."
+msgstr ""
+"Si pas activé, la taille du pdf contenant le graphique sera celle de "
+"l'exportation en graphique"
+
+#: csuper-gui.glade:4285
+msgid "Use the pdf size for the chart"
+msgstr "Utilise la taille des pdf pour le graphique"
+
+#: csuper-gui.glade:4333
 msgid "Error while importing the games configurations."
 msgstr "Erreur lors de l'importation des configurations de jeu."
 
-#: csuper-gui.glade:4318
+#: csuper-gui.glade:4341
 msgid "Error while importing the game configurations."
 msgstr "Erreur lors de l'importation des configurations de jeu."
 
