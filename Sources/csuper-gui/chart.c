@@ -291,7 +291,14 @@ G_MODULE_EXPORT void changeChartPlayersDisplay(GtkWidget *widget, gpointer data)
     }
  }
 
-
+/*!
+ * \fn bool exportToChart(csuStruct *ptr_csu_struct, char *filename, ChartExportationType type)
+ *  Export to a chart
+ * \param[in] ptr_csu_struct tge csi struct
+ * \param[in] filename the filename
+ * \param[in] type the type of exportation
+ * \return true is everything is fine, false otherwise
+ */
 bool exportToChart(csuStruct *ptr_csu_struct, char *filename, ChartExportationType type)
 {
     int i,j;
@@ -361,7 +368,7 @@ bool exportToChart(csuStruct *ptr_csu_struct, char *filename, ChartExportationTy
         res = slope_figure_write_to_svg(slope_chart,filename,chart_pref.width,chart_pref.height);
         break;
     case png:
-        slope_figure_write_to_png(slope_chart,filename,chart_pref.width,chart_pref.height);
+        res = slope_figure_write_to_png(slope_chart,filename,chart_pref.width,chart_pref.height);
         break;
     case pdf:
         if (pdf_pref.pdf_size_for_chart)
@@ -413,16 +420,38 @@ bool exportToChart(csuStruct *ptr_csu_struct, char *filename, ChartExportationTy
 }
 
 
+/*!
+ * \fn bool exportToSvg(csuStruct *ptr_csu_struct, char *filename)
+ *  Export to a SVG chart
+ * \param[in] ptr_csu_struct tge csi struct
+ * \param[in] filename the filename
+ * \return true is everything is fine, false otherwise
+ */
 bool exportToSvg(csuStruct *ptr_csu_struct, char *filename)
 {
     return exportToChart(ptr_csu_struct,filename,svg);
 }
 
+/*!
+ * \fn bool exportToPng(csuStruct *ptr_csu_struct, char *filename)
+ *  Export to a PNG chart
+ * \param[in] ptr_csu_struct tge csi struct
+ * \param[in] filename the filename
+ * \return true is everything is fine, false otherwise
+ */
 bool exportToPng(csuStruct *ptr_csu_struct, char *filename)
 {
     return exportToChart(ptr_csu_struct,filename,png);
 }
 
+
+/*!
+ * \fn bool exportToPdfChart(csuStruct *ptr_csu_struct, char *filename)
+ *  Export to a PDF chart
+ * \param[in] ptr_csu_struct tge csi struct
+ * \param[in] filename the filename
+ * \return true is everything is fine, false otherwise
+ */
 bool exportToPdfChart(csuStruct *ptr_csu_struct, char *filename)
 {
     return exportToChart(ptr_csu_struct,filename,pdf);
