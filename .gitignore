@@ -19,8 +19,12 @@ Locales
 /csuper-gui
 /csuper-cli
 libcsuper.def
+libslope.def
 /cmake_install.cmake
 /CMakeCache.txt
 /Makefile
 /Csuper.cbp
 /Csuper.layout
+/test.csu
+/test.pdf
+/test.csv

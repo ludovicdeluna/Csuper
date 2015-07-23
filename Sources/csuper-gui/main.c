@@ -9,7 +9,7 @@
  /*
  * main.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -62,6 +62,10 @@ int main (int argc, char *argv[])
 
     gtk_init(&argc, &argv);
 
+    #ifdef _WIN32
+    GtkSettings *settings = gtk_settings_get_default();
+    gtk_settings_set_string_property(settings,"gtk-font-name","Arial 10","");
+    #endif // _WIN32
     /* Init the global data*/
     data.ptr_builder = gtk_builder_new();
     data.ptr_clipboard=gtk_clipboard_get(gdk_atom_intern("CLIPBOARD",TRUE));
@@ -86,12 +90,12 @@ int main (int argc, char *argv[])
 
     gtk_builder_connect_signals (data.ptr_builder, &data);
 
-    data.ptr_main_window = GTK_WIDGET(gtk_builder_get_object(data.ptr_builder,"main_window"));
+    data.ptr_main_window = getWidgetFromBuilder(data.ptr_builder,"main_window");
 
     /* Set csuper */
     noCsuFileRanking(&data);
     noCsuFilePoints(&data);
-    setButtonMainWindowSensitive(&data);
+    setButtonMainWindow(&data);
     readMainWindowSize(&data);
     updateToolbarButton(&data);
 
@@ -99,6 +103,11 @@ int main (int argc, char *argv[])
         return EXIT_FAILURE;
 
     gtk_widget_show_all(data.ptr_main_window);
+    updateMainWindowSide(&data);
+
+    g_timeout_add(50,&setButtonMainWindowClipboardSensitive,&data);
+
+
 
     gtk_main();
 
@@ -122,13 +131,8 @@ bool openFileWithMainArgument(globalData *data,int argc, char *argv[])
         return true;
 
     gchar filename[SIZE_MAX_FILE_NAME];
-    printf("%s",argv[1]);
 
-    #ifdef _WIN32
-    strncpy(filename,g_convert(argv[1],-1,"ISO-8859-1","UTF-8",NULL,NULL,NULL),SIZE_MAX_FILE_NAME-1);
-    #else
-    strncpy(filename,argv[1],SIZE_MAX_FILE_NAME-1);
-    #endif // _WIN32
+    strncpy(filename,g_locale_from_utf8(argv[1],-1,NULL,NULL,NULL),SIZE_MAX_FILE_NAME-1);
 
     (data->ptr_csu_struct) = readCsuFile(filename);
     if((data->ptr_csu_struct) != NULL)
@@ -142,10 +146,10 @@ bool openFileWithMainArgument(globalData *data,int argc, char *argv[])
         #endif // PORTABLE
 
         strcpy(data->csu_filename,filename);
-        updateMainWindow(data);
+        updateMainWindow(data,!exceedMaxNumber(data->ptr_csu_struct));
         deleteAllLastCsuStruct(data);
         addLastCsuStruct(data);
-        setButtonMainWindowSensitive(data);
+        setButtonMainWindow(data);
     }
     else
     {

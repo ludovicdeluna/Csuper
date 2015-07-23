@@ -32,12 +32,14 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
+			<Add option="`pkg-config --cflags libxml-2.0`" />
 			<Add directory="../" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="../" />
 		</ResourceCompiler>
 		<Linker>
+			<Add option="`pkg-config --libs libxml-2.0`" />
 			<Add library="libcsuper" />
 			<Add directory="../" />
 		</Linker>

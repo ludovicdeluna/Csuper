@@ -3,36 +3,36 @@
  * \file    csu_struct.c
  * \brief   Management of the csu files
  * \author  Remi BERTHO
- * \date    15/06/14
- * \version 4.0.0
+ * \date    25/01/15
+ * \version 4.1.0
  */
 
- /*
- * csu_struct.c
- *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
- *
- * This file is part of LibCsuper.
- *
- * LibCsuper is free software; you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation; either version 3 of the License, or
- * (at your option) any later version.
- *
- * LibCsuper is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
- * MA 02110-1301, USA.
- *
- *
- */
+/*
+* csu_struct.c
+*
+* Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
+*
+* This file is part of LibCsuper.
+*
+* LibCsuper is free software; you can redistribute it and/or modify
+* it under the terms of the GNU General Public License as published by
+* the Free Software Foundation; either version 3 of the License, or
+* (at your option) any later version.
+*
+* LibCsuper is distributed in the hope that it will be useful,
+* but WITHOUT ANY WARRANTY; without even the implied warranty of
+* MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+* GNU General Public License for more details.
+*
+* You should have received a copy of the GNU General Public License
+* along with this program; if not, write to the Free Software
+* Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+* MA 02110-1301, USA.
+*
+*
+*/
 
- #include "csu_struct.h"
+#include "csu_struct.h"
 
 /*!
  * \fn csuStruct *newCsuStruct(float nb_player , game_config config)
@@ -126,7 +126,7 @@ void startNewTurn(csuStruct *ptr_csu_struct,int index_player)
 
     if (index_player == -1)
     {
-         for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
             myRealloc((void**)&(ptr_csu_struct->point[i]),ptr_csu_struct->nb_player*((ptr_csu_struct->nb_turn[0])+1)*sizeof(float));
     }
     else
@@ -184,9 +184,7 @@ void rankCalculation(csuStruct *ptr_csu_struct)
     sort_points=(float *)myAlloc(sizeof(float)*ptr_csu_struct->nb_player);
 
     for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
-    {
         sort_points[i]=ptr_csu_struct->total_points[i];
-    }
 
     /*Sort the points base on the first way*/
     if(ptr_csu_struct->config.first_way == 1)
@@ -202,9 +200,7 @@ void rankCalculation(csuStruct *ptr_csu_struct)
         for(j=0 ; j<ptr_csu_struct->nb_player ; j++)
         {
             if (sort_points[i]==ptr_csu_struct->total_points[j])
-            {
                 ptr_csu_struct->rank[j]=i+1;
-            }
         }
     }
 
@@ -335,7 +331,7 @@ int searchPlayerIndex(csuStruct *ptr_csu_struct, char *player_name)
 
 /*!
  * \fn bool differentsPlayerName(csuStruct *ptr_csu_struct)
- *  Search the index of a person
+ *  Search if all the name are different
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
  * \return true if all player names are different, false otherwise
  */
@@ -401,4 +397,354 @@ csuStruct *copyCsuStruct(csuStruct *ptr_csu_struct)
     }
 
     return ptr_copy_csu_struct;
+}
+
+/*!
+ * \fn bool changeDistributor(csuStruct *ptr_csu_struct, int index)
+ *  Change the distributor
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] index the index of the player
+ * \return true if the distributor can be change, false otherwise
+ */
+bool changeDistributor(csuStruct *ptr_csu_struct, int index)
+{
+    if (index >= ptr_csu_struct->nb_player + 0.1)
+    {
+        printf(_("\nError: this index doesn't exist\n"));
+        return false;
+    }
+
+    ptr_csu_struct->distributor = index;
+
+    return true;
+}
+
+
+/*!
+ * \fn float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+ *  Return the number of points of a player at a specific turn
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \param[in] turn the turn
+ * \return the total number of points
+ */
+float pointsAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+{
+    if (ptr_csu_struct->nb_turn[player_index] < turn)
+    {
+        printf(_("\nError: %s only have %.0f turn but you ask the %d turn\n"),ptr_csu_struct->player_names[player_index],ptr_csu_struct->nb_turn[player_index],turn);
+        return 0;
+    }
+    if (turn < 0)
+    {
+        printf(_("\nError: negative turns doesn't exist\n"));
+        return 0;
+    }
+
+    int i;
+    float points=0;
+
+    for (i=0 ; i<=turn ; i++)
+        points += ptr_csu_struct->point[player_index][i];
+
+    return points;
+}
+
+
+/*!
+ * \fn float rankAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+ *  Return the ranking of a player at a specific turn
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \param[in] turn she turn
+ * \return the ranking or 0 if the game configuration is not turn based
+ */
+int rankAtTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+{
+    float *sort_points;
+    int i;
+    int ranking;
+
+    if (ptr_csu_struct->config.turn_based == 0)
+        return 0;
+
+    sort_points=(float *)myAlloc(sizeof(float)*ptr_csu_struct->nb_player);
+
+    for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        sort_points[i]=pointsAtTurn(ptr_csu_struct,i,turn);
+
+    /*Sort the points base on the first way*/
+    if(ptr_csu_struct->config.first_way == 1)
+        qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatDescending);
+    else
+        qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatAscending);
+
+
+    /*Loop on the sort points from the smallest*/
+    for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        if (sort_points[i] == pointsAtTurn(ptr_csu_struct,player_index,turn))
+        {
+            ranking = i+1;
+            break;
+        }
+    }
+
+    free(sort_points);
+
+    return ranking;
+}
+
+/*!
+ * \fn int lastRankAtTurn(csuStruct *ptr_csu_struct, int turn)
+ *  Return the last rank at a specific turn
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] turn she turn
+ * \return the last rank or 0 if the game configuration is not turn based
+ */
+int lastRankAtTurn(csuStruct *ptr_csu_struct, int turn)
+{
+    float *sort_points;
+    int i,j;
+    int *rank;
+    int last_rank=0;
+
+    if (ptr_csu_struct->config.turn_based == 0)
+        return 0;
+
+    sort_points=(float *)myAlloc(sizeof(float)*ptr_csu_struct->nb_player);
+    rank=(int *)myAlloc(sizeof(int)*ptr_csu_struct->nb_player);
+
+    for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        sort_points[i]=pointsAtTurn(ptr_csu_struct,i,turn);
+
+    /*Sort the points base on the first way*/
+    if(ptr_csu_struct->config.first_way == 1)
+        qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatDescending);
+    else
+        qsort(sort_points,ptr_csu_struct->nb_player,sizeof(float),compareFloatAscending);
+
+
+    /*Loop on the sort points from the smallest*/
+    for(i=ptr_csu_struct->nb_player -1 ; i>=0 ; i--)
+    {
+          /*Loop on the total points*/
+        for(j=0 ; j<ptr_csu_struct->nb_player ; j++)
+        {
+            if (sort_points[i]==pointsAtTurn(ptr_csu_struct,j,turn))
+                rank[j]=i+1;
+        }
+    }
+
+    for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+    {
+        if (rank[i] > last_rank)
+            last_rank = rank[i];
+    }
+
+    free(sort_points);
+    free(rank);
+
+    return last_rank;
+}
+
+
+
+/*!
+ * \fn bool changeDeleteTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+ *  Delete a turn of a player or all of them
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \param[in] turn the turn
+ * \return true if everything is OK, false otherwise
+ */
+bool deleteTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+{
+    int i,j;
+
+    // Test the turn
+    if (ptr_csu_struct->nb_turn[player_index] < turn)
+    {
+        printf(_("\nError: %s only have %.0f turn but you ask the %d turn\n"),ptr_csu_struct->player_names[player_index],ptr_csu_struct->nb_turn[player_index],turn);
+        return 0;
+    }
+    if (turn < 0)
+    {
+        printf(_("\nError: negative turns doesn't exist\n"));
+        return 0;
+    }
+
+    // Turn based game
+    if (ptr_csu_struct->config.turn_based)
+    {
+        // For all player delete the points and the turn
+        for (i=0 ; i<ptr_csu_struct->nb_player ; i++)
+        {
+            (ptr_csu_struct->total_points[i]) -= ptr_csu_struct->point[i][turn];
+            for (j=turn+1 ; j<ptr_csu_struct->nb_turn[i] ; j++)
+            {
+                ptr_csu_struct->point[i][j-1] = ptr_csu_struct->point[i][j];
+            }
+            myRealloc((void**)&(ptr_csu_struct->point[i]),((ptr_csu_struct->nb_turn[i])-1)*sizeof(float));
+            (ptr_csu_struct->nb_turn[i]) -= 1;
+        }
+
+    }
+    else
+    {
+        (ptr_csu_struct->total_points[player_index]) -= ptr_csu_struct->point[player_index][turn];
+        for (j=turn+1 ; j<ptr_csu_struct->nb_turn[player_index] ; j++)
+            ptr_csu_struct->point[player_index][j-1] = ptr_csu_struct->point[player_index][j];
+        myRealloc((void**)&(ptr_csu_struct->point[player_index]),((ptr_csu_struct->nb_turn[player_index])-1)*sizeof(float));
+        (ptr_csu_struct->nb_turn[player_index]) -= 1;
+    }
+
+    rankCalculation(ptr_csu_struct);
+
+    return true;
+}
+
+
+/*!
+ * \fn float meanPoints(csuStruct *ptr_csu_struct, int player_index)
+ *  Calculate the mean points of a player
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \return the mean points
+ */
+float meanPoints(csuStruct *ptr_csu_struct, int player_index)
+{
+    return ptr_csu_struct->total_points[player_index] / (ptr_csu_struct->nb_turn[player_index]-1);
+}
+
+
+/*!
+ * \fn int nbTurnBest(csuStruct *ptr_csu_struct, int player_index)
+ *  Calculate the number of turn where the player do the best score
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \return the  number of turn where the player do the best score
+ */
+int nbTurnBest(csuStruct *ptr_csu_struct, int player_index)
+{
+    int i,j;
+    int nb_best=0;
+    float best;
+
+    if (ptr_csu_struct->config.turn_based == 0)
+        return -1;
+
+
+    for (i=1 ; i<ptr_csu_struct->nb_turn[player_index] ; i++)
+    {
+        if (ptr_csu_struct->config.first_way == 1)
+            best=-FLT_MAX;
+        else
+            best=FLT_MAX;
+
+        for (j=0 ; j<ptr_csu_struct->nb_player ; j++)
+        {
+            if ((ptr_csu_struct->config.first_way == 1) && (ptr_csu_struct->point[j][i] > best) )
+                best = ptr_csu_struct->point[j][i];
+            else if ((ptr_csu_struct->config.first_way == -1) && (ptr_csu_struct->point[j][i] < best) )
+                best = ptr_csu_struct->point[j][i];
+        }
+
+        if (best == ptr_csu_struct->point[player_index][i])
+            nb_best++;
+    }
+
+
+    return nb_best;
+}
+
+/*!
+ * \fn int nbTurnWorst(csuStruct *ptr_csu_struct, int player_index)
+ *  Calculate the number of turn where the player do the worst score
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \return the  number of turn where the player do the worst score
+ */
+int nbTurnWorst(csuStruct *ptr_csu_struct, int player_index)
+{
+    int i,j;
+    int nb_worst=0;
+    float worst;
+
+    if (ptr_csu_struct->config.turn_based == 0)
+        return -1;
+
+
+    for (i=1 ; i<ptr_csu_struct->nb_turn[player_index] ; i++)
+    {
+        if (ptr_csu_struct->config.first_way == 1)
+            worst=FLT_MAX;
+        else
+            worst=-FLT_MAX;
+
+        for (j=0 ; j<ptr_csu_struct->nb_player ; j++)
+        {
+            if ((ptr_csu_struct->config.first_way == 1) && (ptr_csu_struct->point[j][i] < worst) )
+                worst = ptr_csu_struct->point[j][i];
+            else if ((ptr_csu_struct->config.first_way == -1) && (ptr_csu_struct->point[j][i] > worst) )
+                worst = ptr_csu_struct->point[j][i];
+        }
+
+        if (worst == ptr_csu_struct->point[player_index][i])
+            nb_worst++;
+    }
+
+
+    return nb_worst;
+}
+
+
+/*!
+ * \fn int nbTurnFirst(csuStruct *ptr_csu_struct, int player_index)
+ *  Calculate the number of turn where the player is the first place
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \return the  number of turn where the player is the first
+ */
+int nbTurnFirst(csuStruct *ptr_csu_struct, int player_index)
+{
+    int i;
+    int nb_first=0;
+
+    if (ptr_csu_struct->config.turn_based == 0)
+        return -1;
+
+
+    for (i=1 ; i<ptr_csu_struct->nb_turn[player_index] ; i++)
+    {
+        if (1 == rankAtTurn(ptr_csu_struct,player_index,i))
+            nb_first++;
+    }
+
+    return nb_first;
+}
+
+
+/*!
+ * \fn int nbTurnLast(csuStruct *ptr_csu_struct, int player_index)
+ *  Calculate the number of turn where the player is the last place
+ * \param[in] *ptr_csu_struct a pointer on a csuStruct
+ * \param[in] player_index the index of the player
+ * \return the  number of turn where the player is the last
+ */
+int nbTurnLast(csuStruct *ptr_csu_struct, int player_index)
+{
+    int i;
+    int nb_last=0;
+    if (ptr_csu_struct->config.turn_based == 0)
+        return -1;
+
+
+    for (i=1 ; i<ptr_csu_struct->nb_turn[player_index] ; i++)
+    {
+        if (lastRankAtTurn(ptr_csu_struct,i) == rankAtTurn(ptr_csu_struct,player_index,i))
+            nb_last++;
+    }
+
+    return nb_last;
 }

@@ -9,7 +9,7 @@
  /*
  * keyboarding.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-cli.
  *
@@ -82,11 +82,15 @@ char *stringKey(char *string, int nb_char_plus_one)
  */
 void intKey(int *nb)
 {
-    char string[NB_CARACT_INT];
+    char string[NB_CARACT_EXPRESSION];
+    double res;
 
-    stringKey(string,NB_CARACT_INT);
+    stringKey(string,NB_CARACT_EXPRESSION);
     *nb=0;
-    sscanf(string,"%d",nb);
+    //sscanf(string,"%d",nb);
+    res = calculateFromString(string);
+    if (!isnan(res))
+        *nb=(int)res;
 }
 
 /*!
@@ -96,18 +100,26 @@ void intKey(int *nb)
  */
 void floatKey(float *nb)
 {
-    char string[NB_CARACT_FLOAT];
-    char *decimal;
+    char string[NB_CARACT_EXPRESSION];
+    char *comma;
+    double res;
+    struct lconv *lc;
 
-    stringKey(string,NB_CARACT_FLOAT);
+    stringKey(string,NB_CARACT_EXPRESSION);
 
-    /*Change the decimal to a comma*/
-    decimal = strchr(string, '.');
-    if (decimal)
-        *decimal = ',';
+    /*Change the decimals to a comma if needed*/
+    lc=localeconv();
+    if(*(lc->decimal_point) == ',')
+    {
+        while ((comma = strchr(string, '.')) != NULL)
+            *comma=',';
+    }
 
     *nb=0;
-    sscanf(string,"%f",nb);
+    //sscanf(string,"%f",nb);
+    res = calculateFromString(string);
+    if (!isnan(res))
+        *nb=res;
 }
 
 /*!
@@ -117,10 +129,11 @@ void floatKey(float *nb)
  */
 void floatKeyNoComma(float *nb)
 {
-    char string[NB_CARACT_FLOAT];
+    char string[NB_CARACT_EXPRESSION];
     char *p;
+    double res;
 
-    stringKey(string,NB_CARACT_FLOAT);
+    stringKey(string,NB_CARACT_EXPRESSION);
 
     /*Remove the comma*/
     p = strchr(string, ',');
@@ -130,7 +143,10 @@ void floatKeyNoComma(float *nb)
     }
 
     *nb=0;
-    sscanf(string,"%f",nb);
+    //sscanf(string,"%f",nb);
+    res = calculateFromString(string);
+    if (!isnan(res))
+        *nb=res;
 }
 
 /*!

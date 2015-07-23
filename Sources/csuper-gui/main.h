@@ -9,7 +9,7 @@
  /*
  * main.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -35,11 +35,7 @@
 #define MAIN_H_INCLUDED
 
 #include "csuper-gui.h"
-#include "main_menu.h"
 #include "main_window.h"
-#include "preferences.h"
-#include "new_file_assistant.h"
-#include "utils.h"
 
 int main (int   argc, char *argv[]);
 bool openFileWithMainArgument(globalData *data,int argc, char *argv[]);

@@ -1,0 +1,3 @@
+[submodule "Externals library/Slope"]
+	path = Externals library/Slope
+	url = https://github.com/Dalan94/slope

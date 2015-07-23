@@ -1,4 +1,5 @@
 #!/bin/bash
-sudo rm -R /opt/csuper
-sudo rm /usr/local/bin/csuper
-sudo rm /usr/local/lib/libcsuper.so
+sudo rm -R /usr/share/csuper
+sudo rm /usr/local/bin/csuper-cli
+sudo rm /usr/lib/libcsuper.so
+sudo rm /usr/share/man/man1/csuper-cli.1.gz

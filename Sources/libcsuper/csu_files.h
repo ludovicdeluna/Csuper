@@ -9,7 +9,7 @@
  /*
  * csu_files.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of LibCsuper.
  *
@@ -36,6 +36,7 @@
 
 #include "csu_struct.h"
 #include "filename.h"
+#include <libxml/tree.h>
 #include <unistd.h>
 
 
@@ -46,10 +47,10 @@
 #define SIZE_MAX_FILE_NAME 1024
 
 /*!
- * \def FILE_EXTENSION
+ * \def FILE_EXTENSION_CSU
  * Define the file extension to "csu"
  */
-#define FILE_EXTENSION "csu"
+#define FILE_EXTENSION_CSU "csu"
 
 /*!
  * \def STRING_CHECK_CSU_FILE
@@ -61,5 +62,14 @@ FILE *openFileCsuExtension(char file_name[], char mode[]);
 csuStruct *readCsuFile(char *file_name);
 bool writeCsuFile(char *file_name, csuStruct *ptr_csu_struct);
 bool writeFileNewTurn(char *file_name, csuStruct *ptr_csu_struct);
+
+bool writeCsuXmlFile(char *filename, csuStruct *ptr_csu_struct);
+void addXmlFloatNode(xmlNodePtr parent, char *name, float value, int decimal_place);
+void addXmlBoolNode(xmlNodePtr parent, char *name, int value);
+void addXmlIntNode(xmlNodePtr parent, char *name, int value);
+void addXmlStringNode(xmlNodePtr parent, char *name, char *value);
+void addXmlFloatNodeIntProp(xmlNodePtr parent, char *name, float value, int decimal_place,char *prop_name, int prop_value);
+
+csuStruct *readCsuXmlFile(char *filename);
 
 #endif

@@ -9,7 +9,7 @@
  /*
  * main_window.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -41,16 +41,25 @@
 void noCsuFileRanking(globalData *data);
 void deleteRanking(globalData *data);
 void createRanking(globalData *data);
-void updateMainWindow(globalData *data);
+void updateMainWindow(globalData *data,bool editable);
 void updateDistributorLabel(globalData *data);
-G_MODULE_EXPORT void updateTotalPointsInTurnLabel(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void updateTotalPointsInTurnLabelSignal(GtkWidget *widget, gpointer data);
+void updateTotalPointsInTurnLabel(globalData *data,bool updatable_points);
 void noCsuFilePoints(globalData *data);
 void deletePoints(globalData *data);
-void createPointsGrid(globalData *data);
+void createPointsGrid(globalData *data,bool spin_button);
+G_MODULE_EXPORT void deleteTurnSignal(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void changeTurnSignal(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void endOfTurn(GtkWidget *widget, gpointer data);
-void setButtonMainWindowSensitive(globalData *data);
+void gameOver(globalData *data);
+void setButtonMainWindow(globalData *data);
 G_MODULE_EXPORT gboolean setButtonMainWindowClipboardSensitive(gpointer data);
 void readMainWindowSize(globalData *data);
 G_MODULE_EXPORT gboolean saveMainWindowSize(GtkWidget *widget,GdkEvent *event,gpointer user_data);
+G_MODULE_EXPORT void changeDistributorButton(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void validateCalculatorPoints(GtkWidget *widget, gpointer data);
+void fillCalculatorNames(globalData *data);
+void updateMainWindowSide(globalData *data);
 
 #endif // MAIN_WINDOW_H_INCLUDED

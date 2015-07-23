@@ -9,7 +9,7 @@
  /*
  * csuper-gui.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -47,16 +47,25 @@
 #define PORTABLE
 
 /*!
+ * \def ENABLE_DEPRECIATE_FUNCTIONS
+ * Define that we enable using depreciate function
+ */
+//#define ENABLE_DEPRECIATE_FUNCTIONS
+
+/*!
  * \def NB_LAST_CSU_STRUCT
  * Define the number of last csu structure saved
  */
 #define NB_LAST_CSU_STRUCT 10
+
+#undef G_OS_UNIX
 
 #include <gtk/gtk.h>
 #include <stdlib.h>
 #include <glib/gi18n.h>
 #include <locale.h>
 #include "../libcsuper/libcsuper.h"
+#include "slope/slope.h"
 
 /*!
  * \struct globalData
@@ -75,7 +84,13 @@ typedef struct
     GtkClipboard *ptr_clipboard_selected;       /*!< A pointer to the selected clipboard */
     csuStruct *lastCsuStruct[NB_LAST_CSU_STRUCT]; /*!< A array of pointer to the last csu structure */
     gint indexLastCsuStruct;                /*!< A index on the lastCsuStruct array */
-    gint nbLastCsuStruct;                   /*!< the number of last csu structure */
+    gint nbLastCsuStruct;                   /*!< The number of last csu structure */
+    gboolean save_new_game_config;          /*!< Indicate if we would save the new game configuration */
+
+    double** slope_points;
+    double* slope_turn;
+    slope_item_t** slope_items;
+    slope_figure_t* slope_chart;
 }globalData;
 
 

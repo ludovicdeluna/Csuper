@@ -32,14 +32,27 @@
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
-			<Add option="`pkg-config --cflags gtk+-3.0`" />
+			<Add option="`pkg-config --cflags gtk+-3.0 libxml-2.0`" />
+			<Add directory="../Externals library/Slope" />
 		</Compiler>
 		<Linker>
-			<Add option="`pkg-config --libs gtk+-3.0 gmodule-export-2.0 gmodule-2.0`" />
+			<Add option="-Wl,-Bstatic -lslope -Wl,-Bdynamic `pkg-config --libs gtk+-3.0 gmodule-export-2.0 gmodule-2.0 libxml-2.0`" />
 			<Add library="libcsuper" />
 			<Add directory="../" />
 		</Linker>
+		<Unit filename="../Sources/csuper-gui/chart.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/chart.h" />
 		<Unit filename="../Sources/csuper-gui/csuper-gui.h" />
+		<Unit filename="../Sources/csuper-gui/exportation_preferences.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/exportation_preferences.h" />
+		<Unit filename="../Sources/csuper-gui/game_config_preferences.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/game_config_preferences.h" />
 		<Unit filename="../Sources/csuper-gui/main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -63,6 +76,10 @@
 		<Unit filename="../Sources/csuper-gui/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 		</Unit>
+		<Unit filename="../Sources/csuper-gui/toolbar_button_preferences.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/csuper-gui/toolbar_button_preferences.h" />
 		<Unit filename="../Sources/csuper-gui/utils.c">
 			<Option compilerVar="CC" />
 		</Unit>

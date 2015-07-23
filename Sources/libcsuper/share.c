@@ -2,14 +2,14 @@
  * \file    share.c
  * \brief   Essential function of libcsuper
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    25/01/15
+ * \version 4.1.0
  */
 
  /*
  * share.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of LibCsuper.
  *
@@ -179,6 +179,12 @@ void myRealloc(void **ptr,int size_alloue)
 {
     libcsuper_initialize();
 
+    if (size_alloue == 0)
+    {
+        free(*ptr);
+        return;
+    }
+
     if ((*ptr=realloc(*ptr,size_alloue)) == NULL)
     {
         printf(_("\nMemory allocation problem\n"));
@@ -205,3 +211,253 @@ char *integerToYesNo(int i, char *yes, char *no)
         return no;
 }
 
+
+/*!
+ * \fn char *utf8ToLatin9(const char *const string)
+ * Create a dynamically allocated copy of string,
+ * changing the encoding from UTF-8 to ISO-8859-15.
+ * Unsupported code points are ignored.
+ * \param[in] string the input string in UTF-8
+ * \return a newly allocated string in ISO-8859-15
+ */
+char *utf8ToLatin9(const char *const string)
+{
+    size_t         size = 0;
+    size_t         used = 0;
+    unsigned char *result = NULL;
+
+    if (string) {
+        const unsigned char  *s = (const unsigned char *)string;
+
+        while (*s) {
+
+            if (used >= size) {
+                void *const old = result;
+
+                size = (used | 255) + 257;
+                result = realloc(result, size);
+                if (!result) {
+                    if (old)
+                        free(old);
+                    errno = ENOMEM;
+                    return NULL;
+                }
+            }
+
+            if (*s < 128) {
+                result[used++] = *(s++);
+                continue;
+
+            } else
+            if (s[0] == 226 && s[1] == 130 && s[2] == 172) {
+                result[used++] = 164;
+                s += 3;
+                continue;
+
+            } else
+            if (s[0] == 194 && s[1] >= 128 && s[1] <= 191) {
+                result[used++] = s[1];
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 195 && s[1] >= 128 && s[1] <= 191) {
+                result[used++] = s[1] + 64;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 160) {
+                result[used++] = 166;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 161) {
+                result[used++] = 168;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 189) {
+                result[used++] = 180;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 190) {
+                result[used++] = 184;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 146) {
+                result[used++] = 188;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 147) {
+                result[used++] = 189;
+                s += 2;
+                continue;
+
+            } else
+            if (s[0] == 197 && s[1] == 184) {
+                result[used++] = 190;
+                s += 2;
+                continue;
+
+            }
+
+            if (s[0] >= 192 && s[0] < 224 &&
+                s[1] >= 128 && s[1] < 192) {
+                s += 2;
+                continue;
+            } else
+            if (s[0] >= 224 && s[0] < 240 &&
+                s[1] >= 128 && s[1] < 192 &&
+                s[2] >= 128 && s[2] < 192) {
+                s += 3;
+                continue;
+            } else
+            if (s[0] >= 240 && s[0] < 248 &&
+                s[1] >= 128 && s[1] < 192 &&
+                s[2] >= 128 && s[2] < 192 &&
+                s[3] >= 128 && s[3] < 192) {
+                s += 4;
+                continue;
+            } else
+            if (s[0] >= 248 && s[0] < 252 &&
+                s[1] >= 128 && s[1] < 192 &&
+                s[2] >= 128 && s[2] < 192 &&
+                s[3] >= 128 && s[3] < 192 &&
+                s[4] >= 128 && s[4] < 192) {
+                s += 5;
+                continue;
+            } else
+            if (s[0] >= 252 && s[0] < 254 &&
+                s[1] >= 128 && s[1] < 192 &&
+                s[2] >= 128 && s[2] < 192 &&
+                s[3] >= 128 && s[3] < 192 &&
+                s[4] >= 128 && s[4] < 192 &&
+                s[5] >= 128 && s[5] < 192) {
+                s += 6;
+                continue;
+            }
+
+            s++;
+        }
+    }
+    {
+        void *const old = result;
+
+        size = (used | 7) + 1;
+
+        result = realloc(result, size);
+        if (!result) {
+            if (old)
+                free(old);
+            errno = ENOMEM;
+            return NULL;
+        }
+
+        memset(result + used, 0, size - used);
+    }
+
+    return (char *)result;
+}
+
+/*!
+ * \fn void convertFloatString(char *output, float input,int decimal_place)
+ *  Convert a float into the output string with a specific number of decimal place
+ * \param[in] output the output sting
+ * \param[in] input the input float
+ * \param[in] decimal_place the number of decimal, must be between 0 and 3
+ * \return the ranking
+ */
+void convertFloatString(char *output, float input,int decimal_place)
+{
+    #ifdef _WIN32
+    if isinf(input)
+    {
+        strcpy(output,"inf");
+        return;
+    }
+    #endif // _WIN32
+    switch (decimal_place)
+    {
+    case 0 :
+        sprintf(output,"%.0f",input);
+        break;
+    case 1 :
+        sprintf(output,"%.1f",input);
+        break;
+    case 2 :
+        sprintf(output,"%.2f",input);
+        break;
+    case 3 :
+        sprintf(output,"%.3f",input);
+        break;
+    }
+}
+
+
+/*!
+ * \fn float convertStringFloat(char *str)
+ *  Convert a string into a float
+ * \param[in] str the string
+ * \return the float
+ */
+float convertStringFloat(char *str)
+{
+    float ret;
+    struct lconv *lc;
+    char *comma;
+
+    /*Change the decimals to a comma if needed*/
+    lc=localeconv();
+    if(*(lc->decimal_point) == ',')
+    {
+        while ((comma = strchr(str, '.')) != NULL)
+            *comma=',';
+    }
+    else if(*(lc->decimal_point) == '.')
+    {
+        while ((comma = strchr(str, ',')) != NULL)
+            *comma='.';
+    }
+    #ifdef _WIN32
+    if (strncmp("inf",str,4) == 0)
+        ret = INFINITY;
+    else
+    #endif // _WIN32
+    sscanf(str,"%f",&ret);
+    return ret;
+}
+
+
+/*!
+ * \fn int convertStringInt(char *str)
+ *  Convert a string into a int
+ * \param[in] str the string
+ * \return the int
+ */
+int convertStringInt(char *str)
+{
+    int ret;
+    sscanf(str,"%d",&ret);
+    return ret;
+}
+
+
+/*!
+ * \fn bool convertStringBool(char *str)
+ *  Convert a string into a bool
+ * \param[in] str the string
+ * \return the bool
+ */
+bool convertStringBool(char *str)
+{
+    return strcmp("no",str);
+}

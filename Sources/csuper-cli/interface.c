@@ -2,14 +2,14 @@
  * \file    interface.c
  * \brief   Graphical interface
  * \author  Remi BERTHO
- * \date    20/07/14
- * \version 4.0.2
+ * \date    01/09/14
+ * \version 4.2.0
  */
 
  /*
  * interface.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-cli.
  *
@@ -96,7 +96,7 @@ void listCsuFiles()
 {
     struct dirent *lecture;
     DIR *rep;
-    char jeu[4]=FILE_EXTENSION;
+    char jeu[4]=FILE_EXTENSION_CSU;
     char ext[4]="abc";
     char folder[SIZE_MAX_FILE_NAME]=".";
     int i;
@@ -135,7 +135,8 @@ void listCsuFiles()
  */
 void play(csuStruct *ptr_csu_struct, char *file_name)
 {
-    int continuer=false;
+    ContinueChangeDistributorOrQuit choice;
+    bool continuer=true;
 
     clearScreen();
     printPoints(ptr_csu_struct);
@@ -154,7 +155,13 @@ void play(csuStruct *ptr_csu_struct, char *file_name)
             continuer=false;
 
         else
-            continuer=menuContinue();
+        {
+            choice=menuContinueChangeDistributorOrQuit();
+            if (choice == Quit)
+                continuer = false;
+            if (choice == ChangeDistributor)
+                menuChangeDistributor(ptr_csu_struct);
+        }
 
     } while (continuer==true);
 
@@ -270,10 +277,13 @@ void mainMenu()
 
         clearScreen();
 
-        printf(_("Csuper - Universal points counter allowing a dispense with reflection v4.0.2\n\nWhat do you want to do?\n "
-        "(%d) Play a new game\n (%d) Load an existing game\n (%d) Display the results of an existing game"
-        "\n (%d) Delete a game\n (%d) Display all existing games\n (%d) Display the preferences menu"
-        "\n (%d) Quit the program\n\nYour choice : "),newMatch,loadMatch,printFile,deleteFiles,listFile,pref,quit);
+        printf(_("Csuper - Universal points counter allowing a dispense with reflection v"));
+        printf(_("%s"),CSUPER_VERSION);
+        printf(_("\n\nWhat do you want to do?\n "
+            "(%d) Play a new game\n (%d) Load an existing game\n (%d) Display the results of an existing game"
+            "\n (%d) Delete a game\n (%d) Display all existing games\n (%d) Export a file\n"
+            " (%d) Display the preferences menu\n (%d) Quit the program\n\nYour choice : ")
+            ,newMatch,loadMatch,printFile,deleteFiles,listFile,export_file,pref,quit);
 
         intKey(&choice);
 
@@ -287,6 +297,8 @@ void mainMenu()
             case deleteFiles  : deleteCsuFileNom();
                                 break;
             case listFile  :    listCsuFiles();
+                                break;
+            case export_file  : exportCsu();
                                 break;
             case pref :         preferencesMenu();
                                 break;
@@ -327,8 +339,9 @@ void preferencesMenu()
         #endif
         printf(_("\n (%d) Make a new game configuration\n (%d) Delete an existing game configuration"
         "\n (%d) Display the list of game configurations\n (%d) Display a game configuration"
-        "\n (%d) Export game configurations\n (%d) Import game configurations\n (%d) Back to main menu\n\nYour choice : ")
-               ,newGameConf,removeGameConf,printListGameConf,printGameConf,exportGameConf,importGameConf,backMainMenu);
+        "\n (%d) Export game configurations\n (%d) Import game configurations\n (%d) Change pdf export preferences"
+        "\n (%d) Back to main menu\n\nYour choice : ")
+               ,newGameConf,removeGameConf,printListGameConf,printGameConf,exportGameConf,importGameConf,pdfPreferences,backMainMenu);
 
         intKey(&choice);
 
@@ -355,6 +368,8 @@ void preferencesMenu()
             case exportGameConf:exportListGameConfig();
                                 break;
             case importGameConf:importListGameConfig();
+                                break;
+            case pdfPreferences:changePdfPreferences();
                                 break;
             default :           wrongChoice();
                                 systemPause();
@@ -593,6 +608,8 @@ void exportListGameConfig()
 {
     char home_path[SIZE_MAX_FILE_NAME]="";
     char file_name[SIZE_MAX_FILE_NAME]="";
+    int *id;
+    int nb_id;
 
     clearScreen();
 
@@ -604,8 +621,13 @@ void exportListGameConfig()
         return;
     #endif // PORTABLE
 
-    if(exportConfigFile(home_path,file_name) == true)
+    if (!menuExportListGameConfig(&id,&nb_id))
+        return;
+
+    if(exportConfigFile(home_path,file_name,id,nb_id) == true)
         printf(_("\nGame configurations were exported successfully in %s\n"),file_name);
+
+    free(id);
     systemPause();
 }
 
@@ -616,19 +638,219 @@ void exportListGameConfig()
 void importListGameConfig()
 {
     char home_path[SIZE_MAX_FILE_NAME]="";
-    char file_name[SIZE_MAX_FILE_NAME]="";
+    char filename[SIZE_MAX_FILE_NAME]="";
+    int *id;
+    int nb_id=0;
 
     clearScreen();
 
-    menuFileName(file_name);
+    menuFileName(filename);
 
     #ifndef PORTABLE
     readHomePathSlash(home_path);
-    if(readSystemPath(file_name)==false)
+    if(readSystemPath(filename)==false)
         return;
     #endif // PORTABLE
 
-    if(importConfigFile(home_path,file_name) == true)
-        printf(_("\nGame configurations were successfully imported from %s\n"),file_name);
+    if (!menuImportListGameConfig(&id,&nb_id,filename))
+        return;
+
+    if(importConfigFile(home_path,filename,id,nb_id) == true)
+        printf(_("\nGame configurations were successfully imported from %s\n"),filename);
+
+    free(id);
+    systemPause();
+}
+
+
+/*!
+ * \fn void exportToPdfLocale(char *filename, char *export_filename)
+ *  Export the csu file named filename into a pdf file named export_filename
+ * \param[in] filename the csu filename
+ * \param[in] export_filename the pdf filename
+ */
+void exportToPdfLocale(char *filename, char *export_filename)
+{
+    csuStruct *ptr_csu_struct;
+
+    ptr_csu_struct=readCsuFile(filename);
+
+    if (ptr_csu_struct == NULL)
+    {
+        systemPause();
+        return;
+    }
+
+    if (exportToPdf(ptr_csu_struct,export_filename))
+        printf(_("The file was well export to %s\n"),export_filename);
+    else
+        printf(_("There is an error when exporting the file %s into a pdf file.\n"),filename);
+}
+
+
+/*!
+ * \fn void changePdfPreferences()
+ *  Change the export to pdf preferences
+ */
+void changePdfPreferences()
+{
+    export_pdf_preferences pref;
+    char home_path[SIZE_MAX_FILE_NAME]="";
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+
+    readFilePdfPreferences(home_path,&pref);
+    menuPdfPreferences(&pref);
+    createFilePdfPreferences(home_path,&pref);
+}
+
+
+/*!
+ * \fn void exportToCsvLocale(char *filename, char *export_filename)
+ *  Export the csu file named filename into a csv file named export_filename
+ * \param[in] filename the csu filename
+ * \param[in] export_filename the csv filename
+ */
+void exportToCsvLocale(char *filename, char *export_filename)
+{
+    csuStruct *ptr_csu_struct;
+
+    ptr_csu_struct=readCsuFile(filename);
+
+    if (ptr_csu_struct == NULL)
+    {
+        systemPause();
+        return;
+    }
+
+    if (exportToCsv(ptr_csu_struct,export_filename))
+        printf(_("The file was well export to %s\n"),export_filename);
+    else
+        printf(_("There is an error when exporting the file %s into a csv file.\n"),filename);
+
+    closeCsuStruct(ptr_csu_struct);
+}
+
+/*!
+ * \fn void exportToGnuplotLocale(char *filename, char *export_filename)
+ *  Export the csu file named filename into gnuplot files named export_filename
+ * \param[in] filename the csu filename
+ * \param[in] export_filename the filename
+ */
+void exportToGnuplotLocale(char *filename, char *export_filename)
+{
+    csuStruct *ptr_csu_struct;
+
+    ptr_csu_struct=readCsuFile(filename);
+
+    if (ptr_csu_struct == NULL)
+    {
+        systemPause();
+        return;
+    }
+
+    if (exportToGnuplotFile(ptr_csu_struct,export_filename))
+        printf(_("The file was well export to %s\n"),export_filename);
+    else
+        printf(_("There is an error when exporting the file %s into a csv file.\n"),filename);
+
+    closeCsuStruct(ptr_csu_struct);
+}
+
+
+/*!
+ * \fn void exportToMLocale(char *filename, char *export_filename)
+ *  Export the csu file named filename into a m file (octave/matlab)
+ * \param[in] filename the csu filename
+ * \param[in] export_filename
+ */
+void exportToMLocale(char *filename, char *export_filename)
+{
+    csuStruct *ptr_csu_struct;
+
+    ptr_csu_struct=readCsuFile(filename);
+
+    if (ptr_csu_struct == NULL)
+    {
+        systemPause();
+        return;
+    }
+
+    if (exportToM(ptr_csu_struct,export_filename))
+        printf(_("The file was well export to %s\n"),export_filename);
+    else
+        printf(_("There is an error when exporting the file %s into a m file.\n"),filename);
+
+    closeCsuStruct(ptr_csu_struct);
+}
+
+/*!
+ * \fn void exportCsu()
+ *  Export a csu file into a csv or pdf file
+ */
+void exportCsu()
+{
+    csuStruct *ptr_csu_struct;
+    char filename[SIZE_MAX_FILE_NAME];
+    char export_filename[SIZE_MAX_FILE_NAME];
+    FileType type;
+
+    clearScreen();
+
+    // Get the filename
+    menuFileName(filename);
+    #ifndef PORTABLE
+    if(readSystemPath(filename)==false)
+        return;
+    #endif // PORTABLE
+    ptr_csu_struct=readCsuFile(filename);
+
+    // Read the file
+    if (ptr_csu_struct == NULL)
+    {
+        systemPause();
+        return;
+    }
+
+    // Prepare the exportation
+    strcpy(export_filename,filename);
+    removeFileExtension(export_filename);
+    type = menuChooseExportFileType();
+
+    if (type == pdf_file)
+    {
+        addFilePdfExtension(export_filename);
+        if (exportToPdf(ptr_csu_struct,export_filename))
+            printf(_("The file was well export to %s\n"),export_filename);
+        else
+            printf(_("There is an error when exporting the file %s into a pdf file.\n"),filename);
+    }
+    else if (type == gnuplot_file)
+    {
+        if (exportToGnuplotFile(ptr_csu_struct,export_filename))
+            printf(_("The file was well export to %s\n"),export_filename);
+        else
+            printf(_("There is an error when exporting the file %s into gnuplot files.\n"),filename);
+    }
+    else if (type == csv_file)
+    {
+        addFileCsvExtension(export_filename);
+        if (exportToCsv(ptr_csu_struct,export_filename))
+            printf(_("The file was well export to %s\n"),export_filename);
+        else
+        printf(_("There is an error when exporting the file %s into a csv file.\n"),filename);
+    }
+    else
+    {
+        addFileExtension(export_filename,"m");
+        if (exportToM(ptr_csu_struct,export_filename))
+            printf(_("The file was well export to %s\n"),export_filename);
+        else
+        printf(_("There is an error when exporting the file %s into a m file.\n"),filename);
+    }
+
+    closeCsuStruct(ptr_csu_struct);
     systemPause();
 }

@@ -9,7 +9,7 @@
  /*
  * interface.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-cli.
  *
@@ -36,17 +36,59 @@
 
 #include <dirent.h>
 
+
+typedef enum {
+    newMatch=1,
+    loadMatch=2,
+    printFile=3,
+    deleteFiles=4,
+    listFile=5,
+    export_file=6,
+    pref=7,
+    quit=8,
+    easterEggs = 42
+} MainMenu;
+
+#ifndef PORTABLE
+typedef enum {
+    newPath=1,
+    readPath=2,
+    newGameConf=3,
+    removeGameConf=4,
+    printListGameConf=5,
+    printGameConf=6,
+    exportGameConf=7,
+    importGameConf=8,
+    pdfPreferences=9,
+    backMainMenu=10,
+    easterEggs2 = 42
+} PreferencesMenu;
+#else
+typedef enum {
+    newGameConf=1,
+    removeGameConf=2,
+    printListGameConf=3,
+    printGameConf=4,
+    exportGameConf=5,
+    importGameConf=6,
+    pdfPreferences=7
+    backMainMenu=8,
+    easterEggs2 = 42
+} PreferencesMenu;
+#endif
+
+typedef enum{
+    csv_file,
+    pdf_file,
+    gnuplot_file,
+    m_file,
+    csu_file
+} FileType;
+
 #include "menu.h"
 #include "display.h"
 #include "main.h"
 #include "csuper.h"
-
-typedef enum {newMatch=1 , loadMatch=2 , printFile=3 , deleteFiles=4 , listFile=5 , pref=6, quit=7 , easterEggs = 42} MainMenu;
-#ifndef PORTABLE
-typedef enum {newPath=1, readPath=2 , newGameConf=3, removeGameConf=4, printListGameConf=5 , printGameConf=6, exportGameConf=7, importGameConf=8 ,backMainMenu=9 , easterEggs2 = 42} PreferencesMenu;
-#else
-typedef enum {newGameConf=1,removeGameConf=2,printListGameConf=3 , printGameConf=4,exportGameConf=5, importGameConf=6  ,backMainMenu=7, easterEggs2 = 42} PreferencesMenu;
-#endif
 
 
 void displayFile();
@@ -67,5 +109,12 @@ void printListGameConfig();
 void printGameConfigFile();
 void exportListGameConfig();
 void importListGameConfig();
+
+void exportToPdfLocale(char *filename, char *export_filename);
+void changePdfPreferences();
+void exportToCsvLocale(char *filename, char *export_filename);
+void exportToGnuplotLocale(char *filename, char *export_filename);
+void exportToMLocale(char *filename, char *export_filename);
+void exportCsu();
 
 #endif

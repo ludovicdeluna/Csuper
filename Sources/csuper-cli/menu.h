@@ -2,14 +2,14 @@
  * \file    menu.h
  * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    17/06/14
- * \version 4.0.0
+ * \date    01/09/14
+ * \version 4.2.0
  */
 
  /*
  * menu.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-cli.
  *
@@ -37,6 +37,9 @@
 #include "keyboarding.h"
 #include "main.h"
 #include "csuper.h"
+#include "interface.h"
+
+typedef enum {Continue , ChangeDistributor , Quit} ContinueChangeDistributorOrQuit;
 
 
 char *menuFileName(char file_name[SIZE_MAX_FILE_NAME]);
@@ -46,8 +49,13 @@ void menuDistributor(char *distributor_name);
 void menuPlayersName(csuStruct *ptr_csu_struct);
 void menuPlayersPoints(csuStruct *ptr_csu_struct);
 int menuPlayerIndex(csuStruct *ptr_csu_struct);
-bool menuContinue();
+ContinueChangeDistributorOrQuit menuContinueChangeDistributorOrQuit();
+void menuChangeDistributor(csuStruct *ptr_csu_struct);
 bool menuDelete();
 void menuNewPath(char *new_path);
+bool menuExportListGameConfig(int **id,int *nb_id);
+bool menuImportListGameConfig(int **id,int *nb_id,char *filename);
+void menuPdfPreferences(export_pdf_preferences *pref);
+FileType menuChooseExportFileType();
 
 #endif

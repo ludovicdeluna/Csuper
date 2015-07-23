@@ -37,10 +37,17 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-fpic" />
+			<Add option="`pkg-config --cflags libxml-2.0`" />
 		</Compiler>
 		<Linker>
 			<Add option="-shared" />
+			<Add option="`pkg-config --libs libxml-2.0`" />
+			<Add library="hpdf" />
 		</Linker>
+		<Unit filename="../Sources/libcsuper/calculator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/calculator.h" />
 		<Unit filename="../Sources/libcsuper/csu_files.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -51,6 +58,10 @@
 		<Unit filename="../Sources/libcsuper/csu_struct.h">
 			<Option weight="0" />
 		</Unit>
+		<Unit filename="../Sources/libcsuper/export.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/export.h" />
 		<Unit filename="../Sources/libcsuper/file.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -63,6 +74,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../Sources/libcsuper/game_config.h" />
+		<Unit filename="../Sources/libcsuper/gnuplot.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../Sources/libcsuper/gnuplot.h" />
 		<Unit filename="../Sources/libcsuper/libcsuper.h" />
 		<Unit filename="../Sources/libcsuper/main_argument.c">
 			<Option compilerVar="CC" />

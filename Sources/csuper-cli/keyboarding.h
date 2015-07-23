@@ -9,7 +9,7 @@
  /*
  * keyboarding.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-cli.
  *
@@ -39,6 +39,13 @@
 #include <string.h>
 #include <math.h>
 #include "main.h"
+
+/*!
+ * \def NB_CARACT_EXPRESSION
+ * Define the number of characters maximum that can contain a mathematical expression
+ */
+#define NB_CARACT_EXPRESSION 256
+
 /*!
  * \def NB_CARACT_INT
  * Define the number of characters that need an int.

@@ -2,14 +2,14 @@
  * \file    menu.c
  * \brief   Menu functions
  * \author  Remi BERTHO
- * \date    05/07/14
- * \version 4.0.1
+ * \date    01/09/14
+ * \version 4.2.0
  */
 
  /*
  * menu.c
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-cli.
  *
@@ -37,7 +37,7 @@
  * \fn char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
  *  Ask and save the filename.
  * \param[in,out] file_name the filename
- * \return filename
+ * \return the filename
  */
 char *menuFileName(char file_name[SIZE_MAX_FILE_NAME])
 {
@@ -295,21 +295,47 @@ int menuPlayerIndex(csuStruct *ptr_csu_struct)
 }
 
 /*!
- * \fn bool menuContinue()
- *  Ask if we want to continue3
- * \return true if we want to continue, false otherwise
+ * \fn ContinueChangeDistributorOrQuit menuContinueChangeDistributorOrQuit()
+ *  Ask if we want to continue
+ * \return a ContinueChangeDistributorOrQuit
  */
-bool menuContinue()
+ContinueChangeDistributorOrQuit menuContinueChangeDistributorOrQuit()
 {
-    char continuer;
+    char choice;
 
-    printf(_("\nWould you like to continue the game (Y/n)? "));
-    charKey(&continuer);
+    printf(_("\nWhat do you want to do?\n (%d) Continue the game (default)\n (%d) Change the distributor and continue the game"
+             "\n (%d) Stop the game\nYour choice: "),1,2,3);
+    charKey(&choice);
 
-    if (continuer=='n' || continuer=='N')
-        return false;
+    if (choice=='2' || choice=='2')
+        return ChangeDistributor;
 
-    return true;
+    if (choice=='3' || choice=='3')
+        return Quit;
+
+    return Continue;
+}
+
+/*!
+ * \fn void menuChangeDistributor(csuStruct *ptr_csu_struct)
+ *  Ask and validate the new distributor
+ * \param[in,out] *ptr_csu_struct a pointer on a csu structure
+ */
+void menuChangeDistributor(csuStruct *ptr_csu_struct)
+{
+    int i;
+    int choice;
+
+    do
+    {
+        printf(_("\nChoose the new disributor\n"));
+        for(i=0 ; i<ptr_csu_struct->nb_player ; i++)
+            printf(_("(%d) %s\n"),i+1,ptr_csu_struct->player_names[i]);
+        printf(_("Your choice: \n"));
+        intKey(&choice);
+    } while (choice < 1 || choice > ptr_csu_struct->nb_player);
+
+    changeDistributor(ptr_csu_struct,choice-1);
 }
 
 /*!
@@ -351,4 +377,223 @@ void menuNewPath(char *new_path)
     } while (verif == false);
 
     printf(_("You chose %s\n"),new_path);
+}
+
+/*!
+ * \fn bool menuExportListGameConfig(int **id,int *nb_id)
+ *  Choose the game configuration which will be exported
+ * \param[in] id the id of the game configuration which will be exported
+ * \param[in] nb_id the number of game configuration which will be exported
+ * \return true if there is no problem, false otherwise
+ */
+bool menuExportListGameConfig(int **id,int *nb_id)
+{
+    int i;
+    list_game_config *ptr_list_config;
+    char home_path[SIZE_MAX_FILE_NAME]="";
+
+    clearScreen();
+
+    #ifndef PORTABLE
+    readHomePathSlash(home_path);
+    #endif // PORTABLE
+    ptr_list_config = readConfigListFile(home_path);
+    if (ptr_list_config == NULL)
+        return false;
+    printf(_("\nHere are all your game configurations:\n"));
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+        printf("(%d) %s\n",i,ptr_list_config->name_game_config[i]);
+
+    do
+    {
+        printf(_("\nGive the number of game configuration you want to export or -1 if you want to export all of them.\nYour choice: "));
+        intKey(nb_id);
+    } while (*nb_id < -1 || *nb_id > ptr_list_config->nb_config || *nb_id == 0);
+
+    if (*nb_id != -1)
+    {
+        *id = (int*)myAlloc(*nb_id * sizeof(int));
+        for (i=0 ; i<*nb_id ; i++)
+        {
+            do
+            {
+                printf(_("\nGive the id of the %dth configuration you want to export.\nYour choice: "),i);
+                intKey(*id+i);
+                printf(_("You chose %d\n"),(*id)[i]);
+            } while ((*id)[i] <0 || (*id)[i] >= ptr_list_config->nb_config);
+        }
+    }
+    else
+    {
+        *id = (int*)myAlloc(ptr_list_config->nb_config * sizeof(int));
+        *nb_id = ptr_list_config->nb_config;
+        for (i=0 ; i< ptr_list_config->nb_config ; i++)
+            (*id)[i]=i;
+    }
+
+    closeListGameConfig(ptr_list_config);
+
+    return true;
+}
+
+/*!
+ * \fn bool menuImportListGameConfig(int **id,int *nb_id,char *filename)
+ *  Choose the game configuration which will be imported
+ * \param[in] file_name the filename of the imported file.
+ * \param[in] id the id of the game configuration which will be imported
+ * \param[in] nb_id the number of game configuration which will be imported
+ * \return true if there is no problem, false otherwise
+ */
+bool menuImportListGameConfig(int **id,int *nb_id,char *filename)
+{
+    int i;
+    list_game_config *ptr_list_config;
+
+    clearScreen();
+
+    ptr_list_config = newListGameConfigFromImport(filename);
+    if (ptr_list_config == NULL)
+        return false;
+    printf(_("\nHere are all the game configurations in this file:\n"));
+    for (i=0 ; i<ptr_list_config->nb_config ; i++)
+        printf("(%d) %s\n",i,ptr_list_config->name_game_config[i]);
+
+    do
+    {
+        printf(_("\nGive the number of game configuration you want to import or -1 if you want to import all of them.\nYour choice: "));
+        intKey(nb_id);
+    } while (*nb_id < -1 || *nb_id > ptr_list_config->nb_config);
+
+    if (*nb_id != -1)
+    {
+        *id = (int*) myAlloc(*nb_id * sizeof(int));
+        for (i=0 ; i<*nb_id ; i++)
+        {
+            do
+            {
+                printf(_("\nGive the id of the %dth configuration you want to import.\nYour choice: "),i);
+                intKey(*id+i);
+                printf(_("You chose %d\n"),(*id)[i]);
+            } while ((*id)[i] <0 || (*id)[i] >= ptr_list_config->nb_config);
+        }
+    }
+    else
+    {
+        *id = (int*) myAlloc(ptr_list_config->nb_config * sizeof(int));
+        *nb_id = ptr_list_config->nb_config;
+        for (i=0 ; i< ptr_list_config->nb_config ; i++)
+            (*id)[i]=i;
+    }
+
+    closeListGameConfig(ptr_list_config);
+
+    return true;
+}
+
+
+/*!
+ * \fn void menuPdfPreferences(export_pdf_preferences *pref)
+ *  Fill a export pdf preferences structure
+ * \param[in] ptr_pref a pointer on a export_pdf_preferences
+ */
+void menuPdfPreferences(export_pdf_preferences *pref)
+{
+    clearScreen();
+
+    char choice;
+    int nb;
+
+    // Charset
+    if (canUseUtf8Pdf())
+    {
+        printf(_("The UTF-8 character set permit to display all the character with the cost of bigger pdf file.\n\nWould you like to use the UTF-8 character set (y/N)? "));
+        charKey(&choice);
+        if (choice=='Y' || choice == 'y')
+            pref->charset = UTF8;
+        else
+            pref->charset = ISO885915;
+    }
+
+    // Direction
+    printf(_("\n\nWhat page direction of the page do you want?\n (1) Portrait (default)\n (2) Landscape\nYour choice: "));
+    charKey(&choice);
+    if (choice=='2' || choice=='2')
+        pref->direction = HPDF_PAGE_LANDSCAPE;
+    else
+        pref->direction = HPDF_PAGE_PORTRAIT;
+
+    // Size
+    printf(_("\n\nWhat size of page do you want?\n (1) A3\n (2) A4 (default)\n (3) A5 \nYour choice: "));
+    charKey(&choice);
+    if (choice=='1')
+        pref->size = HPDF_PAGE_SIZE_A3 ;
+    else if (choice=='3')
+        pref->size = HPDF_PAGE_SIZE_A5;
+    else
+        pref->size = HPDF_PAGE_SIZE_A4;
+
+    // Margin
+    do
+    {
+        printf(_("\nGive the margin you want or -1 if want to keep the old one (%d). It will be between 0 and 200.\nYour choice: "),pref->margin);
+        intKey(&nb);
+    } while (nb < -1 || nb > 200);
+    if (nb != -1)
+        pref->margin = nb;
+
+    // Font size
+    do
+    {
+        printf(_("\nGive the font size you want or -1 if want to keep the old one (%d). It will be between 4 and 40.\nYour choice: "),pref->font_size);
+        intKey(&nb);
+    } while ((nb < 4 || nb > 40) && nb != -1);
+    if (nb != -1)
+        pref->font_size = nb;
+
+    // Total points by turn
+    printf(_("\nWould you like to display the total points in each turn (y/N)? "));
+    charKey(&choice);
+    if (choice=='Y' || choice == 'y')
+        pref->total_points_turn = true;
+    else
+        pref->total_points_turn = false;
+
+    // Ranking by turn
+    printf(_("\nWould you like to display the ranking in each turn (y/N)? "));
+    charKey(&choice);
+    if (choice=='Y' || choice == 'y')
+        pref->ranking_turn = true;
+    else
+        pref->ranking_turn = false;
+
+    // Pdf size for chart
+    printf(_("\nWould you like to use the pdf size for the pdf chart (y/N)? "));
+    charKey(&choice);
+    if (choice=='Y' || choice == 'y')
+        pref->pdf_size_for_chart = true;
+    else
+        pref->pdf_size_for_chart = false;
+}
+
+
+/*!
+ * \fn FileType menuChooseExportFileType()
+ *  Choose the file type which will be exported
+ */
+FileType menuChooseExportFileType()
+{
+    char choice;
+
+    printf(_("\nIn what file type would you like to export?\n "
+             "(1) PDF file (default)\n (2) CSV file\n (3) Gnuplot files\n"
+             " (4) m files (octave/matlab file)\nYour choice: "));
+    charKey(&choice);
+    if (choice=='2')
+        return csv_file;
+    else if (choice=='3')
+        return gnuplot_file;
+    else if (choice=='4')
+        return m_file;
+    else
+        return pdf_file;
 }

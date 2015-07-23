@@ -2,14 +2,14 @@
  * \file    main_menu.h
  * \brief   Main menu
  * \author  Remi BERTHO
- * \date    26/06/14
- * \version 4.0.0
+ * \date    31/08/14
+ * \version 4.2.0
  */
 
  /*
  * main_menu.h
  *
- * Copyright 2014 Remi BERTHO <remi.bertho@gmail.com>
+ * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
  * This file is part of Csuper-gui.
  *
@@ -36,13 +36,15 @@
 
 #include "csuper-gui.h"
 #include "main_window.h"
-#include "preferences.h"
 
 G_MODULE_EXPORT void displayAbout(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void recentCsuFileOpen(GtkRecentChooser *chooser, gpointer data);
 void openFileError(globalData *data);
 G_MODULE_EXPORT void chooseCsuFileSave(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void chooseExportFile(GtkWidget *widget, gpointer data);
 void saveFileError(globalData *data);
+void exportFileError(globalData *data);
 G_MODULE_EXPORT void copyToCliboard(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void pastFromClipboard(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void deleteSelectedText(GtkWidget *widget, gpointer data);
@@ -54,5 +56,13 @@ void deleteAllLastCsuStruct(globalData *data);
 G_MODULE_EXPORT void undoCsuStruct(GtkWidget *widget, gpointer data);
 G_MODULE_EXPORT void redoCsuStruct(GtkWidget *widget, gpointer data);
 void updateToolbarButton(globalData *data);
+G_MODULE_EXPORT void deleteFileButton(GtkWidget *widget, gpointer data);
+void deleteFileError(globalData *data);
+G_MODULE_EXPORT void displayPodium(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void changeDisplayDifferencePoints(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void changeDisplayPointsGrid(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void updateCalculatorMainWindow(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void changeDisplayMainWindowSide(GtkWidget *widget, gpointer data);
+G_MODULE_EXPORT void displayStatistics(GtkWidget *widget, gpointer data);
 
 #endif // MAIN_MENU_H_INCLUDED
