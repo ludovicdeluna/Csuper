@@ -516,7 +516,7 @@ csuStruct *readCsuXmlFile(char *filename)
 
     // Name
     tmp_node = xmlNextElementSibling(tmp_node);
-    strncpy(ptr_csu_struct->config.name,(char *)xmlNodeGetContent(tmp_node),SIZE_MAX_NAME+1);
+    strncpy(ptr_csu_struct->config.name,(char *)xmlNodeGetContent(tmp_node),SIZE_MAX_NAME);
 
     // Begin score
     tmp_node = xmlNextElementSibling(tmp_node);
@@ -564,5 +564,4 @@ csuStruct *readCsuXmlFile(char *filename)
     xmlFreeDoc(doc);
 
     return ptr_csu_struct;
-    //return NULL;
 }

@@ -541,8 +541,8 @@ list_game_config *readXmlListGameConfig(char *filename)
 
         // Name
         tmp_node = xmlNextElementSibling(tmp_node);
-        strncpy(list_config->game_configs[i].name,(char *)xmlNodeGetContent(tmp_node),SIZE_MAX_NAME+1);
-        strncpy(list_config->name_game_config[i],(char *)xmlNodeGetContent(tmp_node),SIZE_MAX_NAME+1);
+        strncpy(list_config->game_configs[i].name,(char *)xmlNodeGetContent(tmp_node),SIZE_MAX_NAME);
+        strncpy(list_config->name_game_config[i],(char *)xmlNodeGetContent(tmp_node),SIZE_MAX_NAME);
 
         // Begin score
         tmp_node = xmlNextElementSibling(tmp_node);
