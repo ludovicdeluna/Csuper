@@ -60,7 +60,7 @@ calculatorNodeList *newCalculatorNodeList(bool is_number, double number, char op
 /*!
  * \fn void deleteCalculatorNodeList(calculatorNodeList *node)
  *  Free a node
- * \param[out] node, the node to be freed
+ * \param[out] node the node to be freed
  */
 void deleteCalculatorNodeList(calculatorNodeList *node)
 {

@@ -439,7 +439,7 @@ bool menuExportListGameConfig(int **id,int *nb_id)
 /*!
  * \fn bool menuImportListGameConfig(int **id,int *nb_id,char *filename)
  *  Choose the game configuration which will be imported
- * \param[in] file_name the filename of the imported file.
+ * \param[in] filename the filename of the imported file.
  * \param[in] id the id of the game configuration which will be imported
  * \param[in] nb_id the number of game configuration which will be imported
  * \return true if there is no problem, false otherwise
@@ -494,7 +494,7 @@ bool menuImportListGameConfig(int **id,int *nb_id,char *filename)
 /*!
  * \fn void menuPdfPreferences(export_pdf_preferences *pref)
  *  Fill a export pdf preferences structure
- * \param[in] ptr_pref a pointer on a export_pdf_preferences
+ * \param[in] pref a pointer on a export_pdf_preferences
  */
 void menuPdfPreferences(export_pdf_preferences *pref)
 {

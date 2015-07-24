@@ -551,7 +551,7 @@ int lastRankAtTurn(csuStruct *ptr_csu_struct, int turn)
 
 
 /*!
- * \fn bool changeDeleteTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
+ * \fn bool deleteTurn(csuStruct *ptr_csu_struct, int player_index, int turn)
  *  Delete a turn of a player or all of them
  * \param[in] *ptr_csu_struct a pointer on a csuStruct
  * \param[in] player_index the index of the player

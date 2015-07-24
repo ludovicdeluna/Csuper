@@ -39,7 +39,7 @@
  * \param[in] id the id of the game configuration which will be imported
  * \param[in] nb_id the number of game configuration which will be imported
  * \param[in] data the globalData
- * \param[in] list_game_config the list of game configuration
+ * \param[in] ptr_list_config the list of game configuration
  */
 bool dialogMenuImportExportGameConfig(globalData *data,list_game_config *ptr_list_config,int **id,int *nb_id)
 {

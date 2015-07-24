@@ -150,7 +150,7 @@ G_MODULE_EXPORT void chooseCsuFileOpen(GtkWidget *widget, gpointer data)
 /*!
  * \fn G_MODULE_EXPORT void recentCsuFileOpen(GtkRecentChooser *chooser, gpointer data)
  *  Open a recent csu file.
- * \param[in] the GtkRecentChooser which send the signal
+ * \param[in] chooser the GtkRecentChooser which send the signal
  * \param[in] data the globalData
  */
 G_MODULE_EXPORT void recentCsuFileOpen(GtkRecentChooser *chooser, gpointer data)
