@@ -44,7 +44,7 @@
  * \def PORTABLE
  * Define that we compile csuper-gui portable
  */
-#define PORTABLE
+//#define PORTABLE
 
 /*!
  * \def ENABLE_DEPRECIATE_FUNCTIONS

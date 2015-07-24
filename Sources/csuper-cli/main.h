@@ -40,7 +40,7 @@
  * \def PORTABLE
  * Define if csuper is portable.
  */
-#define PORTABLE
+//#define PORTABLE
 
 
 int main(int argc, char *argv[]);
