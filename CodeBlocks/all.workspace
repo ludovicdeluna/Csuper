@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
-		<Project filename="libcsuper.cbp">
-			<Depends filename="libslope.cbp" />
+		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper - 4.3/CodeBlocks/libcsuper.cbp">
+			<Depends filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper - 4.3/CodeBlocks/libslope.cbp" />
 		</Project>
-		<Project filename="csuper-cli.cbp">
-			<Depends filename="/libcsuper.cbp" />
-		</Project>
-		<Project filename="libslope.cbp" />
+		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper - 4.3/CodeBlocks/csuper-cli.cbp" />
+		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper - 4.3/CodeBlocks/libslope.cbp" />
+		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper - 4.3/CodeBlocks/csuper-gtk.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

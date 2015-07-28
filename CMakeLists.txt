@@ -27,6 +27,7 @@ find_package(
 	PkgConfig 
 	REQUIRED
 )
+
 pkg_check_modules(
 	GLIBMM
 	REQUIRED glibmm-2.4
@@ -74,7 +75,7 @@ include_directories(
 	"Externals library/Slope"
 )
 
-CONFIGURE_FILE (
+CONFIGURE_FILE(
 	"Externals library/Slope/slope-config.h.in"
 	"Externals library/Slope/slope-config.h"
 )
@@ -163,7 +164,6 @@ IF(CLI MATCHES "TRUE")
 		${GLIBMM_LIBRARIES}
 		${XMLPP_LIBRARIES}
 		muparser
-		hpdf
 	)
 	
 	IF(UNIX)
@@ -177,5 +177,58 @@ IF(CLI MATCHES "TRUE")
 		csuper-cli
 		PRIVATE cxx_range_for
 	)
+
+ENDIF() # CLI
+
+
+#
+# csuper-gtk
+#
+
+IF(GTK MATCHES "TRUE")
+
+	pkg_check_modules(
+		GTKMM
+		REQUIRED gtkmm-3.0
+	)
+
+	include_directories(
+		${GTKMM_INCLUDE_DIRS}
+	)
+	
+	link_directories(
+		${GTKMM_LIBRARY_DIRS}
+	)
+
+	add_definitions(
+		${GTKMM_CFLAGS_OTHER}
+	)
+
+
+	file(
+	    GLOB
+	    source_files_csuper-gtk
+	    Sources/csuper-gtk/*.cpp
+	)
+
+	add_executable(
+		csuper-gtk
+		${source_files_csuper-gtk}
+	)
+	
+	target_link_libraries(
+		csuper-gtk
+		csuper
+		${GLIBMM_LIBRARIES}
+		${XMLPP_LIBRARIES}
+		${GTKMM_LIBRARIES}
+		muparser
+	)
+	
+	target_compile_features(
+		csuper-gtk
+		PRIVATE cxx_range_for
+	)
+	
 
 ENDIF() # CLI

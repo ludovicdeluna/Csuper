@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="csuper-gtk" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug Unix">
+				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Debug_Unix" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release Unix">
+				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Release_Unix" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug Portable Unix">
+				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Debug_Portable_Unix" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DPORTABLE" />
+				</Compiler>
+			</Target>
+			<Target title="Release Portable Unix">
+				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Release_Portable_Unix" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DPORTABLE" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug Windows">
+				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Debug_Windows" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release Windows">
+				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Release_Windows" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+			<Target title="Debug Portable Windows">
+				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Debug_Portable_Windows" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add option="-DPORTABLE" />
+				</Compiler>
+			</Target>
+			<Target title="Release Portable Windows">
+				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
+				<Option working_dir="../" />
+				<Option object_output="../Compilation/obj/Release_Portable_Windows" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+					<Add option="-DPORTABLE" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="`pkg-config --cflags gtkmm-3.0 libxml++-2.6 `" />
+			<Add directory="../" />
+		</Compiler>
+		<ResourceCompiler>
+			<Add directory="../" />
+		</ResourceCompiler>
+		<Linker>
+			<Add option="`pkg-config --libs gtkmm-3.0`" />
+			<Add library="libcsuper" />
+			<Add library="podofo" />
+			<Add directory="../" />
+		</Linker>
+		<Unit filename="../Sources/csuper-gtk/ressources_windows.rc">
+			<Option compilerVar="WINDRES" />
+			<Option target="Debug Windows" />
+			<Option target="Release Windows" />
+			<Option target="Debug Portable Windows" />
+			<Option target="Release Portable Windows" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<debugger />
+			<envvars />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

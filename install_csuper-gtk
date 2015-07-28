@@ -1,0 +1,10 @@
+#!/bin/bash
+sudo mkdir -p /usr/share/csuper
+sudo cp csuper-gtk /usr/share/csuper
+sudo cp csuper-gtk.glade /usr/share/csuper
+sudo cp libcsuper.so /usr/lib
+sudo cp -R Locales /usr/share/csuper
+sudo cp Installation/csuper-gtk /usr/local/bin/csuper-gtk
+sudo cp Man/csuper-gtk.1.gz /usr/share/man/man1
+sudo chmod -R a+rx /usr/share/csuper
+sudo ldconfig 

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-20 23:50+0200\n"
+"POT-Creation-Date: 2015-07-28 16:49+0200\n"
 "PO-Revision-Date: 2015-07-20 23:03+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
@@ -20,22 +20,22 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #. TRANSLATORS:First letter of YES
-#: Sources/csuper-cli/cin.cpp:87
+#: Sources/csuper-cli/cin.cpp:96
 msgid "Y"
 msgstr "O"
 
 #. TRANSLATORS:First letter of yes
-#: Sources/csuper-cli/cin.cpp:89
+#: Sources/csuper-cli/cin.cpp:98
 msgid "y"
 msgstr "o"
 
 #. TRANSLATORS:First letter of NO
-#: Sources/csuper-cli/cin.cpp:97
+#: Sources/csuper-cli/cin.cpp:106
 msgid "N"
 msgstr "N"
 
 #. TRANSLATORS:First letter of no
-#: Sources/csuper-cli/cin.cpp:99
+#: Sources/csuper-cli/cin.cpp:108
 msgid "n"
 msgstr "n"
 
@@ -181,7 +181,7 @@ msgstr "Erreur lors de l'initialisation de Csuper"
 msgid "The file %1 was well exported to %2"
 msgstr "Le fichier %1 a bien été exporté en %2"
 
-#: Sources/csuper-cli/menu.cpp:80 Sources/csuper-cli/menu.cpp:354
+#: Sources/csuper-cli/menu.cpp:80 Sources/csuper-cli/menu.cpp:355
 msgid "Csuper - Universal points counter allowing a dispense with reflection v"
 msgstr ""
 "Csuper - Compteur de Score Universel Permettant l'Exemption de Réflexion v"
@@ -214,7 +214,7 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:124
+#: Sources/csuper-cli/menu.cpp:125
 msgid ""
 "\n"
 "See you."
@@ -222,11 +222,11 @@ msgstr ""
 "\n"
 "À bientôt."
 
-#: Sources/csuper-cli/menu.cpp:147
+#: Sources/csuper-cli/menu.cpp:148
 msgid "What do you want to do?"
 msgstr "Que voulez-vous faire ?"
 
-#: Sources/csuper-cli/menu.cpp:148
+#: Sources/csuper-cli/menu.cpp:149
 msgid ""
 "\n"
 " (%1) Make a new game configuration\n"
@@ -250,7 +250,7 @@ msgstr ""
 " (%8) Changer le dossier d'enregistrement des fichiers\n"
 " (%9) Afficher le dossier d'enregistrement des fichiers"
 
-#: Sources/csuper-cli/menu.cpp:161
+#: Sources/csuper-cli/menu.cpp:162
 msgid ""
 "\n"
 " (%1) Back to main menu\n"
@@ -262,7 +262,7 @@ msgstr ""
 "\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:225
+#: Sources/csuper-cli/menu.cpp:226
 msgid ""
 "Give the number of players in the game (>0).\n"
 "Your choice: "
@@ -270,36 +270,36 @@ msgstr ""
 "Donnez le nombre de joueurs (>0).\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:228 Sources/csuper-cli/menu.cpp:242
-#: Sources/csuper-cli/menu.cpp:262 Sources/csuper-cli/menu.cpp:275
-#: Sources/csuper-cli/menu.cpp:514 Sources/csuper-cli/menu.cpp:540
-#: Sources/csuper-cli/menu.cpp:742 Sources/csuper-cli/menu.cpp:782
-#: Sources/csuper-cli/menu.cpp:850 Sources/csuper-cli/play_game.cpp:132
+#: Sources/csuper-cli/menu.cpp:229 Sources/csuper-cli/menu.cpp:243
+#: Sources/csuper-cli/menu.cpp:263 Sources/csuper-cli/menu.cpp:276
+#: Sources/csuper-cli/menu.cpp:515 Sources/csuper-cli/menu.cpp:541
+#: Sources/csuper-cli/menu.cpp:749 Sources/csuper-cli/menu.cpp:789
+#: Sources/csuper-cli/menu.cpp:857 Sources/csuper-cli/play_game.cpp:132
 msgid "You chose %1"
 msgstr "Vous avez choisi %1"
 
-#: Sources/csuper-cli/menu.cpp:233
+#: Sources/csuper-cli/menu.cpp:234
 msgid "Which game configuration would you like to use?"
 msgstr "Quelle configuration de jeu voulez-vous utiliser ?"
 
-#: Sources/csuper-cli/menu.cpp:236
+#: Sources/csuper-cli/menu.cpp:237
 msgid " (%1) Create a new game configuration"
 msgstr " (%1) Créer une nouvelle configuration de jeu"
 
-#: Sources/csuper-cli/menu.cpp:240 Sources/csuper-cli/menu.cpp:512
-#: Sources/csuper-cli/menu.cpp:538
+#: Sources/csuper-cli/menu.cpp:241 Sources/csuper-cli/menu.cpp:513
+#: Sources/csuper-cli/menu.cpp:539
 msgid "Your choice: "
 msgstr "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:254
+#: Sources/csuper-cli/menu.cpp:255
 msgid "The players' names must have between 2 and %1 characters."
 msgstr "Les noms des personnes doivent avoir entre 2 et %1 caractères."
 
-#: Sources/csuper-cli/menu.cpp:260
+#: Sources/csuper-cli/menu.cpp:261
 msgid "Give the name of the %1th person: "
 msgstr "Donnez le nom de la %1ème personne : "
 
-#: Sources/csuper-cli/menu.cpp:272
+#: Sources/csuper-cli/menu.cpp:273
 msgid ""
 "Give the name (or the first letters of the name) of the person who will "
 "distribute first.\n"
@@ -309,15 +309,15 @@ msgstr ""
 "en premier.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:330
+#: Sources/csuper-cli/menu.cpp:331
 msgid "Here are all your csu files:"
 msgstr "Voici tous vos fichiers csu : "
 
-#: Sources/csuper-cli/menu.cpp:356
+#: Sources/csuper-cli/menu.cpp:357
 msgid "Csuper website: "
 msgstr "Site internet de Csuper : "
 
-#: Sources/csuper-cli/menu.cpp:358
+#: Sources/csuper-cli/menu.cpp:359
 msgid ""
 "This program comes with ABSOLUTELY NO WARRANTY. \n"
 "This is free software,and you are welcome to redistribute it under certain "
@@ -329,15 +329,15 @@ msgstr ""
 "certaines conditions. \n"
 "Pour plus de détails : http://www.gnu.org/licenses/gpl.html\n"
 
-#: Sources/csuper-cli/menu.cpp:370 Sources/csuper-cli/play_game.cpp:87
+#: Sources/csuper-cli/menu.cpp:371 Sources/csuper-cli/play_game.cpp:87
 msgid "Error when deleting %1: "
 msgstr "Erreur lors de la surpression de %1 : "
 
-#: Sources/csuper-cli/menu.cpp:372 Sources/csuper-cli/play_game.cpp:89
+#: Sources/csuper-cli/menu.cpp:373 Sources/csuper-cli/play_game.cpp:89
 msgid "The file %1 was successfully deleted."
 msgstr "Le fichier %1 a bien été supprimé."
 
-#: Sources/csuper-cli/menu.cpp:418
+#: Sources/csuper-cli/menu.cpp:419
 msgid ""
 "In what file type would you like to export?\n"
 " (1) PDF file (default)\n"
@@ -353,15 +353,15 @@ msgstr ""
 " (4) Fichier m (fichier Octave/Matlab)\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:445
+#: Sources/csuper-cli/menu.cpp:446
 msgid "The file was well exported."
 msgstr "Le fichier a bien été exporté."
 
-#: Sources/csuper-cli/menu.cpp:450
+#: Sources/csuper-cli/menu.cpp:451
 msgid "There is an error when exporting the file."
 msgstr "Il y a eut une erreur lors de l'exportation du fichier."
 
-#: Sources/csuper-cli/menu.cpp:466
+#: Sources/csuper-cli/menu.cpp:467
 msgid ""
 "Give the new folder in which you would like to save and read your files.\n"
 "Check if the folder exists and if you have the read and write rights.\n"
@@ -375,32 +375,32 @@ msgstr ""
 "\n"
 "Votre choix :"
 
-#: Sources/csuper-cli/menu.cpp:484
+#: Sources/csuper-cli/menu.cpp:485
 msgid "Your files are saved and read in %1"
 msgstr "Vos fichiers sont lus et écrit depuis %1"
 
-#: Sources/csuper-cli/menu.cpp:493 Sources/csuper-cli/menu.cpp:767
+#: Sources/csuper-cli/menu.cpp:494 Sources/csuper-cli/menu.cpp:774
 msgid "Here are all your game configurations:"
 msgstr "Voici la liste des configurations de jeu :"
 
-#: Sources/csuper-cli/menu.cpp:505
+#: Sources/csuper-cli/menu.cpp:506
 msgid "Which game configuration would you like to display?"
 msgstr "Quelle configuration de jeu voulez-vous afficher ?"
 
-#: Sources/csuper-cli/menu.cpp:520 Sources/csuper-cli/menu.cpp:549
-#: Sources/csuper-cli/menu.cpp:811
+#: Sources/csuper-cli/menu.cpp:521 Sources/csuper-cli/menu.cpp:550
+#: Sources/csuper-cli/menu.cpp:818
 msgid "You do not have any game configuration file."
 msgstr "Vous n'avez pas de configurations de jeu."
 
-#: Sources/csuper-cli/menu.cpp:531
+#: Sources/csuper-cli/menu.cpp:532
 msgid "Which game configuration would you like to delete?"
 msgstr "Quelle configuration de jeu voulez-vous supprimer ?"
 
-#: Sources/csuper-cli/menu.cpp:546
+#: Sources/csuper-cli/menu.cpp:547
 msgid "The game configuration was well deleted."
 msgstr "la configuration de jeu a bien été supprimé."
 
-#: Sources/csuper-cli/menu.cpp:562
+#: Sources/csuper-cli/menu.cpp:565
 msgid ""
 "The UTF-8 character set permit to display all character but can have problem "
 "with some fonts.\n"
@@ -412,7 +412,7 @@ msgstr ""
 "\n"
 "Voulez-vous utilisez l'UTF-8 (o/N) ? "
 
-#: Sources/csuper-cli/menu.cpp:571
+#: Sources/csuper-cli/menu.cpp:578
 msgid ""
 "Please type the font name which will be use in the PDF\n"
 "Be careful, if the font does'nt exist the PDF file will be unreadable.\n"
@@ -422,7 +422,7 @@ msgstr ""
 "Attention, si la police ne correspond à rien d'existant, le fichier PDF sera "
 "illisible."
 
-#: Sources/csuper-cli/menu.cpp:579
+#: Sources/csuper-cli/menu.cpp:586
 msgid ""
 "If the font is embedded in the PDF file, any user will can read the file "
 "even if he has not the font installed. But the file will be bigger.\n"
@@ -435,7 +435,7 @@ msgstr ""
 "\n"
 "Voulez-vous incorporer la police dans le fichier PDF (O/n) ? "
 
-#: Sources/csuper-cli/menu.cpp:589
+#: Sources/csuper-cli/menu.cpp:596
 msgid ""
 "What page direction of the page do you want?\n"
 " (1) Portrait (default)\n"
@@ -447,7 +447,7 @@ msgstr ""
 " (2) Paysage\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:601
+#: Sources/csuper-cli/menu.cpp:608
 msgid ""
 "What size of page do you want?\n"
 " (1) A3\n"
@@ -461,7 +461,7 @@ msgstr ""
 " (3) A5\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:618
+#: Sources/csuper-cli/menu.cpp:625
 msgid ""
 "Give the margin you want or -1 if want to keep the old one (%1). It will be "
 "between 0 and 200.\n"
@@ -471,7 +471,7 @@ msgstr ""
 "l'ancienne. Ce chiffre doit être compris entre 0 et 200.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:631
+#: Sources/csuper-cli/menu.cpp:638
 msgid ""
 "Give the font size you want or -1 if want to keep the old one (%1). It will "
 "be between 4 and 40.\n"
@@ -481,25 +481,25 @@ msgstr ""
 "garder l'ancienne. Ce chiffre doit être compris entre 4 et 40.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:642
+#: Sources/csuper-cli/menu.cpp:649
 msgid "Would you like to display the total points in each turn (y/N)? "
 msgstr "Voulez-vous afficher les points totaux à chaque tour (o/N) ?"
 
-#: Sources/csuper-cli/menu.cpp:650
+#: Sources/csuper-cli/menu.cpp:657
 msgid "Would you like to display the ranking in each turn (y/N)? "
 msgstr "Voulez-vous afficher le classement à chaque tour (o/N) ?"
 
-#: Sources/csuper-cli/menu.cpp:658
+#: Sources/csuper-cli/menu.cpp:665
 msgid "Would you like to use the pdf size for the pdf chart (y/N)? "
 msgstr ""
 "Voulez-vous utiliser la taille des PDF pour l'export en PDF du graphique (o/"
 "N) ?"
 
-#: Sources/csuper-cli/menu.cpp:667
+#: Sources/csuper-cli/menu.cpp:674
 msgid "The PDF preferences was well changed."
 msgstr "Les préférences de PDF ont bien été changées."
 
-#: Sources/csuper-cli/menu.cpp:678
+#: Sources/csuper-cli/menu.cpp:685
 msgid ""
 "What is the name of the new game configuration?\n"
 "Your choice: "
@@ -507,15 +507,15 @@ msgstr ""
 "Quel est le nom de la nouvelle configuration de jeu ?\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:683
+#: Sources/csuper-cli/menu.cpp:690
 msgid "Would you like to use a maximum or a minimum score (Y/n): "
 msgstr "Voulez-vous utiliser un nombre maximum ou minimum (O/n) : "
 
-#: Sources/csuper-cli/menu.cpp:691
+#: Sources/csuper-cli/menu.cpp:698
 msgid "Would you like to use a maximum score (Y/n): "
 msgstr "Voulez-vous utiliser un nombre maximum (O/n) : "
 
-#: Sources/csuper-cli/menu.cpp:699
+#: Sources/csuper-cli/menu.cpp:706
 msgid ""
 "Give the maximal or minimal score which a player can reach in the game.\n"
 "Your choice: "
@@ -524,11 +524,11 @@ msgstr ""
 "votre jeu.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:702 Sources/csuper-cli/menu.cpp:709
+#: Sources/csuper-cli/menu.cpp:709 Sources/csuper-cli/menu.cpp:716
 msgid "You chose %1\n"
 msgstr "Vous avez choisi %1\n"
 
-#: Sources/csuper-cli/menu.cpp:707
+#: Sources/csuper-cli/menu.cpp:714
 msgid ""
 "Give the initial score of the players.\n"
 "Your choice: "
@@ -536,19 +536,19 @@ msgstr ""
 "Donnez le score initial des joueurs.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:713
+#: Sources/csuper-cli/menu.cpp:720
 msgid "The winner is the player who has the highest score (Y/n): "
 msgstr "Le gagnant est le joueur qui a le plus de points (O/n) : "
 
-#: Sources/csuper-cli/menu.cpp:721
+#: Sources/csuper-cli/menu.cpp:728
 msgid "This is a turn-based game (Y/n): "
 msgstr "Les points seront attribués en tour par tour (O/n) :"
 
-#: Sources/csuper-cli/menu.cpp:729
+#: Sources/csuper-cli/menu.cpp:736
 msgid "A distributor is used (Y/n): "
 msgstr "On utilise un distributeur (O/n) : "
 
-#: Sources/csuper-cli/menu.cpp:739
+#: Sources/csuper-cli/menu.cpp:746
 msgid ""
 "Give the number of decimals displayed. This number must be between 0 and "
 "10.\n"
@@ -558,15 +558,15 @@ msgstr ""
 "chiffre doit être compris entre 0 et 10.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:749
+#: Sources/csuper-cli/menu.cpp:756
 msgid "The game configuration was well created."
 msgstr "La configuration de jeu a bien été créée."
 
-#: Sources/csuper-cli/menu.cpp:771
+#: Sources/csuper-cli/menu.cpp:778
 msgid "Export all your game configuration (Y/n): "
 msgstr "Exporter toutes les configurations de jeu (O/n) : "
 
-#: Sources/csuper-cli/menu.cpp:779
+#: Sources/csuper-cli/menu.cpp:786
 msgid ""
 "Give the id of the game configuration you want to export. Use 0 if you don't "
 "want another.\n"
@@ -576,23 +576,23 @@ msgstr ""
 "0 si vous n'en voulez pas d'autre.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:784 Sources/csuper-cli/menu.cpp:852
+#: Sources/csuper-cli/menu.cpp:791 Sources/csuper-cli/menu.cpp:859
 msgid "There is only %1 game configuration."
 msgstr "Il n'y a que %1 configurations de jeu."
 
-#: Sources/csuper-cli/menu.cpp:803
+#: Sources/csuper-cli/menu.cpp:810
 msgid "The game configuration was well exported."
 msgstr "La configuration de jeu a bien été exporté3"
 
-#: Sources/csuper-cli/menu.cpp:836
+#: Sources/csuper-cli/menu.cpp:843
 msgid "Here are all the game configurations in the file:"
 msgstr "Voici la liste des configurations de jeu dans le fichier :"
 
-#: Sources/csuper-cli/menu.cpp:839
+#: Sources/csuper-cli/menu.cpp:846
 msgid "Import all the game configuration (Y/n): "
 msgstr "Importer toutes les configurations de jeu (O/n) : "
 
-#: Sources/csuper-cli/menu.cpp:847
+#: Sources/csuper-cli/menu.cpp:854
 msgid ""
 "Give the id of the game configuration you want to import. Use 0 if you don't "
 "want another.\n"
@@ -602,11 +602,11 @@ msgstr ""
 "0 si vous n'en voulez pas d'autre.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:868
+#: Sources/csuper-cli/menu.cpp:875
 msgid "The game configuration was well imported."
 msgstr "Les configurations de jeu ont bien été importées."
 
-#: Sources/csuper-cli/menu.cpp:880
+#: Sources/csuper-cli/menu.cpp:887
 msgid ""
 "Give a name to the file.\n"
 "Your choice: "
@@ -614,11 +614,11 @@ msgstr ""
 "Donner le nom du fichier.\n"
 "Votre choix : "
 
-#: Sources/csuper-cli/menu.cpp:882
+#: Sources/csuper-cli/menu.cpp:889
 msgid "You choose "
 msgstr "Vous avez choisi "
 
-#: Sources/csuper-cli/menu.cpp:891
+#: Sources/csuper-cli/menu.cpp:898
 msgid "Error: you didn't enter a good value."
 msgstr "Erreur : Vous n'avez pas entré une bonne valeur."
 

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.19.0 
+
+Copyright (C) Copyright © 2014-2015 Rémi BERTHO <remi.bertho@openmailbox.org>
+
+This file is part of Csuper-gtk.
+
+Csuper-gtk is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+Csuper-gtk is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with Csuper-gtk.  If not, see <http://www.gnu.org/licenses/>.
+
+Author: Rémi BERTHO
+
+-->
+<interface domain="csuper-gtk">
+  <requires lib="gtk+" version="3.10"/>
+  <!-- interface-license-type gplv3 -->
+  <!-- interface-name Csuper-gtk -->
+  <!-- interface-description Universal points counter allowing a dispense with reflection -->
+  <!-- interface-copyright Copyright \302\251 2014-2015 R\303\251mi BERTHO <remi.bertho@openmailbox.org> -->
+  <!-- interface-authors R\303\251mi BERTHO -->
+</interface>

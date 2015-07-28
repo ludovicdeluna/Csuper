@@ -1218,7 +1218,7 @@ namespace csuper
             res = slope_figure_write_to_svg(slope_chart,locale_filename.c_str(),chart_pref.width(),chart_pref.height());
             break;
         case PNG:
-            slope_figure_write_to_png(slope_chart,locale_filename.c_str(),chart_pref.width(),chart_pref.height());
+            res = slope_figure_write_to_png(slope_chart,locale_filename.c_str(),chart_pref.width(),chart_pref.height());
             break;
         case PDF:
             if (pdf_pref.pdfSizeForChart())

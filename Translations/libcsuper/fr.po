@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-20 23:50+0200\n"
+"POT-Creation-Date: 2015-07-28 16:49+0200\n"
 "PO-Revision-Date: 2015-07-21 21:33+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
@@ -335,7 +335,7 @@ msgstr ""
 "Erreur lors de l'exportation du jeu en un fichier m, mauvais nom de "
 "fichier : "
 
-#: Sources/libcsuper/game.cpp:986 Sources/libcsuper/pdf_exportation.cpp:425
+#: Sources/libcsuper/game.cpp:986 Sources/libcsuper/pdf_exportation.cpp:431
 msgid "Total points"
 msgstr "Points totaux"
 
@@ -346,9 +346,9 @@ msgstr "Tour"
 
 #: Sources/libcsuper/game.cpp:988 Sources/libcsuper/game.cpp:1028
 #: Sources/libcsuper/game.cpp:1030 Sources/libcsuper/game.cpp:1098
-#: Sources/libcsuper/game.cpp:1142 Sources/libcsuper/pdf_exportation.cpp:327
-#: Sources/libcsuper/pdf_exportation.cpp:340
-#: Sources/libcsuper/pdf_exportation.cpp:351
+#: Sources/libcsuper/game.cpp:1142 Sources/libcsuper/pdf_exportation.cpp:333
+#: Sources/libcsuper/pdf_exportation.cpp:346
+#: Sources/libcsuper/pdf_exportation.cpp:357
 msgid "Points"
 msgstr "Points"
 
@@ -443,101 +443,101 @@ msgstr ""
 msgid "Error while writing the list of game configuration file %1"
 msgstr "Erreur lors d'écriture du fichier de configuration de jeu %1"
 
-#: Sources/libcsuper/pdf_exportation.cpp:141
+#: Sources/libcsuper/pdf_exportation.cpp:147
 msgid "File created on the %1"
 msgstr "Fichier créé le %1"
 
-#: Sources/libcsuper/pdf_exportation.cpp:146
+#: Sources/libcsuper/pdf_exportation.cpp:152
 msgid "Number of players: %1"
 msgstr "Nombre de joueurs : %1"
 
-#: Sources/libcsuper/pdf_exportation.cpp:151
+#: Sources/libcsuper/pdf_exportation.cpp:157
 msgid "Maximum number of turns: %1"
 msgstr "Nombre maximum de tour : %1"
 
-#: Sources/libcsuper/pdf_exportation.cpp:156
+#: Sources/libcsuper/pdf_exportation.cpp:162
 msgid "Name of the game configuration: %1"
 msgstr "Nom de la configuration de jeu : %1"
 
-#: Sources/libcsuper/pdf_exportation.cpp:174
+#: Sources/libcsuper/pdf_exportation.cpp:180
 msgid "Page 1"
 msgstr "Page 1"
 
-#: Sources/libcsuper/pdf_exportation.cpp:240
+#: Sources/libcsuper/pdf_exportation.cpp:246
 msgid "Page %1"
 msgstr "Page %1"
 
-#: Sources/libcsuper/pdf_exportation.cpp:285
-#: Sources/libcsuper/pdf_exportation.cpp:420
-#: Sources/libcsuper/pdf_exportation.cpp:454
+#: Sources/libcsuper/pdf_exportation.cpp:291
+#: Sources/libcsuper/pdf_exportation.cpp:426
+#: Sources/libcsuper/pdf_exportation.cpp:460
 msgid "Name"
 msgstr "Nom"
 
-#: Sources/libcsuper/pdf_exportation.cpp:319
+#: Sources/libcsuper/pdf_exportation.cpp:325
 msgid "Legend"
 msgstr "Légende"
 
-#: Sources/libcsuper/pdf_exportation.cpp:329
-#: Sources/libcsuper/pdf_exportation.cpp:342
+#: Sources/libcsuper/pdf_exportation.cpp:335
+#: Sources/libcsuper/pdf_exportation.cpp:348
 msgid "Total"
 msgstr "Total"
 
-#: Sources/libcsuper/pdf_exportation.cpp:331
-#: Sources/libcsuper/pdf_exportation.cpp:353
-#: Sources/libcsuper/pdf_exportation.cpp:433
+#: Sources/libcsuper/pdf_exportation.cpp:337
+#: Sources/libcsuper/pdf_exportation.cpp:359
+#: Sources/libcsuper/pdf_exportation.cpp:439
 msgid "Ranking"
 msgstr "Classement"
 
-#: Sources/libcsuper/pdf_exportation.cpp:369
+#: Sources/libcsuper/pdf_exportation.cpp:375
 msgid "Turn %1"
 msgstr "Tour %1"
 
-#: Sources/libcsuper/pdf_exportation.cpp:463
+#: Sources/libcsuper/pdf_exportation.cpp:469
 msgid "Nb turn"
 msgstr "Nb tours"
 
-#: Sources/libcsuper/pdf_exportation.cpp:472
+#: Sources/libcsuper/pdf_exportation.cpp:478
 msgid "Mean points"
 msgstr "Points moyens"
 
-#: Sources/libcsuper/pdf_exportation.cpp:483
+#: Sources/libcsuper/pdf_exportation.cpp:489
 msgid "Nb turn best"
 msgstr "Nb tours meilleur"
 
-#: Sources/libcsuper/pdf_exportation.cpp:492
+#: Sources/libcsuper/pdf_exportation.cpp:498
 msgid "Nb turn worst"
 msgstr "Nb tours mauvais"
 
-#: Sources/libcsuper/pdf_exportation.cpp:501
+#: Sources/libcsuper/pdf_exportation.cpp:507
 msgid "Nb turn first"
 msgstr "Nb tours premier"
 
-#: Sources/libcsuper/pdf_exportation.cpp:510
+#: Sources/libcsuper/pdf_exportation.cpp:516
 msgid "Nb turn last"
 msgstr "Nb tours dernier"
 
-#: Sources/libcsuper/pdf_exportation.cpp:684
-#: Sources/libcsuper/pdf_exportation.cpp:686
+#: Sources/libcsuper/pdf_exportation.cpp:690
+#: Sources/libcsuper/pdf_exportation.cpp:692
 msgid "Error when deleting %1: "
 msgstr "Erreur lors de la suppression de %1 : "
 
-#: Sources/libcsuper/pdf_exportation.cpp:716
+#: Sources/libcsuper/pdf_exportation.cpp:731
 msgid "The PDF document cannot be created"
 msgstr "Le document PDF n'a pas pu être créé."
 
-#: Sources/libcsuper/pdf_exportation.cpp:728
+#: Sources/libcsuper/pdf_exportation.cpp:743
 msgid "The PDF table cannot be created"
 msgstr "Le tableau PDF n'a pas pu être créé."
 
-#: Sources/libcsuper/pdf_exportation.cpp:747
+#: Sources/libcsuper/pdf_exportation.cpp:762
 msgid "The PDF charts cannot be save"
 msgstr "Le graphique en PDF n'a pas pu être sauvegardé."
 
-#: Sources/libcsuper/pdf_exportation.cpp:762
+#: Sources/libcsuper/pdf_exportation.cpp:777
 msgid "The PDF charts cannot be merge to the table"
 msgstr "Le graphique en PDF n'a pas pu être assemblé au reste du PDF."
 
-#: Sources/libcsuper/pdf_exportation.cpp:774
+#: Sources/libcsuper/pdf_exportation.cpp:789
 msgid "The PDF table cannot be save"
 msgstr "Le tableau PDF n'a pas pu être sauvegardé"
 
