@@ -17,7 +17,7 @@ Locales
 *.layout
 *.depend
 /csuper
-/csuper-gui
+/csuper-gtk
 /csuper-cli
 libcsuper.def
 libslope.def
