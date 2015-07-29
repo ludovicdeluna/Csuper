@@ -20,7 +20,7 @@
 				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
 				<Option object_output="../Compilation/obj/Release_Unix" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -44,7 +44,7 @@
 				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
 				<Option object_output="../Compilation/obj/Release_Portable_Unix" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -68,7 +68,7 @@
 				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
 				<Option object_output="../Compilation/obj/Release_Windows" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -92,7 +92,7 @@
 				<Option output="../csuper-gtk" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="../" />
 				<Option object_output="../Compilation/obj/Release_Portable_Windows" />
-				<Option type="1" />
+				<Option type="0" />
 				<Option compiler="gcc" />
 				<Compiler>
 					<Add option="-O2" />
@@ -118,6 +118,15 @@
 			<Add library="podofo" />
 			<Add directory="../" />
 		</Linker>
+		<Unit filename="../Sources/csuper-gtk/about.cpp" />
+		<Unit filename="../Sources/csuper-gtk/about.h" />
+		<Unit filename="../Sources/csuper-gtk/csu_application.cpp" />
+		<Unit filename="../Sources/csuper-gtk/csu_application.h" />
+		<Unit filename="../Sources/csuper-gtk/csu_widget.cpp" />
+		<Unit filename="../Sources/csuper-gtk/csu_widget.h" />
+		<Unit filename="../Sources/csuper-gtk/main.cpp" />
+		<Unit filename="../Sources/csuper-gtk/main_window.cpp" />
+		<Unit filename="../Sources/csuper-gtk/main_window.h" />
 		<Unit filename="../Sources/csuper-gtk/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 			<Option target="Debug Windows" />

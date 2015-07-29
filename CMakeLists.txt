@@ -189,7 +189,7 @@ IF(GTK MATCHES "TRUE")
 
 	pkg_check_modules(
 		GTKMM
-		REQUIRED gtkmm-3.0
+		REQUIRED gtkmm-3.0>=3.10
 	)
 
 	include_directories(

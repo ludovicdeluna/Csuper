@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
 <CodeBlocks_workspace_file>
 	<Workspace title="Workspace">
-		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper - 4.3/CodeBlocks/csuper-gtk.cbp" />
-		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper - 4.3/CodeBlocks/libcsuper.cbp" />
-		<Project filename="../../../../../../../media/Data/Documents/Programmes/Csuper/Csuper - 4.3/CodeBlocks/libslope.cbp" />
+		<Project filename="csuper-gtk.cbp" />
+		<Project filename="libcsuper.cbp" />
+		<Project filename="libslope.cbp" />
 	</Workspace>
 </CodeBlocks_workspace_file>

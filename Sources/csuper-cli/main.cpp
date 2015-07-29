@@ -76,7 +76,7 @@ int main(int argc, char *argv[])
 
     set_terminate(terminateFunction);
     set_prgname("csuper-cli");
-    set_application_name(_("Csuper-cli"));
+    set_application_name(_("Csuper"));
 
     // Initialization of csuper
     try
