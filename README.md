@@ -56,7 +56,7 @@ You can obviously chose to not compile the CLI or GUI version. If you are under 
 
 There are codeblocks project to managed the sources if you want.
 
-If you are under Linux you can run the softwares with the scripts `run-csuper` and `run-csuper-gui`.
+If you are under Linux you can run the softwares with the scripts `run-csuper-cli.sh` and `run-csuper-gui.sh`.
 
 The update and compilation of the translation is done via the following commands:
 
