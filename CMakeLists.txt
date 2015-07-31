@@ -35,6 +35,7 @@ else (WIN32)
 	target_link_libraries(
 		csuper 
 		-lhpdf
+		${LIBXML2_LIBRARIES}
 	)
 endif (WIN32)
 
