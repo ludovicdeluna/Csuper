@@ -47,7 +47,7 @@ To compile csuper you need the following libraries:
 Then use:
 ```
 git clone --recursive https://git.framasoft.org/Dalan94/Csuper.git
-cd csuper
+cd Csuper
 cmake . -G"Unix Makefiles" -DCLI=TRUE -DGUI=TRUE
 make
 ```
