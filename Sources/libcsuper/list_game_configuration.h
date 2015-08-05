@@ -99,6 +99,29 @@ namespace csuper
         GameConfiguration &operator[](const unsigned int i);
 
         /*!
+         *  \brief Access to the reference of the game configuration at position i
+         *  \param i the index of the game configuration
+         *  \return the game configuration
+         *  \exception csuper::OutOfRange if i is greater the the number of game configuration
+         */
+        inline const GameConfiguration at(const unsigned int i) const
+        {
+            return (*this)[i];
+        }
+
+        /*!
+         *  \brief Access to the reference of the game configuration at position i
+         *  \param i the index of the game configuration
+         *  \return the game configuration
+         *  \exception csuper::OutOfRange if i is greater the the number of game configuration
+         */
+        inline GameConfiguration &at(const unsigned int i)
+        {
+            return (*this)[i];
+        }
+
+
+        /*!
          *  \brief Get the number of game configuration the contain the object
          *  \return the number of game configuration the contain the object
          */

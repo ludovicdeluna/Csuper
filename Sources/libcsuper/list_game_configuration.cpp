@@ -63,12 +63,15 @@ namespace csuper
         }
 
         Node *node = parser.get_document()->get_root_node();
+        if (node->get_name() != "csu_game_configuration")
+            throw XmlError(ustring::compose(_("This file is not a CSU game configuration file, it's a %1 file."),node->get_name()));
+
         firstChildXmlElement(node);
 
         // Version
         double file_version = ustringToDouble(static_cast<Element*>(node)->get_child_text()->get_content());
         if (file_version > version_)
-            throw XmlError(ustring::compose(_("This version of Csuper only support game configuration file version less than or equal to %1"),version_));
+            throw XmlError(ustring::compose(_("This version of Csuper only support game configuration file version less than or equal to %1."),version_));
 
         // Number of game configurations
         nextXmlElement(node);

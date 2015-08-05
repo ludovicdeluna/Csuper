@@ -96,6 +96,9 @@ namespace csuper
         }
 
         Node *node = parser.get_document()->get_root_node();
+        if (node->get_name() != "csu")
+            throw XmlError(ustring::compose(_("This file is not a CSU file, it's a %1 file."),node->get_name()));
+
         firstChildXmlElement(node);
 
         // Version

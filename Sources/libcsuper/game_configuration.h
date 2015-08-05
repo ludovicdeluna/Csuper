@@ -120,6 +120,11 @@ namespace csuper
         Glib::ustring toUstring() const;
 
         /*!
+         *  \brief Convert the game configuration to a ustring
+         */
+        Glib::ustring toUstringWithoutName() const;
+
+        /*!
          *  \brief Add the game configuration into a xmlpp element
          *  \param parent_node the parent node
          *  \exception xmlpp::internal_error if bad xmlpp node

@@ -50,7 +50,9 @@ namespace csuper
 
     }
 
-    GameConfiguration::GameConfiguration()
+    GameConfiguration::GameConfiguration() : nb_max_min_(0), use_maximum_(true), turn_based_(false),
+                                             use_distributor_(false), decimal_place_(0), max_winner_(true),
+                                             name_(""), initial_score_(0)
     {
 
     }
@@ -127,13 +129,20 @@ namespace csuper
     ustring GameConfiguration::toUstring() const
     {
         ustring res = _("Name of the game configuration: ") + nameUstring() + "\n"
-            + _("The first has the highest score: ") + maxWinnerUstring() + "\n"
+            + toUstringWithoutName();
+
+        return res;
+    }
+
+    ustring GameConfiguration::toUstringWithoutName() const
+    {
+        ustring res = _("Use of a maximum score: ") + useMaximumUstring()  + "\n"
+            + _("Maximum/minimum number of points: ") + nbMaxMinUstring() + "\n"
             + _("Initial score: ") + initialScoreUstring() + "\n"
             + _("Number of decimals displayed: ") + decimalPlaceUstring() + "\n"
+            + _("The first has the highest score: ") + maxWinnerUstring() + "\n"
             + _("Turn-based game: ") + turnBasedUstring() + "\n"
-            + _("Use of a distributor: ") + useDistributorUstring() + "\n"
-            + _("Use of a maximum score: ") + useMaximumUstring()  + "\n"
-            + _("Maximum/minimum number of points: ") + nbMaxMinUstring();
+            + _("Use of a distributor: ") + useDistributorUstring();
 
         return res;
     }

@@ -37,6 +37,9 @@
 
 #include "main_window.h"
 #include "about.h"
+#include "game_configuration_window.h"
+#include "new_game_configuration_dialog.h"
+#include "import_export_game_configuration_dialog.h"
 
 #include "../libcsuper/libcsuper.h"
 
@@ -52,8 +55,11 @@ private:
     csuper::Preferences* pref_;                         /*!< The preferences */
     csuper::ListGameConfiguration* list_game_config_;   /*!< The list of game configuration */
 
-    MainWindow* main_window_;               /*!< The main window */
-    About* about_;                          /*!< The about dialog */
+    MainWindow* main_window_;                                               /*!< The main window */
+    About* about_;                                                          /*!< The about dialog */
+    GameConfigurationWindow* game_config_window_;                           /*!< The game configuration window */
+    NewGameConfigurationDialog* new_game_config_dialog_;                    /*!< The new game configuration dialog*/
+    ImportExportGameConfigurationDialog* import_export_game_config_dialog_; /*!< The import export game configuration dialog*/
 
 
 
@@ -102,6 +108,75 @@ public:
      *  \brief Launch the application
      */
     int launch();
+
+
+
+    //
+    // Getter
+    //
+    /*!
+     *  \brief return the Preferences
+     *  \return the Preferences
+     */
+     inline csuper::Preferences* pref()
+     {
+         return pref_;
+     }
+
+    /*!
+     *  \brief return the ListGameConfiguration
+     *  \return the ListGameConfiguration
+     */
+     inline csuper::ListGameConfiguration* listGameConfig()
+     {
+         return list_game_config_;
+     }
+
+    /*!
+     *  \brief return the MainWindow
+     *  \return the MainWindow
+     */
+     inline MainWindow* mainWindow()
+     {
+         return main_window_;
+     }
+
+    /*!
+     *  \brief return the About
+     *  \return the About
+     */
+     inline About* about()
+     {
+         return about_;
+     }
+
+    /*!
+     *  \brief return the GameConfigurationWindow
+     *  \return the GameConfigurationWindow
+     */
+     inline GameConfigurationWindow* gameConfigurationWindow()
+     {
+         return game_config_window_;
+     }
+
+    /*!
+     *  \brief return the NewGameConfigurationDialog
+     *  \return the NewGameConfigurationDialog
+     */
+     inline NewGameConfigurationDialog* newGameConfigurationDialog()
+     {
+         return new_game_config_dialog_;
+     }
+
+    /*!
+     *  \brief return the ImportExportGameConfigurationDialog
+     *  \return the ImportExportGameConfigurationDialog
+     */
+     inline ImportExportGameConfigurationDialog* importExportGameConfigurationDialog()
+     {
+         return import_export_game_config_dialog_;
+     }
+
 };
 
 #endif // CSU_APPLICATION_H_INCLUDED

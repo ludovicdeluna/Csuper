@@ -124,9 +124,15 @@
 		<Unit filename="../Sources/csuper-gtk/csu_application.h" />
 		<Unit filename="../Sources/csuper-gtk/csu_widget.cpp" />
 		<Unit filename="../Sources/csuper-gtk/csu_widget.h" />
+		<Unit filename="../Sources/csuper-gtk/game_configuration_window.cpp" />
+		<Unit filename="../Sources/csuper-gtk/game_configuration_window.h" />
+		<Unit filename="../Sources/csuper-gtk/import_export_game_configuration_dialog.cpp" />
+		<Unit filename="../Sources/csuper-gtk/import_export_game_configuration_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/main.cpp" />
 		<Unit filename="../Sources/csuper-gtk/main_window.cpp" />
 		<Unit filename="../Sources/csuper-gtk/main_window.h" />
+		<Unit filename="../Sources/csuper-gtk/new_game_configuration_dialog.cpp" />
+		<Unit filename="../Sources/csuper-gtk/new_game_configuration_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 			<Option target="Debug Windows" />
