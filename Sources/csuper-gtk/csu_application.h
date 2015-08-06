@@ -40,6 +40,9 @@
 #include "game_configuration_window.h"
 #include "new_game_configuration_dialog.h"
 #include "import_export_game_configuration_dialog.h"
+#include "menu_file.h"
+#include "menu_edit.h"
+#include "menu_display.h"
 
 #include "../libcsuper/libcsuper.h"
 
@@ -60,6 +63,9 @@ private:
     GameConfigurationWindow* game_config_window_;                           /*!< The game configuration window */
     NewGameConfigurationDialog* new_game_config_dialog_;                    /*!< The new game configuration dialog*/
     ImportExportGameConfigurationDialog* import_export_game_config_dialog_; /*!< The import export game configuration dialog*/
+    MenuFile* menu_file_;                                                   /*!< The menu file */
+    MenuEdit* menu_edit_;                                                   /*!< The menu edit */
+    MenuDisplay* menu_display_;                                             /*!< The menu display */
 
 
 
@@ -70,11 +76,6 @@ private:
      *  \brief Function used on the startup signal. It create the menu
      */
     void onStartup();
-
-    /*!
-     *  \brief Quit Csuper
-     */
-    void onQuit();
 
 public:
     //
@@ -108,6 +109,11 @@ public:
      *  \brief Launch the application
      */
     int launch();
+
+    /*!
+     *  \brief Quit Csuper
+     */
+    void onQuit();
 
 
 
@@ -175,6 +181,33 @@ public:
      inline ImportExportGameConfigurationDialog* importExportGameConfigurationDialog()
      {
          return import_export_game_config_dialog_;
+     }
+
+    /*!
+     *  \brief return the MenuFile
+     *  \return the MenuFile
+     */
+     inline MenuFile* menuFile()
+     {
+         return menu_file_;
+     }
+
+    /*!
+     *  \brief return the MenuEdit
+     *  \return the MenuEdit
+     */
+     inline MenuEdit* menuEdit()
+     {
+         return menu_edit_;
+     }
+
+    /*!
+     *  \brief return the MenuDisplay
+     *  \return the MenuDisplay
+     */
+     inline MenuDisplay* menuDisplay()
+     {
+         return menu_display_;
      }
 
 };

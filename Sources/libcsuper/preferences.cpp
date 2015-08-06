@@ -56,6 +56,7 @@ namespace csuper
         size_ = new MainWindowSizePreferences();
         score_ = new ScoreDisplayPreferences();
         chart_ = new ChartExportationPreferences();
+        title_bar_ = new MainWindowTitleBarPreferences();
     }
 
 
@@ -68,6 +69,7 @@ namespace csuper
         size_ = new MainWindowSizePreferences(*(pref.size_));
         score_ = new ScoreDisplayPreferences(*(pref.score_));
         chart_ = new ChartExportationPreferences(*(pref.chart_));
+        title_bar_ = new MainWindowTitleBarPreferences(*(pref.title_bar_));
     }
 
 
@@ -85,6 +87,9 @@ namespace csuper
         }
 
         Node *node = parser.get_document()->get_root_node();
+        if (node->get_name() != "csu_preferences")
+            throw XmlError(ustring::compose(_("This file is not a CSU preferences file, it's a %1 file."),node->get_name()));
+
         firstChildXmlElement(node);
 
         // Version
@@ -120,13 +125,20 @@ namespace csuper
         nextXmlElement(node);
         chart_ = new ChartExportationPreferences(node);
 
-        // directory
+        // directory and title bar
         if (file_version > 1)
         {
             nextXmlElement(node);
             dir_ = new DirectoryPreferences(node);
-        } else
+
+            nextXmlElement(node);
+            title_bar_ = new MainWindowTitleBarPreferences(node);
+        }
+        else
+        {
             dir_ = new DirectoryPreferences();
+            title_bar_ = new MainWindowTitleBarPreferences();
+        }
 
     }
 
@@ -143,6 +155,7 @@ namespace csuper
         delete size_;
         delete score_;
         delete chart_;
+        delete title_bar_;
     }
 
     //
@@ -160,6 +173,7 @@ namespace csuper
         delete size_;
         delete score_;
         delete chart_;
+        delete title_bar_;
 
         diff_ = new DifferenceBetweenPlayerPreferences(*(pref.diff_));
         dir_ = new DirectoryPreferences(*(pref.dir_));
@@ -168,6 +182,7 @@ namespace csuper
         size_ = new MainWindowSizePreferences(*(pref.size_));
         score_ = new ScoreDisplayPreferences(*(pref.score_));
         chart_ = new ChartExportationPreferences(*(pref.chart_));
+        title_bar_ = new MainWindowTitleBarPreferences(*(pref.title_bar_));
 
         return *this;
     }
@@ -180,7 +195,8 @@ namespace csuper
             + mainWindowDisplay().toUstring() + "\n"
             + exportPdf().toUstring() + "\n"
             + chartExportation().toUstring() + "\n"
-            + directory().toUstring();
+            + directory().toUstring() + "\n"
+            + mainWindowTitleBar().toUstring();
     }
 
     ostream& operator<<(ostream& os, const Preferences& pref)
@@ -223,6 +239,7 @@ namespace csuper
         exportPdf().createXmlNode(root);
         chartExportation().createXmlNode(root);
         directory().createXmlNode(root);
+        mainWindowTitleBar().createXmlNode(root);
 
 
         try

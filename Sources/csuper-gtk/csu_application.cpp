@@ -68,10 +68,13 @@ void CsuApplication::init(RefPtr<Builder>& builder)
     builder_ = builder;
     CsuWidget::setApp(this);
 
-    builder_->get_widget_derived("main_window", main_window_);
+    builder_->get_widget_derived("menu_file", menu_file_);
+    builder_->get_widget_derived("menu_edit", menu_edit_);
+    builder_->get_widget_derived("menu_display", menu_display_);
     builder_->get_widget_derived("about_dialog", about_);
     builder_->get_widget_derived("game_configuration_window", game_config_window_);
     builder_->get_widget_derived("new_game_configuration_dialog", new_game_config_dialog_);
+    builder_->get_widget_derived("main_window", main_window_);
     import_export_game_config_dialog_ = new ImportExportGameConfigurationDialog();
 }
 
@@ -83,25 +86,28 @@ int CsuApplication::launch()
 void CsuApplication::onStartup()
 {
     //Load the menu
-    add_action("about",mem_fun(*about_,&About::launch));
-    add_action("quit",mem_fun(*this,&CsuApplication::onQuit));
-    add_action("game_config",mem_fun(*game_config_window_,&GameConfigurationWindow::launch));
-    #if GTK_MINOR_VERSION >= 12
-    set_accel_for_action("app.about","<primary>a");
-    set_accel_for_action("app.quit","<primary>q");
-    set_accel_for_action("app.game_config","<primary>g");
-    #else
-    add_accelerator("<primary>a","app.about");
-    add_accelerator("<primary>q","app.quit");
-    add_accelerator("<primary>g","app.game_config");
-    #endif // GTK_MINOR_VERSION
+    if (pref()->mainWindowTitleBar().disableWindowManagerDecoration())
+    {
+        add_action("about",mem_fun(*about_,&About::launch));
+        add_action("quit",mem_fun(*this,&CsuApplication::onQuit));
+        add_action("game_config",mem_fun(*game_config_window_,&GameConfigurationWindow::launch));
+        #if GTK_MINOR_VERSION >= 12
+        set_accel_for_action("app.about","<primary>a");
+        set_accel_for_action("app.quit","<primary>q");
+        set_accel_for_action("app.game_config","<primary>g");
+        #else
+        add_accelerator("<primary>a","app.about");
+        add_accelerator("<primary>q","app.quit");
+        add_accelerator("<primary>g","app.game_config");
+        #endif // GTK_MINOR_VERSION
 
-    RefPtr<Gio::Menu> menu = Gio::Menu::create();
-    menu->append(_("Preferences"),"app.preferences");
-    menu->append(_("Game configuration"),"app.game_config");
-    menu->append(_("About"),"app.about");
-    menu->append(_("Quit"),"app.quit");
-    set_app_menu(RefPtr<Gio::MenuModel>::cast_static(menu));
+        RefPtr<Gio::Menu> menu = Gio::Menu::create();
+        menu->append(_("Preferences"),"app.preferences");
+        menu->append(_("Game configuration"),"app.game_config");
+        menu->append(_("About"),"app.about");
+        menu->append(_("Quit"),"app.quit");
+        set_app_menu(RefPtr<Gio::MenuModel>::cast_static(menu));
+    }
 }
 
 void CsuApplication::onQuit()

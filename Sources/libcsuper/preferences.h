@@ -41,6 +41,7 @@
 #include "preferences_export_pdf.h"
 #include "preferences_directory.h"
 #include "preferences_chart_exportation.h"
+#include "preferences_main_window_title_bar.h"
 
 namespace csuper
 {
@@ -57,6 +58,7 @@ namespace csuper
         MainWindowSizePreferences* size_;               /*!< The main window size preferences */
         ScoreDisplayPreferences* score_;                /*!< The score display preferences */
         ChartExportationPreferences* chart_;            /*!< The chart exportation preferences */
+        MainWindowTitleBarPreferences* title_bar_;      /*!< The main window title bar preferences */
         static double version_;                         /*!< The version */
 
 
@@ -263,6 +265,24 @@ namespace csuper
         ChartExportationPreferences &chartExportation()
         {
             return *chart_;
+        }
+
+        /*!
+         *  \brief return the MainWindowTitleBarPreferences
+         *  \return the MainWindowTitleBarPreferences
+         */
+        const MainWindowTitleBarPreferences &mainWindowTitleBar() const
+        {
+            return *title_bar_;
+        }
+
+        /*!
+         *  \brief return the MainWindowTitleBarPreferences
+         *  \return the MainWindowTitleBarPreferences
+         */
+        MainWindowTitleBarPreferences &mainWindowTitleBar()
+        {
+            return *title_bar_;
         }
 
     };

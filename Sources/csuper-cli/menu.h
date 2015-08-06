@@ -64,9 +64,11 @@ private:
         MENU_EXPORT_GAME_CONF = 5,
         MENU_IMPORT_GAME_CONF = 6,
         MENU_PDF_PREFERENCES = 7,
-        MENU_CHANGE_OPEN_PATH = 8,
-        MENU_READ_OPEN_PATH = 9,
-        MENU_BACK_MAIN_MENU = 10
+        MENU_CHART_PREFERENCES = 8,
+        MENU_MAIN_WINDOW_TITLE_BAR_PREFERENCES = 9,
+        MENU_CHANGE_OPEN_PATH = 10,
+        MENU_READ_OPEN_PATH = 11,
+        MENU_BACK_MAIN_MENU = 12
     };
 
     /*!
@@ -152,6 +154,16 @@ private:
      *  Change the export to pdf preferences
      */
     void changePdfPreferences() const;
+
+    /*!
+     *  Change the export to chart preferences
+     */
+    void changeChartPreferences() const;
+
+    /*!
+     *  Change the main window title bar preferences
+     */
+    void changeTitleBarPreferences() const;
 
     /*!
      *  Load a game from a file and run the play function.

@@ -44,10 +44,19 @@
 class MainWindow : public CsuWidget, public Gtk::ApplicationWindow
 {
 protected:
+    Gtk::Grid* main_grid_;                  /*!< The main grid */
     Gtk::HeaderBar* header_bar_;            /*!< The HeaderBar */
-    Gtk::MenuButton* display_menu_button_;  /*!< The display MenuButton */
-    Gtk::MenuButton* edit_menu_button_;     /*!< The edit MenuButton */
-    Gtk::MenuButton* file_menu_button_;     /*!< The file MenuButton */
+    Gtk::MenuButton* menu_display_button_;  /*!< The display MenuButton */
+    Gtk::MenuButton* menu_edit_button_;     /*!< The edit MenuButton */
+    Gtk::MenuButton* menu_file_button_;     /*!< The file MenuButton */
+
+    // Use only if the user use window manager decoration
+    Gtk::MenuButton* csuper_menu_button_;   /*!< The csuper MenuButton */
+    Gtk::Menu* csuper_menu_;                /*!< The csuper menu */
+    Gtk::MenuItem* game_config_menu_item_;  /*!< The game config menuitem */
+    Gtk::MenuItem* pref_menu_item_;         /*!< The preferences menuitem */
+    Gtk::MenuItem* about_menu_item_;        /*!< The about menuitem */
+    Gtk::MenuItem* quit_menu_item_;         /*!< The quit menuitem */
 
 public:
     //

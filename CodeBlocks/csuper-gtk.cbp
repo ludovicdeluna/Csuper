@@ -131,6 +131,12 @@
 		<Unit filename="../Sources/csuper-gtk/main.cpp" />
 		<Unit filename="../Sources/csuper-gtk/main_window.cpp" />
 		<Unit filename="../Sources/csuper-gtk/main_window.h" />
+		<Unit filename="../Sources/csuper-gtk/menu_display.cpp" />
+		<Unit filename="../Sources/csuper-gtk/menu_display.h" />
+		<Unit filename="../Sources/csuper-gtk/menu_edit.cpp" />
+		<Unit filename="../Sources/csuper-gtk/menu_edit.h" />
+		<Unit filename="../Sources/csuper-gtk/menu_file.cpp" />
+		<Unit filename="../Sources/csuper-gtk/menu_file.h" />
 		<Unit filename="../Sources/csuper-gtk/new_game_configuration_dialog.cpp" />
 		<Unit filename="../Sources/csuper-gtk/new_game_configuration_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/ressources_windows.rc">

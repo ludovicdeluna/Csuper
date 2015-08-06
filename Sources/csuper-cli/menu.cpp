@@ -153,14 +153,18 @@ void Menu::preferencesMenu() const
                                    "\n (%5) Export game configurations"
                                    "\n (%6) Import game configurations"
                                    "\n (%7) Change PDF export preferences"
-                                   "\n (%8) Change the folder where files will be read and saved"
-                                   "\n (%9) Display the folder where files will be read and saved")
+                                   "\n (%8) Change chart export preferences"
+                                   "\n (%9) Change main window title bar preferences")
                                  ,MENU_NEW_GAME_CONF,MENU_REMOVE_GAME_CONF,MENU_PRINT_LIST_GAME_CONF,
                                  MENU_PRINT_GAME_CONF,MENU_EXPORT_GAME_CONF,MENU_IMPORT_GAME_CONF,
-                                 MENU_PDF_PREFERENCES,MENU_CHANGE_OPEN_PATH,MENU_READ_OPEN_PATH);
+                                 MENU_PDF_PREFERENCES, MENU_CHART_PREFERENCES,
+                                 MENU_MAIN_WINDOW_TITLE_BAR_PREFERENCES);
 
-        cout << ustring::compose(_("\n (%1) Back to main menu"
-                                   "\n\nYour choice: "), MENU_BACK_MAIN_MENU);
+        cout << ustring::compose(_("\n (%1) Change the folder where files will be read and saved"
+                                   "\n (%2) Display the folder where files will be read and saved"
+                                   "\n (%3) Back to main menu"
+                                   "\n\nYour choice: ")
+                                 ,MENU_CHANGE_OPEN_PATH,MENU_READ_OPEN_PATH,MENU_BACK_MAIN_MENU);
 
         choice = Cin::getInt();
 
@@ -195,6 +199,11 @@ void Menu::preferencesMenu() const
             break;
         case MENU_PDF_PREFERENCES :
             changePdfPreferences();
+            break;
+        case MENU_CHART_PREFERENCES :
+            changeChartPreferences();
+        case MENU_MAIN_WINDOW_TITLE_BAR_PREFERENCES :
+            changeTitleBarPreferences();
             break;
         default :
             wrongChoice();
@@ -672,6 +681,78 @@ void Menu::changePdfPreferences() const
     pref_->writeToFile();
 
     cout << endl << ustring(_("The PDF preferences was well changed.")) << endl;
+
+    systemPause();
+}
+
+void Menu::changeChartPreferences() const
+{
+    clearScreen();
+
+    int nb;
+
+    // Width
+    do
+    {
+        cout << ustring::compose(_("Give the width you want or -1 if want to keep the old one (%1)."
+                                   " It will be between 200 and 10000."
+                                   "\nYour choice: ")
+                                 ,pref_->chartExportation().width());
+        nb = Cin::getInt();
+    } while ((nb < 200 || nb > 10000) && (nb != -1));
+    if (nb != -1)
+        pref_->chartExportation().setWidth(nb);
+
+    // Height
+    do
+    {
+        cout << endl << endl;
+        cout << ustring::compose(_("Give the height you want or -1 if want to keep the old one (%1)."
+                                   " It will be between 200 and 10000."
+                                   "\nYour choice: ")
+                                 ,pref_->chartExportation().height());
+        nb = Cin::getInt();
+    } while ((nb < 200 || nb > 10000) && (nb != -1));
+    if (nb != -1)
+        pref_->chartExportation().setHeight(nb);
+
+    // Total points
+    cout << endl << endl;
+    cout << ustring(_("Would you like to display the total points (otherwise it will display the points in each turn) (Y/n)? "));
+    if (Cin::getNo())
+        pref_->chartExportation().setTotalPoints(false);
+    else
+        pref_->chartExportation().setTotalPoints(true);
+
+    pref_->writeToFile();
+
+    cout << endl << ustring(_("The chart preferences was well changed.")) << endl;
+
+    systemPause();
+}
+
+void Menu::changeTitleBarPreferences() const
+{
+    clearScreen();
+
+    // main window decoration
+    cout << ustring(_("Would you like to disable the main window decoration (It will be useful when using GNOME desktop manager) (y/N)? "));
+    if (Cin::getYes())
+        pref_->mainWindowTitleBar().setDisableWindowManagerDecoration(true);
+    else
+        pref_->mainWindowTitleBar().setDisableWindowManagerDecoration(false);
+
+    // Title
+    cout << endl << endl;
+    cout << ustring(_("Would you like to add the title in the title bar (It will be useful when using GNOME desktop manager) (y/N)? "));
+    if (Cin::getYes())
+        pref_->mainWindowTitleBar().setPrintTitle(true);
+    else
+        pref_->mainWindowTitleBar().setPrintTitle(false);
+
+    pref_->writeToFile();
+
+    cout << endl << ustring(_("The main window title bar preferences was well changed.")) << endl;
 
     systemPause();
 }

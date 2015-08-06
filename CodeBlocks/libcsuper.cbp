@@ -79,6 +79,8 @@
 		<Unit filename="../Sources/libcsuper/preferences_main_window_display.h" />
 		<Unit filename="../Sources/libcsuper/preferences_main_window_size.cpp" />
 		<Unit filename="../Sources/libcsuper/preferences_main_window_size.h" />
+		<Unit filename="../Sources/libcsuper/preferences_main_window_title_bar.cpp" />
+		<Unit filename="../Sources/libcsuper/preferences_main_window_title_bar.h" />
 		<Unit filename="../Sources/libcsuper/preferences_score_display.cpp" />
 		<Unit filename="../Sources/libcsuper/preferences_score_display.h" />
 		<Unit filename="../Sources/libcsuper/share.cpp" />

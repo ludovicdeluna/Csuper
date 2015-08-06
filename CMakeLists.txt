@@ -14,7 +14,7 @@ ENDIF()
 # Delete depreciated warning on GCC because of Glibmm
 #
 if("${CMAKE_CXX_COMPILER_ID}" STREQUAL "GNU")
-    if (CMAKE_CXX_COMPILER_VERSION VERSION_EQUAL 5.1)
+    if (CMAKE_CXX_COMPILER_VERSION VERSION_GREATER 5.0)
     	set(CMAKE_CXX_FLAGS "-Wno-deprecated-declarations")
     endif()
 endif()
