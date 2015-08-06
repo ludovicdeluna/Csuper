@@ -80,7 +80,9 @@ void CsuApplication::init(RefPtr<Builder>& builder)
 
 int CsuApplication::launch()
 {
-    return this->run(*main_window_);
+    int res = this->run(*main_window_);
+    mainWindow()->saveSize();
+    return res;
 }
 
 void CsuApplication::onStartup()

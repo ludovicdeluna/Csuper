@@ -119,5 +119,41 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
     header_bar_->pack_end(*menu_file_button_);
     menu_file_button_->show_all();
 
+
+    // Resize
+    resize(app()->pref()->mainWindowSize().width(),app()->pref()->mainWindowSize().height());
+    if (app()->pref()->mainWindowSize().isMaximize())
+        maximize();
+    else
+        unmaximize();
+
+
     main_grid_->show_all();
 }
+
+
+//
+// function
+//
+void MainWindow::saveSize()
+{
+    int width;
+    int height;
+    bool is_maximize = false;
+    get_size(width,height);
+
+    #if GTK_MINOR_VERSION >= 12
+    is_maximize = is_maximized();
+    #endif // GTK_MINOR_VERSION
+
+    app()->pref()->mainWindowSize().setIsMaximize(is_maximize);
+
+    if (!is_maximize)
+    {
+        app()->pref()->mainWindowSize().setWidth(width);
+        app()->pref()->mainWindowSize().setHeight(height);
+    }
+
+    app()->pref()->writeToFile();
+}
+

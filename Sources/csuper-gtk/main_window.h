@@ -58,6 +58,9 @@ protected:
     Gtk::MenuItem* about_menu_item_;        /*!< The about menuitem */
     Gtk::MenuItem* quit_menu_item_;         /*!< The quit menuitem */
 
+
+
+
 public:
     //
     // Constructor and Destructor
@@ -68,6 +71,16 @@ public:
      *  \param refGlade the builder
      */
     MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
+
+
+
+    //
+    // Function
+    //
+    /*!
+     *  \brief Save the window size when changing size
+     */
+     void saveSize();
 };
 
 
