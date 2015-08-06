@@ -202,6 +202,7 @@ void Menu::preferencesMenu() const
             break;
         case MENU_CHART_PREFERENCES :
             changeChartPreferences();
+            break;
         case MENU_MAIN_WINDOW_TITLE_BAR_PREFERENCES :
             changeTitleBarPreferences();
             break;

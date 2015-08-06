@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-05 16:37+0200\n"
-"PO-Revision-Date: 2015-08-05 16:39+0200\n"
+"POT-Creation-Date: 2015-08-06 17:18+0200\n"
+"PO-Revision-Date: 2015-08-06 17:19+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -57,7 +57,7 @@ msgstr "Hors de porté : "
 
 #: Sources/libcsuper/game.cpp:95
 #: Sources/libcsuper/list_game_configuration.cpp:62
-#: Sources/libcsuper/preferences.cpp:84
+#: Sources/libcsuper/preferences.cpp:86
 msgid "Cannot open the file %1"
 msgstr "Ne peut ouvrir le fichier %1"
 
@@ -579,7 +579,11 @@ msgstr ""
 msgid "Cannot delete the %1th turn, there is only %2 turn"
 msgstr "Ne peut supprimer le %1ème tour, il n'y en a que %2"
 
-#: Sources/libcsuper/preferences.cpp:93
+#: Sources/libcsuper/preferences.cpp:91
+msgid "This file is not a CSU preferences file, it's a %1 file."
+msgstr "Ce fichier n'est pas un fichier de préférence CSU mais un fichier %1."
+
+#: Sources/libcsuper/preferences.cpp:98
 msgid ""
 "This version of Csuper only support preferences file version less than or "
 "equal to %1"
@@ -587,7 +591,7 @@ msgstr ""
 "Cette version de Csuper ne supporte que des configurations de jeu ayant une "
 "version inférieur ou égal à %1"
 
-#: Sources/libcsuper/preferences.cpp:235
+#: Sources/libcsuper/preferences.cpp:252
 msgid "Error while writing the CSU preferences file %1"
 msgstr "Erreur lors de l'écriture du fichier de préférence CSU %1."
 
@@ -678,6 +682,16 @@ msgstr ""
 " - Largeur : %1\n"
 " - Hauteur : %2\n"
 " - Est maximisé : %3"
+
+#: Sources/libcsuper/preferences_main_window_title_bar.cpp:77
+msgid ""
+"Main window title bar preferences:\n"
+" - Disable window manager decoration: %1\n"
+" - Print title: %2"
+msgstr ""
+"Préférences de la barre de titre de la fenêtre principal :\n"
+" - Désactiver les décorations du gestionnaire de fenêtre : %1\n"
+" - Affichage le titre : %2"
 
 #: Sources/libcsuper/preferences_score_display.cpp:81
 msgid ""

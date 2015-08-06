@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-05 17:00+0200\n"
+"POT-Creation-Date: 2015-08-06 17:18+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -55,7 +55,7 @@ msgstr ""
 
 #: Sources/libcsuper/game.cpp:95
 #: Sources/libcsuper/list_game_configuration.cpp:62
-#: Sources/libcsuper/preferences.cpp:84
+#: Sources/libcsuper/preferences.cpp:86
 msgid "Cannot open the file %1"
 msgstr ""
 
@@ -536,13 +536,17 @@ msgstr ""
 msgid "Cannot delete the %1th turn, there is only %2 turn"
 msgstr ""
 
-#: Sources/libcsuper/preferences.cpp:93
+#: Sources/libcsuper/preferences.cpp:91
+msgid "This file is not a CSU preferences file, it's a %1 file."
+msgstr ""
+
+#: Sources/libcsuper/preferences.cpp:98
 msgid ""
 "This version of Csuper only support preferences file version less than or "
 "equal to %1"
 msgstr ""
 
-#: Sources/libcsuper/preferences.cpp:235
+#: Sources/libcsuper/preferences.cpp:252
 msgid "Error while writing the CSU preferences file %1"
 msgstr ""
 
@@ -602,6 +606,13 @@ msgid ""
 " - Width: %1\n"
 " - Height: %2\n"
 " - Is maximize: %3"
+msgstr ""
+
+#: Sources/libcsuper/preferences_main_window_title_bar.cpp:77
+msgid ""
+"Main window title bar preferences:\n"
+" - Disable window manager decoration: %1\n"
+" - Print title: %2"
 msgstr ""
 
 #: Sources/libcsuper/preferences_score_display.cpp:81
