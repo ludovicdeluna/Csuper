@@ -173,8 +173,10 @@ namespace csuper
         printNames(text_pos_y);
         printLegend(text_pos_y);
         printPoints(text_pos_y);
-        createGrid(pref_.margin(),height_ - pref_.margin() - 7*line_height_ - table_line_height_*1/3,
-                  width_-pref_.margin(),text_pos_y+table_line_height_*2/3,table_line_height_,table_width_);
+        createGrid(pref_.margin(),
+                   height_ - pref_.margin() - 7*line_height_ - table_line_height_*1/3,
+                   width_-pref_.margin(),
+                   text_pos_y+table_line_height_*2/3,table_line_height_,table_width_);
 
         // Page number
         textOutTable(0,pref_.margin()*2/3,_("Page 1"),width_);
@@ -250,7 +252,8 @@ namespace csuper
         // Grid
         if (height_ - pref_.margin() - line_height_*2/3 != text_pos_y)
         {
-            createGrid(pref_.margin(),height_ - pref_.margin() - table_line_height_*0.7,
+            createGrid(pref_.margin(),
+                       height_ - pref_.margin() - table_line_height_*0.7,
                        width_ - pref_.margin(),text_pos_y + table_line_height_*2/3,
                        table_line_height_,table_width_);
             text_pos_y -= table_line_height_;
@@ -299,17 +302,21 @@ namespace csuper
 
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(pref_.margin() + (nb_column_per_player*i+1)*table_width_,pos_y,
-                game_->playerName(i),table_width_*nb_column_per_player,game_->ranking(i));
+            textOutTable(pref_.margin() + (nb_column_per_player*i+1)*table_width_,
+                         pos_y,
+                         game_->playerName(i),
+                         table_width_*nb_column_per_player,game_->ranking(i));
         }
 
         createGrid(pref_.margin(),pos_y + table_line_height_*2/3,
-            pref_.margin() + table_width_,pos_y - table_line_height_*1/3,
-            table_line_height_,table_width_);
+                   pref_.margin() + table_width_,
+                   pos_y - table_line_height_*1/3,
+                   table_line_height_,table_width_);
 
-        createGrid(pref_.margin() + table_width_,pos_y + table_line_height_*2/3,
-            width_ - pref_.margin(),pos_y - table_line_height_*1/3,
-            table_line_height_,nb_column_per_player*table_width_);
+        createGrid(pref_.margin() + table_width_,
+                   pos_y + table_line_height_*2/3,
+                   width_ - pref_.margin(),pos_y - table_line_height_*1/3,
+                   table_line_height_,nb_column_per_player*table_width_);
 
 
         pos_y = pos_y - table_line_height_;
@@ -329,12 +336,18 @@ namespace csuper
             {
                 for (i=0 ; i<game_->nbPlayer() ; i++)
                 {
-                    textOutTable(pref_.margin() + (3*i+1)*table_width_,pos_y,
-                        _("Points"),table_width_,game_->ranking(i));
-                    textOutTable(pref_.margin() + (3*i+2)*table_width_,pos_y,
-                        _("Total"),table_width_,game_->ranking(i));
-                    textOutTable(pref_.margin() + (3*i+3)*table_width_,pos_y,
-                        _("Ranking"),table_width_,game_->ranking(i));
+                    textOutTable(pref_.margin() + (3*i+1)*table_width_,
+                                 pos_y,
+                                 _("Points"),
+                                 table_width_,game_->ranking(i));
+                    textOutTable(pref_.margin() + (3*i+2)*table_width_,
+                                 pos_y,
+                                 _("Total"),table_width_,
+                                 game_->ranking(i));
+                    textOutTable(pref_.margin() + (3*i+3)*table_width_,
+                                 pos_y,
+                                 _("Ranking"),
+                                 table_width_,game_->ranking(i));
                 }
             } else
             // If it need only the total points
@@ -342,10 +355,14 @@ namespace csuper
             {
                 for (i=0 ; i<game_->nbPlayer() ; i++)
                 {
-                    textOutTable(pref_.margin() + (2*i+1)*table_width_,pos_y,
-                        _("Points"),table_width_,game_->ranking(i));
-                    textOutTable(pref_.margin() + 2*(i+1)*table_width_,pos_y,
-                        _("Total"),table_width_,game_->ranking(i));
+                    textOutTable(pref_.margin() + (2*i+1)*table_width_,
+                                 pos_y,
+                                 _("Points"),table_width_,
+                                 game_->ranking(i));
+                    textOutTable(pref_.margin() + 2*(i+1)*table_width_,
+                                 pos_y,
+                                 _("Total"),
+                                 table_width_,game_->ranking(i));
                 }
             }
             else
@@ -353,10 +370,14 @@ namespace csuper
             {
                 for (i=0 ; i<game_->nbPlayer() ; i++)
                 {
-                    textOutTable(pref_.margin() + (2*i+1)*table_width_,pos_y,
-                        _("Points"),table_width_,game_->ranking(i));
-                    textOutTable(pref_.margin() + 2*(i+1)*table_width_,pos_y,
-                        _("Ranking"),table_width_,game_->ranking(i));
+                    textOutTable(pref_.margin() + (2*i+1)*table_width_,
+                                 pos_y,
+                                 _("Points"),table_width_,
+                                 game_->ranking(i));
+                    textOutTable(pref_.margin() + 2*(i+1)*table_width_,
+                                 pos_y,
+                                 _("Ranking"),
+                                 table_width_,game_->ranking(i));
                 }
             }
 
@@ -385,28 +406,53 @@ namespace csuper
                     // If the total points and the ranking needs to be display
                     if (pref_.totalPoints() && pref_.ranking())
                     {
-                        textOutTable(pref_.margin() + (3*i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
+                        textOutTable(pref_.margin() + (3*i+1)*table_width_,
+                                     pos_y,
+                                     text_buffer,
+                                     table_width_,game_->ranking(i));
                         text_buffer = game_->totalPointsUstring(i,line_);
-                        textOutTable(pref_.margin() + (3*i+2)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
+                        textOutTable(pref_.margin() + (3*i+2)*table_width_,
+                                     pos_y,
+                                     text_buffer,
+                                     table_width_,game_->ranking(i));
                         text_buffer = game_->rankingUstring(i,line_);
-                        textOutTable(pref_.margin() + (3*i+3)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
+                        textOutTable(pref_.margin() + (3*i+3)*table_width_,
+                                     pos_y,
+                                     text_buffer,
+                                     table_width_,game_->ranking(i));
                     } else
                     // If the total points needs to be display
                     if (pref_.totalPoints())
                     {
-                        textOutTable(pref_.margin() + (2*i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
+                        textOutTable(pref_.margin() + (2*i+1)*table_width_,
+                                     pos_y,
+                                     text_buffer,
+                                     table_width_,game_->ranking(i));
                         text_buffer = game_->totalPointsUstring(i,line_);
-                        textOutTable(pref_.margin() + 2*(i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
+                        textOutTable(pref_.margin() + 2*(i+1)*table_width_,
+                                     pos_y,
+                                     text_buffer,
+                                     table_width_,game_->ranking(i));
                     }else
                     // If the ranking needs to be display
                     if (pref_.ranking())
                     {
-                        textOutTable(pref_.margin() + (2*i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
+                        textOutTable(pref_.margin() + (2*i+1)*table_width_,
+                                     pos_y,
+                                     text_buffer,
+                                     table_width_,
+                                     game_->ranking(i));
                         text_buffer = game_->rankingUstring(i,line_);
-                        textOutTable(pref_.margin() + 2*(i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
+                        textOutTable(pref_.margin() + 2*(i+1)*table_width_,
+                                     pos_y,
+                                     text_buffer,
+                                     table_width_,game_->ranking(i));
                     }
                     else
-                        textOutTable(pref_.margin() + (i+1)*table_width_,pos_y,text_buffer,table_width_,game_->ranking(i));
+                        textOutTable(pref_.margin() + (i+1)*table_width_,
+                                     pos_y,
+                                     text_buffer,
+                                     table_width_,game_->ranking(i));
                 }
             }
 
@@ -425,26 +471,42 @@ namespace csuper
         // Names
         textOutTable(pref_.margin(),y,_("Name"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
-            textOutTable(pref_.margin() + (i+1)*table_width,y,game_->playerNameUstring(i),table_width,game_->ranking(i));
+            textOutTable(pref_.margin() + (i+1)*table_width,
+                         y,
+                         game_->playerNameUstring(i),
+                         table_width,game_->ranking(i));
 
         // Print the finals points
-        textOutTable(pref_.margin(),y- table_line_height_,_("Total points"),table_width);
+        textOutTable(pref_.margin(),
+                     y- table_line_height_,
+                     _("Total points"),
+                     table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(pref_.margin() + (i+1)*table_width,y- table_line_height_,
-                         game_->totalPointsUstring(i),table_width,game_->ranking(i));
+            textOutTable(pref_.margin() + (i+1)*table_width,
+                         y- table_line_height_,
+                         game_->totalPointsUstring(i),
+                         table_width,game_->ranking(i));
         }
 
         // Print the ranking
-        textOutTable(pref_.margin(),y-2* table_line_height_,_("Ranking"),table_width);
+        textOutTable(pref_.margin(),
+                     y-2* table_line_height_,
+                     _("Ranking"),
+                     table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(pref_.margin() + (i+1)*table_width,y- 2*table_line_height_,
-                         game_->rankingUstring(i),table_width,game_->ranking(i));
+            textOutTable(pref_.margin() + (i+1)*table_width,
+                         y- 2*table_line_height_,
+                         game_->rankingUstring(i),
+                         table_width,game_->ranking(i));
         }
 
-        createGrid(pref_.margin(),y+ table_line_height_*2/3,width_-pref_.margin(),
-                   y - table_line_height_*7/3, table_line_height_,table_width);
+        createGrid(pref_.margin(),
+                   y+ table_line_height_*2/3,
+                   width_-pref_.margin(),
+                   y - table_line_height_*7/3,
+                   table_line_height_,table_width);
 
         y = y - 3*table_line_height_;
     }
@@ -460,8 +522,10 @@ namespace csuper
         textOutTable(pref_.margin(),y,_("Name"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(pref_.margin() + (i+1)*table_width,y,
-                         game_->playerNameUstring(i),table_width,game_->ranking(i));
+            textOutTable(pref_.margin() + (i+1)*table_width,
+                         y,
+                         game_->playerNameUstring(i),
+                         table_width,game_->ranking(i));
         }
 
         // Nb turn
@@ -469,8 +533,10 @@ namespace csuper
         textOutTable(pref_.margin(),y,_("Nb turn"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(pref_.margin() + (i+1)*table_width,y,
-                            game_->nbTurnUstring(i),table_width,game_->ranking(i));
+            textOutTable(pref_.margin() + (i+1)*table_width,
+                         y,
+                         game_->nbTurnUstring(i),
+                         table_width,game_->ranking(i));
         }
 
         // Mean
@@ -478,8 +544,10 @@ namespace csuper
         textOutTable(pref_.margin(),y,_("Mean points"),table_width);
         for (i=0 ; i<game_->nbPlayer() ; i++)
         {
-            textOutTable(pref_.margin() + (i+1)*table_width,y,
-                            game_->meanPointsUstring(i),table_width,game_->ranking(i));
+            textOutTable(pref_.margin() + (i+1)*table_width,
+                         y,
+                         game_->meanPointsUstring(i),
+                         table_width,game_->ranking(i));
         }
 
         if (game_->config().turnBased())
@@ -489,8 +557,10 @@ namespace csuper
             textOutTable(pref_.margin(),y,_("Nb turn best"),table_width);
             for (i=0 ; i<game_->nbPlayer() ; i++)
             {
-                textOutTable(pref_.margin() + (i+1)*table_width,y,
-                                game_->nbTurnBestUstring(i),table_width,game_->ranking(i));
+                textOutTable(pref_.margin() + (i+1)*table_width,
+                             y,
+                             game_->nbTurnBestUstring(i),
+                             table_width,game_->ranking(i));
             }
 
             // Nb turn worst
@@ -498,8 +568,10 @@ namespace csuper
             textOutTable(pref_.margin(),y,_("Nb turn worst"),table_width);
             for (i=0 ; i<game_->nbPlayer() ; i++)
             {
-                textOutTable(pref_.margin() + (i+1)*table_width,y,
-                                game_->nbTurnWorstUstring(i),table_width,game_->ranking(i));
+                textOutTable(pref_.margin() + (i+1)*table_width,
+                             y,
+                             game_->nbTurnWorstUstring(i),
+                             table_width,game_->ranking(i));
             }
 
             // Nb turn first
@@ -507,8 +579,10 @@ namespace csuper
             textOutTable(pref_.margin(),y,_("Nb turn first"),table_width);
             for (i=0 ; i<game_->nbPlayer() ; i++)
             {
-                textOutTable(pref_.margin() + (i+1)*table_width,y,
-                                game_->nbTurnFirstUstring(i),table_width,game_->ranking(i));
+                textOutTable(pref_.margin() + (i+1)*table_width,
+                             y,
+                             game_->nbTurnFirstUstring(i),
+                             table_width,game_->ranking(i));
             }
 
             // Nb turn last
@@ -516,8 +590,10 @@ namespace csuper
             textOutTable(pref_.margin(),y,_("Nb turn last"),table_width);
             for (i=0 ; i<game_->nbPlayer() ; i++)
             {
-                textOutTable(pref_.margin() + (i+1)*table_width,y,
-                                game_->nbTurnLastUstring(i),table_width,game_->ranking(i));
+                textOutTable(pref_.margin() + (i+1)*table_width,
+                             y,
+                             game_->nbTurnLastUstring(i),
+                             table_width,game_->ranking(i));
             }
 
             createGrid(pref_.margin(),
@@ -568,21 +644,27 @@ namespace csuper
             font_->SetFontSize(2*pref_.fontSize());
 
             // First
-            textOutTable(pref_.margin(),y-podium_height*ratio /4,game_->playerNameUstring(index[0]),
-                            width_-2*pref_.margin(),1);
+            textOutTable(pref_.margin(),
+                         y-podium_height*ratio /4,
+                         game_->playerNameUstring(index[0]),
+                         width_-2*pref_.margin(),1);
 
             // Second
             if (game_->nbPlayer() >= 2)
             {
-                textOutTable((width_-podium_width*ratio )/2,y-podium_height*ratio /2,
-                             game_->playerNameUstring(index[1]),podium_width*ratio /3,2);
+                textOutTable((width_-podium_width*ratio )/2,
+                             y-podium_height*ratio /2,
+                             game_->playerNameUstring(index[1]),
+                             podium_width*ratio /3,2);
             }
 
             // Third
             if (game_->nbPlayer() >= 3)
             {
                 textOutTable((width_-podium_width*ratio )/2 +2*podium_width*ratio /3,
-                             y-13*podium_height*ratio /20,game_->playerNameUstring(index[2]),podium_width*ratio /3,3);
+                             y-13*podium_height*ratio /20,
+                             game_->playerNameUstring(index[2]),
+                             podium_width*ratio /3,3);
             }
 
             return false;

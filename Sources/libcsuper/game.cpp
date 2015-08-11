@@ -76,8 +76,7 @@ namespace csuper
         distributor_ = game.distributor_;
         config_ = new GameConfiguration(*(game.config_));
 
-        vector<Player*>::const_iterator it;
-        for (it = game.players_.cbegin(); it != game.players_.cend() ; it++)
+        for (auto it = game.players_.cbegin(); it != game.players_.cend() ; it++)
             players_.push_back(new Player(**it));
     }
 
@@ -148,8 +147,7 @@ namespace csuper
     {
         delete config_;
 
-        vector<Player*>::iterator it;
-        for (it = players_.begin(); it != players_.end() ; it++)
+        for (auto it = players_.begin(); it != players_.end() ; it++)
             delete *it;
 
         players_.clear();
@@ -167,8 +165,7 @@ namespace csuper
 
         delete config_;
 
-        vector<Player*>::const_iterator it;
-        for (it = players_.cbegin(); it != players_.cend() ; it++)
+        for (auto it = players_.cbegin(); it != players_.cend() ; it++)
             delete *it;
 
         players_.clear();
@@ -180,7 +177,7 @@ namespace csuper
         distributor_ = game.distributor_;
         config_ = new GameConfiguration(*(game.config_));
 
-        for (it = game.players_.cbegin(); it != game.players_.cend() ; it++)
+        for (auto it = game.players_.cbegin(); it != game.players_.cend() ; it++)
             players_.push_back(new Player(**it));
 
         return *this;
@@ -208,9 +205,8 @@ namespace csuper
             throw OutOfRange(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(player_index).nbTurn()));
 
         vector<double> sort_points;
-        vector<Player*>::const_iterator it_player;
 
-        for (it_player=players_.cbegin() ; it_player != players_.cend() ; it_player++)
+        for (auto it_player=players_.cbegin() ; it_player != players_.cend() ; it_player++)
             sort_points.push_back((*it_player)->totalPoints(turn));
 
         // Sort the points base on the first way
@@ -219,7 +215,7 @@ namespace csuper
         else
             sort(sort_points.begin(),sort_points.end(),&compareDoubleAscending);
 
-        vector<double>::iterator it_sort = sort_points.begin();
+        auto it_sort = sort_points.begin();
         double points_player = totalPoints(player_index,turn);
         for (unsigned int i = 0; i<nbPlayer() ; i++,it_sort++)
         {
@@ -383,13 +379,12 @@ namespace csuper
     {
         ustring str;
         unsigned int i;
-        vector<Player*>::const_iterator it;
 
 
         //TRANSLATORS:The number of characters before the | must be eight
         str += _("Total   |");
 
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+        for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
         {
             str += (*it)->totalPointsUstring(*config_,-1,6);
 
@@ -406,13 +401,12 @@ namespace csuper
     {
         ustring str;
         unsigned int i;
-        vector<Player*>::const_iterator it;
 
 
         //TRANSLATORS:The number of characters before the | must be eight
         str += _("Ranking |");
 
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+        for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
         {
             str += (*it)->rankingUstring(6);
 
@@ -434,8 +428,7 @@ namespace csuper
     {
         unsigned int max_turn = 0;
 
-        vector<Player*>::const_iterator it;
-        for (it = players_.cbegin(); it != players_.cend() ; it++)
+        for (auto it = players_.cbegin(); it != players_.cend() ; it++)
             max_turn = max(max_turn,(*it)->nbTurn());
 
         return max_turn;
@@ -464,9 +457,8 @@ namespace csuper
     void Game::rankingCalculation()
     {
         vector<double> sort_points;
-        vector<Player*>::iterator it_player;
 
-        for (it_player=players_.begin() ; it_player != players_.end() ; it_player++)
+        for (auto it_player=players_.begin() ; it_player != players_.end() ; it_player++)
             sort_points.push_back((*it_player)->totalPoints());
 
         // Sort the points base on the first way
@@ -480,7 +472,7 @@ namespace csuper
         for (int i = nbPlayer()-1 ; i>=0 ; i--,it_sort++)
         {
             // Loop on the total points
-            for (it_player=players_.begin() ; it_player != players_.end() ; it_player++)
+            for (auto it_player=players_.begin() ; it_player != players_.end() ; it_player++)
             {
                 if (*it_sort == (*it_player)->totalPoints())
                     (*it_player)->setRanking(i+1);
@@ -491,8 +483,7 @@ namespace csuper
 
     bool Game::exceedMaxNumber() const
     {
-        vector<Player*>::const_iterator it;
-        for (it = players_.cbegin() ; it!=players_.cend() ; it++)
+        for (auto it = players_.cbegin() ; it!=players_.cend() ; it++)
         {
             if (config().useMaximum())
             {
@@ -529,8 +520,8 @@ namespace csuper
         if (points.size() != nbPlayer())
             throw OutOfRange(ustring::compose(_("There is %1 points and %2 player in the game"),intToUstring(points.size()),nbPlayer()));
 
-        vector<double>::const_iterator it_points = points.cbegin();
-        vector<Player*>::iterator it_player = players_.begin();
+        auto it_points = points.cbegin();
+        auto it_player = players_.begin();
         for (;it_points != points.cend() ; it_player++, it_points++)
             (*it_player)->addPoints(*it_points);
 
@@ -542,11 +533,10 @@ namespace csuper
 
     bool Game::differentsPlayerNames() const
     {
-        vector<Player*>::const_iterator it1,it2;
         unsigned int i=0;
-        for (it1 = players_.cbegin() ; it1 != players_.cend() ; it1++, i++)
+        for (auto it1 = players_.cbegin() ; it1 != players_.cend() ; it1++, i++)
         {
-            for (it2 = players_.cbegin() + i + 1 ; it2 != players_.cend() ; it2++)
+            for (auto it2 = players_.cbegin() + i + 1 ; it2 != players_.cend() ; it2++)
             {
                 if ((*it1)->name() == (*it2)->name())
                     return false;
@@ -566,9 +556,9 @@ namespace csuper
 
 
         vector<double> sort_points;
-        vector<Player*>::const_iterator it_player;
+        auto it_player=players_.cbegin();
 
-        for (it_player=players_.cbegin() ; it_player != players_.cend() ; it_player++)
+        for ( ; it_player != players_.cend() ; it_player++)
             sort_points.push_back((*it_player)->totalPoints(turn));
 
 
@@ -605,8 +595,7 @@ namespace csuper
         if (!(player(0).hasTurn(turn)))
             throw OutOfRange(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(0).nbTurn()));
 
-        vector<Player*>::iterator it;
-        for (it=players_.begin() ; it != players_.end() ; it++)
+        for (auto it=players_.begin() ; it != players_.end() ; it++)
             (*it)->deleteTurn(turn);
 
         rankingCalculation();
@@ -636,8 +625,8 @@ namespace csuper
         if (points.size() != nbPlayer())
             throw OutOfRange(ustring::compose(_("There is %1 points and %2 player in the game"),intToUstring(points.size()),nbPlayer()));
 
-        vector<double>::const_iterator it_points = points.cbegin();
-        vector<Player*>::iterator it_player = players_.begin();
+        auto it_points = points.cbegin();
+        auto it_player = players_.begin();
         for (;it_points != points.cend() ; it_player++, it_points++)
         {
             if ((*it_player)->hasTurn(turn))
@@ -678,11 +667,11 @@ namespace csuper
     {
         vector<unsigned int> index;
 
-        vector<Player*>::const_iterator it;
         unsigned int j;
         for (unsigned int i=1 ; i<=nbPlayer() ; i++)
         {
-            for (it = players_.cbegin(), j=0 ; it !=  players_.cend() ; it++,j++)
+            j = 0;
+            for (auto it = players_.cbegin(); it !=  players_.cend() ; it++,j++)
             {
                 if (i == (*it)->ranking())
                     index.push_back(j);
@@ -727,8 +716,7 @@ namespace csuper
         config().createXmlNode(root);
 
         // Players
-        vector<Player*>::const_iterator it;
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+        for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
             (*it)->createXmlNode(root,config());
 
         try
@@ -782,8 +770,7 @@ namespace csuper
             else
                 points = DBL_MAX;
 
-            vector<Player*>::const_iterator it;
-            for (it = players_.cbegin() ; it != players_.cend() ; it++)
+            for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
             {
                 if ((config().maxWinner() && best) || (!(config().maxWinner() || best)))
                     points = max(points,(*it)->points(i));
@@ -1059,17 +1046,16 @@ namespace csuper
             throw FileError(_("Error while exporting the game into a m file, bad filename: ") + filename);
         }
 
-        vector<Player*>::const_iterator it;
         unsigned int i;
 
         file << "\"" << _("Players") << "\"";
-        for (it=players_.cbegin() ; it != players_.cend() ; it++)
+        for (auto it=players_.cbegin() ; it != players_.cend() ; it++)
             file << "\t\"" << (*it)->name().raw() << "\"";
 
         for (i=0; i<= maxNbTurn() ; i++)
         {
             file << endl << i;
-            for (it=players_.cbegin() ; it != players_.cend() ; it++)
+            for (auto it=players_.cbegin() ; it != players_.cend() ; it++)
             {
                 if ((*it)->hasTurn(i))
                     file << "\t" << replaceCharacterInUstring((*it)->totalPointsUstring(config(),i),',','.').raw();

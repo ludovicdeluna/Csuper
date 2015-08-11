@@ -59,16 +59,16 @@ private:
     Glib::OptionEntry input_entry_;         /*!< The input filename entry */
     Glib::OptionEntry output_entry_;        /*!< The output filename entry */
 
-    bool open_;                             /*!< Check if the open option is used */
-    bool read_;                             /*!< Check if the read option is used */
-    bool pdf_;                              /*!< Check if the pdf option is used */
-    bool csv_;                              /*!< Check if the csv option is used */
-    bool m_;                                /*!< Check if the m option is used */
-    bool png_;                              /*!< Check if the png option is used */
-    bool svg_;                              /*!< Check if the svg option is used */
-    bool gnuplot_;                          /*!< Check if the gnuplot option is used */
-    std::string input_;                     /*!< The input filename */
-    std::string output_;                    /*!< The output filename */
+    bool open_ = false;                     /*!< Check if the open option is used */
+    bool read_ = false;                     /*!< Check if the read option is used */
+    bool pdf_ = false;                      /*!< Check if the pdf option is used */
+    bool csv_ = false;                      /*!< Check if the csv option is used */
+    bool m_ = false;                        /*!< Check if the m option is used */
+    bool png_ = false;                      /*!< Check if the png option is used */
+    bool svg_ = false;                      /*!< Check if the svg option is used */
+    bool gnuplot_ = false;                  /*!< Check if the gnuplot option is used */
+    std::string input_ = "";                /*!< The input filename */
+    std::string output_ = "";               /*!< The output filename */
 
 public:
     /*!

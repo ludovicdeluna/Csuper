@@ -82,10 +82,10 @@ public:
     };
 
 private:
-    ForegroundColor foreground_; /*!< The foreground color */
-    BackgroundColor background_; /*!< The background color */
-    Style style_;                /*!< The style */
-    bool reset_;                 /*!< Reset the text style */
+    ForegroundColor foreground_ = TEXT_FOREGROUND_NO_CHANGE;    /*!< The foreground color */
+    BackgroundColor background_ = TEXT_BACKGROUND_NO_CHANGE;    /*!< The background color */
+    Style style_ = TEXT_STYLE_NO_CHANGE;                        /*!< The style */
+    bool reset_ = true;                                         /*!< Reset the text style */
 
 public:
     /*!

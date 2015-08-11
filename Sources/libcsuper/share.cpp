@@ -118,7 +118,7 @@ namespace csuper{
 
     ustring intToUstring(const double i, const unsigned int width)
     {
-        return Glib::ustring::format(setw(width),i);
+        return ustring::format(setw(width),i);
     }
 
     int ustringToInt(const ustring& str)
@@ -204,7 +204,7 @@ namespace csuper{
     Element *nextXmlElement(Node*& node)
     {
         node = node->get_next_sibling();
-        while (dynamic_cast<Element*>(node) == NULL)
+        while (dynamic_cast<Element*>(node) == nullptr)
         {
             if (node != nullptr)
                 node = node->get_next_sibling();

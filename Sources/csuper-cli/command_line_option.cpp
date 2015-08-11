@@ -40,10 +40,7 @@ using namespace std;
 
 CommandLineOption::CommandLineOption() : context_(""),
     filename_group_("filename",_("The input and output filename")),
-    instruction_group_("instruction",_("The instruction")),
-    open_(false), read_(false), pdf_(false), csv_(false),
-     m_(false), png_(false), svg_(false), gnuplot_(false)
-     , input_(""), output_("")
+    instruction_group_("instruction",_("The instruction"))
 {
     open_entry_.set_long_name("open");
     open_entry_.set_short_name('e');

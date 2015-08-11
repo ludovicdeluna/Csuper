@@ -41,8 +41,7 @@
 
  }
 
- TextStyle::TextStyle() : foreground_(TEXT_FOREGROUND_NO_CHANGE), background_(TEXT_BACKGROUND_NO_CHANGE),
-    style_(TEXT_STYLE_NO_CHANGE), reset_(true)
+ TextStyle::TextStyle()
 {
 
 }

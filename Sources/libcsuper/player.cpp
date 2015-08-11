@@ -55,8 +55,7 @@ namespace csuper
                     name_(name), points_(points), ranking_(ranking), nb_turn_(points.size()-1)
     {
         double total=0;
-        vector<double>::const_iterator it;
-        for (it=points.cbegin() ; it != points.cend() ; it++)
+        for (auto it=points.cbegin() ; it != points.cend() ; it++)
             total += *it;
         total_points_ = total;
     }

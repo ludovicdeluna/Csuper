@@ -66,9 +66,9 @@ GameCli::~GameCli()
 //
 ustring GameCli::setTextStyle(const Player& player, const bool use_distributor) const
 {
-    TextStyle::ForegroundColor foreground_color = TextStyle::TEXT_FOREGROUND_NO_CHANGE;
-    TextStyle::BackgroundColor background_color = TextStyle::TEXT_BACKGROUND_NO_CHANGE;
-    TextStyle::Style style = TextStyle::TEXT_STYLE_NO_CHANGE;
+    auto foreground_color = TextStyle::TEXT_FOREGROUND_NO_CHANGE;
+    auto background_color = TextStyle::TEXT_BACKGROUND_NO_CHANGE;
+    auto style = TextStyle::TEXT_STYLE_NO_CHANGE;
 
     if (use_distributor && config().useDistributor() && player == this->player(distributor()))
         style = TextStyle::TEXT_UNDERLINE;
@@ -105,12 +105,11 @@ ustring GameCli::toUstringNames(unsigned int& line_size, const bool change_line_
 {
     ustring str;
     int i;
-    vector<Player*>::const_iterator it;
 
     //TRANSLATORS:The number of characters before the | must be eight
     str = _("Names   | ");
 
-    for (it = players_.cbegin() ; it != players_.cend() ; it++)
+    for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
     {
         ustring name((*it)->name());
         str += setTextStyle(**it,true);
@@ -138,14 +137,13 @@ ustring GameCli::toUstringAllPoints() const
 {
     ustring str;
     unsigned int i,j;
-    vector<Player*>::const_iterator it;
 
     for (i=0 ; i<=maxNbTurn() ; i++)
     {
         //TRANSLATORS:The number of characters before the | and without the %1 must be six
         str += ustring::compose(_("Turn %1 |"),ustring::format(setw(2),i));
 
-        for (it=players_.cbegin() ; it != players_.cend() ; it++)
+        for (auto it=players_.cbegin() ; it != players_.cend() ; it++)
         {
             if ((*it)->hasTurn(i))
             {
@@ -171,13 +169,12 @@ ustring GameCli::toUstringTotalPoints() const
 {
     ustring str;
     unsigned int i;
-    vector<Player*>::const_iterator it;
 
 
     //TRANSLATORS:The number of characters before the | must be eight
     str += _("Total   |");
 
-    for (it = players_.cbegin() ; it != players_.cend() ; it++)
+    for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
     {
         str += setTextStyle(**it);
         str += (*it)->totalPointsUstring(*config_,-1,6);
@@ -196,13 +193,12 @@ ustring GameCli::toUstringRanking() const
 {
     ustring str;
     unsigned int i;
-    vector<Player*>::const_iterator it;
 
 
     //TRANSLATORS:The number of characters before the | must be eight
     str += _("Ranking |");
 
-    for (it = players_.cbegin() ; it != players_.cend() ; it++)
+    for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
     {
         str += setTextStyle(**it);
         str += (*it)->rankingUstring(6);
@@ -224,7 +220,7 @@ ustring GameCli::toUstringGameOver() const
 
     res += _("The game is over.\n");
 
-    std::vector<unsigned int> player_index = playerIndexFromPosition();
+    auto player_index = playerIndexFromPosition();
 
     // Print the first line
     res += "\n\t\t\t";

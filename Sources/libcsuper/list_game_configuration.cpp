@@ -88,16 +88,14 @@ namespace csuper
 
     ListGameConfiguration::ListGameConfiguration(const ListGameConfiguration &list_game_config)
     {
-        vector<GameConfiguration*>::const_iterator it;
-        for (it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
+        for (auto it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
             game_configuration_list_.push_back(new GameConfiguration(**it));
     }
 
 
     ListGameConfiguration::~ListGameConfiguration()
     {
-        vector<GameConfiguration*>::iterator it;
-        for (it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
+        for (auto it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
             delete *it;
 
         game_configuration_list_.clear();
@@ -146,8 +144,7 @@ namespace csuper
 
     void ListGameConfiguration::add(GameConfiguration* game_config)
     {
-        vector<GameConfiguration*>::iterator it;
-        for (it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
+        for (auto it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
         {
             if (*game_config == **it)
                 throw AlreadyExist(game_config->name());
@@ -157,8 +154,7 @@ namespace csuper
 
     void ListGameConfiguration::add(const ListGameConfiguration& list_game_config)
     {
-        vector<GameConfiguration*>::const_iterator it;
-        for (it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
+        for (auto it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
         {
             GameConfiguration* tmp_game_config = new GameConfiguration(**it);
             try
@@ -175,15 +171,13 @@ namespace csuper
 
     void ListGameConfiguration::add(const ListGameConfiguration& list_game_config,const vector<unsigned int>& indexes)
     {
-        vector<GameConfiguration*>::const_iterator it;
-        vector<unsigned int>::const_iterator it_index;
         unsigned int i=0;
         bool found;
 
-        for (it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
+        for (auto it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
         {
             found = false;
-            for (it_index=indexes.cbegin() ; it_index != indexes.cend() ; it_index++)
+            for (auto it_index=indexes.cbegin() ; it_index != indexes.cend() ; it_index++)
             {
                 if (*it_index == i)
                 {
@@ -222,8 +216,7 @@ namespace csuper
 
     void ListGameConfiguration::remove(const GameConfiguration& game_config)
     {
-        vector<GameConfiguration*>::iterator it;
-        for (it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
+        for (auto it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
         {
             if (**it == game_config)
             {
@@ -239,8 +232,7 @@ namespace csuper
     {
         ustring str("");
 
-        vector<GameConfiguration*>::const_iterator it;
-        for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
+        for (auto it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
             str += ((*it)->toUstring() + "\n\n");
 
         return str;
@@ -251,8 +243,7 @@ namespace csuper
         ustring str("");
         unsigned int i=1;
 
-        vector<GameConfiguration*>::const_iterator it;
-        for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++, i++)
+        for (auto it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++, i++)
             str += ustring::compose(" (%1) %2\n",i,(*it)->nameUstring()); //(" - " + (*it)->nameUstring() + "\n");
 
         return str;
@@ -278,8 +269,7 @@ namespace csuper
         Element* node_nb = root->add_child("nb_game_config");
         node_nb->add_child_text(Ascii::dtostr(size()));
 
-        vector<GameConfiguration*>::const_iterator it;
-        for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
+        for (auto it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
             (*it)->createXmlNode(root);
 
         try
@@ -306,12 +296,10 @@ namespace csuper
         Element* node_nb = root->add_child("nb_game_config");
         node_nb->add_child_text(Ascii::dtostr(indexes.size()));
 
-        vector<GameConfiguration*>::const_iterator it;
-        vector<unsigned int>::const_iterator it_index;
         unsigned int i=0;
-        for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
+        for (auto it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
         {
-            for (it_index=indexes.cbegin() ; it_index != indexes.cend() ; it_index++)
+            for (auto it_index=indexes.cbegin() ; it_index != indexes.cend() ; it_index++)
             {
                 if (*it_index == i)
                 {
