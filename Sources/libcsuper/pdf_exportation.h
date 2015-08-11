@@ -49,20 +49,20 @@ namespace csuper
     class PdfExportation
     {
     private:
-        PoDoFo::PdfMemDocument* pdf_;                   /*!< The pdf document */
-        PoDoFo::PdfFont* font_;                 /*!< The font */
-        PoDoFo::PdfPainter* painter_;
-        unsigned int line_;                       /*!< The number of the line to be display */
-        int num_page_;                   /*!< The number of the page to be display */
-        int line_height_;                /*!< The line height */
-        int table_line_height_;          /*!< The line height of a table */
-        ExportPdfPreferences pref_;      /*!< The user preferences */
-        bool total_points_ranking_print_;/*!< Indicate if the total points and the ranking is printed */
-        bool stat_print_;                /*!< Indicate if the stats are printed */
-        const Game* game_;               /*!< The game */
-        double height_;
-        double width_;
-        double table_width_;
+        PoDoFo::PdfMemDocument* pdf_;       /*!< The pdf document */
+        PoDoFo::PdfFont* font_;             /*!< The font */
+        PoDoFo::PdfPainter* painter_;       /*!< The painter */
+        unsigned int line_;                 /*!< The number of the line to be display */
+        int num_page_;                      /*!< The number of the page to be display */
+        int line_height_;                   /*!< The line height */
+        int table_line_height_;             /*!< The line height of a table */
+        ExportPdfPreferences pref_;         /*!< The user preferences */
+        bool total_points_ranking_print_;   /*!< Indicate if the total points and the ranking is printed */
+        bool stat_print_;                   /*!< Indicate if the stats are printed */
+        const Game* game_;                  /*!< The game */
+        double height_;                     /*!< The height of the page */
+        double width_;                      /*!< The width of the page */
+        double table_width_;                /*!< The table width of the page */
 
 
 

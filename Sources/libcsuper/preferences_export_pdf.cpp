@@ -116,6 +116,11 @@ namespace csuper
                 && pdfSizeForChart() == pdf.pdfSizeForChart());
     }
 
+    bool ExportPdfPreferences::operator!=(const ExportPdfPreferences& pdf) const
+    {
+        return !(*this == pdf);
+    }
+
     ustring ExportPdfPreferences::toUstring() const
     {
         return ustring::compose(_("Export pdf preferences preferences:\n - Font size: %1\n - Page size: %2\n - Page direction: %3"

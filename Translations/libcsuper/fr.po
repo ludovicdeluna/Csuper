@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-06 17:18+0200\n"
+"POT-Creation-Date: 2015-08-11 15:04+0200\n"
 "PO-Revision-Date: 2015-08-06 17:19+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
@@ -595,7 +595,7 @@ msgstr ""
 msgid "Error while writing the CSU preferences file %1"
 msgstr "Erreur lors de l'écriture du fichier de préférence CSU %1."
 
-#: Sources/libcsuper/preferences_chart_exportation.cpp:81
+#: Sources/libcsuper/preferences_chart_exportation.cpp:86
 msgid ""
 "Chart exportation preferences:\n"
 " - Width: %1\n"
@@ -627,7 +627,7 @@ msgstr ""
 "Préférences des répertoires:\n"
 " - Ouverture : %1"
 
-#: Sources/libcsuper/preferences_export_pdf.cpp:121
+#: Sources/libcsuper/preferences_export_pdf.cpp:126
 msgid ""
 "Export pdf preferences preferences:\n"
 " - Font size: %1\n"
@@ -651,7 +651,7 @@ msgstr ""
 " - Police embarquée : %8\n"
 " - Nom de la police : %9"
 
-#: Sources/libcsuper/preferences_export_pdf.cpp:126
+#: Sources/libcsuper/preferences_export_pdf.cpp:131
 msgid ""
 "\n"
 " - PDF size for chart: %1"
@@ -683,7 +683,7 @@ msgstr ""
 " - Hauteur : %2\n"
 " - Est maximisé : %3"
 
-#: Sources/libcsuper/preferences_main_window_title_bar.cpp:77
+#: Sources/libcsuper/preferences_main_window_title_bar.cpp:83
 msgid ""
 "Main window title bar preferences:\n"
 " - Disable window manager decoration: %1\n"

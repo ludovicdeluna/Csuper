@@ -23,7 +23,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * aint with this program; if not, write to the Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
@@ -43,6 +43,7 @@
 #include "menu_file.h"
 #include "menu_edit.h"
 #include "menu_display.h"
+#include "preferences_window.h"
 
 #include "../libcsuper/libcsuper.h"
 
@@ -66,6 +67,9 @@ private:
     MenuFile* menu_file_;                                                   /*!< The menu file */
     MenuEdit* menu_edit_;                                                   /*!< The menu edit */
     MenuDisplay* menu_display_;                                             /*!< The menu display */
+    PreferencesWindow* pref_window_;                                        /*!< The preferences window */
+    ExportationPreferences* export_pref_window_;                            /*!< The exportation preferences scrolled window */
+    DisplayPreferences* display_pref_window_;                               /*!< The display preferences scrolled window */
 
 
 
@@ -208,6 +212,33 @@ public:
      inline MenuDisplay* menuDisplay()
      {
          return menu_display_;
+     }
+
+    /*!
+     *  \brief return the PreferencesWindow
+     *  \return the PreferencesWindow
+     */
+     inline PreferencesWindow* preferencesWindow()
+     {
+         return pref_window_;
+     }
+
+    /*!
+     *  \brief return the ExportationPreferences
+     *  \return the ExportationPreferences
+     */
+     inline ExportationPreferences* exportationPreferencesWindow()
+     {
+         return export_pref_window_;
+     }
+
+    /*!
+     *  \brief return the DisplayPreferences
+     *  \return the DisplayPreferences
+     */
+     inline DisplayPreferences* displayPreferencesWindow()
+     {
+         return display_pref_window_;
      }
 
 };

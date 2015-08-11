@@ -82,6 +82,14 @@ namespace csuper
          */
         bool operator==(const MainWindowTitleBarPreferences& pref) const;
 
+
+        /*!
+         *  \brief Operator !=
+         *  \param pref another MainWindowTitleBarPreferences
+         */
+        bool operator!=(const MainWindowTitleBarPreferences& pref) const;
+
+
         /*!
          *  \brief Convert to a ustring
          *  \return the ustring

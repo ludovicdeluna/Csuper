@@ -76,6 +76,11 @@ namespace csuper
         return (totalPoints() == pref.totalPoints() && width() == pref.width() && height() == pref.height());
     }
 
+    bool ChartExportationPreferences::operator!=(const ChartExportationPreferences& pref) const
+    {
+        return !(*this == pref);
+    }
+
     ustring ChartExportationPreferences::toUstring() const
     {
         return ustring::compose(_("Chart exportation preferences:\n - Width: %1\n - Height: %2\n - Total points: %3"),

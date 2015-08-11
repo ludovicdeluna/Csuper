@@ -131,6 +131,12 @@ namespace csuper
         bool operator==(const ExportPdfPreferences& pdf) const;
 
         /*!
+         *  \brief Operator !=
+         *  \param pdf another ExportPdfPreferences
+         */
+        bool operator!=(const ExportPdfPreferences& pdf) const;
+
+        /*!
          *  \brief Convert to a ustring
          *  \return the ustring
          */

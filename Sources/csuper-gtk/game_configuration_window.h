@@ -23,7 +23,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * aint with this program; if not, write to the Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
@@ -58,7 +58,7 @@ protected:
     Gtk::Label* selected_pref_label_;       /*!< The selected pref label*/
     Gtk::Label* config_name_label_;         /*!< The config name label*/
 
-    Gtk::Grid* game_config_grid_=nullptr;                    /*!< The grid of game configuration*/
+    Gtk::Grid* game_config_grid_=nullptr;   /*!< The grid of game configuration*/
 
     unsigned int game_config_displayed_;    /*!< The current game configuration displayed */
 

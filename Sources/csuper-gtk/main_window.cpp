@@ -23,7 +23,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * aint with this program; if not, write to the Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
@@ -79,10 +79,12 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
         csuper_menu_->attach(*quit_menu_item_,0,1,3,4);
 
         game_config_menu_item_->signal_activate().connect(mem_fun(*(app()->gameConfigurationWindow()),&GameConfigurationWindow::launch));
+        pref_menu_item_->signal_activate().connect(mem_fun(*(app()->preferencesWindow()),&PreferencesWindow::launch));
         about_menu_item_->signal_activate().connect(mem_fun(*(app()->about()),&About::launch));
         quit_menu_item_->signal_activate().connect(mem_fun(*(app()),&CsuApplication::onQuit));
 
         game_config_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_G,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
+        pref_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_P,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
         about_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_A,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
         quit_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_Q,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
 

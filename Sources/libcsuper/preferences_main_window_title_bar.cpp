@@ -72,6 +72,12 @@ namespace csuper
         return (disableWindowManagerDecoration() == pref.disableWindowManagerDecoration() && printTitle() == pref.printTitle());
     }
 
+
+    bool MainWindowTitleBarPreferences::operator!=(const MainWindowTitleBarPreferences& pref) const
+    {
+        return !(*this == pref);
+    }
+
     ustring MainWindowTitleBarPreferences::toUstring() const
     {
         return ustring::compose(_("Main window title bar preferences:\n - Disable window manager decoration: %1\n - Print title: %2"),

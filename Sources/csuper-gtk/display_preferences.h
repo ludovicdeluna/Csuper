@@ -1,12 +1,12 @@
 /*!
- * \file    main_window.h
+ * \file    display_preferences.h
  * \author  Remi BERTHO
- * \date    28/07/15
+ * \date    10/08/15
  * \version 4.3.0
  */
 
 /*
- * main_window.h
+ * display_preferences.h
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
@@ -30,33 +30,30 @@
  *
  */
 
-
-#ifndef MAIN_WINDOW_H_INCLUDED
-#define MAIN_WINDOW_H_INCLUDED
+#ifndef DISPLAY_PREFERENCES_H_INCLUDED
+#define DISPLAY_PREFERENCES_H_INCLUDED
 
 #include <gtkmm.h>
+#include "../libcsuper/libcsuper.h"
+
 
 #include "csu_widget.h"
 
-/*! \class MainWindow
-*   \brief This class represent the main window
+
+/*! \class DisplayPreferences
+*   \brief This class represent the display preferences scrolled window
 */
-class MainWindow : public CsuWidget, public Gtk::ApplicationWindow
+class DisplayPreferences : public CsuWidget, public Gtk::ScrolledWindow
 {
 protected:
     Gtk::Grid* main_grid_;                  /*!< The main grid */
-    Gtk::HeaderBar* header_bar_;            /*!< The HeaderBar */
-    Gtk::MenuButton* menu_display_button_;  /*!< The display MenuButton */
-    Gtk::MenuButton* menu_edit_button_;     /*!< The edit MenuButton */
-    Gtk::MenuButton* menu_file_button_;     /*!< The file MenuButton */
+    Gtk::Viewport* viewport_;               /*!< The viewport */
 
-    // Use only if the user use window manager decoration
-    Gtk::MenuButton* csuper_menu_button_;   /*!< The csuper MenuButton */
-    Gtk::Menu* csuper_menu_;                /*!< The csuper menu */
-    Gtk::MenuItem* game_config_menu_item_;  /*!< The game config menuitem */
-    Gtk::MenuItem* pref_menu_item_;         /*!< The preferences menuitem */
-    Gtk::MenuItem* about_menu_item_;        /*!< The about menuitem */
-    Gtk::MenuItem* quit_menu_item_;         /*!< The quit menuitem */
+    Gtk::Label* title_bar_label_;               /*!< The title bar label */
+    Gtk::Label* title_bar_decoration_label_;    /*!< The title bar decoration label */
+    Gtk::Switch* title_bar_decoration_switch_;  /*!< The title bar decoration switch */
+    Gtk::Label* title_bar_title_label_;         /*!< The title bar title label */
+    Gtk::Switch* title_bar_title_switch_;       /*!< The title bar title switch */
 
 
 
@@ -70,19 +67,23 @@ public:
      *  \param cobject the C object
      *  \param refGlade the builder
      */
-    MainWindow(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
-
+    DisplayPreferences(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
 
 
     //
     // Function
     //
     /*!
-     *  \brief Save the window size when changing size
+     *  \brief Update the view
      */
-     void saveSize();
+    void update();
+
+
+    /*!
+     *  \brief Read the title bar preferences
+     */
+    csuper::MainWindowTitleBarPreferences readTitleBar();
 };
 
 
-
-#endif // MAIN_WINDOW_H_INCLUDED
+#endif // DISPLAY_PREFERENCES_H_INCLUDED

@@ -23,7 +23,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * aint with this program; if not, write to the Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
@@ -74,6 +74,9 @@ void CsuApplication::init(RefPtr<Builder>& builder)
     builder_->get_widget_derived("about_dialog", about_);
     builder_->get_widget_derived("game_configuration_window", game_config_window_);
     builder_->get_widget_derived("new_game_configuration_dialog", new_game_config_dialog_);
+    builder_->get_widget_derived("preferences_window", pref_window_);
+    builder_->get_widget_derived("preferences_exportation_scrolledwindow", export_pref_window_);
+    builder_->get_widget_derived("preferences_display_scrolledwindow", display_pref_window_);
     builder_->get_widget_derived("main_window", main_window_);
     import_export_game_config_dialog_ = new ImportExportGameConfigurationDialog();
 }
@@ -93,14 +96,17 @@ void CsuApplication::onStartup()
         add_action("about",mem_fun(*about_,&About::launch));
         add_action("quit",mem_fun(*this,&CsuApplication::onQuit));
         add_action("game_config",mem_fun(*game_config_window_,&GameConfigurationWindow::launch));
+        add_action("preferences",mem_fun(*pref_window_,&PreferencesWindow::launch));
         #if GTK_MINOR_VERSION >= 12
         set_accel_for_action("app.about","<primary>a");
         set_accel_for_action("app.quit","<primary>q");
         set_accel_for_action("app.game_config","<primary>g");
+        set_accel_for_action("app.preferences","<primary>p");
         #else
         add_accelerator("<primary>a","app.about");
         add_accelerator("<primary>q","app.quit");
         add_accelerator("<primary>g","app.game_config");
+        add_accelerator("<primary>p","app.preferences");
         #endif // GTK_MINOR_VERSION
 
         RefPtr<Gio::Menu> menu = Gio::Menu::create();
@@ -116,5 +122,6 @@ void CsuApplication::onQuit()
 {
     quit();
     about_->hide();
+    new_game_config_dialog_->hide();
 }
 

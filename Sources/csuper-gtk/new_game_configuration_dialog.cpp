@@ -23,7 +23,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * aint with this program; if not, write to the Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
@@ -33,6 +33,7 @@
 #include "new_game_configuration_dialog.h"
 
 #include <glibmm/i18n.h>
+#include "csu_application.h"
 
 using namespace Gtk;
 using namespace Glib;

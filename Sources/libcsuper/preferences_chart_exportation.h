@@ -85,6 +85,12 @@ namespace csuper
         bool operator==(const ChartExportationPreferences& pref) const;
 
         /*!
+         *  \brief Operator !=
+         *  \param pref another ChartExportationPreferences
+         */
+        bool operator!=(const ChartExportationPreferences& pref) const;
+
+        /*!
          *  \brief Convert to a ustring
          *  \return the ustring
          */

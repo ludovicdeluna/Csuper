@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Csuper -  4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-06 17:18+0200\n"
-"PO-Revision-Date: 2015-08-05 17:13+0200\n"
+"POT-Creation-Date: 2015-08-11 15:07+0200\n"
+"PO-Revision-Date: 2015-08-11 15:21+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -19,38 +19,38 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Gtranslator 2.91.7\n"
 
-#: Sources/csuper-gtk/csu_application.cpp:105
+#: Sources/csuper-gtk/csu_application.cpp:113
 #: Sources/csuper-gtk/main_window.cpp:72
 msgid "Preferences"
 msgstr "Préférences"
 
-#: Sources/csuper-gtk/csu_application.cpp:106
-#: Sources/csuper-gtk/main_window.cpp:71 UI/csuper-gtk.glade:110
+#: Sources/csuper-gtk/csu_application.cpp:114
+#: Sources/csuper-gtk/main_window.cpp:71 UI/csuper-gtk.glade:133
 msgid "Game configuration"
 msgstr "Configuration de jeu"
 
-#: Sources/csuper-gtk/csu_application.cpp:107
+#: Sources/csuper-gtk/csu_application.cpp:115
 #: Sources/csuper-gtk/main_window.cpp:73
 msgid "About"
 msgstr "À propos"
 
-#: Sources/csuper-gtk/csu_application.cpp:108
+#: Sources/csuper-gtk/csu_application.cpp:116
 #: Sources/csuper-gtk/main_window.cpp:74
 msgid "Quit"
 msgstr "Quitter"
 
 #: Sources/csuper-gtk/game_configuration_window.cpp:134
-#: Sources/csuper-gtk/main_window.cpp:109
+#: Sources/csuper-gtk/main_window.cpp:111
 msgid "Edit"
 msgstr "Éditer"
 
 #: Sources/csuper-gtk/game_configuration_window.cpp:135
-#: UI/csuper-gtk.glade:548
+#: UI/csuper-gtk.glade:571
 msgid "Properties"
 msgstr "Propriétés"
 
 #: Sources/csuper-gtk/game_configuration_window.cpp:136
-#: UI/csuper-gtk.glade:508 UI/csuper-gtk.glade:564
+#: UI/csuper-gtk.glade:531 UI/csuper-gtk.glade:587
 msgid "Delete"
 msgstr "Supprimer"
 
@@ -78,7 +78,7 @@ msgstr "Accepter"
 #: Sources/csuper-gtk/game_configuration_window.cpp:232
 #: Sources/csuper-gtk/game_configuration_window.cpp:266
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:50
-#: UI/csuper-gtk.glade:607
+#: UI/csuper-gtk.glade:631
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -87,17 +87,17 @@ msgid "Import file"
 msgstr "Importer un fichier"
 
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:51
-#: UI/csuper-gtk.glade:622
+#: UI/csuper-gtk.glade:646
 msgid "Validate"
 msgstr "Valider"
 
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:85
-#: UI/csuper-gtk.glade:184
+#: UI/csuper-gtk.glade:207
 msgid "Import game configuration"
 msgstr "Importer des configurations de jeu"
 
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:87
-#: UI/csuper-gtk.glade:198
+#: UI/csuper-gtk.glade:221
 msgid "Export game configuration"
 msgstr "Exporter des configurations de jeu"
 
@@ -119,37 +119,37 @@ msgstr "Csuper"
 msgid "Error when initializing csuper."
 msgstr "Erreur lors de l'initialisation de csuper."
 
-#: Sources/csuper-gtk/main_window.cpp:101
+#: Sources/csuper-gtk/main_window.cpp:103 UI/csuper-gtk.glade:1521
 msgid "Display"
 msgstr "Affichage"
 
-#: Sources/csuper-gtk/main_window.cpp:117
+#: Sources/csuper-gtk/main_window.cpp:119
 msgid "File"
 msgstr "Fichier"
 
-#: Sources/csuper-gtk/new_game_configuration_dialog.cpp:152
-#: Sources/csuper-gtk/new_game_configuration_dialog.cpp:157
-#: UI/csuper-gtk.glade:658
+#: Sources/csuper-gtk/new_game_configuration_dialog.cpp:153
+#: Sources/csuper-gtk/new_game_configuration_dialog.cpp:158
+#: UI/csuper-gtk.glade:682
 msgid "Name of the game configuration"
 msgstr "Nom de la configuration de jeu"
 
-#: UI/csuper-gtk.glade:58
+#: UI/csuper-gtk.glade:81
 msgid "About Csuper"
 msgstr "À propos de Csuper"
 
-#: UI/csuper-gtk.glade:68
+#: UI/csuper-gtk.glade:91
 msgid "Copyright © 2014-2015 Rémi BERTHO <remi.bertho@openmailbox.org>"
 msgstr "Copyright © 2014-2015 Rémi BERTHO <remi.bertho@openmailbox.org>"
 
-#: UI/csuper-gtk.glade:69
+#: UI/csuper-gtk.glade:92
 msgid "Universal points counter allowing a dispense with reflection"
 msgstr "Compteur de Score Universel Permettant l'Exemption de Réflexion"
 
-#: UI/csuper-gtk.glade:71
+#: UI/csuper-gtk.glade:94
 msgid "Visit the website of Csuper"
 msgstr "Visiter le site internet de Csuper"
 
-#: UI/csuper-gtk.glade:74
+#: UI/csuper-gtk.glade:97
 msgid ""
 "Rémi BERTHO\n"
 "Nicolas DANKAR"
@@ -157,31 +157,31 @@ msgstr ""
 "Rémi BERTHO\n"
 "Nicolas DANKAR"
 
-#: UI/csuper-gtk.glade:165
+#: UI/csuper-gtk.glade:188
 msgid "Add"
 msgstr "Ajouter"
 
-#: UI/csuper-gtk.glade:169
+#: UI/csuper-gtk.glade:192
 msgid "Add a game configuration"
 msgstr "Ajouter une configuration de jeu"
 
-#: UI/csuper-gtk.glade:180
+#: UI/csuper-gtk.glade:203
 msgid "Import"
 msgstr "Importer"
 
-#: UI/csuper-gtk.glade:194 UI/csuper-gtk.glade:532
+#: UI/csuper-gtk.glade:217 UI/csuper-gtk.glade:555
 msgid "Export"
 msgstr "Exporter"
 
-#: UI/csuper-gtk.glade:208
+#: UI/csuper-gtk.glade:231
 msgid "Close"
 msgstr "Fermer"
 
-#: UI/csuper-gtk.glade:212
+#: UI/csuper-gtk.glade:235 UI/csuper-gtk.glade:1579
 msgid "Close the game preferences window"
 msgstr "Fermer la fenêtre des configurations de jeu"
 
-#: UI/csuper-gtk.glade:235
+#: UI/csuper-gtk.glade:258
 msgid ""
 "<span font_weight=\"bold\" size=\"large\">List of all your game "
 "configurations</span>"
@@ -189,13 +189,13 @@ msgstr ""
 "<span font_weight=\"bold\" size=\"large\">Liste de vos configurations de "
 "jeu</span>"
 
-#: UI/csuper-gtk.glade:249
+#: UI/csuper-gtk.glade:272
 msgid "<span size=\"large\">You have no game configuration selected.</span>"
 msgstr ""
 "<span size=\"large\">Vous n'avez pas de configuration de jeu sélectionnée.</"
 "span>"
 
-#: UI/csuper-gtk.glade:266
+#: UI/csuper-gtk.glade:289
 msgid ""
 "<span font_weight=\"bold\" size=\"large\">The selected game configurations</"
 "span>"
@@ -203,50 +203,50 @@ msgstr ""
 "<span font_weight=\"bold\" size=\"large\">La configuration de jeu "
 "sélectionnée</span>"
 
-#: UI/csuper-gtk.glade:299
+#: UI/csuper-gtk.glade:322
 msgid "Display the podium"
 msgstr "Afficher le podium"
 
-#: UI/csuper-gtk.glade:300
+#: UI/csuper-gtk.glade:323
 msgid "Display podium"
 msgstr "Afficher podium"
 
-#: UI/csuper-gtk.glade:309
+#: UI/csuper-gtk.glade:332
 msgid "Display the chart of the total points"
 msgstr "Afficher le graphique des points totaux"
 
-#: UI/csuper-gtk.glade:310
+#: UI/csuper-gtk.glade:333
 msgid "Display the total points chart"
 msgstr "Afficher le graphique des points totaux"
 
-#: UI/csuper-gtk.glade:319
+#: UI/csuper-gtk.glade:342
 msgid "Display the chart of the points"
 msgstr "Afficher le graphique des points"
 
-#: UI/csuper-gtk.glade:320
+#: UI/csuper-gtk.glade:343
 msgid "Display the points chart"
 msgstr "Afficher le graphique des points"
 
-#: UI/csuper-gtk.glade:329
+#: UI/csuper-gtk.glade:352
 msgid "Display the statistics"
 msgstr "Afficher les statistiques"
 
-#: UI/csuper-gtk.glade:330
+#: UI/csuper-gtk.glade:353
 msgid "Display statistics"
 msgstr "Afficher statistiques"
 
-#: UI/csuper-gtk.glade:345
+#: UI/csuper-gtk.glade:368
 msgid ""
 "Display the points differences between two consecutive player in the ranking"
 msgstr ""
 "Afficher la différence de points entre deux joueurs consécutifs dans le "
 "classement"
 
-#: UI/csuper-gtk.glade:346
+#: UI/csuper-gtk.glade:369
 msgid "Display the difference between two player consecutive"
 msgstr "Afficher la différence entre deux joueurs consécutifs"
 
-#: UI/csuper-gtk.glade:355
+#: UI/csuper-gtk.glade:378
 msgid ""
 "Display the points differences between a player and the first one in the "
 "ranking"
@@ -254,11 +254,11 @@ msgstr ""
 "Afficher la différence de points entre un joueur et le premier dans le "
 "classement"
 
-#: UI/csuper-gtk.glade:356
+#: UI/csuper-gtk.glade:379
 msgid "Display the difference with the first"
 msgstr "Afficher la différence avec le premier"
 
-#: UI/csuper-gtk.glade:365
+#: UI/csuper-gtk.glade:388
 msgid ""
 "Display the points differences between a player and the last one in the "
 "ranking"
@@ -266,177 +266,343 @@ msgstr ""
 "Afficher la différence de points entre un joueur et le dernier dans le "
 "classement"
 
-#: UI/csuper-gtk.glade:366
+#: UI/csuper-gtk.glade:389
 msgid "Display the difference with the last"
 msgstr "Afficher la différence avec le dernier"
 
-#: UI/csuper-gtk.glade:381
+#: UI/csuper-gtk.glade:404
 msgid "Display the total points in each turn in the points grid"
 msgstr "Afficher les points totaux à chaque tour dans la grille de points"
 
-#: UI/csuper-gtk.glade:382
+#: UI/csuper-gtk.glade:405
 msgid "Display the total points in each turn"
 msgstr "Afficher les points totaux à chaque tour"
 
-#: UI/csuper-gtk.glade:391
+#: UI/csuper-gtk.glade:414
 msgid "Display the ranking in each turn in the points grid"
 msgstr "Afficher le classement à chaque tour dans la grille de points"
 
-#: UI/csuper-gtk.glade:392
+#: UI/csuper-gtk.glade:415
 msgid "Display the ranking in each turn"
 msgstr "Afficher le classement à chaque tour"
 
-#: UI/csuper-gtk.glade:401
+#: UI/csuper-gtk.glade:424
 msgid "Display the button which permit to edit and suppress a turn"
 msgstr "Afficher les boutons permettant d'éditer et de supprimer un tour"
 
-#: UI/csuper-gtk.glade:402
+#: UI/csuper-gtk.glade:425
 msgid "Display the edit and suppr button"
 msgstr "Afficher les boutons éditer et supprimer"
 
-#: UI/csuper-gtk.glade:417
+#: UI/csuper-gtk.glade:440
 msgid "Display the ranking in the left side of the main window"
 msgstr "Afficher le classement sur la gauche de la fenêtre principal"
 
-#: UI/csuper-gtk.glade:418
+#: UI/csuper-gtk.glade:441
 msgid "Display the ranking"
 msgstr "Afficher le classement"
 
-#: UI/csuper-gtk.glade:427
+#: UI/csuper-gtk.glade:450
 msgid "Display the calculator in the left side of the main window"
 msgstr "Afficher la calculatrice sur la gauche de la fenêtre principal"
 
-#: UI/csuper-gtk.glade:428
+#: UI/csuper-gtk.glade:451
 msgid "Display the calculator"
 msgstr "Afficher la calculatrice "
 
-#: UI/csuper-gtk.glade:437
+#: UI/csuper-gtk.glade:460
 msgid "Display the game infonrmations in the left side of the main window"
 msgstr "Afficher les informations de jeu sur la gauche de la fenêtre principal"
 
-#: UI/csuper-gtk.glade:438
+#: UI/csuper-gtk.glade:461
 msgid "Display the game infonrmations"
 msgstr "Afficher les informations de jeu"
 
-#: UI/csuper-gtk.glade:451
+#: UI/csuper-gtk.glade:474
 msgid "Undo the last \"End of turn\""
 msgstr "Annuler le dernier \"Fin du tour\""
 
-#: UI/csuper-gtk.glade:452
+#: UI/csuper-gtk.glade:475
 msgid "Undo"
 msgstr "Annuler"
 
-#: UI/csuper-gtk.glade:461
+#: UI/csuper-gtk.glade:484
 msgid "Redo the last \"End of turn\""
 msgstr "Rétablir le dernier \"Fin du tour\""
 
-#: UI/csuper-gtk.glade:462
+#: UI/csuper-gtk.glade:485
 msgid "Redo"
 msgstr "Rétablir"
 
-#: UI/csuper-gtk.glade:477
+#: UI/csuper-gtk.glade:500
 msgid "Cut the current text"
 msgstr "Couper le texte sélectionné"
 
-#: UI/csuper-gtk.glade:478
+#: UI/csuper-gtk.glade:501
 msgid "Cut"
 msgstr "Couper"
 
-#: UI/csuper-gtk.glade:487
+#: UI/csuper-gtk.glade:510
 msgid "Copy the current text"
 msgstr "Copier le texte sélectionné"
 
-#: UI/csuper-gtk.glade:488
+#: UI/csuper-gtk.glade:511
 msgid "Copy"
 msgstr "Copier"
 
-#: UI/csuper-gtk.glade:497 UI/csuper-gtk.glade:498
+#: UI/csuper-gtk.glade:520 UI/csuper-gtk.glade:521
 msgid "Paste"
 msgstr "Coller"
 
-#: UI/csuper-gtk.glade:507
+#: UI/csuper-gtk.glade:530
 msgid "Delete the current text"
 msgstr "Supprimer le texte sélectionné"
 
-#: UI/csuper-gtk.glade:521
+#: UI/csuper-gtk.glade:544
 msgid "Save as a CSU file"
 msgstr "Enregistrer sous un fichier CSU"
 
-#: UI/csuper-gtk.glade:522
+#: UI/csuper-gtk.glade:545
 msgid "Save as"
 msgstr "Enregistrer sous"
 
-#: UI/csuper-gtk.glade:531
+#: UI/csuper-gtk.glade:554
 msgid "Export the current game"
 msgstr "Exporter le fichier CSU courant"
 
-#: UI/csuper-gtk.glade:547
+#: UI/csuper-gtk.glade:570
 msgid "Properties of the file"
 msgstr "Propriétés du fichier"
 
-#: UI/csuper-gtk.glade:563
+#: UI/csuper-gtk.glade:586
 msgid "Delete the current csu file"
 msgstr "Supprimer le fichier CSU courant"
 
-#: UI/csuper-gtk.glade:590
+#: UI/csuper-gtk.glade:613
 msgid "New game configuration"
 msgstr "Nouvelle configuration de jeu"
 
-#: UI/csuper-gtk.glade:611
+#: UI/csuper-gtk.glade:635
 msgid "Cancel and go back to the game configuration preferences"
 msgstr "Annuler et revenir sur les préférences de configuration de jeu"
 
-#: UI/csuper-gtk.glade:626
+#: UI/csuper-gtk.glade:650
 msgid "Validate the new game configuration"
 msgstr "Valider la nouvelle configuration de jeu"
 
-#: UI/csuper-gtk.glade:671
+#: UI/csuper-gtk.glade:695
 msgid "Use a maximum or minimum score or neither"
 msgstr "Utilise un score maximum, minimum ou aucun des deux"
 
-#: UI/csuper-gtk.glade:684
+#: UI/csuper-gtk.glade:708
 msgid "Initial score"
 msgstr "Score initial"
 
-#: UI/csuper-gtk.glade:697
+#: UI/csuper-gtk.glade:721
 msgid "Number of decimals displayed"
 msgstr "Nombre de chiffres après la virgule"
 
-#: UI/csuper-gtk.glade:710
+#: UI/csuper-gtk.glade:734
 msgid "The winner is the player with the highest score"
 msgstr "Le premier est le joueur qui a le plus de points"
 
-#: UI/csuper-gtk.glade:723
+#: UI/csuper-gtk.glade:747
 msgid "The points will be attributed in turn-based"
 msgstr "Les points seront attribués en tour par tour"
 
-#: UI/csuper-gtk.glade:736
+#: UI/csuper-gtk.glade:760
 msgid "Use of a distributor"
 msgstr "Utilise un distributeur"
 
-#: UI/csuper-gtk.glade:749
+#: UI/csuper-gtk.glade:773
 msgid "Maximal or minimal score which a player can reach in the game"
 msgstr "Score maximum ou minimum qu'un joueur peut atteindre dans une partie"
 
-#: UI/csuper-gtk.glade:764
+#: UI/csuper-gtk.glade:788
 msgid "Type here the name of the game configuration"
 msgstr "Écrire ici le nom de la configuration de jeu"
 
-#: UI/csuper-gtk.glade:817
+#: UI/csuper-gtk.glade:841
 msgid "Maximum"
 msgstr "Maximum"
 
-#: UI/csuper-gtk.glade:818
+#: UI/csuper-gtk.glade:842
 msgid "Minimum"
 msgstr "Minimum"
 
-#: UI/csuper-gtk.glade:819
+#: UI/csuper-gtk.glade:843
 msgid "Neither"
 msgstr "Aucun des deux"
 
-#: UI/csuper-gtk.glade:831 UI/csuper-gtk.glade:848 UI/csuper-gtk.glade:865
+#: UI/csuper-gtk.glade:855 UI/csuper-gtk.glade:872 UI/csuper-gtk.glade:889
 msgid "0,000"
 msgstr "0.000"
+
+#: UI/csuper-gtk.glade:990
+msgid "<span font_weight=\"bold\" size=\"large\">PDF exportation</span>"
+msgstr "<span font_weight=\"bold\" size=\"large\">Exportation en PDF</span>"
+
+#: UI/csuper-gtk.glade:1003
+msgid ""
+"The UTF-8 character set permit to display all character but can have problem "
+"with some fonts."
+msgstr ""
+"Le codage de caractères UTF-8 permet d'afficher tout les caractères "
+"possibles mais peut avoir des problèmes avec certaines polices."
+
+#: UI/csuper-gtk.glade:1005
+msgid "Use the UTF-8 character set"
+msgstr "Utiliser le codage de caractère UTF-8"
+
+#: UI/csuper-gtk.glade:1031
+msgid "Size of the pdf document"
+msgstr "Format du document PDF"
+
+#: UI/csuper-gtk.glade:1046
+msgid "A5"
+msgstr "A5"
+
+#: UI/csuper-gtk.glade:1047
+msgid "A4"
+msgstr "A4"
+
+#: UI/csuper-gtk.glade:1048
+msgid "A3"
+msgstr "A3"
+
+#: UI/csuper-gtk.glade:1061
+msgid "Margin of the pdf document"
+msgstr "Marge du document PDF"
+
+#: UI/csuper-gtk.glade:1075 UI/csuper-gtk.glade:1109 UI/csuper-gtk.glade:1236
+#: UI/csuper-gtk.glade:1255
+msgid "0"
+msgstr "0"
+
+#: UI/csuper-gtk.glade:1095
+msgid "Font size of the pdf document"
+msgstr "Taille de la police du document PDF"
+
+#: UI/csuper-gtk.glade:1129
+msgid "Show the total points in each turn"
+msgstr "Afficher les points totaux à chaque tour"
+
+#: UI/csuper-gtk.glade:1156
+msgid "Show the ranking in each turn"
+msgstr "Afficher le classement à chaque tour"
+
+#: UI/csuper-gtk.glade:1183
+msgid "<span font_weight=\"bold\" size=\"large\">Chart exportation</span>"
+msgstr ""
+"<span font_weight=\"bold\" size=\"large\">Exportation en graphique</span>"
+
+#: UI/csuper-gtk.glade:1197
+msgid "Width of the chart"
+msgstr "Largeur du graphique"
+
+#: UI/csuper-gtk.glade:1209
+msgid "Height of the chart"
+msgstr "Hauteur du graphique"
+
+#: UI/csuper-gtk.glade:1220
+msgid ""
+"Show the total points in the chart. If it is turn off, it will show the "
+"points."
+msgstr ""
+"Afficher les points totaux sur le graphique. Si le bouton est désactivé, "
+"affiche les points sur le graphique."
+
+#: UI/csuper-gtk.glade:1222
+msgid "Show the total points"
+msgstr "Afficher les points totaux"
+
+#: UI/csuper-gtk.glade:1284
+msgid ""
+"If it's not set, the size of the chart on the pdf will be those of the chart "
+"exportation."
+msgstr ""
+"Si pas activé, la taille du PDF contenant le graphique sera celle de "
+"l'exportation en graphique"
+
+#: UI/csuper-gtk.glade:1288
+msgid "Use the pdf size for the chart"
+msgstr "Utilise la taille des PDF pour le graphique"
+
+#: UI/csuper-gtk.glade:1313
+msgid "Direction of the pdf document"
+msgstr "Orientation du document PDF"
+
+#: UI/csuper-gtk.glade:1328
+msgid "Portrait"
+msgstr "Portrait"
+
+#: UI/csuper-gtk.glade:1329
+msgid "Landscape"
+msgstr "Paysage"
+
+#: UI/csuper-gtk.glade:1354
+msgid ""
+"Please type the font name which will be use in the PDF\n"
+"Be careful, if the font does'nt exist the PDF file will be unreadable."
+msgstr ""
+"Écrivez ici le nom de la police à utiliser.\n"
+"Attention, si la police ne correspond à rien d'existant, le fichier PDF sera "
+"illisible."
+
+#: UI/csuper-gtk.glade:1357
+msgid "Font name"
+msgstr "Nom de la police"
+
+#: UI/csuper-gtk.glade:1369
+msgid ""
+"If the font is embedded in the PDF file, any user will can read the file "
+"even if he has not the font installed. But the file will be bigger."
+msgstr ""
+"Si la police est incorporé au fichier PDF, n'importe quel utilisateur pourra "
+"lire le fichier même s'il n'a pas la police d'installée. Par contre le "
+"fichier sera plus volumineux."
+
+#: UI/csuper-gtk.glade:1371
+msgid "Embedded font"
+msgstr "Police embarquée"
+
+#: UI/csuper-gtk.glade:1405
+msgid "Exportation"
+msgstr "Exportation"
+
+#: UI/csuper-gtk.glade:1445
+msgid "<span font_weight=\"bold\" size=\"large\">Title bar</span>"
+msgstr "<span font_weight=\"bold\" size=\"large\">Barre de titre</span>"
+
+#: UI/csuper-gtk.glade:1458
+msgid ""
+"Disable the main window decoration will be useful when using GNOME desktop "
+"manager."
+msgstr ""
+"Désactiver les décorations de la fenêtre principale peut être utile si vous "
+"utiliser GNOME"
+
+#: UI/csuper-gtk.glade:1460
+msgid "Disable the main window decoration "
+msgstr "Désactiver les décorations de la fenêtre principale"
+
+#: UI/csuper-gtk.glade:1472
+msgid ""
+"Add the title in the title bar will be useful when using GNOME desktop "
+"manager."
+msgstr ""
+"Ajouter le titre dans la barre de titre peut être utile si vous utiliser "
+"GNOME"
+
+#: UI/csuper-gtk.glade:1474
+msgid "Add title"
+msgstr "Ajouter le titre"
+
+#: UI/csuper-gtk.glade:1549 UI/csuper-gtk.glade:1564
+msgid "Apply the new preferences for the new toolbar button displayed"
+msgstr ""
+"Appliquer les nouvelles préférences sur l'affichage des boutons de la barre "
+"d'outils"
 
 #~ msgid "New"
 #~ msgstr "Nouveau"

@@ -23,7 +23,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * aint with this program; if not, write to the Free Software
+ * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301, USA.
  *
@@ -584,7 +584,7 @@ void Menu::changePdfPreferences() const
         pref_->exportPdf().setCharset(ExportPdfPreferences::WINDOWS1252);
 
 
-    // Font
+    // Font name
     cout << ustring(_("Please type the font name which will be use in the PDF\n"
                       "Be careful, if the font does'nt exist the PDF file will be unreadable."
                       "\nYour choice: ")) << endl;
