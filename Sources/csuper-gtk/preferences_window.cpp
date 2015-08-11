@@ -111,6 +111,7 @@ void PreferencesWindow::apply()
     app()->pref()->exportPdf() = pdf;
     app()->pref()->chartExportation() = chart;
     app()->pref()->mainWindowTitleBar() = title_bar;
+    app()->pref()->writeToFile();
 
     apply_button_->set_sensitive(false);
     ok_button_->set_sensitive(false);
@@ -125,6 +126,7 @@ void PreferencesWindow::validate()
     app()->pref()->exportPdf() = pdf;
     app()->pref()->chartExportation() = chart;
     app()->pref()->mainWindowTitleBar() = title_bar;
+    app()->pref()->writeToFile();
 
     stop();
 }

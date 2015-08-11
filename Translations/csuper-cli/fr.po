@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 15:04+0200\n"
+"POT-Creation-Date: 2015-08-11 17:06+0200\n"
 "PO-Revision-Date: 2015-08-11 15:21+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
@@ -47,53 +47,53 @@ msgstr "Le fichier d'entrée et de sortie"
 msgid "The instruction"
 msgstr "L'instruction"
 
-#: Sources/csuper-cli/command_line_option.cpp:51
+#: Sources/csuper-cli/command_line_option.cpp:48
 msgid "Open the input file"
 msgstr "Ouvre le fichier d'entrée"
 
-#: Sources/csuper-cli/command_line_option.cpp:56
+#: Sources/csuper-cli/command_line_option.cpp:53
 msgid "Read the input file"
 msgstr "Lis le fichier d'entrée"
 
-#: Sources/csuper-cli/command_line_option.cpp:61
+#: Sources/csuper-cli/command_line_option.cpp:58
 msgid "Export the input file into into a PDF output file"
 msgstr "Exporte le fichier d'entrée dans le fichier PDF de sortie"
 
-#: Sources/csuper-cli/command_line_option.cpp:66
+#: Sources/csuper-cli/command_line_option.cpp:63
 msgid "Export the input file into into a CSV output file"
 msgstr "Exporte le fichier d'entrée dans le fichier CSV de sortie"
 
-#: Sources/csuper-cli/command_line_option.cpp:71
+#: Sources/csuper-cli/command_line_option.cpp:68
 msgid "Export the input file into into a m (Octave/Matlab) output file"
 msgstr ""
 "Exporte le fichier d'entrée dans le fichier m (Octave/Matlab) de sortie"
 
-#: Sources/csuper-cli/command_line_option.cpp:76
+#: Sources/csuper-cli/command_line_option.cpp:73
 msgid "Export the input file into into Gnuplot output files"
 msgstr "Exporte le fichier d'entrée dans le fichier Gnuplot de sortie"
 
-#: Sources/csuper-cli/command_line_option.cpp:81
+#: Sources/csuper-cli/command_line_option.cpp:78
 msgid "Export the input file into into a PNG output file"
 msgstr "Exporte le fichier d'entrée dans le fichier PNG de sortie"
 
-#: Sources/csuper-cli/command_line_option.cpp:86
+#: Sources/csuper-cli/command_line_option.cpp:83
 msgid "Export the input file into into a SVG output file"
 msgstr "Exporte le fichier d'entrée dans le fichier SVG de sortie"
 
-#: Sources/csuper-cli/command_line_option.cpp:103
+#: Sources/csuper-cli/command_line_option.cpp:100
 msgid "The input filename"
 msgstr "Le fichier d'entrée"
 
-#: Sources/csuper-cli/command_line_option.cpp:104
-#: Sources/csuper-cli/command_line_option.cpp:110
+#: Sources/csuper-cli/command_line_option.cpp:101
+#: Sources/csuper-cli/command_line_option.cpp:107
 msgid "filename"
 msgstr "nom_de_fichier"
 
-#: Sources/csuper-cli/command_line_option.cpp:109
+#: Sources/csuper-cli/command_line_option.cpp:106
 msgid "The output filename"
 msgstr "Le fichier de sortie"
 
-#: Sources/csuper-cli/command_line_option.cpp:118
+#: Sources/csuper-cli/command_line_option.cpp:115
 msgid ""
 "If an instruction is set, a input filename is needed.\n"
 "If a \"to\" instruction is set, an output filename is needed.\n"
@@ -103,59 +103,59 @@ msgstr ""
 "Si une instruction d'export, un fichier de sortie est requis.\n"
 "Vous ne pouvez utiliser qu'une seule instruction à la fois."
 
-#: Sources/csuper-cli/command_line_option.cpp:136
-#: Sources/csuper-cli/command_line_option.cpp:205
+#: Sources/csuper-cli/command_line_option.cpp:133
+#: Sources/csuper-cli/command_line_option.cpp:202
 msgid "Use -h or --help for help."
 msgstr "Utiliser -h ou --help pour avoir de l'aide."
 
-#: Sources/csuper-cli/command_line_option.cpp:143
+#: Sources/csuper-cli/command_line_option.cpp:140
 msgid "You need an instruction.\n"
 msgstr "Vous devez utiliser une instruction.\n"
 
-#: Sources/csuper-cli/command_line_option.cpp:158
+#: Sources/csuper-cli/command_line_option.cpp:155
 msgid "You have to use only one instruction.\n"
 msgstr "Vous devez utiliser une seule instruction.\n"
 
-#: Sources/csuper-cli/command_line_option.cpp:163
+#: Sources/csuper-cli/command_line_option.cpp:160
 msgid "You need an input file to open or read a file.\n"
 msgstr ""
 "Vous devez mettre un fichier d'entrée lors de la lecture ou l'ouverture.\n"
 
-#: Sources/csuper-cli/command_line_option.cpp:173
+#: Sources/csuper-cli/command_line_option.cpp:170
 msgid "You don't need an output file to open or read a file.\n"
 msgstr ""
 "Vous ne devez pas mettre un fichier de sortie lors de la lecture ou "
 "l'ouverture.\n"
 
-#: Sources/csuper-cli/command_line_option.cpp:178
+#: Sources/csuper-cli/command_line_option.cpp:175
 msgid "You need an input file to export a file.\n"
 msgstr "Vous devez mettre un fichier d'entrée lors de l'exportation.\n"
 
-#: Sources/csuper-cli/command_line_option.cpp:180
+#: Sources/csuper-cli/command_line_option.cpp:177
 msgid "You need an output file to export a file.\n"
 msgstr "Vous devez mettre un fichier de sortie lors de l'exportation.\n"
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper-cli/game_cli.cpp:111
+#: Sources/csuper-cli/game_cli.cpp:110
 msgid "Names   | "
 msgstr "Nom     | "
 
 #. TRANSLATORS:The number of characters before the | and without the %1 must be six
-#: Sources/csuper-cli/game_cli.cpp:146
+#: Sources/csuper-cli/game_cli.cpp:144
 msgid "Turn %1 |"
 msgstr "Tour %1 |"
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper-cli/game_cli.cpp:178
+#: Sources/csuper-cli/game_cli.cpp:175
 msgid "Total   |"
 msgstr "Total   |"
 
 #. TRANSLATORS:The number of characters before the | must be eight
-#: Sources/csuper-cli/game_cli.cpp:203
+#: Sources/csuper-cli/game_cli.cpp:199
 msgid "Ranking |"
 msgstr "Classmt |"
 
-#: Sources/csuper-cli/game_cli.cpp:225
+#: Sources/csuper-cli/game_cli.cpp:221
 msgid "The game is over.\n"
 msgstr "Le jeu est fini.\n"
 

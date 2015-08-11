@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 15:07+0200\n"
+"POT-Creation-Date: 2015-08-11 17:06+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -85,7 +85,7 @@ msgid "Import file"
 msgstr ""
 
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:51
-#: UI/csuper-gtk.glade:646
+#: UI/csuper-gtk.glade:646 UI/csuper-gtk.glade:1560
 msgid "Validate"
 msgstr ""
 
@@ -169,7 +169,7 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: UI/csuper-gtk.glade:231
+#: UI/csuper-gtk.glade:231 UI/csuper-gtk.glade:1575
 msgid "Close"
 msgstr ""
 
@@ -563,6 +563,10 @@ msgstr ""
 
 #: UI/csuper-gtk.glade:1474
 msgid "Add title"
+msgstr ""
+
+#: UI/csuper-gtk.glade:1545
+msgid "Apply"
 msgstr ""
 
 #: UI/csuper-gtk.glade:1549 UI/csuper-gtk.glade:1564

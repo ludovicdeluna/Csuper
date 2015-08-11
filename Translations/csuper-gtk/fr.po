@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Csuper -  4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 15:07+0200\n"
-"PO-Revision-Date: 2015-08-11 15:21+0200\n"
+"POT-Creation-Date: 2015-08-11 17:06+0200\n"
+"PO-Revision-Date: 2015-08-11 17:07+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -87,7 +87,7 @@ msgid "Import file"
 msgstr "Importer un fichier"
 
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:51
-#: UI/csuper-gtk.glade:646
+#: UI/csuper-gtk.glade:646 UI/csuper-gtk.glade:1560
 msgid "Validate"
 msgstr "Valider"
 
@@ -173,7 +173,7 @@ msgstr "Importer"
 msgid "Export"
 msgstr "Exporter"
 
-#: UI/csuper-gtk.glade:231
+#: UI/csuper-gtk.glade:231 UI/csuper-gtk.glade:1575
 msgid "Close"
 msgstr "Fermer"
 
@@ -597,6 +597,10 @@ msgstr ""
 #: UI/csuper-gtk.glade:1474
 msgid "Add title"
 msgstr "Ajouter le titre"
+
+#: UI/csuper-gtk.glade:1545
+msgid "Apply"
+msgstr "Appliquer"
 
 #: UI/csuper-gtk.glade:1549 UI/csuper-gtk.glade:1564
 msgid "Apply the new preferences for the new toolbar button displayed"

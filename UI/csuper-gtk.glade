@@ -1542,7 +1542,7 @@ Be careful, if the font does'nt exist the PDF file will be unreadable.</property
             <property name="layout_style">spread</property>
             <child>
               <object class="GtkButton" id="preferences_apply_button">
-                <property name="label">Apply</property>
+                <property name="label" translatable="yes">Apply</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -1557,7 +1557,7 @@ Be careful, if the font does'nt exist the PDF file will be unreadable.</property
             </child>
             <child>
               <object class="GtkButton" id="preferences_ok_button">
-                <property name="label">Validate</property>
+                <property name="label" translatable="yes">Validate</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -1572,7 +1572,7 @@ Be careful, if the font does'nt exist the PDF file will be unreadable.</property
             </child>
             <child>
               <object class="GtkButton" id="preferences_close_button">
-                <property name="label">Close</property>
+                <property name="label" translatable="yes">Close</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
