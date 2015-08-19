@@ -49,6 +49,7 @@ protected:
     Gtk::MenuButton* menu_display_button_;  /*!< The display MenuButton */
     Gtk::MenuButton* menu_edit_button_;     /*!< The edit MenuButton */
     Gtk::MenuButton* menu_file_button_;     /*!< The file MenuButton */
+    Gtk::Button* new_button_;               /*!< The new Button */
 
     // Use only if the user use window manager decoration
     Gtk::MenuButton* csuper_menu_button_;   /*!< The csuper MenuButton */

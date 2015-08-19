@@ -97,6 +97,16 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
     }
 
 
+    // New button
+    new_button_ = manage(new Button(_("New")));
+    new_button_->set_image_from_icon_name("document-new",ICON_SIZE_SMALL_TOOLBAR);
+    new_button_->set_always_show_image(true);
+    new_button_->add_accelerator("clicked",get_accel_group(),GDK_KEY_N,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
+    new_button_->show_all();
+    new_button_->signal_clicked().connect(mem_fun(*(app()->newFileAssistant()),&NewFileAssistant::launch));
+    header_bar_->pack_start(*new_button_);
+
+
 
     // Display menu
     menu_display_button_ = manage(new MenuButton());

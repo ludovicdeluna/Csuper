@@ -164,14 +164,12 @@ vector<unsigned int> ImportExportGameConfigurationDialog::launch(const ListGameC
 //
 void ImportExportGameConfigurationDialog::selectAll()
 {
-    vector<CheckButton*>::iterator it;
-    for (it = check_buttons_.begin() ; it != check_buttons_.end() ; it++)
+    for (auto it = check_buttons_.begin() ; it != check_buttons_.end() ; it++)
         (*it)->set_active(true);
 }
 
 void ImportExportGameConfigurationDialog::deselectAll()
 {
-    vector<CheckButton*>::iterator it;
-    for (it = check_buttons_.begin() ; it != check_buttons_.end() ; it++)
+    for (auto it = check_buttons_.begin() ; it != check_buttons_.end() ; it++)
         (*it)->set_active(false);
 }

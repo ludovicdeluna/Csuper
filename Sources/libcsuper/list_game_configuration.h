@@ -135,6 +135,13 @@ namespace csuper
         void add(GameConfiguration* game_config);
 
         /*!
+         *  \brief Add a game configuration to the object
+         *  \param game_config the game configuration
+         *  \exception csuper::AlreadyExist if the game configuration already exist in the object
+         */
+        void add(const GameConfiguration& game_config);
+
+        /*!
          *  \brief Add all game configuration that contain another list of game configuration to the object
          *  \param list_game_config the game configuration
          */

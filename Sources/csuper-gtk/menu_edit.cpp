@@ -42,9 +42,79 @@ MenuEdit::MenuEdit(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  
 {
     refGlade->get_widget("menu_undo", undo_);
     refGlade->get_widget("menu_redo", redo_);
+
     refGlade->get_widget("menuitem_separator_4", sep_);
+
     refGlade->get_widget("menu_copy", copy_);
     refGlade->get_widget("menu_cut", cut_);
     refGlade->get_widget("menu_paste", paste_);
     refGlade->get_widget("menu_delete", delete_);
+
+    copy_->signal_activate().connect(mem_fun(*this,&MenuEdit::copy));
+    cut_->signal_activate().connect(mem_fun(*this,&MenuEdit::cut));
+    paste_->signal_activate().connect(mem_fun(*this,&MenuEdit::paste));
+    delete_->signal_activate().connect(mem_fun(*this,&MenuEdit::deleteText));
+}
+
+
+//
+// Function
+//
+void MenuEdit::copy()
+{
+    Widget* focus_widget = app()->get_active_window()->get_focus();
+    if (focus_widget == nullptr)
+        return;
+
+    Editable* focus_editable = dynamic_cast<Editable*>(focus_widget);
+    if (focus_editable == nullptr)
+        return;
+
+    focus_editable->copy_clipboard();
+}
+
+
+void MenuEdit::cut()
+{
+    Widget* focus_widget = app()->get_active_window()->get_focus();
+    if (focus_widget == nullptr)
+        return;
+
+    Editable* focus_editable = dynamic_cast<Editable*>(focus_widget);
+    if (focus_editable == nullptr)
+        return;
+
+    focus_editable->cut_clipboard();
+}
+
+
+
+
+void MenuEdit::paste()
+{
+    Widget* focus_widget = app()->get_active_window()->get_focus();
+    if (focus_widget == nullptr)
+        return;
+
+    Editable* focus_editable = dynamic_cast<Editable*>(focus_widget);
+    if (focus_editable == nullptr)
+        return;
+
+    focus_editable->paste_clipboard();
+}
+
+
+
+
+void MenuEdit::deleteText()
+{
+    Widget* focus_widget = app()->get_active_window()->get_focus();
+    if (focus_widget == nullptr)
+        return;
+
+    Editable* focus_editable = dynamic_cast<Editable*>(focus_widget);
+    if (focus_editable == nullptr)
+        return;
+
+    focus_editable->delete_selection();
 }

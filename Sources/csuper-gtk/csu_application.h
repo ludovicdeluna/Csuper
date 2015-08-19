@@ -44,6 +44,7 @@
 #include "menu_edit.h"
 #include "menu_display.h"
 #include "preferences_window.h"
+#include "new_file_assistant.h"
 
 #include "../libcsuper/libcsuper.h"
 
@@ -59,6 +60,9 @@ private:
     csuper::Preferences* pref_;                         /*!< The preferences */
     csuper::ListGameConfiguration* list_game_config_;   /*!< The list of game configuration */
 
+    csuper::Game* game_ = nullptr;  /*!< The game */
+    Glib::ustring filename_ = "";   /*!< The filename */
+
     MainWindow* main_window_;                                               /*!< The main window */
     About* about_;                                                          /*!< The about dialog */
     GameConfigurationWindow* game_config_window_;                           /*!< The game configuration window */
@@ -70,7 +74,7 @@ private:
     PreferencesWindow* pref_window_;                                        /*!< The preferences window */
     ExportationPreferences* export_pref_window_;                            /*!< The exportation preferences scrolled window */
     DisplayPreferences* display_pref_window_;                               /*!< The display preferences scrolled window */
-
+    NewFileAssistant* new_file_assistant_;                                  /*!< The new file assistant */
 
 
     //
@@ -240,6 +244,51 @@ public:
      {
          return display_pref_window_;
      }
+
+    /*!
+     *  \brief return the NewFileAssistant
+     *  \return the NewFileAssistant
+     */
+     inline NewFileAssistant* newFileAssistant()
+     {
+         return new_file_assistant_;
+     }
+
+    /*!
+     *  \brief return the Game
+     *  \return the Game
+     */
+     inline csuper::Game* game()
+     {
+         return game_;
+     }
+
+    /*!
+     *  \brief return the filename
+     *  \return the filename
+     */
+     inline Glib::ustring filename()
+     {
+         return filename_;
+     }
+
+
+
+     //
+     // Setter
+     //
+     /*!
+     *  \brief Set a new Game
+     *  \param game the new Game
+     */
+     void setGame(csuper::Game* game);
+
+
+     /*!
+     *  \brief Set a new filename
+     *  \param filename the new filename
+     */
+     void setFilename(Glib::ustring& filename);
 
 };
 

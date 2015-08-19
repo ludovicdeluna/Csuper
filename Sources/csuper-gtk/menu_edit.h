@@ -51,6 +51,31 @@ protected:
     Gtk::MenuItem* paste_;          /*!< The paste button */
     Gtk::MenuItem* delete_;         /*!< The delete button */
 
+
+
+    //
+    // Function
+    //
+    /*!
+     *  \brief Copy the current text in the clipboard
+     */
+    void copy();
+
+    /*!
+     *  \brief Cut the current text in the clipboard
+     */
+    void cut();
+
+    /*!
+     *  \brief Paste the current text in the clipboard
+     */
+    void paste();
+
+    /*!
+     *  \brief Delete the current text in the clipboard
+     */
+    void deleteText();
+
 public:
     //
     // Constructor and Destructor

@@ -152,6 +152,16 @@ namespace csuper
         game_configuration_list_.push_back(game_config);
     }
 
+    void ListGameConfiguration::add(const GameConfiguration& game_config)
+    {
+        for (auto it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
+        {
+            if (game_config == **it)
+                throw AlreadyExist(game_config.name());
+        }
+        game_configuration_list_.push_back(new GameConfiguration(game_config));
+    }
+
     void ListGameConfiguration::add(const ListGameConfiguration& list_game_config)
     {
         for (auto it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)

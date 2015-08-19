@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 17:06+0200\n"
+"POT-Creation-Date: 2015-08-19 12:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -17,38 +17,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: Sources/csuper-gtk/csu_application.cpp:113
+#: Sources/csuper-gtk/csu_application.cpp:118
 #: Sources/csuper-gtk/main_window.cpp:72
 msgid "Preferences"
 msgstr ""
 
-#: Sources/csuper-gtk/csu_application.cpp:114
+#: Sources/csuper-gtk/csu_application.cpp:119
 #: Sources/csuper-gtk/main_window.cpp:71 UI/csuper-gtk.glade:133
 msgid "Game configuration"
 msgstr ""
 
-#: Sources/csuper-gtk/csu_application.cpp:115
+#: Sources/csuper-gtk/csu_application.cpp:120
 #: Sources/csuper-gtk/main_window.cpp:73
 msgid "About"
 msgstr ""
 
-#: Sources/csuper-gtk/csu_application.cpp:116
+#: Sources/csuper-gtk/csu_application.cpp:121
 #: Sources/csuper-gtk/main_window.cpp:74
 msgid "Quit"
 msgstr ""
 
 #: Sources/csuper-gtk/game_configuration_window.cpp:134
-#: Sources/csuper-gtk/main_window.cpp:111
+#: Sources/csuper-gtk/main_window.cpp:121
 msgid "Edit"
 msgstr ""
 
-#: Sources/csuper-gtk/game_configuration_window.cpp:135
-#: UI/csuper-gtk.glade:571
+#: Sources/csuper-gtk/game_configuration_window.cpp:135 UI/csuper-gtk.glade:571
 msgid "Properties"
 msgstr ""
 
-#: Sources/csuper-gtk/game_configuration_window.cpp:136
-#: UI/csuper-gtk.glade:531 UI/csuper-gtk.glade:587
+#: Sources/csuper-gtk/game_configuration_window.cpp:136 UI/csuper-gtk.glade:531
+#: UI/csuper-gtk.glade:587
 msgid "Delete"
 msgstr ""
 
@@ -76,7 +75,7 @@ msgstr ""
 #: Sources/csuper-gtk/game_configuration_window.cpp:232
 #: Sources/csuper-gtk/game_configuration_window.cpp:266
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:50
-#: UI/csuper-gtk.glade:631
+#: UI/csuper-gtk.glade:731
 msgid "Cancel"
 msgstr ""
 
@@ -85,7 +84,7 @@ msgid "Import file"
 msgstr ""
 
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:51
-#: UI/csuper-gtk.glade:646 UI/csuper-gtk.glade:1560
+#: UI/csuper-gtk.glade:746 UI/csuper-gtk.glade:1660
 msgid "Validate"
 msgstr ""
 
@@ -117,17 +116,78 @@ msgstr ""
 msgid "Error when initializing csuper."
 msgstr ""
 
-#: Sources/csuper-gtk/main_window.cpp:103 UI/csuper-gtk.glade:1521
+#: Sources/csuper-gtk/main_window.cpp:101
+msgid "New"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:113 UI/csuper-gtk.glade:1621
 msgid "Display"
 msgstr ""
 
-#: Sources/csuper-gtk/main_window.cpp:119
+#: Sources/csuper-gtk/main_window.cpp:129
 msgid "File"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:59
+msgid "New csu file assistant"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:73
+msgid "General information"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:83
+msgid "Player's names"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:91
+msgid "Distributor and validation"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:118
+msgid "Add a new game configuration"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:119
+msgid "Use an other game configuration"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:167
+#: Sources/csuper-gtk/new_file_assistant.cpp:171
+msgid "Name of the new CSU file"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:177
+#: Sources/csuper-gtk/new_file_assistant.cpp:181
+msgid "Folder where the new csu file will be saved"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:187
+#: Sources/csuper-gtk/new_file_assistant.cpp:191 UI/csuper-gtk.glade:647
+msgid "Your game configuration"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:215
+#: Sources/csuper-gtk/new_file_assistant.cpp:218
+#: Sources/csuper-gtk/new_file_assistant.cpp:232
+#: Sources/csuper-gtk/new_file_assistant.cpp:235
+#: Sources/csuper-gtk/new_file_assistant_page_2.cpp:70
+msgid "Name of the %1th player"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant.cpp:256
+#: Sources/csuper-gtk/new_file_assistant.cpp:262
+#: Sources/csuper-gtk/new_file_assistant_page_3.cpp:58
+msgid "Select the distributor"
+msgstr ""
+
+#: Sources/csuper-gtk/new_file_assistant_page_2.cpp:73
+msgid "Type here the name of the %1th player"
 msgstr ""
 
 #: Sources/csuper-gtk/new_game_configuration_dialog.cpp:153
 #: Sources/csuper-gtk/new_game_configuration_dialog.cpp:158
-#: UI/csuper-gtk.glade:682
+#: UI/csuper-gtk.glade:782
 msgid "Name of the game configuration"
 msgstr ""
 
@@ -169,11 +229,11 @@ msgstr ""
 msgid "Export"
 msgstr ""
 
-#: UI/csuper-gtk.glade:231 UI/csuper-gtk.glade:1575
+#: UI/csuper-gtk.glade:231 UI/csuper-gtk.glade:1675
 msgid "Close"
 msgstr ""
 
-#: UI/csuper-gtk.glade:235 UI/csuper-gtk.glade:1579
+#: UI/csuper-gtk.glade:235 UI/csuper-gtk.glade:1679
 msgid "Close the game preferences window"
 msgstr ""
 
@@ -362,213 +422,233 @@ msgstr ""
 msgid "Delete the current csu file"
 msgstr ""
 
-#: UI/csuper-gtk.glade:613
+#: UI/csuper-gtk.glade:609
+msgid "Folder where the new CSU file will be saved"
+msgstr ""
+
+#: UI/csuper-gtk.glade:620
+msgid "Number of players on the game"
+msgstr ""
+
+#: UI/csuper-gtk.glade:631
+msgid "1"
+msgstr ""
+
+#: UI/csuper-gtk.glade:670
+msgid "Name of the new csu file"
+msgstr ""
+
+#: UI/csuper-gtk.glade:682
+msgid "Type here the name of the new csu file"
+msgstr ""
+
+#: UI/csuper-gtk.glade:713
 msgid "New game configuration"
 msgstr ""
 
-#: UI/csuper-gtk.glade:635
+#: UI/csuper-gtk.glade:735
 msgid "Cancel and go back to the game configuration preferences"
 msgstr ""
 
-#: UI/csuper-gtk.glade:650
+#: UI/csuper-gtk.glade:750
 msgid "Validate the new game configuration"
 msgstr ""
 
-#: UI/csuper-gtk.glade:695
+#: UI/csuper-gtk.glade:795
 msgid "Use a maximum or minimum score or neither"
 msgstr ""
 
-#: UI/csuper-gtk.glade:708
+#: UI/csuper-gtk.glade:808
 msgid "Initial score"
 msgstr ""
 
-#: UI/csuper-gtk.glade:721
+#: UI/csuper-gtk.glade:821
 msgid "Number of decimals displayed"
 msgstr ""
 
-#: UI/csuper-gtk.glade:734
+#: UI/csuper-gtk.glade:834
 msgid "The winner is the player with the highest score"
 msgstr ""
 
-#: UI/csuper-gtk.glade:747
+#: UI/csuper-gtk.glade:847
 msgid "The points will be attributed in turn-based"
 msgstr ""
 
-#: UI/csuper-gtk.glade:760
+#: UI/csuper-gtk.glade:860
 msgid "Use of a distributor"
 msgstr ""
 
-#: UI/csuper-gtk.glade:773
+#: UI/csuper-gtk.glade:873
 msgid "Maximal or minimal score which a player can reach in the game"
 msgstr ""
 
-#: UI/csuper-gtk.glade:788
+#: UI/csuper-gtk.glade:888
 msgid "Type here the name of the game configuration"
 msgstr ""
 
-#: UI/csuper-gtk.glade:841
+#: UI/csuper-gtk.glade:941
 msgid "Maximum"
 msgstr ""
 
-#: UI/csuper-gtk.glade:842
+#: UI/csuper-gtk.glade:942
 msgid "Minimum"
 msgstr ""
 
-#: UI/csuper-gtk.glade:843
+#: UI/csuper-gtk.glade:943
 msgid "Neither"
 msgstr ""
 
-#: UI/csuper-gtk.glade:855 UI/csuper-gtk.glade:872 UI/csuper-gtk.glade:889
+#: UI/csuper-gtk.glade:955 UI/csuper-gtk.glade:972 UI/csuper-gtk.glade:989
 msgid "0,000"
 msgstr ""
 
-#: UI/csuper-gtk.glade:990
+#: UI/csuper-gtk.glade:1090
 msgid "<span font_weight=\"bold\" size=\"large\">PDF exportation</span>"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1003
+#: UI/csuper-gtk.glade:1103
 msgid ""
 "The UTF-8 character set permit to display all character but can have problem "
 "with some fonts."
 msgstr ""
 
-#: UI/csuper-gtk.glade:1005
+#: UI/csuper-gtk.glade:1105
 msgid "Use the UTF-8 character set"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1031
+#: UI/csuper-gtk.glade:1131
 msgid "Size of the pdf document"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1046
+#: UI/csuper-gtk.glade:1146
 msgid "A5"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1047
+#: UI/csuper-gtk.glade:1147
 msgid "A4"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1048
+#: UI/csuper-gtk.glade:1148
 msgid "A3"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1061
+#: UI/csuper-gtk.glade:1161
 msgid "Margin of the pdf document"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1075 UI/csuper-gtk.glade:1109 UI/csuper-gtk.glade:1236
-#: UI/csuper-gtk.glade:1255
+#: UI/csuper-gtk.glade:1175 UI/csuper-gtk.glade:1209 UI/csuper-gtk.glade:1336
+#: UI/csuper-gtk.glade:1355
 msgid "0"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1095
+#: UI/csuper-gtk.glade:1195
 msgid "Font size of the pdf document"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1129
+#: UI/csuper-gtk.glade:1229
 msgid "Show the total points in each turn"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1156
+#: UI/csuper-gtk.glade:1256
 msgid "Show the ranking in each turn"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1183
+#: UI/csuper-gtk.glade:1283
 msgid "<span font_weight=\"bold\" size=\"large\">Chart exportation</span>"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1197
+#: UI/csuper-gtk.glade:1297
 msgid "Width of the chart"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1209
+#: UI/csuper-gtk.glade:1309
 msgid "Height of the chart"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1220
+#: UI/csuper-gtk.glade:1320
 msgid ""
 "Show the total points in the chart. If it is turn off, it will show the "
 "points."
 msgstr ""
 
-#: UI/csuper-gtk.glade:1222
+#: UI/csuper-gtk.glade:1322
 msgid "Show the total points"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1284
+#: UI/csuper-gtk.glade:1384
 msgid ""
 "If it's not set, the size of the chart on the pdf will be those of the chart "
 "exportation."
 msgstr ""
 
-#: UI/csuper-gtk.glade:1288
+#: UI/csuper-gtk.glade:1388
 msgid "Use the pdf size for the chart"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1313
+#: UI/csuper-gtk.glade:1413
 msgid "Direction of the pdf document"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1328
+#: UI/csuper-gtk.glade:1428
 msgid "Portrait"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1329
+#: UI/csuper-gtk.glade:1429
 msgid "Landscape"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1354
+#: UI/csuper-gtk.glade:1454
 msgid ""
 "Please type the font name which will be use in the PDF\n"
 "Be careful, if the font does'nt exist the PDF file will be unreadable."
 msgstr ""
 
-#: UI/csuper-gtk.glade:1357
+#: UI/csuper-gtk.glade:1457
 msgid "Font name"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1369
+#: UI/csuper-gtk.glade:1469
 msgid ""
 "If the font is embedded in the PDF file, any user will can read the file "
 "even if he has not the font installed. But the file will be bigger."
 msgstr ""
 
-#: UI/csuper-gtk.glade:1371
+#: UI/csuper-gtk.glade:1471
 msgid "Embedded font"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1405
+#: UI/csuper-gtk.glade:1505
 msgid "Exportation"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1445
+#: UI/csuper-gtk.glade:1545
 msgid "<span font_weight=\"bold\" size=\"large\">Title bar</span>"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1458
+#: UI/csuper-gtk.glade:1558
 msgid ""
 "Disable the main window decoration will be useful when using GNOME desktop "
 "manager."
 msgstr ""
 
-#: UI/csuper-gtk.glade:1460
+#: UI/csuper-gtk.glade:1560
 msgid "Disable the main window decoration "
 msgstr ""
 
-#: UI/csuper-gtk.glade:1472
+#: UI/csuper-gtk.glade:1572
 msgid ""
 "Add the title in the title bar will be useful when using GNOME desktop "
 "manager."
 msgstr ""
 
-#: UI/csuper-gtk.glade:1474
+#: UI/csuper-gtk.glade:1574
 msgid "Add title"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1545
+#: UI/csuper-gtk.glade:1645
 msgid "Apply"
 msgstr ""
 
-#: UI/csuper-gtk.glade:1549 UI/csuper-gtk.glade:1564
+#: UI/csuper-gtk.glade:1649 UI/csuper-gtk.glade:1664
 msgid "Apply the new preferences for the new toolbar button displayed"
 msgstr ""

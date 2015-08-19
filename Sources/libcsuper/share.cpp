@@ -40,6 +40,7 @@
 #include <iomanip>
 #include <clocale>
 #include <cmath>
+#include <fstream>
 #include <sys/stat.h>
 #include <glib/gstdio.h>
 #include "config.h"
@@ -116,7 +117,7 @@ namespace csuper{
         return str == "yes";
     }
 
-    ustring intToUstring(const double i, const unsigned int width)
+    ustring intToUstring(const int i, const unsigned int width)
     {
         return ustring::format(setw(width),i);
     }
@@ -245,4 +246,67 @@ namespace csuper{
         }
     }
 
+    //
+    // File
+    //
+    bool checkFilename(const ustring& filename)
+    {
+        string full_filename = build_filename(get_tmp_dir(),locale_from_utf8(filename));
+
+        ofstream file;
+        file.exceptions(ofstream::failbit | ofstream::badbit );
+        try
+        {
+            file.open(full_filename,ofstream::out);
+            file.close();
+            remove(full_filename.c_str());
+            return true;
+        }
+        catch (ios_base::failure& e)
+        {
+            return false;
+        }
+    }
+
+
+    bool checkFolder(const ustring& folder)
+    {
+        string filename = build_filename(locale_from_utf8(folder),"test_csu_tmp");
+
+        ofstream file;
+        file.exceptions(ofstream::failbit | ofstream::badbit );
+        try
+        {
+            file.open(filename,ofstream::out);
+            file.close();
+            remove(filename.c_str());
+            return true;
+        }
+        catch (ios_base::failure& e)
+        {
+            return false;
+        }
+    }
+
+
+
+    //
+    // Extension
+    //
+    ustring addFileExtension(const ustring& filename, const ustring& file_extension)
+    {
+        if (filename.substr(filename.size() - file_extension.size()) == file_extension)
+            return filename;
+        else
+            return filename + file_extension;
+    }
+
+
+    ustring& addFileExtension(ustring& filename, const ustring& file_extension)
+    {
+        if (filename.substr(filename.size() - file_extension.size()) != file_extension)
+            filename += ("." + file_extension);
+
+        return filename;
+    }
 }

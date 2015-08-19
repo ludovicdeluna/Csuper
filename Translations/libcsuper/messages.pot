@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-11 17:06+0200\n"
+"POT-Creation-Date: 2015-08-19 12:25+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -398,17 +398,17 @@ msgstr ""
 msgid "Cannot access to the %1th element, there is only %2 elements"
 msgstr ""
 
-#: Sources/libcsuper/list_game_configuration.cpp:211
+#: Sources/libcsuper/list_game_configuration.cpp:221
 msgid "Cannot remove the %1th element, there is only %2 elements"
 msgstr ""
 
-#: Sources/libcsuper/list_game_configuration.cpp:228
+#: Sources/libcsuper/list_game_configuration.cpp:238
 msgid ""
 "The game configuration %1 was not found in the list of game configuration"
 msgstr ""
 
-#: Sources/libcsuper/list_game_configuration.cpp:282
-#: Sources/libcsuper/list_game_configuration.cpp:320
+#: Sources/libcsuper/list_game_configuration.cpp:292
+#: Sources/libcsuper/list_game_configuration.cpp:330
 msgid "Error while writing the list of game configuration file %1"
 msgstr ""
 
@@ -623,18 +623,18 @@ msgid ""
 " - Edit/suppr: %3"
 msgstr ""
 
-#: Sources/libcsuper/share.cpp:86
+#: Sources/libcsuper/share.cpp:87
 msgid "Creation of the preferences file."
 msgstr ""
 
-#: Sources/libcsuper/share.cpp:93
+#: Sources/libcsuper/share.cpp:94
 msgid "Creation of the game configuration file."
 msgstr ""
 
-#: Sources/libcsuper/share.cpp:101
+#: Sources/libcsuper/share.cpp:102
 msgid "yes"
 msgstr ""
 
-#: Sources/libcsuper/share.cpp:103
+#: Sources/libcsuper/share.cpp:104
 msgid "no"
 msgstr ""

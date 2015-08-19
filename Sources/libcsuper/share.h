@@ -159,7 +159,7 @@ namespace csuper
      *  \param i the int
      *  \return the ustring
      */
-     Glib::ustring intToUstring(const double i, const unsigned int width =0);
+     Glib::ustring intToUstring(const int i, const unsigned int width =0);
 
     /*!
      *  Change the decimal place of a double in a ustring
@@ -216,6 +216,44 @@ namespace csuper
      */
     xmlpp::Element *firstChildXmlElement(xmlpp::Node*& node);
 
+
+
+    //
+    // File
+    //
+    /*!
+     *  Test if the filename is valid
+     * \param filename the filename
+     * \return true if the filename is valid OK, false otherwise
+     */
+    bool checkFilename(const Glib::ustring& filename);
+
+    /*!
+     *  Test if the folder is valid
+     * \param filename the filename
+     * \return true if the filename is valid OK, false otherwise
+     */
+    bool checkFolder(const Glib::ustring& folder);
+
+
+    //
+    // Extension
+    //
+    /*!
+     *  Add a file extension to a filename
+     * \param filename the filename
+     * \param file_extension the file extension
+     * \return the filename with the file extension
+     */
+    Glib::ustring addFileExtension(const Glib::ustring& filename, const Glib::ustring& file_extension);
+
+    /*!
+     *  Add a file extension to a filename
+     * \param filename the filename
+     * \param file_extension the file extension
+     * \return the filename with the file extension
+     */
+    Glib::ustring& addFileExtension(Glib::ustring& filename, const Glib::ustring& file_extension);
 
 
 

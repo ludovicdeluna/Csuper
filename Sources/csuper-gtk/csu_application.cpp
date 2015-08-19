@@ -57,6 +57,10 @@ CsuApplication::~CsuApplication()
     delete pref_;
     delete list_game_config_;
     delete import_export_game_config_dialog_;
+    delete new_file_assistant_;
+
+    if (game_ != nullptr)
+        delete game_;
 }
 
 
@@ -75,6 +79,7 @@ void CsuApplication::init(RefPtr<Builder>& builder)
     builder_->get_widget_derived("game_configuration_window", game_config_window_);
     builder_->get_widget_derived("new_game_configuration_dialog", new_game_config_dialog_);
     builder_->get_widget_derived("preferences_window", pref_window_);
+    new_file_assistant_ = new NewFileAssistant(builder);
     builder_->get_widget_derived("preferences_exportation_scrolledwindow", export_pref_window_);
     builder_->get_widget_derived("preferences_display_scrolledwindow", display_pref_window_);
     builder_->get_widget_derived("main_window", main_window_);
@@ -125,3 +130,26 @@ void CsuApplication::onQuit()
     new_game_config_dialog_->hide();
 }
 
+
+//
+// Setter and getter
+//
+void CsuApplication::setGame(csuper::Game* game)
+ {
+    if (game_ != nullptr)
+        delete game_;
+    game_ = game;
+
+    // Update main window
+    // Update last game
+    // Set button
+    // fill calculator names
+ }
+
+void CsuApplication::setFilename(ustring& filename)
+{
+    filename_ = filename;
+
+    pref()->directory().setOpen(path_get_dirname(filename));
+    pref()->writeToFile();
+}
