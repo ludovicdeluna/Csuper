@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-19 12:25+0200\n"
+"POT-Creation-Date: 2015-08-21 11:03+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 
 #: Sources/csuper-gtk/csu_application.cpp:118
-#: Sources/csuper-gtk/main_window.cpp:72
+#: Sources/csuper-gtk/main_window.cpp:74
 msgid "Preferences"
 msgstr ""
 
 #: Sources/csuper-gtk/csu_application.cpp:119
-#: Sources/csuper-gtk/main_window.cpp:71 UI/csuper-gtk.glade:133
+#: Sources/csuper-gtk/main_window.cpp:73 UI/csuper-gtk.glade:133
 msgid "Game configuration"
 msgstr ""
 
 #: Sources/csuper-gtk/csu_application.cpp:120
-#: Sources/csuper-gtk/main_window.cpp:73
+#: Sources/csuper-gtk/main_window.cpp:75
 msgid "About"
 msgstr ""
 
 #: Sources/csuper-gtk/csu_application.cpp:121
-#: Sources/csuper-gtk/main_window.cpp:74
+#: Sources/csuper-gtk/main_window.cpp:76
 msgid "Quit"
 msgstr ""
 
 #: Sources/csuper-gtk/game_configuration_window.cpp:134
-#: Sources/csuper-gtk/main_window.cpp:121
+#: Sources/csuper-gtk/main_window.cpp:150
 msgid "Edit"
 msgstr ""
 
@@ -75,7 +75,7 @@ msgstr ""
 #: Sources/csuper-gtk/game_configuration_window.cpp:232
 #: Sources/csuper-gtk/game_configuration_window.cpp:266
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:50
-#: UI/csuper-gtk.glade:731
+#: Sources/csuper-gtk/main_window.cpp:206 UI/csuper-gtk.glade:731
 msgid "Cancel"
 msgstr ""
 
@@ -106,8 +106,8 @@ msgstr ""
 msgid "Deselect all"
 msgstr ""
 
-#: Sources/csuper-gtk/main.cpp:80 Sources/csuper-gtk/main_window.cpp:54
-#: Sources/csuper-gtk/main_window.cpp:62 Sources/csuper-gtk/main_window.cpp:68
+#: Sources/csuper-gtk/main.cpp:80 Sources/csuper-gtk/main_window.cpp:56
+#: Sources/csuper-gtk/main_window.cpp:64 Sources/csuper-gtk/main_window.cpp:70
 #: UI/csuper-gtk.glade:34
 msgid "Csuper"
 msgstr ""
@@ -116,16 +116,49 @@ msgstr ""
 msgid "Error when initializing csuper."
 msgstr ""
 
-#: Sources/csuper-gtk/main_window.cpp:101
+#: Sources/csuper-gtk/main_window.cpp:103
 msgid "New"
 msgstr ""
 
-#: Sources/csuper-gtk/main_window.cpp:113 UI/csuper-gtk.glade:1621
+#: Sources/csuper-gtk/main_window.cpp:107
+msgid "Create a new CSU file"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:114
+#: Sources/csuper-gtk/main_window.cpp:205
+msgid "Open"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:118
+msgid "Open a existing CSU file"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:126
+msgid "Recent"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:127
+msgid "Open a recent CSU file"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:142 UI/csuper-gtk.glade:1621
 msgid "Display"
 msgstr ""
 
-#: Sources/csuper-gtk/main_window.cpp:129
+#: Sources/csuper-gtk/main_window.cpp:158
 msgid "File"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:204
+msgid "Open file"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:214
+msgid "CSU file"
+msgstr ""
+
+#: Sources/csuper-gtk/main_window.cpp:217
+msgid "All file"
 msgstr ""
 
 #: Sources/csuper-gtk/new_file_assistant.cpp:59
@@ -158,7 +191,7 @@ msgid "Name of the new CSU file"
 msgstr ""
 
 #: Sources/csuper-gtk/new_file_assistant.cpp:177
-#: Sources/csuper-gtk/new_file_assistant.cpp:181
+#: Sources/csuper-gtk/new_file_assistant.cpp:181 UI/csuper-gtk.glade:609
 msgid "Folder where the new csu file will be saved"
 msgstr ""
 
@@ -422,10 +455,6 @@ msgstr ""
 msgid "Delete the current csu file"
 msgstr ""
 
-#: UI/csuper-gtk.glade:609
-msgid "Folder where the new CSU file will be saved"
-msgstr ""
-
 #: UI/csuper-gtk.glade:620
 msgid "Number of players on the game"
 msgstr ""
@@ -486,19 +515,19 @@ msgstr ""
 msgid "Type here the name of the game configuration"
 msgstr ""
 
-#: UI/csuper-gtk.glade:941
+#: UI/csuper-gtk.glade:928
 msgid "Maximum"
 msgstr ""
 
-#: UI/csuper-gtk.glade:942
+#: UI/csuper-gtk.glade:929
 msgid "Minimum"
 msgstr ""
 
-#: UI/csuper-gtk.glade:943
+#: UI/csuper-gtk.glade:930
 msgid "Neither"
 msgstr ""
 
-#: UI/csuper-gtk.glade:955 UI/csuper-gtk.glade:972 UI/csuper-gtk.glade:989
+#: UI/csuper-gtk.glade:942 UI/csuper-gtk.glade:959 UI/csuper-gtk.glade:976
 msgid "0,000"
 msgstr ""
 

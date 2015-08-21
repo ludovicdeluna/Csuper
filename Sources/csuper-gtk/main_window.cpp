@@ -38,6 +38,8 @@
 
 using namespace Gtk;
 using namespace Glib;
+using namespace std;
+using namespace csuper;
 
 MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  CsuWidget(), ApplicationWindow(cobject)
 {
@@ -102,9 +104,36 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
     new_button_->set_image_from_icon_name("document-new",ICON_SIZE_SMALL_TOOLBAR);
     new_button_->set_always_show_image(true);
     new_button_->add_accelerator("clicked",get_accel_group(),GDK_KEY_N,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
+    new_button_->set_tooltip_text(_("Create a new CSU file"));
     new_button_->show_all();
     new_button_->signal_clicked().connect(mem_fun(*(app()->newFileAssistant()),&NewFileAssistant::launch));
     header_bar_->pack_start(*new_button_);
+
+
+    // Open button
+    open_button_ = manage(new Button(_("Open")));
+    open_button_->set_image_from_icon_name("document-open",ICON_SIZE_SMALL_TOOLBAR);
+    open_button_->set_always_show_image(true);
+    open_button_->add_accelerator("clicked",get_accel_group(),GDK_KEY_O,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
+    open_button_->set_tooltip_text(_("Open a existing CSU file"));
+    open_button_->show_all();
+    open_button_->signal_clicked().connect(mem_fun(*this,&MainWindow::openFile));
+    header_bar_->pack_start(*open_button_);
+
+
+    // Open recent button
+    open_recent_button_ = manage(new MenuButton());
+    open_recent_button_->add_label(_("Recent"));
+    open_recent_button_->set_tooltip_text(_("Open a recent CSU file"));
+    open_recent_menu_ = manage(new RecentChooserMenu());
+    open_recent_button_->set_popup(*open_recent_menu_);
+    open_recent_filter_ = RecentFilter::create();
+    open_recent_filter_->add_pattern("*.csu");
+    open_recent_filter_->add_mime_type("application/csu");
+    open_recent_menu_->set_filter(open_recent_filter_);
+    open_recent_button_->show_all();
+    open_recent_menu_->signal_item_activated().connect(mem_fun(*this,&MainWindow::openRecentFile));
+    header_bar_->pack_start(*open_recent_button_);
 
 
 
@@ -169,3 +198,77 @@ void MainWindow::saveSize()
     app()->pref()->writeToFile();
 }
 
+void MainWindow::openFile()
+{
+    // File chooser dialog
+    FileChooserDialog* file_chooser = new FileChooserDialog(*this,_("Open file"),FILE_CHOOSER_ACTION_OPEN);
+    file_chooser->add_button(_("Open"),RESPONSE_ACCEPT);
+    file_chooser->add_button(_("Cancel"),RESPONSE_CANCEL);
+    file_chooser->set_current_folder(filename_from_utf8(app()->pref()->directory().open()));
+
+
+    // File filter
+    RefPtr<FileFilter> csu_file_filter = FileFilter::create();
+    csu_file_filter->add_mime_type("application/csu");
+    csu_file_filter->add_pattern("*.csu");
+    csu_file_filter->set_name(_("CSU file"));
+    RefPtr<FileFilter> all_file_filter = FileFilter::create();
+    all_file_filter->add_pattern("*");
+    all_file_filter->set_name(_("All file"));
+    file_chooser->add_filter(csu_file_filter);
+    file_chooser->add_filter(all_file_filter);
+
+
+    // Run
+    ustring new_filename;
+
+    switch (file_chooser->run())
+    {
+    case RESPONSE_ACCEPT:
+        file_chooser->hide();
+
+        new_filename = filename_to_utf8(file_chooser->get_filename());
+
+        try
+        {
+            Game* tmp_game = new Game(new_filename);
+            app()->setGame(tmp_game);
+            app()->setFilename(new_filename);
+        }
+        catch(Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
+            MessageDialog* error = new MessageDialog(*this,e.what(),false,MESSAGE_ERROR,BUTTONS_OK,true);
+            error->run();
+            error->hide();
+            delete error;
+        }
+        break;
+    default:
+        file_chooser->hide();
+        break;
+    }
+
+    delete file_chooser;
+}
+
+
+void MainWindow::openRecentFile()
+{
+    ustring filename = filename_to_utf8(filename_from_uri(open_recent_menu_->get_current_uri()));
+
+    try
+    {
+        Game* tmp_game = new Game(filename);
+        app()->setGame(tmp_game);
+        app()->setFilename(filename);
+    }
+    catch(Glib::Exception& e)
+    {
+        cerr << e.what() << endl;
+        MessageDialog* error = new MessageDialog(*this,e.what(),false,MESSAGE_ERROR,BUTTONS_OK,true);
+        error->run();
+        error->hide();
+        delete error;
+    }
+}

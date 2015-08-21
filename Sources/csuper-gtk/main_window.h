@@ -46,10 +46,17 @@ class MainWindow : public CsuWidget, public Gtk::ApplicationWindow
 protected:
     Gtk::Grid* main_grid_;                  /*!< The main grid */
     Gtk::HeaderBar* header_bar_;            /*!< The HeaderBar */
+
     Gtk::MenuButton* menu_display_button_;  /*!< The display MenuButton */
     Gtk::MenuButton* menu_edit_button_;     /*!< The edit MenuButton */
     Gtk::MenuButton* menu_file_button_;     /*!< The file MenuButton */
+
     Gtk::Button* new_button_;               /*!< The new Button */
+
+    Gtk::MenuButton* open_recent_button_;                   /*!< The open recent MenuButton */
+    Gtk::RecentChooserMenu* open_recent_menu_;              /*!< The open recent Menu */
+    Glib::RefPtr<Gtk::RecentFilter> open_recent_filter_;    /*!< The open recent filter */
+    Gtk::Button* open_button_;                              /*!< The open button */
 
     // Use only if the user use window manager decoration
     Gtk::MenuButton* csuper_menu_button_;   /*!< The csuper MenuButton */
@@ -60,6 +67,18 @@ protected:
     Gtk::MenuItem* quit_menu_item_;         /*!< The quit menuitem */
 
 
+    //
+    // Function
+    //
+    /*!
+     *  \brief Open a file
+     */
+     void openFile();
+
+    /*!
+     *  \brief Open a recent file
+     */
+     void openRecentFile();
 
 
 public:

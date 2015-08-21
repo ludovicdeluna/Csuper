@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Csuper -  4.3\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-08-19 12:24+0200\n"
-"PO-Revision-Date: 2015-08-19 12:25+0200\n"
+"POT-Creation-Date: 2015-08-21 11:03+0200\n"
+"PO-Revision-Date: 2015-08-21 11:04+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -20,27 +20,27 @@ msgstr ""
 "X-Generator: Gtranslator 2.91.7\n"
 
 #: Sources/csuper-gtk/csu_application.cpp:118
-#: Sources/csuper-gtk/main_window.cpp:72
+#: Sources/csuper-gtk/main_window.cpp:74
 msgid "Preferences"
 msgstr "Préférences"
 
 #: Sources/csuper-gtk/csu_application.cpp:119
-#: Sources/csuper-gtk/main_window.cpp:71 UI/csuper-gtk.glade:133
+#: Sources/csuper-gtk/main_window.cpp:73 UI/csuper-gtk.glade:133
 msgid "Game configuration"
 msgstr "Configuration de jeu"
 
 #: Sources/csuper-gtk/csu_application.cpp:120
-#: Sources/csuper-gtk/main_window.cpp:73
+#: Sources/csuper-gtk/main_window.cpp:75
 msgid "About"
 msgstr "À propos"
 
 #: Sources/csuper-gtk/csu_application.cpp:121
-#: Sources/csuper-gtk/main_window.cpp:74
+#: Sources/csuper-gtk/main_window.cpp:76
 msgid "Quit"
 msgstr "Quitter"
 
 #: Sources/csuper-gtk/game_configuration_window.cpp:134
-#: Sources/csuper-gtk/main_window.cpp:121
+#: Sources/csuper-gtk/main_window.cpp:150
 msgid "Edit"
 msgstr "Éditer"
 
@@ -77,7 +77,7 @@ msgstr "Accepter"
 #: Sources/csuper-gtk/game_configuration_window.cpp:232
 #: Sources/csuper-gtk/game_configuration_window.cpp:266
 #: Sources/csuper-gtk/import_export_game_configuration_dialog.cpp:50
-#: UI/csuper-gtk.glade:731
+#: Sources/csuper-gtk/main_window.cpp:206 UI/csuper-gtk.glade:731
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -108,8 +108,8 @@ msgstr "Tout sélectionner"
 msgid "Deselect all"
 msgstr "Tout déselectionner"
 
-#: Sources/csuper-gtk/main.cpp:80 Sources/csuper-gtk/main_window.cpp:54
-#: Sources/csuper-gtk/main_window.cpp:62 Sources/csuper-gtk/main_window.cpp:68
+#: Sources/csuper-gtk/main.cpp:80 Sources/csuper-gtk/main_window.cpp:56
+#: Sources/csuper-gtk/main_window.cpp:64 Sources/csuper-gtk/main_window.cpp:70
 #: UI/csuper-gtk.glade:34
 msgid "Csuper"
 msgstr "Csuper"
@@ -118,17 +118,50 @@ msgstr "Csuper"
 msgid "Error when initializing csuper."
 msgstr "Erreur lors de l'initialisation de csuper."
 
-#: Sources/csuper-gtk/main_window.cpp:101
+#: Sources/csuper-gtk/main_window.cpp:103
 msgid "New"
 msgstr "Nouveau"
 
-#: Sources/csuper-gtk/main_window.cpp:113 UI/csuper-gtk.glade:1621
+#: Sources/csuper-gtk/main_window.cpp:107
+msgid "Create a new CSU file"
+msgstr "Créer un nouveau fichier CSU"
+
+#: Sources/csuper-gtk/main_window.cpp:114
+#: Sources/csuper-gtk/main_window.cpp:205
+msgid "Open"
+msgstr "Ouvrir"
+
+#: Sources/csuper-gtk/main_window.cpp:118
+msgid "Open a existing CSU file"
+msgstr "Ouvrir un fichier CSU existant"
+
+#: Sources/csuper-gtk/main_window.cpp:126
+msgid "Recent"
+msgstr "Récents"
+
+#: Sources/csuper-gtk/main_window.cpp:127
+msgid "Open a recent CSU file"
+msgstr "Ouvrir un fichier CSU récent"
+
+#: Sources/csuper-gtk/main_window.cpp:142 UI/csuper-gtk.glade:1621
 msgid "Display"
 msgstr "Affichage"
 
-#: Sources/csuper-gtk/main_window.cpp:129
+#: Sources/csuper-gtk/main_window.cpp:158
 msgid "File"
 msgstr "Fichier"
+
+#: Sources/csuper-gtk/main_window.cpp:204
+msgid "Open file"
+msgstr "Ouvrir un fichier"
+
+#: Sources/csuper-gtk/main_window.cpp:214
+msgid "CSU file"
+msgstr "Fichier CSU"
+
+#: Sources/csuper-gtk/main_window.cpp:217
+msgid "All file"
+msgstr "Tout les fichiers"
 
 #: Sources/csuper-gtk/new_file_assistant.cpp:59
 msgid "New csu file assistant"
@@ -160,7 +193,7 @@ msgid "Name of the new CSU file"
 msgstr "Nom du nouveau fichier CSU"
 
 #: Sources/csuper-gtk/new_file_assistant.cpp:177
-#: Sources/csuper-gtk/new_file_assistant.cpp:181
+#: Sources/csuper-gtk/new_file_assistant.cpp:181 UI/csuper-gtk.glade:609
 msgid "Folder where the new csu file will be saved"
 msgstr "Dossier où le nouveau fichier CSU va être enregistré"
 
@@ -438,10 +471,6 @@ msgstr "Propriétés du fichier"
 msgid "Delete the current csu file"
 msgstr "Supprimer le fichier CSU courant"
 
-#: UI/csuper-gtk.glade:609
-msgid "Folder where the new CSU file will be saved"
-msgstr "Dossier où le nouveau fichier CSU va être enregistré"
-
 #: UI/csuper-gtk.glade:620
 msgid "Number of players on the game"
 msgstr "Nombre de joueurs dans le jeu"
@@ -502,19 +531,19 @@ msgstr "Score maximum ou minimum qu'un joueur peut atteindre dans une partie"
 msgid "Type here the name of the game configuration"
 msgstr "Écrire ici le nom de la configuration de jeu"
 
-#: UI/csuper-gtk.glade:941
+#: UI/csuper-gtk.glade:928
 msgid "Maximum"
 msgstr "Maximum"
 
-#: UI/csuper-gtk.glade:942
+#: UI/csuper-gtk.glade:929
 msgid "Minimum"
 msgstr "Minimum"
 
-#: UI/csuper-gtk.glade:943
+#: UI/csuper-gtk.glade:930
 msgid "Neither"
 msgstr "Aucun des deux"
 
-#: UI/csuper-gtk.glade:955 UI/csuper-gtk.glade:972 UI/csuper-gtk.glade:989
+#: UI/csuper-gtk.glade:942 UI/csuper-gtk.glade:959 UI/csuper-gtk.glade:976
 msgid "0,000"
 msgstr "0.000"
 
@@ -687,3 +716,6 @@ msgid "Apply the new preferences for the new toolbar button displayed"
 msgstr ""
 "Appliquer les nouvelles préférences sur l'affichage des boutons de la barre "
 "d'outils"
+
+#~ msgid "Folder where the new CSU file will be saved"
+#~ msgstr "Dossier où le nouveau fichier CSU va être enregistré"

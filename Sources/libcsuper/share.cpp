@@ -262,7 +262,7 @@ namespace csuper{
             remove(full_filename.c_str());
             return true;
         }
-        catch (ios_base::failure& e)
+        catch (std::exception& e)
         {
             return false;
         }
