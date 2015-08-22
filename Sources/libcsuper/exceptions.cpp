@@ -104,4 +104,11 @@ namespace csuper
     {
 
     }
+
+
+
+    UndoRedoError::UndoRedoError(const ustring& msg) : Exception(_("Undo redo error: ") + msg)
+    {
+
+    }
 }

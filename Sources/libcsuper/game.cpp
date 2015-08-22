@@ -76,8 +76,8 @@ namespace csuper
         distributor_ = game.distributor_;
         config_ = new GameConfiguration(*(game.config_));
 
-        for (auto it = game.players_.cbegin(); it != game.players_.cend() ; it++)
-            players_.push_back(new Player(**it));
+        for (auto& it : game.players_)
+            players_.push_back(new Player(*it));
     }
 
 
@@ -147,8 +147,8 @@ namespace csuper
     {
         delete config_;
 
-        for (auto it = players_.begin(); it != players_.end() ; it++)
-            delete *it;
+        for (auto& it : players_)
+            delete it;
 
         players_.clear();
     }
@@ -165,8 +165,8 @@ namespace csuper
 
         delete config_;
 
-        for (auto it = players_.cbegin(); it != players_.cend() ; it++)
-            delete *it;
+        for (auto& it : players_)
+            delete it;
 
         players_.clear();
 
@@ -177,8 +177,8 @@ namespace csuper
         distributor_ = game.distributor_;
         config_ = new GameConfiguration(*(game.config_));
 
-        for (auto it = game.players_.cbegin(); it != game.players_.cend() ; it++)
-            players_.push_back(new Player(**it));
+        for (auto& it : game.players_)
+            players_.push_back(new Player(*it));
 
         return *this;
     }
@@ -206,8 +206,8 @@ namespace csuper
 
         vector<double> sort_points;
 
-        for (auto it_player=players_.cbegin() ; it_player != players_.cend() ; it_player++)
-            sort_points.push_back((*it_player)->totalPoints(turn));
+        for (auto& it_player : players_)
+            sort_points.push_back(it_player->totalPoints(turn));
 
         // Sort the points base on the first way
         if (config().maxWinner())
@@ -309,14 +309,13 @@ namespace csuper
     {
         ustring str;
         int i;
-        vector<Player*>::const_iterator it;
 
         //TRANSLATORS:The number of characters before the | must be eight
         str = _("Names   | ");
 
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
+        for (auto& it : players_)
         {
-            ustring name((*it)->name());
+            ustring name(it->name());
             str += name;
 
             for (i=name.size() ; i < 4 ; i++)
@@ -350,21 +349,20 @@ namespace csuper
     {
         ustring str;
         unsigned int i,j;
-        vector<Player*>::const_iterator it;
 
         for (i=0 ; i<=maxNbTurn() ; i++)
         {
             //TRANSLATORS:The number of characters before the | and without the %1 must be six
             str += ustring::compose(_("Turn %1 |"),ustring::format(setw(2),i));
 
-            for (it=players_.cbegin() ; it != players_.cend() ; it++)
+            for (auto& it : players_)
             {
-                if ((*it)->hasTurn(i))
-                    str += (*it)->pointsUstring(*config_,i,6);
+                if (it->hasTurn(i))
+                    str += it->pointsUstring(*config_,i,6);
                 else
                     str += "      ";
 
-                for (j=4 ; j<(*it)->name().size(); j++)
+                for (j=4 ; j < it->name().size(); j++)
                     str += " ";
 
                 str += "|";
@@ -384,11 +382,11 @@ namespace csuper
         //TRANSLATORS:The number of characters before the | must be eight
         str += _("Total   |");
 
-        for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
+        for (auto& it : players_)
         {
-            str += (*it)->totalPointsUstring(*config_,-1,6);
+            str += it->totalPointsUstring(*config_,-1,6);
 
-            for (i=4 ; i<(*it)->name().size(); i++)
+            for (i=4 ; i < it->name().size(); i++)
                 str += " ";
 
             str += "|";
@@ -406,11 +404,11 @@ namespace csuper
         //TRANSLATORS:The number of characters before the | must be eight
         str += _("Ranking |");
 
-        for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
+        for (auto& it : players_)
         {
-            str += (*it)->rankingUstring(6);
+            str += it->rankingUstring(6);
 
-            for (i=4 ; i<(*it)->name().size(); i++)
+            for (i=4 ; i < it->name().size(); i++)
                 str += " ";
 
             str += "|";
@@ -428,8 +426,8 @@ namespace csuper
     {
         unsigned int max_turn = 0;
 
-        for (auto it = players_.cbegin(); it != players_.cend() ; it++)
-            max_turn = max(max_turn,(*it)->nbTurn());
+        for (auto& it : players_)
+            max_turn = max(max_turn,it->nbTurn());
 
         return max_turn;
     }
@@ -458,8 +456,8 @@ namespace csuper
     {
         vector<double> sort_points;
 
-        for (auto it_player=players_.begin() ; it_player != players_.end() ; it_player++)
-            sort_points.push_back((*it_player)->totalPoints());
+        for (auto& it_player : players_)
+            sort_points.push_back(it_player->totalPoints());
 
         // Sort the points base on the first way
         if (config().maxWinner())
@@ -467,15 +465,15 @@ namespace csuper
         else
             sort(sort_points.begin(),sort_points.end(),&compareDoubleAscending);
 
-        vector<double>::reverse_iterator it_sort = sort_points.rbegin() ;
+        auto it_sort = sort_points.rbegin() ;
         // Loop on the sort points from the smallest
         for (int i = nbPlayer()-1 ; i>=0 ; i--,it_sort++)
         {
             // Loop on the total points
-            for (auto it_player=players_.begin() ; it_player != players_.end() ; it_player++)
+            for (auto& it_player : players_)
             {
-                if (*it_sort == (*it_player)->totalPoints())
-                    (*it_player)->setRanking(i+1);
+                if (*it_sort == it_player->totalPoints())
+                    it_player->setRanking(i+1);
             }
         }
 
@@ -483,15 +481,15 @@ namespace csuper
 
     bool Game::exceedMaxNumber() const
     {
-        for (auto it = players_.cbegin() ; it!=players_.cend() ; it++)
+        for (auto& it : players_)
         {
             if (config().useMaximum())
             {
-                if ((*it)->totalPoints() + DBL_EPSILON >= config().nbMaxMin())
+                if (it->totalPoints() + DBL_EPSILON >= config().nbMaxMin())
                     return true;
             } else
             {
-                if ((*it)->totalPoints() - DBL_EPSILON <= config().nbMaxMin())
+                if (it->totalPoints() - DBL_EPSILON <= config().nbMaxMin())
                     return true;
             }
         }
@@ -569,7 +567,7 @@ namespace csuper
             sort(sort_points.begin(),sort_points.end(),&compareDoubleAscending);
 
 
-        vector<double>::reverse_iterator it_sort = sort_points.rbegin();
+        auto it_sort = sort_points.rbegin();
         vector<unsigned int> ranking(nbPlayer());
         vector<unsigned int>::iterator it_rank;
         // Loop on the sort points from the smallest
@@ -595,8 +593,8 @@ namespace csuper
         if (!(player(0).hasTurn(turn)))
             throw OutOfRange(ustring::compose(_("Cannot access to the %1th turn, there is only %2 turn"),turn,player(0).nbTurn()));
 
-        for (auto it=players_.begin() ; it != players_.end() ; it++)
-            (*it)->deleteTurn(turn);
+        for (auto& it : players_)
+            it->deleteTurn(turn);
 
         rankingCalculation();
         decreaseDistributor();
@@ -716,8 +714,8 @@ namespace csuper
         config().createXmlNode(root);
 
         // Players
-        for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
-            (*it)->createXmlNode(root,config());
+        for (auto& it : players_)
+            it->createXmlNode(root,config());
 
         try
         {
@@ -770,12 +768,12 @@ namespace csuper
             else
                 points = DBL_MAX;
 
-            for (auto it = players_.cbegin() ; it != players_.cend() ; it++)
+            for (auto& it : players_)
             {
                 if ((config().maxWinner() && best) || (!(config().maxWinner() || best)))
-                    points = max(points,(*it)->points(i));
+                    points = max(points,it->points(i));
                 else
-                    points = min(points,(*it)->points(i));
+                    points = min(points,it->points(i));
             }
             if (points == player(player_index).points(i))
                 nb++;
@@ -824,7 +822,6 @@ namespace csuper
             throw FileError(_("Error while exporting the game into a csv file, bad filename: ") + filename);
         }
 
-        vector<Player*>::const_iterator it;
         unsigned int i,j;
 
         // Header
@@ -849,16 +846,16 @@ namespace csuper
         // Statistics
 
         file << _("Names;");
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
-            file << (*it)->name().raw() << ";";
+        for (auto& it : players_)
+            file << it->name().raw() << ";";
 
         file << endl << _("Mean points;");
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
-            file << (*it)->meanPoints() << ";";
+        for (auto& it : players_)
+            file << it->meanPoints() << ";";
 
         file << endl << _("Number of turn;");
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
-            file << (*it)->nbTurn() << ";";
+        for (auto& it : players_)
+            file << it->nbTurn() << ";";
         if (config().turnBased())
         {
             file << endl << _("Number of turn with the best score;");
@@ -880,8 +877,8 @@ namespace csuper
 
         // Points
         file << endl << endl << _("Names");
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
-            file << ";;" << (*it)->name().raw() << ";";
+        for (auto& it : players_)
+            file << ";;" << it->name().raw() << ";";
 
         file << endl << _("Legend;");
         for (i=0 ; i < nbPlayer() ; i++)
@@ -909,16 +906,16 @@ namespace csuper
 
 
         file << endl << endl << _("Names;");
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
-            file << (*it)->name().raw() << ";";
+        for (auto& it : players_)
+            file << it->name().raw() << ";";
 
         file << endl << _("Total points;");
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
-            file << (*it)->totalPoints() << ";";
+        for (auto& it : players_)
+            file << it->totalPoints() << ";";
 
         file << endl << _("Ranking;");
-        for (it = players_.cbegin() ; it != players_.cend() ; it++)
-            file << (*it)->ranking() << ";";
+        for (auto& it : players_)
+            file << it->ranking() << ";";
 
 
         file.close();
@@ -1049,16 +1046,16 @@ namespace csuper
         unsigned int i;
 
         file << "\"" << _("Players") << "\"";
-        for (auto it=players_.cbegin() ; it != players_.cend() ; it++)
-            file << "\t\"" << (*it)->name().raw() << "\"";
+        for (auto& it : players_)
+            file << "\t\"" << it->name().raw() << "\"";
 
         for (i=0; i<= maxNbTurn() ; i++)
         {
             file << endl << i;
-            for (auto it=players_.cbegin() ; it != players_.cend() ; it++)
+            for (auto& it : players_)
             {
-                if ((*it)->hasTurn(i))
-                    file << "\t" << replaceCharacterInUstring((*it)->totalPointsUstring(config(),i),',','.').raw();
+                if (it->hasTurn(i))
+                    file << "\t" << replaceCharacterInUstring(it->totalPointsUstring(config(),i),',','.').raw();
                 else
                     file << "\t-";
             }
@@ -1085,9 +1082,9 @@ namespace csuper
             << "set style data linespoints" << endl
             << "set xlabel \"" << _("Number of turns") << "\"" << endl
             << "set ylabel \"" << _("Points") << "\"" << endl
-            << "set title \"" << _("Points on ") << Glib::path_get_basename(filename) << "\"" << endl;
+            << "set title \"" << _("Points on ") << path_get_basename(filename) << "\"" << endl;
 
-        file << "plot '" << Glib::path_get_basename(filename) << ".dat" << "' using 2:xtic(1) title columnheader(2),"
+        file << "plot '" << path_get_basename(filename) << ".dat" << "' using 2:xtic(1) title columnheader(2),"
             << " for [i=3:" << (nbPlayer() + 1)
             << "] '' using i title columnheader(i)" << endl << "pause -1";
 
@@ -1095,13 +1092,13 @@ namespace csuper
         file.close();
     }
 
-    void Game::exportToGnuplot(const Glib::ustring& filename) const
+    void Game::exportToGnuplot(const ustring& filename) const
     {
         exportToGnuplotData(filename);
         exportToGnuplotScript(filename);
     }
 
-    void Game::exportToPdf(const Glib::ustring& filename, const ExportPdfPreferences& pdf_pref, const ChartExportationPreferences& chart_pref) const
+    void Game::exportToPdf(const ustring& filename, const ExportPdfPreferences& pdf_pref, const ChartExportationPreferences& chart_pref) const
     {
         // Save the temporary file
         try

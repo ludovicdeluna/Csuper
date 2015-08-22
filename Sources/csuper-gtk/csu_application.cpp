@@ -130,6 +130,20 @@ void CsuApplication::onQuit()
     new_game_config_dialog_->hide();
 }
 
+void CsuApplication::updateGame(csuper::Game* game)
+{
+    if (game == nullptr)
+        undoRedoManager().add(game_);
+    else
+    {
+        if (game_ != nullptr)
+            delete game_;
+        game_ = game;
+    }
+
+    // Update main window
+}
+
 
 //
 // Setter and getter
@@ -140,8 +154,10 @@ void CsuApplication::setGame(csuper::Game* game)
         delete game_;
     game_ = game;
 
+    undoRedoManager().clear();
+    undoRedoManager().add(game);
+
     // Update main window
-    // Update last game
     // Set button
     // fill calculator names
  }

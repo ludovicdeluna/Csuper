@@ -88,15 +88,15 @@ namespace csuper
 
     ListGameConfiguration::ListGameConfiguration(const ListGameConfiguration &list_game_config)
     {
-        for (auto it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
-            game_configuration_list_.push_back(new GameConfiguration(**it));
+        for (auto& it : list_game_config.game_configuration_list_)
+            game_configuration_list_.push_back(new GameConfiguration(*it));
     }
 
 
     ListGameConfiguration::~ListGameConfiguration()
     {
-        for (auto it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
-            delete *it;
+        for (auto& it : game_configuration_list_)
+            delete it;
 
         game_configuration_list_.clear();
     }
@@ -129,14 +129,13 @@ namespace csuper
             return *this;
 
 
-        vector<GameConfiguration*>::const_iterator it;
-        for (it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
-            delete *it;
+        for (auto& it : game_configuration_list_)
+            delete it;
         game_configuration_list_.clear();
 
 
-        for (it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
-            game_configuration_list_.push_back(new GameConfiguration(**it));
+        for (auto& it : list_game_config.game_configuration_list_)
+            game_configuration_list_.push_back(new GameConfiguration(*it));
 
         return *this;
     }
@@ -144,9 +143,9 @@ namespace csuper
 
     void ListGameConfiguration::add(GameConfiguration* game_config)
     {
-        for (auto it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
+        for (auto& it : game_configuration_list_)
         {
-            if (*game_config == **it)
+            if (*game_config == *it)
                 throw AlreadyExist(game_config->name());
         }
         game_configuration_list_.push_back(game_config);
@@ -154,9 +153,9 @@ namespace csuper
 
     void ListGameConfiguration::add(const GameConfiguration& game_config)
     {
-        for (auto it = game_configuration_list_.begin() ; it != game_configuration_list_.end() ; it++)
+        for (auto& it : game_configuration_list_)
         {
-            if (game_config == **it)
+            if (game_config == *it)
                 throw AlreadyExist(game_config.name());
         }
         game_configuration_list_.push_back(new GameConfiguration(game_config));
@@ -164,9 +163,9 @@ namespace csuper
 
     void ListGameConfiguration::add(const ListGameConfiguration& list_game_config)
     {
-        for (auto it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
+        for (auto& it : list_game_config.game_configuration_list_)
         {
-            GameConfiguration* tmp_game_config = new GameConfiguration(**it);
+            GameConfiguration* tmp_game_config = new GameConfiguration(*it);
             try
             {
                 add(tmp_game_config);
@@ -184,12 +183,12 @@ namespace csuper
         unsigned int i=0;
         bool found;
 
-        for (auto it = list_game_config.game_configuration_list_.cbegin() ; it != list_game_config.game_configuration_list_.cend() ; it++)
+        for (auto& it : list_game_config.game_configuration_list_)
         {
             found = false;
-            for (auto it_index=indexes.cbegin() ; it_index != indexes.cend() ; it_index++)
+            for (auto& it_index : indexes)
             {
-                if (*it_index == i)
+                if (it_index == i)
                 {
                     found = true;
                     break;
@@ -198,7 +197,7 @@ namespace csuper
 
             if (found)
             {
-                GameConfiguration* tmp_game_config = new GameConfiguration(**it);
+                GameConfiguration* tmp_game_config = new GameConfiguration(*it);
                 try
                 {
                     add(tmp_game_config);
@@ -242,8 +241,8 @@ namespace csuper
     {
         ustring str("");
 
-        for (auto it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
-            str += ((*it)->toUstring() + "\n\n");
+        for (auto& it : game_configuration_list_)
+            str += (it->toUstring() + "\n\n");
 
         return str;
     }
@@ -254,7 +253,7 @@ namespace csuper
         unsigned int i=1;
 
         for (auto it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++, i++)
-            str += ustring::compose(" (%1) %2\n",i,(*it)->nameUstring()); //(" - " + (*it)->nameUstring() + "\n");
+            str += ustring::compose(" (%1) %2\n",i,(*it)->nameUstring());
 
         return str;
     }
@@ -279,8 +278,8 @@ namespace csuper
         Element* node_nb = root->add_child("nb_game_config");
         node_nb->add_child_text(Ascii::dtostr(size()));
 
-        for (auto it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
-            (*it)->createXmlNode(root);
+        for (auto& it : game_configuration_list_)
+            it->createXmlNode(root);
 
         try
         {
@@ -307,13 +306,13 @@ namespace csuper
         node_nb->add_child_text(Ascii::dtostr(indexes.size()));
 
         unsigned int i=0;
-        for (auto it = game_configuration_list_.cbegin() ; it != game_configuration_list_.cend() ; it++)
+        for (auto& it : game_configuration_list_)
         {
-            for (auto it_index=indexes.cbegin() ; it_index != indexes.cend() ; it_index++)
+            for (auto& it_index : indexes)
             {
-                if (*it_index == i)
+                if (it_index == i)
                 {
-                    (*it)->createXmlNode(root);
+                    it->createXmlNode(root);
                     break;
                 }
             }

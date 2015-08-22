@@ -56,5 +56,6 @@
 #include "preferences_chart_exportation.h"
 #include "preferences.h"
 #include "pdf_exportation.h"
+#include "undo_redo_manager.h"
 
 #endif

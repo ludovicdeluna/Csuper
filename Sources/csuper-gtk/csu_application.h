@@ -59,6 +59,7 @@ private:
 
     csuper::Preferences* pref_;                         /*!< The preferences */
     csuper::ListGameConfiguration* list_game_config_;   /*!< The list of game configuration */
+    csuper::UndoRedoManager undo_redo_manager_;         /*!< The undo redo manager */
 
     csuper::Game* game_ = nullptr;  /*!< The game */
     Glib::ustring filename_ = "";   /*!< The filename */
@@ -124,6 +125,13 @@ public:
     void onQuit();
 
 
+    /*!
+     *  \brief Initialize the CsuApplication with the builder
+     *  \param game the game that may come from the undo redo manager
+     */
+    void updateGame(csuper::Game* game = nullptr);
+
+
 
     //
     // Getter
@@ -144,6 +152,15 @@ public:
      inline csuper::ListGameConfiguration* listGameConfig()
      {
          return list_game_config_;
+     }
+
+    /*!
+     *  \brief return the UndoRedoManager
+     *  \return the UndoRedoManager
+     */
+     inline csuper::UndoRedoManager& undoRedoManager()
+     {
+         return undo_redo_manager_;
      }
 
     /*!

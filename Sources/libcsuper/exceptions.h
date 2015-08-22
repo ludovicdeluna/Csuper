@@ -198,6 +198,23 @@ namespace csuper
          */
         OutOfRange(const Glib::ustring& msg);
     };
+
+
+
+
+
+    /*! \class UndoRedoError
+    *   \brief This class represent a error on the UndoRedoManager
+    */
+    class UndoRedoError : public Exception
+    {
+    public:
+        /*!
+         *  \brief Constructor with the string parameter
+         *  \param msg the string of the error
+         */
+        UndoRedoError(const Glib::ustring& msg);
+    };
 }
 
 
