@@ -45,6 +45,7 @@
 #include "menu_display.h"
 #include "preferences_window.h"
 #include "new_file_assistant.h"
+#include "file_properties_dialog.h"
 
 #include "../libcsuper/libcsuper.h"
 
@@ -76,6 +77,7 @@ private:
     ExportationPreferences* export_pref_window_;                            /*!< The exportation preferences scrolled window */
     DisplayPreferences* display_pref_window_;                               /*!< The display preferences scrolled window */
     NewFileAssistant* new_file_assistant_;                                  /*!< The new file assistant */
+    FilePropertiesDialog* file_properties_dialog_;                          /*!< The file properties dialog */
 
 
     //
@@ -269,6 +271,15 @@ public:
      inline NewFileAssistant* newFileAssistant()
      {
          return new_file_assistant_;
+     }
+
+    /*!
+     *  \brief return the FilePropertiesDialog
+     *  \return the FilePropertiesDialog
+     */
+     inline FilePropertiesDialog* filePropertiesDialog()
+     {
+         return file_properties_dialog_;
      }
 
     /*!

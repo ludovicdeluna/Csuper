@@ -102,12 +102,6 @@ namespace csuper
      */
     void csuperInitialize(const bool portable);
 
-    /*!
-     *  Remove the file extension from a filename
-     * \param[in] filename the filename
-     */
-    void removeFileExtension(Glib::ustring& filename);
-
 
 
     // Conversion
@@ -254,6 +248,20 @@ namespace csuper
      * \return the filename with the file extension
      */
     Glib::ustring& addFileExtension(Glib::ustring& filename, const Glib::ustring& file_extension);
+
+    /*!
+     *  Remove the file extension from a filename
+     * \param[in] filename the filename
+     * \return the filename without the file extension
+     */
+    Glib::ustring removeFileExtension(const Glib::ustring& filename);
+
+    /*!
+     *  Remove the file extension from a filename
+     * \param[in] filename the filename
+     * \return the filename without the file extension
+     */
+    Glib::ustring& removeFileExtension(Glib::ustring& filename);
 
 
 

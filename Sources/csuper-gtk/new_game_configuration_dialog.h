@@ -46,8 +46,8 @@
 class NewGameConfigurationDialog : public CsuWidget, public Gtk::Dialog
 {
 protected:
-    Gtk::Button* cancel_button_;    /*!< The HeaderBar */
-    Gtk::Button* ok_button_;        /*!< The HeaderBar */
+    Gtk::Button* cancel_button_;    /*!< The cancel button */
+    Gtk::Button* ok_button_;        /*!< The OK button */
 
     Gtk::Grid* main_grid_;  /*!< The main grid */
 

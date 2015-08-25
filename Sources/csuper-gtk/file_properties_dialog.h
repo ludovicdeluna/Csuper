@@ -1,12 +1,12 @@
 /*!
- * \file    menu_file.h
+ * \file    file_properties_dialog.h
  * \author  Remi BERTHO
- * \date    06/08/15
+ * \date    25/08/15
  * \version 4.3.0
  */
 
 /*
- * menu_file.h
+ * file_properties_dialog.h
  *
  * Copyright 2014-2015 Remi BERTHO <remi.bertho@openmailbox.org>
  *
@@ -30,25 +30,22 @@
  *
  */
 
-#ifndef MENU_FILE_H_INCLUDED
-#define MENU_FILE_H_INCLUDED
+#ifndef FILE_PROPERTIES_DIALOG_H_INCLUDED
+#define FILE_PROPERTIES_DIALOG_H_INCLUDED
 
 #include <gtkmm.h>
 
 #include "csu_widget.h"
 
-/*! \class MenuFile
-*   \brief This class represent the menu file
+/*! \class FilePropertiesDialog
+*   \brief This class represent the file properties dialog
 */
-class MenuFile : public CsuWidget, public Gtk::Menu
+class FilePropertiesDialog : public CsuWidget, public Gtk::Dialog
 {
 protected:
-    Gtk::MenuItem* save_as_;        /*!< The save as button */
-    Gtk::MenuItem* export_;         /*!< The export button */
-    Gtk::SeparatorMenuItem* sep_1_; /*!< The separator 1 */
-    Gtk::MenuItem* prop_;           /*!< The properties button */
-    Gtk::SeparatorMenuItem* sep_2_; /*!< The separator 2 */
-    Gtk::MenuItem* delete_;         /*!< The delete file button */
+    Gtk::Button* ok_button_;    /*!< The OK button */
+    Gtk::Grid* main_grid_;      /*!< The main grid */
+    Gtk::Label* prop_label_;    /*!< The properties label */
 
 public:
     //
@@ -59,45 +56,15 @@ public:
      *  \param cobject the C object
      *  \param refGlade the builder
      */
-    MenuFile(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
+    FilePropertiesDialog(BaseObjectType* cobject, const Glib::RefPtr<Gtk::Builder>& refGlade);
 
-
-
-
-
-    //
-    // Function
-    //
-    /*!
-     *  \brief Set all the menu sensitive
-     */
-     void setSensitive();
 
 
     /*!
-     *  \brief Show the properties window
+     *  \brief Show the dialog properties
      */
-     void showProperties();
-
-
-    /*!
-     *  \brief Delete the current file
-     */
-     void deleteFile();
-
-
-    /*!
-     *  \brief Save as the current file
-     */
-     void saveAs();
-
-
-    /*!
-     *  \brief Export the current file
-     */
-     void exportFile();
+    void launch();
 };
 
 
-
-#endif // MENU_FILE_H_INCLUDED
+#endif // FILE_PROPERTIES_DIALOG_H_INCLUDED

@@ -338,6 +338,12 @@ namespace csuper
         Glib::ustring toUstringPoints() const;
 
         /*!
+         *  \brief Convert the properties of the game to a ustring
+         *  \return the ustring
+         */
+        Glib::ustring toUstringProperties() const;
+
+        /*!
          *  \brief Calculate the maximal number of turn
          *  \return the maximal number of turn
          */

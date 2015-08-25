@@ -101,6 +101,12 @@ public:
      *  \brief Save the window size when changing size
      */
      void saveSize();
+
+
+    /*!
+     *  \brief Set the filename as subtitle
+     */
+     void setFilename();
 };
 
 

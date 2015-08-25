@@ -262,8 +262,6 @@ namespace csuper
         str += toUstringLine(line_size);
         str += toUstringRanking();
 
-
-
         return str;
     }
 
@@ -283,6 +281,16 @@ namespace csuper
         str += toUstringRanking();
         str += toUstringDistributor();
 
+        return str;
+    }
+
+    ustring Game::toUstringProperties() const
+    {
+        ustring str;
+
+        str = toUstringHeader();
+        str += config_->toUstring() + "\n";
+        str += toUstringDistributor();
 
         return str;
     }

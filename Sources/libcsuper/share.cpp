@@ -232,20 +232,6 @@ namespace csuper{
         return static_cast<Element*>(node) ;
     }
 
-
-
-    void removeFileExtension(Glib::ustring& filename)
-    {
-        for (int i=filename.size()-2 ; i>0 ; i--)
-        {
-            if (filename[i] == '.')
-            {
-                filename.resize(i);
-                break;
-            }
-        }
-    }
-
     //
     // File
     //
@@ -307,6 +293,35 @@ namespace csuper{
         if (filename.substr(filename.size() - file_extension.size()) != file_extension)
             filename += ("." + file_extension);
 
+        return filename;
+    }
+
+
+    ustring removeFileExtension(const ustring& filename)
+    {
+        ustring new_filename(filename);
+        for (int i=new_filename.size()-2 ; i>0 ; i--)
+        {
+            if (new_filename[i] == '.')
+            {
+                new_filename.resize(i);
+                break;
+            }
+        }
+        return new_filename;
+    }
+
+
+    ustring& removeFileExtension(ustring& filename)
+    {
+        for (int i=filename.size()-2 ; i>0 ; i--)
+        {
+            if (filename[i] == '.')
+            {
+                filename.resize(i);
+                break;
+            }
+        }
         return filename;
     }
 }

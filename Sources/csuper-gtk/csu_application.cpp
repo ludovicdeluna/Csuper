@@ -83,6 +83,7 @@ void CsuApplication::init(RefPtr<Builder>& builder)
     builder_->get_widget_derived("preferences_exportation_scrolledwindow", export_pref_window_);
     builder_->get_widget_derived("preferences_display_scrolledwindow", display_pref_window_);
     builder_->get_widget_derived("main_window", main_window_);
+    builder_->get_widget_derived("file_properties_dialog", file_properties_dialog_);
     import_export_game_config_dialog_ = new ImportExportGameConfigurationDialog();
 }
 
@@ -152,11 +153,15 @@ void CsuApplication::setGame(csuper::Game* game)
  {
     if (game_ != nullptr)
         delete game_;
+    else
+    {
+        menuFile()->setSensitive();
+    }
+
     game_ = game;
 
     undoRedoManager().clear();
     undoRedoManager().add(game);
-
     // Update main window
     // Set button
     // fill calculator names
@@ -165,6 +170,7 @@ void CsuApplication::setGame(csuper::Game* game)
 void CsuApplication::setFilename(ustring& filename)
 {
     filename_ = filename;
+    mainWindow()->setFilename();
 
     pref()->directory().setOpen(path_get_dirname(filename));
     pref()->writeToFile();

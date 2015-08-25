@@ -85,6 +85,8 @@
 		<Unit filename="../Sources/libcsuper/preferences_score_display.h" />
 		<Unit filename="../Sources/libcsuper/share.cpp" />
 		<Unit filename="../Sources/libcsuper/share.h" />
+		<Unit filename="../Sources/libcsuper/undo_redo_manager.cpp" />
+		<Unit filename="../Sources/libcsuper/undo_redo_manager.h" />
 		<Extensions>
 			<envvars />
 			<code_completion />

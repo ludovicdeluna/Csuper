@@ -272,3 +272,11 @@ void MainWindow::openRecentFile()
         delete error;
     }
 }
+
+void MainWindow::setFilename()
+{
+    if (app()->pref()->mainWindowTitleBar().printTitle())
+        header_bar_->set_subtitle(app()->filename());
+    else
+        set_title(app()->filename() + " - " + _("Csuper"));
+}
