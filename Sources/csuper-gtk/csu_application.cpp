@@ -105,7 +105,7 @@ void CsuApplication::onStartup()
         add_action("quit",mem_fun(*this,&CsuApplication::onQuit));
         add_action("game_config",mem_fun(*game_config_window_,&GameConfigurationWindow::launch));
         add_action("preferences",mem_fun(*pref_window_,&PreferencesWindow::launch));
-        add_action("update",mem_fun(*this,&CsuApplication::checkForUpdate));
+        add_action("update",bind<-1, const bool>(mem_fun(*this,&CsuApplication::checkForUpdate),false));
         #if GTK_MINOR_VERSION >= 12
         set_accel_for_action("app.about","<primary>a");
         set_accel_for_action("app.quit","<primary>q");
@@ -127,6 +127,10 @@ void CsuApplication::onStartup()
         menu->append(_("Quit"),"app.quit");
         set_app_menu(RefPtr<Gio::MenuModel>::cast_static(menu));
     }
+
+    Rand rand;
+    if (rand.get_int_range(0,5) == 0)
+        checkForUpdate(true);
 }
 
 void CsuApplication::on_open(const type_vec_files& files, const ustring& hint)
@@ -160,7 +164,7 @@ void CsuApplication::onQuit()
     new_game_config_dialog_->hide();
 }
 
-void CsuApplication::checkForUpdate()
+void CsuApplication::checkForUpdate(const bool auto_check)
 {
     // Check the version
     RefPtr<File> file = File::create_for_uri("http://www.dalan.rd-h.fr/binaries/Csuper/latest_version.txt");
@@ -172,8 +176,11 @@ void CsuApplication::checkForUpdate()
         Version version(data);
         g_free(data);
 
+        if (auto_check && version <= pref()->version().lastCheckVersion())
+            return;
+
         ustring msg;
-        if (version > pref()->version().lastCheckVersion() && version > Version())
+        if (version > Version())
         {
             msg = ustring::compose(_("A update is available: you use the version %1 of Csuper whereas the version %2 is available.\n"
                                      "You can download the new version on this website: http://www.dalan.rd-h.fr/wordpress/"),
@@ -196,11 +203,14 @@ void CsuApplication::checkForUpdate()
     catch (Glib::Exception& e)
     {
         cerr << e.what() << endl;
-        ustring msg = _("Cannot access to the latest version file on the internet");
-        MessageDialog* error = new MessageDialog(*(mainWindow()),msg,false,MESSAGE_ERROR,BUTTONS_OK,true);
-        error->run();
-        error->hide();
-        delete error;
+        if (!auto_check)
+        {
+            ustring msg = _("Cannot access to the latest version file on the internet");
+            MessageDialog* error = new MessageDialog(*(mainWindow()),msg,false,MESSAGE_ERROR,BUTTONS_OK,true);
+            error->run();
+            error->hide();
+            delete error;
+        }
     }
 }
 

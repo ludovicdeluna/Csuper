@@ -85,7 +85,7 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
         game_config_menu_item_->signal_activate().connect(mem_fun(*(app()->gameConfigurationWindow()),&GameConfigurationWindow::launch));
         pref_menu_item_->signal_activate().connect(mem_fun(*(app()->preferencesWindow()),&PreferencesWindow::launch));
         about_menu_item_->signal_activate().connect(mem_fun(*(app()->about()),&About::launch));
-        update_menu_item_->signal_activate().connect(mem_fun(*(app()),&CsuApplication::checkForUpdate));
+        update_menu_item_->signal_activate().connect(bind<-1, const bool>(mem_fun(*(app()),&CsuApplication::checkForUpdate),false));
         quit_menu_item_->signal_activate().connect(mem_fun(*(app()),&CsuApplication::onQuit));
 
         game_config_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_G,Gdk::CONTROL_MASK,ACCEL_VISIBLE);

@@ -71,6 +71,10 @@ void Menu::main()
     int choice;
     int stop = false;
 
+    Rand rand;
+    if (rand.get_int_range(0,5) == 0)
+        checkForUpdate(true);
+
     do
     {
         choice=-1;
@@ -378,7 +382,7 @@ void Menu::about() const
     systemPause();
 }
 
-void Menu::checkForUpdate()
+void Menu::checkForUpdate(const bool auto_check)
 {
     clearScreen();
 
@@ -391,8 +395,11 @@ void Menu::checkForUpdate()
         Version version(data);
         g_free(data);
 
+        if (auto_check && version <= pref_->version().lastCheckVersion())
+            return;
+
         ustring msg;
-        if (version > pref_->version().lastCheckVersion() && version > Version())
+        if (version > Version())
         {
             msg = ustring::compose(_("A update is available: you use the version %1 of Csuper whereas the version %2 is available.\n"
                                      "You can download the new version on this website: http://www.dalan.rd-h.fr/wordpress/"),
@@ -411,7 +418,8 @@ void Menu::checkForUpdate()
     catch (Glib::Exception& e)
     {
         cerr << e.what() << endl << endl;
-        cout << ustring(_("Cannot access to the latest version file on the internet")) << endl << endl;
+        if (!auto_check)
+            cout << ustring(_("Cannot access to the latest version file on the internet")) << endl << endl;
     }
     systemPause();
 }

@@ -94,7 +94,7 @@ private:
     /*!
      *  \brief Check if there is an update
      */
-    void checkForUpdate();
+    void checkForUpdate(const bool auto_check = false);
 
     /*!
      *  \brief Delete a CSU file
