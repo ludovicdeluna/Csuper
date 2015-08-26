@@ -64,6 +64,7 @@ protected:
     Gtk::MenuItem* game_config_menu_item_;  /*!< The game config menuitem */
     Gtk::MenuItem* pref_menu_item_;         /*!< The preferences menuitem */
     Gtk::MenuItem* about_menu_item_;        /*!< The about menuitem */
+    Gtk::MenuItem* update_menu_item_;       /*!< The update menuitem */
     Gtk::MenuItem* quit_menu_item_;         /*!< The quit menuitem */
 
 

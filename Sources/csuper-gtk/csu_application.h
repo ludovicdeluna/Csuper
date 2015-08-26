@@ -98,6 +98,7 @@ private:
      */
     void on_open(const type_vec_files& files, const Glib::ustring& hint);
 
+
 public:
     //
     // Constructor and destructor
@@ -136,6 +137,11 @@ public:
      */
     void onQuit();
 
+
+    /*!
+     *  \brief Check if there is an update
+     */
+    void checkForUpdate();
 
     /*!
      *  \brief Initialize the CsuApplication with the builder

@@ -149,7 +149,7 @@ Olivier FRISCH</property>
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="button_validate_properties">
-                <property name="label">Validate</property>
+                <property name="label" translatable="yes">Validate</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>
@@ -415,7 +415,7 @@ Olivier FRISCH</property>
             <property name="layout_style">end</property>
             <child>
               <object class="GtkButton" id="dialog_game_over_button">
-                <property name="label">Validate</property>
+                <property name="label" translatable="yes">Validate</property>
                 <property name="visible">True</property>
                 <property name="can_focus">True</property>
                 <property name="receives_default">True</property>

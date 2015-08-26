@@ -42,6 +42,7 @@
 #include "preferences_directory.h"
 #include "preferences_chart_exportation.h"
 #include "preferences_main_window_title_bar.h"
+#include "preferences_version.h"
 
 namespace csuper
 {
@@ -59,6 +60,7 @@ namespace csuper
         ScoreDisplayPreferences* score_;                /*!< The score display preferences */
         ChartExportationPreferences* chart_;            /*!< The chart exportation preferences */
         MainWindowTitleBarPreferences* title_bar_;      /*!< The main window title bar preferences */
+        VersionPreferences* version_pref_;              /*!< The version preferences */
         static double version_;                         /*!< The version */
 
 
@@ -283,6 +285,24 @@ namespace csuper
         MainWindowTitleBarPreferences &mainWindowTitleBar()
         {
             return *title_bar_;
+        }
+
+        /*!
+         *  \brief return the VersionPreferences
+         *  \return the VersionPreferences
+         */
+        const VersionPreferences &version() const
+        {
+            return *version_pref_;
+        }
+
+        /*!
+         *  \brief return the VersionPreferences
+         *  \return the VersionPreferences
+         */
+        VersionPreferences &version()
+        {
+            return *version_pref_;
         }
 
     };

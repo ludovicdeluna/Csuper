@@ -53,7 +53,8 @@ private:
         MENU_EXPORT = 6,
         MENU_PREF = 7,
         MENU_ABOUT = 8,
-        MENU_QUIT = 9
+        MENU_UPDATE = 9,
+        MENU_QUIT = 10
     };
 
     enum Preferences{
@@ -89,6 +90,11 @@ private:
      *  \brief About
      */
     void about() const;
+
+    /*!
+     *  \brief Check if there is an update
+     */
+    void checkForUpdate();
 
     /*!
      *  \brief Delete a CSU file

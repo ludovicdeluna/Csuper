@@ -73,21 +73,25 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
         game_config_menu_item_ = manage(new MenuItem(_("Game configuration")));
         pref_menu_item_ = manage(new MenuItem(_("Preferences")));
         about_menu_item_ = manage(new MenuItem(_("About")));
+        update_menu_item_ = manage(new MenuItem(_("Check for update")));
         quit_menu_item_ = manage(new MenuItem(_("Quit")));
 
         csuper_menu_->attach(*game_config_menu_item_,0,1,0,1);
         csuper_menu_->attach(*pref_menu_item_,0,1,1,2);
         csuper_menu_->attach(*about_menu_item_,0,1,2,3);
-        csuper_menu_->attach(*quit_menu_item_,0,1,3,4);
+        csuper_menu_->attach(*update_menu_item_,0,1,3,4);
+        csuper_menu_->attach(*quit_menu_item_,0,1,4,5);
 
         game_config_menu_item_->signal_activate().connect(mem_fun(*(app()->gameConfigurationWindow()),&GameConfigurationWindow::launch));
         pref_menu_item_->signal_activate().connect(mem_fun(*(app()->preferencesWindow()),&PreferencesWindow::launch));
         about_menu_item_->signal_activate().connect(mem_fun(*(app()->about()),&About::launch));
+        update_menu_item_->signal_activate().connect(mem_fun(*(app()),&CsuApplication::checkForUpdate));
         quit_menu_item_->signal_activate().connect(mem_fun(*(app()),&CsuApplication::onQuit));
 
         game_config_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_G,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
         pref_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_P,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
         about_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_A,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
+        update_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_U,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
         quit_menu_item_->add_accelerator("activate",get_accel_group(),GDK_KEY_Q,Gdk::CONTROL_MASK,ACCEL_VISIBLE);
 
         csuper_menu_button_->set_popup(*csuper_menu_);

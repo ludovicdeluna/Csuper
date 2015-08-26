@@ -57,6 +57,7 @@ namespace csuper
         score_ = new ScoreDisplayPreferences();
         chart_ = new ChartExportationPreferences();
         title_bar_ = new MainWindowTitleBarPreferences();
+        version_pref_ = new VersionPreferences();
     }
 
 
@@ -70,6 +71,7 @@ namespace csuper
         score_ = new ScoreDisplayPreferences(*(pref.score_));
         chart_ = new ChartExportationPreferences(*(pref.chart_));
         title_bar_ = new MainWindowTitleBarPreferences(*(pref.title_bar_));
+        version_pref_ = new VersionPreferences(*(pref.version_pref_));
     }
 
 
@@ -133,6 +135,9 @@ namespace csuper
 
             nextXmlElement(node);
             title_bar_ = new MainWindowTitleBarPreferences(node);
+
+            nextXmlElement(node);
+            version_pref_ = new VersionPreferences(node);
         }
         else
         {
@@ -156,6 +161,7 @@ namespace csuper
         delete score_;
         delete chart_;
         delete title_bar_;
+        delete version_pref_;
     }
 
     //
@@ -174,6 +180,7 @@ namespace csuper
         delete score_;
         delete chart_;
         delete title_bar_;
+        delete version_pref_;
 
         diff_ = new DifferenceBetweenPlayerPreferences(*(pref.diff_));
         dir_ = new DirectoryPreferences(*(pref.dir_));
@@ -183,6 +190,7 @@ namespace csuper
         score_ = new ScoreDisplayPreferences(*(pref.score_));
         chart_ = new ChartExportationPreferences(*(pref.chart_));
         title_bar_ = new MainWindowTitleBarPreferences(*(pref.title_bar_));
+        version_pref_ = new VersionPreferences(*(pref.version_pref_));
 
         return *this;
     }
@@ -196,7 +204,8 @@ namespace csuper
             + exportPdf().toUstring() + "\n"
             + chartExportation().toUstring() + "\n"
             + directory().toUstring() + "\n"
-            + mainWindowTitleBar().toUstring();
+            + mainWindowTitleBar().toUstring() + "\n"
+            + version().toUstring();
     }
 
     ostream& operator<<(ostream& os, const Preferences& pref)
@@ -240,6 +249,7 @@ namespace csuper
         chartExportation().createXmlNode(root);
         directory().createXmlNode(root);
         mainWindowTitleBar().createXmlNode(root);
+        version().createXmlNode(root);
 
 
         try

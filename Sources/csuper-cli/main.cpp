@@ -73,6 +73,7 @@ int main(int argc, char *argv[])
     bindtextdomain("csuper-cli","Locales");
     bind_textdomain_codeset("csuper-cli","UTF-8");
     textdomain("csuper-cli");
+    Gio::init();
 
     set_terminate(terminateFunction);
     set_prgname("csuper-cli");

@@ -78,7 +78,7 @@ void Menu::main()
         clearScreen();
 
         cout << ustring(_("Csuper - Universal points counter allowing a dispense with reflection v"));
-        cout << CSUPER_VERSION << endl << endl;
+        cout << Version().toUstring() << endl << endl;
         cout << ustring::compose(_("What do you want to do?"
                                    "\n (%1) Play a new game"
                                    "\n (%2) Load an existing game"
@@ -88,10 +88,13 @@ void Menu::main()
                                    "\n (%6) Export a file"
                                    "\n (%7) Display the preferences menu"
                                    "\n (%8) About"
-                                   "\n (%9) Quit the program"
-                                   "\n\nYour choice : ")
+                                   "\n (%9) Check for update")
                                  ,MENU_NEW,MENU_LOAD,MENU_PRINT,MENU_DELETE,MENU_LIST,MENU_EXPORT,
-                                 MENU_PREF,MENU_ABOUT,MENU_QUIT);
+                                 MENU_PREF,MENU_ABOUT,MENU_UPDATE);
+
+        cout << ustring::compose(_("\n (%1) Quit the program"
+                                   "\n\nYour choice : ")
+                                 ,MENU_QUIT);
 
         choice = Cin::getInt();
 
@@ -120,6 +123,9 @@ void Menu::main()
             break;
         case MENU_ABOUT:
             about();
+            break;
+        case MENU_UPDATE:
+            checkForUpdate();
             break;
         case MENU_QUIT:
             cout << ustring(_("\nSee you.")) << endl;
@@ -363,12 +369,50 @@ void Menu::about() const
 {
     clearScreen();
     cout << ustring(_("Csuper - Universal points counter allowing a dispense with reflection v"))
-         << CSUPER_VERSION << endl;
+         << Version().toUstring() << endl;
     cout << _("Csuper website: ") << ustring("http://www.dalan.rd-h.fr/wordpress") << endl;
     cout << ustring("Copyright © 2014-2015 Rémi BERTHO <remi.bertho@openmailbox.org>") << endl;
     cout << ustring(_("This program comes with ABSOLUTELY NO WARRANTY. \nThis is free software,"
                      "and you are welcome to redistribute it under certain conditions. \n"
                      "Fore more details : http://www.gnu.org/licenses/gpl.html\n")) << endl << endl;
+    systemPause();
+}
+
+void Menu::checkForUpdate()
+{
+    clearScreen();
+
+    RefPtr<Gio::File> file = Gio::File::create_for_uri("http://www.dalan.rd-h.fr/binaries/Csuper/latest_version.txt");
+    char* data;
+    gsize length;
+    try
+    {
+        file->load_contents(data,length);
+        Version version(data);
+        g_free(data);
+
+        ustring msg;
+        if (version > pref_->version().lastCheckVersion() && version > Version())
+        {
+            msg = ustring::compose(_("A update is available: you use the version %1 of Csuper whereas the version %2 is available.\n"
+                                     "You can download the new version on this website: http://www.dalan.rd-h.fr/wordpress/"),
+                                   Version().toUstring(),version.toUstring());
+        }
+        else
+        {
+            msg = ustring::compose(_("You use the version %1 of Csuper which is the latest version."),
+                                   Version().toUstring());
+        }
+        cout << msg << endl << endl;
+
+        pref_->version().setLastCheckVersion(version);
+        pref_->writeToFile();
+    }
+    catch (Glib::Exception& e)
+    {
+        cerr << e.what() << endl << endl;
+        cout << ustring(_("Cannot access to the latest version file on the internet")) << endl << endl;
+    }
     systemPause();
 }
 

@@ -105,11 +105,13 @@ void CsuApplication::onStartup()
         add_action("quit",mem_fun(*this,&CsuApplication::onQuit));
         add_action("game_config",mem_fun(*game_config_window_,&GameConfigurationWindow::launch));
         add_action("preferences",mem_fun(*pref_window_,&PreferencesWindow::launch));
+        add_action("update",mem_fun(*this,&CsuApplication::checkForUpdate));
         #if GTK_MINOR_VERSION >= 12
         set_accel_for_action("app.about","<primary>a");
         set_accel_for_action("app.quit","<primary>q");
         set_accel_for_action("app.game_config","<primary>g");
         set_accel_for_action("app.preferences","<primary>p");
+        set_accel_for_action("app.update","<primary>u");
         #else
         add_accelerator("<primary>a","app.about");
         add_accelerator("<primary>q","app.quit");
@@ -121,6 +123,7 @@ void CsuApplication::onStartup()
         menu->append(_("Preferences"),"app.preferences");
         menu->append(_("Game configuration"),"app.game_config");
         menu->append(_("About"),"app.about");
+        menu->append(_("Check for update"),"app.update");
         menu->append(_("Quit"),"app.quit");
         set_app_menu(RefPtr<Gio::MenuModel>::cast_static(menu));
     }
@@ -155,6 +158,50 @@ void CsuApplication::onQuit()
     quit();
     about_->hide();
     new_game_config_dialog_->hide();
+}
+
+void CsuApplication::checkForUpdate()
+{
+    // Check the version
+    RefPtr<File> file = File::create_for_uri("http://www.dalan.rd-h.fr/binaries/Csuper/latest_version.txt");
+    char* data;
+    gsize length;
+    try
+    {
+        file->load_contents(data,length);
+        Version version(data);
+        g_free(data);
+
+        ustring msg;
+        if (version > pref()->version().lastCheckVersion() && version > Version())
+        {
+            msg = ustring::compose(_("A update is available: you use the version %1 of Csuper whereas the version %2 is available.\n"
+                                     "You can download the new version on this website: http://www.dalan.rd-h.fr/wordpress/"),
+                                   Version().toUstring(),version.toUstring());
+        }
+        else
+        {
+            msg = ustring::compose(_("You use the version %1 of Csuper which is the latest version."),
+                                   Version().toUstring());
+        }
+
+        MessageDialog* dial = new MessageDialog(*(mainWindow()),msg,false,MESSAGE_INFO,BUTTONS_OK,true);
+        dial->run();
+        dial->hide();
+        delete dial;
+
+        pref()->version().setLastCheckVersion(version);
+        pref()->writeToFile();
+    }
+    catch (Glib::Exception& e)
+    {
+        cerr << e.what() << endl;
+        ustring msg = _("Cannot access to the latest version file on the internet");
+        MessageDialog* error = new MessageDialog(*(mainWindow()),msg,false,MESSAGE_ERROR,BUTTONS_OK,true);
+        error->run();
+        error->hide();
+        delete error;
+    }
 }
 
 void CsuApplication::updateGame(csuper::Game* game)

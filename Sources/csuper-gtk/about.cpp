@@ -37,11 +37,12 @@
 
 using namespace Gtk;
 using namespace Glib;
+using namespace csuper;
 
 About::About(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  CsuWidget(), AboutDialog(cobject)
 {
     //Version
-    set_version(CSUPER_VERSION);
+    set_version(Version().toUstring());
 }
 
 

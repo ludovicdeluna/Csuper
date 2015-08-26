@@ -54,8 +54,10 @@
 #include "preferences_export_pdf.h"
 #include "preferences_directory.h"
 #include "preferences_chart_exportation.h"
+#include "preferences_version.h"
 #include "preferences.h"
 #include "pdf_exportation.h"
 #include "undo_redo_manager.h"
+#include "version.h"
 
 #endif
