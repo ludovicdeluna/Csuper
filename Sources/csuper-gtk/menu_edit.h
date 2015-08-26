@@ -57,6 +57,12 @@ protected:
     // Function
     //
     /*!
+     *  \brief Set all the menu sensitive
+     */
+     void setSensitive();
+
+
+    /*!
      *  \brief Copy the current text in the clipboard
      */
     void copy();
@@ -75,6 +81,16 @@ protected:
      *  \brief Delete the current text in the clipboard
      */
     void deleteText();
+
+    /*!
+     *  \brief Undo the last action
+     */
+    void undo();
+
+    /*!
+     *  \brief Redo the last action
+     */
+    void redo();
 
 public:
     //

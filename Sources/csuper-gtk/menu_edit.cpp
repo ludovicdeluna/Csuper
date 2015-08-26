@@ -37,6 +37,7 @@
 
 using namespace Gtk;
 using namespace Glib;
+using namespace csuper;
 
 MenuEdit::MenuEdit(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  CsuWidget(), Menu(cobject)
 {
@@ -50,6 +51,18 @@ MenuEdit::MenuEdit(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  
     refGlade->get_widget("menu_paste", paste_);
     refGlade->get_widget("menu_delete", delete_);
 
+    undo_->set_sensitive(false);
+    redo_->set_sensitive(false);
+    copy_->set_sensitive(false);
+    cut_->set_sensitive(false);
+    paste_->set_sensitive(false);
+    delete_->set_sensitive(false);
+
+    signal_show().connect(mem_fun(*this,&MenuEdit::setSensitive));
+
+    undo_->signal_activate().connect(mem_fun(*this,&MenuEdit::undo));
+    redo_->signal_activate().connect(mem_fun(*this,&MenuEdit::redo));
+
     copy_->signal_activate().connect(mem_fun(*this,&MenuEdit::copy));
     cut_->signal_activate().connect(mem_fun(*this,&MenuEdit::cut));
     paste_->signal_activate().connect(mem_fun(*this,&MenuEdit::paste));
@@ -60,6 +73,52 @@ MenuEdit::MenuEdit(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  
 //
 // Function
 //
+void MenuEdit::setSensitive()
+{
+    // Undo/redo
+    if (app()->undoRedoManager().canUndo())
+        undo_->set_sensitive(true);
+    else
+        undo_->set_sensitive(false);
+
+    if (app()->undoRedoManager().canRedo())
+        redo_->set_sensitive(true);
+    else
+        redo_->set_sensitive(false);
+
+    // Clipboard
+    Widget* focus_widget = app()->get_active_window()->get_focus();
+    if (focus_widget == nullptr)
+    {
+        copy_->set_sensitive(false);
+        cut_->set_sensitive(false);
+        paste_->set_sensitive(false);
+        delete_->set_sensitive(false);
+        return;
+    }
+
+    Editable* focus_editable = dynamic_cast<Editable*>(focus_widget);
+    if (focus_editable == nullptr)
+    {
+        copy_->set_sensitive(false);
+        cut_->set_sensitive(false);
+        paste_->set_sensitive(false);
+        delete_->set_sensitive(false);
+        return;
+    }
+
+    RefPtr<Clipboard> clipboard = Clipboard::get();
+    RefPtr<Clipboard> clipboard_selected = Clipboard::get(gdk_atom_intern("PRIMARY",TRUE));
+
+    bool text_selected = clipboard_selected->wait_is_text_available();
+
+    copy_->set_sensitive(text_selected);
+    cut_->set_sensitive(text_selected);
+    delete_->set_sensitive(text_selected);
+    paste_->set_sensitive(clipboard->wait_is_text_available());
+}
+
+
 void MenuEdit::copy()
 {
     Widget* focus_widget = app()->get_active_window()->get_focus();
@@ -117,4 +176,17 @@ void MenuEdit::deleteText()
         return;
 
     focus_editable->delete_selection();
+}
+
+void MenuEdit::undo()
+{
+    Game* game = app()->undoRedoManager().undo();
+    app()->updateGame(game);
+}
+
+
+void MenuEdit::redo()
+{
+    Game* game = app()->undoRedoManager().redo();
+    app()->updateGame(game);
 }
