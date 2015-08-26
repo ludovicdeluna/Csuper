@@ -112,16 +112,16 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add option="-Wall" />
-			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 `" />
+			<Add option="-std=c++11" />
+			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 giomm-2.4`" />
 			<Add directory="../" />
 		</Compiler>
 		<ResourceCompiler>
 			<Add directory="../" />
 		</ResourceCompiler>
 		<Linker>
-			<Add option="`pkg-config --libs glibmm-2.4 cairo`" />
+			<Add option="`pkg-config --libs glibmm-2.4 cairo giomm-2.4`" />
 			<Add library="libcsuper" />
 			<Add library="podofo" />
 			<Add directory="../" />

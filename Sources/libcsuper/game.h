@@ -34,6 +34,8 @@
 #ifndef GAME_H_INCLUDED
 #define GAME_H_INCLUDED
 
+#include "giomm.h"
+
 
 #include "game_configuration.h"
 #include "player.h"
@@ -285,6 +287,13 @@ namespace csuper
          */
         Game(const Glib::ustring filename);
 
+        /*!
+         *  \brief Constructor from a Gio::File
+         *  \exception csuper::XmlError if bad file
+         */
+        Game(const Glib::RefPtr<Gio::File>& file);
+
+
 
 
 
@@ -470,11 +479,25 @@ namespace csuper
         void writeToFile(const Glib::ustring& filename) const;
 
         /*!
+         *  \brief Write to a file
+         *  \param file the file
+         *  \exception csuper::FileError if bad filename
+         */
+        void writeToFile(const Glib::RefPtr<Gio::File>& file) const;
+
+        /*!
          *  \brief Rewrite to a file
          *  \param filename the filename
          *  \exception csuper::XmlError if bad filename
          */
         void reWriteToFile(const Glib::ustring& filename) const;
+
+        /*!
+         *  \brief Rewrite to a file
+         *  \param file the file
+         *  \exception csuper::FileError if bad filename
+         */
+        void reWriteToFile(const Glib::RefPtr<Gio::File>& file) const;
 
         /*!
          *  \brief Check if someone exceed the maximum number

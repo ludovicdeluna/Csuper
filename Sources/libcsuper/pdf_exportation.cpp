@@ -768,10 +768,22 @@ namespace csuper
     //
     void PdfExportation::deleteTemporaryFiles(string& filename)
     {
-        if (remove((filename + "1").c_str()) != 0)
-            perror(ustring::compose(_("Error when deleting %1: "),filename + "1").c_str());
-        if (remove((filename + "2").c_str()) != 0)
-            perror(ustring::compose(_("Error when deleting %1: "),filename + "2").c_str());
+        try
+        {
+            removeFile((filename + "1"));
+        }
+        catch (csuper::FileError& e)
+        {
+            cerr << e.what() << endl;
+        }
+        try
+        {
+            removeFile((filename + "2"));
+        }
+        catch (csuper::FileError& e)
+        {
+            cerr << e.what() << endl;
+        }
     }
 
 

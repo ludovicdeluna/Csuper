@@ -38,12 +38,16 @@
 
 using namespace std;
 using namespace Glib;
+using namespace Gio;
 using namespace xmlpp;
 
 namespace csuper
 {
     double ListGameConfiguration::version_(1.0);
 
+    //
+    // Constructor and destructor
+    //
     ListGameConfiguration::ListGameConfiguration()
     {
 
@@ -85,6 +89,11 @@ namespace csuper
         }
     }
 
+    ListGameConfiguration::ListGameConfiguration(const RefPtr<File>& file) : ListGameConfiguration(filename_to_utf8(file->get_path()))
+    {
+
+    }
+
 
     ListGameConfiguration::ListGameConfiguration(const ListGameConfiguration &list_game_config)
     {
@@ -102,7 +111,9 @@ namespace csuper
     }
 
 
-
+    //
+    // Function
+    //
     const GameConfiguration &ListGameConfiguration::operator[](unsigned int i) const
     {
         if (i >= size())
@@ -292,6 +303,11 @@ namespace csuper
         }
     }
 
+    void ListGameConfiguration::writeToFile(const RefPtr<File> file) const
+    {
+        writeToFile(filename_to_utf8(file->get_path()));
+    }
+
     void ListGameConfiguration::writeToFile(const ustring filename, const std::vector<unsigned int>& indexes) const
     {
         Document doc;
@@ -328,6 +344,12 @@ namespace csuper
             cerr << e.what() << endl;
             throw FileError(ustring::compose(_("Error while writing the list of game configuration file %1"),filename));
         }
+    }
+
+
+    void ListGameConfiguration::writeToFile(const RefPtr<File> file, const vector<unsigned int>& indexes) const
+    {
+        writeToFile(filename_to_utf8(file->get_path()),indexes);
     }
 
     void ListGameConfiguration::writeToFile() const

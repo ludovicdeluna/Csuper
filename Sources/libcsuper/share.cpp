@@ -44,12 +44,14 @@
 #include <sys/stat.h>
 #include <glib/gstdio.h>
 #include "config.h"
+#include <giomm.h>
 
 namespace csuper{
 
     using namespace std;
     using namespace xmlpp;
     using namespace Glib;
+    using namespace Gio;
 
     bool Portable::portable_(false);
 
@@ -202,6 +204,10 @@ namespace csuper{
     }
 
 
+
+    //
+    // XML
+    //
     Element *nextXmlElement(Node*& node)
     {
         node = node->get_next_sibling();
@@ -237,18 +243,19 @@ namespace csuper{
     //
     bool checkFilename(const ustring& filename)
     {
+        if (filename.empty())
+            return false;
+
         string full_filename = build_filename(get_tmp_dir(),locale_from_utf8(filename));
 
-        ofstream file;
-        file.exceptions(ofstream::failbit | ofstream::badbit );
+        RefPtr<File> file = File::create_for_path(full_filename);
         try
         {
-            file.open(full_filename,ofstream::out);
-            file.close();
-            remove(full_filename.c_str());
+            file->create_file();
+            file->remove();
             return true;
         }
-        catch (std::exception& e)
+        catch (...)
         {
             return false;
         }
@@ -257,20 +264,67 @@ namespace csuper{
 
     bool checkFolder(const ustring& folder)
     {
+        if (folder.empty())
+            return false;
+
         string filename = build_filename(locale_from_utf8(folder),"test_csu_tmp");
 
-        ofstream file;
-        file.exceptions(ofstream::failbit | ofstream::badbit );
+        RefPtr<File> file = File::create_for_path(filename);
         try
         {
-            file.open(filename,ofstream::out);
-            file.close();
-            remove(filename.c_str());
+            file->create_file();
+            file->remove();
             return true;
         }
-        catch (ios_base::failure& e)
+        catch (...)
         {
             return false;
+        }
+    }
+
+    void removeFile(const ustring& filename)
+    {
+        RefPtr<File> file = File::create_for_path(filename_from_utf8(filename));
+        try
+        {
+            if (!(file->remove()))
+                throw csuper::FileError(ustring::compose(_("Error when deleting %1."),filename));
+        }
+        catch (Glib::Error& e)
+        {
+            cerr << e.what() << endl;
+            throw csuper::FileError(ustring::compose(_("Error when deleting %1."),filename));
+        }
+    }
+
+    void trashFile(const ustring& filename)
+    {
+        RefPtr<File> file = File::create_for_path(filename_from_utf8(filename));
+        try
+        {
+            if (!(file->trash()))
+                throw csuper::FileError(ustring::compose(_("Error when trashing %1."),filename));
+        }
+        catch (Glib::Error& e)
+        {
+            cerr << e.what() << endl;
+            throw csuper::FileError(ustring::compose(_("Error when trashing %1."),filename));
+        }
+    }
+
+    void moveFile(const ustring& old_filename, const ustring& new_filename)
+    {
+        RefPtr<File> old_file = File::create_for_path(filename_from_utf8(old_filename));
+        RefPtr<File> new_file = File::create_for_path(filename_from_utf8(new_filename));
+        try
+        {
+            if (!(old_file->move(new_file)))
+                throw csuper::FileError(ustring::compose(_("Error when moving %1 to %2."),old_filename,new_filename));
+        }
+        catch (Glib::Error& e)
+        {
+            cerr << e.what() << endl;
+            throw csuper::FileError(ustring::compose(_("Error when moving %1 to %2."),old_filename,new_filename));
         }
     }
 

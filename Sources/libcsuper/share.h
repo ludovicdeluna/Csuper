@@ -229,6 +229,28 @@ namespace csuper
      */
     bool checkFolder(const Glib::ustring& folder);
 
+    /*!
+     *  Remove a file
+     * \param filename the filename
+     * \exception csuper::FileError if bad filename or IO error
+     */
+    void removeFile(const Glib::ustring& filename);
+
+    /*!
+     *  Thrash a file
+     * \param filename the filename
+     * \exception csuper::FileError if bad filename or IO error
+     */
+    void trashFile(const Glib::ustring& filename);
+
+    /*!
+     *  Move a file
+     * \param old_filename the old filename
+     * \param new_filename the new filename
+     * \exception csuper::FileError if bad filename or IO error
+     */
+    void moveFile(const Glib::ustring& old_filename, const Glib::ustring& new_filename);
+
 
     //
     // Extension

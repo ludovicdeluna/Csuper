@@ -86,11 +86,14 @@ void MenuFile::deleteFile()
     {
     case RESPONSE_YES:
         verif->hide();
-        if (std::remove((app()->filename()).c_str()) != 0)
+        try
         {
-            perror(ustring::compose(_("Error when deleting %1: "),app()->filename()).c_str());
-            MessageDialog* error = new MessageDialog(*(app()->mainWindow()),ustring::compose(_("Error when deleting %1"),app()->filename())
-                                                     ,false,MESSAGE_ERROR,BUTTONS_OK,true);
+            trashFile(app()->filename());
+        }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
+            MessageDialog* error = new MessageDialog(*(app()->mainWindow()),e.what(),false,MESSAGE_ERROR,BUTTONS_OK,true);
             error->run();
             error->hide();
             delete error;

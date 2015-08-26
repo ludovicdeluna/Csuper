@@ -88,6 +88,14 @@ private:
      */
     void onStartup();
 
+
+    /*!
+     *  \brief Function used to parse the command line
+     *  \param command_line the ApplicationCommandLine
+     *  \return An integer that is set as the exit status for the calling process.
+     */
+    void on_open(const type_vec_files& files, const Glib::ustring& hint);
+
 public:
     //
     // Constructor and destructor

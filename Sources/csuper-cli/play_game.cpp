@@ -83,10 +83,15 @@ void PlayGame::play() const
 
     if (deleteFile())
     {
-        if (remove((filename_).c_str()) != 0)
-            perror(ustring::compose(_("Error when deleting %1: "),filename_).c_str());
-        else
+        try
+        {
+            trashFile(filename_);
             cout << ustring::compose(_("The file %1 was successfully deleted."),filename_) << endl;
+        }
+        catch (csuper::FileError& e)
+        {
+            cout << e.what() << endl;
+        }
 
         systemPause();
     }

@@ -119,7 +119,7 @@ namespace csuper
 
 
     /*! \class FileError
-    *   \brief This class represent a not file error
+    *   \brief This class represent a file error
     */
     class FileError : public Exception
     {

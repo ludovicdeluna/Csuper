@@ -34,6 +34,11 @@ pkg_check_modules(
 )
 
 pkg_check_modules(
+	GIOMM
+	REQUIRED  giomm-2.4
+)
+
+pkg_check_modules(
 	XMLPP
 	REQUIRED libxml++-2.6
 )
@@ -45,12 +50,14 @@ pkg_check_modules(
 
 include_directories(
 	${XMLPP_INCLUDE_DIRS}
+	${GIOMM_INCLUDE_DIRS}
 	${GLIBMM_INCLUDE_DIRS}
 	${CAIRO_INCLUDE_DIRS}
 )
 link_directories(
 	${XMLPP_LIBRARY_DIRS}
 	${GLIBMM_LIBRARY_DIRS}
+	${GIOMM_LIBRARY_DIRS}
 	${CAIRO_LIBRARY_DIRS}
 	${PROJECT_BINARY_DIR}
 )
@@ -58,6 +65,7 @@ link_directories(
 add_definitions(
 	${XMLPP_CFLAGS_OTHER}
 	${GLIBMM_CFLAGS_OTHER}
+	${GLIOMM_CFLAGS_OTHER}
 	${CAIRO_CFLAGS_OTHER}
 )
 
@@ -131,6 +139,7 @@ add_library(
 target_link_libraries(
 	csuper
 	${GLIBMM_LIBRARIES}
+	${GIOMM_LIBRARIES}
 	${XMLPP_LIBRARIES}
 	muparser
 	podofo
@@ -162,6 +171,7 @@ IF(CLI MATCHES "TRUE")
 		csuper-cli 
 		csuper
 		${GLIBMM_LIBRARIES}
+		${GIOMM_LIBRARIES}
 		${XMLPP_LIBRARIES}
 		muparser
 	)

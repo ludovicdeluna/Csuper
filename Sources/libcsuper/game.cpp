@@ -49,6 +49,7 @@ namespace csuper
     using namespace std;
     using namespace Glib;
     using namespace xmlpp;
+    using namespace Gio;
 
     double Game::version_(1.4);
 
@@ -136,6 +137,11 @@ namespace csuper
             nextXmlElement(node);
             players_.push_back(new Player(node));
         }
+
+    }
+
+    Game::Game(const RefPtr<File>& file) : Game(filename_to_utf8(file->get_path()))
+    {
 
     }
 
@@ -687,7 +693,7 @@ namespace csuper
         return index;
     }
 
-    void Game::writeToFile(const Glib::ustring& filename) const
+    void Game::writeToFile(const ustring& filename) const
     {
         Document doc;
         Element* root = doc.create_root_node("csu");
@@ -736,24 +742,30 @@ namespace csuper
         }
     }
 
-    void Game::reWriteToFile(const Glib::ustring& filename) const
+    void Game::writeToFile(const RefPtr<File>& file) const
+    {
+        writeToFile(filename_to_utf8(file->get_path()));
+    }
+
+    void Game::reWriteToFile(const ustring& filename) const
     {
         ustring tmp_filename = filename + ".tmp";
-        string locale_filename = locale_from_utf8(filename);
-        string tmp_locale_filename = locale_from_utf8(tmp_filename);
-
-        writeToFile(tmp_locale_filename);
-
-        if (remove(locale_filename.c_str()) == -1)
-            perror(locale_filename.c_str());
-
-        if (rename(tmp_locale_filename.c_str(),locale_filename.c_str()) == -1)
+        try
         {
-            if (remove(tmp_locale_filename.c_str()) == -1)
-                perror("");
-
-            throw FileError(_("Error while rewriting the file ") + locale_filename);
+            writeToFile(tmp_filename);
+            removeFile(filename);
+            moveFile(tmp_filename,filename);
         }
+        catch (Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
+            throw FileError(ustring::compose(_("Error while rewriting the file %1"),filename));
+        }
+    }
+
+    void Game::reWriteToFile(const RefPtr<File>& file) const
+    {
+        reWriteToFile(filename_to_utf8(file->get_path()));
     }
 
 
@@ -827,7 +839,7 @@ namespace csuper
         }
         catch (ios_base::failure& e)
         {
-            throw FileError(_("Error while exporting the game into a csv file, bad filename: ") + filename);
+            throw FileError(_("Error while exporting the game into a CSV file, bad filename: ") + filename);
         }
 
         unsigned int i,j;

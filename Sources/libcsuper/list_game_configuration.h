@@ -34,6 +34,8 @@
 #ifndef LIST_GAME_CONFIGURATION_H_INCLUDED
 #define LIST_GAME_CONFIGURATION_H_INCLUDED
 
+#include <giomm.h>
+
 #include "game_configuration.h"
 
 namespace csuper
@@ -44,8 +46,8 @@ namespace csuper
     class ListGameConfiguration
     {
     private:
-        std::vector<GameConfiguration*> game_configuration_list_; /*!< Tab of game configuration */
-        static double version_; /*!< The version */
+        std::vector<GameConfiguration*> game_configuration_list_;   /*!< Tab of game configuration */
+        static double version_;                                     /*!< The version */
 
     public:
         //
@@ -63,9 +65,17 @@ namespace csuper
 
         /*!
          *  \brief Constructor from a filename
+         *  \param filename the filename
          *  \exception csuper::XmlError if bad file
          */
         ListGameConfiguration(const Glib::ustring& filename);
+
+        /*!
+         *  \brief Constructor from a filename
+         *  \param file the file
+         *  \exception csuper::XmlError if bad file
+         */
+        ListGameConfiguration(const Glib::RefPtr<Gio::File>& file);
 
 
 
@@ -207,12 +217,27 @@ namespace csuper
         void writeToFile(const Glib::ustring filename) const;
 
         /*!
+         *  \brief Write the list of game configuration to a file
+         *  \param file the file
+         *  \exception csuper::FileError if bad filename
+         */
+        void writeToFile(const Glib::RefPtr<Gio::File> file) const;
+
+        /*!
          *  \brief Write the list of game configuration to a file with specific indexes
          *  \param filename the filename
          *  \param indexes of the games configuration that will be write to the file
          *  \exception csuper::FileError if bad filename
          */
         void writeToFile(const Glib::ustring filename, const std::vector<unsigned int>& indexes) const;
+
+        /*!
+         *  \brief Write the list of game configuration to a file with specific indexes
+         *  \param file the file
+         *  \param indexes of the games configuration that will be write to the file
+         *  \exception csuper::FileError if bad filename
+         */
+        void writeToFile(const Glib::RefPtr<Gio::File> file, const std::vector<unsigned int>& indexes) const;
 
         /*!
          *  \brief Write the list of game configuration to the file which contain the main list

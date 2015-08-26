@@ -38,13 +38,13 @@
 			<Add option="-Wall" />
 			<Add option="-std=c++11" />
 			<Add option="-fpic" />
-			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 cairo `" />
+			<Add option="`pkg-config --cflags glibmm-2.4 libxml++-2.6 cairo giomm-2.4`" />
 			<Add directory="../Externals library/Slope" />
 		</Compiler>
 		<Linker>
 			<Add option="-shared" />
 			<Add option="-Wl,-Bstatic -lslope -Wl,-Bdynamic" />
-			<Add option="`pkg-config --libs glibmm-2.4 libxml++-2.6 cairo `" />
+			<Add option="`pkg-config --libs glibmm-2.4 libxml++-2.6 cairo giomm-2.4`" />
 			<Add library="muparser" />
 			<Add library="podofo" />
 			<Add directory=".." />

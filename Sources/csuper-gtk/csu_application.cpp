@@ -37,6 +37,7 @@
 
 using namespace Gtk;
 using namespace Glib;
+using namespace Gio;
 using namespace std;
 using namespace csuper;
 using namespace sigc;
@@ -44,7 +45,7 @@ using namespace sigc;
 //
 // Constructor and destructor
 //
-CsuApplication::CsuApplication(int& argc, char**& argv) : Gtk::Application(argc,argv,"org.dalan.csuper-gtk")
+CsuApplication::CsuApplication(int& argc, char**& argv) : Gtk::Application(argc,argv,"org.dalan.csuper-gtk",APPLICATION_HANDLES_OPEN)
 {
     signal_startup().connect(sigc::mem_fun(*this,&CsuApplication::onStartup));
 
@@ -122,6 +123,30 @@ void CsuApplication::onStartup()
         menu->append(_("Quit"),"app.quit");
         set_app_menu(RefPtr<Gio::MenuModel>::cast_static(menu));
     }
+}
+
+void CsuApplication::on_open(const type_vec_files& files, const ustring& hint)
+{
+    RefPtr<File> file = files[0];
+    if (file->query_exists())
+    {
+        try
+        {
+            ustring filename = filename_to_utf8(file->get_path());
+            Game* tmp_game = new Game(file);
+            setGame(tmp_game);
+            setFilename(filename);
+        }
+        catch(Glib::Exception& e)
+        {
+            cerr << e.what() << endl;
+            MessageDialog* error = new MessageDialog(*mainWindow(),e.what(),false,MESSAGE_ERROR,BUTTONS_OK,true);
+            error->run();
+            error->hide();
+            delete error;
+        }
+    }
+    activate();
 }
 
 void CsuApplication::onQuit()
