@@ -132,6 +132,8 @@
 		<Unit filename="../Sources/csuper-gtk/file_properties_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/game_configuration_window.cpp" />
 		<Unit filename="../Sources/csuper-gtk/game_configuration_window.h" />
+		<Unit filename="../Sources/csuper-gtk/game_over_dialog.cpp" />
+		<Unit filename="../Sources/csuper-gtk/game_over_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/import_export_game_configuration_dialog.cpp" />
 		<Unit filename="../Sources/csuper-gtk/import_export_game_configuration_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/main.cpp" />

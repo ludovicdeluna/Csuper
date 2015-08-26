@@ -83,6 +83,11 @@ public:
     // Function
     //
     /*!
+     *  \brief Set all the menu sensitive
+     */
+     void setSensitive();
+
+    /*!
      *  \brief Slot used when a difference between player is changed
      */
     void diffChanged();
@@ -96,6 +101,11 @@ public:
      *  \brief Slot used when a main window display is changed
      */
     void mainWindowDisplayChanged();
+
+    /*!
+     *  \brief Show the game over dialog
+     */
+    void showGameOver();
 };
 
 #endif // MENU_DISPLAY_H_INCLUDED

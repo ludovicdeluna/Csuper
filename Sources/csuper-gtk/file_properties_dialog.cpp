@@ -52,7 +52,9 @@ FilePropertiesDialog::FilePropertiesDialog(BaseObjectType* cobject, const RefPtr
     ok_button_->set_image_from_icon_name("gtk-ok",ICON_SIZE_BUTTON);
 }
 
-
+//
+// Function
+//
 void FilePropertiesDialog::launch()
 {
     prop_label_->set_text(app()->game()->toUstringProperties());

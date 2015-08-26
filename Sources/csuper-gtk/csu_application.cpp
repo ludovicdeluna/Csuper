@@ -85,6 +85,7 @@ void CsuApplication::init(RefPtr<Builder>& builder)
     builder_->get_widget_derived("preferences_display_scrolledwindow", display_pref_window_);
     builder_->get_widget_derived("main_window", main_window_);
     builder_->get_widget_derived("file_properties_dialog", file_properties_dialog_);
+    builder_->get_widget_derived("game_over_dialog", game_over_dialog_);
     import_export_game_config_dialog_ = new ImportExportGameConfigurationDialog();
 }
 
@@ -167,7 +168,13 @@ void CsuApplication::updateGame(csuper::Game* game)
         game_ = game;
     }
 
-    // Update main window
+    if (game_->exceedMaxNumber())
+    {
+        gameOverDialog()->launch();
+    }
+
+    // Update points
+    // update ranking
 }
 
 
@@ -181,14 +188,15 @@ void CsuApplication::setGame(csuper::Game* game)
     else
     {
         menuFile()->setSensitive();
+        menuDisplay()->setSensitive();
     }
 
     game_ = game;
 
     undoRedoManager().clear();
     undoRedoManager().add(game);
-    // Update main window
-    // Set button
+    // Update points
+    // update ranking
     // fill calculator names
  }
 

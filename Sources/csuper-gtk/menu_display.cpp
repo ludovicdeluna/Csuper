@@ -66,6 +66,12 @@ MenuDisplay::MenuDisplay(BaseObjectType* cobject, const RefPtr<Builder>& refGlad
     refGlade->get_widget("menu_display_game_information", game_information_);
 
 
+    podium_->set_sensitive(false);
+    chart_total_points_->set_sensitive(false);
+    chart_points_->set_sensitive(false);
+    statistics_->set_sensitive(false);
+
+
     // Set from pref
     cons_->set_active(app()->pref()->differenceBetweenPlayer().consecutive());
     first_->set_active(app()->pref()->differenceBetweenPlayer().first());
@@ -81,6 +87,8 @@ MenuDisplay::MenuDisplay(BaseObjectType* cobject, const RefPtr<Builder>& refGlad
 
 
     // Connect signal
+    podium_->signal_activate().connect(mem_fun(*this,&MenuDisplay::showGameOver));
+
     cons_->signal_toggled().connect(mem_fun(*this,&MenuDisplay::diffChanged));
     first_->signal_toggled().connect(mem_fun(*this,&MenuDisplay::diffChanged));
     last_->signal_toggled().connect(mem_fun(*this,&MenuDisplay::diffChanged));
@@ -98,6 +106,14 @@ MenuDisplay::MenuDisplay(BaseObjectType* cobject, const RefPtr<Builder>& refGlad
 //
 // Function
 //
+void MenuDisplay::setSensitive()
+{
+    podium_->set_sensitive(true);
+    chart_total_points_->set_sensitive(true);
+    chart_points_->set_sensitive(true);
+    statistics_->set_sensitive(true);
+}
+
 void MenuDisplay::diffChanged()
 {
     app()->pref()->differenceBetweenPlayer().setConsecutive(cons_->get_active());
@@ -121,4 +137,9 @@ void MenuDisplay::mainWindowDisplayChanged()
     app()->pref()->mainWindowDisplay().setCalculator(calculator_->get_active());
     app()->pref()->mainWindowDisplay().setGameInformation(game_information_->get_active());
     app()->pref()->writeToFile();
+}
+
+void MenuDisplay::showGameOver()
+{
+    app()->gameOverDialog()->launch();
 }
