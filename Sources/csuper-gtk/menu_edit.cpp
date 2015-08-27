@@ -38,9 +38,12 @@
 using namespace Gtk;
 using namespace Glib;
 using namespace csuper;
+using namespace Gdk;
 
 MenuEdit::MenuEdit(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  CsuWidget(), Menu(cobject)
 {
+    set_accel_group(app()->mainAccelGroup());
+
     refGlade->get_widget("menu_undo", undo_);
     refGlade->get_widget("menu_redo", redo_);
 
@@ -51,6 +54,7 @@ MenuEdit::MenuEdit(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  
     refGlade->get_widget("menu_paste", paste_);
     refGlade->get_widget("menu_delete", delete_);
 
+
     undo_->set_sensitive(false);
     redo_->set_sensitive(false);
     copy_->set_sensitive(false);
@@ -58,7 +62,9 @@ MenuEdit::MenuEdit(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  
     paste_->set_sensitive(false);
     delete_->set_sensitive(false);
 
+
     signal_show().connect(mem_fun(*this,&MenuEdit::setSensitive));
+
 
     undo_->signal_activate().connect(mem_fun(*this,&MenuEdit::undo));
     redo_->signal_activate().connect(mem_fun(*this,&MenuEdit::redo));
@@ -67,6 +73,15 @@ MenuEdit::MenuEdit(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  
     cut_->signal_activate().connect(mem_fun(*this,&MenuEdit::cut));
     paste_->signal_activate().connect(mem_fun(*this,&MenuEdit::paste));
     delete_->signal_activate().connect(mem_fun(*this,&MenuEdit::deleteText));
+
+
+    undo_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_Z,CONTROL_MASK,ACCEL_VISIBLE);
+    redo_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_Y,CONTROL_MASK,ACCEL_VISIBLE);
+
+    copy_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_C,CONTROL_MASK,ACCEL_VISIBLE);
+    cut_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_X,CONTROL_MASK,ACCEL_VISIBLE);
+    paste_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_P,CONTROL_MASK,ACCEL_VISIBLE);
+    delete_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_Delete,~MODIFIER_MASK,ACCEL_VISIBLE);
 }
 
 

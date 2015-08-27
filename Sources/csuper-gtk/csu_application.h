@@ -58,7 +58,8 @@
 class CsuApplication : public Gtk::Application
 {
 private:
-    Glib::RefPtr<Gtk::Builder> builder_;    /*!< The Gtk::Builder */
+    Glib::RefPtr<Gtk::Builder> builder_;                /*!< The Builder */
+    Glib::RefPtr<Gtk::AccelGroup> main_accel_group_;    /*!< The main accel group */
 
     csuper::Preferences* pref_;                         /*!< The preferences */
     csuper::ListGameConfiguration* list_game_config_;   /*!< The list of game configuration */
@@ -181,6 +182,15 @@ public:
      inline csuper::UndoRedoManager& undoRedoManager()
      {
          return undo_redo_manager_;
+     }
+
+    /*!
+     *  \brief return the main AccelGroup
+     *  \return the main AccelGroup
+     */
+     inline Glib::RefPtr<Gtk::AccelGroup> mainAccelGroup()
+     {
+         return main_accel_group_;
      }
 
     /*!

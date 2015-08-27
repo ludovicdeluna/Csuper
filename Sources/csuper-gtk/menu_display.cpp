@@ -37,10 +37,14 @@
 
 using namespace Gtk;
 using namespace Glib;
+using namespace Gdk;
 using namespace csuper;
 
 MenuDisplay::MenuDisplay(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  CsuWidget(), Menu(cobject)
 {
+    set_accel_group(app()->mainAccelGroup());
+
+
     // Glade
     refGlade->get_widget("menu_display_podium", podium_);
     refGlade->get_widget("menu_display_chart_total_points", chart_total_points_);
@@ -101,6 +105,25 @@ MenuDisplay::MenuDisplay(BaseObjectType* cobject, const RefPtr<Builder>& refGlad
     ranking_side_->signal_toggled().connect(mem_fun(*this,&MenuDisplay::mainWindowDisplayChanged));
     calculator_->signal_toggled().connect(mem_fun(*this,&MenuDisplay::mainWindowDisplayChanged));
     game_information_->signal_toggled().connect(mem_fun(*this,&MenuDisplay::mainWindowDisplayChanged));
+
+
+    // Accelerator
+    podium_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_I,CONTROL_MASK,ACCEL_VISIBLE);
+    chart_total_points_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_W,CONTROL_MASK,ACCEL_VISIBLE);
+    chart_points_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_D,CONTROL_MASK,ACCEL_VISIBLE);
+    statistics_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_J,CONTROL_MASK,ACCEL_VISIBLE);
+
+    cons_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_C,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
+    first_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_F,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
+    last_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_L,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
+
+    total_points_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_T,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
+    ranking_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_N,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
+    edit_suppr_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_M,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
+
+    ranking_side_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_Q,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
+    calculator_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_Z,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
+    game_information_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_D,CONTROL_MASK | SHIFT_MASK,ACCEL_VISIBLE);
 }
 
 

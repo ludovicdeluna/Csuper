@@ -73,6 +73,8 @@ void CsuApplication::init(RefPtr<Builder>& builder)
     builder_ = builder;
     CsuWidget::setApp(this);
 
+    main_accel_group_ = RefPtr<AccelGroup>::cast_dynamic(builder->get_object("main_accelgroup"));
+
     builder_->get_widget_derived("menu_file", menu_file_);
     builder_->get_widget_derived("menu_edit", menu_edit_);
     builder_->get_widget_derived("menu_display", menu_display_);

@@ -43,6 +43,8 @@ using namespace csuper;
 
 MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  CsuWidget(), ApplicationWindow(cobject)
 {
+    add_accel_group(app()->mainAccelGroup());
+
     refGlade->get_widget("main_grid", main_grid_);
 
     // Header bar
@@ -171,6 +173,7 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
         maximize();
     else
         unmaximize();
+
 
 
     main_grid_->show_all();

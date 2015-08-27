@@ -38,11 +38,14 @@
 
 using namespace Gtk;
 using namespace Glib;
+using namespace Gdk;
 using namespace std;
 using namespace csuper;
 
 MenuFile::MenuFile(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  CsuWidget(), Menu(cobject)
 {
+    set_accel_group(app()->mainAccelGroup());
+
     refGlade->get_widget("menu_save_as", save_as_);
     refGlade->get_widget("menu_export", export_);
     refGlade->get_widget("menuitem_separator5", sep_1_);
@@ -59,6 +62,11 @@ MenuFile::MenuFile(BaseObjectType* cobject, const RefPtr<Builder>& refGlade) :  
     prop_->signal_activate().connect(mem_fun(*this,&MenuFile::showProperties));
     save_as_->signal_activate().connect(mem_fun(*this,&MenuFile::saveAs));
     export_->signal_activate().connect(mem_fun(*this,&MenuFile::exportFile));
+
+    delete_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_Delete,CONTROL_MASK,ACCEL_VISIBLE);
+    prop_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_R,CONTROL_MASK,ACCEL_VISIBLE);
+    save_as_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_S,CONTROL_MASK,ACCEL_VISIBLE);
+    export_->add_accelerator("activate",app()->mainAccelGroup(),GDK_KEY_E,CONTROL_MASK,ACCEL_VISIBLE);
 }
 
 
