@@ -106,6 +106,11 @@ public:
      *  \brief Show the game over dialog
      */
     void showGameOver();
+
+    /*!
+     *  \brief Show the statistics dialog
+     */
+    void showStatistics();
 };
 
 #endif // MENU_DISPLAY_H_INCLUDED

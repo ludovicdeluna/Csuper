@@ -79,6 +79,8 @@ ExportationPreferences::ExportationPreferences(BaseObjectType* cobject, const Re
     refGlade->get_widget("preferences_exportation_chart_total_points_label", chart_total_points_label_);
     refGlade->get_widget("preferences_exportation_chart_total_points_switch", chart_total_points_switch_);
 
+    if (!(PdfExportation::canUseUtf8()))
+        pdf_utf8_switch_->set_sensitive(false);
 
     pdf_utf8_switch_->property_active().signal_changed().connect(
                                     mem_fun(*(app()->preferencesWindow()),&PreferencesWindow::hasChange));

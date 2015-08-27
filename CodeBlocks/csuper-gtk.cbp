@@ -164,6 +164,8 @@
 			<Option target="Debug Portable Windows" />
 			<Option target="Release Portable Windows" />
 		</Unit>
+		<Unit filename="../Sources/csuper-gtk/statistics_dialog.cpp" />
+		<Unit filename="../Sources/csuper-gtk/statistics_dialog.h" />
 		<Extensions>
 			<code_completion />
 			<debugger />

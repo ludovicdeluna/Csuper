@@ -86,6 +86,7 @@ void CsuApplication::init(RefPtr<Builder>& builder)
     builder_->get_widget_derived("main_window", main_window_);
     builder_->get_widget_derived("file_properties_dialog", file_properties_dialog_);
     builder_->get_widget_derived("game_over_dialog", game_over_dialog_);
+    builder_->get_widget_derived("statistics_dialog", stat_dialog_);
     import_export_game_config_dialog_ = new ImportExportGameConfigurationDialog();
 }
 

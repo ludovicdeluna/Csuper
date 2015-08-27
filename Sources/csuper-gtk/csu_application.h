@@ -47,6 +47,7 @@
 #include "new_file_assistant.h"
 #include "file_properties_dialog.h"
 #include "game_over_dialog.h"
+#include "statistics_dialog.h"
 
 #include "../libcsuper/libcsuper.h"
 
@@ -80,6 +81,7 @@ private:
     NewFileAssistant* new_file_assistant_;                                  /*!< The new file assistant */
     FilePropertiesDialog* file_properties_dialog_;                          /*!< The file properties dialog */
     GameOverDialog* game_over_dialog_;                                      /*!< The game over dialog */
+    StatisticsDialog* stat_dialog_;                                         /*!< The statistics dialog */
 
 
     //
@@ -305,6 +307,15 @@ public:
      inline GameOverDialog* gameOverDialog()
      {
          return game_over_dialog_;
+     }
+
+    /*!
+     *  \brief return the StatisticsDialog
+     *  \return the StatisticsDialog
+     */
+     inline StatisticsDialog* statisticsDialog()
+     {
+         return stat_dialog_;
      }
 
     /*!

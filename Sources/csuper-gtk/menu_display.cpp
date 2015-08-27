@@ -88,6 +88,7 @@ MenuDisplay::MenuDisplay(BaseObjectType* cobject, const RefPtr<Builder>& refGlad
 
     // Connect signal
     podium_->signal_activate().connect(mem_fun(*this,&MenuDisplay::showGameOver));
+    statistics_->signal_activate().connect(mem_fun(*this,&MenuDisplay::showStatistics));
 
     cons_->signal_toggled().connect(mem_fun(*this,&MenuDisplay::diffChanged));
     first_->signal_toggled().connect(mem_fun(*this,&MenuDisplay::diffChanged));
@@ -142,4 +143,9 @@ void MenuDisplay::mainWindowDisplayChanged()
 void MenuDisplay::showGameOver()
 {
     app()->gameOverDialog()->launch();
+}
+
+void MenuDisplay::showStatistics()
+{
+    app()->statisticsDialog()->launch();
 }
