@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Csuper -  4.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-27 14:07+0200\n"
-"PO-Revision-Date: 2015-08-27 14:08+0200\n"
+"PO-Revision-Date: 2015-09-18 15:04+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -628,7 +628,7 @@ msgstr "Nombre de chiffres après la virgule"
 
 #: UI/csuper-gtk.glade:1088
 msgid "The winner is the player with the highest score"
-msgstr "Le premier est le joueur qui a le plus de points"
+msgstr "Le gagnant est le joueur qui a le plus de points"
 
 #: UI/csuper-gtk.glade:1101
 msgid "The points will be attributed in turn-based"

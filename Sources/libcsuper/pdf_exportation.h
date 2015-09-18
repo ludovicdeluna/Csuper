@@ -35,7 +35,6 @@
 #define PDF_EXPORTATION_H_INCLUDED
 
 
-#include <hpdf.h>
 #include "game.h"
 #include "preferences_export_pdf.h"
 

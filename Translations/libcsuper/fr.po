@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-08-26 19:09+0200\n"
-"PO-Revision-Date: 2015-08-26 19:11+0200\n"
+"PO-Revision-Date: 2015-09-18 15:04+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -270,7 +270,7 @@ msgstr "Nombre de chiffres après la virgule affiché;"
 
 #: Sources/libcsuper/game.cpp:860
 msgid "The first has the highest score;"
-msgstr "Le premier est celui qui a le plus grand score;"
+msgstr "Le gagnant est celui qui a le plus grand score;"
 
 #: Sources/libcsuper/game.cpp:861
 msgid "Turn-based game;"
@@ -412,7 +412,7 @@ msgstr "Nombre de chiffres après la virgule affiché : "
 
 #: Sources/libcsuper/game_configuration.cpp:143
 msgid "The first has the highest score: "
-msgstr "Le premier est celui qui a le plus grand score : "
+msgstr "Le gagnant est celui qui a le plus grand score : "
 
 #: Sources/libcsuper/game_configuration.cpp:144
 msgid "Turn-based game: "
