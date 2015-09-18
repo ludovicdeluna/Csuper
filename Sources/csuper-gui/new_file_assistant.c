@@ -66,7 +66,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_window_resize(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),700,400);
     gtk_window_set_title(GTK_WINDOW(user_data->ptr_new_csu_file_assistant),_("New csu file assistant"));
 
-    /*Set the signal pf the assistant */
+    /*Set the signal of the assistant */
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"delete-event", G_CALLBACK(deleteEventAssistantNewCsu),user_data);
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"cancel", G_CALLBACK(deleteAssistantNewCsu),user_data);
     g_signal_connect(user_data->ptr_new_csu_file_assistant,"prepare", G_CALLBACK(preparePageAssistantNewCsu),user_data);
@@ -77,7 +77,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     GtkWidget *grid_1 = getWidgetFromBuilder(user_data->ptr_builder,"grid_new_csu_file_assistant_1");
     gtk_assistant_append_page(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1);
     gtk_assistant_set_page_type(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,GTK_ASSISTANT_PAGE_INTRO);
-    gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,_("General informations"));
+    gtk_assistant_set_page_title(GTK_ASSISTANT(user_data->ptr_new_csu_file_assistant),grid_1,_("General information"));
 
     /* Configure the file chooser */
     gtk_entry_set_max_length(GTK_ENTRY(gtk_grid_get_child_at(GTK_GRID(grid_1),1,0)),SIZE_MAX_FILE_NAME/8);
@@ -93,6 +93,7 @@ G_MODULE_EXPORT void openAssistantNewCsu(GtkWidget *widget, gpointer data)
     gtk_grid_attach(GTK_GRID(grid_1),combo_config,1,3,1,1);
     g_signal_connect(combo_config,"changed", G_CALLBACK(chooseGameConfigurationNewAssistant),user_data);
     closeListGameConfig(ptr_list_config);
+
 
     /* Set the second page */
     GtkWidget *scrolled_window_name = getWidgetFromBuilder(user_data->ptr_builder,"scrolled_window_new_csu_file_assistant_2");

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-23 11:40+0200\n"
-"PO-Revision-Date: 2015-07-09 15:33+0200\n"
+"PO-Revision-Date: 2015-09-18 15:00+0200\n"
 "Last-Translator: Rémi BERTHO <remi.bertho@openmailbox.org>\n"
 "Language-Team: français <>\n"
 "Language: fr\n"
@@ -94,7 +94,7 @@ msgstr "Supprimer la configuration de jeu"
 
 #: Sources/csuper-gui/game_config_preferences.c:387
 msgid "Edit the game configuration"
-msgstr "Editer la configuration de jeu"
+msgstr "Éditer la configuration de jeu"
 
 #: Sources/csuper-gui/game_config_preferences.c:549
 #: Sources/csuper-gui/main_menu.c:476
@@ -579,7 +579,7 @@ msgstr "Nombre de chiffres après la virgule"
 
 #: csuper-gui.glade:400
 msgid "The winner is the player with the highest score"
-msgstr "Le premier est le joueur qui a le plus de points"
+msgstr "Le gagnant est le joueur qui a le plus de points"
 
 #: csuper-gui.glade:413
 msgid "The points will be attributed in turn-based"

@@ -160,6 +160,7 @@ along with .  If not, see <http://www.gnu.org/licenses/>.
   <object class="GtkAdjustment" id="new_csu_file_assistant_nb_player_adjustement">
     <property name="lower">1</property>
     <property name="upper">100</property>
+    <property name="value">1</property>
     <property name="step_increment">1</property>
     <property name="page_increment">10</property>
   </object>
@@ -235,7 +236,7 @@ along with .  If not, see <http://www.gnu.org/licenses/>.
       <object class="GtkLabel" id="grid_new_csu_file_assistant_1_label_folder1">
         <property name="visible">True</property>
         <property name="can_focus">False</property>
-        <property name="label" translatable="yes">Name of the new csu file</property>
+        <property name="label" translatable="yes">Name of the new CSU file</property>
       </object>
       <packing>
         <property name="left_attach">0</property>
