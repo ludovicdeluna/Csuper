@@ -48,6 +48,10 @@
 #include "file_properties_dialog.h"
 #include "game_over_dialog.h"
 #include "statistics_dialog.h"
+#include "calculator_view.h"
+#include "ranking_view.h"
+#include "game_information_view.h"
+#include "change_distributor_dialog.h"
 
 #include "../libcsuper/libcsuper.h"
 
@@ -83,6 +87,10 @@ private:
     FilePropertiesDialog* file_properties_dialog_;                          /*!< The file properties dialog */
     GameOverDialog* game_over_dialog_;                                      /*!< The game over dialog */
     StatisticsDialog* stat_dialog_;                                         /*!< The statistics dialog */
+    CalculatorView* calc_;                                                  /*!< The calculator box */
+    RankingView* rank_;                                                     /*!< The ranking box */
+    GameInformationView* game_info_;                                        /*!< The game information box */
+    ChangeDistributorDialog* change_distributor_dialog_;                    /*!< The change distributor dialog */
 
 
     //
@@ -326,6 +334,42 @@ public:
      inline StatisticsDialog* statisticsDialog()
      {
          return stat_dialog_;
+     }
+
+    /*!
+     *  \brief return the CalculatorView
+     *  \return the CalculatorView
+     */
+     inline CalculatorView* calculator()
+     {
+         return calc_;
+     }
+
+    /*!
+     *  \brief return the RankingView
+     *  \return the RankingView
+     */
+     inline RankingView* ranking()
+     {
+         return rank_;
+     }
+
+    /*!
+     *  \brief return the GameInformationView
+     *  \return the GameInformationView
+     */
+     inline GameInformationView* gameInformation()
+     {
+         return game_info_;
+     }
+
+    /*!
+     *  \brief return the ChangeDistributorDialog
+     *  \return the ChangeDistributorDialog
+     */
+     inline ChangeDistributorDialog* changeDistributorDialog()
+     {
+         return change_distributor_dialog_;
      }
 
     /*!

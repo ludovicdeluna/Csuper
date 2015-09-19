@@ -46,6 +46,7 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
     add_accel_group(app()->mainAccelGroup());
 
     refGlade->get_widget("main_grid", main_grid_);
+    refGlade->get_widget("main_window_side_box", side_box_);
 
     // Header bar
     header_bar_ = manage(new HeaderBar());
@@ -101,7 +102,7 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
 
         header_bar_->pack_start(*csuper_menu_button_);
 
-        main_grid_->attach(*header_bar_,0,0,1,1);
+        main_grid_->attach(*header_bar_,0,0,2,1);
     }
 
 
@@ -175,6 +176,9 @@ MainWindow::MainWindow(BaseObjectType* cobject, const RefPtr<Builder>& refGlade)
         unmaximize();
 
 
+    // End of turn button
+    refGlade->get_widget("main_window_side_end_of_turn_button", end_of_turn_button_);
+    end_of_turn_button_->set_sensitive(false);
 
     main_grid_->show_all();
 }
@@ -286,4 +290,19 @@ void MainWindow::setFilename()
         header_bar_->set_subtitle(app()->filename());
     else
         set_title(app()->filename() + " - " + _("Csuper"));
+}
+
+
+void MainWindow::on_show()
+{
+    ApplicationWindow::on_show();
+
+    if(! app()->pref()->mainWindowDisplay().calculator())
+        app()->calculator()->hide();
+
+    if(! app()->pref()->mainWindowDisplay().ranking())
+        app()->ranking()->hide();
+
+    if(! app()->pref()->mainWindowDisplay().gameInformation())
+        app()->gameInformation()->hide();
 }

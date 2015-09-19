@@ -144,6 +144,7 @@ void MenuDisplay::diffChanged()
     app()->pref()->differenceBetweenPlayer().setFirst(first_->get_active());
     app()->pref()->differenceBetweenPlayer().setLast(last_->get_active());
     app()->pref()->writeToFile();
+    app()->ranking()->update();
 }
 
 
@@ -160,6 +161,22 @@ void MenuDisplay::mainWindowDisplayChanged()
     app()->pref()->mainWindowDisplay().setRanking(ranking_side_->get_active());
     app()->pref()->mainWindowDisplay().setCalculator(calculator_->get_active());
     app()->pref()->mainWindowDisplay().setGameInformation(game_information_->get_active());
+
+    if(! app()->pref()->mainWindowDisplay().calculator())
+        app()->calculator()->hide();
+    else
+        app()->calculator()->show();
+
+    if(! app()->pref()->mainWindowDisplay().ranking())
+        app()->ranking()->hide();
+    else
+        app()->ranking()->show();
+
+    if(! app()->pref()->mainWindowDisplay().gameInformation())
+        app()->gameInformation()->hide();
+    else
+        app()->gameInformation()->show();
+
     app()->pref()->writeToFile();
 }
 

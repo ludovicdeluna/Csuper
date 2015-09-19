@@ -75,6 +75,10 @@ void CsuApplication::init(RefPtr<Builder>& builder)
 
     main_accel_group_ = RefPtr<AccelGroup>::cast_dynamic(builder->get_object("main_accelgroup"));
 
+    builder_->get_widget_derived("change_distributor_dialog", change_distributor_dialog_);
+    builder_->get_widget_derived("main_window_side_ranking_box", rank_);
+    builder_->get_widget_derived("main_window_side_calculator_box", calc_);
+    builder_->get_widget_derived("main_window_side_game_information_box", game_info_);
     builder_->get_widget_derived("menu_file", menu_file_);
     builder_->get_widget_derived("menu_edit", menu_edit_);
     builder_->get_widget_derived("menu_display", menu_display_);
@@ -234,7 +238,8 @@ void CsuApplication::updateGame(csuper::Game* game)
     }
 
     // Update points
-    // update ranking
+    ranking()->update();
+    gameInformation()->updateDistributor();
 }
 
 
@@ -256,8 +261,9 @@ void CsuApplication::setGame(csuper::Game* game)
     undoRedoManager().clear();
     undoRedoManager().add(game);
     // Update points
-    // update ranking
-    // fill calculator names
+    ranking()->update();
+    gameInformation()->updateDistributor();
+    calculator()->fillNames();
  }
 
 void CsuApplication::setFilename(ustring& filename)

@@ -104,8 +104,8 @@
 			</Target>
 		</Build>
 		<Compiler>
-			<Add option="-std=c++11" />
 			<Add option="-Wall" />
+			<Add option="-std=c++11" />
 			<Add option="`pkg-config --cflags gtkmm-3.0 libxml++-2.6 `" />
 			<Add directory="../" />
 		</Compiler>
@@ -116,10 +116,15 @@
 			<Add option="`pkg-config --libs gtkmm-3.0`" />
 			<Add library="libcsuper" />
 			<Add library="podofo" />
+			<Add library="muparser" />
 			<Add directory="../" />
 		</Linker>
 		<Unit filename="../Sources/csuper-gtk/about.cpp" />
 		<Unit filename="../Sources/csuper-gtk/about.h" />
+		<Unit filename="../Sources/csuper-gtk/calculator_view.cpp" />
+		<Unit filename="../Sources/csuper-gtk/calculator_view.h" />
+		<Unit filename="../Sources/csuper-gtk/change_distributor_dialog.cpp" />
+		<Unit filename="../Sources/csuper-gtk/change_distributor_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/csu_application.cpp" />
 		<Unit filename="../Sources/csuper-gtk/csu_application.h" />
 		<Unit filename="../Sources/csuper-gtk/csu_widget.cpp" />
@@ -132,6 +137,8 @@
 		<Unit filename="../Sources/csuper-gtk/file_properties_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/game_configuration_window.cpp" />
 		<Unit filename="../Sources/csuper-gtk/game_configuration_window.h" />
+		<Unit filename="../Sources/csuper-gtk/game_information_view.cpp" />
+		<Unit filename="../Sources/csuper-gtk/game_information_view.h" />
 		<Unit filename="../Sources/csuper-gtk/game_over_dialog.cpp" />
 		<Unit filename="../Sources/csuper-gtk/game_over_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/import_export_game_configuration_dialog.cpp" />
@@ -157,6 +164,8 @@
 		<Unit filename="../Sources/csuper-gtk/new_game_configuration_dialog.h" />
 		<Unit filename="../Sources/csuper-gtk/preferences_window.cpp" />
 		<Unit filename="../Sources/csuper-gtk/preferences_window.h" />
+		<Unit filename="../Sources/csuper-gtk/ranking_view.cpp" />
+		<Unit filename="../Sources/csuper-gtk/ranking_view.h" />
 		<Unit filename="../Sources/csuper-gtk/ressources_windows.rc">
 			<Option compilerVar="WINDRES" />
 			<Option target="Debug Windows" />
